@@ -1,0 +1,158 @@
+<!--********************************************* View Trainee Modal ************************************-->
+<!doctype html>
+<html lang="en">
+
+<div class="row text-center">
+  <div class="container">
+    <h2>Modal Example</h2>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#traineeModalLabel">Open Modal</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="traineeModalLabel" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
+  <div class="modal-dialog modal-lg modal-widest" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="traineeModalLabel">View/Add
+          Trainees</h4>
+      </div>
+
+      <div class="modal-body only-top-padding">
+        <!-- switch trainees type -->
+        <div class="container modal-widest">
+          <div class="pull-right">
+            <span>Active </span> <a role="button"
+							(click)="switchTraineeView()" [hidden]="!showdropped"><span
+							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
+							role="button" (click)="switchTraineeView()"
+							[hidden]="showdropped"><span class="fa fa-toggle-off fa-2x"
+							aria-hidden="true"> </span></a>
+          </div>
+          <!-- View Trainees in Batch -->
+          <h3>Trainees in Batch</h3>
+        </div>
+        <!--add trainee button -->
+        <br />
+        <!--                   <div class="row scrollable-div"> -->
+        <div class="col-md-12 col-lg-12">
+
+          <div class="modal-body">
+            <div class="container modal-widest">
+              <a role="button" class="pull-right" ng-click="resetTraineeForm();" data-toggle="modal" data-target="#addTraineeModal"
+                type="button">Add Trainee<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span></a>
+            </div>
+
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th>Trainee Name</th>
+                  <th></th>
+                  <th>Trainee Email</th>
+                  <th>Training Status</th>
+                  <th>Phone Number</th>
+                  <th>Skype Id</th>
+                  <th>Profile URL</th>
+                  <th>Recruiter Name</th>
+                  <th>College</th>
+                  <th>Degree</th>
+                  <th>Major</th>
+                  <th>Tech Screener</th>
+                  <th>Project Completion</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngFor="trainee in trainees">
+									<td role="button" ng-click="toggleColor(trainee, $index)">{{trainee.name}}</td>
+									<td><span ng-mouseover="showNotes($index)"
+										ng-mouseleave="hideNotes($index)"
+										ng-init="initFlags(trainee, $index)"
+										class="glyphicon glyphicon-flag"></span>
+										<form ng-if="showCommentForm[$index]" class="commentForm"
+											ng-submit="updateFlag(trainee, $index)"
+											style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
+											<input type="text" placeholder="comment" name="statusComment"
+												ng-model="trainee.flagNotes"> <input type="submit"
+												value="Save"> <span ng-click="closeComment()"
+												class="glyphicon glyphicon-remove-sign"></span>
+										</form>
+										<div
+											ng-if="showCommentBox[$index] && currentBatch.trainees[$index].flagNotes"
+											style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
+											class="notes">
+											<span>{{trainee.flagNotes}}</span>
+										</div></td>
+									<td>{{trainee.email}}</td>
+									<td>{{trainee.trainingStatus}}</td>
+									<td>{{trainee.phoneNumber}}</td>
+									<td>{{trainee.skypeId}}</td>
+									<td><span ng-if="trainee.profileUrl"> <a
+											href="{{trainee.profileUrl}}" target="_blank"><i
+												class="fa fa-file-code-o" aria-hidden="true"></i></a>
+									</span></td>
+									<td>{{trainee.recruiterName}}</td>
+									<td>{{trainee.college}}</td>
+									<td>{{trainee.degree}}</td>
+									<td>{{trainee.major}}</td>
+									<td>{{trainee.techScreenerName}}</td>
+									<td>{{trainee.projectCompletion}}</td>
+
+									<td>
+										***comment*** Change Batches Modal ***close comment*** <a role="button"
+										data-toggle="modal"
+										ng-click="getSwitchableBatches(trainee)"
+										data-target="#switchBatchModal"><span
+											class="glyphicon glyphicon-refresh"></span> </a>
+									</td>
+
+									<td><a role="button"
+										ng-click="populateTrainee(trainee);getTrainee($index)"
+										data-toggle="modal" data-target="#addTraineeModal"
+										type="button"> <span class="glyphicon glyphicon-pencil"></span>
+									</a></td>
+									<td><a role="button" class="pull-right"
+										ng-click="getTraineeToDelete($index)" data-toggle="modal"
+										data-target="#deleteTraineeModal"><span
+											class="glyphicon glyphicon-remove" aria-hidden="true">
+										</span></a></td>
+								</tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
