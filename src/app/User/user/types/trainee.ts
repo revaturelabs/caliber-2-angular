@@ -3,10 +3,12 @@ import { TraineeFlag } from './trainee-flag';
 
 export class Trainee {
 
+    traineeId: number;
+    resourceId: number;
     name: string;
     email: string;
     trainingStatus: TrainingStatus;
-    batch: number;
+    // batch: number;
     phoneNumber: string;
     skypeId: string;
     profileUrl: string;
@@ -15,6 +17,7 @@ export class Trainee {
     degree: string;
     major: string;
     techScreenerName: string;
+    techScreenScore: number;
     projectCompletion: string;
     flagNotes: string;
     flagStatus: TraineeFlag;
@@ -23,7 +26,7 @@ export class Trainee {
         name: string,
         email: string,
         trainingStatus: TrainingStatus,
-        batch: number,
+        // batch: number,
         phoneNumber: string) {
         // skypeId: string,
         // profileUrl: string,
@@ -36,7 +39,7 @@ export class Trainee {
             this.name = name;
             this.email = email;
             this.trainingStatus = trainingStatus;
-            this.batch = batch;
+            // this.batch = batch;
             this.phoneNumber = phoneNumber;
             // this.skypeId = skypeId;
             // this.profileUrl = profileUrl;

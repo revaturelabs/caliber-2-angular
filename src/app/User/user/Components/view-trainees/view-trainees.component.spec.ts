@@ -27,7 +27,7 @@ describe('ViewtraineesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //Protractor Test for toggling between dropped and active trainees
+  // Protractor Test for toggling between dropped and active trainees
   // it('should filter out dropped trainees', () => {
   //   browser.get('/manage');
   //   element(by.buttonText('viewTraineesPlaceHolder')).click();

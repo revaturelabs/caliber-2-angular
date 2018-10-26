@@ -24,12 +24,12 @@ describe('Trainee Pipe Test', () => {
     });
   it('should filter out everything that is not DROPPED', () => {
     const pipe = new TraineeTogglePipe();
-    const testList = pipe.transform(traineeList, true);
+    const testList = pipe.transform(traineeList, false);
     expect(testList).toEqual(new Array<Trainee>(trainee3));
   });
   it('should filter out DROPPED', () => {
     const pipe = new TraineeTogglePipe();
-    const testList = pipe.transform(traineeList, false);
+    const testList = pipe.transform(traineeList, true);
     expect(testList).toEqual(new Array<Trainee>(trainee1, trainee2));
   });
 });

@@ -9,7 +9,7 @@ export class TraineeTogglePipe implements PipeTransform {
 
   transform(trainees: Trainee[], show: boolean): Array<Trainee> {
     if (!trainees) {return []; }
-    if (show === false) {
+    if (show === true) {
       return trainees.filter(trainee => {
           if (trainee.trainingStatus !== (TrainingStatus.DROPPED)) {
             return true;
