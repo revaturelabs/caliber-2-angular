@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BatchService } from '../batch.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-batch-modal',
@@ -8,10 +9,38 @@ import { BatchService } from '../batch.service';
 })
 export class BatchModalComponent implements OnInit {
 
+  batchFormName: '';
+  trainingName: string;
+  trainingType: string;
+  trainingTypes: string[];
+  skillType: string;
+  skillTypes: string[];
+  location: string;
+  // needs to be a location type
+  locationOptions: string[];
+  trainer: string;
+  // needs to be a user type
+  trainers: string[];
+  coTrainer: string;
+  startDate: Date;
+  endDate: Date;
+  goodGradeThreshold: number;
+  borderlineGradeThreshold: number;
+
   constructor(private batchservice: BatchService) { }
 
   ngOnInit() {
     console.log('generated');
+  }
+
+  // Method to get all training types
+
+  // Method: setMinGrade
+  setMinGrade(): void {
+    console.log(this.goodGradeThreshold);
+  }
+
+  lowerMinGrade(): void {
   }
 
 }
