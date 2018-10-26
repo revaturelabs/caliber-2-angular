@@ -47,7 +47,7 @@
         <!-- switch trainees type -->
         <div class="container modal-widest">
           <div class="pull-right">
-            <span>Active </span> <a role="button"
+            <span>Active  </span> <a role="button"
 							(click)="switchTraineeView()" [hidden]="!showdropped"><span
 							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
 							role="button" (click)="switchTraineeView()"
@@ -64,7 +64,7 @@
 
           <div class="modal-body">
             <div class="container modal-widest">
-              <a role="button" class="pull-right" ng-click="resetTraineeForm();" data-toggle="modal" data-target="#addTraineeModal"
+              <a role="button" class="pull-right" (click)="resetTraineeForm();" data-toggle="modal" data-target="#addTraineeModal"
                 type="button">Add Trainee<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span></a>
             </div>
 
@@ -90,22 +90,22 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="trainee in trainees">
-									<td role="button" ng-click="toggleColor(trainee, $index)">{{trainee.name}}</td>
-									<td><span ng-mouseover="showNotes($index)"
-										ng-mouseleave="hideNotes($index)"
+                <tr *ngFor="let trainee of trainees">
+									<td role="button" (click)="toggleColor(trainee, $index)">{{trainee.name}}</td>
+									<td><span (mouseover)="showNotes($index)"
+										(mouseleave)="hideNotes($index)"
 										ng-init="initFlags(trainee, $index)"
 										class="glyphicon glyphicon-flag"></span>
-										<form ng-if="showCommentForm[$index]" class="commentForm"
+										<form *ngIf="showCommentForm[$index]" class="commentForm"
 											ng-submit="updateFlag(trainee, $index)"
 											style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
 											<input type="text" placeholder="comment" name="statusComment"
-												ng-model="trainee.flagNotes"> <input type="submit"
-												value="Save"> <span ng-click="closeComment()"
+												[(ngModel)]="trainee.flagNotes"> <input type="submit"
+												value="Save"> <span (click)="closeComment()"
 												class="glyphicon glyphicon-remove-sign"></span>
 										</form>
 										<div
-											ng-if="showCommentBox[$index] && currentBatch.trainees[$index].flagNotes"
+											*ngIf="showCommentBox[$index] && currentBatch.trainees[$index].flagNotes"
 											style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
 											class="notes">
 											<span>{{trainee.flagNotes}}</span>
@@ -114,7 +114,7 @@
 									<td>{{trainee.trainingStatus}}</td>
 									<td>{{trainee.phoneNumber}}</td>
 									<td>{{trainee.skypeId}}</td>
-									<td><span ng-if="trainee.profileUrl"> <a
+									<td><span *ngIf="trainee.profileUrl"> <a
 											href="{{trainee.profileUrl}}" target="_blank"><i
 												class="fa fa-file-code-o" aria-hidden="true"></i></a>
 									</span></td>
@@ -126,24 +126,25 @@
 									<td>{{trainee.projectCompletion}}</td>
 
 									<td>
-										***comment*** Change Batches Modal ***close comment*** <a role="button"
+                    <!-- Change Batches Modal -->
+                    <a role="button"
 										data-toggle="modal"
-										ng-click="getSwitchableBatches(trainee)"
+										(click)="getSwitchableBatches(trainee)"
 										data-target="#switchBatchModal"><span
 											class="glyphicon glyphicon-refresh"></span> </a>
 									</td>
 
 									<td><a role="button"
-										ng-click="populateTrainee(trainee);getTrainee($index)"
+										(click)="populateTrainee(trainee);getTrainee($index)"
 										data-toggle="modal" data-target="#addTraineeModal"
 										type="button"> <span class="glyphicon glyphicon-pencil"></span>
 									</a></td>
 									<td><a role="button" class="pull-right"
-										ng-click="getTraineeToDelete($index)" data-toggle="modal"
+										(click)="getTraineeToDelete($index)" data-toggle="modal"
 										data-target="#deleteTraineeModal"><span
 											class="glyphicon glyphicon-remove" aria-hidden="true">
 										</span></a></td>
-								</tr> -->
+								</tr>
               </tbody>
             </table>
           </div>
