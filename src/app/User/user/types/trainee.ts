@@ -34,6 +34,7 @@ export class Trainee {
         // techScreenerName: string,
         // projectCompletion: string
             this.name = name;
+            this.email = email;
             this.trainingStatus = trainingStatus;
             this.batch = batch;
             this.phoneNumber = phoneNumber;
