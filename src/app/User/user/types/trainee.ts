@@ -1,5 +1,5 @@
-import { TrainingStatus } from './TrainingStatus';
-import { TraineeFlag } from './TraineeFlag';
+import { TrainingStatus } from './training-status';
+import { TraineeFlag } from './trainee-flag';
 
 export class Trainee {
 
@@ -31,8 +31,9 @@ export class Trainee {
         // degree: string,
         // major: string,
         // techScreenerName: string,
-        // projectCompletion: string 
+        // projectCompletion: string
             this.name = name;
+            this.email = email;
             this.trainingStatus = trainingStatus;
             this.batch = batch;
             this.phoneNumber = phoneNumber;
