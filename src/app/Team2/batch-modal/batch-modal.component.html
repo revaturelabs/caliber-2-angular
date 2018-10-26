@@ -1,5 +1,6 @@
 <!--********************************************* Create Batch Modal ************************************-->
-<form (submit)="checkDates()">
+<!-- <form (submit)="checkDates()"> -->
+<form>
   <div class="modal fade" id="createBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -15,13 +16,13 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingName">Training Name:</label> 
               <input [(ngModel)]="trainingName" type="text" class="form-control"
-                id="trainingName" placeholder="1611 Jul11 Java" required name= "trainingName">
+                id="trainingName" placeholder="1611 Jul11 Java" minlength="1" autofocus required name="trainingName">
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingType">Training Type:</label>
               <select [(ngModel)]="trainingType" class="form-control" id="trainingType" required name= "trainingType">
-                <option value="" disabled>Select Training Type</option>
-                <option *ngFor="let option of trainingTypes">{{option}}</option>
+                <option [ngValue]="null" disabled>Select Training Type</option>
+                <option  *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
               </select>
             </div>
           </div>
@@ -29,8 +30,8 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="skillType">Skill Type:</label> <select [(ngModel)]="skillType" name= "skillType" class="form-control" id="skillType"
                 required>
-                <option value="" disabled>Select Skill Type</option>
-                <option *ngFor="let option of skillTypes">{{option}}</option>
+                <option [ngValue]="null" disabled>Select Skill Type</option>
+                <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
               </select>
             </div>
             <!-- Dropdown for location -->
@@ -41,8 +42,8 @@
 
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
               <select [(ngModel)]="location" id="location" required class="form-control" required name= "location">
-                <option value="" disabled>Select Location</option>
-                <option *ngFor="let option of locationOptions">option.company, option.street, option.city,
+                <option [ngValue]="null" disabled>Select Location</option>
+                <option *ngFor="let option of locationOptions" [ngValue]="option">option.company, option.street, option.city,
                   option.state, option.zipcode</option>
               </select>
             </div>
@@ -53,16 +54,16 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainer">Trainer:</label>
               <select [(ngModel)]="trainer" class="form-control" id="trainer" required name= "trainer">
-                <option value="" disabled>Select Trainer</option>
-                <option *ngFor="let option of trainers">{{option.name}}</option>
+                <option [ngValue] = "null" disabled>Select Trainer</option>
+                <option *ngFor="let option of trainers" [ngValue]="null">{{option.name}}</option>
               </select>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="co-trainer">Co-Trainer:</label> 
               <select [(ngModel)]="coTrainer" class="form-control" id="co-trainer" name= "coTrainer">
-                <option value="" disabled>Select Co-Trainer</option>
-                <option value="">None</option>
-                <option *ngFor="let option of trainers">{{option.name}}</option>
+                <option [ngValue]="null" disabled>Select Co-Trainer</option>
+                <option [ngValue]="none">None</option>
+                <option *ngFor="let option of trainers" [ngValue]="option">{{option.name}}</option>
               </select>
             </div>
           </div>
@@ -88,7 +89,7 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
-              <label for="goodGrade">Good Grade:  {{goodGradeThreshold}}<span title="The minimum acceptable grade." alt="The minimum acceptable grade."
+              <label for="goodGrade">Good Grade: <span title="The minimum acceptable grade." alt="The minimum acceptable grade."
                   class="glyphicon glyphicon-question-sign"></span></label> 
                 <input [(ngModel)]="goodGradeThreshold"
                 (change)="setMinGrade()" type="number" min="0" step="1" class="form-control" name="goodGradeThreshold" id="goodGrade"
@@ -100,12 +101,12 @@
                   class="glyphicon glyphicon-question-sign"></span></label> 
                 <input [(ngModel)]="borderlineGradeThreshold"
                 (change)="lowerMinGrade()" type="number" min="0" step="1" class="form-control" id="borderlineGrade"
-                placeholder="50" required name= "passingGrade">
+                placeholder="50" required name= "passingGrade" max="goodGradeThreshold">
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="btn btn-primary">
+          <input value="Save" type="submit" class="btn btn-primary"/>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

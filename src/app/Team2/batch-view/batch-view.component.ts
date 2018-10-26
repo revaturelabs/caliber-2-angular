@@ -22,4 +22,11 @@ export class BatchViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  resetBatchForm(): void {
+
+  }
+
+  resetImportModal(): void {
+
+  }
 }

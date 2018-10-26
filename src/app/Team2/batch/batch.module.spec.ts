@@ -11,3 +11,9 @@ describe('BatchModule', () => {
     expect(batchModule).toBeTruthy();
   });
 });
+
+describe('Always True', () => {
+  it('always true', () => {
+    expect(true).toBeTruthy();
+  });
+});

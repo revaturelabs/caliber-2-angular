@@ -11,17 +11,17 @@ export class BatchModalComponent implements OnInit {
 
   batchFormName: '';
   trainingName: string;
-  trainingType: string;
+  trainingType: string = null;
   trainingTypes: string[];
-  skillType: string;
+  skillType: string = null;
   skillTypes: string[];
-  location: string;
+  location: string = null;
   // needs to be a location type
   locationOptions: string[];
-  trainer: string;
+  trainer: string = null;
   // needs to be a user type
   trainers: string[];
-  coTrainer: string;
+  coTrainer: string = null;
   startDate: Date;
   endDate: Date;
   goodGradeThreshold: number;
@@ -37,10 +37,13 @@ export class BatchModalComponent implements OnInit {
 
   // Method: setMinGrade
   setMinGrade(): void {
-    console.log(this.goodGradeThreshold);
+    this.borderlineGradeThreshold = this.goodGradeThreshold;
   }
 
   lowerMinGrade(): void {
+    if (this.borderlineGradeThreshold > this.goodGradeThreshold) {
+      this.borderlineGradeThreshold = this.goodGradeThreshold;
+    }
   }
 
 }
