@@ -5,8 +5,9 @@
 <div class="row text-center">
   <div class="container">
     <h2>Modal Example</h2>
+    <h2>Trainee name: {{showTrainingStatus(t1)}}</h2>
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#traineeModalLabel">Open Modal</button>
+    <button id="modalButton" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#traineeModalLabel">Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -47,7 +48,7 @@
         <!-- switch trainees type -->
         <div class="container modal-widest">
           <div class="pull-right">
-            <span>Active  </span> <a role="button"
+            <span>Active   </span> <a role="button"
 							(click)="switchTraineeView()" [hidden]="!showdropped"><span
 							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
 							role="button" (click)="switchTraineeView()"
@@ -96,22 +97,23 @@
 										(mouseleave)="hideNotes($index)"
 										ng-init="initFlags(trainee, $index)"
 										class="glyphicon glyphicon-flag"></span>
-										<form *ngIf="showCommentForm[$index]" class="commentForm"
+										<!-- <form *ngIf="showCommentForm[$index]" class="commentForm"
 											ng-submit="updateFlag(trainee, $index)"
 											style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
 											<input type="text" placeholder="comment" name="statusComment"
 												[(ngModel)]="trainee.flagNotes"> <input type="submit"
 												value="Save"> <span (click)="closeComment()"
 												class="glyphicon glyphicon-remove-sign"></span>
-										</form>
-										<div
+										</form> -->
+										<!-- <div
 											*ngIf="showCommentBox[$index] && currentBatch.trainees[$index].flagNotes"
 											style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
 											class="notes">
 											<span>{{trainee.flagNotes}}</span>
-										</div></td>
+                    </div> -->
+                  </td>
 									<td>{{trainee.email}}</td>
-									<td>{{trainee.trainingStatus}}</td>
+									<td>{{showTrainingStatus(trainee)}}</td>
 									<td>{{trainee.phoneNumber}}</td>
 									<td>{{trainee.skypeId}}</td>
 									<td><span *ngIf="trainee.profileUrl"> <a

@@ -4,27 +4,54 @@ import { TrainingStatus } from '../../types/training-status';
 
 @Component({
   selector: 'app-viewtrainees',
-  templateUrl: './viewtrainees.component.html',
-  styleUrls: ['./viewtrainees.component.css']
+  templateUrl: './view-trainees.component.html',
+  styleUrls: ['./view-trainees.component.css']
 })
 export class ViewtraineesComponent implements OnInit {
 
   showdropped = true;
   trainees: Trainee[];
 
-  t1: Trainee = new Trainee('John Dao', 'jd@j.com', TrainingStatus.SIGNED, 7, '111' );
-  t2: Trainee = new Trainee( 'Emily Dao', 'ed@j.com', TrainingStatus.SIGNED, 7, '222' );
+  t1: Trainee;
+  t2: Trainee;
 
 
   constructor() { }
 
   ngOnInit() {
-    this.trainees = [ this.t1, this.t2];
+    this.t1 = new Trainee('John Dao', 'jd@j.com', TrainingStatus.DROPPED, 7, '111');
+    this.t2 = new Trainee('Emily Dao', 'ed@j.com', TrainingStatus.SIGNED, 7, '222');
+    console.log(this.t1);
+    this.trainees = [this.t1, this.t2];
+    console.log(this.trainees);
   }
 
   switchTraineeView() {
     const temp = !this.showdropped;
     this.showdropped = temp;
+  }
+
+  showTrainingStatus(t: Trainee) {
+    switch (t.trainingStatus) {
+      case TrainingStatus.SIGNED:
+        return 'Signed';
+      case TrainingStatus.SELECTED:
+        return 'Selected';
+      case TrainingStatus.TRAINING:
+        return 'Training';
+      case TrainingStatus.MARKETING:
+        return 'Marketing';
+      case TrainingStatus.CONFIRMED:
+        return 'Confirmed';
+      case TrainingStatus.EMPLOYED:
+        return 'Employed';
+      case TrainingStatus.DROPPED:
+        return 'Dropped';
+      case TrainingStatus.PROJECT:
+        return 'Project';
+      case TrainingStatus.STAGING:
+        return 'Staging';
+    }
   }
 
 }
