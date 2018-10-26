@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
+import { RouterOutlet } from '@angular/router';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +9,8 @@ describe('FooterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
+      declarations: [ FooterComponent,
+      RouterOutlet ]
     })
     .compileComponents();
   }));
@@ -22,4 +24,10 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create a footer', () => {
+   // expect('#footer-id').toBeFalsy();
+  });
+
+
 });
