@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TraineeForm } from '../../TraineeForm';
+
 
 @Component({
   selector: 'app-viewtrainees',
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ViewtraineesComponent implements OnInit {
 
   showdropped = true;
+  traineeForm: TraineeForm;
 
   constructor() { }
 
@@ -17,6 +20,9 @@ export class ViewtraineesComponent implements OnInit {
   switchTraineeView() {
     const temp = !this.showdropped;
     this.showdropped = temp;
+  }
+
+  resetTraineeForm() {
   }
 
 }

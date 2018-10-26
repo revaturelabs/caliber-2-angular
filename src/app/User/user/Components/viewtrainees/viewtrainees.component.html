@@ -33,7 +33,7 @@
 
 
 <div class="modal fade" id="traineeModalLabel" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
-  <div class="modal-dialog modal-lg modal-widest" role="document">
+  <div class="modal-dialog modal-lg modal-widest" role="document" style="font-family: Futura-Std-Book;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -47,12 +47,9 @@
         <!-- switch trainees type -->
         <div class="container modal-widest">
           <div class="pull-right">
-            <span>Active </span> <a role="button"
-							(click)="switchTraineeView()" [hidden]="!showdropped"><span
-							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
-							role="button" (click)="switchTraineeView()"
-							[hidden]="showdropped"><span class="fa fa-toggle-off fa-2x"
-							aria-hidden="true"> </span></a>
+            <span>Active </span> <a role="button" (click)="switchTraineeView()" [hidden]="!showdropped"><span class="fa fa-toggle-on fa-2x"
+                aria-hidden="true"> </span></a> <a role="button" (click)="switchTraineeView()" [hidden]="showdropped"><span
+                class="fa fa-toggle-off fa-2x" aria-hidden="true"> </span></a>
           </div>
           <!-- View Trainees in Batch -->
           <h3>Trainees in Batch</h3>
@@ -64,7 +61,7 @@
 
           <div class="modal-body">
             <div class="container modal-widest">
-              <a role="button" class="pull-right" ng-click="resetTraineeForm();" data-toggle="modal" data-target="#addTraineeModal"
+              <a role="button" class="pull-right" (click)="resetTraineeForm()" data-toggle="modal" data-target="#addTraineeModal"
                 type="button">Add Trainee<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span></a>
             </div>
 
@@ -154,5 +151,104 @@
     </div>
   </div>
 </div>
+
+
+<!--********************************************* Add Trainee Modal ************************************-->
+<div class="modal fade in" id="addTraineeModal" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
+  <div class="modal-dialog modal-lg" role="document" style="font-family: Futura-Std-Book;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="traineeModalLabel">Add Trainees</h4>
+      </div>
+
+      <div class="modal-body">
+        <!-- Add New Trainee -->
+        <h3>Add Trainee</h3>
+
+        <div>
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeName">Full Name:</label> <input type="text" class="form-control" id="traineeName" placeholder="Name" required="">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeEmail">Email:</label> <input type="email" class="form-control" id="traineeEmail" placeholder="Email" required="">
+              <!--<div ng-show="addTraineeForm.temail.$submitted || addTraineeForm.temail.$touched" class="ng-hide">
+                <span class="warning ng-hide" ng-show="addTraineeForm.temail.$error.email">Must enter
+                  a valid email</span>
+              </div>-->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeSkype">Skype Id:</label> <input type="text" class="form-control" id="traineeSkype" placeholder="Skype Id">
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineePhone">Phone:</label> <input type="text" class="form-control" id="traineePhone" placeholder="(xxx)-xxx-xxxx">
+            </div>
+          </div>
+
+            <div class="row">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeCollege">College:</label> <input type="text" class="form-control" id="traineeCollege" placeholder="College">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeDegree">Degree:</label> <input type="text" class="form-control" id="traineeDegree" placeholder="Degree	">
+            </div>
+          </div>
+
+            <div class="row">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeMajor">Major:</label> <input type="text" class="form-control" id="traineeMajor" placeholder="Major">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeRecruiterName">Recruiter Name:</label> <input type="text" class="form-control" id="traineeRecruiterName" placeholder="Recruiter Name">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeTechScreenerName">Tech Screener Name:</label> <input type="text" class="form-control" id="traineeTechScreenerName" placeholder="Tech Screener Name">
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+              <label for="traineeProjectCompletion">Project Completion:</label> <input type="text" class="form-control" id="traineeProjectCompletion" placeholder="0 %">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+              <label for="traineeProfile">Profile URL:</label> <input type="text" class="form-control" id="traineeName" placeholder="http://www.example.com/revature">
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+              <label for="traineeStatus">Training Status</label> <select class="form-control" id="traineeStatus" required="">
+                <option value="" disabled="">Select Status</option>
+                <option value="Signed" style="">Signed</option><option value="Selected">Selected</option><option value="Training">Training</option><option value="Marketing">Marketing</option><option value="Confirmed">Confirmed</option>
+                <option value="Employed">Employed</option><option value="Dropped">Dropped</option><option value="Project">Project</option><option value="Staging">Staging</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="Save" class="btn btn-primary">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!--<input type="submit" value="Update" class="btn btn-primary">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </html>

@@ -69,6 +69,10 @@ a {
 	color: #F26925;
 }
 
+a:hover {
+	color: rgb(35,82,124);
+}
+
 .sticky-header {
     padding: 10px;
     padding-right: 55px;
