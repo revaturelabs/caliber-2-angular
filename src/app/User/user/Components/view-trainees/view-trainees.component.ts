@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Trainee } from '../../types/trainee';
-import { TrainingStatus } from '../../types/trainingStatus';
+import { TrainingStatus } from '../../types/training-status';
 
 @Component({
   selector: 'app-viewtrainees',
