@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Trainee } from '../../types/trainee';
 import { TrainingStatus } from '../../types/training-status';
+import { FormsModule } from '@angular/forms';
+import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 
 @Component({
-  selector: 'app-viewtrainees',
-  templateUrl: './viewtrainees.component.html',
-  styleUrls: ['./viewtrainees.component.css']
+  selector: 'app-view-trainees',
+  templateUrl: './view-trainees.component.html',
+  styleUrls: ['./view-trainees.component.css']
 })
 export class ViewtraineesComponent implements OnInit {
 
+  togglePipe: TraineeTogglePipe;
   showdropped = true;
   trainees: Trainee[];
 
@@ -23,8 +26,7 @@ export class ViewtraineesComponent implements OnInit {
   }
 
   switchTraineeView() {
-    const temp = !this.showdropped;
-    this.showdropped = temp;
+    this.showdropped = !this.showdropped;
   }
 
 }
