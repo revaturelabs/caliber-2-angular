@@ -19,7 +19,8 @@ export class Trainee {
     flagNotes: string;
     flagStatus: TraineeFlag;
 
-    constructor( name: string,
+    constructor(
+        name: string,
         email: string,
         trainingStatus: TrainingStatus,
         batch: number,
