@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { BatchModalComponent } from './batch-modal.component';
 import { BatchService } from '../batch.service';
@@ -7,34 +7,37 @@ import { Batch } from '../type/batch';
 
 describe('BatchModalComponent', () => {
   let component: BatchModalComponent;
-  let fixture: ComponentFixture<BatchModalComponent>;
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ BatchModalComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
+  let testService: BatchService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BatchModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new BatchModalComponent(testService);
   });
 
+  it('should create a component', () => {
+    expect(component).toBeTruthy();
+  });
 
-  it('should return 1', () => {
+  it('should have goodGradeThreshold be undefined', () => {
+    expect(component.goodGradeThreshold).toBeUndefined();
+  });
+
+  it('should have goodGradeThreshold not be undefined', () => {
     component.goodGradeThreshold = 1;
-    component.borderlineGradeThreshold = 1;
+    expect(component.goodGradeThreshold).toBeDefined();
+  });
+
+  it('should have goodGradeThreshold be equal to borderlineGradeThreshold', () => {
+    component.goodGradeThreshold = 1;
     component.setMinGrade();
-    expect(component.borderlineGradeThreshold).toBe(1);
+    expect(component.borderlineGradeThreshold).toBeGreaterThanOrEqual(component.goodGradeThreshold);
   });
-  it('is always true', () => {
-    const alwaysTrue = true;
-    expect(alwaysTrue).toBeTruthy();
-  });
-  it('should create', () => {
-    expect(1).toBeTruthy();
+
+  it('should have borderlineGradeThreshold not be greater than goodGradeThreshold', () => {
+    component.goodGradeThreshold = 3;
+    component.borderlineGradeThreshold = 4;
+    component.lowerMinGrade();
+    expect(component.borderlineGradeThreshold).toBeLessThanOrEqual(component.goodGradeThreshold);
   });
 });
+
 

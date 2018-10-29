@@ -46,4 +46,12 @@ export class BatchModalComponent implements OnInit {
     }
   }
 
+  checkDates(): void {
+    if (this.startDate < this.endDate) {
+      console.log('this is fine');
+    } else {
+      console.log('this is not fine');
+    }
+  }
+
 }
