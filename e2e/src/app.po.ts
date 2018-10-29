@@ -42,9 +42,8 @@ export class AppPage {
 
   /* FOR FOOTER TESTS */
 
-  getFooterRevatureLink() {
-    element(by.css('app-root #revature-link')).click();
-    return browser.getAllWindowHandles();
-  }
+  getFooterRevature() {
+   return element(by.css('app-root #footer-id'));
 
+}
 }

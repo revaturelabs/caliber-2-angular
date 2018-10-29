@@ -35,8 +35,8 @@ describe('workspace-project App', () => {
   });
 
   /* FOOTER TESTS */
-  it('should click the revature.com link in the footer and return the Revature homepage', () => {
+  it('should create footer with contact information', () => {
     page.navigateTo();
-    expect(page.getFooterRevatureLink()).toEqual('www.revature.com');
+    expect(page.getFooterRevature()).toBeTruthy();
   });
 });
