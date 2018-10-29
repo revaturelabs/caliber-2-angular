@@ -10,20 +10,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class BatchService {
 
 
-  url = 'http://dev-caliber.revature.tech';
+  url = 'http://localhost:9090';
 
   constructor(private http: HttpClient) { }
 
   getAllBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/vp/batch/all/current', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
+    return this.http.get<Batch[]>(this.url + '/batch', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
   }
 
   getBatch(batch: Batch): Observable<Batch> {
-    return this.http.get<Batch>(this.url + '/batch/' + batch.batchId);
+    return this.http.get<Batch>(this.url + '/batch/id' + batch.batchId);
   }
 
   postBatch(batch: Batch): Observable<Batch> {
-    return this.http.post<Batch>(this.url + '/all/batch/create', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+    return this.http.post<Batch>(this.url + '/batch', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   putBatch(batch: Batch): Observable<Batch> {

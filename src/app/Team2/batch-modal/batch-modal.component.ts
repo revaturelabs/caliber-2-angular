@@ -31,14 +31,9 @@ export class BatchModalComponent implements OnInit {
 
   constructor(private batchservice: BatchService) {
     this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
-    // this.trainers = [
-    //   new Trainer(1, 'Patrick Walsh', 'Lead Trainer', 'patrick@revature.com',
-    //   'ROLE_VP'),
-    //   new Trainer(2, 'Dan Pickles', 'Lead Trainer', 'pjw6193@hotmail.com',
-    //   'ROLE_VP'),
-    //   new Trainer(3, 'Ravi Singh', 'Vice Preseident of Technology',
-    //   'ravi.cto@revature.com', 'ROLE_VP')
-    // ];
+    this.locationOptions = ['Virginia', 'Texas', 'Florida'];
+    this.skillTypes = ['Java', 'Spark', '.NET', 'PEGA'];
+    this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
   ngOnInit() {

@@ -42,8 +42,7 @@
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
               <select [(ngModel)]="location" id="location" required class="form-control" required name= "location">
                 <option [ngValue]="null" disabled>Select Location</option>
-                <option *ngFor="let option of locationOptions" [ngValue]="option">option.company, option.street, option.city,
-                  option.state, option.zipcode</option>
+                <option *ngFor="let option of locationOptions" [ngValue]="option">{{ option }}</option>
               </select>
             </div>
             <!-- Dropdown ends -->
@@ -54,7 +53,7 @@
               <label for="trainer">Trainer:</label>
               <select [(ngModel)]="trainer" class="form-control" id="trainer" required name= "trainer">
                 <option [ngValue] = "null" disabled>Select Trainer</option>
-                <option *ngFor="let option of trainers" [ngValue]="null">{{option}}</option>
+                <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
               </select>
             </div>
             <div class="form-group col-md-6 col-sm-6">
