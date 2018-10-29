@@ -55,20 +55,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
             ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                     <li class="link">
                         <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                    ${ isNormalMode ? 'data-target="#components-links-module-AppModule-30218a1c44b1462a724d2d5e00f66b28"' : 'data-target="#xs-components-links-module-AppModule-30218a1c44b1462a724d2d5e00f66b28"' }>
-                                    <span class="icon ion-md-cog"></span>
-                                    <span>Components</span>
-                                    <span class="icon ion-ios-arrow-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                    ${ isNormalMode ? 'id="components-links-module-AppModule-30218a1c44b1462a724d2d5e00f66b28"' : 'id="xs-components-links-module-AppModule-30218a1c44b1462a724d2d5e00f66b28"' }>
-                                        <li class="link">
-                                            <a href="components/AppComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppComponent</a>
-                                        </li>
-                                </ul>
-                            </li>
                     </li>
                     <li class="link">
                         <a href="modules/UserModule.html" data-type="entity-link">UserModule</a>
@@ -113,9 +99,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
             <ul class="links collapse"
             ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                     <li class="link">
-                        <a href="classes/Trainee.html" data-type="entity-link">Trainee</a>
-                    </li>
-                    <li class="link">
                         <a href="classes/ViewTraineePage.html" data-type="entity-link">ViewTraineePage</a>
                     </li>
             </ul>
@@ -131,9 +114,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
             ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
                     <li class="link">
                       <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
                     </li>
             </ul>
         </li>

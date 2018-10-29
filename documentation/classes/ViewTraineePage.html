@@ -66,6 +66,14 @@
             <code>src/app/User/user/Tests/view-trainees.test.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Uses Protractor to test using front end input
+tests are not yet implemented. Waiting for database funcitonality.</p>
+
+            </p>
 
 
 
@@ -133,13 +141,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:18</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Used to open up the batch modal to see the trainee&#39;s</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -171,13 +181,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:25</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Returns the information from the Modal page</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -209,13 +221,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:4</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:11</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Used to navigate to the proper page</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -238,15 +252,28 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { browser, element, by } from &#x27;protractor&#x27;;
 
+/**
+ * Uses Protractor to test using front end input
+ * tests are not yet implemented. Waiting for database funcitonality.
+ */
 export class ViewTraineePage {
+    /**
+     * Used to navigate to the proper page
+     */
     navigateTo() {
         return browser.get(&#x27;/&#x27;);
     }
 
+    /**
+     * Used to open up the batch modal to see the trainee&#x27;s
+     */
     clickModalButton() {
         return element(by.id(&#x27;modalButton&#x27;)).click();
     }
 
+    /**
+     * Returns the information from the Modal page
+     */
     getModal() {
         return element(by.id(&#x27;myModal&#x27;));
     }

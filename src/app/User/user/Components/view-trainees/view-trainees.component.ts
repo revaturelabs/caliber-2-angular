@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Trainee } from '../../types/trainee';
 import { TrainingStatus } from '../../types/training-status';
 import { FormsModule } from '@angular/forms';
-import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 
 @Component({
   selector: 'app-view-trainees',
@@ -11,16 +10,20 @@ import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 })
 export class ViewtraineesComponent implements OnInit {
 
-  togglePipe: TraineeTogglePipe;
   showdropped = true;
   trainees: Trainee[];
 
   t1: Trainee;
   t2: Trainee;
 
-
+  /**
+   * @ignore
+   */
   constructor() { }
 
+  /**
+   * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
+   */
   ngOnInit() {
     this.t1 = new Trainee('John Dao', 'jd@j.com', TrainingStatus.DROPPED, 7, '111');
     this.t2 = new Trainee('Emily Dao', 'ed@j.com', TrainingStatus.SIGNED, 7, '222');
@@ -29,10 +32,16 @@ export class ViewtraineesComponent implements OnInit {
     console.log(this.trainees);
   }
 
+  /**
+   * Swaps showDropped from it's current boolean to the opposite boolean
+   */
   switchTraineeView() {
     this.showdropped = !this.showdropped;
   }
 
+  /**
+   * returns the trainee's current Training Status as a String
+   */
   showTrainingStatus(t: Trainee) {
     switch (t.trainingStatus) {
       case TrainingStatus.SIGNED:

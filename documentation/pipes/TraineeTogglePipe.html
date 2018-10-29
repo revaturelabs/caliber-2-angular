@@ -66,6 +66,15 @@
             <code>src/app/User/user/Pipes/trainee-toggle.pipe.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Checks to see if &#39;show&#39; is true or false
+true will show all trainees that are not dropped
+false will show all trainees that are drpoped</p>
+
+            </p>
 
 
         <section>
@@ -100,14 +109,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>transform(trainees: <a href="../classes/Trainee.html">Trainee[]</a>, show: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+<code>transform(trainees: Trainee[], show: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/User/user/Pipes/trainee-toggle.pipe.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/User/user/Pipes/trainee-toggle.pipe.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -129,7 +138,7 @@
                                                 <tr>
                                                         <td>trainees</td>
                                                         <td>
-                                                                    <code><a href="../classes/Trainee.html" target="_self" >Trainee[]</a></code>
+                                                                    <code>Trainee[]</code>
                                                         </td>
                                                     
                                                     <td>
@@ -156,7 +165,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/Trainee.html" target="_self" >Array&lt;Trainee&gt;</a></code>
+                                <b>Returns : </b>    <code>Array&lt;Trainee&gt;</code>
 
                             </div>
                                 <div class="io-description">
@@ -177,11 +186,15 @@
 import { Trainee } from &#x27;../types/trainee&#x27;;
 import { TrainingStatus } from &#x27;../types/training-status&#x27;;
 
+ /**
+   * Checks to see if &#x27;show&#x27; is true or false
+   * true will show all trainees that are not dropped
+   * false will show all trainees that are drpoped
+   */
 @Pipe({
   name: &#x27;traineeToggle&#x27;
 })
 export class TraineeTogglePipe implements PipeTransform {
-
   transform(trainees: Trainee[], show: boolean): Array&lt;Trainee&gt; {
     if (!trainees) {return []; }
     if (show &#x3D;&#x3D;&#x3D; false) {
