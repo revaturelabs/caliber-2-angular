@@ -32,9 +32,12 @@ export class BatchModalComponent implements OnInit {
 
   ngOnInit() {
     console.log('generated');
-    this.batchservice.getAllBatches().subscribe(result => {
-      console.log(result);
+    // generate all the skilltypes
+    this.batchservice.getAllSkillTypes().subscribe( results => {
+      console.log(results);
+      this.skillTypes = results;
     });
+    console.log(this.skillTypes);
   }
 
   // Method to get all training types

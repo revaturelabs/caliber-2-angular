@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Batch } from './type/batch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { text } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,10 @@ export class BatchService {
 
   url = 'http://dev-caliber.revature.tech';
 
-  test = 'boyaka';
   constructor(private http: HttpClient) { }
 
   getAllBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/vp/batch/all/current', { headers: new HttpHeaders({'Content-Type': 'application/json'}) });
+    return this.http.get<Batch[]>(this.url + '/vp/batch/all/current', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
   }
 
   getBatch(batch: Batch): Observable<Batch> {
@@ -34,5 +32,9 @@ export class BatchService {
 
   deleteBatch(batch: Batch): Observable<Batch> {
     return this.http.delete<Batch>(this.url + '/batch/' + batch.batchId);
+  }
+
+  getAllSkillTypes(): Observable<string[]> {
+    return this.http.get<string[]>(this.url + '/types/skill/all');
   }
 }
