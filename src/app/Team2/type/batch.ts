@@ -8,8 +8,8 @@ export class Batch {
     location: string;
     startDate: Date;
     endDate: Date;
-    goodGrade: number;
-    passingGrade: number;
+    goodGradeThreshold: number;
+    borderlineGradeThreshold: number;
 
     constructor(batchId: number, trainingName: string, trainingType: string, skillType: string, trainer: string, coTrainer: string,
         location: string, startDate: Date, endDate: Date, goodGrade: number, passingGrade: number) {
@@ -22,7 +22,7 @@ export class Batch {
             this.location = location;
             this.startDate = startDate;
             this.endDate = endDate;
-            this.goodGrade = goodGrade;
-            this.passingGrade = passingGrade;
+            this.goodGradeThreshold = goodGrade;
+            this.borderlineGradeThreshold = passingGrade;
         }
 }

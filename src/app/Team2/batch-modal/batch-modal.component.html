@@ -15,7 +15,7 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingName">Training Name:</label> 
               <input [(ngModel)]="trainingName" type="text" class="form-control"
-                id="trainingName" placeholder="1611 Jul11 Java" minlength="1" autofocus required name="trainingName">
+                id="trainingName" placeholder="1611 Jul11 Java" minlength="1" required name="trainingName">
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingType">Training Type:</label>
@@ -91,7 +91,7 @@
               <label for="goodGrade">Good Grade: <span title="The minimum acceptable grade." alt="The minimum acceptable grade."
                   class="glyphicon glyphicon-question-sign"></span></label> 
                 <input [(ngModel)]="goodGradeThreshold"
-                (change)="setMinGrade()" type="number" min="0" step="1" class="form-control" name="goodGradeThreshold" id="goodGrade"
+                (input)="setMinGrade()" type="number" min="0" step="1" class="form-control" name="goodGradeThreshold" id="goodGrade"
                 placeholder="80" required>
             </div>
             <div class="form-group col-md-6 col-sm-6">
@@ -99,7 +99,7 @@
                   alt="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action."
                   class="glyphicon glyphicon-question-sign"></span></label> 
                 <input [(ngModel)]="borderlineGradeThreshold"
-                (change)="lowerMinGrade()" type="number" min="0" step="1" class="form-control" id="borderlineGrade"
+                (change)="lowerMinGrade()" (input)="lowerMinGrade" type="number" min="0" step="1" class="form-control" id="borderlineGrade"
                 placeholder="50" required name= "passingGrade" max="goodGradeThreshold">
             </div>
           </div>
