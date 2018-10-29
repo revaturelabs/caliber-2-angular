@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { FormsModule } from '@angular/forms';
 import { Batch } from '../type/batch';
+import { Trainer } from '../type/trainer';
 
 @Component({
   selector: 'app-batch-modal',
@@ -28,7 +29,17 @@ export class BatchModalComponent implements OnInit {
   goodGradeThreshold: number;
   borderlineGradeThreshold: number;
 
-  constructor(private batchservice: BatchService) { }
+  constructor(private batchservice: BatchService) {
+    this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
+    // this.trainers = [
+    //   new Trainer(1, 'Patrick Walsh', 'Lead Trainer', 'patrick@revature.com',
+    //   'ROLE_VP'),
+    //   new Trainer(2, 'Dan Pickles', 'Lead Trainer', 'pjw6193@hotmail.com',
+    //   'ROLE_VP'),
+    //   new Trainer(3, 'Ravi Singh', 'Vice Preseident of Technology',
+    //   'ravi.cto@revature.com', 'ROLE_VP')
+    // ];
+  }
 
   ngOnInit() {
     console.log('generated');
