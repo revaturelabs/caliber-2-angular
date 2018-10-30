@@ -49,10 +49,10 @@
         <div class="container modal-widest">
           <div class="pull-right">
             <span>Active   </span> <a role="button"
-							(click)="switchTraineeView()" [hidden]="!showdropped"><span
+							(click)="switchTraineeView()" [hidden]="!showActive"><span
 							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
 							role="button" (click)="switchTraineeView()"
-							[hidden]="showdropped"><span class="fa fa-toggle-off fa-2x"
+							[hidden]="showActive"><span class="fa fa-toggle-off fa-2x"
 							aria-hidden="true"> </span></a>
           </div>
           <!-- View Trainees in Batch -->
@@ -91,11 +91,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let trainee of trainees">
-									<td role="button" (click)="toggleColor(trainee, $index)">{{trainee.name}}</td>
-									<td><span (mouseover)="showNotes($index)"
-										(mouseleave)="hideNotes($index)"
-										ng-init="initFlags(trainee, $index)"
+                <tr *ngFor="let trainee of trainees | traineeToggle: showActive; index as i" [attr.data-index]="i">
+									<td role="button" (click)="toggleColor(trainee, i)">{{trainee.name}}</td>
+									<td><span (mouseover)="showNotes(i)"
+										(mouseleave)="hideNotes(i)"
+										ng-init="initFlags(trainee, i)"
 										class="glyphicon glyphicon-flag"></span>
 										<!-- <form *ngIf="showCommentForm[$index]" class="commentForm"
 											ng-submit="updateFlag(trainee, $index)"
@@ -144,7 +144,7 @@
 									<td><a role="button" class="pull-right"
 										(click)="getTraineeToDelete($index)" data-toggle="modal"
 										data-target="#deleteTraineeModal"><span
-											class="glyphicon glyphicon-remove" aria-hidden="true">
+											class="glyphicon glyphicon-remove">
 										</span></a></td>
 								</tr>
               </tbody>
