@@ -182,6 +182,10 @@ a {
 	margin: 1.3em;
 }
 
+.invalid-feedback {
+	color: red;
+}
+
 /************************
 	Manage Trainee Modal
 ************************/

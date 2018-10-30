@@ -13,25 +13,30 @@
         <div class="modal-body">
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
-              <label for="trainingName">Training Name:</label> 
-              <input [(ngModel)]="trainingName" type="text" class="form-control"
-                id="trainingName" placeholder="1611 Jul11 Java" minlength="1" required name="trainingName">
+              <label for="trainingName">Training Name:</label>
+              <input [(ngModel)]="trainingName" [ngModelOptions]="{standalone: true}" type="text" class="form-control"
+                id="trainingName" placeholder="1611 Jul11 Java" name="trainingName">
+              <div *ngIf="submitted && !trainingName" class="invalid-feedback">Training name is required</div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingType">Training Type:</label>
-              <select [(ngModel)]="trainingType" class="form-control" id="trainingType" required name= "trainingType">
+              <select [(ngModel)]="trainingType" [ngModelOptions]="{standalone: true}" class="form-control" id="trainingType"
+                required name="trainingType">
                 <option [ngValue]="null" disabled>Select Training Type</option>
-                <option  *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
+                <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
               </select>
+              <div *ngIf="submitted && !trainingType" class="invalid-feedback">Training type is required</div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
-              <label for="skillType">Skill Type:</label> <select [(ngModel)]="skillType" name= "skillType" class="form-control" id="skillType"
-                required>
+              <label for="skillType">Skill Type:</label> <select [(ngModel)]="skillType" 
+              [ngModelOptions]="{standalone: true}"
+                name="skillType" class="form-control" id="skillType" required>
                 <option [ngValue]="null" disabled>Select Skill Type</option>
                 <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
               </select>
+              <div *ngIf="submitted && !skillType" class="invalid-feedback">Skill type is required</div>
             </div>
             <!-- Dropdown for location -->
             <div class="form-group col-md-6 col-sm-6">
@@ -40,10 +45,12 @@
               <!-- ng-options is used ass opposed to ng-repeat because an entire object needs to be passed -->
 
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
-              <select [(ngModel)]="location" id="location" required class="form-control" required name= "location">
+              <select [(ngModel)]="location" [ngModelOptions]="{standalone: true}" id="location" required class="form-control"
+                required name="location">
                 <option [ngValue]="null" disabled>Select Location</option>
                 <option *ngFor="let option of locationOptions" [ngValue]="option">{{ option }}</option>
               </select>
+              <div *ngIf="submitted && !location" class="invalid-feedback">Location is required</div>
             </div>
             <!-- Dropdown ends -->
 
@@ -51,14 +58,17 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainer">Trainer:</label>
-              <select [(ngModel)]="trainer" class="form-control" id="trainer" required name= "trainer">
-                <option [ngValue] = "null" disabled>Select Trainer</option>
+              <select [(ngModel)]="trainer" [ngModelOptions]="{standalone: true}" class="form-control" id="trainer"
+                required name="trainer">
+                <option [ngValue]="null" disabled>Select Trainer</option>
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
               </select>
+              <div *ngIf="submitted && !trainer" class="invalid-feedback">Trainer is required</div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
-              <label for="co-trainer">Co-Trainer:</label> 
-              <select [(ngModel)]="coTrainer" class="form-control" id="co-trainer" name= "coTrainer">
+              <label for="co-trainer">Co-Trainer:</label>
+              <select [(ngModel)]="coTrainer" [ngModelOptions]="{standalone: true}" class="form-control" id="co-trainer"
+                name="coTrainer">
                 <option [ngValue]="null" disabled>Select Co-Trainer</option>
                 <option [ngValue]="none">None</option>
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
@@ -70,17 +80,15 @@
               <label for="start-date">Start Date:</label>
               <div class="input-group" id="start-date" data-datepicker="true">
                 <input type="date" class="date-input form-control date-selector" name="s" min="0" placeholder="Start Date"
-                  [(ngModel)]="startDate"
-                  required><span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                  [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required><span class="input-group-addon glyphicon glyphicon-calendar"></span>
               </div>
             </div>
             <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
               <label for="end_date">End Date:</label>
               <div class="input-group" id="end-date" data-datepicker="true">
                 <input type="date" class="date-input form-control date-selector" name="date" placeholder="End Date"
-                  [(ngModel)]="endDate" required>
-                <span
-                  class="input-group-addon glyphicon glyphicon-calendar">
+                  [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" required>
+                <span class="input-group-addon glyphicon glyphicon-calendar">
                 </span>
               </div>
             </div>
@@ -88,23 +96,24 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="goodGrade">Good Grade: <span title="The minimum acceptable grade." alt="The minimum acceptable grade."
-                  class="glyphicon glyphicon-question-sign"></span></label> 
-                <input [(ngModel)]="goodGradeThreshold"
-                (input)="setMinGrade()" type="number" min="0" step="1" class="form-control" name="goodGradeThreshold" id="goodGrade"
-                placeholder="80" required>
+                  class="glyphicon glyphicon-question-sign"></span></label>
+              <input [(ngModel)]="goodGradeThreshold" [ngModelOptions]="{standalone: true}" (input)="setMinGrade()" type="number" min="0" step="1" class="form-control"
+                name="goodGradeThreshold" id="goodGrade" placeholder="80" required>
+                <div *ngIf="submitted && !goodGradeThreshold" class="invalid-feedback">Good grade is required</div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="borderlineGrade">Passing Grade: <span title="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action."
                   alt="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action."
-                  class="glyphicon glyphicon-question-sign"></span></label> 
-                <input [(ngModel)]="borderlineGradeThreshold"
-                (change)="lowerMinGrade()" (input)="lowerMinGrade" type="number" min="0" step="1" class="form-control" id="borderlineGrade"
-                placeholder="50" required name= "passingGrade" max="goodGradeThreshold">
+                  class="glyphicon glyphicon-question-sign"></span></label>
+              <input [(ngModel)]="borderlineGradeThreshold" [ngModelOptions]="{standalone: true}" (change)="lowerMinGrade()" (input)="lowerMinGrade" type="number"
+                min="0" step="1" class="form-control" id="borderlineGrade" placeholder="50" required name="passingGrade"
+                max="goodGradeThreshold">
+                <div *ngIf="submitted && !borderlineGradeThreshold" class="invalid-feedback">Passing grade is required</div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <input value="Save" type="submit" class="btn btn-primary"/>
+          <input value="Save" type="submit" class="btn btn-primary" />
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
