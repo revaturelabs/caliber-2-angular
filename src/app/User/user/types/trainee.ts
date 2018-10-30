@@ -7,7 +7,7 @@ export class Trainee {
     resourceId: number;
     name: string;
     email: string;
-    trainingStatus: TrainingStatus;
+    trainingStatus: string;
     // batch: number;
     phoneNumber: string;
     skypeId: string;
@@ -20,12 +20,12 @@ export class Trainee {
     techScreenScore: number;
     projectCompletion: string;
     flagNotes: string;
-    flagStatus: TraineeFlag;
+    flagStatus: string;
 
     constructor(
         name: string,
         email: string,
-        trainingStatus: TrainingStatus,
+        trainingStatus: string,
         // batch: number,
         phoneNumber: string) {
         // skypeId: string,

@@ -28,14 +28,18 @@ export class ViewtraineesComponent implements OnInit {
     private http: HttpClient) { }
 
   ngOnInit() {
-    this.t1 = new Trainee('John Dao', 'jd@j.com', TrainingStatus.DROPPED, '111');
-    this.t2 = new Trainee('Emily Dao', 'ed@j.com', TrainingStatus.SIGNED, '222');
+    this.t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
+    this.t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
     this.t1.profileUrl = 'http://www.google.com';
     this.trainees2 = [this.t1, this.t2];
+    // this.viewAllTraineeService.getTrainees(2200).subscribe(data => {
+    //    // this.trainees = data;
+    //   // console.log(this.trainees);
+    //   });
     this.viewAllTraineeService.getTrainees(2200).subscribe(data => {
-       this.trainees = data;
-       console.log(this.trainees);
-      });
+      this.trainees = data;
+      console.log(this.trainees);
+    });
   }
 
   switchTraineeView() {
@@ -43,7 +47,7 @@ export class ViewtraineesComponent implements OnInit {
   }
 
   showTrainingStatus(t: Trainee) {
-    switch (t.trainingStatus) {
+    /*switch (t.trainingStatus) {
       case TrainingStatus.SIGNED:
         return 'Signed';
       case TrainingStatus.SELECTED:
@@ -62,20 +66,21 @@ export class ViewtraineesComponent implements OnInit {
         return 'Project';
       case TrainingStatus.STAGING:
         return 'Staging';
-    }
+    }*/
+    return t.trainingStatus;
   }
 
   // Needs to be completed along with the rest of the flag methods
   // currently not working, look into this whoever does this user story
   toggleColor( t: Trainee, index: number) {
     const flag = document.getElementsByClassName('glyphicon-flag').item(index);
-    let status = TraineeFlag.NONE;
+    let status = 'None';
     if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-white') {
-      status = TraineeFlag.RED;
+      status = 'Red';
       flag.setAttribute('class',
           'glyphicon glyphicon-flag color-red');
     } else if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-red') {
-      status = TraineeFlag.GREEN;
+      status = 'Green';
       flag.setAttribute('class',
           'glyphicon glyphicon-flag color-green');
     } else if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-green') {

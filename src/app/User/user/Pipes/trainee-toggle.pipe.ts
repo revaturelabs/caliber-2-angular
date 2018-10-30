@@ -11,13 +11,13 @@ export class TraineeTogglePipe implements PipeTransform {
     if (!trainees) {return []; }
     if (show === true) {
       return trainees.filter(trainee => {
-          if (trainee.trainingStatus !== (TrainingStatus.DROPPED)) {
+          if (trainee.trainingStatus !== ('Dropped')) {
             return true;
           }
       });
     } else {
       return trainees.filter(trainee => {
-        if (trainee.trainingStatus === TrainingStatus.DROPPED) {
+        if (trainee.trainingStatus === 'Dropped') {
           return true;
         }
       });
