@@ -22,11 +22,13 @@ export class ViewtraineesComponent implements OnInit {
   t1: Trainee;
   t2: Trainee;
 
-
   constructor(
     private viewAllTraineeService: ViewAllTraineesService,
     private http: HttpClient) { }
 
+  /**
+   * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
+   */
   ngOnInit() {
     this.t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
     this.t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
@@ -42,10 +44,16 @@ export class ViewtraineesComponent implements OnInit {
     });
   }
 
+  /**
+   * Swaps showDropped from it's current boolean to the opposite boolean
+   */
   switchTraineeView() {
     this.showActive = !this.showActive;
   }
 
+  /**
+   * returns the trainee's current Training Status as a String
+   */
   showTrainingStatus(t: Trainee) {
     /*switch (t.trainingStatus) {
       case TrainingStatus.SIGNED:
