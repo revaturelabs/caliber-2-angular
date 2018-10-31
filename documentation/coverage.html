@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -66,7 +63,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="medium">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/ViewtraineesComponent.html">src/app/User/user/Components/view-trainees/view-trainees.component.ts</a>
@@ -77,9 +74,9 @@
             <td>
                 ViewtraineesComponent
             </td>
-            <td align="right" data-sort="37">
-                <span class="coverage-percent">37 %</span>
-                <span class="coverage-count">(3/8)</span>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(3/12)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -96,6 +93,70 @@
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
                 <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ViewAllTraineesService.html">src/app/User/user/Services/view-all-trainees.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                ViewAllTraineesService
+            </td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#httpOptions">src/app/User/user/Services/view-all-trainees.service.ts</a>
+            </td>
+            <td>
+                variable
+            </td>
+            <td>
+                httpOptions
+            </td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ViewBatchesService.html">src/app/User/user/Services/view-batches.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                ViewBatchesService
+            </td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#httpOptions">src/app/User/user/Services/view-batches.service.ts</a>
+            </td>
+            <td>
+                variable
+            </td>
+            <td>
+                httpOptions
+            </td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -145,7 +206,9 @@
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <script src="./js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

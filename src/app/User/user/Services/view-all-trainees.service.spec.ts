@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ViewAllTraineesService } from './view-all-trainees.service';
 import { Trainee } from '../types/trainee';

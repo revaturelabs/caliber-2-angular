@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Trainee } from '../types/trainee';
 import { catchError, map, tap } from 'rxjs/operators';
+import { userInfo } from 'os';
 
 const httpOptions = {
   headers: new HttpHeaders({
