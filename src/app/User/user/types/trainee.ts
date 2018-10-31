@@ -23,7 +23,6 @@ export class Trainee {
     flagStatus: TraineeFlag;
 
     /**
-     * 
      * @param name Trainee's name
      * @param email  Trainee's email
      * @param trainingStatus Trainee's training status
