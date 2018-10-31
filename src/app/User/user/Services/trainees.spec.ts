@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ViewAllTraineesService } from './view-all-trainees.service';
+import { TraineesService } from './trainees';
 
 describe('ViewAllTraineesService', () => {
-  let service: ViewAllTraineesService;
+  let service: TraineesService;
   beforeEach(() => TestBed.configureTestingModule({}));
   beforeEach(() => {
-    service = TestBed.get(ViewAllTraineesService);
+    service = TestBed.get(TraineesService);
   });
 
   it('should be created', () => {
