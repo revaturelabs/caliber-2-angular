@@ -123,6 +123,7 @@ export class BatchModalComponent implements OnInit {
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true});
       elem.dispatchEvent(evt);
+      location.reload();
     } else {
       console.log('this is not fine');
     }

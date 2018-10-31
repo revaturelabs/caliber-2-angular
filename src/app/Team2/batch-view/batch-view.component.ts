@@ -19,6 +19,7 @@ export class BatchViewComponent implements OnInit {
   constructor(private batchservice: BatchService) { }
 
   ngOnInit() {
+    this.pickYear(2016);
   }
 
   resetBatchForm(): void {
@@ -28,8 +29,15 @@ export class BatchViewComponent implements OnInit {
   resetImportModal(): void {
 
   }
+
   pickYear(event: number) {
-     this.selectedYear =  event;
-     // this.batchService
+    this.selectedYear =  event;
+    this.batchservice.getBatchesByYear(event).subscribe(result => {
+      this.selectedBatches = result;
+    });
+  }
+
+  selectCurrentBatch(bid: number) {
+    sessionStorage.setItem('bid', '' + bid);
   }
 }

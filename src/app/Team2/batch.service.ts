@@ -22,6 +22,10 @@ export class BatchService {
     return this.http.get<Batch>(this.url + '/batch/id' + batch.batchId);
   }
 
+  getBatchesByYear(year: number): Observable<Batch[]> {
+    return this.http.get<Batch[]>(this.url + '/batch/year/' + year);
+  }
+
   postBatch(batch: Batch): Observable<Batch> {
     return this.http.post<Batch>(this.url + '/batch', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
