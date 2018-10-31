@@ -13,7 +13,8 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   declarations: [ViewtraineesComponent, TraineeTogglePipe],
   exports: [
-    ViewtraineesComponent
+    ViewtraineesComponent,
+    TraineeTogglePipe
   ]
 })
 export class UserModule { }
