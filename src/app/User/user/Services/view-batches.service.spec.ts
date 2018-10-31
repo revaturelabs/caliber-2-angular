@@ -1,36 +1,32 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TraineesService } from './trainees.service';
+import { ViewBatchesService } from './view-batches.service';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { Trainee } from '../types/trainee';
 
-describe('ViewAllTraineesService', () => {
-  let service: TraineesService;
+describe('ViewBatchesService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [TraineesService],
+    providers: [ViewBatchesService],
     imports: [HttpClientTestingModule]
   }));
-beforeEach(() => {
-    service = TestBed.get(TraineesService);
-  });
 
   it('should be created', () => {
+    const service: ViewBatchesService = TestBed.get(ViewBatchesService);
     expect(service).toBeTruthy();
   });
 
-  it('should send a http request and handle returning information',
-    inject([HttpTestingController, TraineesService],
-      (httpMock: HttpTestingController, vats: TraineesService) => {
+  it('should get all current batches with an http request',
+    inject([HttpTestingController, ViewBatchesService],
+      (httpMock: HttpTestingController, vbs: ViewBatchesService) => {
         let t: Trainee[];
-        vats.getTrainees(2200).subscribe(_ => {
+        vbs.getBatches().subscribe(_ => {
           t = _;
         });
-        const req = httpMock.expectOne('http://localhost:9085/all/trainee?batch=2200');
+        const req = httpMock.expectOne('http://localhost:9085/vp/batch/all/');
         expect(req.request.method).toEqual('GET');
         const t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
         const t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
         req.flush([t1, t2]);
-      }
-    )
+      })
   );
 
   afterEach(inject([HttpTestingController],
@@ -38,4 +34,5 @@ beforeEach(() => {
       httpMock.verify();
     }
   ));
+
 });
