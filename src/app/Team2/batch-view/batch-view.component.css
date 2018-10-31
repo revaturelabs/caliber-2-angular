@@ -3,22 +3,22 @@
 ************************/
 @font-face {
 	font-family: 'Futura-Std-Medium';
-	src: url('assets/fonts/Futura-Std-Medium.otf') format('opentype');
+	src: url('../fonts/Futura-Std-Medium.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Book';
-	src: url('assets/fonts/Futura-Std-Book.otf') format('opentype');
+	src: url('../fonts/Futura-Std-Book.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Heavy';
-	src: url('assets/fonts/Futura-Std-Heavy.otf') format('opentype');
+	src: url('../fonts/Futura-Std-Heavy.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Bold';
-	src: url('assets/fonts/Futura-Std-Bold.otf') format('opentype');
+	src: url('../fonts/Futura-Std-Bold.otf') format('opentype');
 }
 
 body {
@@ -36,22 +36,43 @@ li {
 /************************
 	Revature Colors
 ************************/
-/****
-:root {
-	/*** Primary Colors ***/
-	/**-orange: #F26925; -
+/* :root {
+	/*** Primary Colors 
+	-orange: #F26925; -
 	-white: #FFFFF; -
 	-dark-grey: #474C55;
-	/*** Secondary Colors ***/
-	/**-blue: #72A4C2; -
+	/*** Secondary Colors  -
+	-blue: #72A4C2; -
 	-yellow: #FCB414; -
 	-light-grey: #B9B9BA;
-}**/
+} */
 
 .warning {
 	color: red;
 }
 
+/**********************
+	Header
+**********************/
+.navbar-right {
+	margin-top: .75em;
+	margin-right: 5em;
+}
+
+.header-styles {
+	background-color: white;
+}
+
+a {
+	color: #F26925;
+}
+
+.sticky-header {
+    padding: 10px;
+    padding-right: 55px;
+    font-size: 15px;
+	width: 1000px;
+} 
 
 /**********************
 	Chart Containers
@@ -294,7 +315,53 @@ li {
 textarea {
 	resize: none;
 }
+/************************
+	Footer
+************************/
+.footer-margin {
+	margin-top: .85em;
+}
 
+.footer-img {
+	margin-top: 1.5em;
+}
+
+/* Footer, set footer height to actual height of footer*/
+html, body {
+	height: 100%;
+}
+
+.img-responsive {
+	padding-bottom: 1em;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin-bottom: -103px;
+	padding-bottom: 103px;
+}
+
+footer {
+	min-height: 103px;
+	background-color: #474C55;
+	font-size: .75em;
+}
+
+.center {
+	text-align: center;
+}
+
+.contact-info {
+	color: #B9B9BA;
+}
+
+.fa-copyright {
+	padding-right: .5em;
+}
+
+footer a, footer a:hover {
+	color: #B9B9BA;
+}
 /**********************
 	Table styles
 **********************/
