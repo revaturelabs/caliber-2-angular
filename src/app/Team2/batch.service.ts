@@ -41,4 +41,8 @@ export class BatchService {
   getAllSkillTypes(): Observable<string[]> {
     return this.http.get<string[]>(this.url + '/types/skill/all');
   }
+
+  getAllYears(): Observable<number[]> {
+    return this.http.get<number[]>(this.url + '/batch/valid_years');
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { FormsModule, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Batch } from '../type/batch';
@@ -11,6 +11,8 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   styleUrls: ['./batch-modal.component.css']
 })
 export class BatchModalComponent implements OnInit {
+
+  @Output() someEvent = new EventEmitter<string>();
 
   batchFormName: '';
   trainingName: string = null;
@@ -53,6 +55,19 @@ export class BatchModalComponent implements OnInit {
     // console.log(this.skillTypes);
   }
 
+  resetForm() {
+    console.log('am i in here?');
+    this.trainingName = null;
+    this.trainingType = undefined;
+    this.skillType = undefined;
+    this.trainer = undefined;
+    this.coTrainer = undefined;
+    this.location = undefined;
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.goodGradeThreshold = undefined;
+    this.borderlineGradeThreshold = undefined;
+  }
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
         this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
@@ -62,6 +77,8 @@ export class BatchModalComponent implements OnInit {
       this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
         console.log('created');
+        this.someEvent.next('created');
+        this.resetForm();
       });
   }
 

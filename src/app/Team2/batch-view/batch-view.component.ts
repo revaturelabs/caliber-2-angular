@@ -13,13 +13,14 @@ export class BatchViewComponent implements OnInit {
 
   years: string[];
   selectedBatches: Batch[];
-  defaultYears = [2016, 2017, 2018, 2019];
-  selectedYear = 2016;
+  defaultYears: number[];
+  selectedYear: number;
 
   constructor(private batchservice: BatchService) { }
 
   ngOnInit() {
-    this.pickYear(2016);
+    this.getAllYears();
+    console.log(this.defaultYears);
   }
 
   resetBatchForm(): void {
@@ -28,6 +29,13 @@ export class BatchViewComponent implements OnInit {
 
   resetImportModal(): void {
 
+  }
+
+  refreshPage() {
+    this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
+      this.selectedBatches = result;
+    });
+    this.getAllYears();
   }
 
   pickYear(event: number) {
@@ -39,5 +47,25 @@ export class BatchViewComponent implements OnInit {
 
   selectCurrentBatch(bid: number) {
     sessionStorage.setItem('bid', '' + bid);
+  }
+
+  getAllYears() {
+    this.batchservice.getAllYears().subscribe(years => {
+      console.log(years);
+      if (years.length === 0 ) {
+        this.makeDefaultBatches();
+        this.getAllYears();
+      } else {
+        this.defaultYears = years;
+        this.selectedYear = this.defaultYears[this.defaultYears.length - 1];
+        this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
+      }
+    });
+  }
+
+  makeDefaultBatches() {
+    this.batchservice.postBatch(new Batch('Tester', 'Tester',
+    'Tester', 'Nick', 'Help', 'Nowhere', new Date('October 19, 2018'),
+    new Date('October 20, 2018'), 55, 45)).subscribe();
   }
 }
