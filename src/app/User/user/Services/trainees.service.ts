@@ -18,7 +18,7 @@ export class TraineesService {
 
   trainees: Observable<Trainee[]>;
   url = 'http://localhost:9085/user/all/trainee?batch=2200';
-  updateUrl = 'http://localhost:9085/user/trainee';
+  updateUrl = 'http://localhost:9085/user/all/trainee/update';
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +33,6 @@ export class TraineesService {
     return this.trainees;
   }
   updateTrainee(t: Trainee): Observable<Trainee> {
-    return this.http.put<Trainee>(this.updateUrl + '/' + t.traineeId, httpOptions);
+    return this.http.put<Trainee>(this.updateUrl, httpOptions);
   }
 }
