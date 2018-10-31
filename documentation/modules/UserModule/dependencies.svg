@@ -22,69 +22,69 @@
 <text text-anchor="start" x="429.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
 <g id="clust1" class="cluster">
 <title>cluster_UserModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="80.5,-70 80.5,-268 415.5,-268 415.5,-70 80.5,-70"/>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="78,-70 78,-268 418,-268 418,-70 78,-70"/>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_UserModule_declarations</title>
-<polygon fill="none" stroke="#000000" points="91.5,-78 91.5,-130 404.5,-130 404.5,-78 91.5,-78"/>
+<polygon fill="none" stroke="#000000" points="89,-78 89,-130 407,-130 407,-78 89,-78"/>
 </g>
 <g id="clust6" class="cluster">
 <title>cluster_UserModule_exports</title>
-<polygon fill="none" stroke="#000000" points="88.5,-208 88.5,-260 407.5,-260 407.5,-208 88.5,-208"/>
+<polygon fill="none" stroke="#000000" points="86,-208 86,-260 410,-260 410,-208 86,-208"/>
 </g>
 <!-- TraineeTogglePipe -->
 <g id="node1" class="node">
 <title>TraineeTogglePipe</title>
-<polygon fill="#ffffb3" stroke="#000000" points="396.2935,-122 272.7065,-122 272.7065,-86 396.2935,-86 396.2935,-122"/>
-<text text-anchor="middle" x="334.5" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TraineeTogglePipe</text>
+<polygon fill="#ffffb3" stroke="#000000" points="398.7935,-122 275.2065,-122 275.2065,-86 398.7935,-86 398.7935,-122"/>
+<text text-anchor="middle" x="337" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TraineeTogglePipe</text>
 </g>
 <!-- UserModule -->
 <g id="node3" class="node">
 <title>UserModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="220.4762,-187 217.4762,-191 196.4762,-191 193.4762,-187 134.5238,-187 134.5238,-151 220.4762,-151 220.4762,-187"/>
-<text text-anchor="middle" x="177.5" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">UserModule</text>
+<polygon fill="#8dd3c7" stroke="#000000" points="220.9762,-187 217.9762,-191 196.9762,-191 193.9762,-187 135.0238,-187 135.0238,-151 220.9762,-151 220.9762,-187"/>
+<text text-anchor="middle" x="178" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">UserModule</text>
 </g>
 <!-- TraineeTogglePipe&#45;&gt;UserModule -->
 <g id="edge1" class="edge">
 <title>TraineeTogglePipe&#45;&gt;UserModule</title>
-<path fill="none" stroke="#000000" d="M355.1322,-122.0225C355.1322,-139.3734 355.1322,-163 355.1322,-163 355.1322,-163 230.4998,-163 230.4998,-163"/>
-<polygon fill="#000000" stroke="#000000" points="230.4998,-159.5001 220.4998,-163 230.4998,-166.5001 230.4998,-159.5001"/>
+<path fill="none" stroke="#000000" d="M357.6322,-122.0225C357.6322,-139.3734 357.6322,-163 357.6322,-163 357.6322,-163 231.0264,-163 231.0264,-163"/>
+<polygon fill="#000000" stroke="#000000" points="231.0264,-159.5001 221.0264,-163 231.0264,-166.5001 231.0264,-159.5001"/>
 </g>
-<!-- ViewtraineesComponent -->
+<!-- ViewTraineesComponent -->
 <g id="node2" class="node">
-<title>ViewtraineesComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="255.1811,-122 99.8189,-122 99.8189,-86 255.1811,-86 255.1811,-122"/>
-<text text-anchor="middle" x="177.5" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewtraineesComponent</text>
+<title>ViewTraineesComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="256.8431,-122 97.1569,-122 97.1569,-86 256.8431,-86 256.8431,-122"/>
+<text text-anchor="middle" x="177" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewTraineesComponent</text>
 </g>
-<!-- ViewtraineesComponent&#45;&gt;UserModule -->
+<!-- ViewTraineesComponent&#45;&gt;UserModule -->
 <g id="edge2" class="edge">
-<title>ViewtraineesComponent&#45;&gt;UserModule</title>
-<path fill="none" stroke="#000000" d="M177.5,-122.1061C177.5,-122.1061 177.5,-140.991 177.5,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="174.0001,-140.9909 177.5,-150.991 181.0001,-140.991 174.0001,-140.9909"/>
+<title>ViewTraineesComponent&#45;&gt;UserModule</title>
+<path fill="none" stroke="#000000" d="M178,-122.1061C178,-122.1061 178,-140.991 178,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="174.5001,-140.9909 178,-150.991 181.5001,-140.991 174.5001,-140.9909"/>
 </g>
 <!-- TraineeTogglePipe  -->
 <g id="node4" class="node">
 <title>TraineeTogglePipe </title>
-<polygon fill="#fb8072" stroke="#000000" points="399.7934,-252 273.2066,-252 273.2066,-216 399.7934,-216 399.7934,-252"/>
-<text text-anchor="middle" x="336.5" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">TraineeTogglePipe </text>
+<polygon fill="#fb8072" stroke="#000000" points="402.2934,-252 275.7066,-252 275.7066,-216 402.2934,-216 402.2934,-252"/>
+<text text-anchor="middle" x="339" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">TraineeTogglePipe </text>
 </g>
 <!-- UserModule&#45;&gt;TraineeTogglePipe  -->
 <g id="edge3" class="edge">
 <title>UserModule&#45;&gt;TraineeTogglePipe </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M220.7267,-175C260.7515,-175 314.1178,-175 314.1178,-175 314.1178,-175 314.1178,-205.9775 314.1178,-205.9775"/>
-<polygon fill="#000000" stroke="#000000" points="310.6179,-205.9774 314.1178,-215.9775 317.6179,-205.9775 310.6179,-205.9774"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M221.0997,-175C261.7913,-175 316.6178,-175 316.6178,-175 316.6178,-175 316.6178,-205.9775 316.6178,-205.9775"/>
+<polygon fill="#000000" stroke="#000000" points="313.1179,-205.9774 316.6178,-215.9775 320.1179,-205.9775 313.1179,-205.9774"/>
 </g>
-<!-- ViewtraineesComponent  -->
+<!-- ViewTraineesComponent  -->
 <g id="node5" class="node">
-<title>ViewtraineesComponent </title>
-<polygon fill="#fb8072" stroke="#000000" points="254.6813,-252 96.3187,-252 96.3187,-216 254.6813,-216 254.6813,-252"/>
-<text text-anchor="middle" x="175.5" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewtraineesComponent </text>
+<title>ViewTraineesComponent </title>
+<polygon fill="#fb8072" stroke="#000000" points="257.8434,-252 94.1566,-252 94.1566,-216 257.8434,-216 257.8434,-252"/>
+<text text-anchor="middle" x="176" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewTraineesComponent </text>
 </g>
-<!-- UserModule&#45;&gt;ViewtraineesComponent  -->
+<!-- UserModule&#45;&gt;ViewTraineesComponent  -->
 <g id="edge4" class="edge">
-<title>UserModule&#45;&gt;ViewtraineesComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M177.5,-187.1061C177.5,-187.1061 177.5,-205.991 177.5,-205.991"/>
-<polygon fill="#000000" stroke="#000000" points="174.0001,-205.9909 177.5,-215.991 181.0001,-205.991 174.0001,-205.9909"/>
+<title>UserModule&#45;&gt;ViewTraineesComponent </title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178,-187.1061C178,-187.1061 178,-205.991 178,-205.991"/>
+<polygon fill="#000000" stroke="#000000" points="174.5001,-205.9909 178,-215.991 181.5001,-205.991 174.5001,-205.9909"/>
 </g>
 </g>
 </svg>
