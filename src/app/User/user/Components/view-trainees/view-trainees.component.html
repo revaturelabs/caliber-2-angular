@@ -91,12 +91,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let trainee of trainees | traineeToggle: showActive; index as i" [attr.data-index]="i">
-									<td role="button" (click)="toggleColor(trainee, i)">{{trainee.name}}</td>
+                <tr *ngFor="let trainee of trainees2 | traineeToggle: showActive; index as i" [attr.data-index]="i">
+									<td role="button" (click)="toggleColor(trainee)">{{trainee.name}}</td>
 									<td><span (mouseover)="showNotes(i)"
-										(mouseleave)="hideNotes(i)"
-										ng-init="initFlags(trainee, i)"
-										class="glyphicon glyphicon-flag"></span>
+                    (mouseleave)="hideNotes(i)"
+                    class='glyphicon glyphicon-flag'
+                    [ngClass]="{'color-red': (trainee.flagStatus === red), 'color-green': (trainee.flagStatus === green), 'color-white': trainee.flagStatus === none}"></span>
 										<!-- <form *ngIf="showCommentForm[$index]" class="commentForm"
 											ng-submit="updateFlag(trainee, $index)"
 											style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">

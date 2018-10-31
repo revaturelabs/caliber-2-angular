@@ -6,6 +6,7 @@ import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 import { TraineeFlag } from '../../types/trainee-flag';
 import { ViewAllTraineesService } from '../../Services/view-all-trainees.service';
 import { HttpClient } from '@angular/common/http';
+import { FLAGS } from '@angular/core/src/render3/interfaces/view';
 
 @Component({
   selector: 'app-view-trainees',
@@ -14,10 +15,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ViewtraineesComponent implements OnInit {
 
+  private status: string;
   togglePipe: TraineeTogglePipe;
   showActive = true;
   trainees2: Trainee[];
   trainees: Trainee[];
+
+  red = TraineeFlag.RED;
+  green = TraineeFlag.GREEN;
+  none = TraineeFlag.NONE;
 
   t1: Trainee;
   t2: Trainee;
@@ -32,6 +38,8 @@ export class ViewtraineesComponent implements OnInit {
   ngOnInit() {
     this.t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
     this.t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
+    this.t2.flagStatus = TraineeFlag.RED;
+    this.t1.flagStatus = TraineeFlag.GREEN;
     this.t1.profileUrl = 'http://www.google.com';
     this.trainees2 = [this.t1, this.t2];
     // this.viewAllTraineeService.getTrainees(2200).subscribe(data => {
@@ -80,26 +88,16 @@ export class ViewtraineesComponent implements OnInit {
 
   // Needs to be completed along with the rest of the flag methods
   // currently not working, look into this whoever does this user story
-  toggleColor( t: Trainee, index: number) {
-    const flag = document.getElementsByClassName('glyphicon-flag').item(index);
-    let status = 'None';
-    if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-white') {
-      status = 'Red';
-      flag.setAttribute('class',
-          'glyphicon glyphicon-flag color-red');
-    } else if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-red') {
-      status = 'Green';
-      flag.setAttribute('class',
-          'glyphicon glyphicon-flag color-green');
-    } else if (flag.getAttribute('class') === 'glyphicon glyphicon-flag color-green') {
-      flag.setAttribute('class',
-          'glyphicon glyphicon-flag color-white');
-    }
-    if (t.flagStatus !== status) {
-      // look into: commentBox(flag, status, initialStatus, index, t);
-      t.flagStatus = status;
+  toggleColor( t: Trainee) {
+    if (t.flagStatus === this.green) {
+      console.log('changing to none!');
+      t.flagStatus = this.none;
+    } else if (t.flagStatus === this.red) {
+      console.log('changing to green!');
+      t.flagStatus = this.green;
     } else {
-      // look into: $scope.hideNotes(index);
+      console.log('changing to red!');
+      t.flagStatus = this.red;
     }
   }
 
