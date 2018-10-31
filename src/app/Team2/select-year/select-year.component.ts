@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BatchService } from '../batch.service';
 
 @Component({
   selector: 'app-select-year',
@@ -8,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class SelectYearComponent implements OnInit {
   defaultYears = [2016, 2017, 2018, 2019];
   selectedYear = 2016;
-  constructor() { }
+
+  constructor(private batchService: BatchService) { }
 
   ngOnInit() {
   }
-  pickYear(event) {
-     console.log ('working');
+  pickYear(event: number) {
+     this.selectedYear =  event;
+     // this.batchService
   }
 
 }

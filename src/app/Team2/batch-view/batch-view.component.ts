@@ -13,9 +13,8 @@ export class BatchViewComponent implements OnInit {
 
   years: string[];
   selectedBatches: Batch[];
-
-  test = 'whats poppin';
-  selectedYear: '2018';
+  defaultYears = [2016, 2017, 2018, 2019];
+  selectedYear = 2016;
 
   constructor(private batchservice: BatchService) { }
 
@@ -28,5 +27,9 @@ export class BatchViewComponent implements OnInit {
 
   resetImportModal(): void {
 
+  }
+  pickYear(event: number) {
+     this.selectedYear =  event;
+     // this.batchService
   }
 }
