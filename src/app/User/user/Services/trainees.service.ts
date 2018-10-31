@@ -14,12 +14,11 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class ViewAllTraineesService {
+export class TraineesService {
 
   trainees: Observable<Trainee[]>;
-
-  url = 'http://localhost:9085/all/trainee?batch=2200';
-  // url = 'https://dev-caliber.revature.tech/vp/batch/all/';
+  url = 'http://localhost:9085/user/all/trainee?batch=2200';
+  updateUrl = 'http://localhost:9085/user/trainee';
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +31,8 @@ export class ViewAllTraineesService {
         })
       );
     return this.trainees;
+  }
+  updateTrainee(t: Trainee): Observable<Trainee> {
+    return this.http.put<Trainee>(this.updateUrl + '/' + t.traineeId, httpOptions);
   }
 }

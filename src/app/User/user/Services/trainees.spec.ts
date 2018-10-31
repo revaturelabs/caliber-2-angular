@@ -1,16 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ViewAllTraineesService } from './view-all-trainees.service';
+import { TraineesService } from './trainees.service';
 import { Trainee } from '../types/trainee';
 
 describe('ViewAllTraineesService', () => {
-  let service: ViewAllTraineesService;
+  let service: TraineesService;
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [ViewAllTraineesService],
+    providers: [TraineesService],
     imports: [HttpClientTestingModule]
   }));
-  beforeEach(() => {
-    service = TestBed.get(ViewAllTraineesService);
+beforeEach(() => {
+    service = TestBed.get(TraineesService);
   });
 
   it('should be created', () => {
@@ -18,8 +18,8 @@ describe('ViewAllTraineesService', () => {
   });
 
   it('should send a http request and handle returning information',
-    inject([HttpTestingController, ViewAllTraineesService],
-      (httpMock: HttpTestingController, vats: ViewAllTraineesService) => {
+    inject([HttpTestingController, TraineesService],
+      (httpMock: HttpTestingController, vats: TraineesService) => {
         let t: Trainee[];
         vats.getTrainees(2200).subscribe(_ => {
           t = _;
