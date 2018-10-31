@@ -13,15 +13,15 @@ import { TrainingStatus } from '../types/training-status';
 export class TraineeTogglePipe implements PipeTransform {
   transform(trainees: Trainee[], show: boolean): Array<Trainee> {
     if (!trainees) {return []; }
-    if (show === false) {
+    if (show === true) {
       return trainees.filter(trainee => {
-          if (trainee.trainingStatus !== (TrainingStatus.DROPPED)) {
+          if (trainee.trainingStatus !== ('Dropped')) {
             return true;
           }
       });
     } else {
       return trainees.filter(trainee => {
-        if (trainee.trainingStatus === TrainingStatus.DROPPED) {
+        if (trainee.trainingStatus === 'Dropped') {
           return true;
         }
       });
