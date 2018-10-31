@@ -35,7 +35,7 @@ describe('ViewAllTraineesService', () => {
 
   afterEach(inject([HttpTestingController],
     (httpMock: HttpTestingController) => {
-      // httpMock.verify();
+      httpMock.verify();
     }
   ));
 });
