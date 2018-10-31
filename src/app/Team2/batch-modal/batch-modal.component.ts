@@ -3,6 +3,7 @@ import { BatchService } from '../batch.service';
 import { FormsModule, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Batch } from '../type/batch';
 import { Trainer } from '../type/trainer';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-batch-modal',
@@ -32,8 +33,7 @@ export class BatchModalComponent implements OnInit {
   submitted: Boolean = false;
 
   constructor(
-    private batchservice: BatchService,
-    private formBuilder: FormBuilder) {
+    private batchservice: BatchService) {
     this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
     this.locationOptions = ['Virginia', 'Texas', 'Florida'];
     this.skillTypes = ['Java', 'Spark', '.NET', 'PEGA'];
@@ -54,7 +54,7 @@ export class BatchModalComponent implements OnInit {
   }
 
   createBatch(): void {
-    this.batchservice.postBatch(new Batch(1, this.trainingName, this.trainingType,
+    this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
         console.log('created');
@@ -72,37 +72,47 @@ export class BatchModalComponent implements OnInit {
   }
 
   checkInputs(): Boolean {
-    if ( this.trainingName === null) {
+    if (this.trainingName === null || this.trainingName === '') {
+      console.log('1');
       return false;
     }
-    if ( this.trainingType === null) {
+    if (this.trainingType === null) {
+      console.log('2');
       return false;
     }
-    if ( this.skillType === null) {
+    if (this.skillType === null) {
+      console.log(3);
       return false;
     }
-    if ( this.location === null) {
+    if (this.location === null) {
+      console.log(4);
       return false;
     }
-    if ( this.trainer === null) {
+    if (this.trainer === null) {
+      console.log(5);
       return false;
     }
-    if ( this.startDate === undefined) {
+    if (this.startDate === undefined) {
+      console.log(6);
       return false;
-    } else if ( this.endDate === undefined) {
+    } else if (this.endDate === undefined) {
+      console.log(7);
       return false;
     }
-    if ( this.goodGradeThreshold === undefined || this.goodGradeThreshold < 0) {
+    if (this.goodGradeThreshold === undefined || this.goodGradeThreshold < 0) {
+      console.log(8);
       return false;
     }
     if (this.borderlineGradeThreshold === undefined || this.borderlineGradeThreshold < 0) {
+      console.log(9);
       return false;
     }
+    console.log(10);
     return true;
   }
 
 
-  checkDates(): void {
+  checkDates(id: string): void {
     if (!this.checkInputs()) {
       this.submitted = true;
       return;
@@ -110,6 +120,9 @@ export class BatchModalComponent implements OnInit {
     if (this.startDate < this.endDate) {
       console.log('this is fine');
       this.createBatch();
+      const elem = document.getElementById('closeBtn');
+      const evt = new MouseEvent('click', { bubbles: true});
+      elem.dispatchEvent(evt);
     } else {
       console.log('this is not fine');
     }
