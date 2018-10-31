@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { FormsModule, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Batch } from '../type/batch';
@@ -54,6 +54,10 @@ export class BatchModalComponent implements OnInit {
   }
 
   createBatch(): void {
+    console.log(new Batch(this.trainingName, this.trainingType,
+        this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+        this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
+
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
@@ -113,20 +117,34 @@ export class BatchModalComponent implements OnInit {
 
 
   checkDates(id: string): void {
-    if (!this.checkInputs()) {
-      this.submitted = true;
-      return;
-    }
+    // if (!this.checkInputs()) {
+    //   this.submitted = true;
+    //   return;
+    // }
     if (this.startDate < this.endDate) {
       console.log('this is fine');
       this.createBatch();
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true});
       elem.dispatchEvent(evt);
-      location.reload();
     } else {
       console.log('this is not fine');
     }
   }
 
+  setTrainingType(option: string) {
+    this.trainingType = option;
+  }
+
+  setSkillType(option: string) {
+    this.skillType = option;
+  }
+
+  setLocation(option: string) {
+    this.location = option;
+  }
+
+  setTrainer(option: string) {
+    this.trainer = option;
+  }
 }
