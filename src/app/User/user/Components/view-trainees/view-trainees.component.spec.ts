@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewtraineesComponent } from './view-trainees.component';
+import { ViewTraineesComponent } from './view-trainees.component';
 import { browser, by, element } from 'protractor';
 import { UserModule } from '../../user.module';
 
 describe('ViewtraineesComponent', () => {
-  let component: ViewtraineesComponent;
-  let fixture: ComponentFixture<ViewtraineesComponent>;
+  let component: ViewTraineesComponent;
+  let fixture: ComponentFixture<ViewTraineesComponent>;
   // let page: ViewTraineePage;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewtraineesComponent]
+      declarations: [ ViewTraineesComponent]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewtraineesComponent);
+    fixture = TestBed.createComponent(ViewTraineesComponent);
     component = fixture.componentInstance;
     // page = new ViewTraineePage();
     fixture.detectChanges();
