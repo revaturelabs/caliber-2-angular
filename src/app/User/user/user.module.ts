@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViewtraineesComponent } from './Components/view-trainees/view-trainees.component';
+import { ViewTraineesComponent } from './Components/view-trainees/view-trainees.component';
 import { FormsModule } from '@angular/forms';
 import { TraineeTogglePipe } from './Pipes/trainee-toggle.pipe';
 import {HttpClientModule} from '@angular/common/http';
@@ -11,9 +11,10 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewtraineesComponent, TraineeTogglePipe],
+  declarations: [ViewTraineesComponent, TraineeTogglePipe],
   exports: [
-    ViewtraineesComponent
+    ViewTraineesComponent,
+    TraineeTogglePipe
   ]
 })
 export class UserModule { }

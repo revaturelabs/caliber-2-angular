@@ -13,7 +13,7 @@ import { FLAGS } from '@angular/core/src/render3/interfaces/view';
   templateUrl: './view-trainees.component.html',
   styleUrls: ['./view-trainees.component.css']
 })
-export class ViewtraineesComponent implements OnInit {
+export class ViewTraineesComponent implements OnInit {
 
   private status: string;
   togglePipe: TraineeTogglePipe;
