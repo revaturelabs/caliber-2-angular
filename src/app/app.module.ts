@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { BatchModule } from '../app/Team2/batch/batch.module';
 import { AppComponent } from './app.component';
 
+
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    ],
   imports: [
     BrowserModule,
     BatchModule

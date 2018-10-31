@@ -3,14 +3,15 @@
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <ul class="nav nav-tabs">
+          <app-select-year></app-select-year>
           <!-- Filter batches by year -->
-          <li role="button" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span
+          <!--<li role="button" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span
                 class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu">-->
               <!-- years for filtering data -->
-              <li *ngFor="let menuItem of years"><a role="button">{{menuItem}}</a></li>
+              <!--<li *ngFor="let menuItem of years"><a role="button">{{menuItem}}</a></li>
             </ul>
-          </li>
+          </li>-->
           <!-- Button Trigger for Import Batch Modal -->
           <li role="button" class="pull-right" data-toggle="modal" data-target="#importBatchModal" (click)="resetImportModal()"><a>Import
               Batch <span class="glyphicon glyphicon-download" aria-hidden="true">
