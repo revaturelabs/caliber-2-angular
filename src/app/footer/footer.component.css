@@ -1,0 +1,51 @@
+/************************
+	Footer
+************************/
+.footer-margin {
+	margin-top: .85em;
+}
+
+.footer-img {
+	margin-top: 1.5em;
+}
+
+/* Footer, set footer height to actual height of footer*/
+html, body {
+	height: 100%;
+}
+
+.img-responsive {
+	padding-bottom: 1em;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin-bottom: -103px;
+	padding-bottom: 103px;
+}
+
+footer {
+	min-height: 103px;
+	background-color: #474C55;
+	font-size: .75em;
+	position: absolute;
+	width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.center {
+	text-align: center;
+}
+
+.contact-info {
+	color: #B9B9BA;
+}
+
+.fa-copyright {
+	padding-right: .5em;
+}
+
+footer a, footer a:hover {
+	color: #B9B9BA;
+}
