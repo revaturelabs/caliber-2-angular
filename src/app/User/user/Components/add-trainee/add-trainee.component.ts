@@ -32,7 +32,7 @@ export class AddTraineeComponent implements OnInit {
   }
 
   addTrainee() {
-    const trainee = new Trainee;
+    const trainee = new Trainee();
     trainee.batchId = this.batchId;
     trainee.name = this.fullName;
     trainee.email = this.email;
