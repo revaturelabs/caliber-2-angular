@@ -11,7 +11,7 @@ export class Trainee {
     name: string;
     email: string;
     trainingStatus: string;
-    // batch: number;
+    // batchId: number;
     phoneNumber: string;
     skypeId: string;
     profileUrl: string;

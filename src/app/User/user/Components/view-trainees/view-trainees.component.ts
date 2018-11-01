@@ -37,9 +37,9 @@ export class ViewTraineesComponent implements OnInit {
     this.ts.getTrainees(2200).subscribe(data => {
       this.trainees = data;
       this.showCommentForm = new Boolean[this.trainees.length];
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
+      this.showNotes = new Array<boolean>(this.trainees.length);
     });
-    this.showCommentForm = new Array<boolean>(this.trainees.length);
-    this.showNotes = new Array<boolean>(this.trainees.length);
   }
 
   /**
