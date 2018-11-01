@@ -48,12 +48,27 @@ export class ViewtraineesComponent implements OnInit {
     const traineeForm = new TraineeForm(this.fullName, this.email, this.skypeId, this.batchId, this.phoneNumber, this.college,
       this.degree, this.major, this.recruiterName, this.techScreenerName, this.projectCompletion,
       this.profileUrl, this.trainingStatus);
-
+    console.log(traineeForm);
     this.submitted = true;
-    this.userService.postForm(traineeForm).subscribe();
-    // to close the modal the following 3 lines must be placed in an if that checks for valid response from postForm subscribe
-    // const elem = document.getElementById('closeButton1');
-    // const evt = new MouseEvent('click', { bubbles: true});
-    // elem.dispatchEvent(evt);  }
+    this.userService.postForm(traineeForm).subscribe(data => {
+      if (data) {
+        const elem = document.getElementById('closeButton1');
+        const evt = new MouseEvent('click', { bubbles: true});
+        elem.dispatchEvent(evt);
+        this.fullName = null;
+        this.email = null;
+        this.skypeId = null;
+        this.phoneNumber = null;
+        this.college = null;
+        this.degree = null;
+        this.major = null;
+        this.recruiterName = null;
+        this.techScreenerName = null;
+        this.projectCompletion = null;
+        this.profileUrl = null;
+        this.trainingStatus = null;
+      }
+    });
   }
 }
+
