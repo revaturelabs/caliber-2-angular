@@ -17,8 +17,8 @@ const httpOptions = {
 export class TraineesService {
 
   trainees: Observable<Trainee[]>;
-  url = 'http://localhost:9085/user/all/trainee?batch=2200';
-  updateUrl = 'http://localhost:9085/user/all/trainee/update';
+  url = 'http://localhost:9085/all/trainee?batch=2200';
+  updateUrl = 'http://localhost:9085/all/trainee/update';
 
   constructor(private http: HttpClient) { }
 
