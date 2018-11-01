@@ -12,13 +12,13 @@ import { UserModule } from 'src/app/User/user/user.module';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    UserModule
+    ReactiveFormsModule
+    // UserModule
     ],
   declarations: [
     BatchViewComponent,
     BatchModalComponent,
-    SelectYearComponent
+    SelectYearComponent,
   ],
   exports: [
     BatchViewComponent,

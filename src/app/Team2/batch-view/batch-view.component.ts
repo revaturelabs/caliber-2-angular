@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BatchModalComponent } from '../batch-modal/batch-modal.component';
 import { BatchService } from '../batch.service';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,8 @@ import { Batch } from '../type/batch';
 })
 export class BatchViewComponent implements OnInit {
 
-  createOrUpdate: Batch = null;
+  @ViewChild('batchModal') batchModal: BatchModalComponent;
+  createUpdate: Batch = null;
   years: string[];
   selectedBatches: Batch[];
   defaultYears: number[];
@@ -26,7 +27,7 @@ export class BatchViewComponent implements OnInit {
   }
 
   resetBatchForm(): void {
-
+    this.createUpdate = null;
   }
 
   resetImportModal(): void {
@@ -34,7 +35,8 @@ export class BatchViewComponent implements OnInit {
   }
 
   populateBatch(batch: Batch) {
-    this.createOrUpdate = batch;
+    console.log(batch);
+    this.createUpdate = batch;
   }
 
   refreshPage() {
