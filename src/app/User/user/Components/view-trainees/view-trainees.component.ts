@@ -34,9 +34,12 @@ export class ViewTraineesComponent implements OnInit {
    * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
    */
   ngOnInit() {
+    this.trainees = new Array<Trainee>();
+    this.showCommentForm = new Array<boolean>();
+    this.showNotes = new Array<boolean>();
     this.ts.getTrainees(2200).subscribe(data => {
       this.trainees = data;
-      this.showCommentForm = new Boolean[this.trainees.length];
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showNotes = new Array<boolean>(this.trainees.length);
     });
@@ -47,33 +50,6 @@ export class ViewTraineesComponent implements OnInit {
    */
   switchTraineeView() {
     this.showActive = !this.showActive;
-  }
-
-  /**
-   * returns the trainee's current Training Status as a String
-   */
-  showTrainingStatus(t: Trainee) {
-    /*switch (t.trainingStatus) {
-      case TrainingStatus.SIGNED:
-        return 'Signed';
-      case TrainingStatus.SELECTED:
-        return 'Selected';
-      case TrainingStatus.TRAINING:
-        return 'Training';
-      case TrainingStatus.MARKETING:
-        return 'Marketing';
-      case TrainingStatus.CONFIRMED:
-        return 'Confirmed';
-      case TrainingStatus.EMPLOYED:
-        return 'Employed';
-      case TrainingStatus.DROPPED:
-        return 'Dropped';
-      case TrainingStatus.PROJECT:
-        return 'Project';
-      case TrainingStatus.STAGING:
-        return 'Staging';
-    }*/
-    return t.trainingStatus;
   }
 
   // Needs to be completed along with the rest of the flag methods
@@ -94,5 +70,4 @@ export class ViewTraineesComponent implements OnInit {
   updateTrainee(t: Trainee) {
     this.ts.updateTrainee(t).subscribe();
   }
-
 }

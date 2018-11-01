@@ -33,6 +33,7 @@ export class TraineesService {
     return this.trainees;
   }
   updateTrainee(t: Trainee): Observable<Trainee> {
-    return this.http.put<Trainee>(this.updateUrl, httpOptions);
+    console.log(t);
+    return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
   }
 }
