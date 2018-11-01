@@ -26,8 +26,16 @@ beforeEach(() => {
         });
         const req = httpMock.expectOne('http://localhost:9085/all/trainee?batch=2200');
         expect(req.request.method).toEqual('GET');
-        const t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
-        const t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
+        const t1 = new Trainee();
+        t1.name = 'John Dao';
+        t1.email = 'jd@j.com';
+        t1.trainingStatus = 'Dropped';
+        t1.phoneNumber = '111';
+        const t2 = new Trainee();
+        t1.name = 'Emily Dao';
+        t1.email = 'ed@j.com';
+        t1.trainingStatus = 'Signed';
+        t1.phoneNumber = '222';
         req.flush([t1, t2]);
       }
     )
