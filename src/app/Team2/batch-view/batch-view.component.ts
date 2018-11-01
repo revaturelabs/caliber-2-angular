@@ -11,6 +11,7 @@ import { Batch } from '../type/batch';
 })
 export class BatchViewComponent implements OnInit {
 
+  createOrUpdate: Batch = null;
   years: string[];
   selectedBatches: Batch[];
   defaultYears: number[];
@@ -29,6 +30,10 @@ export class BatchViewComponent implements OnInit {
 
   resetImportModal(): void {
 
+  }
+
+  populateBatch(batch: Batch) {
+    this.createOrUpdate = batch;
   }
 
   refreshPage() {

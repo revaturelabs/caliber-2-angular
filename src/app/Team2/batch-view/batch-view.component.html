@@ -17,7 +17,7 @@
               </span>
             </a></li>
           <!-- Button Trigger for Create Batch Modal -->
-          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" ><a>Create
+          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" (click)="resetBatch()"><a>Create
               Batch<span class="glyphicon glyphicon-plus" aria-hidden="true">
               </span>
             </a></li>
@@ -96,4 +96,4 @@
   <div ui-view="trainee-extra-modals"></div>
 
 </div>
-<app-batch-modal (someEvent)="refreshPage()"></app-batch-modal>
+<app-batch-modal (someEvent)="refreshPage()" [createOrUpdate]="createOrUpdate"></app-batch-modal>
