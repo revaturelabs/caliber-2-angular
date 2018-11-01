@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { UserModule } from './User/user/user.module';
 import { BatchModule } from '../app/Team2/batch/batch.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { ManageComponent } from './manage/manage.component';
   ],
   imports: [
     BrowserModule,
+    UserModule,
     AppRoutingModule,
     BatchModule
   ],

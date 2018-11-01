@@ -2,7 +2,7 @@
 
 <div class="modal fade" id="createBatchModal" [hidden]="hide" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
   <div class="modal-dialog" role="document">
-    <form ngNativeValidate (submit)="checkDates('createBatchModal')">
+    <form id="formId" ngNativeValidate (submit)="checkDates('createBatchModal')">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -116,16 +116,16 @@
         </div>
         <div class="modal-footer">
           <input value="Save" type="submit" class="btn btn-primary" />
-          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal" (click)="resetForm()">Close</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<!--********************************************* Check Batch Modal   ************************************-->
+<!--********************************************* Check Batch Modal Date  ************************************-->
 <form>
-  <div class="modal fade" id="checkBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
+  <div class="modal fade" id="checkBatchModalDate" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -140,8 +140,34 @@
         <div class="modal-body">
 
           <p>
-            The Start Date should be before the End Date. <br /> Trainer and
-            Co-trainer cannot be the same.
+            The Start Date should be before the End Date.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--********************************************* Check Batch Modal Trainer  ************************************-->
+<form>
+  <div class="modal fade" id="checkBatchModalTrainer" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="batchModalLabel">
+            Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+
+          <p>
+            Trainer and Co-trainer cannot be the same.
           </p>
         </div>
         <div class="modal-footer">
