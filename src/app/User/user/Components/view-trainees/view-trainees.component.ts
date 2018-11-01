@@ -27,8 +27,7 @@ export class ViewTraineesComponent implements OnInit {
   none = TraineeFlag.NONE;
 
   constructor(
-    private ts: TraineesService,
-    private http: HttpClient) { }
+    private ts: TraineesService) { }
 
   /**
    * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
