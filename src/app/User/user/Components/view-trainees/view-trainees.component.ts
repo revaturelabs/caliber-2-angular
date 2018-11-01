@@ -67,7 +67,8 @@ export class ViewTraineesComponent implements OnInit {
     }
   }
 
-  updateTrainee(t: Trainee) {
+  updateTraineeFlagNotes(t: Trainee, flagNote: HTMLInputElement) {
+    t.flagNotes = flagNote.value;
     this.ts.updateTrainee(t).subscribe();
   }
 }
