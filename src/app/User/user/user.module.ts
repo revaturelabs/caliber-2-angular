@@ -4,6 +4,7 @@ import { ViewTraineesComponent } from './Components/view-trainees/view-trainees.
 import { FormsModule } from '@angular/forms';
 import { TraineeTogglePipe } from './Pipes/trainee-toggle.pipe';
 import {HttpClientModule} from '@angular/common/http';
+import { AddTraineeComponent } from './Components/add-trainee/add-trainee.component';
 
 @NgModule({
   imports: [
@@ -11,8 +12,9 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewTraineesComponent, TraineeTogglePipe],
+  declarations: [ViewTraineesComponent, TraineeTogglePipe, AddTraineeComponent],
   exports: [
+    AddTraineeComponent,
     ViewTraineesComponent,
     TraineeTogglePipe
   ]
