@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BatchModalComponent } from '../batch-modal/batch-modal.component';
 import { BatchService } from '../batch.service';
 import { FormsModule } from '@angular/forms';
+import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/view-trainees.component';
 import { Batch } from '../type/batch';
 
 @Component({
