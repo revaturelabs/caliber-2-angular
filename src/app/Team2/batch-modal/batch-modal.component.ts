@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { BatchService } from '../batch.service';
-import { FormsModule, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Batch } from '../type/batch';
 import { Trainer } from '../type/trainer';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
@@ -11,9 +11,10 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   styleUrls: ['./batch-modal.component.css']
 })
 export class BatchModalComponent implements OnInit {
-
+  @Input() createOrUpdate;
   @Output() someEvent = new EventEmitter<string>();
 
+  currBatch: Batch;
   batchFormName: '';
   trainingName: string = null;
   trainingType: string = null;
@@ -43,9 +44,6 @@ export class BatchModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.batchForm = this.formBuilder.group({
-    //   trainingName: ['', [Validators.requiredTrue, Validators.minLength(3)]]
-    // });
     console.log('generated');
     // generate all the skilltypes
     // this.batchservice.getAllSkillTypes().subscribe( results => {
@@ -94,10 +92,6 @@ export class BatchModalComponent implements OnInit {
   }
 
   checkDates(id: string): void {
-    // if (!this.checkInputs()) {
-    //   this.submitted = true;
-    //   return;
-    // }
     if (this.startDate < this.endDate) {
       console.log('this is fine');
       this.createBatch();

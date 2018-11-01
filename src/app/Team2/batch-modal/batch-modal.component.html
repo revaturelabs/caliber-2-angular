@@ -8,7 +8,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="batchModalLabel">Create New Batch {{batchFormName}}</h4>
+          <h4 *ngIf="createOrUpdate === null" class="modal-title" id="batchModalLabel">Create New Batch</h4>
+          <h4 *ngIf="createOrUpdate != null" class="modal-title" id="batchModalLabel">Update Batch</h4>
         </div>
         <!-- Add Batch Info -->
         <div class="modal-body">
