@@ -59,6 +59,7 @@ export class BatchModalComponent implements OnInit {
     console.log('am i in here?');
     this.trainingName = null;
     this.trainingType = undefined;
+    (<HTMLFormElement>document.getElementById('formId')).reset();
     this.skillType = undefined;
     this.trainer = undefined;
     this.coTrainer = undefined;
