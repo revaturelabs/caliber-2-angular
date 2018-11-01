@@ -1,38 +1,3 @@
-<!--********************************************* View Trainee Modal ************************************-->
-<!doctype html>
-<html lang="en">
-
-<div class="row text-center">
-  <div class="container">
-    <h2>Modal Example</h2>
-    <h2>Trainee name: {{showTrainingStatus(t1)}}</h2>
-    <!-- Trigger the modal with a button -->
-    <button id="modalButton" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#traineeModalLabel">Open Modal</button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
-          </div>
-          <div class="modal-body">
-            <p>Some text in the modal.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <div class="modal fade" id="traineeModalLabel" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
   <div class="modal-dialog modal-lg modal-widest" role="document">
     <div class="modal-content">
@@ -43,17 +8,17 @@
         <h4 class="modal-title" id="traineeModalLabel">View/Add
           Trainees</h4>
       </div>
-
+  
       <div class="modal-body only-top-padding">
         <!-- switch trainees type -->
         <div class="container modal-widest">
           <div class="pull-right">
             <span>Active   </span> <a role="button"
-							(click)="switchTraineeView()" [hidden]="!showActive"><span
-							class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
-							role="button" (click)="switchTraineeView()"
-							[hidden]="showActive"><span class="fa fa-toggle-off fa-2x"
-							aria-hidden="true"> </span></a>
+              (click)="switchTraineeView()" [hidden]="!showActive"><span
+              class="fa fa-toggle-on fa-2x" aria-hidden="true"> </span></a> <a
+              role="button" (click)="switchTraineeView()"
+              [hidden]="showActive"><span class="fa fa-toggle-off fa-2x"
+              aria-hidden="true"> </span></a>
           </div>
           <!-- View Trainees in Batch -->
           <h3>Trainees in Batch</h3>
@@ -62,13 +27,13 @@
         <br />
         <!--                   <div class="row scrollable-div"> -->
         <div class="col-md-12 col-lg-12">
-
+  
           <div class="modal-body">
             <div class="container modal-widest">
               <a role="button" class="pull-right" (click)="resetTraineeForm();" data-toggle="modal" data-target="#addTraineeModal"
                 type="button">Add Trainee<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span></a>
             </div>
-
+  
             <table class="table table-responsive">
               <thead>
                 <tr>
@@ -92,69 +57,71 @@
               </thead>
               <tbody>
                 <tr *ngFor="let trainee of trainees | traineeToggle: showActive; index as i;" [attr.data-index]="i">
-									<td role="button" (click)="toggleColor(trainee)" (click)="showCommentForm[i] = true">{{trainee.name}}</td>
-									<td><span (mouseover)="showNotes[i] = true"
+                  <td role="button" (click)="toggleColor(trainee)" (click)="showCommentForm[i] = true">{{trainee.name}}</td>
+                  <td><span (mouseover)="showNotes[i] = true"
                     (mouseleave)="showNotes[i] = false"
                     class='glyphicon glyphicon-flag'
-                    [ngClass]="{'color-red': (trainee.flagStatus === red), 'color-green': (trainee.flagStatus === green), 'color-white': trainee.flagStatus === none}"></span>
-										<form (submit)="showCommentForm[i] = false" (submit)="updateTrainee(trainee)" *ngIf="showCommentForm[i]" class="commentForm"
-											style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
-											<input type="text" placeholder="comment" name="statusComment"
-												[(ngModel)]="trainee.flagNotes"> <input type="submit"
-												value="Save"> <span (click)="showCommentForm[i] = false"
-												class="glyphicon glyphicon-remove-sign"></span>
-										</form>
-										<div
-											*ngIf="showNotes[i]"
-											style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
-											class="notes">
-											<span>{{trainee.flagNotes}}</span>
+                    [ngClass]="{'color-red': (trainee.flagStatus === red), 'color-green': (trainee.flagStatus === green), 'color-white': trainee.flagStatus === none || trainee.flagStatus === null}"></span>
+                    <form (submit)="showCommentForm[i] = false" (submit)="updateTrainee(trainee)" *ngIf="showCommentForm[i]" class="commentForm"
+                      style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
+                      <input type="text" placeholder="comment" name="statusComment"
+                        [(ngModel)]="trainee.flagNotes"> <input type="submit"
+                        value="Save"> <span (click)="showCommentForm[i] = false"
+                        class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <div
+                      *ngIf="showNotes[i]"
+                      style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
+                      class="notes">
+                      <span>{{trainee.flagNotes}}</span>
                     </div>
                   </td>
-									<td>{{trainee.email}}</td>
-									<td>{{showTrainingStatus(trainee)}}</td>
-									<td>{{trainee.phoneNumber}}</td>
-									<td>{{trainee.skypeId}}</td>
-									<td><span *ngIf="trainee.profileUrl"> <a
-											href="{{trainee.profileUrl}}" target="_blank"><i
-												class="fa fa-file-code-o" aria-hidden="true"></i></a>
-									</span></td>
-									<td>{{trainee.recruiterName}}</td>
-									<td>{{trainee.college}}</td>
-									<td>{{trainee.degree}}</td>
-									<td>{{trainee.major}}</td>
-									<td>{{trainee.techScreenerName}}</td>
-									<td>{{trainee.projectCompletion}}</td>
-
-									<td>
+                  <td>{{trainee.email}}</td>
+                  <td>{{trainee.trainingStatus}}</td>
+                  <td>{{trainee.phoneNumber}}</td>
+                  <td>{{trainee.skypeId}}</td>
+                  <td><span *ngIf="trainee.profileUrl"> <a
+                      href="{{trainee.profileUrl}}" target="_blank"><i
+                        class="fa fa-file-code-o" aria-hidden="true"></i></a>
+                  </span></td>
+                  <td>{{trainee.recruiterName}}</td>
+                  <td>{{trainee.college}}</td>
+                  <td>{{trainee.degree}}</td>
+                  <td>{{trainee.major}}</td>
+                  <td>{{trainee.techScreenerName}}</td>
+                  <td>{{trainee.projectCompletion}}</td>
+  
+                  <td>
                     <!-- Change Batches Modal -->
                     <a role="button"
-										data-toggle="modal"
-										(click)="getSwitchableBatches(trainee)"
-										data-target="#switchBatchModal"><span
-											class="glyphicon glyphicon-refresh"></span> </a>
-									</td>
-
-									<td><a role="button"
-										(click)="populateTrainee(trainee);getTrainee($index)"
-										data-toggle="modal" data-target="#addTraineeModal"
-										type="button"> <span class="glyphicon glyphicon-pencil"></span>
-									</a></td>
-									<td><a role="button" class="pull-right"
-										(click)="getTraineeToDelete($index)" data-toggle="modal"
-										data-target="#deleteTraineeModal"><span
-											class="glyphicon glyphicon-remove">
-										</span></a></td>
-								</tr>
+                    data-toggle="modal"
+                    (click)="getSwitchableBatches(trainee)"
+                    data-target="#switchBatchModal"><span
+                      class="glyphicon glyphicon-refresh"></span> </a>
+                  </td>
+  
+                  <td><a role="button"
+                    (click)="populateTrainee(trainee);getTrainee($index)"
+                    data-toggle="modal" data-target="#addTraineeModal"
+                    type="button"> <span class="glyphicon glyphicon-pencil"></span>
+                  </a></td>
+                  <td><a role="button" class="pull-right"
+                    (click)="getTraineeToDelete($index)" data-toggle="modal"
+                    data-target="#deleteTraineeModal"><span
+                      class="glyphicon glyphicon-remove">
+                    </span></a></td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
-
+  
         <div class="modal-footer"></div>
       </div>
     </div>
   </div>
 </div>
 
-</html>
+
+<!--********************************************* View Trainee Modal ************************************-->
+

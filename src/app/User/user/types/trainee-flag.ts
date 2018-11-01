@@ -1,6 +1,6 @@
 export enum TraineeFlag {
-   NONE,
-   RED,
-   GREEN,
-   TRAINER
+   NONE = 'NONE',
+   RED = 'RED',
+   GREEN = 'GREEN',
+   TRAINER = 'TRAINER'
 }

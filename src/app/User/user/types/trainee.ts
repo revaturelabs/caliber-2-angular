@@ -11,7 +11,7 @@ export class Trainee {
     name: string;
     email: string;
     trainingStatus: string;
-    // batch: number;
+    batchId: number;
     phoneNumber: string;
     skypeId: string;
     profileUrl: string;
@@ -30,14 +30,14 @@ export class Trainee {
      * @param name Trainee's name
      * @param email  Trainee's email
      * @param trainingStatus Trainee's training status
-     * @param batch Trainee's batch id
+     * @param batchId Trainee's batch id
      * @param phoneNumber Trainee's phone Number
      */
     constructor(
         name: string,
         email: string,
         trainingStatus: string,
-        // batch: number,
+        batchId: number,
         phoneNumber: string) {
         // skypeId: string,
         // profileUrl: string,
@@ -50,7 +50,7 @@ export class Trainee {
             this.name = name;
             this.email = email;
             this.trainingStatus = trainingStatus;
-            // this.batch = batch;
+            this.batchId = batchId;
             this.phoneNumber = phoneNumber;
             // this.skypeId = skypeId;
             // this.profileUrl = profileUrl;
