@@ -28,7 +28,7 @@ footer {
 	min-height: 103px;
 	background-color: #474C55;
 	font-size: .75em;
-	position: absolute;
+	position: relative;
 	width: 100%;
     left: 0;
     bottom: 0;
