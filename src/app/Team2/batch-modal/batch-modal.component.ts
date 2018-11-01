@@ -93,47 +93,6 @@ export class BatchModalComponent implements OnInit {
     }
   }
 
-  checkInputs(): Boolean {
-    if (this.trainingName === null || this.trainingName === '') {
-      console.log('1');
-      return false;
-    }
-    if (this.trainingType === null) {
-      console.log('2');
-      return false;
-    }
-    if (this.skillType === null) {
-      console.log(3);
-      return false;
-    }
-    if (this.location === null) {
-      console.log(4);
-      return false;
-    }
-    if (this.trainer === null) {
-      console.log(5);
-      return false;
-    }
-    if (this.startDate === undefined) {
-      console.log(6);
-      return false;
-    } else if (this.endDate === undefined) {
-      console.log(7);
-      return false;
-    }
-    if (this.goodGradeThreshold === undefined || this.goodGradeThreshold < 0) {
-      console.log(8);
-      return false;
-    }
-    if (this.borderlineGradeThreshold === undefined || this.borderlineGradeThreshold < 0) {
-      console.log(9);
-      return false;
-    }
-    console.log(10);
-    return true;
-  }
-
-
   checkDates(id: string): void {
     // if (!this.checkInputs()) {
     //   this.submitted = true;
