@@ -61,7 +61,6 @@ export class BatchViewComponent implements OnInit {
     this.batchservice.getAllYears().subscribe(years => {
       console.log(years);
       if (years.length === 0 ) {
-        this.makeDefaultBatches();
         this.getAllYears();
       } else {
         this.defaultYears = years;
@@ -69,11 +68,5 @@ export class BatchViewComponent implements OnInit {
         this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
       }
     });
-  }
-
-  makeDefaultBatches() {
-    this.batchservice.postBatch(new Batch('Tester', 'Tester',
-    'Tester', 'Nick', 'Help', 'Nowhere', new Date('October 19, 2018'),
-    new Date('October 20, 2018'), 55, 45)).subscribe();
   }
 }
