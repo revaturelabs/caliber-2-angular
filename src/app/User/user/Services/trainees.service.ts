@@ -37,7 +37,7 @@ export class TraineesService {
     console.log(t);
     return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
   }
-  postForm(t: Trainee): Observable<Trainee> {
+  createTrainee(t: Trainee): Observable<Trainee> {
     return this.http.post<Trainee>(this.createUrl, t, httpOptions);
   }
 }
