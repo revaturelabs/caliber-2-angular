@@ -24,7 +24,8 @@
               <label for="trainingType">Training Type:</label>
               <select #t (change)="setTrainingType(t.value)" class="form-control" id="trainingType"
                 required name="trainingType">
-                <option selected="selected" value="" disabled>Select Training Type</option>
+                <option *ngIf="createOrUpdate === null"  selected="selected" id="defaultTrainingType" value="" disabled>Select Training Type</option>
+                <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.trainingType" disabled>{{createOrUpdate.trainingType}}</option>
                 <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
               </select>
               <div *ngIf="submitted && !trainingType" class="invalid-feedback">Training type is required</div>
@@ -35,7 +36,8 @@
               <label for="skillType">Skill Type:</label>
                <select #skillType (change)="setSkillType(skillType.value)"
                 name="skillType" class="form-control" id="skillType" required>
-                <option selected="selected" value ="" disabled>Select Skill Type</option>
+                <option *ngIf="createOrUpdate === null" selected="selected" value ="" disabled>Select Skill Type</option>
+                <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.skillType" disabled>{{createOrUpdate.skillType}}</option>
                 <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
               </select>
               <div *ngIf="submitted && !skillType" class="invalid-feedback">Skill type is required</div>
@@ -49,7 +51,8 @@
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
               <select #location (change)="setLocation(location.value)"  id="location" required class="form-control"
                 required name="location">
-                <option value ="" selected="selected" disabled>Select Location</option>
+                <option *ngIf="createOrUpdate === null" value ="" selected="selected" disabled>Select Location</option>
+                <option *ngIf="createOrUpdate != null" value="createOrUpdate.location" disabled>{{createOrUpdate.location}}</option>
                 <option *ngFor="let option of locationOptions" [ngValue]="option">{{ option }}</option>
               </select>
               <div *ngIf="submitted && !location" class="invalid-feedback">Location is required</div>
@@ -62,7 +65,8 @@
               <label for="trainer">Trainer:</label>
               <select #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer"
                 required name="trainer">
-                <option value="" selected="selected" disabled>Select Trainer</option>
+                <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Trainer</option>
+                <option *ngIf="createOrUpdate != null" value="createOrUpdate.trainer" selected="selected" disabled>{{createOrUpdate.trainer}}</option>
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
               </select>
               <div *ngIf="submitted && !trainer" class="invalid-feedback">Trainer is required</div>
@@ -81,7 +85,7 @@
             <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
               <label for="start-date">Start Date:</label>
               <div class="input-group" id="start-date" data-datepicker="true">
-                <input type="date" class="date-input form-control date-selector" name="s" min="0" placeholder="Start Date"
+                <input type="date" id="startDate" class="date-input form-control date-selector" name="s" min="0" placeholder="Start Date"
                   [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required><span class="input-group-addon glyphicon glyphicon-calendar"></span>
               </div>
             </div>

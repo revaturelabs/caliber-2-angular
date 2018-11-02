@@ -15,27 +15,27 @@ export class BatchService {
   constructor(private http: HttpClient) { }
 
   getAllBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/batch', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
+    return this.http.get<Batch[]>(this.url + '/vp/batch/all', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
   }
 
   getBatch(batch: Batch): Observable<Batch> {
-    return this.http.get<Batch>(this.url + '/batch/id' + batch.batchId);
+    return this.http.get<Batch>(this.url + 'all/batch/' + batch.batchId);
   }
 
   getBatchesByYear(year: number): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/batch/year/' + year);
+    return this.http.get<Batch[]>(this.url + '/vp/batch/' + year);
   }
 
   postBatch(batch: Batch): Observable<Batch> {
-    return this.http.post<Batch>(this.url + '/batch', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+    return this.http.post<Batch>(this.url + '/all/batch/create', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   putBatch(batch: Batch): Observable<Batch> {
-    return this.http.put<Batch>(this.url + '/batch/', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+    return this.http.put<Batch>(this.url + '/all/batch/update', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   deleteBatch(batch: Batch): Observable<Batch> {
-    return this.http.delete<Batch>(this.url + '/batch/' + batch.batchId);
+    return this.http.delete<Batch>(this.url + '/all/batch/delete' + batch.batchId);
   }
 
   getAllSkillTypes(): Observable<string[]> {
@@ -43,6 +43,6 @@ export class BatchService {
   }
 
   getAllYears(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + '/batch/valid_years');
+    return this.http.get<number[]>(this.url + '/valid_years');
   }
 }

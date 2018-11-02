@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { FormGroup } from '@angular/forms';
 import { Batch } from '../type/batch';
@@ -10,8 +10,8 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   templateUrl: './batch-modal.component.html',
   styleUrls: ['./batch-modal.component.css']
 })
-export class BatchModalComponent implements OnInit {
-  @Input() createOrUpdate;
+export class BatchModalComponent implements OnInit, OnChanges {
+  @Input() createOrUpdate: Batch;
   @Output() someEvent = new EventEmitter<string>();
 
   currBatch: Batch;
@@ -43,6 +43,20 @@ export class BatchModalComponent implements OnInit {
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
+  setValues() {
+    console.log(this.createOrUpdate);
+    this.trainingName = this.createOrUpdate.trainingName;
+    this.trainingType = this.createOrUpdate.trainingType;
+    this.skillType = this.createOrUpdate.skillType;
+    this.location = this.createOrUpdate.location;
+    this.trainer = this.createOrUpdate.trainer;
+    this.coTrainer = this.createOrUpdate.coTrainer;
+    const d = new Date(this.createOrUpdate.startDate);
+    // this.startDate = ;
+    this.endDate = this.createOrUpdate.endDate;
+    this.goodGradeThreshold = this.createOrUpdate.goodGrade;
+    this.borderlineGradeThreshold = this.createOrUpdate.passingGrade;
+  }
   ngOnInit() {
     console.log('generated');
     // generate all the skilltypes
@@ -53,6 +67,11 @@ export class BatchModalComponent implements OnInit {
     // console.log(this.skillTypes);
   }
 
+  ngOnChanges() {
+    if (this.createOrUpdate != null) {
+      this.setValues();
+    }
+  }
   resetForm() {
     console.log('am i in here?');
     this.trainingName = null;
