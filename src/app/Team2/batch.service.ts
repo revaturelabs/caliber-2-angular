@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Batch } from './type/batch';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +34,8 @@ export class BatchService {
     return this.http.put<Batch>(this.url + '/all/batch/update', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
-  deleteBatch(batch: Batch): Observable<Batch> {
-    return this.http.delete<Batch>(this.url + '/all/batch/delete');
+  deleteBatch(batchId: number): Observable<Batch> {
+    return this.http.delete<any>(this.url + '/all/batch/delete/' + batchId);
   }
 
   getAllSkillTypes(): Observable<string[]> {
