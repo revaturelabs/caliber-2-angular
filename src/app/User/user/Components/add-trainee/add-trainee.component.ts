@@ -49,7 +49,7 @@ export class AddTraineeComponent implements OnInit {
 
 
     this.submitted = true;
-    this.ts.postForm(trainee).subscribe(data => {
+    this.ts.createTrainee(trainee).subscribe(data => {
       if (data) {
         const elem = document.getElementById('closeButton1');
         const evt = new MouseEvent('click', { bubbles: true});
