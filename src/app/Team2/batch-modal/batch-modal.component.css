@@ -120,6 +120,37 @@ a {
 	color: white;
 }
 
+/***************************
+	Error Modal for Batch
+***************************/
+
+.hidden{
+    display:none;
+}
+.show{
+    display:block;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+	box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+
+#overlay {
+	position: fixed;
+	
+    top: 0px;
+    left:  400px;
+    background:  rgba(0,0,0,0.8);
+    width: 40%;
+	z-index: 90000;
+}
+
 /************************
 	Manage Batch
 ************************/
@@ -180,6 +211,10 @@ a {
 *************************/
 .batchModal {
 	margin: 1.3em;
+}
+
+.fa-frown-o:before {
+    content: "\f119";
 }
 
 .invalid-feedback {

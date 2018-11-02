@@ -2,7 +2,7 @@
 
 <div class="modal fade" id="createBatchModal" [hidden]="hide" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
   <div class="modal-dialog" role="document">
-    <form id="formId" ngNativeValidate (submit)="checkDates('createBatchModal')">
+    <form id="formId" ngNativeValidate (submit)="checkDates('createBatchModal')" data-toggle="modal" data-target="#dateError" >
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -22,9 +22,9 @@
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingType">Training Type:</label>
-              <select #t (change)="setTrainingType(t.value)" class="form-control" id="trainingType"
-                required name="trainingType">
-                <option *ngIf="createOrUpdate === null"  selected="selected" id="defaultTrainingType" value="" disabled>Select Training Type</option>
+              <select #t (change)="setTrainingType(t.value)" class="form-control" id="trainingType" required name="trainingType">
+                <option *ngIf="createOrUpdate === null" selected="selected" id="defaultTrainingType" value="" disabled>Select
+                  Training Type</option>
                 <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.trainingType" disabled>{{createOrUpdate.trainingType}}</option>
                 <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
               </select>
@@ -34,9 +34,9 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="skillType">Skill Type:</label>
-               <select #skillType (change)="setSkillType(skillType.value)"
-                name="skillType" class="form-control" id="skillType" required>
-                <option *ngIf="createOrUpdate === null" selected="selected" value ="" disabled>Select Skill Type</option>
+              <select #skillType (change)="setSkillType(skillType.value)" name="skillType" class="form-control" id="skillType"
+                required>
+                <option *ngIf="createOrUpdate === null" selected="selected" value="" disabled>Select Skill Type</option>
                 <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.skillType" disabled>{{createOrUpdate.skillType}}</option>
                 <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
               </select>
@@ -49,9 +49,9 @@
               <!-- ng-options is used ass opposed to ng-repeat because an entire object needs to be passed -->
 
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
-              <select #location (change)="setLocation(location.value)"  id="location" required class="form-control"
+              <select #location (change)="setLocation(location.value)" id="location" required class="form-control"
                 required name="location">
-                <option *ngIf="createOrUpdate === null" value ="" selected="selected" disabled>Select Location</option>
+                <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Location</option>
                 <option *ngIf="createOrUpdate != null" value="createOrUpdate.location" disabled>{{createOrUpdate.location}}</option>
                 <option *ngFor="let option of locationOptions" [ngValue]="option">{{ option }}</option>
               </select>
@@ -63,8 +63,7 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainer">Trainer:</label>
-              <select #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer"
-                required name="trainer">
+              <select #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer" required name="trainer">
                 <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Trainer</option>
                 <option *ngIf="createOrUpdate != null" value="createOrUpdate.trainer" selected="selected" disabled>{{createOrUpdate.trainer}}</option>
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
@@ -85,8 +84,9 @@
             <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
               <label for="start-date">Start Date:</label>
               <div class="input-group" id="start-date" data-datepicker="true">
-                <input type="date" id="startDate" class="date-input form-control date-selector" name="s" min="0" placeholder="Start Date"
-                  [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required><span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                <input type="date" id="startDate" class="date-input form-control date-selector" name="s" min="0"
+                  placeholder="Start Date" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required><span
+                  class="input-group-addon glyphicon glyphicon-calendar"></span>
               </div>
             </div>
             <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
@@ -120,63 +120,40 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input value="Save" type="submit" class="btn btn-primary" />
-          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal" (click)="resetForm()">Close</button>
+          <input *ngIf= "createOrUpdate === null" value="Save"  type="submit" class="btn btn-primary"/>
+          <input *ngIf= "createOrUpdate != null" value="Update"  type="submit" class="btn btn-primary"/>
+          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<!--********************************************* Check Batch Modal Date  ************************************-->
-<form>
-  <div class="modal fade" id="checkBatchModalDate" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
-    <div class="modal-dialog" role="document">
+<!------------------------------------------------- Error Modal for Date -------------------------------------->
+<div #dateError class="modal fade" id="checkBatchModalDate" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
+    <div id="overlay" class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="batchModalLabel">
             Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
           </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
 
         </div>
         <div class="modal-body">
 
-          <p>
+          <p *ngIf="dateIsError">
             The Start Date should be before the End Date.
           </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!--********************************************* Check Batch Modal Trainer  ************************************-->
-<form>
-  <div class="modal fade" id="checkBatchModalTrainer" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="batchModalLabel">
-            Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
-          </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-
-        </div>
-        <div class="modal-body">
-
-          <p>
+          <p *ngIf="trainerIsError">
             Trainer and Co-trainer cannot be the same.
           </p>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">Ok</button>
         </div>
       </div>
     </div>

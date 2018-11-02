@@ -34,6 +34,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
   borderlineGradeThreshold: number;
   batchForm: FormGroup;
   submitted: Boolean = false;
+  dateIsError: Boolean = false;
+  trainerIsError: Boolean = false;
 
   constructor(
     private batchservice: BatchService) {
@@ -111,13 +113,23 @@ export class BatchModalComponent implements OnInit, OnChanges {
   }
 
   checkDates(id: string): void {
-    if (this.startDate < this.endDate) {
+    if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
       console.log('this is fine');
       this.createBatch();
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true});
       elem.dispatchEvent(evt);
-    } else {
+    }
+
+    if (this.startDate >= this.endDate) {
+      this.dateIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+    }
+
+    if (this.trainer === this.coTrainer) {
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
       console.log('this is not fine');
     }
   }
@@ -136,5 +148,11 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
   setTrainer(option: string) {
     this.trainer = option;
+  }
+
+  closeModal() {
+    document.getElementById('checkBatchModalDate').className = 'hidden';
+    this.dateIsError = false;
+    this.trainerIsError = false;
   }
 }

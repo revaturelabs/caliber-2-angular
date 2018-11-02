@@ -18,7 +18,7 @@ import { UserModule } from 'src/app/User/user/user.module';
   declarations: [
     BatchViewComponent,
     BatchModalComponent,
-    SelectYearComponent,
+    SelectYearComponent
   ],
   exports: [
     BatchViewComponent,
