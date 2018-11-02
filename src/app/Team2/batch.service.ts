@@ -35,7 +35,7 @@ export class BatchService {
   }
 
   deleteBatch(batch: Batch): Observable<Batch> {
-    return this.http.delete<Batch>(this.url + '/all/batch/delete' + batch.batchId);
+    return this.http.delete<Batch>(this.url + '/all/batch/delete');
   }
 
   getAllSkillTypes(): Observable<string[]> {
