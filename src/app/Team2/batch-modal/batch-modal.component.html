@@ -45,9 +45,6 @@
             <!-- Dropdown for location -->
             <div class="form-group col-md-6 col-sm-6">
               <label for="commonLocations">Location :</label>
-              <!-- Leave the comment below -->
-              <!-- ng-options is used ass opposed to ng-repeat because an entire object needs to be passed -->
-
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
               <select #location (change)="setLocation(location.value)"  id="location" required class="form-control"
                 required name="location">

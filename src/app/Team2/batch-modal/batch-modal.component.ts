@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Batch } from '../type/batch';
 import { Trainer } from '../type/trainer';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { BLocation } from '../type/location';
 
 @Component({
   selector: 'app-batch-modal',
@@ -13,6 +14,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class BatchModalComponent implements OnInit, OnChanges {
   @Input() createOrUpdate: Batch;
   @Output() someEvent = new EventEmitter<string>();
+  @Output() closeEvent = new EventEmitter<string>();
 
   currBatch: Batch;
   batchFormName: '';
@@ -38,8 +40,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
   constructor(
     private batchservice: BatchService) {
     this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
-    this.locationOptions = ['Virginia', 'Texas', 'Florida'];
     this.skillTypes = ['Java', 'Spark', '.NET', 'PEGA'];
+    this.locationOptions = ['Virginia', 'New York', 'Texas'];
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
@@ -48,7 +50,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainingName = this.createOrUpdate.trainingName;
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
-    this.location = this.createOrUpdate.location;
+    this.location = 'New York';
+    // this.location = this.createOrUpdate.location;
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
     const d = new Date(this.createOrUpdate.startDate);
@@ -63,6 +66,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     // this.batchservice.getAllSkillTypes().subscribe( results => {
     //   console.log(results);
     //   this.skillTypes = results;
+    // });
+    // this.batchservice.getAllLocations().subscribe( locs => {
+    //   this.locationOptions = locs;
     // });
     // console.log(this.skillTypes);
   }
@@ -85,6 +91,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.endDate = undefined;
     this.goodGradeThreshold = undefined;
     this.borderlineGradeThreshold = undefined;
+    this.closeEvent.next('closed');
+    this.createOrUpdate = null;
   }
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,

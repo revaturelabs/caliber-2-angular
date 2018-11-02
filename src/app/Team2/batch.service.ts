@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Batch } from './type/batch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BLocation } from './type/location';
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +46,9 @@ export class BatchService {
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + '/valid_years');
   }
+
+  getAllLocations(): Observable<BLocation[]> {
+    return this.http.get<BLocation[]>('http://localhost:8010/all/location/all');
+  }
+
 }

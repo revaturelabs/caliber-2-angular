@@ -96,5 +96,5 @@
   <div ui-view="trainee-extra-modals"></div>
 
 </div>
-<app-batch-modal #batchModal (someEvent)="refreshPage()" [createOrUpdate]="createUpdate"></app-batch-modal>
+<app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createOrUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal>
 <!-- <app-view-trainees></app-view-trainees> -->
