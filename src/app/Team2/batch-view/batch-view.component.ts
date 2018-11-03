@@ -12,6 +12,7 @@ import { Batch } from '../type/batch';
 })
 export class BatchViewComponent implements OnInit {
 
+  // class variables
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   createUpdate: Batch = null;
   years: string[];
@@ -23,23 +24,29 @@ export class BatchViewComponent implements OnInit {
   constructor(private batchservice: BatchService) { }
 
   ngOnInit() {
+    // gets all years for dropdown button
     this.getAllYears();
     console.log(this.defaultYears);
   }
 
+  // resets createorUpdate variable for child component
   resetBatchForm(): void {
     this.createUpdate = null;
   }
 
+  // ToDo: future implementation
+  // method for import button
   resetImportModal(): void {
 
   }
 
+  // sets batch information for child component
   populateBatch(batch: Batch) {
     console.log(batch);
     this.createUpdate = batch;
   }
 
+  // re-renders contents in batch view component
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
@@ -47,6 +54,7 @@ export class BatchViewComponent implements OnInit {
     this.getAllYears();
   }
 
+  // renders contents in view batch component based on year selected
   pickYear(event: number) {
     this.selectedYear =  event;
     this.batchservice.getBatchesByYear(event).subscribe(result => {
@@ -54,10 +62,12 @@ export class BatchViewComponent implements OnInit {
     });
   }
 
+  // stores batch id for trainee display
   selectCurrentBatch(bid: number) {
     sessionStorage.setItem('bid', '' + bid);
   }
 
+  // removes a batch
   deleteBatch(batchId: number) {
     console.log('delete');
     console.log(batchId);
@@ -65,6 +75,7 @@ export class BatchViewComponent implements OnInit {
     this.refreshPage();
   }
 
+  // gets all start years from database for dropdown button
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years => {
       console.log(years);

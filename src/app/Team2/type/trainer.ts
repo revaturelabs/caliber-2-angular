@@ -5,6 +5,7 @@ export class Trainer {
     email: string;
     tier: string;
 
+    // constructor for trainer object
     constructor(trainerId: number, name: string, title: string,
         email: string, tier: string) {
             this.trainerId = trainerId;
