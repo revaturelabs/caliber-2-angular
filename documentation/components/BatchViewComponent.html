@@ -1,0 +1,1697 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>caliber-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">caliber-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>BatchViewComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Team2/batch-view/batch-view.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-batch-view</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./batch-view.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./batch-view.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#defaultYears">defaultYears</a>
+                            </li>
+                            <li>
+                                <a href="#selectedBatches">selectedBatches</a>
+                            </li>
+                            <li>
+                                <a href="#selectedYear">selectedYear</a>
+                            </li>
+                            <li>
+                                <a href="#years">years</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getAllYears">getAllYears</a>
+                            </li>
+                            <li>
+                                <a href="#makeDefaultBatches">makeDefaultBatches</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#pickYear">pickYear</a>
+                            </li>
+                            <li>
+                                <a href="#refreshPage">refreshPage</a>
+                            </li>
+                            <li>
+                                <a href="#resetBatchForm">resetBatchForm</a>
+                            </li>
+                            <li>
+                                <a href="#resetImportModal">resetImportModal</a>
+                            </li>
+                            <li>
+                                <a href="#selectCurrentBatch">selectCurrentBatch</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(batchservice: <a href="../injectables/BatchService.html">BatchService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>batchservice</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/BatchService.html" target="_self" >BatchService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAllYears"></a>
+                        <span class="name">
+                            <b>
+                            getAllYears
+                            </b>
+                            <a href="#getAllYears"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAllYears()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="makeDefaultBatches"></a>
+                        <span class="name">
+                            <b>
+                            makeDefaultBatches
+                            </b>
+                            <a href="#makeDefaultBatches"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>makeDefaultBatches()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:66</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:21</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pickYear"></a>
+                        <span class="name">
+                            <b>
+                            pickYear
+                            </b>
+                            <a href="#pickYear"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>pickYear(event: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>event</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="refreshPage"></a>
+                        <span class="name">
+                            <b>
+                            refreshPage
+                            </b>
+                            <a href="#refreshPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>refreshPage()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resetBatchForm"></a>
+                        <span class="name">
+                            <b>
+                            resetBatchForm
+                            </b>
+                            <a href="#resetBatchForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>resetBatchForm()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resetImportModal"></a>
+                        <span class="name">
+                            <b>
+                            resetImportModal
+                            </b>
+                            <a href="#resetImportModal"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>resetImportModal()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectCurrentBatch"></a>
+                        <span class="name">
+                            <b>
+                            selectCurrentBatch
+                            </b>
+                            <a href="#selectCurrentBatch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>selectCurrentBatch(bid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bid</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="defaultYears"></a>
+                        <span class="name">
+                            <b>
+                            defaultYears
+                            </b>
+                            <a href="#defaultYears"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>defaultYears:     <code>number[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedBatches"></a>
+                        <span class="name">
+                            <b>
+                            selectedBatches
+                            </b>
+                            <a href="#selectedBatches"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>selectedBatches:     <code><a href="../classes/Batch.html" target="_self" >Batch[]</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >Batch[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedYear"></a>
+                        <span class="name">
+                            <b>
+                            selectedYear
+                            </b>
+                            <a href="#selectedYear"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>selectedYear:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="years"></a>
+                        <span class="name">
+                            <b>
+                            years
+                            </b>
+                            <a href="#years"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>years:     <code>string[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { BatchModalComponent } from &#x27;../batch-modal/batch-modal.component&#x27;;
+import { BatchService } from &#x27;../batch.service&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { Batch } from &#x27;../type/batch&#x27;;
+
+@Component({
+  selector: &#x27;app-batch-view&#x27;,
+  templateUrl: &#x27;./batch-view.component.html&#x27;,
+  styleUrls: [&#x27;./batch-view.component.css&#x27;]
+})
+export class BatchViewComponent implements OnInit {
+
+  years: string[];
+  selectedBatches: Batch[];
+  defaultYears: number[];
+  selectedYear: number;
+
+  constructor(private batchservice: BatchService) { }
+
+  ngOnInit() {
+    this.getAllYears();
+    console.log(this.defaultYears);
+  }
+
+  resetBatchForm(): void {
+
+  }
+
+  resetImportModal(): void {
+
+  }
+
+  refreshPage() {
+    this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result &#x3D;&gt; {
+      this.selectedBatches &#x3D; result;
+    });
+    this.getAllYears();
+  }
+
+  pickYear(event: number) {
+    this.selectedYear &#x3D;  event;
+    this.batchservice.getBatchesByYear(event).subscribe(result &#x3D;&gt; {
+      this.selectedBatches &#x3D; result;
+    });
+  }
+
+  selectCurrentBatch(bid: number) {
+    sessionStorage.setItem(&#x27;bid&#x27;, &#x27;&#x27; + bid);
+  }
+
+  getAllYears() {
+    this.batchservice.getAllYears().subscribe(years &#x3D;&gt; {
+      console.log(years);
+      if (years.length &#x3D;&#x3D;&#x3D; 0 ) {
+        this.makeDefaultBatches();
+        this.getAllYears();
+      } else {
+        this.defaultYears &#x3D; years;
+        this.selectedYear &#x3D; this.defaultYears[this.defaultYears.length - 1];
+        this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
+      }
+    });
+  }
+
+  makeDefaultBatches() {
+    this.batchservice.postBatch(new Batch(&#x27;Tester&#x27;, &#x27;Tester&#x27;,
+    &#x27;Tester&#x27;, &#x27;Nick&#x27;, &#x27;Help&#x27;, &#x27;Nowhere&#x27;, new Date(&#x27;October 19, 2018&#x27;),
+    new Date(&#x27;October 20, 2018&#x27;), 55, 45)).subscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;manage&quot;&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-12 col-lg-12&quot;&gt;
+        &lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;
+          &lt;!-- Filter batches by year --&gt;
+          &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;dropdown&quot;&gt;&lt;a id&#x3D;&quot;&quot; class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;dropdown&quot;&gt;{{selectedYear}}&lt;span
+              class&#x3D;&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+            &lt;ul class&#x3D;&quot;dropdown-menu&quot;&gt;
+              &lt;!-- years for filtering data --&gt;
+              &lt;li *ngFor&#x3D;&quot;let menuItem of defaultYears&quot;&gt;&lt;a role&#x3D;&quot;button&quot; (click)&#x3D;&quot;pickYear(menuItem)&quot;&gt;{{menuItem}}&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;!-- Button Trigger for Import Batch Modal --&gt;
+          &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#importBatchModal&quot; (click)&#x3D;&quot;resetImportModal()&quot;&gt;&lt;a&gt;Import
+              Batch &lt;span class&#x3D;&quot;glyphicon glyphicon-download&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;&lt;/li&gt;
+          &lt;!-- Button Trigger for Create Batch Modal --&gt;
+          &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#createBatchModal&quot; &gt;&lt;a&gt;Create
+              Batch&lt;span class&#x3D;&quot;glyphicon glyphicon-plus&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Manage batch table --&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-12 col-lg-12&quot;&gt;
+        &lt;table class&#x3D;&quot;table table-hover&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Training Name&lt;/th&gt;
+              &lt;th&gt;Training Type&lt;/th&gt;
+              &lt;th&gt;Skill Type&lt;/th&gt;
+              &lt;th&gt;Trainer&lt;/th&gt;
+              &lt;th&gt;Co-Trainer&lt;/th&gt;
+              &lt;th&gt;Location&lt;/th&gt;
+              &lt;th&gt;Start Date&lt;/th&gt;
+              &lt;th&gt;End Date&lt;/th&gt;
+              &lt;th&gt;Good Grade&lt;/th&gt;
+              &lt;th&gt;Passing Grade&lt;/th&gt;
+              &lt;th&gt;&lt;/th&gt;
+              &lt;th&gt;&lt;/th&gt;
+              &lt;th&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr *ngFor&#x3D;&quot;let batch of selectedBatches&quot;&gt;
+              &lt;td&gt;{{batch.trainingName}}&lt;/td&gt;
+              &lt;td&gt;{{batch.trainingType}}&lt;/td&gt;
+              &lt;td&gt;{{batch.skillType}}&lt;/td&gt;
+              &lt;td&gt;{{batch.trainer}}&lt;/td&gt;
+              &lt;td&gt;{{batch.coTrainer}}&lt;/td&gt;
+              &lt;td&gt;{{batch.location}}&lt;/td&gt;
+              &lt;td&gt;{{batch.startDate|date}}&lt;/td&gt;
+              &lt;td&gt;{{batch.endDate|date}}&lt;/td&gt;
+              &lt;td&gt;{{batch.goodGrade}}&lt;/td&gt;
+              &lt;td&gt;{{batch.passingGrade}}&lt;/td&gt;
+              &lt;td&gt;
+                &lt;!-- Button Trigger for Add Trainee Modal --&gt;
+                &lt;a role&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;modal&quot; (click)&#x3D;&quot;resetTraineeForm();selectCurrentBatch(batch.batchId)&quot; data-target&#x3D;&quot;#viewTraineeModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-user&quot;&gt;
+                    &lt;!-- &lt;p&gt;{{batch.trainees.length}}&lt;/p&gt; --&gt;
+                  &lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/td&gt;
+              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;populateBatch(batch);selectCurrentBatch($index)&quot; data-toggle&#x3D;&quot;modal&quot;
+                  data-target&#x3D;&quot;#createBatchModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-pencil&quot;
+                    aria-hidden&#x3D;&quot;true&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;selectCurrentBatch($index)&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#deleteBatchModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-remove&quot; aria-hidden&#x3D;&quot;true&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+
+        &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- form for updating or creating batch --&gt;
+  &lt;div ui-view&#x3D;&quot;batch-form&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- for for importing batch --&gt;
+  &lt;div ui-view&#x3D;&quot;import-batch&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- confirm and invalid input modals for batch --&gt;
+  &lt;div ui-view&#x3D;&quot;batch-extra-modals&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- trainees view modal --&gt;
+  &lt;div ui-view&#x3D;&quot;view-trainees&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- form for creating or updating trainee --&gt;
+  &lt;div ui-view&#x3D;&quot;trainee-form&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- confirm, and error models for trainees --&gt;
+  &lt;div ui-view&#x3D;&quot;trainee-extra-modals&quot;&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;app-batch-modal (someEvent)&#x3D;&quot;refreshPage()&quot;&gt;&lt;/app-batch-modal&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./batch-view.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/************************
+	Revature Fonts
+************************/
+@font-face {
+	font-family: &#x27;Futura-Std-Medium&#x27;;
+	src: url(&#x27;../fonts/Futura-Std-Medium.otf&#x27;) format(&#x27;opentype&#x27;);
+}
+
+@font-face {
+	font-family: &#x27;Futura-Std-Book&#x27;;
+	src: url(&#x27;../fonts/Futura-Std-Book.otf&#x27;) format(&#x27;opentype&#x27;);
+}
+
+@font-face {
+	font-family: &#x27;Futura-Std-Heavy&#x27;;
+	src: url(&#x27;../fonts/Futura-Std-Heavy.otf&#x27;) format(&#x27;opentype&#x27;);
+}
+
+@font-face {
+	font-family: &#x27;Futura-Std-Bold&#x27;;
+	src: url(&#x27;../fonts/Futura-Std-Bold.otf&#x27;) format(&#x27;opentype&#x27;);
+}
+
+body {
+	font-family: &#x27;Futura-Std-Book&#x27;;
+}
+
+th {
+	font-family: &#x27;Futura-Std-Bold&#x27;;
+}
+
+li {
+	font-family: &#x27;Futura-Std-Heavy&#x27;;
+}
+
+/************************
+	Revature Colors
+************************/
+/* :root {
+	/*** Primary Colors 
+	-orange: #F26925; -
+	-white: #FFFFF; -
+	-dark-grey: #474C55;
+	/*** Secondary Colors  -
+	-blue: #72A4C2; -
+	-yellow: #FCB414; -
+	-light-grey: #B9B9BA;
+} */
+
+.warning {
+	color: red;
+}
+
+/**********************
+	Header
+**********************/
+.navbar-right {
+	margin-top: .75em;
+	margin-right: 5em;
+}
+
+.header-styles {
+	background-color: white;
+}
+
+a {
+	color: #F26925;
+}
+
+.sticky-header {
+    padding: 10px;
+    padding-right: 55px;
+    font-size: 15px;
+	width: 1000px;
+} 
+
+/**********************
+	Chart Containers
+**********************/
+.nav&gt;li&gt;a, .nav&gt;li&gt;a {
+	transition: background-color 1s ease;
+}
+
+.data-container {
+	padding: .5em 1em 1em 1em;
+	border-radius: .5em;
+}
+
+.chart-container {
+	padding: .5em;
+	background-color: #ffffff;
+	border-radius: .3em;
+}
+
+@media ( max-width : 400px) {
+	.chart-container {
+		min-height: 8.8em;
+	}
+}
+
+@media ( min-width : 401px) and (max-width: 600px) {
+	.chart-container {
+		min-height: 11.8em;
+	}
+}
+
+@media ( min-width : 601px) {
+	.chart-container {
+		min-height: 25.8em;
+	}
+}
+
+.panel&gt;.panel-heading {
+	background-image: none;
+	background-color: #F26925;
+	color: white;
+}
+#panelReportDisplay{
+	background-color: #72A4C2;
+	color: white;
+}
+
+/************************
+	Manage Batch
+************************/
+.modal-header {
+	background-color: #f1f2f4;
+	border-radius: 6px;
+}
+
+.scrollable-div {
+	width: 550px;
+	height: 200px;
+	overflow-y: scroll;
+}
+
+.glyphicon {
+	top: 0px;
+}
+
+.glyphicon-plus {
+	padding-left: .5em;
+}
+
+.glyphicon-user {
+	padding-left: .5em;
+}
+
+.glyphicon-download {
+	padding-left: .2em;
+}
+
+.glyphicon-question-sign, .fa-question-circle {
+	padding-left: .25em;
+	color: #F26925 !important;
+	border-color: white !important;
+	background-color: white !important;
+}
+
+.glyph-top-margin {
+	padding-top: 2em;
+}
+
+.btn-primary, .fa .fa-file-code-o {
+	color: white !important;
+	border-color: white !important;
+	background-color: #F26925 !important;
+	background-image: none;
+}
+
+/************************
+***Manage Batch Modal****
+*************************/
+.batchModal {
+	margin: 1.3em;
+}
+
+/************************
+	Manage Trainee Modal
+************************/
+.modal-body {
+    max-width: 100%;
+    overflow-x: auto;
+}
+.modal-widest{
+	width: 100%;
+}
+.no-padding{
+	padding: 0px;
+}
+.only-top-padding{
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 20px;
+}
+/* .scoll-tree {
+    width:1000px;
+} */
+
+/************************
+	QC Assess
+************************/
+.fa-smile-o, .fa-meh-o, .fa-frown-o, .fa-star {
+	color: #B9B9BA;
+}
+
+.fa-smile-o:hover {
+	color: #81f575;
+}
+
+.fa-meh-o:hover {
+	color: #fdff9e;
+}
+
+.fa-frown-o:hover {
+	color: #ff7575;
+}
+
+.fa-star:hover {
+	color: #7972ff;
+}
+
+.fa-smile-o.pick {
+	color: #18ad18 !important;
+}
+
+.fa-meh-o.pick {
+	color: #f9e900 !important;
+}
+
+.fa-frown-o.pick {
+	color: #ea2825 !important;
+}
+
+.fa-star.pick {
+	color: #393fef !important;
+}
+
+.fa-file-pdf-o {
+	color: #d00a0a;
+}
+
+.fa-filter {
+	color: #F26925;
+}
+
+#qcTrainees {
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: #474C55;
+}
+
+.hiddenButton {
+	border: none;
+	outline: none;
+	background-color: Transparent;
+}
+.centered{
+	display: block;
+	left: auto;
+	right: auto;
+}
+/************************
+	Margins
+************************/
+.top5 {
+	margin-top: .5em;
+}
+
+.top10 {
+	margin-top: 1em;
+}
+
+.top15 {
+	margin-top: 1.5em;
+}
+
+.top20 {
+	margin-top: 2em;
+}
+
+.top25 {
+	margin-top: 2.5em;
+}
+
+.top30 {
+	margin-top: 3em;
+}
+
+.top35 {
+	margin-top: 35em;
+}
+
+.top40 {
+	margin-top: 40em;
+}
+
+.top45 {
+	margin-top: 45em;
+}
+
+/* Accordion style tables*/
+.hiddenRow td {
+	padding: 0 !important;
+}
+
+/**********************
+ 	Input styles
+**********************/
+.overall-feedback {
+	margin: 2em;
+}
+
+textarea {
+	resize: none;
+}
+/************************
+	Footer
+************************/
+.footer-margin {
+	margin-top: .85em;
+}
+
+.footer-img {
+	margin-top: 1.5em;
+}
+
+/* Footer, set footer height to actual height of footer*/
+html, body {
+	height: 100%;
+}
+
+.img-responsive {
+	padding-bottom: 1em;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin-bottom: -103px;
+	padding-bottom: 103px;
+}
+
+footer {
+	min-height: 103px;
+	background-color: #474C55;
+	font-size: .75em;
+}
+
+.center {
+	text-align: center;
+}
+
+.contact-info {
+	color: #B9B9BA;
+}
+
+.fa-copyright {
+	padding-right: .5em;
+}
+
+footer a, footer a:hover {
+	color: #B9B9BA;
+}
+/**********************
+	Table styles
+**********************/
+.vcenter {
+	vertical-align: middle !important;
+}
+
+.table-responsive {
+	display: block !important;
+}
+
+.table&gt;tbody&gt;tr {
+	border-top: 1px solid #ddd;
+}
+
+.table&gt;tbody&gt;tr&gt;td, .table&gt;tbody&gt;tr&gt;th {
+	border-top: 0;
+}
+
+.wrap {
+	text-align: center;
+}
+
+.outer-bar-data {
+	display: inline-block;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.table-view {
+	max-width: 400px;
+}
+
+.table, .table-responsive, thead {
+	position: relative !important;
+}
+
+.fixed-style-table-header {
+	position: fixed !important;
+	background: #fff;
+	z-index: 100;
+	top: 0;
+	width: 90%;
+}
+
+.note-mw {
+	min-width: 300px;
+}
+.removeSpaces{
+	            border-collapse: collapse;
+            border-spacing: 0;
+            display: inline-table !important;
+	margin: 0 !important;
+}
+.move-glyphicon{
+	top: 2.5px;
+}
+.glyphicon-ok{
+	color: #81f575; 
+	width: 100%;
+}
+.glyphicon-remove{
+	color: #ff7575; 
+	width: 100%;
+}
+.pBody{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.add-margin{
+	margin-bottom: 10px;
+}
+.add-space{
+	margin-bottom: 5px;
+}
+.fa-check{
+	color: #81f575;
+}
+.fa-minus{
+	color: rgb(252,221,115);
+}
+
+#overallRow{
+    border-top-width: thick; 
+}
+/********************************************************
+	Panels table
+*********************************************************/
+.panel-glyph {
+	width: 100%;
+	text-align: center;
+}
+
+.centered-panels{
+	text-align: center;
+}
+.no-wrap{
+	white-space:nowrap;
+}
+/********************************************************
+	Overall Batch Status column in vp-home and qc-home
+*********************************************************/
+.color-green {
+	font-weight: bold;
+  	color: green;
+}
+
+.color-yellow {
+	font-weight: bold;
+  	color: orange;
+}
+
+.color-red {
+	font-weight: bold;
+  	color: red;
+}
+
+.color-white {
+	font-weight: bold;
+  	color: white;
+}
+
+.color-orange{
+	font-weight: bold;
+  	color: #F26925;
+}
+
+/**********************
+	save button
+**********************/
+.save-button-wrapper {
+	width: 100%;
+	height: 76px;
+}
+
+.save-button {
+	float: right;
+	margin-top: 10px;
+	border: solid 1px;
+	padding: 6px;
+	box-shadow: 1px 3px 4px #888888;
+	color: #F26925;
+	background: white;
+	border-radius: 5px;
+	transition: all ease 0.3s;
+	top: 0px;
+	margin-right: 6px;
+}
+
+.save-button:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.save-button:active {
+	box-shadow: 0 3px 0px #888888;
+	margin-top: 13px;
+}
+
+a.save-button .fa-floppy-o {
+	margin-right: 6px;
+}
+
+.spinner {
+	float: right;
+	margin-top: 10px;
+	top: 0px;
+}
+
+#checkMark {
+	color: #72A4C2;
+}
+
+.fa-style {
+	margin-right: 11px;
+	margin-top: 15px;
+}
+
+.fade.ng-hide-remove {
+	-webkit-transition: 1s ease-in opacity;
+	-moz-transition: 1s ease-in opacity;
+	-ms-transition: 1s ease-out opacity;
+	-o-transition: 1s ease-out opacity;
+	transition: 1s ease-out opacity;
+	opacity: 1;
+}
+
+/* .fade-in.ng-hide-remove {
+  transition: all ease-out 3000ms;
+} */
+/************************
+***Trainer Assess ***
+************************/
+#trainer-assess-table input[type&#x3D;number]::-webkit-inner-spin-button,
+	#trainer-assess-table input[type&#x3D;number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+#trainer-assess-table input[type&#x3D;number] {
+	min-width: 65px;
+	text-align: center;
+}
+
+/* .has-error input{
+	border:solid red;
+} */
+.has-error {
+	border: solid red 1px;
+}
+
+/************************
+***Assessment Modal****
+*************************/
+.editAssessModal {
+	font-family: &#x27;Futura-Std-Book&#x27;;
+}
+
+select{
+	color:black;
+}
+/*
+CHANGE CURSOR TO POINTER
+INTENDED FOR CHART DOWNLOAD ICON IF HOVER OVER CHANGE CURSOR TO POINTING
+ */
+.clickableIcons {
+	cursor: pointer;
+}
+
+.container-1{
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;  
+}
+
+.container-1 .icon{
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  margin-left: 17px;
+  margin-top: 17px;
+  z-index: 1;
+  color: grey;
+}
+
+.SearchPad {
+    padding-right: 40px;
+}
+
+.SearchButton {
+    background-color: Transparent;
+    border: none;
+    padding-right: 30px;
+    height: 34px;
+    width: 35px;
+    overflow: hidden;
+    outline:none;
+}
+
+/**********************
+	  Panel Tab
+**********************/
+
+.fade-speeder.ng-leave {
+	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s;
+	opacity: 1;
+}
+
+.fade-speeder.ng-leave.ng-leave-active {
+	opacity: 0;
+}
+
+.highlight {
+	background-color: #18AD18;
+	transition: background-color 1s ease;
+}
+
+.no-highlight {
+	background-color: #FFFFFF;
+	transition: background-color 1.5s ease;
+}
+
+.mouse-over{
+	cursor: pointer;
+}
+
+.hideDropdown input::-webkit-calendar-picker-indicator {
+	display: none;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div id="manage">  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <ul class="nav nav-tabs">          <!-- Filter batches by year -->          <li role="button" class="dropdown"><a id="" class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span              class="caret"></span></a>            <ul class="dropdown-menu">              <!-- years for filtering data -->              <li *ngFor="let menuItem of defaultYears"><a role="button" (click)="pickYear(menuItem)">{{menuItem}}</a></li>            </ul>          </li>          <!-- Button Trigger for Import Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#importBatchModal" (click)="resetImportModal()"><a>Import              Batch <span class="glyphicon glyphicon-download" aria-hidden="true">              </span>            </a></li>          <!-- Button Trigger for Create Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" ><a>Create              Batch<span class="glyphicon glyphicon-plus" aria-hidden="true">              </span>            </a></li>        </ul>      </div>    </div>  </div>  <!-- Manage batch table -->  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <table class="table table-hover">          <thead>            <tr>              <th>Training Name</th>              <th>Training Type</th>              <th>Skill Type</th>              <th>Trainer</th>              <th>Co-Trainer</th>              <th>Location</th>              <th>Start Date</th>              <th>End Date</th>              <th>Good Grade</th>              <th>Passing Grade</th>              <th></th>              <th></th>              <th></th>            </tr>          </thead>          <tbody>            <tr *ngFor="let batch of selectedBatches">              <td>{{batch.trainingName}}</td>              <td>{{batch.trainingType}}</td>              <td>{{batch.skillType}}</td>              <td>{{batch.trainer}}</td>              <td>{{batch.coTrainer}}</td>              <td>{{batch.location}}</td>              <td>{{batch.startDate|date}}</td>              <td>{{batch.endDate|date}}</td>              <td>{{batch.goodGrade}}</td>              <td>{{batch.passingGrade}}</td>              <td>                <!-- Button Trigger for Add Trainee Modal -->                <a role="button" data-toggle="modal" (click)="resetTraineeForm();selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">                    <!-- <p>{{batch.trainees.length}}</p> -->                  </span>                </a>              </td>              <td><a role="button" class="pull-right" (click)="populateBatch(batch);selectCurrentBatch($index)" data-toggle="modal"                  data-target="#createBatchModal"><span class="glyphicon glyphicon-pencil"                    aria-hidden="true"> </span></a></td>              <td><a role="button" class="pull-right" (click)="selectCurrentBatch($index)" data-toggle="modal" data-target="#deleteBatchModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span></a></td>            </tr>          </tbody>        </table>      </div>    </div>  </div>  <!-- form for updating or creating batch -->  <div ui-view="batch-form"></div>  <!-- for for importing batch -->  <div ui-view="import-batch"></div>  <!-- confirm and invalid input modals for batch -->  <div ui-view="batch-extra-modals"></div>  <!-- trainees view modal -->  <div ui-view="view-trainees"></div>  <!-- form for creating or updating trainee -->  <div ui-view="trainee-form"></div>  <!-- confirm, and error models for trainees -->  <div ui-view="trainee-extra-modals"></div></div><app-batch-modal (someEvent)="refreshPage()"></app-batch-modal></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SelectYearComponent', 'selector': 'app-select-year'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'BatchViewComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'BatchViewComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
