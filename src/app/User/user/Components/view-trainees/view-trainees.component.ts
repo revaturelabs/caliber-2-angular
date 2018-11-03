@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TrainingStatus } from '../../Types/training-status';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { FLAGS } from '@angular/core/src/render3/interfaces/view';
   templateUrl: './view-trainees.component.html',
   styleUrls: ['./view-trainees.component.css']
 })
-export class ViewTraineesComponent implements OnInit, OnChanges {
+export class ViewTraineesComponent implements OnInit {
 
   private status: string;
   togglePipe: TraineeTogglePipe;
@@ -27,12 +27,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   green = TraineeFlag.GREEN;
   none = TraineeFlag.NONE;
 
-  @Input() batchId = 2200;
-
-  switchTrainee: Trainee = new Trainee();
-
   constructor(
-    private ts: TraineesService) { }
+    private ts: TraineesService,
+    private http: HttpClient) { }
 
   /**
    * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
@@ -41,10 +38,6 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     this.trainees = new Array<Trainee>();
     this.showCommentForm = new Array<boolean>();
     this.showNotes = new Array<boolean>();
-    this.refreshList();
-  }
-
-  ngOnChanges() {
     this.refreshList();
   }
 
@@ -57,7 +50,7 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
   // Needs to be completed along with the rest of the flag methods
   // currently not working, look into this whoever does this user story
-  toggleColor(t: Trainee) {
+  toggleColor( t: Trainee) {
     if (t.flagStatus === this.green) {
       console.log('changing to none!');
       t.flagStatus = this.none;
@@ -78,22 +71,12 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   setDeleteTrainee(t: Trainee) {
     this.traineeToDelete = t;
   }
-
   refreshList() {
-    this.ts.getTrainees(this.batchId).subscribe(data => {
-      if (data) {
-        this.trainees = data;
-        this.showCommentForm = new Array<boolean>(this.trainees.length);
-        this.showCommentForm = new Array<boolean>(this.trainees.length);
-        this.showNotes = new Array<boolean>(this.trainees.length);
-      } else {
-        this.trainees = [];
-      }
+    this.ts.getTrainees(2200).subscribe(data => {
+      this.trainees = data;
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
+      this.showNotes = new Array<boolean>(this.trainees.length);
     });
-  }
-
-  getSwitchableBatches(trainee: Trainee) {
-    this.switchTrainee = trainee;
-    console.log(trainee, 'inside view traiees ts getSiwtchableBatches');
   }
 }

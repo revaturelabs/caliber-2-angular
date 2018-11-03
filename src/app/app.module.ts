@@ -18,7 +18,7 @@ import { ManageComponent } from './manage/manage.component';
     HomeComponent,
     ManageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
