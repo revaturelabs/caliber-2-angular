@@ -7,7 +7,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddTraineeComponent } from './Components/add-trainee/add-trainee.component';
 import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
 import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
-import { SwitchBatchPipe } from './Pipes/switch-batch.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +14,7 @@ import { SwitchBatchPipe } from './Pipes/switch-batch.pipe';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewTraineesComponent, TraineeTogglePipe, SwitchBatchComponent, AddTraineeComponent, DeleteTraineeComponent, SwitchBatchPipe],
+  declarations: [ViewTraineesComponent, TraineeTogglePipe, SwitchBatchComponent, AddTraineeComponent, DeleteTraineeComponent],
   exports: [
     AddTraineeComponent,
     ViewTraineesComponent,
