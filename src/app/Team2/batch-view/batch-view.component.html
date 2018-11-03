@@ -113,7 +113,7 @@
         </div>
         <div class="modal-body">
 
-          <p>
+          <p *ngIf="selectedBatch != null">
             Are you sure you want to delete batch {{selectedBatch.trainingName}}? 
           </p>
         </div>
