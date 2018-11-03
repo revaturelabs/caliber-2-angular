@@ -2,7 +2,7 @@
 
 <div class="modal fade" id="createBatchModal" [hidden]="hide" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
   <div class="modal-dialog" role="document">
-    <form id="formId" ngNativeValidate (submit)="checkDates('createBatchModal')" data-toggle="modal" data-target="#dateError" >
+    <form id="formId" ngNativeValidate (submit)="checkDates('createBatchModal')" data-toggle="modal" data-target="#dateError">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -76,21 +76,25 @@
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
               </select>
             </div>
-          </div>
+          </div> <!-- fixing dates -->
           <div class="row">
-            <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
+            <div class="form-group col-md-6 col-sm-6">
               <label for="start-date">Start Date:</label>
               <div class="input-group" id="start-date" data-datepicker="true">
                 <input type="date" id="startDate" class="date-input form-control date-selector" name="s" min="0"
-                  placeholder="Start Date" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required><span
-                  class="input-group-addon glyphicon glyphicon-calendar"></span>
+                  [ngModelOptions]="{standalone: true}" [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event"
+                  required>
+                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                <!--<input type="date" id="startDate" class="date-input form-control date-selector" name="s" min="0"
+                  [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" required> -->
               </div>
             </div>
             <div class="form-group col-md-6 col-sm-6" format="YYYY-MM-DD">
               <label for="end_date">End Date:</label>
               <div class="input-group" id="end-date" data-datepicker="true">
-                <input type="date" class="date-input form-control date-selector" name="date" placeholder="End Date"
-                  [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" required>
+                <input type="date" id="endDate" class="date-input form-control date-selector" name="s" min="0"
+                  [ngModelOptions]="{standalone: true}" [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event"
+                  required>
                 <span class="input-group-addon glyphicon glyphicon-calendar">
                 </span>
               </div>
@@ -117,9 +121,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input *ngIf= "createOrUpdate === null" value="Save"  type="submit" class="btn btn-primary"/>
-          <input *ngIf= "createOrUpdate != null" value="Update"  type="submit" class="btn btn-primary"/>
-          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input *ngIf="createOrUpdate === null" value="Save" type="submit" class="btn btn-primary" />
+          <input *ngIf="createOrUpdate != null" value="Update" (click)="checkDates2()" class="btn btn-primary" />
+          <button type="button" id="closeBtn" class="btn btn-default" (click)="resetForm()" data-dismiss="modal">Close</button>
         </div>
       </div>
     </form>
@@ -128,30 +132,30 @@
 
 <!------------------------------------------------- Error Modal for Date -------------------------------------->
 <div #dateError class="modal fade" id="checkBatchModalDate" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
-    <div id="overlay" class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="batchModalLabel">
-            Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
-          </h4>
-          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div id="overlay" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="batchModalLabel">
+          Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-        </div>
-        <div class="modal-body">
+      </div>
+      <div class="modal-body">
 
-          <p *ngIf="dateIsError">
-            The Start Date should be before the End Date.
-          </p>
-          <p *ngIf="trainerIsError">
-            Trainer and Co-trainer cannot be the same.
-          </p>
+        <p *ngIf="dateIsError">
+          The Start Date should be before the End Date.
+        </p>
+        <p *ngIf="trainerIsError">
+          Trainer and Co-trainer cannot be the same.
+        </p>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">Ok</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">Ok</button>
       </div>
     </div>
   </div>
+</div>

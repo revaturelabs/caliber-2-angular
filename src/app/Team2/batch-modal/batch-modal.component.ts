@@ -38,6 +38,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   submitted: Boolean = false;
   dateIsError: Boolean = false;
   trainerIsError: Boolean = false;
+  myDate: Date;
 
   constructor(
     private batchservice: BatchService) {
@@ -56,9 +57,13 @@ export class BatchModalComponent implements OnInit, OnChanges {
     // this.location = this.createOrUpdate.location;
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
+
     const d = new Date(this.createOrUpdate.startDate);
-    // this.startDate = ;
+    this.startDate = d;
+    console.log(this.startDate);
+    console.log('start date: ' + d);
     this.endDate = this.createOrUpdate.endDate;
+
     this.goodGradeThreshold = this.createOrUpdate.goodGrade;
     this.borderlineGradeThreshold = this.createOrUpdate.passingGrade;
   }
@@ -81,7 +86,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     }
   }
   resetForm() {
-    console.log('am i in here?');
+    console.log('inside resetForm');
     this.trainingName = null;
     this.trainingType = undefined;
     (<HTMLFormElement>document.getElementById('formId')).reset();
@@ -98,9 +103,15 @@ export class BatchModalComponent implements OnInit, OnChanges {
   }
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
-        this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
-        this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
+      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
 
+    const sdate = new Date(this.startDate);
+    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
+    this.startDate = sdate;
+    const edate = new Date(this.endDate);
+    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
+    this.endDate = edate;
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
@@ -108,6 +119,29 @@ export class BatchModalComponent implements OnInit, OnChanges {
         this.someEvent.next('created');
         this.resetForm();
       });
+  }
+
+  updateBatch(): void {
+    // set dates
+    const sdate = new Date(this.startDate);
+    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
+    this.startDate = sdate;
+    const edate = new Date(this.endDate);
+    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
+    this.endDate = edate;
+
+    // make updated batch
+    const batch = new Batch(this.trainingName, this.trainingType,
+      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold);
+    batch.batchId = this.createOrUpdate.batchId;
+
+    // update batch in backend
+    this.batchservice.putBatch(batch).subscribe(result => {
+      console.log('created');
+      this.someEvent.next('created');
+      this.resetForm();
+    });
   }
 
   setMinGrade(): void {
@@ -121,24 +155,58 @@ export class BatchModalComponent implements OnInit, OnChanges {
   }
 
   checkDates(id: string): void {
+    if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
+      this.dateIsError = true;
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.startDate >= this.endDate) {
+      this.dateIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.trainer === this.coTrainer) {
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    }
+
     if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
       console.log('this is fine');
       this.createBatch();
       const elem = document.getElementById('closeBtn');
-      const evt = new MouseEvent('click', { bubbles: true});
+      const evt = new MouseEvent('click', { bubbles: true });
       elem.dispatchEvent(evt);
     }
+  }
 
-    if (this.startDate >= this.endDate) {
+  checkDates2(id: string): void {
+    if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
       this.dateIsError = true;
-      document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
-    }
-
-    if (this.trainer === this.coTrainer) {
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       console.log('this is not fine');
+      return;
+    } else if (this.startDate >= this.endDate) {
+      this.dateIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.trainer === this.coTrainer) {
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    }
+
+    if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
+      console.log('this is fine');
+      this.updateBatch();
+      const elem = document.getElementById('closeBtn');
+      const evt = new MouseEvent('click', { bubbles: true });
+      elem.dispatchEvent(evt);
     }
   }
 
