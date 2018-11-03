@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ManageComponent } from './manage/manage.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ManageComponent } from './manage/manage.component';
     BrowserModule,
     UserModule,
     AppRoutingModule,
-    BatchModule
+    BatchModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
