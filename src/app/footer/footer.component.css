@@ -10,28 +10,22 @@
 }
 
 /* Footer, set footer height to actual height of footer*/
+/*
 html, body {
 	height: 100%;
 }
-
+*/
 .img-responsive {
 	padding-bottom: 1em;
-}
-
-.wrapper {
-	min-height: 100%;
-	margin-bottom: -103px;
-	padding-bottom: 103px;
 }
 
 footer {
 	min-height: 103px;
 	background-color: #474C55;
 	font-size: .75em;
-	position: relative;
+	position: absolute;
 	width: 100%;
     left: 0;
-    bottom: 0;
 }
 
 .center {
