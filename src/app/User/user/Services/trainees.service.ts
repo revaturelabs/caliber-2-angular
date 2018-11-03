@@ -19,6 +19,7 @@ export class TraineesService {
   getUrl = 'http://localhost:9085/all/trainee?batch=';
   updateUrl = 'http://localhost:9085/all/trainee/update';
   createUrl = 'http://localhost:9085/all/trainee/create';
+  deleteUrl = 'http://localhost:9085/all/trainee/delete/';
 
   /**
    *
@@ -45,7 +46,10 @@ export class TraineesService {
     console.log(t);
     return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
   }
-  postForm(t: Trainee): Observable<Trainee> {
+  createTrainee(t: Trainee): Observable<Trainee> {
     return this.http.post<Trainee>(this.createUrl, t, httpOptions);
+  }
+  deleteTrainee(id: Number): Observable<void> {
+    return this.http.delete<void>(this.deleteUrl + id);
   }
 }
