@@ -1,0 +1,30 @@
+<form (submit)="switchBatchForTrainee(switchBatch)" name="switchBatchForm">
+	<div class="modal fade" id="switchBatchModal" tabindex="0"
+		role="dialog" aria-labelledby="traineeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="traineeModalLabel">Switch Batch - Trainee: {{trainee.batchId}} - SB: {{switchBatch}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-lg-12 col-md-12 col-sm-12">
+							<label for="switchBatch">Batch:</label> <select id="switchBatch"
+								class="form-control" [(ngModel)]="switchBatch" name="switchBatch">
+								<option *ngFor="let batch of batches" value="{{batch.batchId}}">{{batch.trainingName}} - {{batch.trainer}} - {{batch.batchId}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="Switch" class="btn btn-lg btn-primary">
+					<button id="closeButton3" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class BatchService {
 
 
-  url = 'http://localhost:9090';
+  url = 'http://localhost:9095';
 
   constructor(private http: HttpClient) { }
 
@@ -43,6 +43,6 @@ export class BatchService {
   }
 
   getAllYears(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + '/batch/valid_years');
+    return this.http.get<number[]>(this.url + '/batch/2018');
   }
 }

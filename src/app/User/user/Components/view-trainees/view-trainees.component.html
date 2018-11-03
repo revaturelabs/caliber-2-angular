@@ -126,4 +126,7 @@
 <app-delete-trainee (refreshList)="refreshList()" [trainee]="traineeToDelete"></app-delete-trainee>
 <!--********************************************* View Trainee Modal ************************************-->
 <app-add-trainee></app-add-trainee>
+<!--********************************************* Switch Batch Modal ************************************-->
+<app-switch-batch [trainee]="switchTrainee" (switchBatchEvent)="refreshList()"></app-switch-batch>
+
 
