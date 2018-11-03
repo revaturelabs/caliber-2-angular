@@ -25,7 +25,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   skillTypes: string[];
   location: string = null;
   // needs to be a location type
-  locationOptions: string[];
+  locationOptions: BLocation[];
   trainer: string = null;
   // needs to be a user type
   trainers: string[];
@@ -44,7 +44,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     private batchservice: BatchService) {
     this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
     this.skillTypes = ['Java', 'Spark', '.NET', 'PEGA'];
-    this.locationOptions = ['Virginia', 'New York', 'Texas'];
+    // this.locationOptions = ['Virginia', 'New York', 'Texas'];
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
@@ -74,10 +74,10 @@ export class BatchModalComponent implements OnInit, OnChanges {
     //   console.log(results);
     //   this.skillTypes = results;
     // });
-    // this.batchservice.getAllLocations().subscribe( locs => {
-    //   this.locationOptions = locs;
-    // });
-    // console.log(this.skillTypes);
+    this.batchservice.getAllLocations().subscribe( locs => {
+      this.locationOptions = locs;
+    });
+    console.log(this.skillTypes);
   }
 
   ngOnChanges() {

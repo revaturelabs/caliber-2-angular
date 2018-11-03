@@ -50,7 +50,8 @@
                 required name="location">
                 <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Location</option>
                 <option *ngIf="createOrUpdate != null" value="createOrUpdate.location" disabled>{{createOrUpdate.location}}</option>
-                <option *ngFor="let option of locationOptions" [ngValue]="option">{{ option }}</option>
+                <option *ngFor="let option of locationOptions" [ngValue]="option.name + option.address + option.city + option.state + option.zipcode">
+                  {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
               </select>
               <div *ngIf="submitted && !location" class="invalid-feedback">Location is required</div>
             </div>
@@ -76,7 +77,7 @@
                 <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
               </select>
             </div>
-          </div> <!-- fixing dates -->
+          </div>
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="start-date">Start Date:</label>

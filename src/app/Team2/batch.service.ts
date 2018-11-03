@@ -48,7 +48,7 @@ export class BatchService {
   }
 
   getAllLocations(): Observable<BLocation[]> {
-    return this.http.get<BLocation[]>('http://localhost:8010/all/location/all');
+    return this.http.get<BLocation[]>('http://localhost:8040/all/location/all');
   }
 
 }
