@@ -4,6 +4,7 @@ import { BatchService } from './batch.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('BatchService', () => {
+  let batchService: BatchService;
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [
@@ -11,10 +12,12 @@ describe('BatchService', () => {
     ]
   }));
 
-  it('should get users', inject([HttpTestingController, BatchService],
-      (httpMock: HttpTestingController, apiService: BatchService) => {
-        expect(apiService).toBeTruthy();
-      }
-    )
-  );
+  beforeEach(() => {
+    batchService = TestBed.get(BatchService);
+  });
+
+  it('should be created', () => {
+    expect(batchService).toBeTruthy();
+  });
+
 });

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Batch } from './type/batch';
 import { BLocation } from './type/location';
+import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
@@ -58,6 +59,16 @@ export class BatchService {
   // get all locations from location service
   getAllLocations(): Observable<BLocation[]> {
     return this.http.get<BLocation[]>('http://localhost:8040/all/location/all');
+  }
+
+  // get all trainers from user service
+  getAllTrainers(): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>('http://localhost:9085/all/trainer/all');
+  }
+
+  // get all trainee counts for batches in a year
+  getTraineeCount(batches: number[]): Observable<number[][]> {
+    return this.http.post<number[][]>('http://localhost:9085/all/count/', batches);
   }
 
 }

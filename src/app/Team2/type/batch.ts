@@ -10,6 +10,7 @@ export class Batch {
     endDate: Date;
     goodGrade: number;
     passingGrade: number;
+    traineeCount: number;
 
     //  constructor for batch object
     constructor(trainingName: string, trainingType: string, skillType: string, trainer: string, coTrainer: string,

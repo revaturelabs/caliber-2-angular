@@ -31,7 +31,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   locationOptions: BLocation[];
   trainer: string = null;
   // needs to be a user type
-  trainers: string[];
+  trainers: Trainer[];
   coTrainer: string = null;
   startDate: Date;
   endDate: Date;
@@ -46,7 +46,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   constructor(
     private batchservice: BatchService) {
     // still need to grab trainers from user service
-    this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
+    // this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
@@ -57,6 +57,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
     this.location = this.createOrUpdate.location;
+    console.log(this.location);
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
 
@@ -81,6 +82,11 @@ export class BatchModalComponent implements OnInit, OnChanges {
     // generate all the locations
     this.batchservice.getAllLocations().subscribe( locs => {
       this.locationOptions = locs;
+    });
+    // generate all the trainers
+    this.batchservice.getAllTrainers().subscribe( t => {
+      this.trainers = t;
+      console.log('trainers: ' + t);
     });
   }
 
