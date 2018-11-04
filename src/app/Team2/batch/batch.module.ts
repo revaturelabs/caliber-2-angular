@@ -4,7 +4,6 @@ import { BatchViewComponent } from '../batch-view/batch-view.component';
 import { BatchModalComponent } from '../batch-modal/batch-modal.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SelectYearComponent } from '../select-year/select-year.component';
 import { UserModule } from 'src/app/User/user/user.module';
 
 @NgModule({
@@ -17,13 +16,11 @@ import { UserModule } from 'src/app/User/user/user.module';
     ],
   declarations: [
     BatchViewComponent,
-    BatchModalComponent,
-    SelectYearComponent
+    BatchModalComponent
   ],
   exports: [
     BatchViewComponent,
-    BatchModalComponent,
-    SelectYearComponent
+    BatchModalComponent
   ]
 })
 export class BatchModule { }
