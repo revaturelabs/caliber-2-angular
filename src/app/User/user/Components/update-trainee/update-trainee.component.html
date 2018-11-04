@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <div class="modal fade in" id="updateTraineeModal" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
+    <!-- data-backdrop="static" -->
+  <div (onHidden)="close()" class="modal fade in" id="updateTraineeModal" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
     <div class="modal-dialog modal-lg" role="document" >
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 class="modal-title" id="traineeModalLabel">Add Trainee</h4>
@@ -18,12 +19,12 @@
             <div class="row">
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeName">Full Name:</label> <input type="text" class="form-control" id="traineeName"
-                  placeholder= "Name"  name="fullName" [(ngModel)]="trainee ? trainee.name : name" required>
+                  placeholder= "Name"  name="fullName" [(ngModel)]="traineeTemp.name" required>
               </div>
   
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeEmail">Email:</label> <input type="email" class="form-control" id="traineeEmail"
-                  placeholder="Email" [(ngModel)]="trainee ? trainee.email : email" name="email" required>
+                  placeholder="Email" [(ngModel)]="traineeTemp.email" name="email" required>
                 <!--<div ng-show="addTraineeForm.temail.$submitted || addTraineeForm.temail.$touched" class="ng-hide">
                   <span class="warning ng-hide" ng-show="addTraineeForm.temail.$error.email">Must enter
                     a valid email</span>
@@ -34,54 +35,54 @@
             <div class="row">
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeSkype">Skype Id:</label> <input type="text" class="form-control" id="traineeSkype"
-                  placeholder="Skype Id" [(ngModel)]="trainee.skypeId" name="skypeId">
+                  placeholder="Skype Id" [(ngModel)]="traineeTemp.skypeId" name="skypeId">
               </div>
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineePhone">Phone:</label> <input type="text" class="form-control" id="traineePhone"
-                  placeholder="(xxx)-xxx-xxxx" [(ngModel)]="trainee.phoneNumber" name="phoneNumber">
+                  placeholder="(xxx)-xxx-xxxx" [(ngModel)]="traineeTemp.phoneNumber" name="phoneNumber">
               </div>
             </div>
   
             <div class="row">
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeCollege">College:</label> <input type="text" class="form-control" id="traineeCollege"
-                  placeholder="College" [(ngModel)]="trainee.college" name="college">
+                  placeholder="College" [(ngModel)]="traineeTemp.college" name="college">
               </div>
   
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeDegree">Degree:</label> <input type="text" class="form-control" id="traineeDegree"
-                  placeholder="Degree" [(ngModel)]="trainee.degree " name="degree">
+                  placeholder="Degree" [(ngModel)]="traineeTemp.degree " name="degree">
               </div>
             </div>
   
             <div class="row">
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeMajor">Major:</label> <input type="text" class="form-control" id="traineeMajor"
-                  placeholder="Major" [(ngModel)]="trainee.major" name="major">
+                  placeholder="Major" [(ngModel)]="traineeTemp.major" name="major">
               </div>
   
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeRecruiterName">Recruiter Name:</label> <input type="text" class="form-control" id="traineeRecruiterName"
-                  placeholder="Recruiter Name" [(ngModel)]="trainee.recruiterName" name="recruiterName">
+                  placeholder="Recruiter Name" [(ngModel)]="traineeTemp.recruiterName" name="recruiterName">
               </div>
             </div>
   
             <div class="row">
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeTechScreenerName">Tech Screener Name:</label> <input type="text" class="form-control"
-                  id="traineeTechScreenerName" placeholder="Tech Screener Name" [(ngModel)]="trainee.techScreenerName" name="techScreenerName">
+                  id="traineeTechScreenerName" placeholder="Tech Screener Name" [(ngModel)]="traineeTemp.techScreenerName" name="techScreenerName">
               </div>
   
               <div class="form-group col-lg-6 col-md-6 col-sm-12">
                 <label for="traineeProjectCompletion">Project Completion:</label> <input type="text" class="form-control"
-                  id="traineeProjectCompletion" placeholder="0 %" [(ngModel)]="trainee.projectCompletion" name="projectCompletion">
+                  id="traineeProjectCompletion" placeholder="0 %" [(ngModel)]="traineeTemp.projectCompletion" name="projectCompletion">
               </div>
             </div>
   
             <div class="row">
               <div class="form-group col-lg-12 col-md-12 col-sm-12">
                 <label for="traineeProfile">Profile URL:</label> <input type="text" class="form-control" id="traineeName"
-                  placeholder="http://www.example.com/revature" [(ngModel)]="trainee.profileUrl" name="profileUrl">
+                  placeholder="http://www.example.com/revature" [(ngModel)]="traineeTemp.profileUrl" name="profileUrl">
               </div>
             </div>
   
@@ -89,7 +90,7 @@
   
               <div class="form-group col-lg-12 col-md-12 col-sm-12">
                 <label for="traineeStatus">Training Status</label> <select class="form-control" id="traineeStatus"
-                  required [(ngModel)]="trainee.trainingStatus" name="trainingStatus">
+                  required [(ngModel)]="traineeTemp.trainingStatus" name="trainingStatus">
                   <option value="" disabled="">Select Status</option>
                   <option value="Signed">Signed</option>
                   <option value="Selected">Selected</option>

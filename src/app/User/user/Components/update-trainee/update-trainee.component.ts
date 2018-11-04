@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
+import { getParentRenderElement } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-update-trainee',
@@ -14,7 +15,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   @Output()
   refreshList = new EventEmitter<boolean>();
 
-  private traineeTemp: Trainee;
+  private traineeTemp = new Trainee();
   submitted: Boolean = false;
   /** need to implement batchId sharing between components,
    * specifically between view-all-trainees and this component */
@@ -31,6 +32,17 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   projectCompletion: string;
   profileUrl: string;
   trainingStatus: string;
+
+  // @HostListener('document:body.click')
+  // onHidden(): void {
+  //   console.log('handling hidden event');
+  //   close();
+  // }
+
+  // @HostListener('click', [`$event`])
+  // onClick(event: MouseEvent): void {
+  //   event.srcElement
+  // }
 
   // populateTrainee(trainee: Trainee) {
   //   console.log('in popul trainee');
@@ -52,7 +64,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   constructor() { }
 
    ngOnChanges() {
-     this.traineeTemp = this.trainee;
+     this.refreshTrainee();
      console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
    }
 
@@ -60,12 +72,49 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     this.trainee = new Trainee();
     this.trainee.email = '';
     console.log(this.trainee);
+    document.getElementsByName('body')[0].addEventListener('click', close);
   }
 
   close() {
     console.log('in close() setting ' + this.trainee.email + ' to ' + this.traineeTemp.email);
-    this.trainee = this.traineeTemp;
+    this.traineeTemp = this.trainee;
     this.refreshList.emit(true);
+  }
+
+  // refreshPage(trainee: Trainee) {
+  //   this.trainee = trainee;
+  //   this.refreshTrainee();
+  //   console.log(trainee);
+  // }
+
+  refreshTrainee() {
+    this.traineeTemp.college = this.trainee.college;
+    this.traineeTemp.degree = this.trainee.degree;
+    this.traineeTemp.email = this.trainee.email;
+    this.traineeTemp.major = this.trainee.major;
+    this.traineeTemp.name = this.trainee.name;
+    this.traineeTemp.phoneNumber = this.trainee.phoneNumber;
+    this.traineeTemp.profileUrl = this.trainee.profileUrl;
+    this.traineeTemp.projectCompletion = this.trainee.projectCompletion;
+    this.traineeTemp.recruiterName = this.trainee.recruiterName;
+    this.traineeTemp.techScreenerName = this.trainee.techScreenerName;
+    this.traineeTemp.skypeId = this.trainee.skypeId;
+    this.traineeTemp.trainingStatus = this.trainee.trainingStatus;
+  }
+
+  updateTrainee() {
+    this.trainee.college = this.traineeTemp.college;
+    this.trainee.degree = this.traineeTemp.degree;
+    this.trainee.email = this.traineeTemp.email;
+    this.trainee.major = this.traineeTemp.major;
+    this.trainee.name = this.traineeTemp.name;
+    this.trainee.phoneNumber = this.traineeTemp.phoneNumber;
+    this.trainee.profileUrl = this.traineeTemp.profileUrl;
+    this.trainee.projectCompletion = this.traineeTemp.projectCompletion;
+    this.trainee.recruiterName = this.traineeTemp.recruiterName;
+    this.trainee.techScreenerName = this.traineeTemp.techScreenerName;
+    this.trainee.skypeId = this.traineeTemp.skypeId;
+    this.trainee.trainingStatus = this.traineeTemp.trainingStatus;
   }
 
 }

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TrainingStatus } from '../../Types/training-status';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, SelectMultipleControlValueAccessor } from '@angular/forms';
 import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 import { TraineeFlag } from '../../Types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpClient } from '@angular/common/http';
 import { FLAGS } from '@angular/core/src/render3/interfaces/view';
+import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
 
 @Component({
   selector: 'app-view-trainees',
@@ -26,6 +27,7 @@ export class ViewTraineesComponent implements OnInit {
   red = TraineeFlag.RED;
   green = TraineeFlag.GREEN;
   none = TraineeFlag.NONE;
+  @ViewChild('updateTraineeModal') updateTrainee: UpdateTraineeComponent;
 
   constructor(
     private ts: TraineesService,
@@ -82,10 +84,12 @@ export class ViewTraineesComponent implements OnInit {
       console.log('refreshed');
     });
     console.log(this.trainees[0].email);
+    this.traineeToUpdate = null;
   }
 
   populateTrainee(trainee: Trainee) {
-   this.traineeToUpdate = trainee;
-    // console.log(this.trainee);
+    this.updateTrainee.refreshTrainee();
+    this.traineeToUpdate = trainee;
+    console.log(this.traineeToUpdate);
   }
 }
