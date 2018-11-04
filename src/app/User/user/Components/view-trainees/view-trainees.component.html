@@ -1,3 +1,4 @@
+<html>
 <div class="modal fade" id="traineeModalLabel" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">
   <div class="modal-dialog modal-lg modal-widest" role="document">
     <div class="modal-content">
@@ -100,10 +101,11 @@
                   </td>
   
                   <td><a role="button"
-                    (click)="populateTrainee(trainee);getTrainee($index)"
-                    data-toggle="modal" data-target="#addTraineeModal"
+                    (click)="populateTrainee(trainee)"
+                    data-toggle="modal" data-target="#updateTraineeModal"
                     type="button"> <span class="glyphicon glyphicon-pencil"></span>
                   </a></td>
+
                   <td><a role="button" class="pull-right"
                     (click)="getTraineeToDelete($index)" data-toggle="modal"
                     data-target="#deleteTraineeModal"><span
@@ -124,4 +126,6 @@
 
 <!--********************************************* View Trainee Modal ************************************-->
 <app-add-trainee></app-add-trainee>
+<app-update-trainee (refreshList)="refreshList()" [trainee]="traineeToUpdate"></app-update-trainee>
 
+</html>
