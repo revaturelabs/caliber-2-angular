@@ -65,7 +65,7 @@ export class BatchViewComponent implements OnInit {
 
   // stores batch id for trainee display
   selectCurrentBatch(bid: number) {
-    sessionStorage.setItem('bid', '' + bid);
+    // sessionStorage.setItem('bid', '' + bid);
     this.selectedBatchId = bid;
   }
 

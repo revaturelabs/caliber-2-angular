@@ -17,7 +17,7 @@ const httpOptions = {
 export class TraineesService {
 
   trainees: Observable<Trainee[]>;
-  url = 'http://localhost:9085/all/trainee?batch=2';
+  url = 'http://localhost:9085/all/trainee?batch=';
   updateUrl = 'http://localhost:9085/all/trainee/update';
   createUrl = 'http://localhost:9085/all/trainee/create';
   deleteUrl = 'http://localhost:9085/all/trainee/delete/';
@@ -25,10 +25,10 @@ export class TraineesService {
   constructor(protected http: HttpClient) { }
 
   getTrainees(batchId: Number):  Observable<Trainee[]> {
-    this.trainees =  this.http.get<Trainee[]>(this.url, httpOptions).
+    this.trainees =  this.http.get<Trainee[]>(this.url + batchId, httpOptions).
       pipe(
         catchError(data => {
-          this.trainees = this.http.get<Trainee[]>(this.url, httpOptions);
+          this.trainees = this.http.get<Trainee[]>(this.url + batchId, httpOptions);
           return this.trainees;
         })
       );

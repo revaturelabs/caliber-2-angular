@@ -61,7 +61,7 @@
               <td>{{batch.passingGrade}}</td>
               <td>
                 <!-- Button Trigger for Add Trainee Modal -->
-                <a role="button" data-toggle="modal" (click)="resetTraineeForm();selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">
+                <a role="button" data-toggle="modal" (click)="selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">
                     <!-- <p>{{batch.trainees.length}}</p> -->
                   </span>
                 </a>
@@ -97,6 +97,7 @@
 
 </div>
 <app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createOrUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal>
+<app-view-trainees [batchId]="selectedBatchId"></app-view-trainees>
 <form>
   <div class="modal fade" id="deleteBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
     <div class="modal-dialog" role="document">
@@ -124,4 +125,3 @@
     </div>
   </div>
 <!-- <app-view-trainees></app-view-trainees> -->
-<app-view-trainees [batchId]="selectedBatchId"></app-view-trainees>

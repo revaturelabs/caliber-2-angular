@@ -16,7 +16,7 @@ import { FLAGS } from '@angular/core/src/render3/interfaces/view';
 export class ViewTraineesComponent implements OnInit, OnChanges {
 
 
-  @Input() batchId = 0;
+  @Input() batchId: number;
   private status: string;
   togglePipe: TraineeTogglePipe;
   showActive = true;
