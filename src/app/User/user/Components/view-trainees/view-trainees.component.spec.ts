@@ -27,6 +27,11 @@ describe('ViewtraineesComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should do something', () => {
+    browser.get('http://localhost:4200/caliber/%23/vp/manage');
+    // element(by.css;
+  });
+
   // Protractor Test for toggling between dropped and active trainees
   // it('should filter out dropped trainees', () => {
   //   browser.get('/manage');

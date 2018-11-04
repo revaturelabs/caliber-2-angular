@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 
@@ -12,7 +12,8 @@ export class AddTraineeComponent implements OnInit {
   submitted: Boolean = false;
   /** need to implement batchId sharing between components,
    * specifically between view-all-trainees and this component */
-  batchId = 0;
+  @Input() batchId: number;
+  @Output() addTraineeEvent = new EventEmitter<boolean>();
   fullName: string;
   email: string;
   skypeId: string;
@@ -54,6 +55,7 @@ export class AddTraineeComponent implements OnInit {
         const elem = document.getElementById('closeButton1');
         const evt = new MouseEvent('click', { bubbles: true});
         elem.dispatchEvent(evt);
+        this.addTraineeEvent.emit(true);
         this.fullName = null;
         this.email = null;
         this.skypeId = null;
