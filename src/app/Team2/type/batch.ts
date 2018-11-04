@@ -11,6 +11,7 @@ export class Batch {
     goodGrade: number;
     passingGrade: number;
 
+    //  constructor for batch object
     constructor(trainingName: string, trainingType: string, skillType: string, trainer: string, coTrainer: string,
         location: string, startDate: Date, endDate: Date, goodGrade: number, passingGrade: number) {
             this.trainingName = trainingName;

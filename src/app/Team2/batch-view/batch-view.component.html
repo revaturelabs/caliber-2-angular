@@ -61,7 +61,7 @@
               <td>{{batch.passingGrade}}</td>
               <td>
                 <!-- Button Trigger for Add Trainee Modal -->
-                <a role="button" data-toggle="modal" (click)="resetTraineeForm();selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">
+                <a role="button" data-toggle="modal" (click)="selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">
                     <!-- <p>{{batch.trainees.length}}</p> -->
                   </span>
                 </a>
@@ -96,5 +96,32 @@
   <div ui-view="trainee-extra-modals"></div>
 
 </div>
-<app-batch-modal #batchModal (someEvent)="refreshPage()" [createOrUpdate]="createUpdate"></app-batch-modal>
+<app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createOrUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal>
+<app-view-trainees [batchId]="selectedBatchId"></app-view-trainees>
+<form>
+  <div class="modal fade" id="deleteBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="batchModalLabel">
+            Confirm Batch Delete<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+
+          <p *ngIf="selectedBatch != null">
+            Are you sure you want to delete batch {{selectedBatch.trainingName}}? 
+          </p>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" value="Delete" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- <app-view-trainees></app-view-trainees> -->

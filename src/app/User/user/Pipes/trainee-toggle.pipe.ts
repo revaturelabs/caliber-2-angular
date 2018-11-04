@@ -5,7 +5,7 @@ import { TrainingStatus } from '../types/training-status';
  /**
    * Checks to see if 'show' is true or false
    * true will show all trainees that are not dropped
-   * false will show all trainees that are drpoped
+   * false will show all trainees that are dropped
    */
 @Pipe({
   name: 'traineeToggle'

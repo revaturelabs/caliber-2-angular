@@ -4,6 +4,9 @@ import { ViewTraineesComponent } from './Components/view-trainees/view-trainees.
 import { FormsModule } from '@angular/forms';
 import { TraineeTogglePipe } from './Pipes/trainee-toggle.pipe';
 import {HttpClientModule} from '@angular/common/http';
+import { AddTraineeComponent } from './Components/add-trainee/add-trainee.component';
+import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
+import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
 
 @NgModule({
   imports: [
@@ -11,9 +14,11 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewTraineesComponent, TraineeTogglePipe],
+  declarations: [ViewTraineesComponent, TraineeTogglePipe, SwitchBatchComponent, AddTraineeComponent, DeleteTraineeComponent],
   exports: [
+    AddTraineeComponent,
     ViewTraineesComponent,
+    SwitchBatchComponent,
     TraineeTogglePipe
   ]
 })

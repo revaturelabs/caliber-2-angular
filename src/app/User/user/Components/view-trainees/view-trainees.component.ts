@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Trainee } from '../../types/trainee';
-import { TrainingStatus } from '../../types/training-status';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Trainee } from '../../Types/trainee';
+import { TrainingStatus } from '../../Types/training-status';
 import { FormsModule } from '@angular/forms';
 import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
-import { TraineeFlag } from '../../types/trainee-flag';
+import { TraineeFlag } from '../../Types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpClient } from '@angular/common/http';
 import { FLAGS } from '@angular/core/src/render3/interfaces/view';
@@ -13,21 +13,26 @@ import { FLAGS } from '@angular/core/src/render3/interfaces/view';
   templateUrl: './view-trainees.component.html',
   styleUrls: ['./view-trainees.component.css']
 })
-export class ViewTraineesComponent implements OnInit {
+export class ViewTraineesComponent implements OnInit, OnChanges {
 
+
+  @Input() batchId: number;
   private status: string;
   togglePipe: TraineeTogglePipe;
   showActive = true;
   trainees: Trainee[];
   showCommentForm: boolean[];
   showNotes: boolean[];
+  traineeToDelete: Trainee;
+  switchTrainee: Trainee;
 
   red = TraineeFlag.RED;
   green = TraineeFlag.GREEN;
   none = TraineeFlag.NONE;
 
   constructor(
-    private ts: TraineesService) { }
+    private ts: TraineesService,
+    private http: HttpClient) { }
 
   /**
    * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
@@ -36,12 +41,13 @@ export class ViewTraineesComponent implements OnInit {
     this.trainees = new Array<Trainee>();
     this.showCommentForm = new Array<boolean>();
     this.showNotes = new Array<boolean>();
-    this.ts.getTrainees(2200).subscribe(data => {
-      this.trainees = data;
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showNotes = new Array<boolean>(this.trainees.length);
-    });
+    this.refreshList();
+  }
+
+  ngOnChanges() {
+    if (this.batchId) {
+      this.refreshList();
+    }
   }
 
   /**
@@ -66,7 +72,24 @@ export class ViewTraineesComponent implements OnInit {
     }
   }
 
-  updateTrainee(t: Trainee) {
+  updateTraineeFlagNotes(t: Trainee, flagNote: HTMLInputElement) {
+    t.flagNotes = flagNote.value;
     this.ts.updateTrainee(t).subscribe();
+  }
+
+  setDeleteTrainee(t: Trainee) {
+    this.traineeToDelete = t;
+  }
+  refreshList() {
+    this.ts.getTrainees(this.batchId).subscribe(data => {
+      this.trainees = data;
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
+      this.showCommentForm = new Array<boolean>(this.trainees.length);
+      this.showNotes = new Array<boolean>(this.trainees.length);
+    });
+  }
+
+  getSwitchableBatches(trainee: Trainee) {
+    this.switchTrainee = trainee;
   }
 }
