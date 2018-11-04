@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TrainingStatus } from '../../Types/training-status';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +13,10 @@ import { FLAGS } from '@angular/core/src/render3/interfaces/view';
   templateUrl: './view-trainees.component.html',
   styleUrls: ['./view-trainees.component.css']
 })
-export class ViewTraineesComponent implements OnInit {
+export class ViewTraineesComponent implements OnInit, OnChanges {
 
+
+  @Input() batchId = 0;
   private status: string;
   togglePipe: TraineeTogglePipe;
   showActive = true;
@@ -39,6 +41,12 @@ export class ViewTraineesComponent implements OnInit {
     this.showCommentForm = new Array<boolean>();
     this.showNotes = new Array<boolean>();
     this.refreshList();
+  }
+
+  ngOnChanges() {
+    if (this.batchId) {
+      this.refreshList();
+    }
   }
 
   /**
@@ -72,7 +80,7 @@ export class ViewTraineesComponent implements OnInit {
     this.traineeToDelete = t;
   }
   refreshList() {
-    this.ts.getTrainees(2200).subscribe(data => {
+    this.ts.getTrainees(this.batchId).subscribe(data => {
       this.trainees = data;
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showCommentForm = new Array<boolean>(this.trainees.length);

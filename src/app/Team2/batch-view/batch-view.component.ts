@@ -19,6 +19,7 @@ export class BatchViewComponent implements OnInit {
   defaultYears: number[];
   selectedYear: number;
   selectedBatch: Batch;
+  selectedBatchId = 0;
 
   constructor(private batchservice: BatchService) { }
 
@@ -56,6 +57,7 @@ export class BatchViewComponent implements OnInit {
 
   selectCurrentBatch(bid: number) {
     sessionStorage.setItem('bid', '' + bid);
+    this.selectedBatchId = bid;
   }
 
   deleteBatch(batchId: number) {
