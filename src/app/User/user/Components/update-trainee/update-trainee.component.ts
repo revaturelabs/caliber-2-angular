@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
+import { TraineesService } from '../../Services/trainees.service';
 
 @Component({
   selector: 'app-update-trainee',
@@ -49,12 +50,12 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   //   this.trainingStatus = trainee.trainingStatus;
   // }
 
-  constructor() { }
+  constructor(private ts: TraineesService) { }
 
-   ngOnChanges() {
-     this.traineeTemp = this.trainee;
-     console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
-   }
+  ngOnChanges() {
+    this.traineeTemp = this.trainee;
+    console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
+  }
 
   ngOnInit() {
     this.trainee = new Trainee();
@@ -66,6 +67,17 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     console.log('in close() setting ' + this.trainee.email + ' to ' + this.traineeTemp.email);
     this.trainee = this.traineeTemp;
     this.refreshList.emit(true);
+  }
+
+  updateTrainee() {
+    this.ts.updateTrainee(this.trainee).subscribe(data => {
+      if (data) {
+        const elem = document.getElementById('closeButtonUpdate');
+        const evt = new MouseEvent('click', { bubbles: true });
+        elem.dispatchEvent(evt);
+        this.refreshList.emit(true);
+      }
+    });
   }
 
 }
