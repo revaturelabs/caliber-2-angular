@@ -24,6 +24,7 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   showCommentForm: boolean[];
   showNotes: boolean[];
   traineeToDelete: Trainee;
+  switchTrainee: Trainee;
 
   red = TraineeFlag.RED;
   green = TraineeFlag.GREEN;
@@ -86,5 +87,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showNotes = new Array<boolean>(this.trainees.length);
     });
+  }
+
+  getSwitchableBatches(trainee: Trainee) {
+    this.switchTrainee = trainee;
   }
 }
