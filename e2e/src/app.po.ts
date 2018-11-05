@@ -32,7 +32,7 @@ export class AppPage {
 
   getNavManageLink() {
     element(by.css('app-root #manage-link')).click();
-    return element(by.css('app-root p')).getText();
+    return element(by.css('app-root #manage'));
   }
 
   getNavImgLink() {
