@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UserModule } from './User/user/user.module';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { BatchModule } from '../app/Team2/batch/batch.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ManageComponent } from './manage/manage.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
 
 
 @NgModule({
@@ -23,10 +23,10 @@ import { ManageComponent } from './manage/manage.component';
   imports: [
     BrowserModule,
     UserModule,
-    FormsModule,
-    HttpClientModule,
     AppRoutingModule,
-    BatchModule
+    BatchModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
