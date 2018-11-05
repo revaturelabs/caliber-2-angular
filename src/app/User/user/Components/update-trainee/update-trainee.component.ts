@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
-import { getParentRenderElement } from '@angular/core/src/view/util';
+import { TraineesService } from '../../Services/trainees.service';
 
 @Component({
   selector: 'app-update-trainee',
@@ -61,7 +61,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   //   this.trainingStatus = trainee.trainingStatus;
   // }
 
-  constructor() { }
+  constructor(private ts: TraineesService) { }
 
    ngOnChanges() {
      this.refreshTrainee();
@@ -102,7 +102,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     this.traineeTemp.trainingStatus = this.trainee.trainingStatus;
   }
 
-  updateTrainee() {
+  mergeTrainee() {
     this.trainee.college = this.traineeTemp.college;
     this.trainee.degree = this.traineeTemp.degree;
     this.trainee.email = this.traineeTemp.email;
@@ -115,6 +115,18 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     this.trainee.techScreenerName = this.traineeTemp.techScreenerName;
     this.trainee.skypeId = this.traineeTemp.skypeId;
     this.trainee.trainingStatus = this.traineeTemp.trainingStatus;
+  }
+
+  updateTrainee() {
+    this.mergeTrainee();
+    this.ts.updateTrainee(this.trainee).subscribe(data => {
+      if (data) {
+        const elem = document.getElementById('closeButtonUpdate');
+        const evt = new MouseEvent('click', { bubbles: true });
+        elem.dispatchEvent(evt);
+        this.refreshList.emit(true);
+      }
+    });
   }
 
 }
