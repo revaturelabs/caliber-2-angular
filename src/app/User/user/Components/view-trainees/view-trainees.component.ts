@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
-import { TrainingStatus } from '../../Types/training-status';
-import { FormsModule, SelectMultipleControlValueAccessor } from '@angular/forms';
+// import { FormsModule, SelectMultipleControlValueAccessor } from '@angular/forms';
 import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 import { TraineeFlag } from '../../Types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpClient } from '@angular/common/http';
-import { FLAGS } from '@angular/core/src/render3/interfaces/view';
 import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
 
 @Component({
@@ -23,6 +21,7 @@ export class ViewTraineesComponent implements OnInit {
   showCommentForm: boolean[];
   showNotes: boolean[];
   traineeToUpdate: Trainee;
+  traineeToDelete: Trainee;
 
   red = TraineeFlag.RED;
   green = TraineeFlag.GREEN;
@@ -40,12 +39,7 @@ export class ViewTraineesComponent implements OnInit {
     this.trainees = new Array<Trainee>();
     this.showCommentForm = new Array<boolean>();
     this.showNotes = new Array<boolean>();
-    this.ts.getTrainees(2200).subscribe(data => {
-      this.trainees = data;
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showNotes = new Array<boolean>(this.trainees.length);
-    });
+    this.refreshList();
   }
 
   /**
@@ -73,6 +67,10 @@ export class ViewTraineesComponent implements OnInit {
   updateTraineeFlagNotes(t: Trainee, flagNote: HTMLInputElement) {
     t.flagNotes = flagNote.value;
     this.ts.updateTrainee(t).subscribe();
+  }
+
+  setDeleteTrainee(t: Trainee) {
+    this.traineeToDelete = t;
   }
 
   refreshList() {

@@ -107,7 +107,7 @@
                   </a></td>
 
                   <td><a role="button" class="pull-right"
-                    (click)="getTraineeToDelete($index)" data-toggle="modal"
+                    (click)="setDeleteTrainee(trainee)" data-toggle="modal"
                     data-target="#deleteTraineeModal"><span
                       class="glyphicon glyphicon-remove">
                     </span></a></td>
@@ -124,6 +124,8 @@
 </div>
 
 
+<!--********************************************* Delete Trainee Modal **********************************-->
+<app-delete-trainee (refreshList)="refreshList()" [trainee]="traineeToDelete"></app-delete-trainee>
 <!--********************************************* View Trainee Modal ************************************-->
 <app-add-trainee></app-add-trainee>
 <app-update-trainee #updateTraineeModal (refreshList)="refreshList()" [trainee]="traineeToUpdate"></app-update-trainee>

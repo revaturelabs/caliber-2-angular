@@ -18,8 +18,11 @@ describe('TraineeTogglePipe', () => {
 describe('Trainee Pipe Test', () => {
   beforeEach(() => {
       trainee1 = new Trainee();
+      trainee1.trainingStatus = 'Confirmed';
       trainee2 = new Trainee();
+      trainee2.trainingStatus = 'Employed';
       trainee3 = new Trainee();
+      trainee3.trainingStatus = 'Dropped';
       traineeList = new Array<Trainee>(trainee1, trainee2, trainee3);
     });
   it('should filter out everything that is not DROPPED', () => {
