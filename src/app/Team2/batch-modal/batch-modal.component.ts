@@ -95,7 +95,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
     // generate all the trainers
     this.batchservice.getAllTrainers().subscribe(t => {
       this.trainers = t;
-      console.log('trainers: ' + t);
     });
   }
 
