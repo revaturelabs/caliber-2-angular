@@ -63,16 +63,16 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
 
   constructor(private ts: TraineesService) { }
 
-   ngOnChanges() {
-     this.refreshTrainee();
-     console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
-   }
+  ngOnChanges() {
+    this.refreshTrainee();
+    // console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
+  }
 
   ngOnInit() {
     this.trainee = new Trainee();
     this.trainee.email = '';
     console.log(this.trainee);
-    document.getElementsByName('body')[0].addEventListener('click', close);
+    // document.getElementsByName('body')[0].addEventListener('click', close);
   }
 
   close() {
@@ -88,18 +88,20 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   // }
 
   refreshTrainee() {
-    this.traineeTemp.college = this.trainee.college;
-    this.traineeTemp.degree = this.trainee.degree;
-    this.traineeTemp.email = this.trainee.email;
-    this.traineeTemp.major = this.trainee.major;
-    this.traineeTemp.name = this.trainee.name;
-    this.traineeTemp.phoneNumber = this.trainee.phoneNumber;
-    this.traineeTemp.profileUrl = this.trainee.profileUrl;
-    this.traineeTemp.projectCompletion = this.trainee.projectCompletion;
-    this.traineeTemp.recruiterName = this.trainee.recruiterName;
-    this.traineeTemp.techScreenerName = this.trainee.techScreenerName;
-    this.traineeTemp.skypeId = this.trainee.skypeId;
-    this.traineeTemp.trainingStatus = this.trainee.trainingStatus;
+    if (this.trainee) {
+      this.traineeTemp.college = this.trainee.college;
+      this.traineeTemp.degree = this.trainee.degree;
+      this.traineeTemp.email = this.trainee.email;
+      this.traineeTemp.major = this.trainee.major;
+      this.traineeTemp.name = this.trainee.name;
+      this.traineeTemp.phoneNumber = this.trainee.phoneNumber;
+      this.traineeTemp.profileUrl = this.trainee.profileUrl;
+      this.traineeTemp.projectCompletion = this.trainee.projectCompletion;
+      this.traineeTemp.recruiterName = this.trainee.recruiterName;
+      this.traineeTemp.techScreenerName = this.trainee.techScreenerName;
+      this.traineeTemp.skypeId = this.trainee.skypeId;
+      this.traineeTemp.trainingStatus = this.trainee.trainingStatus;
+    }
   }
 
   mergeTrainee() {

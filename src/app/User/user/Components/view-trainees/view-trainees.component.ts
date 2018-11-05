@@ -59,7 +59,7 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
   // Needs to be completed along with the rest of the flag methods
   // currently not working, look into this whoever does this user story
-  toggleColor( t: Trainee) {
+  toggleColor(t: Trainee) {
     if (t.flagStatus === this.green) {
       console.log('changing to none!');
       t.flagStatus = this.none;
@@ -89,14 +89,15 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
       this.showNotes = new Array<boolean>(this.trainees.length);
       console.log('refreshed');
     });
-    console.log(this.trainees[0].email);
     this.traineeToUpdate = null;
   }
 
   populateTrainee(trainee: Trainee) {
-    this.traineeToUpdate = trainee;
-    this.updateTrainee.refreshTrainee();
-    console.log(this.traineeToUpdate);
+    if (trainee) {
+      this.traineeToUpdate = trainee;
+      this.updateTrainee.refreshTrainee();
+      console.log(this.traineeToUpdate);
+    }
   }
 
   getSwitchableBatches(trainee: Trainee) {
