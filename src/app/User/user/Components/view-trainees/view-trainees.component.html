@@ -1,3 +1,4 @@
+<html>
 <div class="modal fade" id="viewTraineeModal" tabindex="-1" role="dialog" aria-labelledby="viewTraineeModal">
   <div class="modal-dialog modal-lg modal-widest" role="document">
     <div class="modal-content">
@@ -100,10 +101,11 @@
                   </td>
   
                   <td><a role="button"
-                    (click)="populateTrainee(trainee);getTrainee($index)"
-                    data-toggle="modal" data-target="#addTraineeModal"
+                    (click)="populateTrainee(trainee)"
+                    data-toggle="modal" data-target="#updateTraineeModal"
                     type="button"> <span class="glyphicon glyphicon-pencil"></span>
                   </a></td>
+
                   <td><a role="button" class="pull-right"
                     (click)="setDeleteTrainee(trainee)" data-toggle="modal"
                     data-target="#deleteTraineeModal"><span
@@ -128,5 +130,7 @@
 <app-add-trainee [batchId]="batchId" (addTraineeEvent)="refreshList()"></app-add-trainee>
 <!--********************************************* Switch Batch Modal ************************************-->
 <app-switch-batch [trainee]="switchTrainee" (switchBatchEvent)="refreshList()"></app-switch-batch>
+<!--********************************************* Update Trainee Modal ************************************-->
+<app-update-trainee #updateTraineeModal (refreshList)="refreshList()" [trainee]="traineeToUpdate"></app-update-trainee>
 
-
+</html>

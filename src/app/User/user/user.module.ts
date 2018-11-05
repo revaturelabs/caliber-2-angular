@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TraineeTogglePipe } from './Pipes/trainee-toggle.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import { AddTraineeComponent } from './Components/add-trainee/add-trainee.component';
+import { UpdateTraineeComponent } from './Components/update-trainee/update-trainee.component';
 import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
 import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
 
@@ -14,12 +15,20 @@ import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.com
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewTraineesComponent, TraineeTogglePipe, SwitchBatchComponent, AddTraineeComponent, DeleteTraineeComponent],
+  declarations: [
+    ViewTraineesComponent,
+    SwitchBatchComponent,
+    TraineeTogglePipe,
+    AddTraineeComponent,
+    DeleteTraineeComponent,
+    UpdateTraineeComponent
+  ],
   exports: [
     AddTraineeComponent,
     ViewTraineesComponent,
-    SwitchBatchComponent,
-    TraineeTogglePipe
+    UpdateTraineeComponent,
+    TraineeTogglePipe,
+    DeleteTraineeComponent
   ]
 })
 export class UserModule { }
