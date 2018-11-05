@@ -23,8 +23,8 @@ describe('ViewBatchesService', () => {
         });
         const req = httpMock.expectOne('http://localhost:9085/vp/batch/all/');
         expect(req.request.method).toEqual('GET');
-        const t1 = new Trainee('John Dao', 'jd@j.com', 'Dropped', '111');
-        const t2 = new Trainee('Emily Dao', 'ed@j.com', 'Signed', '222');
+        const t1 = new Trainee();
+        const t2 = new Trainee();
         req.flush([t1, t2]);
       })
   );

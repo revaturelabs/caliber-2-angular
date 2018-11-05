@@ -16,24 +16,40 @@ const httpOptions = {
 })
 export class TraineesService {
 
-  trainees: Observable<Trainee[]>;
-  url = 'http://localhost:9085/all/trainee?batch=2200';
+  getUrl = 'http://localhost:9085/all/trainee?batch=';
   updateUrl = 'http://localhost:9085/all/trainee/update';
+  createUrl = 'http://localhost:9085/all/trainee/create';
+  deleteUrl = 'http://localhost:9085/all/trainee/delete/';
 
+  /**
+   *
+   * @param http Object which will allow us to send REST requests to our endpoints
+   */
   constructor(private http: HttpClient) { }
 
+  /**
+   * Sends a get request to retrieve all of the trainees having to do with a specific batch id
+   * @param batchId The id representing the batch to get all of the trainees from
+   */
   getTrainees(batchId: Number):  Observable<Trainee[]> {
-    this.trainees =  this.http.get<Trainee[]>(this.url, httpOptions).
+    let trainees: Observable<Trainee[]>;
+    trainees =  this.http.get<Trainee[]>(this.getUrl + batchId, httpOptions).
       pipe(
         catchError(data => {
-          this.trainees = this.http.get<Trainee[]>(this.url, httpOptions);
-          return this.trainees;
+          trainees = this.http.get<Trainee[]>(this.getUrl + batchId, httpOptions);
+          return trainees;
         })
       );
-    return this.trainees;
+    return trainees;
   }
   updateTrainee(t: Trainee): Observable<Trainee> {
     console.log(t);
     return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
+  }
+  createTrainee(t: Trainee): Observable<Trainee> {
+    return this.http.post<Trainee>(this.createUrl, t, httpOptions);
+  }
+  deleteTrainee(id: Number): Observable<void> {
+    return this.http.delete<void>(this.deleteUrl + id);
   }
 }
