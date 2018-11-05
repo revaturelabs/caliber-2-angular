@@ -107,8 +107,7 @@ export class BatchViewComponent implements OnInit {
   deleteBatch(batchId: number) {
     console.log('delete');
     console.log(batchId);
-    this.batchservice.deleteBatch(batchId).subscribe( data => console.log(data));
-    this.refreshPage();
+    this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage());
   }
 
   // gets all start years from database for dropdown button
