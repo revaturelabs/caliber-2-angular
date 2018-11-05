@@ -36,7 +36,6 @@ export class BatchViewComponent implements OnInit {
   ngOnInit() {
     // gets all years for dropdown button
     this.getAllYears();
-    console.log(this.defaultYears);
   }
 
   // resets createorUpdate variable for child component
@@ -113,7 +112,6 @@ export class BatchViewComponent implements OnInit {
   // gets all start years from database for dropdown button
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years => {
-      console.log(years);
       if (years.length === 0 ) {
         this.getAllYears();
       } else {

@@ -26,7 +26,7 @@
                   Training Type</option>
                 <option *ngFor="let option of trainingTypes" [selected]="option === createOrUpdate.trainingType" [ngValue]="option">{{option}}</option>
               </select>
-              <select *ngIf="!createOrUpdate" #trainingType (click)="setTrainingType(trainingType.value)" class="form-control" id="trainingType" required name="trainingType">
+              <select *ngIf="!createOrUpdate" #trainingType (change)="setTrainingType(trainingType.value)" class="form-control" id="trainingType" required name="trainingType">
                   <option id="defaultTrainingType" selected="selected" value="" disabled>Select
                     Training Type</option>
                   <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>

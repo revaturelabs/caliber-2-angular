@@ -54,8 +54,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
   constructor(
     private batchservice: BatchService) {
-    // still need to grab trainers from user service
-    // this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
@@ -66,15 +64,12 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
     this.location = this.createOrUpdate.location;
-    console.log(this.location);
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
 
     // handle start and end dates
     const d = new Date(this.createOrUpdate.startDate);
     this.startDate = d;
-    console.log(this.startDate);
-    console.log('start date: ' + d);
     this.endDate = this.createOrUpdate.endDate;
 
     // handle grades
@@ -165,7 +160,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // update batch in backend
     this.batchservice.putBatch(batch).subscribe(result => {
-      console.log('created');
+      console.log('updated');
       this.someEvent.next('created');
       this.resetForm();
     });
@@ -189,22 +184,18 @@ export class BatchModalComponent implements OnInit, OnChanges {
       this.dateIsError = true;
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     } else if (this.startDate >= this.endDate) {
       this.dateIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     } else if (this.trainer === this.coTrainer) {
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     }
 
     if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
-      console.log('this is fine');
       this.createBatch();
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true });
@@ -218,22 +209,18 @@ export class BatchModalComponent implements OnInit, OnChanges {
       this.dateIsError = true;
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     } else if (this.startDate >= this.endDate) {
       this.dateIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     } else if (this.trainer === this.coTrainer) {
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
       return;
     }
 
     if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
-      console.log('this is fine');
       this.updateBatch();
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true });
