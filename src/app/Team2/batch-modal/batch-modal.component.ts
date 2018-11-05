@@ -12,10 +12,14 @@ import { BLocation } from '../type/location';
   styleUrls: ['./batch-modal.component.css']
 })
 export class BatchModalComponent implements OnInit, OnChanges {
+  // grabs value from parent component
   @Input() createOrUpdate: Batch;
+
+  // modal event emmitters
   @Output() someEvent = new EventEmitter<string>();
   @Output() closeEvent = new EventEmitter<string>();
 
+  // class variables
   currBatch: Batch;
   batchFormName: '';
   trainingName: string = null;
@@ -24,8 +28,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   skillType: string = null;
   skillTypes: string[];
   location: string = null;
-  // needs to be a location type
-  locationOptions: string[];
+  locationOptions: BLocation[];
   trainer: string = null;
   // needs to be a user type
   trainers: string[];
@@ -38,50 +41,59 @@ export class BatchModalComponent implements OnInit, OnChanges {
   submitted: Boolean = false;
   dateIsError: Boolean = false;
   trainerIsError: Boolean = false;
+  myDate: Date;
 
   constructor(
     private batchservice: BatchService) {
+    // still need to grab trainers from user service
     this.trainers = ['Patrick Walsh', 'Dan Pickles', 'Ravi Singh'];
-    this.skillTypes = ['Java', 'Spark', '.NET', 'PEGA'];
-    this.locationOptions = ['Virginia', 'New York', 'Texas'];
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
+  // populates form modal if updating batch and not creating new
   setValues() {
     console.log(this.createOrUpdate);
     this.trainingName = this.createOrUpdate.trainingName;
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
-    this.location = 'New York';
-    // this.location = this.createOrUpdate.location;
+    this.location = this.createOrUpdate.location;
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
+
+    // handle start and end dates
     const d = new Date(this.createOrUpdate.startDate);
-    // this.startDate = ;
+    this.startDate = d;
+    console.log(this.startDate);
+    console.log('start date: ' + d);
     this.endDate = this.createOrUpdate.endDate;
+
+    // handle grades
     this.goodGradeThreshold = this.createOrUpdate.goodGrade;
     this.borderlineGradeThreshold = this.createOrUpdate.passingGrade;
   }
+
   ngOnInit() {
     console.log('generated');
     // generate all the skilltypes
-    // this.batchservice.getAllSkillTypes().subscribe( results => {
-    //   console.log(results);
-    //   this.skillTypes = results;
-    // });
-    // this.batchservice.getAllLocations().subscribe( locs => {
-    //   this.locationOptions = locs;
-    // });
-    // console.log(this.skillTypes);
+    this.batchservice.getAllSkillTypes().subscribe( results => {
+      this.skillTypes = results;
+    });
+    // generate all the locations
+    this.batchservice.getAllLocations().subscribe( locs => {
+      this.locationOptions = locs;
+    });
   }
 
+  // prepopulates the batch info if existing batch is passed through the parent
   ngOnChanges() {
     if (this.createOrUpdate != null) {
       this.setValues();
     }
   }
+
+  // resets the form info to default values
   resetForm() {
-    console.log('am i in here?');
+    console.log('inside resetForm');
     this.trainingName = null;
     this.trainingType = undefined;
     (<HTMLFormElement>document.getElementById('formId')).reset();
@@ -96,11 +108,22 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.closeEvent.next('closed');
     this.createOrUpdate = null;
   }
+
+  // creates a brand new batch with form inputs
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
-        this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
-        this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
+      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
 
+    // account for time zone differences
+    const sdate = new Date(this.startDate);
+    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
+    this.startDate = sdate;
+    const edate = new Date(this.endDate);
+    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
+    this.endDate = edate;
+
+    // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
@@ -110,38 +133,101 @@ export class BatchModalComponent implements OnInit, OnChanges {
       });
   }
 
+  // updates the batch using form inputs
+  updateBatch(): void {
+    // set dates and account for time zone difference
+    const sdate = new Date(this.startDate);
+    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
+    this.startDate = sdate;
+    const edate = new Date(this.endDate);
+    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
+    this.endDate = edate;
+
+    // make updated batch
+    const batch = new Batch(this.trainingName, this.trainingType,
+      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold);
+    batch.batchId = this.createOrUpdate.batchId;
+
+    // update batch in backend
+    this.batchservice.putBatch(batch).subscribe(result => {
+      console.log('created');
+      this.someEvent.next('created');
+      this.resetForm();
+    });
+  }
+
+  // sets minimal passing grade
   setMinGrade(): void {
     this.borderlineGradeThreshold = this.goodGradeThreshold;
   }
 
+  // sets maximum grade
   lowerMinGrade(): void {
     if (this.borderlineGradeThreshold > this.goodGradeThreshold) {
       this.borderlineGradeThreshold = this.goodGradeThreshold;
     }
   }
 
+  // handles error checking for batch form when creating new batch
   checkDates(id: string): void {
+    if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
+      this.dateIsError = true;
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.startDate >= this.endDate) {
+      this.dateIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.trainer === this.coTrainer) {
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    }
+
     if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
       console.log('this is fine');
       this.createBatch();
       const elem = document.getElementById('closeBtn');
-      const evt = new MouseEvent('click', { bubbles: true});
+      const evt = new MouseEvent('click', { bubbles: true });
       elem.dispatchEvent(evt);
-    }
-
-    if (this.startDate >= this.endDate) {
-      this.dateIsError = true;
-      document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
-    }
-
-    if (this.trainer === this.coTrainer) {
-      this.trainerIsError = true;
-      document.getElementById('checkBatchModalDate').className = 'show';
-      console.log('this is not fine');
     }
   }
 
+  // handles error checking for batch when updating current batch
+  checkDates2(id: string): void {
+    if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
+      this.dateIsError = true;
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.startDate >= this.endDate) {
+      this.dateIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    } else if (this.trainer === this.coTrainer) {
+      this.trainerIsError = true;
+      document.getElementById('checkBatchModalDate').className = 'show';
+      console.log('this is not fine');
+      return;
+    }
+
+    if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
+      console.log('this is fine');
+      this.updateBatch();
+      const elem = document.getElementById('closeBtn');
+      const evt = new MouseEvent('click', { bubbles: true });
+      elem.dispatchEvent(evt);
+    }
+  }
+
+  // setter methods
   setTrainingType(option: string) {
     this.trainingType = option;
   }
@@ -158,6 +244,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainer = option;
   }
 
+  // closes error modal
   closeModal() {
     document.getElementById('checkBatchModalDate').className = 'hidden';
     this.dateIsError = false;

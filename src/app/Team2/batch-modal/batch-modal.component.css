@@ -142,12 +142,11 @@ a {
 }
 
 #overlay {
-	position: fixed;
-	
-    top: 0px;
-    left:  400px;
+	position: relative;
+	align-content: center;
+    top: -210px;
     background:  rgba(0,0,0,0.8);
-    width: 40%;
+    width: 600px;
 	z-index: 90000;
 }
 
@@ -261,6 +260,7 @@ a {
 
 .fa-frown-o:hover {
 	color: #ff7575;
+
 }
 
 .fa-star:hover {
@@ -276,6 +276,7 @@ a {
 }
 
 .fa-frown-o.pick {
+	
 	color: #ea2825 !important;
 }
 

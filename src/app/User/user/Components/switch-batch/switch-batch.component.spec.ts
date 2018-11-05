@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectYearComponent } from './select-year.component';
+import { SwitchBatchComponent } from './switch-batch.component';
 
-describe('SelectYearComponent', () => {
-  let component: SelectYearComponent;
-  let fixture: ComponentFixture<SelectYearComponent>;
+describe('SwitchBatchComponent', () => {
+  let component: SwitchBatchComponent;
+  let fixture: ComponentFixture<SwitchBatchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectYearComponent ]
+      declarations: [ SwitchBatchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectYearComponent);
+    fixture = TestBed.createComponent(SwitchBatchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
