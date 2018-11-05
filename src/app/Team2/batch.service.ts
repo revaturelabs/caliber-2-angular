@@ -5,6 +5,13 @@ import { BLocation } from './type/location';
 import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+  /*
+  The batch service handles all of the http client methods used to send and recieve data from the back-end.
+
+  @author Anthony Jin, Juan Trejo
+
+ */
+
 @Injectable({
   providedIn: 'root'
 })

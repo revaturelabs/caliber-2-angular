@@ -6,6 +6,16 @@ import { Trainer } from '../type/trainer';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { BLocation } from '../type/location';
 
+
+  /*
+  The batch modal component is the child component of the batch view component.
+  It handles the modal used to create and update batches.
+  This component also handles form validation from the user.
+  @author Anthony Jin, Juan Trejo
+
+ */
+
+
 @Component({
   selector: 'app-batch-modal',
   templateUrl: './batch-modal.component.html',
@@ -57,6 +67,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
     this.location = this.createOrUpdate.location;
+    for (let l of this.locationOptions ) {
+      console.log(l.address);
+    }
     console.log(this.location);
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
