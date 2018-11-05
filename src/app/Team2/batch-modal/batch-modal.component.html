@@ -38,7 +38,7 @@
                   <option id="defaultTrainingType" selected="selected" value="" disabled>Select
                     Training Type</option>
                   <!-- <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.trainingType" disabled>{{createOrUpdate.trainingType}}</option> -->
-                  <option *ngFor="let option of trainingTypes" [selected]="createOrUpdate && undefined === createOrUpdate.trainingType" [ngValue]="option">{{option}}</option>
+                  <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
                 </select>
               <div *ngIf="submitted && !trainingType" class="invalid-feedback">Training type is required</div>
             </div>
@@ -61,7 +61,7 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="commonLocations">Location :</label>
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
-              <select #location (change)="setLocation(location.value)" id="location" required class="form-control"
+              <select *ngIf="!createOrUpdate" #location (change)="setLocation(location.value)" id="location" required class="form-control"
                 required name="location">
                 <option *ngIf="!createOrUpdate" value="" selected="selected" disabled>Select Location</option>
                 <option *ngIf="createOrUpdate" selected="selected" value="createOrUpdate.location" disabled>
