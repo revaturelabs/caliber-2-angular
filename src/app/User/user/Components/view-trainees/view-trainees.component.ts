@@ -88,8 +88,8 @@ export class ViewTraineesComponent implements OnInit {
   }
 
   populateTrainee(trainee: Trainee) {
-    this.updateTrainee.refreshTrainee();
     this.traineeToUpdate = trainee;
+    this.updateTrainee.refreshTrainee();
     console.log(this.traineeToUpdate);
   }
 }
