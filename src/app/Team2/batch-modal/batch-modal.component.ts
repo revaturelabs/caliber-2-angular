@@ -12,6 +12,15 @@ import { BLocation } from '../type/location';
   styleUrls: ['./batch-modal.component.css']
 })
 export class BatchModalComponent implements OnInit, OnChanges {
+
+  /*
+ The batch modal component is the child component of the batch view component.
+ It handles the modal used to create and update batches.
+ This component also handles form validation from the user.
+ @author Anthony Jin, Juan Trejo
+
+*/
+
   // grabs value from parent component
   @Input() createOrUpdate: Batch;
 
@@ -76,15 +85,15 @@ export class BatchModalComponent implements OnInit, OnChanges {
   ngOnInit() {
     console.log('generated');
     // generate all the skilltypes
-    this.batchservice.getAllSkillTypes().subscribe( results => {
+    this.batchservice.getAllSkillTypes().subscribe(results => {
       this.skillTypes = results;
     });
     // generate all the locations
-    this.batchservice.getAllLocations().subscribe( locs => {
+    this.batchservice.getAllLocations().subscribe(locs => {
       this.locationOptions = locs;
     });
     // generate all the trainers
-    this.batchservice.getAllTrainers().subscribe( t => {
+    this.batchservice.getAllTrainers().subscribe(t => {
       this.trainers = t;
       console.log('trainers: ' + t);
     });

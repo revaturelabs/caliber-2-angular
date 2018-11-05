@@ -5,6 +5,13 @@ import { BLocation } from './type/location';
 import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+
+/*
+
+The batch service handles all of the http client methods used to send and recieve data from the back-end.
+ @author Anthony Jin, Juan Trejo, Will Bennet
+
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +25,7 @@ export class BatchService {
 
   // get all the batches from batch service
   getAllBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/vp/batch/all', { headers: new HttpHeaders({'Content-Type': 'application/json'}), });
+    return this.http.get<Batch[]>(this.url + '/vp/batch/all', { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), });
   }
 
   // get specific batch from batch service
@@ -33,12 +40,14 @@ export class BatchService {
 
   // creates new batch in batch service
   postBatch(batch: Batch): Observable<Batch> {
-    return this.http.post<Batch>(this.url + '/all/batch/create', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+    return this.http.post<Batch>(this.url + '/all/batch/create', batch,
+    { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
 
   // updates specified batch in batch service
   putBatch(batch: Batch): Observable<Batch> {
-    return this.http.put<Batch>(this.url + '/all/batch/update', batch, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+    return this.http.put<Batch>(this.url + '/all/batch/update', batch,
+     { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
 
   // deletes specified batch from batch service

@@ -6,6 +6,15 @@ import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/v
 import { Batch } from '../type/batch';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
+ /*
+
+ The batch-view component is the parent component for the manage batch feature.
+ This component allows the user to view all of the batches by the selected year.
+ This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
+ @author Juan Trejo, Anthony Jin
+
+ */
+
 @Component({
   selector: 'app-batch-view',
   templateUrl: './batch-view.component.html',
