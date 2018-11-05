@@ -18,29 +18,34 @@
               <label for="trainingName">Training Name:</label>
               <input [(ngModel)]="trainingName" required [ngModelOptions]="{standalone: true}" type="text" class="form-control"
                 id="trainingName" placeholder="1611 Jul11 Java" name="trainingName">
-              <div *ngIf="submitted && !trainingName" class="invalid-feedback">Training name is required</div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainingType">Training Type:</label>
-              <select #t (change)="setTrainingType(t.value)" class="form-control" id="trainingType" required name="trainingType">
-                <option *ngIf="createOrUpdate === null" selected="selected" id="defaultTrainingType" value="" disabled>Select
+              <select *ngIf="createOrUpdate" [(ngModel)]="trainingType" [ngModelOptions]="{standalone: true}" class="form-control" id="trainingType" required name="trainingType">
+                <option id="defaultTrainingType" value="null" disabled>Select
                   Training Type</option>
-                <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.trainingType" disabled>{{createOrUpdate.trainingType}}</option>
-                <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
+                <option *ngFor="let option of trainingTypes" [selected]="option === createOrUpdate.trainingType" [ngValue]="option">{{option}}</option>
               </select>
-              <div *ngIf="submitted && !trainingType" class="invalid-feedback">Training type is required</div>
+              <select *ngIf="!createOrUpdate" #trainingType (change)="setTrainingType(trainingType.value)" class="form-control" id="trainingType" required name="trainingType">
+                  <option id="defaultTrainingType" selected="selected" value="" disabled>Select
+                    Training Type</option>
+                  <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
+                </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="skillType">Skill Type:</label>
-              <select #skillType (change)="setSkillType(skillType.value)" name="skillType" class="form-control" id="skillType"
+              <select *ngIf="!createOrUpdate" #skillType (change)="setSkillType(skillType.value)" name="skillType" class="form-control" id="skillType"
                 required>
-                <option *ngIf="createOrUpdate === null" selected="selected" value="" disabled>Select Skill Type</option>
-                <option *ngIf="createOrUpdate != null" selected="selected" value="createOrUpdate.skillType" disabled>{{createOrUpdate.skillType}}</option>
+                <option selected="selected" value="" disabled>Select Skill Type</option>
                 <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
               </select>
-              <div *ngIf="submitted && !skillType" class="invalid-feedback">Skill type is required</div>
+              <select *ngIf="createOrUpdate" [(ngModel)]="skillType" [ngModelOptions]="{standalone: true}" name="skillType" class="form-control" id="skillType"
+                required>
+                <option value="" disabled>Select Skill Type</option>
+                <option *ngFor="let option of skillTypes" [ngValue]="option" [selected]="createOrUpdate && option === createOrUpdate.skillType">{{option}}</option>
+              </select>
             </div>
             <!-- Dropdown for location -->
             <div class="form-group col-md-6 col-sm-6">
@@ -48,12 +53,13 @@
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
               <select #location (change)="setLocation(location.value)" id="location" required class="form-control"
                 required name="location">
-                <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Location</option>
-                <option *ngIf="createOrUpdate != null" value="createOrUpdate.location" disabled>{{createOrUpdate.location}}</option>
+                <option *ngIf="!createOrUpdate" value="" selected="selected" disabled>Select Location</option>
+                <option *ngIf="createOrUpdate" selected="selected" value="createOrUpdate.location" disabled>
+                  {{ createOrUpdate.location}}
+                </option>
                 <option *ngFor="let option of locationOptions" [ngValue]="option.name + option.address + option.city + option.state + option.zipcode">
                   {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
               </select>
-              <div *ngIf="submitted && !location" class="invalid-feedback">Location is required</div>
             </div>
             <!-- Dropdown ends -->
 
@@ -61,12 +67,14 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-6">
               <label for="trainer">Trainer:</label>
-              <select #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer" required name="trainer">
-                <option *ngIf="createOrUpdate === null" value="" selected="selected" disabled>Select Trainer</option>
-                <option *ngIf="createOrUpdate != null" value="createOrUpdate.trainer" selected="selected" disabled>{{createOrUpdate.trainer}}</option>
-                <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
+              <select *ngIf="!createOrUpdate" #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer" required name="trainer">
+                <option value="" selected="selected" disabled>Select Trainer</option>
+                <option *ngFor="let option of trainers" [ngValue]="option.name">{{option.name}}</option>
               </select>
-              <div *ngIf="submitted && !trainer" class="invalid-feedback">Trainer is required</div>
+              <select *ngIf="createOrUpdate" [(ngModel)]="trainer" [ngModelOptions]="{standalone: true}" class="form-control" id="trainer" required name="trainer">
+                  <option value=""  disabled>Select Trainer</option>
+                  <option *ngFor="let option of trainers" [ngValue]="option.name" [selected]="option.name === createOrUpdate.trainer">{{option.name}}</option>
+                </select>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="co-trainer">Co-Trainer:</label>
@@ -74,7 +82,7 @@
                 name="coTrainer">
                 <option [ngValue]="null" disabled>Select Co-Trainer</option>
                 <option [ngValue]="none">None</option>
-                <option *ngFor="let option of trainers" [ngValue]="option">{{option}}</option>
+                <option *ngFor="let option of trainers" [ngValue]="option.name">{{option.name}}</option>
               </select>
             </div>
           </div>
@@ -108,7 +116,6 @@
               <input [(ngModel)]="goodGradeThreshold" [ngModelOptions]="{standalone: true}" (input)="setMinGrade()"
                 type="number" min="0" step="1" class="form-control" name="goodGradeThreshold" id="goodGrade"
                 placeholder="80" required>
-              <div *ngIf="submitted && !goodGradeThreshold" class="invalid-feedback">Good grade is required</div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
               <label for="borderlineGrade">Passing Grade: <span title="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action."
@@ -117,14 +124,13 @@
               <input [(ngModel)]="borderlineGradeThreshold" [ngModelOptions]="{standalone: true}" (change)="lowerMinGrade()"
                 (input)="lowerMinGrade" type="number" min="0" step="1" class="form-control" id="borderlineGrade"
                 placeholder="50" required name="passingGrade" max="goodGradeThreshold">
-              <div *ngIf="submitted && !borderlineGradeThreshold" class="invalid-feedback">Passing grade is required</div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <input *ngIf="createOrUpdate === null" value="Save" type="submit" class="btn btn-primary" />
           <input *ngIf="createOrUpdate != null" value="Update" (click)="checkDates2()" class="btn btn-primary" />
-          <button type="button" id="closeBtn" class="btn btn-default" (click)="resetForm()" data-dismiss="modal">Close</button>
+          <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </form>

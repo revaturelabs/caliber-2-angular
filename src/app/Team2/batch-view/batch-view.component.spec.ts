@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BatchViewComponent } from './batch-view.component';
+import { BatchService } from '../batch.service';
 
 describe('BatchViewComponent', () => {
   let component: BatchViewComponent;
@@ -21,5 +22,14 @@ describe('BatchViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+});
+
+describe('BatchViewMethods', () => {
+  let batchComponent: BatchViewComponent;
+  let batchService: BatchService;
+
+  beforeEach(() => {
+    batchComponent = new BatchViewComponent(batchService);
   });
 });

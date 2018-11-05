@@ -4,14 +4,8 @@ export class Trainer {
     title: string;
     email: string;
     tier: string;
+    password: string;
 
     // constructor for trainer object
-    constructor(trainerId: number, name: string, title: string,
-        email: string, tier: string) {
-            this.trainerId = trainerId;
-            this.name = name;
-            this.title = title;
-            this.email = email;
-            this.tier = tier;
-        }
+    constructor() {}
 }

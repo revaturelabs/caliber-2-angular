@@ -4,6 +4,16 @@ import { BatchService } from '../batch.service';
 import { FormsModule } from '@angular/forms';
 import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/view-trainees.component';
 import { Batch } from '../type/batch';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+
+ /*
+
+ The batch-view component is the parent component for the manage batch feature.
+ This component allows the user to view all of the batches by the selected year.
+ This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
+ @author Juan Trejo, Anthony Jin
+
+ */
 
 @Component({
   selector: 'app-batch-view',
@@ -27,12 +37,12 @@ export class BatchViewComponent implements OnInit {
   ngOnInit() {
     // gets all years for dropdown button
     this.getAllYears();
-    console.log(this.defaultYears);
   }
 
   // resets createorUpdate variable for child component
   resetBatchForm(): void {
     this.createUpdate = null;
+    this.batchModal.resetForm();
   }
 
   // ToDo: future implementation
@@ -60,7 +70,31 @@ export class BatchViewComponent implements OnInit {
     this.selectedYear =  event;
     this.batchservice.getBatchesByYear(event).subscribe(result => {
       this.selectedBatches = result;
+      this.getTraineeCount();
     });
+  }
+
+  getTraineeCount() {
+    const allids: number[] = [];
+    for (const batch of this.selectedBatches) {
+      if (batch) {
+        allids.push(batch.batchId);
+      }
+    }
+    console.log('ids: ' + allids);
+    this.batchservice.getTraineeCount(allids).subscribe( count => {
+      this.populateTraineeCount(count);
+    });
+  }
+
+  populateTraineeCount(count: number[][]) {
+    for (const batch of this.selectedBatches) {
+      for (const c of count) {
+        if (c[0] === batch.batchId) {
+          batch.traineeCount = c[1];
+        }
+      }
+    }
   }
 
   // stores batch id for trainee display
@@ -80,9 +114,7 @@ export class BatchViewComponent implements OnInit {
   // gets all start years from database for dropdown button
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years => {
-      console.log(years);
       if (years.length === 0 ) {
-        this.makeDefaultBatches();
         this.getAllYears();
       } else {
         this.defaultYears = years;
@@ -90,11 +122,5 @@ export class BatchViewComponent implements OnInit {
         this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
       }
     });
-  }
-
-  makeDefaultBatches() {
-    this.batchservice.postBatch(new Batch('Tester', 'Tester',
-    'Tester', 'Nick', 'Help', 'Nowhere', new Date('October 19, 2018'),
-    new Date('October 20, 2018'), 55, 45)).subscribe();
   }
 }
