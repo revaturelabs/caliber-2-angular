@@ -32,6 +32,4 @@ describe('BatchViewMethods', () => {
   beforeEach(() => {
     batchComponent = new BatchViewComponent(batchService);
   });
-
-  it()
 });

@@ -6,11 +6,12 @@ import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/v
 import { Batch } from '../type/batch';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
-/*
-  The batch-view component is the parent component for the manage batch feature.
-  This component allows the user to view all of the batches by the selected year.
-  This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
-  @author Juan Trejo, Anthony Jin
+ /*
+
+ The batch-view component is the parent component for the manage batch feature.
+ This component allows the user to view all of the batches by the selected year.
+ This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
+ @author Juan Trejo, Anthony Jin
 
  */
 
@@ -36,7 +37,6 @@ export class BatchViewComponent implements OnInit {
   ngOnInit() {
     // gets all years for dropdown button
     this.getAllYears();
-    console.log(this.defaultYears);
   }
 
   // resets createorUpdate variable for child component
@@ -107,14 +107,12 @@ export class BatchViewComponent implements OnInit {
   deleteBatch(batchId: number) {
     console.log('delete');
     console.log(batchId);
-    this.batchservice.deleteBatch(batchId).subscribe( data => console.log(data));
-    this.refreshPage();
+    this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage());
   }
 
   // gets all start years from database for dropdown button
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years => {
-      console.log(years);
       if (years.length === 0 ) {
         this.getAllYears();
       } else {
