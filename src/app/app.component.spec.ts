@@ -2,6 +2,13 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { UserModule } from './User/user/user.module';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { RouterOutlet } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { ManageComponent } from './manage/manage.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 
 describe('AppComponent', () => {
@@ -9,21 +16,31 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        UserModule
+        UserModule,
+        AppRoutingModule
       ],
       declarations: [
-        AppComponent
-      ]
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomeComponent,
+        ManageComponent
+      ],
+    providers: [
+      { provide: APP_BASE_HREF, useValue: '/caliber' }
+    ]
     }).compileComponents();
   }));
+
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'caliber-ui'`, async(() => {
+
+  it(`should have as title 'Caliber | Performance Management'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('caliber-ui');
+    expect(app.title).toEqual('Caliber | Performance Management');
   }));
 });

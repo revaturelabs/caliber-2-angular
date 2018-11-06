@@ -1,0 +1,40 @@
+/************************
+	Footer
+************************/
+.footer-margin {
+	margin-top: .85em;
+}
+
+.footer-img {
+	margin-top: 1.5em;
+}
+
+
+.img-responsive {
+	padding-bottom: 1em;
+}
+
+footer {
+	min-height: 103px;
+	background-color: #474C55;
+	font-size: .75em;
+	position: absolute;
+	width: 100%;
+    left: 0;
+}
+
+.center {
+	text-align: center;
+}
+
+.contact-info {
+	color: #B9B9BA;
+}
+
+.fa-copyright {
+	padding-right: .5em;
+}
+
+footer a, footer a:hover {
+	color: #B9B9BA;
+}
