@@ -1,5 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { UserModule } from './User/user/user.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
@@ -12,6 +14,11 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        UserModule,
+        AppRoutingModule
+      ],
       declarations: [
         AppComponent,
         HeaderComponent,
@@ -19,9 +26,6 @@ describe('AppComponent', () => {
         HomeComponent,
         ManageComponent
       ],
-    imports: [
-      AppRoutingModule
-    ],
     providers: [
       { provide: APP_BASE_HREF, useValue: '/caliber' }
     ]

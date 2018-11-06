@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { UserModule } from './User/user/user.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +20,9 @@ import { ManageComponent } from './manage/manage.component';
   ],
   imports: [
     BrowserModule,
+    UserModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
 
   ],
