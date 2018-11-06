@@ -27,6 +27,5 @@ export class ErrorService {
       serviceName: serviceName,
       errorMessage: errorMessage
     };
-    console.log(this.error);
   }
 }
