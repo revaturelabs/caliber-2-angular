@@ -10,7 +10,7 @@ import { ManageComponent } from './manage/manage.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { ErrorComponent } from './Error Handling/error/error.component';
+import { ErrorComponent } from './error-handling/error/error.component';
 
 
 @NgModule({

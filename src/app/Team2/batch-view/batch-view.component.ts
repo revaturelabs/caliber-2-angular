@@ -24,6 +24,7 @@ export class BatchViewComponent implements OnInit {
 
   // class variables
   @ViewChild('batchModal') batchModal: BatchModalComponent;
+  @ViewChild('viewTraineeModal') viewTraineeModal: ViewTraineesComponent;
   createUpdate: Batch = null;
   years: string[];
   selectedBatches: Batch[];
@@ -121,5 +122,10 @@ export class BatchViewComponent implements OnInit {
         this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
       }
     });
+  }
+
+  traineeClose() {
+    this.refreshPage();
+    this.viewTraineeModal.refreshView();
   }
 }

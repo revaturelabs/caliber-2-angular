@@ -7,13 +7,13 @@ import { Trainee } from '../types/trainee';
 @Injectable({
   providedIn: 'root'
 })
-export class MockTraineeService extends TraineesService {
+export class MockTraineeService  {
 
   traineeObservable = new Subject<Trainee>();
   trainee: Trainee;
 
   constructor(http: HttpClient) {
-    super(http);
+    // super(http);
   }
 
   postForm(t: Trainee): Observable<Trainee> {

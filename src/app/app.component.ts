@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ErrorService } from './error-handling/services/error.service';
 
 /**
  * @ignore
@@ -10,4 +11,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Caliber | Performance Management';
+
+  constructor(private errorService: ErrorService) {}
 }
