@@ -39,19 +39,6 @@ export class ViewBatchesService {
     /**
      * returns the list of batches
      */
-    return this.http.get<Batch[]>(this.url, httpOptions).
-      pipe(
-        catchError((issue, data) => {
-          if (issue instanceof HttpErrorResponse) {
-            const err = issue as HttpErrorResponse;
-            this.errorService.setError('ViewBatchService',
-            `Issue getting batches. Please contact system administrator: \n
-            Status Code: ${err.status} \n
-            Status Text: ${err.statusText} \n
-            Error: ${err.message}`);
-          }
-          return data;
-        })
-      );
+    return this.http.get<Batch[]>(this.url, httpOptions);
   }
 }

@@ -31,6 +31,16 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.vbs.getBatches().subscribe(data => {
       this.allBatches = data;
+    },
+    issue => {
+      if (issue instanceof HttpErrorResponse) {
+        const err = issue as HttpErrorResponse;
+        this.errorService.setError('ViewBatchService',
+        `Issue getting batches. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}`);
+      }
     });
   }
 
