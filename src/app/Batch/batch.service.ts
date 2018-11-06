@@ -5,6 +5,20 @@ import { BLocation } from './type/location';
 import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+/**
+ * sets headers for recieving JSON objects
+ */
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
+/**
+   * @ignore
+   */
+  const currentBatchUrl = 'http://localhost:9095/vp/batch/all/';
+
 
 /*
 
@@ -89,6 +103,16 @@ export class BatchService {
   // get all trainee counts for batches in a year
   getTraineeCount(batches: number[]): Observable<number[][]> {
     return this.http.post<number[][]>(this.traineeCountURL, batches);
+  }
+
+  /**
+   * gets batches from the batch controller usng a rest call
+   */
+  getBatches(): Observable<Array<Batch>> {
+    /**
+     * returns the list of batches
+     */
+    return this.http.get<Batch[]>(currentBatchUrl, httpOptions);
   }
 
 }

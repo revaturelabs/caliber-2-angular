@@ -24,12 +24,12 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
   @Input() trainee: Trainee;
 
   constructor(
-    private vbs: ViewBatchesService,
+    private bs: BatchService,
     private ts: TraineesService,
     private errorService: ErrorService) { }
 
   ngOnInit() {
-    this.vbs.getBatches().subscribe(data => {
+    this.bs.getBatches().subscribe(data => {
       this.allBatches = data;
     },
     issue => {
