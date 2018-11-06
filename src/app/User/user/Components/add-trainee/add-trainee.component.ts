@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-add-trainee',
   templateUrl: './add-trainee.component.html',
@@ -27,11 +30,20 @@ export class AddTraineeComponent implements OnInit {
   profileUrl: string;
   trainingStatus: string;
 
+  /**
+   * @ignore
+   */
   constructor(private ts: TraineesService) {}
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
   }
 
+  /**
+   * creates a trainee and populates with current fields
+   */
   addTrainee() {
     const trainee = new Trainee();
     trainee.batchId = this.batchId;

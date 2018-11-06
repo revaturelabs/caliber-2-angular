@@ -9,23 +9,36 @@ import { Trainee } from '../../Types/trainee';
 })
 export class DeleteTraineeComponent implements OnInit {
 
-  @Input()
   /**
-   * trainee refers to the specific trainee object that is to be deleted
+   * expects a 'trainee' as an input
    */
+  @Input()
   private trainee: Trainee;
 
+  /**
+   * expects to output an 'EventEmitter<boolean>'
+   */
   @Output()
   refreshList = new EventEmitter<boolean>();
 
+  /**
+   * calls the 'deleteTrainee' function from 'TraineeService' to delete the trainee
+   * @param trainee the trainee that is to be deleted
+   */
   private deleteTrainee(trainee: Trainee) {
     this.ts.deleteTrainee(trainee.traineeId).subscribe(data => {
       this.refreshList.emit(true);
     });
   }
 
+  /**
+   * @ignore
+   */
   constructor(private ts: TraineesService) { }
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
     this.trainee = new Trainee();
     this.trainee.name = '';

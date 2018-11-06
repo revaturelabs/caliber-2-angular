@@ -14,7 +14,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
 
   /**
   * Trainee object were passing from view-trainees component.
-  * Specifically passes the trainee object we want to update, depending 
+  * Specifically passes the trainee object we want to update, depending
   * on what row the update button was pressed.
   * @author Jacques Myette
   */

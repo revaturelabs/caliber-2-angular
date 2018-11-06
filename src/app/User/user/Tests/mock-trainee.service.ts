@@ -7,6 +7,9 @@ import { Trainee } from '../types/trainee';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @ignore
+ */
 export class MockTraineeService extends TraineesService {
 
   traineeObservable = new Subject<Trainee>();

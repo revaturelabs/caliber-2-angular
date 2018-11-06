@@ -13,6 +13,7 @@ const httpOptions = {
   })
 };
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +23,8 @@ const httpOptions = {
 export class ViewBatchesService {
 
   /**
-   * @param http injects an Http Client into the service
    * constructor for the service
+   * @param http injects an Http Client into the service
    */
   constructor(private http: HttpClient) { }
 
@@ -35,9 +36,6 @@ export class ViewBatchesService {
    * gets batches from the batch controller usng a rest call
    */
   getBatches(): Observable<Array<Batch>> {
-    /**
-     * returns the list of batches
-     */
     return this.http.get<Batch[]>(this.url, httpOptions);
   }
 }

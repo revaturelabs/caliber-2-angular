@@ -100,12 +100,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:23</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>constructor for the service</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -130,8 +132,7 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>injects an Http Client into the service
-constructor for the service</p>
+                                                                <code><p>injects an Http Client into the service</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -171,7 +172,7 @@ constructor for the service</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -211,6 +212,7 @@ const httpOptions &#x3D; {
   })
 };
 
+
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -220,8 +222,8 @@ const httpOptions &#x3D; {
 export class ViewBatchesService {
 
   /**
-   * @param http injects an Http Client into the service
    * constructor for the service
+   * @param http injects an Http Client into the service
    */
   constructor(private http: HttpClient) { }
 
@@ -233,9 +235,6 @@ export class ViewBatchesService {
    * gets batches from the batch controller usng a rest call
    */
   getBatches(): Observable&lt;Array&lt;Batch&gt;&gt; {
-    /**
-     * returns the list of batches
-     */
     return this.http.get&lt;Batch[]&gt;(this.url, httpOptions);
   }
 }

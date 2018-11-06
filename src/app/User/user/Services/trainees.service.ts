@@ -5,12 +5,18 @@ import { Trainee } from '../types/trainee';
 import { catchError, map, tap } from 'rxjs/operators';
 import { userInfo } from 'os';
 
+/**
+ * sets the Http headers
+ */
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
 };
 
+/**
+ * @ignore
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -42,12 +48,26 @@ export class TraineesService {
       );
     return trainees;
   }
+  /**
+   * uses an http put method to update trainee
+   * @param t the trainee that is being used to update
+   */
   updateTrainee(t: Trainee): Observable<Trainee> {
     return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
   }
+
+  /**
+   * uses an http post method to create trainee
+   * @param t the trainee that is being used to create
+   */
   createTrainee(t: Trainee): Observable<Trainee> {
     return this.http.post<Trainee>(this.createUrl, t, httpOptions);
   }
+  
+  /**
+   * uses an http delete method to delete trainee
+   * @param t the trainee that is being used to delete
+   */
   deleteTrainee(id: Number): Observable<void> {
     return this.http.delete<void>(this.deleteUrl + id);
   }
