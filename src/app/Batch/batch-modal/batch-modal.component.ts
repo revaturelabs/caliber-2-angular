@@ -45,7 +45,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   batchFormName: '';
   trainingName: string = null;
   trainingType: string = null;
-  trainingTypes: string[];
+  trainingTypes: string[] = ['Revature', 'Corporate', 'University', 'Other'];
   skillType: string = null;
   skillTypes: string[];
   location: string = null;
@@ -68,7 +68,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
   constructor(
     private batchservice: BatchService,
     private errorService: ErrorService) {
-    this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
   // populates form modal if updating batch and not creating new
