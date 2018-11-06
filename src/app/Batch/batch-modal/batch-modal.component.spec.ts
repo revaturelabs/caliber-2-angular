@@ -4,13 +4,15 @@ import { BatchModalComponent } from './batch-modal.component';
 import { BatchService } from '../batch.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Batch } from '../type/batch';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 describe('BatchModalComponent', () => {
   let component: BatchModalComponent;
   let testService: BatchService;
+  let errorService: ErrorService;
 
   beforeEach(() => {
-    component = new BatchModalComponent(testService);
+    component = new BatchModalComponent(testService, errorService);
   });
 
   it('should create a component', () => {
