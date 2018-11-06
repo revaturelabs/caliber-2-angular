@@ -13,7 +13,6 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 })
 export class ViewTraineesComponent implements OnInit, OnChanges {
 
-
   @Input() batchId: number;
   @Output() closeTraineeModal =  new EventEmitter<void>();
   showActive = true;
@@ -29,6 +28,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   none = TraineeFlag.NONE;
   @ViewChild('updateTraineeModal') updateTrainee: UpdateTraineeComponent;
 
+  /**
+  * @ignore
+  */
   constructor(
     private ts: TraineesService,
     private http: HttpClient,
@@ -46,6 +48,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+  * Refreshes our trainee list when our @input batchId changes
+  */
   ngOnChanges() {
     if (this.batchId) {
       this.refreshList();
@@ -71,15 +76,24 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+  * Updates a flagnote for a specific trainee
+  */
   updateTraineeFlagNotes(t: Trainee, flagNote: HTMLInputElement) {
     t.flagNotes = flagNote.value;
     this.ts.updateTrainee(t).subscribe();
   }
 
+  /**
+  * Used for setting a trainee to pass to our delete-trainee component
+  */
   setDeleteTrainee(t: Trainee) {
     this.traineeToDelete = t;
   }
 
+  /**
+  * Used to repopulate the trainee list after an update, delete, swap
+  */
   refreshList() {
     console.log('refreshing');
     this.ts.getTrainees(this.batchId).subscribe(data => {
@@ -104,6 +118,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     this.traineeToUpdate = null;
   }
 
+  /**
+  * Calls our child modal to refresh a trainee's fields
+  */
   populateTrainee(trainee: Trainee) {
     if (trainee) {
       this.traineeToUpdate = trainee;
