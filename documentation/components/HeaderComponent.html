@@ -64,6 +64,13 @@
     <code>src/app/header/header.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>This is the header component.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -73,6 +80,11 @@
                 <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
     </p>
 
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
 
 <section>
     <h3>Metadata</h3>
@@ -117,101 +129,12 @@
     </table>
 </section>
 
-    <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
 
 
 
-        </tbody>
-    </table>
-</section>
 
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/header/header.component.ts:8</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
-
-
-
-
-
-    <section>
-    
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/header/header.component.ts:12</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 </div>
@@ -220,6 +143,11 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
+/**
+ * 
+ * This is the header component.
+ * @author Ted Sanjeevi, Bree Hall
+ */
 @Component({
   selector: &#x27;app-header&#x27;,
   templateUrl: &#x27;./header.component.html&#x27;,
@@ -227,8 +155,14 @@
 })
 export class HeaderComponent implements OnInit {
 
+  /**
+   * @ignore
+   */
   constructor() { }
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
   }
 
@@ -285,9 +219,15 @@ a {
 .sticky-header {
     padding: 10px;
     padding-right: 55px;
-    font-size: 15px;
+	/* padding-bottom:  */
+	font-size: 15px;
 	width: 1000px;
-} </code></pre>
+
+}
+
+#logo-id {
+	padding-bottom: 14px;
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -316,7 +256,7 @@ a {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-default">	<div class="container-fluid header-styles">		<ul class="nav navbar-nav">			<li><a id="img-link" routerLink="#/vp/home"> <img id="logo-id" class="img-responsive" src="assets/img/rev-logo.jpg" alt="revature" height="175" width="175">			</a></li>		</ul>		<ul class="nav navbar-nav navbar-right">			<li><a id="home-link" routerLink="#/vp/home">Home</a></li>			<li><a id="manage-link" routerLink="#/vp/manage">Manage Batch</a></li>			<li><a id="assess-link" routerLink="#/vp/assess">Assess Batch</a></li>			<li><a id="quality-link" routerLink="#/vp/audit">Quality Audit</a></li>			<li><a id="panel-link" routerLink="#/vp/panels">Panel</a></li>			<li><a id="reports-link" routerLink="#/vp/reports">Reports</a></li>					<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>				<ul class="dropdown-menu">					<li><a id="trainers-link" routerLink="#/vp/trainers">Trainers</a></li>					<li><a id="location-link" routerLink="#/vp/locations">Locations</a></li> 					<li><a id="category-link" routerLink="#/vp/category">Category</a></li>				</ul></li>			<!-- <li><a href="/revoke" target="_self">Logout</a></li> -->		</ul>	</div></nav></div>'
-    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
 </script>

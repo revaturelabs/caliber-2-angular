@@ -17,6 +17,12 @@ a {
 .sticky-header {
     padding: 10px;
     padding-right: 55px;
-    font-size: 15px;
+	/* padding-bottom:  */
+	font-size: 15px;
 	width: 1000px;
-} 
+
+}
+
+#logo-id {
+	padding-bottom: 14px;
+}
