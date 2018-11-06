@@ -64,6 +64,13 @@
     <code>src/app/footer/footer.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The footer...</p>
+
+    </p>
 
 
     <p class="comment">
@@ -73,6 +80,11 @@
                 <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
     </p>
 
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
 
 <section>
     <h3>Metadata</h3>
@@ -117,101 +129,12 @@
     </table>
 </section>
 
-    <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
 
 
 
-        </tbody>
-    </table>
-</section>
 
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/footer/footer.component.ts:8</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
-
-
-
-
-
-    <section>
-    
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/footer/footer.component.ts:12</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 </div>
@@ -220,6 +143,12 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
+/**
+ * 
+ * The footer...
+ * 
+ * @author Ted Sanjeevi, Bree Hall
+ */
 @Component({
   selector: &#x27;app-footer&#x27;,
   templateUrl: &#x27;./footer.component.html&#x27;,
@@ -227,8 +156,14 @@
 })
 export class FooterComponent implements OnInit {
 
+  /**
+   * @ignore
+   */
   constructor() { }
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
   }
 
@@ -286,18 +221,13 @@ export class FooterComponent implements OnInit {
 }
 
 /* Footer, set footer height to actual height of footer*/
+/*
 html, body {
 	height: 100%;
 }
-
+*/
 .img-responsive {
 	padding-bottom: 1em;
-}
-
-.wrapper {
-	min-height: 100%;
-	margin-bottom: -103px;
-	padding-bottom: 103px;
 }
 
 footer {
@@ -307,7 +237,6 @@ footer {
 	position: absolute;
 	width: 100%;
     left: 0;
-    bottom: 0;
 }
 
 .center {
@@ -353,7 +282,7 @@ footer a, footer a:hover {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><footer id="footer-id">  <div class="container">    <div class="row">      <div class="footer-margin">        <div class="col-sm-4">          <img class="img-responsive footer-img"            src="assets/img/rev-footer.png" alt="revature"            height="175" width="175" />        </div>        <div class="col-sm-3 col-sm-offset-5 contact-info">          <span class="glyphicon glyphicon-home"></span> <span>&nbsp;11730            Plaza America Drive<br>Reston, VA 20190</span>            <br>             <span class="glyphicon glyphicon-earphone"></span>             <a href="tel:(703) 570-8282">&nbsp;(703) 570-8282</a>            <br>             <span class="glyphicon glyphicon-envelope"></span>             <a href="mailto:info@revature.com">&nbsp;info@revature.com</a>            <br>            <span class="glyphicon glyphicon-link"></span>             <a id="revature-link" target="_blank"            href="http://revature.com">&nbsp;revature.com</a>            <br>             <span class="copyright"> <i class="far fa-copyright" aria-hidden="true"></i>2017 Revature </span>        </div>      </div>    </div>  </div></footer></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SelectYearComponent', 'selector': 'app-select-year'}];
+    var COMPONENTS = [{'name': 'AddTraineeComponent', 'selector': 'app-add-trainee'},{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FooterComponent'};
 </script>

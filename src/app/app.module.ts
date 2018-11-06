@@ -22,7 +22,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     BrowserModule,
     UserModule,
-    BatchModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,

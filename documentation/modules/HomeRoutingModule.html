@@ -34,7 +34,7 @@
 
 <ol class="breadcrumb">
   <li>Modules</li>
-  <li>AppRoutingModule</li>
+  <li>HomeRoutingModule</li>
 </ol>
 
 
@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app-routing.module.ts</code>
+            <code>src/app/home-module/home-routing.service.ts</code>
         </p>
 
 
@@ -68,27 +68,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import { HomeComponent } from &#x27;./home/home.component&#x27;;
-import { BatchViewComponent } from &#x27;./Team2/batch-view/batch-view.component&#x27;;
-import { ModuleWithProviders } from &#x27;@angular/compiler/src/core&#x27;;
-import { HomeModule } from &#x27;./home-module/home-module.module&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ModuleWithProviders, NgModule } from &#x27;@angular/core&#x27;;
+import { Routes, RouterModule} from &#x27;@angular/router&#x27;;
 
-
+import { HomeComponent } from &#x27;../home/home.component&#x27;;
 
 const routes: Routes &#x3D; [
-  { path: &#x27;&#x27;, redirectTo: &#x27;#/vp/home&#x27;, pathMatch: &#x27;full&#x27; },
-  { path: &#x27;#/vp/home&#x27;, loadChildren: &#x27;./home-module/home-module.module#HomeModule&#x27; },
-  { path: &#x27;#/vp/manage&#x27;, loadChildren: &#x27;./batch-module/batch.module#BatchRouteModule&#x27; }
+  { path: &#x27;&#x27;, component: HomeComponent }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
+@NgModule( {
   exports: [RouterModule],
-  providers: []
+  imports: [RouterModule.forChild(routes)],
 })
-export class AppRoutingModule {}
+export class HomeRoutingModule {}
 </code></pre>
     </div>
 </div>
@@ -124,7 +117,7 @@ export class AppRoutingModule {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HomeRoutingModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

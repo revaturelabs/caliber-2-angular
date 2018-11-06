@@ -95,7 +95,13 @@
                                 <a href="#getAllBatches">getAllBatches</a>
                             </li>
                             <li>
+                                <a href="#getAllLocations">getAllLocations</a>
+                            </li>
+                            <li>
                                 <a href="#getAllSkillTypes">getAllSkillTypes</a>
+                            </li>
+                            <li>
+                                <a href="#getAllTrainers">getAllTrainers</a>
                             </li>
                             <li>
                                 <a href="#getAllYears">getAllYears</a>
@@ -105,6 +111,9 @@
                             </li>
                             <li>
                                 <a href="#getBatchesByYear">getBatchesByYear</a>
+                            </li>
+                            <li>
+                                <a href="#getTraineeCount">getTraineeCount</a>
                             </li>
                             <li>
                                 <a href="#postBatch">postBatch</a>
@@ -135,7 +144,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/Team2/batch.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/Team2/batch.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -193,14 +202,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>deleteBatch(batch: <a href="../classes/Batch.html">Batch</a>)</code>
+<code>deleteBatch(batchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/Team2/batch.service.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/Team2/batch.service.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -220,9 +229,9 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>batch</td>
+                                                        <td>batchId</td>
                                                         <td>
-                                                                    <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -269,7 +278,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Team2/batch.service.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/Team2/batch.service.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -279,6 +288,44 @@
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="../classes/Batch.html" target="_self" >Observable&lt;Batch[]&gt;</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAllLocations"></a>
+                        <span class="name">
+                            <b>
+                            getAllLocations
+                            </b>
+                            <a href="#getAllLocations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAllLocations()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/Team2/batch.service.ts:69</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/BLocation.html" target="_self" >Observable&lt;BLocation[]&gt;</a></code>
 
                             </div>
                     </td>
@@ -307,7 +354,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/Team2/batch.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/Team2/batch.service.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -317,6 +364,44 @@
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code>Observable&lt;string[]&gt;</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAllTrainers"></a>
+                        <span class="name">
+                            <b>
+                            getAllTrainers
+                            </b>
+                            <a href="#getAllTrainers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAllTrainers()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/Team2/batch.service.ts:74</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/Trainer.html" target="_self" >Observable&lt;Trainer[]&gt;</a></code>
 
                             </div>
                     </td>
@@ -345,7 +430,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/Team2/batch.service.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/Team2/batch.service.ts:64</a></div>
                             </td>
                         </tr>
 
@@ -383,7 +468,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/Team2/batch.service.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/Team2/batch.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -452,7 +537,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/Team2/batch.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/Team2/batch.service.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -503,6 +588,75 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getTraineeCount"></a>
+                        <span class="name">
+                            <b>
+                            getTraineeCount
+                            </b>
+                            <a href="#getTraineeCount"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getTraineeCount(batches: number[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/Team2/batch.service.ts:79</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>batches</td>
+                                                        <td>
+                                                                    <code>number[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;[][]&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="postBatch"></a>
                         <span class="name">
                             <b>
@@ -521,7 +675,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Team2/batch.service.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/Team2/batch.service.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -590,7 +744,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Team2/batch.service.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/Team2/batch.service.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -671,12 +825,12 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;http://localhost:9090&#x27;</code>
+                            <i>Default value : </i><code>&#x27;http://localhost:9095&#x27;</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/Team2/batch.service.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/Team2/batch.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -692,8 +846,17 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { Batch } from &#x27;./type/batch&#x27;;
-import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { BLocation } from &#x27;./type/location&#x27;;
+import { Trainer } from &#x27;./type/trainer&#x27;;
+import { HttpClient, HttpHeaders, HttpParams } from &#x27;@angular/common/http&#x27;;
 
+
+/*
+
+The batch service handles all of the http client methods used to send and recieve data from the back-end.
+ @author Anthony Jin, Juan Trejo, Will Bennet
+
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -701,41 +864,67 @@ import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 export class BatchService {
 
 
-  url &#x3D; &#x27;http://localhost:9090&#x27;;
+  url &#x3D; &#x27;http://localhost:9095&#x27;;
 
   constructor(private http: HttpClient) { }
 
+  // get all the batches from batch service
   getAllBatches(): Observable&lt;Batch[]&gt; {
-    return this.http.get&lt;Batch[]&gt;(this.url + &#x27;/batch&#x27;, { headers: new HttpHeaders({&#x27;Content-Type&#x27;: &#x27;application/json&#x27;}), });
+    return this.http.get&lt;Batch[]&gt;(this.url + &#x27;/vp/batch/all&#x27;, { headers: new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; }), });
   }
 
+  // get specific batch from batch service
   getBatch(batch: Batch): Observable&lt;Batch&gt; {
-    return this.http.get&lt;Batch&gt;(this.url + &#x27;/batch/id&#x27; + batch.batchId);
+    return this.http.get&lt;Batch&gt;(this.url + &#x27;all/batch/&#x27; + batch.batchId);
   }
 
+  // get all batches by specified year from batch service
   getBatchesByYear(year: number): Observable&lt;Batch[]&gt; {
-    return this.http.get&lt;Batch[]&gt;(this.url + &#x27;/batch/year/&#x27; + year);
+    return this.http.get&lt;Batch[]&gt;(this.url + &#x27;/vp/batch/&#x27; + year);
   }
 
+  // creates new batch in batch service
   postBatch(batch: Batch): Observable&lt;Batch&gt; {
-    return this.http.post&lt;Batch&gt;(this.url + &#x27;/batch&#x27;, batch, {headers: new HttpHeaders({&#x27;Content-Type&#x27;: &#x27;application/json&#x27;})});
+    return this.http.post&lt;Batch&gt;(this.url + &#x27;/all/batch/create&#x27;, batch,
+    { headers: new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; }) });
   }
 
+  // updates specified batch in batch service
   putBatch(batch: Batch): Observable&lt;Batch&gt; {
-    return this.http.put&lt;Batch&gt;(this.url + &#x27;/batch/&#x27;, batch, {headers: new HttpHeaders({&#x27;Content-Type&#x27;: &#x27;application/json&#x27;})});
+    return this.http.put&lt;Batch&gt;(this.url + &#x27;/all/batch/update&#x27;, batch,
+     { headers: new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; }) });
   }
 
-  deleteBatch(batch: Batch): Observable&lt;Batch&gt; {
-    return this.http.delete&lt;Batch&gt;(this.url + &#x27;/batch/&#x27; + batch.batchId);
+  // deletes specified batch from batch service
+  deleteBatch(batchId: number): Observable&lt;Batch&gt; {
+    return this.http.delete&lt;any&gt;(this.url + &#x27;/all/batch/delete/&#x27; + batchId);
   }
 
+  // gets all the skill types from skill type service
   getAllSkillTypes(): Observable&lt;string[]&gt; {
-    return this.http.get&lt;string[]&gt;(this.url + &#x27;/types/skill/all&#x27;);
+    return this.http.get&lt;string[]&gt;(&#x27;http://localhost:8080/types/skill/all&#x27;);
   }
 
+  // get all starting years from batch service
   getAllYears(): Observable&lt;number[]&gt; {
-    return this.http.get&lt;number[]&gt;(this.url + &#x27;/batch/valid_years&#x27;);
+    return this.http.get&lt;number[]&gt;(this.url + &#x27;/valid_years&#x27;);
   }
+
+  // get all locations from location service
+  getAllLocations(): Observable&lt;BLocation[]&gt; {
+    return this.http.get&lt;BLocation[]&gt;(&#x27;http://localhost:8040/all/location/all&#x27;);
+  }
+
+  // get all trainers from user service
+  getAllTrainers(): Observable&lt;Trainer[]&gt; {
+    return this.http.get&lt;Trainer[]&gt;(&#x27;http://localhost:9085/all/trainer/all&#x27;);
+  }
+
+  // get all trainee counts for batches in a year
+  getTraineeCount(batches: number[]): Observable&lt;number[][]&gt; {
+    return this.http.post&lt;number[][]&gt;(&#x27;http://localhost:9085/all/count/&#x27;, batches);
+  }
+
 }
 </code></pre>
     </div>

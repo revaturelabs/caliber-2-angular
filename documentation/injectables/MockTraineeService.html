@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content class">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -36,13 +36,9 @@
 
 
 
-
-
-
-
 <ol class="breadcrumb">
-  <li>Classes</li>
-  <li>Trainer</li>
+  <li>Injectables</li>
+  <li>MockTraineeService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,10 +56,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/Team2/type/trainer.ts</code>
+            <code>src/app/User/user/Tests/mock-trainee.service.ts</code>
         </p>
-
-
 
 
 
@@ -80,27 +74,32 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#email">email</a>
+                                <a href="#trainee">trainee</a>
                             </li>
                             <li>
-                                <a href="#name">name</a>
-                            </li>
-                            <li>
-                                <a href="#password">password</a>
-                            </li>
-                            <li>
-                                <a href="#tier">tier</a>
-                            </li>
-                            <li>
-                                <a href="#title">title</a>
-                            </li>
-                            <li>
-                                <a href="#trainerId">trainerId</a>
+                                <a href="#traineeObservable">traineeObservable</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#postForm">postForm</a>
+                            </li>
+                            <li>
+                                <a href="#pushObservable">pushObservable</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -116,15 +115,159 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/Team2/type/trainer.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/User/user/Tests/mock-trainee.service.ts:13</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postForm"></a>
+                        <span class="name">
+                            <b>
+                            postForm
+                            </b>
+                            <a href="#postForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>postForm(t: Trainee)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/User/user/Tests/mock-trainee.service.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>t</td>
+                                                        <td>
+                                                                    <code>Trainee</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;Trainee&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pushObservable"></a>
+                        <span class="name">
+                            <b>
+                            pushObservable
+                            </b>
+                            <a href="#pushObservable"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>pushObservable()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/User/user/Tests/mock-trainee.service.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -138,30 +281,30 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="email"></a>
+                        <a name="trainee"></a>
                         <span class="name">
                             <b>
-                            email
+                            trainee
                             </b>
-                            <a href="#email"><span class="icon ion-ios-link"></span></a>
+                            <a href="#trainee"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>email:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <code>trainee:     <code>Trainee</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>    <code>Trainee</code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/Team2/type/trainer.ts:5</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/User/user/Tests/mock-trainee.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -172,166 +315,29 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="name"></a>
+                        <a name="traineeObservable"></a>
                         <span class="name">
                             <b>
-                            name
+                            traineeObservable
                             </b>
-                            <a href="#name"><span class="icon ion-ios-link"></span></a>
+                            <a href="#traineeObservable"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>name:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <code>traineeObservable:     <code></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                            <i>Default value : </i><code>new Subject&lt;Trainee&gt;()</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="3" class="link-to-prism">src/app/Team2/type/trainer.ts:3</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="password"></a>
-                        <span class="name">
-                            <b>
-                            password
-                            </b>
-                            <a href="#password"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>password:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/Team2/type/trainer.ts:7</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="tier"></a>
-                        <span class="name">
-                            <b>
-                            tier
-                            </b>
-                            <a href="#tier"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>tier:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/Team2/type/trainer.ts:6</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="title"></a>
-                        <span class="name">
-                            <b>
-                            title
-                            </b>
-                            <a href="#title"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>title:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/app/Team2/type/trainer.ts:4</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="trainerId"></a>
-                        <span class="name">
-                            <b>
-                            trainerId
-                            </b>
-                            <a href="#trainerId"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>trainerId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="2" class="link-to-prism">src/app/Team2/type/trainer.ts:2</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/User/user/Tests/mock-trainee.service.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -340,30 +346,46 @@
         </table>
 </section>
 
-
-
-
-
-
-
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export class Trainer {
-    trainerId: number;
-    name: string;
-    title: string;
-    email: string;
-    tier: string;
-    password: string;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { TraineesService } from &#x27;../Services/trainees.service&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { Trainee } from &#x27;../types/trainee&#x27;;
 
-    // constructor for trainer object
-    constructor() {}
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class MockTraineeService extends TraineesService {
+
+  traineeObservable &#x3D; new Subject&lt;Trainee&gt;();
+  trainee: Trainee;
+
+  constructor(http: HttpClient) {
+    super(http);
+  }
+
+  postForm(t: Trainee): Observable&lt;Trainee&gt; {
+    this.trainee &#x3D; t;
+    return this.traineeObservable.asObservable();
+  }
+
+  // simulates the server responding
+  pushObservable() {
+    this.traineeObservable.next(this.trainee);
+  }
 }
 </code></pre>
     </div>
+
 </div>
+
+
+
+
 
 
 
@@ -387,8 +409,8 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'Trainer.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'MockTraineeService.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

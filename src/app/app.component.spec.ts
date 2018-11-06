@@ -6,7 +6,6 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { ManageComponent } from './manage/manage.component';
 import { APP_BASE_HREF } from '@angular/common';
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +16,6 @@ describe('AppComponent', () => {
         HeaderComponent,
         FooterComponent,
         HomeComponent,
-        ManageComponent
       ],
     imports: [
       AppRoutingModule
