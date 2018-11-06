@@ -37,7 +37,7 @@ beforeEach(() => {
     expect(service).toBeTruthy();
   });
 
-  it('should send an http request and receive the appropriate response data',
+  it('should send an http GET request and receive the appropriate response data',
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
         let t: Trainee[];
@@ -71,7 +71,7 @@ beforeEach(() => {
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
         let t: Trainee;
-        vats.createTrainee(t).subscribe(data => {
+        vats.updateTrainee(t).subscribe(data => {
           t = data;
         });
         const req = httpMock.expectOne(updateUrl);
@@ -85,7 +85,7 @@ beforeEach(() => {
   it('should send an http DELETE request and receive the appropriate response data',
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
-        vats.createTrainee(t1).subscribe();
+        vats.deleteTrainee(t1.traineeId).subscribe();
         const req = httpMock.expectOne(deleteUrl + t1.traineeId);
         expect(req.request.method).toEqual('DELETE');
       }
