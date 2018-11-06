@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewTraineesComponent } from './view-trainees.component';
+import { FormsModule } from '@angular/forms';
 import { browser, by, element } from 'protractor';
 import { UserModule } from '../../user.module';
 
@@ -11,7 +12,7 @@ describe('ViewtraineesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewTraineesComponent]
+      imports: [ UserModule ]
     })
     .compileComponents();
   }));
