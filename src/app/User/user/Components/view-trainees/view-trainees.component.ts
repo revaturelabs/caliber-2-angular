@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 import { TraineeFlag } from '../../Types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpClient } from '@angular/common/http';
 import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
+import { AddTraineeComponent } from '../add-trainee/add-trainee.component';
 
 @Component({
   selector: 'app-view-trainees',
@@ -15,8 +16,8 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
 
   @Input() batchId: number;
-  private status: string;
-  togglePipe: TraineeTogglePipe;
+  @Output() closeTraineeModal =  new EventEmitter<void>();
+  @ViewChild('addTraineeModal') addTraineeModal: AddTraineeComponent;
   showActive = true;
   trainees: Trainee[];
   showCommentForm: boolean[];
@@ -41,7 +42,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     this.trainees = new Array<Trainee>();
     this.showCommentForm = new Array<boolean>();
     this.showNotes = new Array<boolean>();
-    this.refreshList();
+    if (this.batchId) {
+      this.refreshList();
+    }
   }
 
   ngOnChanges() {
@@ -79,11 +82,15 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   }
 
   refreshList() {
+    console.log('refreshing');
     this.ts.getTrainees(this.batchId).subscribe(data => {
-      this.trainees = data;
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showCommentForm = new Array<boolean>(this.trainees.length);
-      this.showNotes = new Array<boolean>(this.trainees.length);
+      if (data) {
+        this.trainees = data;
+        this.showCommentForm = new Array<boolean>(this.trainees.length);
+        this.showCommentForm = new Array<boolean>(this.trainees.length);
+        this.showNotes = new Array<boolean>(this.trainees.length);
+        console.log('refreshed');
+      }
     });
     this.traineeToUpdate = null;
   }
@@ -97,5 +104,20 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
   getSwitchableBatches(trainee: Trainee) {
     this.switchTrainee = trainee;
+  }
+
+  refreshView() {
+    this.batchId = 0;
+    this.trainees = null;
+    this.switchTrainee = null;
+    this.showActive = true;
+    this.showCommentForm = null;
+    this.showNotes = null;
+    this.traineeToUpdate = null;
+    this.traineeToDelete = null;
+  }
+
+  close() {
+    this.closeTraineeModal.emit();
   }
 }

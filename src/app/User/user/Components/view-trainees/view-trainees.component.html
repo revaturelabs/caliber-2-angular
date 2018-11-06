@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg modal-widest" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="viewTraineeModal">View/Add
@@ -127,7 +127,7 @@
 <!--********************************************* Delete Trainee Modal **********************************-->
 <app-delete-trainee (refreshList)="refreshList()" [trainee]="traineeToDelete"></app-delete-trainee>
 <!--********************************************* Add Trainee Modal ************************************-->
-<app-add-trainee [batchId]="batchId" (addTraineeEvent)="refreshList()"></app-add-trainee>
+<app-add-trainee #addTraineeModal [batchId]="batchId" (addTraineeEvent)="refreshList()"></app-add-trainee>
 <!--********************************************* Switch Batch Modal ************************************-->
 <app-switch-batch [trainee]="switchTrainee" (switchBatchEvent)="refreshList()"></app-switch-batch>
 <!--********************************************* Update Trainee Modal ************************************-->

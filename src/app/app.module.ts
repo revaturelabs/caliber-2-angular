@@ -10,6 +10,7 @@ import { ManageComponent } from './manage/manage.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { ErrorComponent } from './error-handling/error/error.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AppComponent } from './app.component';
     ManageComponent,
     HeaderComponent,
     FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
