@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Trainee } from '../types/trainee';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Batch } from 'src/app/Team2/type/batch';
+import { Batch } from 'src/app/Batch/type/batch';
 
 /**
  * sets headers for recieving JSON objects

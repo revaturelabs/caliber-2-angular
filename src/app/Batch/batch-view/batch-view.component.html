@@ -5,7 +5,7 @@
         <ul class="nav nav-tabs">
           <!-- Filter batches by year -->
           <li role="button" class="dropdown"><a id="" class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span
-              class="caret"></span></a>
+                class="caret"></span></a>
             <ul class="dropdown-menu">
               <!-- years for filtering data -->
               <li *ngFor="let menuItem of defaultYears"><a role="button" (click)="pickYear(menuItem)">{{menuItem}}</a></li>
@@ -115,14 +115,14 @@
         <div class="modal-body">
 
           <p *ngIf="selectedBatch != null">
-            Are you sure you want to delete batch {{selectedBatch.trainingName}}? 
+            Are you sure you want to delete batch {{selectedBatch.trainingName}}?
           </p>
         </div>
         <div class="modal-footer">
-            <input type="submit" value="Delete" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">
+          <input type="submit" value="Delete" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
   </div>
-<!-- <app-view-trainees></app-view-trainees> -->
+  <!-- <app-view-trainees></app-view-trainees> -->
