@@ -125,7 +125,8 @@ export class BatchViewComponent implements OnInit {
   }
 
   traineeClose() {
-    this.refreshPage();
     this.viewTraineeModal.refreshView();
+    this.selectedBatchId = 0;
+    this.refreshPage();
   }
 }

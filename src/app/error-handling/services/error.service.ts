@@ -12,9 +12,10 @@ export class ErrorService {
   constructor() { }
 
   setError(serviceName: string, errorMessage: string) {
-    this.error = new ServiceError();
-    this.error.serviceName = serviceName;
-    this.error.errorMessage = errorMessage;
+    this.error = {
+      serviceName: serviceName,
+      errorMessage: errorMessage
+    };
     console.log(this.error);
   }
 

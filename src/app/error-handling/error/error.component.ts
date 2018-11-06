@@ -28,8 +28,7 @@ export class ErrorComponent implements OnInit, OnChanges {
   close() {
     document.getElementById('errorModal').className = 'modal hidden';
     console.log('hiding');
-    this.errorService.resetError();
-    this.currentError = null;
+    // this.errorService.resetError();
   }
 
 }

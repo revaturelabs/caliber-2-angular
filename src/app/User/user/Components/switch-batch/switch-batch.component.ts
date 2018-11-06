@@ -5,6 +5,8 @@ import { ViewBatchesService } from '../../Services/view-batches.service';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 import { EventEmitter } from '@angular/core';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-switch-batch',
@@ -21,7 +23,10 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
 
   @Input() trainee: Trainee;
 
-  constructor(private vbs: ViewBatchesService, private ts: TraineesService) { }
+  constructor(
+    private vbs: ViewBatchesService,
+    private ts: TraineesService,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
     this.vbs.getBatches().subscribe(data => {
@@ -46,6 +51,16 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
           const evt = new MouseEvent('click', { bubbles: true });
           elem.dispatchEvent(evt);
           this.switchBatchEvent.emit(true);
+        }
+      },
+      issue => {
+        if (issue instanceof HttpErrorResponse) {
+          const err = issue as HttpErrorResponse;
+          this.errorService.setError('TraineesService',
+          `Issue updating trainee ${this.trainee.name}. Please contact system administrator: \n
+          Status Code: ${err.status} \n
+          Status Text: ${err.statusText} \n
+          Error: ${err.message}`);
         }
       });
     }

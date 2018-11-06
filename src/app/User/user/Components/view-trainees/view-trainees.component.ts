@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
-import { TraineeTogglePipe } from '../../Pipes/trainee-toggle.pipe';
 import { TraineeFlag } from '../../Types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
-import { AddTraineeComponent } from '../add-trainee/add-trainee.component';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
   selector: 'app-view-trainees',
@@ -17,7 +16,6 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
   @Input() batchId: number;
   @Output() closeTraineeModal =  new EventEmitter<void>();
-  @ViewChild('addTraineeModal') addTraineeModal: AddTraineeComponent;
   showActive = true;
   trainees: Trainee[];
   showCommentForm: boolean[];
@@ -33,7 +31,8 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
 
   constructor(
     private ts: TraineesService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private errorService: ErrorService) { }
 
   /**
    * Uses lifecycle hook ngOnInit to intialize mock trainees for testing
@@ -91,6 +90,16 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
         this.showNotes = new Array<boolean>(this.trainees.length);
         console.log('refreshed');
       }
+    },
+    issue => {
+      if (issue instanceof HttpErrorResponse) {
+        const err = issue as HttpErrorResponse;
+        this.errorService.setError('TraineesService',
+        `Issue finding trainees. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}`);
+      }
     });
     this.traineeToUpdate = null;
   }
@@ -107,14 +116,13 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   }
 
   refreshView() {
-    this.batchId = 0;
-    this.trainees = null;
-    this.switchTrainee = null;
     this.showActive = true;
-    this.showCommentForm = null;
-    this.showNotes = null;
-    this.traineeToUpdate = null;
-    this.traineeToDelete = null;
+    this.switchTrainee = new Trainee();
+    this.traineeToUpdate = new Trainee();
+    this.traineeToDelete = new Trainee();
+    this.trainees = new Array<Trainee>();
+    this.showCommentForm = new Array<boolean>();
+    this.showNotes = new Array<boolean>();
   }
 
   close() {

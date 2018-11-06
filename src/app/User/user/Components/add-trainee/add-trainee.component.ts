@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-trainee',
@@ -27,7 +29,7 @@ export class AddTraineeComponent implements OnInit {
   profileUrl: string;
   trainingStatus: string;
 
-  constructor(private ts: TraineesService) {}
+  constructor(private ts: TraineesService, private errorService: ErrorService) {}
 
   ngOnInit() {
   }
@@ -68,6 +70,16 @@ export class AddTraineeComponent implements OnInit {
         this.projectCompletion = null;
         this.profileUrl = null;
         this.trainingStatus = null;
+      }
+    },
+    issue => {
+      if (issue instanceof HttpErrorResponse) {
+        const err = issue as HttpErrorResponse;
+        this.errorService.setError('TraineesService',
+        `Issue creating trainee ${trainee.name}. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}`);
       }
     });
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from '@angular/core';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
   selector: 'app-update-trainee',
@@ -17,9 +19,6 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
 
   private traineeTemp = new Trainee();
   submitted: Boolean = false;
-  /** need to implement batchId sharing between components,
-   * specifically between view-all-trainees and this component */
-  batchId = 0;
   fullName: string;
   email: string;
   skypeId: string;
@@ -33,35 +32,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   profileUrl: string;
   trainingStatus: string;
 
-  // @HostListener('document:body.click')
-  // onHidden(): void {
-  //   console.log('handling hidden event');
-  //   close();
-  // }
-
-  // @HostListener('click', [`$event`])
-  // onClick(event: MouseEvent): void {
-  //   event.srcElement
-  // }
-
-  // populateTrainee(trainee: Trainee) {
-  //   console.log('in popul trainee');
-  //   this.trainee = trainee;
-  //   this.batchId = trainee.batchId;
-  //   this.college = trainee.college;
-  //   this.degree = trainee.degree;
-  //   this.email = trainee.email;
-  //   this.fullName = trainee.name;
-  //   this.major = trainee.major;
-  //   this.skypeId = trainee.skypeId;
-  //   this.phoneNumber = trainee.phoneNumber;
-  //   this.recruiterName = trainee.recruiterName;
-  //   this.techScreenerName = trainee.techScreenerName;
-  //   this.profileUrl = trainee.profileUrl;
-  //   this.trainingStatus = trainee.trainingStatus;
-  // }
-
-  constructor(private ts: TraineesService) { }
+  constructor(private ts: TraineesService, private errorService: ErrorService) { }
 
    ngOnChanges() {
      if (this.trainee) {
@@ -80,12 +51,6 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     this.traineeTemp = this.trainee;
     this.refreshList.emit(true);
   }
-
-  // refreshPage(trainee: Trainee) {
-  //   this.trainee = trainee;
-  //   this.refreshTrainee();
-  //   console.log(trainee);
-  // }
 
   refreshTrainee() {
     if (this.trainee) {
@@ -127,6 +92,16 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
         const evt = new MouseEvent('click', { bubbles: true });
         elem.dispatchEvent(evt);
         this.refreshList.emit(true);
+      }
+    },
+    issue => {
+      if (issue instanceof HttpErrorResponse) {
+        const err = issue as HttpErrorResponse;
+        this.errorService.setError('TraineesService',
+        `Issue updating trainee ${this.trainee.name}. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}`);
       }
     });
   }
