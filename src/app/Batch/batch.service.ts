@@ -34,64 +34,75 @@ export class BatchService {
 
 
   url = 'http://localhost:9095';
+  batchAllURL = '/vp/batch/all';
+  allBatchURL = 'all/batch/';
+  batchesYearURL = '/vp/batch/';
+  batchCreateURL = '/all/batch/create';
+  batchUpdateURL = '/all/batch/update';
+  batchDeleteURL = '/all/batch/delete/';
+  skillTypesAllURL = 'http://localhost:8080/types/skill/all';
+  locationsAllURL = 'http://localhost:8040/all/location/all';
+  trainersAllURL = 'http://localhost:9085/all/trainer/all';
+  batchAllYearsURL = '/valid_years';
+  traineeCountURL = 'http://localhost:9085/all/count/';
 
   constructor(private http: HttpClient) { }
 
   // get all the batches from batch service
   getAllBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/vp/batch/all', { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), });
+    return this.http.get<Batch[]>(this.url + this.batchAllURL, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), });
   }
 
   // get specific batch from batch service
   getBatch(batch: Batch): Observable<Batch> {
-    return this.http.get<Batch>(this.url + 'all/batch/' + batch.batchId);
+    return this.http.get<Batch>(this.url + this.allBatchURL + batch.batchId);
   }
 
   // get all batches by specified year from batch service
   getBatchesByYear(year: number): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url + '/vp/batch/' + year);
+    return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
 
   // creates new batch in batch service
   postBatch(batch: Batch): Observable<Batch> {
-    return this.http.post<Batch>(this.url + '/all/batch/create', batch,
+    return this.http.post<Batch>(this.url + this.batchCreateURL, batch,
     { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
 
   // updates specified batch in batch service
   putBatch(batch: Batch): Observable<Batch> {
-    return this.http.put<Batch>(this.url + '/all/batch/update', batch,
+    return this.http.put<Batch>(this.url + this.batchUpdateURL, batch,
      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
 
   // deletes specified batch from batch service
   deleteBatch(batchId: number): Observable<Batch> {
-    return this.http.delete<any>(this.url + '/all/batch/delete/' + batchId);
+    return this.http.delete<any>(this.url + this.batchDeleteURL + batchId);
   }
 
   // gets all the skill types from skill type service
   getAllSkillTypes(): Observable<string[]> {
-    return this.http.get<string[]>('http://localhost:8080/types/skill/all');
+    return this.http.get<string[]>(this.skillTypesAllURL);
   }
 
   // get all starting years from batch service
   getAllYears(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + '/valid_years');
+    return this.http.get<number[]>(this.url + this.batchAllYearsURL);
   }
 
   // get all locations from location service
   getAllLocations(): Observable<BLocation[]> {
-    return this.http.get<BLocation[]>('http://localhost:8040/all/location/all');
+    return this.http.get<BLocation[]>(this.locationsAllURL);
   }
 
   // get all trainers from user service
   getAllTrainers(): Observable<Trainer[]> {
-    return this.http.get<Trainer[]>('http://localhost:9085/all/trainer/all');
+    return this.http.get<Trainer[]>(this.trainersAllURL);
   }
 
   // get all trainee counts for batches in a year
   getTraineeCount(batches: number[]): Observable<number[][]> {
-    return this.http.post<number[][]>('http://localhost:9085/all/count/', batches);
+    return this.http.post<number[][]>(this.traineeCountURL, batches);
   }
 
   /**

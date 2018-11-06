@@ -12,7 +12,7 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
  The batch-view component is the parent component for the manage batch feature.
  This component allows the user to view all of the batches by the selected year.
  This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
- @author Juan Trejo, Anthony Jin
+ @author Anthony Jin, Juan Trejo
 
  */
 

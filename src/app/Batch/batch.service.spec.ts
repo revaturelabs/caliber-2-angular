@@ -6,6 +6,12 @@ import { Batch } from './type/batch';
 import { BLocation } from './type/location';
 import { Trainer } from './type/trainer';
 
+/*
+These file tests all of the http method calls.
+@author Anthony Jin, Juan Trejo
+
+*/
+
 describe('BatchService', () => {
   let batchService: BatchService;
   beforeEach(() => TestBed.configureTestingModule({
