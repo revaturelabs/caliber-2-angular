@@ -1,34 +1,46 @@
 import { Component, OnInit, HostListener, OnChanges, Input } from '@angular/core';
 import { ServiceError } from '../types/service-error';
-import { ErrorService } from '../services/error.service';
 
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css']
 })
+/**
+ * Error Modal for handling all http errors within the application on the front end
+ */
 export class ErrorComponent implements OnInit, OnChanges {
 
-  constructor(private errorService: ErrorService) { }
+  /**
+   * @ignore
+   */
+  constructor() { }
 
+  /**
+   * The current error being displayed by the modal
+   */
   @Input() currentError: ServiceError;
-  // @Input() currentService: string;
-  // @Input() currentMessage: string;
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
   }
 
+  /**
+   * Shows the modal if the current error exists
+   */
   ngOnChanges() {
     if (this.currentError) {
       document.getElementById('errorModal').className = 'modal show';
-      console.log('showing ', this.currentError);
     }
   }
 
+  /**
+   * Closes the modal on a close click
+   */
   close() {
     document.getElementById('errorModal').className = 'modal hidden';
-    console.log('hiding');
-    // this.errorService.resetError();
   }
 
 }
