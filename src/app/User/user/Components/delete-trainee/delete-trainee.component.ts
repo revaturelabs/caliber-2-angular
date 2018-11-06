@@ -29,7 +29,6 @@ export class DeleteTraineeComponent implements OnInit {
   ngOnInit() {
     this.trainee = new Trainee();
     this.trainee.name = '';
-    console.log(this.trainee);
   }
 
 }

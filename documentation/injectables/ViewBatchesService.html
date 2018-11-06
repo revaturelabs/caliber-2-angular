@@ -100,7 +100,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -171,7 +171,7 @@ constructor for the service</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/User/user/Services/view-batches.service.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -182,7 +182,7 @@ constructor for the service</p>
 </div>
 
                             <div class="io-description">
-                                <b>Returns : </b>    <code>Observable&lt;Array&lt;Trainee&gt;&gt;</code>
+                                <b>Returns : </b>    <code><a href="../classes/Batch.html" target="_self" >Observable&lt;Array&lt;Batch&gt;&gt;</a></code>
 
                             </div>
                     </td>
@@ -200,6 +200,7 @@ constructor for the service</p>
 import { Observable } from &#x27;rxjs&#x27;;
 import { Trainee } from &#x27;../types/trainee&#x27;;
 import { HttpHeaders, HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Batch } from &#x27;src/app/Team2/type/batch&#x27;;
 
 /**
  * sets headers for recieving JSON objects
@@ -227,15 +228,15 @@ export class ViewBatchesService {
   /**
    * @ignore
    */
-  url &#x3D; &#x27;http://localhost:9085/vp/batch/all/&#x27;;
+  url &#x3D; &#x27;http://localhost:9095/vp/batch/all/&#x27;;
   /**
    * gets batches from the batch controller usng a rest call
    */
-  getBatches(): Observable&lt;Array&lt;Trainee&gt;&gt; {
+  getBatches(): Observable&lt;Array&lt;Batch&gt;&gt; {
     /**
      * returns the list of batches
      */
-    return this.http.get&lt;Trainee[]&gt;(this.url, httpOptions);
+    return this.http.get&lt;Batch[]&gt;(this.url, httpOptions);
   }
 }
 </code></pre>

@@ -13,7 +13,6 @@ import { UpdateTraineeComponent } from '../update-trainee/update-trainee.compone
 })
 export class ViewTraineesComponent implements OnInit, OnChanges {
 
-
   @Input() batchId: number;
   private status: string;
   togglePipe: TraineeTogglePipe;
@@ -30,6 +29,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   none = TraineeFlag.NONE;
   @ViewChild('updateTraineeModal') updateTrainee: UpdateTraineeComponent;
 
+  /**
+  * @ignore
+  */
   constructor(
     private ts: TraineesService,
     private http: HttpClient) { }
@@ -44,6 +46,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     this.refreshList();
   }
 
+  /**
+  * Refreshes our trainee list when our @input batchId changes
+  */
   ngOnChanges() {
     if (this.batchId) {
       this.refreshList();
@@ -61,42 +66,49 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   // currently not working, look into this whoever does this user story
   toggleColor(t: Trainee) {
     if (t.flagStatus === this.green) {
-      console.log('changing to none!');
       t.flagStatus = this.none;
     } else if (t.flagStatus === this.red) {
-      console.log('changing to green!');
       t.flagStatus = this.green;
     } else {
-      console.log('changing to red!');
       t.flagStatus = this.red;
     }
   }
 
+  /**
+  * Updates a flagnote for a specific trainee
+  */
   updateTraineeFlagNotes(t: Trainee, flagNote: HTMLInputElement) {
     t.flagNotes = flagNote.value;
     this.ts.updateTrainee(t).subscribe();
   }
 
+  /**
+  * Used for setting a trainee to pass to our delete-trainee component
+  */
   setDeleteTrainee(t: Trainee) {
     this.traineeToDelete = t;
   }
 
+  /**
+  * Used to repopulate the trainee list after an update, delete, swap
+  */
   refreshList() {
     this.ts.getTrainees(this.batchId).subscribe(data => {
       this.trainees = data;
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showNotes = new Array<boolean>(this.trainees.length);
-      console.log('refreshed');
     });
     this.traineeToUpdate = null;
   }
 
+  /**
+  * Calls our child modal to refresh a trainee's fields
+  */
   populateTrainee(trainee: Trainee) {
     if (trainee) {
       this.traineeToUpdate = trainee;
       this.updateTrainee.refreshTrainee();
-      console.log(this.traineeToUpdate);
     }
   }
 

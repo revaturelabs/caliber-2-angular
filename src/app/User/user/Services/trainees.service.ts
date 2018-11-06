@@ -43,7 +43,6 @@ export class TraineesService {
     return trainees;
   }
   updateTrainee(t: Trainee): Observable<Trainee> {
-    console.log(t);
     return this.http.put<Trainee>(this.updateUrl, t, httpOptions);
   }
   createTrainee(t: Trainee): Observable<Trainee> {
