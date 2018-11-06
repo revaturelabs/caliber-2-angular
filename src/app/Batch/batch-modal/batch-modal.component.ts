@@ -46,7 +46,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
   trainingTypes: string[];
   skillType: string = null;
   skillTypes: string[];
-  location: number = null;
+  location: string = null;
+  locationId: number;
   locationOptions: BLocation[];
   trainer: string = null;
   // needs to be a user type
@@ -131,7 +132,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   // creates a brand new batch with form inputs
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
-      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
 
     // account for time zone differences
@@ -144,7 +145,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
-      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
         console.log('created');
         this.someEvent.next('created');
@@ -164,7 +165,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // make updated batch
     const batch = new Batch(this.trainingName, this.trainingType,
-      this.skillType, this.trainer, this.coTrainer, this.location, this.startDate,
+      this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold);
     batch.batchId = this.createOrUpdate.batchId;
 
@@ -248,7 +249,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   }
 
   setLocation(option: number) {
-    this.location = option;
+    this.locationId = option;
   }
 
   setTrainer(option: string) {
