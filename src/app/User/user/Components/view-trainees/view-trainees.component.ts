@@ -11,6 +11,7 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
   templateUrl: './view-trainees.component.html',
   styleUrls: ['./view-trainees.component.css']
 })
+
 export class ViewTraineesComponent implements OnInit, OnChanges {
 
   @Input() batchId: number;
@@ -128,6 +129,9 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * sets the trainee that is to be switched
+   */
   getSwitchableBatches(trainee: Trainee) {
     this.switchTrainee = trainee;
   }

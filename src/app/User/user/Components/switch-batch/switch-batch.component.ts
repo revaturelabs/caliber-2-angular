@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { BatchService } from 'src/app/Batch/batch.service';
-import { ViewBatchesService } from '../../Services/view-batches.service';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 import { EventEmitter } from '@angular/core';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-switch-batch',
@@ -19,15 +19,30 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
   allBatches: Array<Batch> = [];
   switchBatch = '';
 
+  /**
+   * expects to output an 'EventEmitter<boolean>'
+   */
   @Output() switchBatchEvent = new EventEmitter<boolean>();
 
+  /**
+   * expects a 'trainee' as an input
+   */
   @Input() trainee: Trainee;
 
+  /**
+   * @param bs The batch service from the batch folder, used to communicate with the batch microservice
+   * @param ts The trainee service from the User folder, used to communicate with the user microservice
+   * @param errorService The error service from the error handling folder,
+   *   used to communicate with the error modal to display errors on failed http requests
+   */
   constructor(
     private bs: BatchService,
     private ts: TraineesService,
     private errorService: ErrorService) { }
 
+  /**
+   * grabs all of the batches and puts them in the 'allBatches' field when initialized
+   */
   ngOnInit() {
     this.bs.getBatches().subscribe(data => {
       this.allBatches = data;
@@ -44,6 +59,9 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * filters out current batch and returns all other batches
+   */
   ngOnChanges() {
     if (this.batches && this.trainee) {
       this.batches = this.allBatches.filter(batch => {
@@ -52,6 +70,10 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Will swap the trainee's current batch with the new, desired batch
+   * @param switchBatch the batch that is to be switched to
+   */
   switchBatchForTrainee(switchBatch) {
     if (switchBatch) {
       this.trainee.batchId = Number(switchBatch);

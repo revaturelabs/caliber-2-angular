@@ -134,9 +134,6 @@
                                     <span class="modifier">Private</span>
                                 <a href="#deleteTrainee">deleteTrainee</a>
                             </li>
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -177,54 +174,6 @@
     </table>
 </section>
 
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(ts: <a href="../injectables/TraineesService.html">TraineesService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:25</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>ts</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/TraineesService.html" target="_self" >TraineesService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
     <section>
     <h3 id="inputs">Inputs</h3>
@@ -236,6 +185,8 @@
                         <code>trainee</code>
                     </td>
                     <td class="col-md-10">
+                        <div><p>expects a &#39;trainee&#39; as an input</p>
+</div>
                             <p>
                             <em>Type :</em>    <code>Trainee</code>
 
@@ -260,13 +211,15 @@
                         <code>refreshList</code>
                     </td>
                     <td class="col-md-10">
+                        <div><p>expects to output an &#39;EventEmitter<boolean>&#39;</p>
+</div>
                         <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:22</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -303,13 +256,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:28</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>calls the &#39;deleteTrainee&#39; function from &#39;TraineeService&#39; to delete the trainee</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -319,6 +274,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -333,6 +289,10 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>the trainee that is to be deleted</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -346,44 +306,6 @@
                                 <div class="io-description">
                                     
                                 </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:29</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -406,27 +328,39 @@ import { Trainee } from &#x27;../../Types/trainee&#x27;;
 })
 export class DeleteTraineeComponent implements OnInit {
 
-  @Input()
   /**
-   * trainee refers to the specific trainee object that is to be deleted
+   * expects a &#x27;trainee&#x27; as an input
    */
+  @Input()
   private trainee: Trainee;
 
+  /**
+   * expects to output an &#x27;EventEmitter&lt;boolean&gt;&#x27;
+   */
   @Output()
   refreshList &#x3D; new EventEmitter&lt;boolean&gt;();
 
+  /**
+   * calls the &#x27;deleteTrainee&#x27; function from &#x27;TraineeService&#x27; to delete the trainee
+   * @param trainee the trainee that is to be deleted
+   */
   private deleteTrainee(trainee: Trainee) {
     this.ts.deleteTrainee(trainee.traineeId).subscribe(data &#x3D;&gt; {
       this.refreshList.emit(true);
     });
   }
 
+  /**
+   * @ignore
+   */
   constructor(private ts: TraineesService) { }
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
     this.trainee &#x3D; new Trainee();
     this.trainee.name &#x3D; &#x27;&#x27;;
-    console.log(this.trainee);
   }
 
 }
@@ -493,7 +427,7 @@ export class DeleteTraineeComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html>  <div class="modal fade in" id="deleteTraineeModal" tabindex="0" role="dialog" aria-labelledby="traineeModalLabel" style="padding-left: 17px;">    <div class="modal-dialog" role="document">      <div class="modal-content">          <div class="modal-header">              <button type="button" class="close" data-dismiss="modal" aria-label="Close">                  <span aria-hidden="true">×</span>              </button>              <h4 class="modal-title" id="traineeModalLabel">Delete Trainee</h4>          </div>          <div class="modal-body">              <h3>Are you sure you want to delete {{trainee.name}}?</h3>              <br>          </div>          <div class="modal-footer">              <input value="Delete" class="btn btn-lg btn-danger" data-dismiss="modal" type="submit" (click)="deleteTrainee(trainee)">              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>          </div>      </div>  </div>  </div></html></div>'
-    var COMPONENTS = [{'name': 'AddTraineeComponent', 'selector': 'app-add-trainee'},{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DeleteTraineeComponent'};
 </script>
