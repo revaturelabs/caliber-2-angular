@@ -134,6 +134,9 @@
                                     <span class="modifier">Private</span>
                                 <a href="#deleteTrainee">deleteTrainee</a>
                             </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -174,6 +177,76 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(ts: TraineesService, errorService: <a href="../injectables/ErrorService.html">ErrorService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>ts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TraineesService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The trainee service from the User folder, used to communicate with the user microservice</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>errorService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ErrorService.html" target="_self" >ErrorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The error service from the error handling folder,
+used to communicate with the error modal to display errors on failed http requests</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
     <section>
     <h3 id="inputs">Inputs</h3>
@@ -195,7 +268,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:18</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -219,7 +292,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:24</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -256,7 +329,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -310,6 +383,46 @@
                 </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/User/user/Components/delete-trainee/delete-trainee.component.ts:56</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the trainee and their name on init to prevent binding errors</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
 
@@ -320,6 +433,8 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { TraineesService } from &#x27;../../Services/trainees.service&#x27;;
 import { Trainee } from &#x27;../../Types/trainee&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import { ErrorService } from &#x27;src/app/error-handling/services/error.service&#x27;;
 
 @Component({
   selector: &#x27;app-delete-trainee&#x27;,
@@ -347,16 +462,28 @@ export class DeleteTraineeComponent implements OnInit {
   private deleteTrainee(trainee: Trainee) {
     this.ts.deleteTrainee(trainee.traineeId).subscribe(data &#x3D;&gt; {
       this.refreshList.emit(true);
+    },
+    issue &#x3D;&gt; {
+      if (issue instanceof HttpErrorResponse) {
+        const err &#x3D; issue as HttpErrorResponse;
+        this.errorService.setError(&#x27;TraineesService&#x27;,
+        &#x60;Issue deleting trainee. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}&#x60;);
+      }
     });
   }
 
   /**
-   * @ignore
+   * @param ts The trainee service from the User folder, used to communicate with the user microservice
+   * @param errorService The error service from the error handling folder,
+   *   used to communicate with the error modal to display errors on failed http requests
    */
-  constructor(private ts: TraineesService) { }
+  constructor(private ts: TraineesService, private errorService: ErrorService) { }
 
   /**
-   * @ignore
+   * Initializes the trainee and their name on init to prevent binding errors
    */
   ngOnInit() {
     this.trainee &#x3D; new Trainee();
@@ -377,7 +504,7 @@ export class DeleteTraineeComponent implements OnInit {
               &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;
                   &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;×&lt;/span&gt;
               &lt;/button&gt;
-              &lt;h4 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;traineeModalLabel&quot;&gt;Delete Trainee&lt;/h4&gt;
+              &lt;h4 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;traineeModalLabel&quot; id&#x3D;&quot;deleteTraineeHeader&quot;&gt;Delete Trainee&lt;/h4&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;modal-body&quot;&gt;
               &lt;h3&gt;Are you sure you want to delete {{trainee.name}}?&lt;/h3&gt;
@@ -426,8 +553,8 @@ export class DeleteTraineeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html>  <div class="modal fade in" id="deleteTraineeModal" tabindex="0" role="dialog" aria-labelledby="traineeModalLabel" style="padding-left: 17px;">    <div class="modal-dialog" role="document">      <div class="modal-content">          <div class="modal-header">              <button type="button" class="close" data-dismiss="modal" aria-label="Close">                  <span aria-hidden="true">×</span>              </button>              <h4 class="modal-title" id="traineeModalLabel">Delete Trainee</h4>          </div>          <div class="modal-body">              <h3>Are you sure you want to delete {{trainee.name}}?</h3>              <br>          </div>          <div class="modal-footer">              <input value="Delete" class="btn btn-lg btn-danger" data-dismiss="modal" type="submit" (click)="deleteTrainee(trainee)">              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>          </div>      </div>  </div>  </div></html></div>'
-    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
+        var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html>  <div class="modal fade in" id="deleteTraineeModal" tabindex="0" role="dialog" aria-labelledby="traineeModalLabel" style="padding-left: 17px;">    <div class="modal-dialog" role="document">      <div class="modal-content">          <div class="modal-header">              <button type="button" class="close" data-dismiss="modal" aria-label="Close">                  <span aria-hidden="true">×</span>              </button>              <h4 class="modal-title" id="traineeModalLabel" id="deleteTraineeHeader">Delete Trainee</h4>          </div>          <div class="modal-body">              <h3>Are you sure you want to delete {{trainee.name}}?</h3>              <br>          </div>          <div class="modal-footer">              <input value="Delete" class="btn btn-lg btn-danger" data-dismiss="modal" type="submit" (click)="deleteTrainee(trainee)">              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>          </div>      </div>  </div>  </div></html></div>'
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DeleteTraineeComponent'};
 </script>

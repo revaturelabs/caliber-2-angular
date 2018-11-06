@@ -15,6 +15,9 @@ export class ErrorService {
    */
   error: ServiceError;
 
+  /**
+   * @ignore
+   */
   constructor() { }
 
   /**
