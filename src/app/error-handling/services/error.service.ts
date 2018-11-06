@@ -1,6 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { ServiceError } from '../types/service-error';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

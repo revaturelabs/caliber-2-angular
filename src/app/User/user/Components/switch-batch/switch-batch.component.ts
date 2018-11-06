@@ -13,10 +13,24 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './switch-batch.component.html',
   styleUrls: ['./switch-batch.component.css']
 })
+/**
+ * Component used for handling switching trainees from one batch to another
+ */
 export class SwitchBatchComponent implements OnInit, OnChanges {
 
+  /**
+   * All of the current batches minus the current batch
+   */
   batches: Array<Batch> = [];
+
+  /**
+   * All of the current batches as retrieved from the Batch microservice
+   */
   allBatches: Array<Batch> = [];
+
+  /**
+   * The batch id of the batch to be switched to as a string
+   */
   switchBatch = '';
 
   /**

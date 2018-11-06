@@ -580,7 +580,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>gets batches from the batch controller usng a rest call</p>
+                            <div class="io-description"><p>gets all the current batches from the batch microservice</p>
 </div>
 
                             <div class="io-description">
@@ -1365,9 +1365,9 @@ const httpOptions &#x3D; {
 };
 
 /**
-   * @ignore
-   */
-  const currentBatchUrl &#x3D; &#x27;http://localhost:9095/vp/batch/all/&#x27;;
+* The url for getting current batches from the batch microservice
+*/
+const currentBatchUrl &#x3D; &#x27;http://localhost:9095/vp/batch/all/current&#x27;;
 
 
 /*
@@ -1454,12 +1454,9 @@ export class BatchService {
   }
 
   /**
-   * gets batches from the batch controller usng a rest call
+   * gets all the current batches from the batch microservice
    */
   getBatches(): Observable&lt;Array&lt;Batch&gt;&gt; {
-    /**
-     * returns the list of batches
-     */
     return this.http.get&lt;Batch[]&gt;(currentBatchUrl, httpOptions);
   }
 

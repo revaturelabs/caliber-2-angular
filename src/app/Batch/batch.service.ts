@@ -15,9 +15,9 @@ const httpOptions = {
 };
 
 /**
-   * @ignore
-   */
-  const currentBatchUrl = 'http://localhost:9095/vp/batch/all/';
+* The url for getting current batches from the batch microservice
+*/
+const currentBatchUrl = 'http://localhost:9095/vp/batch/all/current';
 
 
 /*
@@ -104,12 +104,9 @@ export class BatchService {
   }
 
   /**
-   * gets batches from the batch controller usng a rest call
+   * gets all the current batches from the batch microservice
    */
   getBatches(): Observable<Array<Batch>> {
-    /**
-     * returns the list of batches
-     */
     return this.http.get<Batch[]>(currentBatchUrl, httpOptions);
   }
 
