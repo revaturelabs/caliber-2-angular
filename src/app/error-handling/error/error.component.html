@@ -1,29 +1,22 @@
 <!------------------------------------------------- Error Modal for Date -------------------------------------->
-<div #errrorModal class="modal fade" id="checkBatchModalDate" tabindex="-1" role="dialog" aria-labelledby="errorModal">
+<div #errrorModal class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal">
   <div id="overlay" class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="batchModalLabel">
-          Invalid Batch In
+        <h4 class="modal-title" id="errorModalLabel">
+          Not Found
           fo&nbsp;<i class="fa fa-frown-o fa-2x pick " style="font-weight:100" aria-hidden="true" ></i>
         </h4>
-        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 
     </div>
     <div class="modal-body">
 
-      <p *ngIf="dateIsError">
-        The Start Date should be before the End Date.
-      </p>
-      <p *ngIf="trainerIsError">
-        Trainer and Co-trainer cannot be the same.
-      </p>
-
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">Ok</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
     </div>
   </div>
 </div>
