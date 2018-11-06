@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
-import { Batch } from 'src/app/Team2/type/batch';
-import { BatchService } from 'src/app/Team2/batch.service';
+import { Batch } from 'src/app/Batch/type/batch';
+import { BatchService } from 'src/app/Batch/batch.service';
 import { ViewBatchesService } from '../../Services/view-batches.service';
 import { Trainee } from '../../Types/trainee';
 import { TraineesService } from '../../Services/trainees.service';

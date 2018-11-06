@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UserModule } from './User/user/user.module';
-import { BatchModule } from '../app/Team2/batch/batch.module';
+import { BatchModule } from '../app/Batch/batch/batch.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';

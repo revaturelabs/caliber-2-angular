@@ -51,13 +51,16 @@
             <div class="form-group col-md-6 col-sm-6">
               <label for="commonLocations">Location :</label>
               <!-- TO DO: implement filter group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId" -->
-              <select #location (change)="setLocation(location.value)" id="location" required class="form-control"
+              <select *ngIf="!createOrUpdate" #location (change)="setLocation(location.value)" id="location" required class="form-control"
                 required name="location">
-                <option *ngIf="!createOrUpdate" value="" selected="selected" disabled>Select Location</option>
-                <option *ngIf="createOrUpdate" selected="selected" value="createOrUpdate.location" disabled>
-                  {{ createOrUpdate.location}}
-                </option>
-                <option *ngFor="let option of locationOptions" [ngValue]="option.name + option.address + option.city + option.state + option.zipcode">
+                <option value="" selected="selected" disabled>Select Location</option>
+                <option *ngFor="let option of locationOptions" [ngValue]="option.id">
+                  {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
+              </select>
+              <select *ngIf="createOrUpdate" [(ngModel)]="location" [ngModelOptions]="{standalone: true}"  id="location" required class="form-control"
+                required name="location">
+                <option value="" disabled>Select Location</option>
+                <option *ngFor="let option of locationOptions" [selected]="option.id===createOrUpdate.location" [ngValue]="option.id">
                   {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
               </select>
             </div>

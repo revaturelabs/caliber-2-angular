@@ -46,7 +46,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   trainingTypes: string[];
   skillType: string = null;
   skillTypes: string[];
-  location: string = null;
+  location: number = null;
   locationOptions: BLocation[];
   trainer: string = null;
   // needs to be a user type
@@ -247,7 +247,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.skillType = option;
   }
 
-  setLocation(option: string) {
+  setLocation(option: number) {
     this.location = option;
   }
 
