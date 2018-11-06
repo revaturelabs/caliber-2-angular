@@ -61,13 +61,10 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   // currently not working, look into this whoever does this user story
   toggleColor(t: Trainee) {
     if (t.flagStatus === this.green) {
-      console.log('changing to none!');
       t.flagStatus = this.none;
     } else if (t.flagStatus === this.red) {
-      console.log('changing to green!');
       t.flagStatus = this.green;
     } else {
-      console.log('changing to red!');
       t.flagStatus = this.red;
     }
   }
@@ -87,7 +84,6 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showCommentForm = new Array<boolean>(this.trainees.length);
       this.showNotes = new Array<boolean>(this.trainees.length);
-      console.log('refreshed');
     });
     this.traineeToUpdate = null;
   }
@@ -96,7 +92,6 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     if (trainee) {
       this.traineeToUpdate = trainee;
       this.updateTrainee.refreshTrainee();
-      console.log(this.traineeToUpdate);
     }
   }
 

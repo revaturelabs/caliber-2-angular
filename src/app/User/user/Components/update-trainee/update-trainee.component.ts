@@ -63,16 +63,16 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
 
   constructor(private ts: TraineesService) { }
 
-  ngOnChanges() {
-    this.refreshTrainee();
-    // console.log('in ngonchanges, trainee: ' + this.trainee.email + ' and traineeTemp: ' + this.traineeTemp.email);
+   ngOnChanges() {
+     if (this.trainee) {
+       this.refreshTrainee();
+     }
   }
 
   ngOnInit() {
     this.trainee = new Trainee();
     this.trainee.email = '';
     console.log(this.trainee);
-    // document.getElementsByName('body')[0].addEventListener('click', close);
   }
 
   close() {

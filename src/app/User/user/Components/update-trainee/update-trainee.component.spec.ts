@@ -9,10 +9,10 @@ describe('UpdateTraineeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule , HttpClientModule],
-      declarations: [ UpdateTraineeComponent ]
+      imports: [FormsModule, HttpClientModule],
+      declarations: [UpdateTraineeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -6,7 +6,12 @@ import { Trainee } from '../types/trainee';
 let t1: Trainee;
 let t2: Trainee;
 
-describe('ViewAllTraineesService', () => {
+const getUrl = 'http://localhost:9085/all/trainee?batch=';
+const updateUrl = 'http://localhost:9085/all/trainee/update';
+const createUrl = 'http://localhost:9085/all/trainee/create';
+const deleteUrl = 'http://localhost:9085/all/trainee/delete/';
+
+describe('TraineesService', () => {
   let service: TraineesService;
   beforeEach(() => TestBed.configureTestingModule({
     providers: [TraineesService],
@@ -32,14 +37,14 @@ beforeEach(() => {
     expect(service).toBeTruthy();
   });
 
-  it('should send an http request and receive the appropriate response data',
+  it('should send an http GET request and receive the appropriate response data',
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
         let t: Trainee[];
         vats.getTrainees(2200).subscribe(data => {
           t = data;
         });
-        const req = httpMock.expectOne('http://localhost:9085/all/trainee?batch=2200');
+        const req = httpMock.expectOne(getUrl + '2200');
         req.flush([t1, t2]);
         expect(req.request.method).toEqual('GET');
         expect(t).toEqual([t1, t2]);
@@ -54,7 +59,7 @@ beforeEach(() => {
         vats.createTrainee(t).subscribe(data => {
           t = data;
         });
-        const req = httpMock.expectOne('http://localhost:9085/all/trainee/create');
+        const req = httpMock.expectOne(createUrl);
         req.flush(t1);
         expect(req.request.method).toEqual('POST');
         expect(t).toEqual(t1);
@@ -66,10 +71,10 @@ beforeEach(() => {
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
         let t: Trainee;
-        vats.createTrainee(t).subscribe(data => {
+        vats.updateTrainee(t).subscribe(data => {
           t = data;
         });
-        const req = httpMock.expectOne('http://localhost:9085/all/trainee/update');
+        const req = httpMock.expectOne(updateUrl);
         req.flush(t1);
         expect(req.request.method).toEqual('PUT');
         expect(t).toEqual(t1);
@@ -80,8 +85,8 @@ beforeEach(() => {
   it('should send an http DELETE request and receive the appropriate response data',
     inject([HttpTestingController, TraineesService],
       (httpMock: HttpTestingController, vats: TraineesService) => {
-        vats.createTrainee(t1).subscribe();
-        const req = httpMock.expectOne('http://localhost:9085/all/trainee/delete/' + t1.traineeId);
+        vats.deleteTrainee(t1.traineeId).subscribe();
+        const req = httpMock.expectOne(deleteUrl + t1.traineeId);
         expect(req.request.method).toEqual('DELETE');
       }
     )
