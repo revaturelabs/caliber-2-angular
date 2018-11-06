@@ -40,7 +40,7 @@ export class TraineesService {
           if (issue instanceof HttpErrorResponse) {
             const err = issue as HttpErrorResponse;
             this.errorService.setError('TraineesService',
-            `Issue finding trainees. Please contact administrator: \n
+            `Issue finding trainees. Please contact system administrator: \n
             Status Code: ${err.status} \n
             Status Text: ${err.statusText} \n
             Error: ${err.message}`);
@@ -58,17 +58,45 @@ export class TraineesService {
           if (issue instanceof HttpErrorResponse) {
             const err = issue as HttpErrorResponse;
             this.errorService.setError('TraineesService',
-            `Issue updating trainee. Please contact administrator.
-            Error:  + ${err.message}`);
+            `Issue updating trainee ${t.name}. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
           }
           return data;
         })
       );
   }
   createTrainee(t: Trainee): Observable<Trainee> {
-    return this.http.post<Trainee>(this.createUrl, t, httpOptions);
+    return this.http.post<Trainee>(this.createUrl, t, httpOptions).
+      pipe(
+        catchError((issue, data) => {
+          if (issue instanceof HttpErrorResponse) {
+            const err = issue as HttpErrorResponse;
+            this.errorService.setError('TraineesService',
+            `Issue creating trainee ${t.name}. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
+          }
+          return data;
+        })
+      );
   }
   deleteTrainee(id: Number): Observable<void> {
-    return this.http.delete<void>(this.deleteUrl + id);
+    return this.http.delete<void>(this.deleteUrl + id).
+      pipe(
+        catchError((issue, data) => {
+          if (issue instanceof HttpErrorResponse) {
+            const err = issue as HttpErrorResponse;
+            this.errorService.setError('TraineesService',
+            `Issue deleting trainee. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
+          }
+          return data;
+        })
+      );
   }
 }
