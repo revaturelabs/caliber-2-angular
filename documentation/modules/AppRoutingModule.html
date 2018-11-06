@@ -70,23 +70,25 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import { ManageComponent } from &#x27;./manage/manage.component&#x27;;
 import { HomeComponent } from &#x27;./home/home.component&#x27;;
-import { BatchViewComponent } from &#x27;./Team2/batch-view/batch-view.component&#x27;;
+import { BatchViewComponent } from &#x27;./Batch/batch-view/batch-view.component&#x27;;
+import { ModuleWithProviders } from &#x27;@angular/compiler/src/core&#x27;;
+import { HomeModule } from &#x27;./home-module/home-module.module&#x27;;
 
 
 
 const routes: Routes &#x3D; [
   { path: &#x27;&#x27;, redirectTo: &#x27;#/vp/home&#x27;, pathMatch: &#x27;full&#x27; },
-  { path: &#x27;#/vp/home&#x27;, component: HomeComponent },
-  { path: &#x27;#/vp/manage&#x27;, component: BatchViewComponent }
+  { path: &#x27;#/vp/home&#x27;, loadChildren: &#x27;./home-module/home-module.module#HomeModule&#x27; },
+  { path: &#x27;#/vp/manage&#x27;, loadChildren: &#x27;./batch-module/batch.module#BatchRouteModule&#x27; }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes)],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 </code></pre>
     </div>
 </div>

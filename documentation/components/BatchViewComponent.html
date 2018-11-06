@@ -61,7 +61,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/Team2/batch-view/batch-view.component.ts</code>
+    <code>src/app/Batch/batch-view/batch-view.component.ts</code>
 </p>
 
 
@@ -130,13 +130,28 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#batchModal">batchModal</a>
+                            </li>
+                            <li>
+                                <a href="#createUpdate">createUpdate</a>
+                            </li>
+                            <li>
                                 <a href="#defaultYears">defaultYears</a>
+                            </li>
+                            <li>
+                                <a href="#selectedBatch">selectedBatch</a>
                             </li>
                             <li>
                                 <a href="#selectedBatches">selectedBatches</a>
                             </li>
                             <li>
+                                <a href="#selectedBatchId">selectedBatchId</a>
+                            </li>
+                            <li>
                                 <a href="#selectedYear">selectedYear</a>
+                            </li>
+                            <li>
+                                <a href="#viewTraineeModal">viewTraineeModal</a>
                             </li>
                             <li>
                                 <a href="#years">years</a>
@@ -154,16 +169,25 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#deleteBatch">deleteBatch</a>
+                            </li>
+                            <li>
                                 <a href="#getAllYears">getAllYears</a>
                             </li>
                             <li>
-                                <a href="#makeDefaultBatches">makeDefaultBatches</a>
+                                <a href="#getTraineeCount">getTraineeCount</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#pickYear">pickYear</a>
+                            </li>
+                            <li>
+                                <a href="#populateBatch">populateBatch</a>
+                            </li>
+                            <li>
+                                <a href="#populateTraineeCount">populateTraineeCount</a>
                             </li>
                             <li>
                                 <a href="#refreshPage">refreshPage</a>
@@ -176,6 +200,9 @@
                             </li>
                             <li>
                                 <a href="#selectCurrentBatch">selectCurrentBatch</a>
+                            </li>
+                            <li>
+                                <a href="#traineeClose">traineeClose</a>
                             </li>
                         </ul>
                     </td>
@@ -195,12 +222,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(batchservice: <a href="../injectables/BatchService.html">BatchService</a>)</code>
+<code>constructor(batchservice: <a href="../injectables/BatchService.html">BatchService</a>, errorService: <a href="../injectables/ErrorService.html">ErrorService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -222,6 +249,18 @@
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/BatchService.html" target="_self" >BatchService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>errorService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ErrorService.html" target="_self" >ErrorService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -251,6 +290,75 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="deleteBatch"></a>
+                        <span class="name">
+                            <b>
+                            deleteBatch
+                            </b>
+                            <a href="#deleteBatch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>deleteBatch(batchId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:122</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>batchId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getAllYears"></a>
                         <span class="name">
                             <b>
@@ -269,7 +377,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:133</a></div>
                             </td>
                         </tr>
 
@@ -289,25 +397,25 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="makeDefaultBatches"></a>
+                        <a name="getTraineeCount"></a>
                         <span class="name">
                             <b>
-                            makeDefaultBatches
+                            getTraineeCount
                             </b>
-                            <a href="#makeDefaultBatches"><span class="icon ion-ios-link"></span></a>
+                            <a href="#getTraineeCount"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>makeDefaultBatches()</code>
+<code>getTraineeCount()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -345,7 +453,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -383,7 +491,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -434,6 +542,144 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="populateBatch"></a>
+                        <span class="name">
+                            <b>
+                            populateBatch
+                            </b>
+                            <a href="#populateBatch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>populateBatch(batch: <a href="../classes/Batch.html">Batch</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:58</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>batch</td>
+                                                        <td>
+                                                                    <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="populateTraineeCount"></a>
+                        <span class="name">
+                            <b>
+                            populateTraineeCount
+                            </b>
+                            <a href="#populateTraineeCount"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>populateTraineeCount(count: number[][])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:105</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>count</td>
+                                                        <td>
+                                                                    <code>number[][]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="refreshPage"></a>
                         <span class="name">
                             <b>
@@ -452,7 +698,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:64</a></div>
                             </td>
                         </tr>
 
@@ -490,7 +736,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -528,7 +774,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:53</a></div>
                             </td>
                         </tr>
 
@@ -566,7 +812,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:116</a></div>
                             </td>
                         </tr>
 
@@ -613,6 +859,44 @@
                 </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="traineeClose"></a>
+                        <span class="name">
+                            <b>
+                            traineeClose
+                            </b>
+                            <a href="#traineeClose"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>traineeClose()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:149</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
     <section>
@@ -620,6 +904,88 @@
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="batchModal"></a>
+                        <span class="name">
+                            <b>
+                            batchModal
+                            </b>
+                            <a href="#batchModal"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>batchModal:     <code><a href="../classes/Batch.html" target="_self" >BatchModalComponent</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >BatchModalComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;batchModal&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="createUpdate"></a>
+                        <span class="name">
+                            <b>
+                            createUpdate
+                            </b>
+                            <a href="#createUpdate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>createUpdate:     <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -647,7 +1013,41 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedBatch"></a>
+                        <span class="name">
+                            <b>
+                            selectedBatch
+                            </b>
+                            <a href="#selectedBatch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>selectedBatch:     <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -681,7 +1081,46 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedBatchId"></a>
+                        <span class="name">
+                            <b>
+                            selectedBatchId
+                            </b>
+                            <a href="#selectedBatchId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>selectedBatchId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -715,7 +1154,50 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="viewTraineeModal"></a>
+                        <span class="name">
+                            <b>
+                            viewTraineeModal
+                            </b>
+                            <a href="#viewTraineeModal"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>viewTraineeModal:     <code><a href="../components/ViewTraineesComponent.html" target="_self" >ViewTraineesComponent</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../components/ViewTraineesComponent.html" target="_self" >ViewTraineesComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;viewTraineeModal&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -749,7 +1231,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Team2/batch-view/batch-view.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Batch/batch-view/batch-view.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -762,11 +1244,23 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { BatchModalComponent } from &#x27;../batch-modal/batch-modal.component&#x27;;
 import { BatchService } from &#x27;../batch.service&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
+import {ViewTraineesComponent } from &#x27;../../User/user/Components/view-trainees/view-trainees.component&#x27;;
 import { Batch } from &#x27;../type/batch&#x27;;
+import { analyzeAndValidateNgModules } from &#x27;@angular/compiler&#x27;;
+import { ErrorService } from &#x27;src/app/error-handling/services/error.service&#x27;;
+
+ /*
+
+ The batch-view component is the parent component for the manage batch feature.
+ This component allows the user to view all of the batches by the selected year.
+ This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
+ @author Anthony Jin, Juan Trejo
+
+ */
 
 @Component({
   selector: &#x27;app-batch-view&#x27;,
@@ -775,62 +1269,133 @@ import { Batch } from &#x27;../type/batch&#x27;;
 })
 export class BatchViewComponent implements OnInit {
 
+  // class variables
+  @ViewChild(&#x27;batchModal&#x27;) batchModal: BatchModalComponent;
+  @ViewChild(&#x27;viewTraineeModal&#x27;) viewTraineeModal: ViewTraineesComponent;
+  createUpdate: Batch &#x3D; null;
   years: string[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: number;
+  selectedBatch: Batch;
+  selectedBatchId &#x3D; 0;
 
-  constructor(private batchservice: BatchService) { }
+  constructor(private batchservice: BatchService,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
+    // gets all years for dropdown button
     this.getAllYears();
-    console.log(this.defaultYears);
   }
 
+  // resets createorUpdate variable for child component
   resetBatchForm(): void {
-
+    this.createUpdate &#x3D; null;
+    this.batchModal.resetForm();
   }
 
+  // ToDo: future implementation
+  // method for import button
   resetImportModal(): void {
 
   }
 
+  // sets batch information for child component
+  populateBatch(batch: Batch) {
+    console.log(batch);
+    this.createUpdate &#x3D; batch;
+  }
+
+  // re-renders contents in batch view component
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result &#x3D;&gt; {
       this.selectedBatches &#x3D; result;
+    }, error &#x3D;&gt; {
+      const serviceName &#x3D; &#x27;Batch Service &#x27;;
+      const errorMessage &#x3D; &#x27;Failed to make connection!&#x27;;
+      this.errorService.setError(serviceName, errorMessage);
     });
     this.getAllYears();
   }
 
+  // renders contents in view batch component based on year selected
   pickYear(event: number) {
     this.selectedYear &#x3D;  event;
     this.batchservice.getBatchesByYear(event).subscribe(result &#x3D;&gt; {
       this.selectedBatches &#x3D; result;
+      this.getTraineeCount();
+    }, error &#x3D;&gt; {
+      const serviceName &#x3D; &#x27;Batch Service &#x27;;
+      const errorMessage &#x3D; &#x27;Failed to make connection!&#x27;;
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
-  selectCurrentBatch(bid: number) {
-    sessionStorage.setItem(&#x27;bid&#x27;, &#x27;&#x27; + bid);
+  getTraineeCount() {
+    const allids: number[] &#x3D; [];
+    for (const batch of this.selectedBatches) {
+      if (batch) {
+        allids.push(batch.batchId);
+      }
+    }
+    console.log(&#x27;ids: &#x27; + allids);
+    this.batchservice.getTraineeCount(allids).subscribe( count &#x3D;&gt; {
+      this.populateTraineeCount(count);
+    }, error &#x3D;&gt; {
+      const serviceName &#x3D; &#x27;Batch Service &#x27;;
+      const errorMessage &#x3D; &#x27;Failed to make connection!&#x27;;
+      this.errorService.setError(serviceName, errorMessage);
+    });
   }
 
+  populateTraineeCount(count: number[][]) {
+    for (const batch of this.selectedBatches) {
+      for (const c of count) {
+        if (c[0] &#x3D;&#x3D;&#x3D; batch.batchId) {
+          batch.traineeCount &#x3D; c[1];
+        }
+      }
+    }
+  }
+
+  // stores batch id for trainee display
+  selectCurrentBatch(bid: number) {
+    // sessionStorage.setItem(&#x27;bid&#x27;, &#x27;&#x27; + bid);
+    this.selectedBatchId &#x3D; bid;
+  }
+
+  // removes a batch
+  deleteBatch(batchId: number) {
+    console.log(&#x27;delete&#x27;);
+    console.log(batchId);
+    this.batchservice.deleteBatch(batchId).subscribe( data &#x3D;&gt; this.refreshPage(), error &#x3D;&gt; {
+      const serviceName &#x3D; &#x27;Batch Service &#x27;;
+      const errorMessage &#x3D; &#x27;Failed to make connection!&#x27;;
+      this.errorService.setError(serviceName, errorMessage);
+    });
+  }
+
+  // gets all start years from database for dropdown button
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years &#x3D;&gt; {
-      console.log(years);
       if (years.length &#x3D;&#x3D;&#x3D; 0 ) {
-        this.makeDefaultBatches();
         this.getAllYears();
       } else {
         this.defaultYears &#x3D; years;
         this.selectedYear &#x3D; this.defaultYears[this.defaultYears.length - 1];
         this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
       }
+    }, error &#x3D;&gt; {
+      const serviceName &#x3D; &#x27;Batch Service &#x27;;
+      const errorMessage &#x3D; &#x27;Failed to make connection!&#x27;;
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
-  makeDefaultBatches() {
-    this.batchservice.postBatch(new Batch(&#x27;Tester&#x27;, &#x27;Tester&#x27;,
-    &#x27;Tester&#x27;, &#x27;Nick&#x27;, &#x27;Help&#x27;, &#x27;Nowhere&#x27;, new Date(&#x27;October 19, 2018&#x27;),
-    new Date(&#x27;October 20, 2018&#x27;), 55, 45)).subscribe();
+  traineeClose() {
+    this.viewTraineeModal.refreshView();
+    this.selectedBatchId &#x3D; 0;
+    this.refreshPage();
   }
 }
 </code></pre>
@@ -844,7 +1409,7 @@ export class BatchViewComponent implements OnInit {
         &lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;
           &lt;!-- Filter batches by year --&gt;
           &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;dropdown&quot;&gt;&lt;a id&#x3D;&quot;&quot; class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;dropdown&quot;&gt;{{selectedYear}}&lt;span
-              class&#x3D;&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+                class&#x3D;&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
             &lt;ul class&#x3D;&quot;dropdown-menu&quot;&gt;
               &lt;!-- years for filtering data --&gt;
               &lt;li *ngFor&#x3D;&quot;let menuItem of defaultYears&quot;&gt;&lt;a role&#x3D;&quot;button&quot; (click)&#x3D;&quot;pickYear(menuItem)&quot;&gt;{{menuItem}}&lt;/a&gt;&lt;/li&gt;
@@ -856,7 +1421,7 @@ export class BatchViewComponent implements OnInit {
               &lt;/span&gt;
             &lt;/a&gt;&lt;/li&gt;
           &lt;!-- Button Trigger for Create Batch Modal --&gt;
-          &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#createBatchModal&quot; &gt;&lt;a&gt;Create
+          &lt;li role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#createBatchModal&quot; (click)&#x3D;&quot;resetBatchForm()&quot;&gt;&lt;a&gt;Create
               Batch&lt;span class&#x3D;&quot;glyphicon glyphicon-plus&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
               &lt;/span&gt;
             &lt;/a&gt;&lt;/li&gt;
@@ -900,15 +1465,15 @@ export class BatchViewComponent implements OnInit {
               &lt;td&gt;{{batch.passingGrade}}&lt;/td&gt;
               &lt;td&gt;
                 &lt;!-- Button Trigger for Add Trainee Modal --&gt;
-                &lt;a role&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;modal&quot; (click)&#x3D;&quot;resetTraineeForm();selectCurrentBatch(batch.batchId)&quot; data-target&#x3D;&quot;#viewTraineeModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-user&quot;&gt;
-                    &lt;!-- &lt;p&gt;{{batch.trainees.length}}&lt;/p&gt; --&gt;
+                &lt;a role&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;modal&quot; (click)&#x3D;&quot;selectCurrentBatch(batch.batchId)&quot; data-target&#x3D;&quot;#viewTraineeModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-user&quot;&gt;
+                    &lt;p&gt;{{batch.traineeCount}}&lt;/p&gt;
                   &lt;/span&gt;
                 &lt;/a&gt;
               &lt;/td&gt;
-              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;populateBatch(batch);selectCurrentBatch($index)&quot; data-toggle&#x3D;&quot;modal&quot;
+              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;populateBatch(batch)&quot; data-toggle&#x3D;&quot;modal&quot;
                   data-target&#x3D;&quot;#createBatchModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-pencil&quot;
                     aria-hidden&#x3D;&quot;true&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;selectCurrentBatch($index)&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#deleteBatchModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-remove&quot; aria-hidden&#x3D;&quot;true&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;a role&#x3D;&quot;button&quot; class&#x3D;&quot;pull-right&quot; (click)&#x3D;&quot;selectedBatch &#x3D; batch&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#deleteBatchModal&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-remove&quot; aria-hidden&#x3D;&quot;true&quot;&gt; &lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
             &lt;/tr&gt;
           &lt;/tbody&gt;
 
@@ -935,7 +1500,36 @@ export class BatchViewComponent implements OnInit {
   &lt;div ui-view&#x3D;&quot;trainee-extra-modals&quot;&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;app-batch-modal (someEvent)&#x3D;&quot;refreshPage()&quot;&gt;&lt;/app-batch-modal&gt;</code></pre>
+&lt;app-batch-modal #batchModal (someEvent)&#x3D;&quot;refreshPage()&quot; (closeEvent)&#x3D;&quot;createOrUpdate&#x3D;null&quot; [createOrUpdate]&#x3D;&quot;createUpdate&quot;&gt;&lt;/app-batch-modal&gt;
+&lt;app-view-trainees #viewTraineeModal [batchId]&#x3D;&quot;selectedBatchId&quot; (closeTraineeModal)&#x3D;&quot;traineeClose()&quot;&gt;&lt;/app-view-trainees&gt;
+&lt;form&gt;
+  &lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;deleteBatchModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;batchModalLabel&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-dialog&quot; role&#x3D;&quot;document&quot;&gt;
+      &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+        &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+          &lt;h4 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;batchModalLabel&quot;&gt;
+            Confirm Batch Delete
+            &lt;!-- Confirm Batch Delete&lt;i class&#x3D;&quot;fa fa-frown-o fa-2x pick&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; --&gt;
+          &lt;/h4&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;
+            &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
+          &lt;/button&gt;
+
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+
+          &lt;p *ngIf&#x3D;&quot;selectedBatch !&#x3D; null&quot;&gt;
+            Are you sure you want to delete batch {{selectedBatch.trainingName}}?
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+          &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Delete&quot; (click)&#x3D;&quot;deleteBatch(selectedBatch.batchId)&quot; data-dismiss&#x3D;&quot;modal&quot; class&#x3D;&quot;btn btn-lg btn-danger&quot;&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-default&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- &lt;app-view-trainees&gt;&lt;/app-view-trainees&gt; --&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -1626,8 +2220,8 @@ INTENDED FOR CHART DOWNLOAD ICON IF HOVER OVER CHANGE CURSOR TO POINTING
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div id="manage">  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <ul class="nav nav-tabs">          <!-- Filter batches by year -->          <li role="button" class="dropdown"><a id="" class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span              class="caret"></span></a>            <ul class="dropdown-menu">              <!-- years for filtering data -->              <li *ngFor="let menuItem of defaultYears"><a role="button" (click)="pickYear(menuItem)">{{menuItem}}</a></li>            </ul>          </li>          <!-- Button Trigger for Import Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#importBatchModal" (click)="resetImportModal()"><a>Import              Batch <span class="glyphicon glyphicon-download" aria-hidden="true">              </span>            </a></li>          <!-- Button Trigger for Create Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" ><a>Create              Batch<span class="glyphicon glyphicon-plus" aria-hidden="true">              </span>            </a></li>        </ul>      </div>    </div>  </div>  <!-- Manage batch table -->  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <table class="table table-hover">          <thead>            <tr>              <th>Training Name</th>              <th>Training Type</th>              <th>Skill Type</th>              <th>Trainer</th>              <th>Co-Trainer</th>              <th>Location</th>              <th>Start Date</th>              <th>End Date</th>              <th>Good Grade</th>              <th>Passing Grade</th>              <th></th>              <th></th>              <th></th>            </tr>          </thead>          <tbody>            <tr *ngFor="let batch of selectedBatches">              <td>{{batch.trainingName}}</td>              <td>{{batch.trainingType}}</td>              <td>{{batch.skillType}}</td>              <td>{{batch.trainer}}</td>              <td>{{batch.coTrainer}}</td>              <td>{{batch.location}}</td>              <td>{{batch.startDate|date}}</td>              <td>{{batch.endDate|date}}</td>              <td>{{batch.goodGrade}}</td>              <td>{{batch.passingGrade}}</td>              <td>                <!-- Button Trigger for Add Trainee Modal -->                <a role="button" data-toggle="modal" (click)="resetTraineeForm();selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">                    <!-- <p>{{batch.trainees.length}}</p> -->                  </span>                </a>              </td>              <td><a role="button" class="pull-right" (click)="populateBatch(batch);selectCurrentBatch($index)" data-toggle="modal"                  data-target="#createBatchModal"><span class="glyphicon glyphicon-pencil"                    aria-hidden="true"> </span></a></td>              <td><a role="button" class="pull-right" (click)="selectCurrentBatch($index)" data-toggle="modal" data-target="#deleteBatchModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span></a></td>            </tr>          </tbody>        </table>      </div>    </div>  </div>  <!-- form for updating or creating batch -->  <div ui-view="batch-form"></div>  <!-- for for importing batch -->  <div ui-view="import-batch"></div>  <!-- confirm and invalid input modals for batch -->  <div ui-view="batch-extra-modals"></div>  <!-- trainees view modal -->  <div ui-view="view-trainees"></div>  <!-- form for creating or updating trainee -->  <div ui-view="trainee-form"></div>  <!-- confirm, and error models for trainees -->  <div ui-view="trainee-extra-modals"></div></div><app-batch-modal (someEvent)="refreshPage()"></app-batch-modal></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ManageComponent', 'selector': 'app-manage'},{'name': 'SelectYearComponent', 'selector': 'app-select-year'}];
+        var COMPONENT_TEMPLATE = '<div><div id="manage">  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <ul class="nav nav-tabs">          <!-- Filter batches by year -->          <li role="button" class="dropdown"><a id="" class="dropdown-toggle" data-toggle="dropdown">{{selectedYear}}<span                class="caret"></span></a>            <ul class="dropdown-menu">              <!-- years for filtering data -->              <li *ngFor="let menuItem of defaultYears"><a role="button" (click)="pickYear(menuItem)">{{menuItem}}</a></li>            </ul>          </li>          <!-- Button Trigger for Import Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#importBatchModal" (click)="resetImportModal()"><a>Import              Batch <span class="glyphicon glyphicon-download" aria-hidden="true">              </span>            </a></li>          <!-- Button Trigger for Create Batch Modal -->          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" (click)="resetBatchForm()"><a>Create              Batch<span class="glyphicon glyphicon-plus" aria-hidden="true">              </span>            </a></li>        </ul>      </div>    </div>  </div>  <!-- Manage batch table -->  <div class="container">    <div class="row">      <div class="col-md-12 col-lg-12">        <table class="table table-hover">          <thead>            <tr>              <th>Training Name</th>              <th>Training Type</th>              <th>Skill Type</th>              <th>Trainer</th>              <th>Co-Trainer</th>              <th>Location</th>              <th>Start Date</th>              <th>End Date</th>              <th>Good Grade</th>              <th>Passing Grade</th>              <th></th>              <th></th>              <th></th>            </tr>          </thead>          <tbody>            <tr *ngFor="let batch of selectedBatches">              <td>{{batch.trainingName}}</td>              <td>{{batch.trainingType}}</td>              <td>{{batch.skillType}}</td>              <td>{{batch.trainer}}</td>              <td>{{batch.coTrainer}}</td>              <td>{{batch.location}}</td>              <td>{{batch.startDate|date}}</td>              <td>{{batch.endDate|date}}</td>              <td>{{batch.goodGrade}}</td>              <td>{{batch.passingGrade}}</td>              <td>                <!-- Button Trigger for Add Trainee Modal -->                <a role="button" data-toggle="modal" (click)="selectCurrentBatch(batch.batchId)" data-target="#viewTraineeModal"><span class="glyphicon glyphicon-user">                    <p>{{batch.traineeCount}}</p>                  </span>                </a>              </td>              <td><a role="button" class="pull-right" (click)="populateBatch(batch)" data-toggle="modal"                  data-target="#createBatchModal"><span class="glyphicon glyphicon-pencil"                    aria-hidden="true"> </span></a></td>              <td><a role="button" class="pull-right" (click)="selectedBatch = batch" data-toggle="modal" data-target="#deleteBatchModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span></a></td>            </tr>          </tbody>        </table>      </div>    </div>  </div>  <!-- form for updating or creating batch -->  <div ui-view="batch-form"></div>  <!-- for for importing batch -->  <div ui-view="import-batch"></div>  <!-- confirm and invalid input modals for batch -->  <div ui-view="batch-extra-modals"></div>  <!-- trainees view modal -->  <div ui-view="view-trainees"></div>  <!-- form for creating or updating trainee -->  <div ui-view="trainee-form"></div>  <!-- confirm, and error models for trainees -->  <div ui-view="trainee-extra-modals"></div></div><app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createOrUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal><app-view-trainees #viewTraineeModal [batchId]="selectedBatchId" (closeTraineeModal)="traineeClose()"></app-view-trainees><form>  <div class="modal fade" id="deleteBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">    <div class="modal-dialog" role="document">      <div class="modal-content">        <div class="modal-header">          <h4 class="modal-title" id="batchModalLabel">            Confirm Batch Delete            <!-- Confirm Batch Delete<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i> -->          </h4>          <button type="button" class="close" data-dismiss="modal" aria-label="Close">            <span aria-hidden="true">&times;</span>          </button>        </div>        <div class="modal-body">          <p *ngIf="selectedBatch != null">            Are you sure you want to delete batch {{selectedBatch.trainingName}}?          </p>        </div>        <div class="modal-footer">          <input type="submit" value="Delete" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>        </div>      </div>    </div>  </div>  <!-- <app-view-trainees></app-view-trainees> --></div>'
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'BatchViewComponent'};
 </script>

@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>ViewTraineePage</li>
+  <li>ServiceError</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,15 +60,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/User/user/Tests/view-trainees.test.ts</code>
+            <code>src/app/error-handling/types/service-error.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Uses Protractor to test using front end input
-tests are not yet implemented. Waiting for database funcitonality.</p>
+                <p>Service error type class</p>
 
             </p>
 
@@ -79,27 +78,24 @@ tests are not yet implemented. Waiting for database funcitonality.</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#clickModalButton">clickModalButton</a>
+                                <a href="#errorMessage">errorMessage</a>
                             </li>
                             <li>
-                                <a href="#getModal">getModal</a>
-                            </li>
-                            <li>
-                                <a href="#navigateTo">navigateTo</a>
+                                <a href="#serviceName">serviceName</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+
 
 
 
@@ -110,133 +106,95 @@ tests are not yet implemented. Waiting for database funcitonality.</p>
 </section>
 
 
-
             <section>
     
-        <h3 id="methods">
-            Methods
+        <h3 id="inputs">
+            Properties
         </h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="clickModalButton"></a>
+                        <a name="errorMessage"></a>
                         <span class="name">
                             <b>
-                            clickModalButton
+                            errorMessage
                             </b>
-                            <a href="#clickModalButton"><span class="icon ion-ios-link"></span></a>
+                            <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>clickModalButton()</code>
+                        <code>errorMessage:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/error-handling/types/service-error.ts:15</a></div>
                             </td>
                         </tr>
 
-
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Used to open up the batch modal to see the trainee&#39;s</p>
+                        <div class="io-description"><p>A description of the error which occurred
+Will be displayed in the body of the error modal</p>
 </div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getModal"></a>
+                        <a name="serviceName"></a>
                         <span class="name">
                             <b>
-                            getModal
+                            serviceName
                             </b>
-                            <a href="#getModal"><span class="icon ion-ios-link"></span></a>
+                            <a href="#serviceName"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getModal()</code>
+                        <code>serviceName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/error-handling/types/service-error.ts:9</a></div>
                             </td>
                         </tr>
 
-
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Returns the information from the Modal page</p>
+                        <div class="io-description"><p>The name of the service that had an error occur
+Will be displayed in the header of the error modal</p>
 </div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="navigateTo"></a>
-                        <span class="name">
-                            <b>
-                            navigateTo
-                            </b>
-                            <a href="#navigateTo"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>navigateTo()</code>
                     </td>
                 </tr>
 
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/User/user/Tests/view-trainees.test.ts:11</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Used to navigate to the proper page</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
+
 
 
 
@@ -247,33 +205,18 @@ tests are not yet implemented. Waiting for database funcitonality.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { browser, element, by } from &#x27;protractor&#x27;;
-
-/**
- * Uses Protractor to test using front end input
- * tests are not yet implemented. Waiting for database funcitonality.
- */
-export class ViewTraineePage {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export class ServiceError {
     /**
-     * Used to navigate to the proper page
+     * The name of the service that had an error occur
+     * Will be displayed in the header of the error modal
      */
-    navigateTo() {
-        return browser.get(&#x27;/&#x27;);
-    }
+    serviceName: string;
 
     /**
-     * Used to open up the batch modal to see the trainee&#x27;s
+     * A description of the error which occurred
+     * Will be displayed in the body of the error modal
      */
-    clickModalButton() {
-        return element(by.id(&#x27;modalButton&#x27;)).click();
-    }
-
-    /**
-     * Returns the information from the Modal page
-     */
-    getModal() {
-        return element(by.id(&#x27;myModal&#x27;));
-    }
+    errorMessage: string;
 }
 </code></pre>
     </div>
@@ -302,7 +245,7 @@ export class ViewTraineePage {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'ViewTraineePage.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ServiceError.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

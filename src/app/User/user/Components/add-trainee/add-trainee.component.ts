@@ -4,6 +4,9 @@ import { TraineesService } from '../../Services/trainees.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-add-trainee',
   templateUrl: './add-trainee.component.html',
@@ -12,8 +15,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AddTraineeComponent implements OnInit {
 
   submitted: Boolean = false;
-  /** need to implement batchId sharing between components,
-   * specifically between view-all-trainees and this component */
   @Input() batchId: number;
   @Output() addTraineeEvent = new EventEmitter<boolean>();
   fullName: string;
@@ -29,11 +30,24 @@ export class AddTraineeComponent implements OnInit {
   profileUrl: string;
   trainingStatus: string;
 
+  /**
+   * @param ts The trainee service from the User folder, used to communicate with the user microservice
+   * @param errorService The error service from the error handling folder,
+   *   used to communicate with the error modal to display errors on failed http requests
+   */
   constructor(private ts: TraineesService, private errorService: ErrorService) {}
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
   }
 
+  /**
+   * creates a trainee and populates with current fields, then sends the post request to the service
+   * Resets the fields upon hearing a response from the user service. Pops up an error modal if the http
+   * request fails
+   */
   addTrainee() {
     const trainee = new Trainee();
     trainee.batchId = this.batchId;

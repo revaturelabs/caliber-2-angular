@@ -21,6 +21,9 @@ import { UserModule } from 'src/app/User/user/user.module';
   exports: [
     BatchViewComponent,
     BatchModalComponent
+  ],
+  bootstrap: [
+    BatchViewComponent
   ]
 })
 export class BatchModule { }

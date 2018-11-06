@@ -4,7 +4,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { ManageComponent } from './manage/manage.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserModule } from './User/user/user.module';
@@ -16,7 +15,6 @@ describe('AppComponent', () => {
         HeaderComponent,
         FooterComponent,
         HomeComponent,
-        ManageComponent
       ],
     imports: [
       AppRoutingModule,

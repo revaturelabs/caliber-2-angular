@@ -25,3 +25,5 @@ describe('UpdateTraineeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+});

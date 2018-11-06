@@ -11,15 +11,22 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 })
 export class DeleteTraineeComponent implements OnInit {
 
-  @Input()
   /**
-   * trainee refers to the specific trainee object that is to be deleted
+   * expects a 'trainee' as an input
    */
+  @Input()
   private trainee: Trainee;
 
+  /**
+   * expects to output an 'EventEmitter<boolean>'
+   */
   @Output()
   refreshList = new EventEmitter<boolean>();
 
+  /**
+   * calls the 'deleteTrainee' function from 'TraineeService' to delete the trainee
+   * @param trainee the trainee that is to be deleted
+   */
   private deleteTrainee(trainee: Trainee) {
     this.ts.deleteTrainee(trainee.traineeId).subscribe(data => {
       this.refreshList.emit(true);
@@ -36,12 +43,19 @@ export class DeleteTraineeComponent implements OnInit {
     });
   }
 
+  /**
+   * @param ts The trainee service from the User folder, used to communicate with the user microservice
+   * @param errorService The error service from the error handling folder,
+   *   used to communicate with the error modal to display errors on failed http requests
+   */
   constructor(private ts: TraineesService, private errorService: ErrorService) { }
 
+  /**
+   * Initializes the trainee and their name on init to prevent binding errors
+   */
   ngOnInit() {
     this.trainee = new Trainee();
     this.trainee.name = '';
-    console.log(this.trainee);
   }
 
 }
