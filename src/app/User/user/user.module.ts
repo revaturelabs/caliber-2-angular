@@ -28,7 +28,8 @@ import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.com
     ViewTraineesComponent,
     UpdateTraineeComponent,
     TraineeTogglePipe,
-    DeleteTraineeComponent
+    DeleteTraineeComponent,
+    SwitchBatchComponent
   ]
 })
 export class UserModule { }
