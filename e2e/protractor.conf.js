@@ -7,8 +7,8 @@ exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
   allScriptsTimeout: 11000,
   specs: [
-    './src/**/*.e2e-spec.ts',
-    './src/app/**/*.spec.ts'
+    './src/**/*.e2e-spec.ts'
+    // './src/app/**/*.spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'

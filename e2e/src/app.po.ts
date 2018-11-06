@@ -1,5 +1,8 @@
 import { browser, by, element } from 'protractor';
 
+const viewABatchUrl = '';
+const buttonToOpenViewTraineesModal = '';
+
 export class AppPage {
   navigateTo() {
     return browser.get('/');
@@ -43,7 +46,50 @@ export class AppPage {
   /* FOR FOOTER TESTS */
 
   getFooterRevature() {
-   return element(by.css('app-root #footer-id'));
-
+    return element(by.css('app-root #footer-id')).getText();
+  }
 }
+
+export class ViewTraineesInBatchPage {
+  navigateTo() {
+    return browser.get('/' + viewABatchUrl);
+  }
+
+  getPopupTraineesinBatchModalH4() {
+    element(by.css('app-root .glyphicon-user')).click();
+    return element(by.css('app-root h4')).getText();
+  }
+
+  getAnAddTraineeModal() {
+    element(by.id('modalButton')).click();
+    browser.sleep(3000);
+    element(by.id('addTraineeButton')).click();
+    browser.sleep(3000);
+    return element(by.id('addTraineeHeader')).getText();
+  }
+
+  getATraineeCommentForm() {
+    element(by.id('modalButton')).click();
+    browser.sleep(3000);
+    element.all(by.css('app-root td')).first().click();
+    browser.sleep(3000);
+    return element.all(by.css('app-root td form input')).first().getAttribute('placeholder');
+  }
+
+  getATraineeUpdateForm() {
+    element(by.id('modalButton')).click();
+    browser.sleep(3000);
+    element.all(by.css('app-root .glyphicon-pencil')).first().click();
+    browser.sleep(3000);
+    return element(by.css('app-root #updateTraineeHeader')).getText();
+  }
+
+  getATraineeDeleteForm() {
+    element(by.id('modalButton')).click();
+    browser.sleep(3000);
+    element.all(by.css('app-root .glyphicon-remove')).first().click();
+    browser.sleep(3000);
+    return element(by.css('app-root #deleteTraineeHeader')).getText();
+  }
+
 }
