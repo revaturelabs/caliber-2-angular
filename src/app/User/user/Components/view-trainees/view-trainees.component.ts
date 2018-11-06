@@ -110,11 +110,6 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
     this.switchTrainee = trainee;
   }
 
-  refreshAdd() {
-    this.refreshList();
-
-  }
-
   refreshView() {
     this.batchId = 0;
     this.trainees = null;
