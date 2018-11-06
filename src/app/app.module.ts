@@ -6,18 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ManageComponent } from './manage/manage.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { ErrorComponent } from './Error Handling/error/error.component';
+import { ErrorComponent } from './error-handling/error/error.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ManageComponent,
     HeaderComponent,
     FooterComponent,
     ErrorComponent,

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManageComponent } from './manage/manage.component';
 import { HomeComponent } from './home/home.component';
 import { BatchViewComponent } from './Team2/batch-view/batch-view.component';
 
