@@ -5,6 +5,8 @@ import { Batch } from '../type/batch';
 import { Trainer } from '../type/trainer';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { BLocation } from '../type/location';
+import { ServiceError } from 'src/app/error-handling/types/service-error';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 
   /*
@@ -64,7 +66,8 @@ export class BatchModalComponent implements OnInit, OnChanges {
   myDate: Date;
 
   constructor(
-    private batchservice: BatchService) {
+    private batchservice: BatchService,
+    private errorService: ErrorService) {
     this.trainingTypes = ['Revature', 'Corporate', 'University', 'Other'];
   }
 
@@ -75,6 +78,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
     this.location = this.createOrUpdate.location;
+    this.locationId = this.createOrUpdate.locationId;
     this.trainer = this.createOrUpdate.trainer;
     this.coTrainer = this.createOrUpdate.coTrainer;
 
@@ -93,21 +97,36 @@ export class BatchModalComponent implements OnInit, OnChanges {
     // generate all the skilltypes
     this.batchservice.getAllSkillTypes().subscribe(results => {
       this.skillTypes = results;
-    });
+    }, error => {
+      const serviceName = 'Skill Type Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
+    }
+    );
     // generate all the locations
     this.batchservice.getAllLocations().subscribe(locs => {
       this.locationOptions = locs;
+    }, error => {
+      const serviceName = 'Location Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
     // generate all the trainers
     this.batchservice.getAllTrainers().subscribe(t => {
       this.trainers = t;
+    }, error => {
+      const serviceName = 'Trainer Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
   // prepopulates the batch info if existing batch is passed through the parent
   ngOnChanges() {
     if (this.createOrUpdate != null) {
+      console.log('change detected');
       this.setValues();
+      console.log(this.locationId);
     }
   }
 
@@ -121,6 +140,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.trainer = undefined;
     this.coTrainer = undefined;
     this.location = undefined;
+    this.locationId = undefined;
     this.startDate = undefined;
     this.endDate = undefined;
     this.goodGradeThreshold = undefined;

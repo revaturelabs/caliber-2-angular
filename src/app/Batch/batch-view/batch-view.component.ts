@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/view-trainees.component';
 import { Batch } from '../type/batch';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
  /*
 
@@ -33,7 +34,8 @@ export class BatchViewComponent implements OnInit {
   selectedBatch: Batch;
   selectedBatchId = 0;
 
-  constructor(private batchservice: BatchService) { }
+  constructor(private batchservice: BatchService,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
     // gets all years for dropdown button
@@ -62,6 +64,10 @@ export class BatchViewComponent implements OnInit {
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
+    }, error => {
+      const serviceName = 'Batch Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
     this.getAllYears();
   }
@@ -72,6 +78,10 @@ export class BatchViewComponent implements OnInit {
     this.batchservice.getBatchesByYear(event).subscribe(result => {
       this.selectedBatches = result;
       this.getTraineeCount();
+    }, error => {
+      const serviceName = 'Batch Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
@@ -85,6 +95,10 @@ export class BatchViewComponent implements OnInit {
     console.log('ids: ' + allids);
     this.batchservice.getTraineeCount(allids).subscribe( count => {
       this.populateTraineeCount(count);
+    }, error => {
+      const serviceName = 'Batch Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
@@ -108,7 +122,11 @@ export class BatchViewComponent implements OnInit {
   deleteBatch(batchId: number) {
     console.log('delete');
     console.log(batchId);
-    this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage());
+    this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage(), error => {
+      const serviceName = 'Batch Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
+    });
   }
 
   // gets all start years from database for dropdown button
@@ -121,6 +139,10 @@ export class BatchViewComponent implements OnInit {
         this.selectedYear = this.defaultYears[this.defaultYears.length - 1];
         this.pickYear(this.defaultYears[this.defaultYears.length - 1]);
       }
+    }, error => {
+      const serviceName = 'Batch Service ';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
     });
   }
 
