@@ -205,6 +205,10 @@ a {
     border-color: #ccc;
 }
 
+#updateBtn {
+	width: 15%;
+}
+
 /************************
 ***Manage Batch Modal****
 *************************/
