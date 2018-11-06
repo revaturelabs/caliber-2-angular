@@ -35,20 +35,6 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   * @author Jacques Myette
   */
   private traineeTemp = new Trainee();
-  // submitted: Boolean = false;
-  // batchId = 0;
-  // fullName: string;
-  // email: string;
-  // skypeId: string;
-  // phoneNumber: string;
-  // college: string;
-  // degree: string;
-  // major: string;
-  // recruiterName: string;
-  // techScreenerName: string;
-  // projectCompletion: string;
-  // profileUrl: string;
-  // trainingStatus: string;
 
   /**
   * Inject our TraineeService to call our UpdateTrainee (put) method
