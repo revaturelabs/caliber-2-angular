@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
-
-import { BatchModule } from '../Team2/batch/batch.module';
-import { BatchViewComponent } from '../Team2/batch-view/batch-view.component';
+import { BatchViewComponent } from '../Batch/batch-view/batch-view.component';
 
 /**
  * This class is handles routing to the batch module, which contains the batch view

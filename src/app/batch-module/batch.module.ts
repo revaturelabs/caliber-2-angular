@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BatchRoutingModule } from './batch-routing.service';
-import { BatchViewComponent } from '../Team2/batch-view/batch-view.component';
-import { BatchModule } from '../Team2/batch/batch.module';
+import { BatchModule } from '../Batch/batch/batch.module';
 
 
 /**
