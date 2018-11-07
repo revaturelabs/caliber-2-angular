@@ -7,15 +7,13 @@ import { Batch } from '../type/batch';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 
- /*
-
- The batch-view component is the parent component for the manage batch feature.
- This component allows the user to view all of the batches by the selected year.
- This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
- @author Anthony Jin, Juan Trejo
-
- */
-
+ /**
+  *  The batch-view component is the parent component for the manage batch feature.
+  *This component allows the user to view all of the batches by the selected year.
+  *This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
+  * @author Anthony Jin, Juan Trejo
+  *
+  */
 @Component({
   selector: 'app-batch-view',
   templateUrl: './batch-view.component.html',
@@ -42,7 +40,9 @@ export class BatchViewComponent implements OnInit {
     this.getAllYears();
   }
 
-  // resets createorUpdate variable for child component
+  /**
+   * resets createorUpdate variable for child component
+   */
   resetBatchForm(): void {
     this.createUpdate = null;
     this.batchModal.resetForm();
@@ -54,13 +54,18 @@ export class BatchViewComponent implements OnInit {
 
   }
 
-  // sets batch information for child component
+  /**
+   * sets batch information for child component
+   * @param batch batch to populate the child component form
+   */
   populateBatch(batch: Batch) {
     console.log(batch);
     this.createUpdate = batch;
   }
 
-  // re-renders contents in batch view component
+  /**
+   * re-renders contents in batch view component
+   */
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
@@ -72,7 +77,10 @@ export class BatchViewComponent implements OnInit {
     this.getAllYears();
   }
 
-  // renders contents in view batch component based on year selected
+  /**
+   * renders contents in view batch component based on year selected
+   * @param event year selected to display batches from
+   */
   pickYear(event: number) {
     this.selectedYear =  event;
     this.batchservice.getBatchesByYear(event).subscribe(result => {
@@ -85,6 +93,9 @@ export class BatchViewComponent implements OnInit {
     });
   }
 
+  /**
+   * gets all trainee counts for the batches
+   */
   getTraineeCount() {
     const allids: number[] = [];
     for (const batch of this.selectedBatches) {
@@ -102,6 +113,10 @@ export class BatchViewComponent implements OnInit {
     });
   }
 
+  /**
+   * sets all trainee counts for the batches
+   * @param count 2d array returned from batchservice call
+   */
   populateTraineeCount(count: number[][]) {
     for (const batch of this.selectedBatches) {
       for (const c of count) {
@@ -112,13 +127,18 @@ export class BatchViewComponent implements OnInit {
     }
   }
 
-  // stores batch id for trainee display
+  /**
+   * stores batch id for trainee display
+   * @param bid the batch identifier
+   */
   selectCurrentBatch(bid: number) {
-    // sessionStorage.setItem('bid', '' + bid);
     this.selectedBatchId = bid;
   }
 
-  // removes a batch
+  /**
+   * removes a batch
+   * @param batchId batchid of the batch to be deleted
+   */
   deleteBatch(batchId: number) {
     console.log('delete');
     console.log(batchId);
@@ -129,7 +149,9 @@ export class BatchViewComponent implements OnInit {
     });
   }
 
-  // gets all start years from database for dropdown button
+  /**
+   * gets all start years from database for dropdown button
+   */
   getAllYears() {
     this.batchservice.getAllYears().subscribe(years => {
       if (years.length === 0 ) {
@@ -146,6 +168,9 @@ export class BatchViewComponent implements OnInit {
     });
   }
 
+  /**
+   * closes trainee modal and resets the selected batchid
+   */
   traineeClose() {
     this.viewTraineeModal.refreshView();
     this.selectedBatchId = 0;

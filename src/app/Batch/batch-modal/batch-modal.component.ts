@@ -9,15 +9,12 @@ import { ServiceError } from 'src/app/error-handling/types/service-error';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 
-  /*
-  The batch modal component is the child component of the batch view component.
-  It handles the modal used to create and update batches.
-  This component also handles form validation from the user.
-  @author Anthony Jin, Juan Trejo
-
- */
-
-
+  /**
+  * The batch modal component is the child component of the batch view component.
+  *It handles the modal used to create and update batches.
+  *This component also handles form validation from the user.
+  * @author Anthony Jin, Juan Trejo
+  */
 @Component({
   selector: 'app-batch-modal',
   templateUrl: './batch-modal.component.html',
@@ -25,22 +22,17 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 })
 export class BatchModalComponent implements OnInit, OnChanges {
 
-  /*
- The batch modal component is the child component of the batch view component.
- It handles the modal used to create and update batches.
- This component also handles form validation from the user.
- @author Anthony Jin, Juan Trejo
-
-*/
-
-  // grabs value from parent component
+  /**
+   * grabs value from parent component
+   */
   @Input() createOrUpdate: Batch;
 
-  // modal event emmitters
+  /**
+   * modal event emmitters
+   */
   @Output() someEvent = new EventEmitter<string>();
   @Output() closeEvent = new EventEmitter<string>();
 
-  // class variables
   currBatch: Batch;
   batchFormName: '';
   trainingName: string = null;
@@ -52,7 +44,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
   locationId: number;
   locationOptions: BLocation[];
   trainer: string = null;
-  // needs to be a user type
   trainers: Trainer[];
   coTrainer: string = null;
   startDate: Date;
@@ -70,7 +61,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     private errorService: ErrorService) {
   }
 
-  // populates form modal if updating batch and not creating new
+  /**
+   * populates form modal if updating batch and not creating new
+   */
   setValues() {
     console.log(this.createOrUpdate);
     this.trainingName = this.createOrUpdate.trainingName;
@@ -121,7 +114,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     });
   }
 
-  // prepopulates the batch info if existing batch is passed through the parent
+  /**
+   * prepopulates the batch info if existing batch is passed through the parent
+   */
   ngOnChanges() {
     if (this.createOrUpdate != null) {
       console.log('change detected');
@@ -129,7 +124,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     }
   }
 
-  // resets the form info to default values
+  /**
+   * resets the form info to default values
+   */
   resetForm() {
     console.log('inside resetForm');
     this.trainingName = null;
@@ -148,7 +145,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.createOrUpdate = null;
   }
 
-  // creates a brand new batch with form inputs
+  /**
+   * creates a brand new batch with form inputs
+   */
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
@@ -170,7 +169,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
       });
   }
 
-  // updates the batch using form inputs
+  /**
+   * updates the batch using form inputs
+   */
   updateBatch(): void {
     // set dates and account for time zone difference
     const d = new Date(this.startDate);
@@ -192,20 +193,26 @@ export class BatchModalComponent implements OnInit, OnChanges {
     });
   }
 
-  // sets minimal passing grade
+  /**
+   * sets minimal passing grade
+   */
   setMinGrade(): void {
     this.borderlineGradeThreshold = this.goodGradeThreshold;
   }
 
-  // sets maximum grade
+  /**
+   * sets maximum grade
+   */
   lowerMinGrade(): void {
     if (this.borderlineGradeThreshold > this.goodGradeThreshold) {
       this.borderlineGradeThreshold = this.goodGradeThreshold;
     }
   }
 
-  // handles error checking for batch form when creating new batch
-  checkDates(id: string): void {
+  /**
+   * handles error checking for batch form when creating new batch
+   */
+  checkDates(): void {
     const d = new Date(this.startDate);
     this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
@@ -231,8 +238,10 @@ export class BatchModalComponent implements OnInit, OnChanges {
     }
   }
 
-  // handles error checking for batch when updating current batch
-  checkDates2(id: string): void {
+  /**
+   *  handles error checking for batch when updating current batch
+   */
+  checkDates2(): void {
     const d = new Date(this.startDate);
     d.setHours(0, 0, 0, 0);
     const d2 = new Date(this.endDate);
@@ -264,24 +273,41 @@ export class BatchModalComponent implements OnInit, OnChanges {
     }
   }
 
-  // setter methods
+  /**
+   * set training type
+   * @param option trainingType
+   */
   setTrainingType(option: string) {
     this.trainingType = option;
   }
 
+  /**
+   * set skilltype
+   * @param option skilltype
+   */
   setSkillType(option: string) {
     this.skillType = option;
   }
 
+  /**
+   * set location
+   * @param option location
+   */
   setLocation(option: number) {
     this.locationId = option;
   }
 
+  /**
+   * set trainer
+   * @param option trainer
+   */
   setTrainer(option: string) {
     this.trainer = option;
   }
 
-  // closes error modal
+  /**
+   *  closes error modal
+   */
   closeModal() {
     document.getElementById('checkBatchModalDate').className = 'hidden';
     this.dateIsError = false;
