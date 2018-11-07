@@ -148,6 +148,8 @@
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>constructor for batch</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -156,6 +158,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -170,6 +173,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>batch name</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>trainingType</td>
@@ -182,6 +189,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>training type</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>skillType</td>
@@ -194,6 +205,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>skill type</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>trainer</td>
@@ -206,6 +221,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>trainer</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>coTrainer</td>
@@ -218,6 +237,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>co-trainer</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>locationId</td>
@@ -230,6 +253,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>location Id</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>startDate</td>
@@ -242,6 +269,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>start date</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>endDate</td>
@@ -254,6 +285,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>end date</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>goodGrade</td>
@@ -266,6 +301,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>good grade</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>passingGrade</td>
@@ -278,6 +317,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>minimal passing grade</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -762,7 +805,19 @@
     passingGrade: number;
     traineeCount: number;
 
-    //  constructor for batch object
+    /**
+     * constructor for batch
+     * @param trainingName batch name
+     * @param trainingType training type
+     * @param skillType skill type
+     * @param trainer trainer
+     * @param coTrainer co-trainer
+     * @param locationId location Id
+     * @param startDate start date
+     * @param endDate end date
+     * @param goodGrade good grade
+     * @param passingGrade minimal passing grade
+     */
     constructor(trainingName: string, trainingType: string, skillType: string, trainer: string, coTrainer: string,
         locationId: number, startDate: Date, endDate: Date, goodGrade: number, passingGrade: number) {
             this.trainingName &#x3D; trainingName;

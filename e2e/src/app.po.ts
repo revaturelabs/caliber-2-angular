@@ -91,5 +91,4 @@ export class ViewTraineesInBatchPage {
     browser.sleep(3000);
     return element(by.css('app-root #deleteTraineeHeader')).getText();
   }
-
 }
