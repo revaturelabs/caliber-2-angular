@@ -26,13 +26,3 @@ describe('BatchViewComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-describe('BatchViewMethods', () => {
-  let batchComponent: BatchViewComponent;
-  let batchService: BatchService;
-  let errorService: ErrorService;
-
-  beforeEach(() => {
-    batchComponent = new BatchViewComponent(batchService, errorService);
-  });
-});
