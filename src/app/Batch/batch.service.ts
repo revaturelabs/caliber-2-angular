@@ -17,7 +17,7 @@ const httpOptions = {
 /**
 * The url for getting current batches from the batch microservice
 */
-const currentBatchUrl = 'http://localhost:9095/vp/batch/all/current';
+const currentBatchUrl = 'http://localhost:9090/vp/batch/all/current';
 
 
 /**
@@ -33,18 +33,18 @@ The batch service handles all of the http client methods used to send and reciev
 export class BatchService {
 
 
-  url = 'http://localhost:9095';
+  url = 'http://localhost:9090';
   batchAllURL = '/vp/batch/all';
-  allBatchURL = 'all/batch/';
+  allBatchURL = '/all/batch/';
   batchesYearURL = '/vp/batch/';
   batchCreateURL = '/all/batch/create';
   batchUpdateURL = '/all/batch/update';
   batchDeleteURL = '/all/batch/delete/';
-  skillTypesAllURL = 'http://localhost:8080/types/skill/all';
-  locationsAllURL = 'http://localhost:8040/all/location/all';
-  trainersAllURL = 'http://localhost:9085/all/trainer/all';
-  batchAllYearsURL = '/valid_years';
-  traineeCountURL = 'http://localhost:9085/all/count/';
+  skillTypesAllURL = 'http://localhost:9090/types/skill/all';
+  locationsAllURL = 'http://localhost:9090/all/location/all';
+  trainersAllURL = 'http://localhost:9090/all/trainer/all';
+  batchAllYearsURL = '/all/batch/valid_years';
+  traineeCountURL = 'http://localhost:9090/all/trainee/count/';
 
   constructor(private http: HttpClient) { }
 
