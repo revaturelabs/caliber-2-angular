@@ -83,8 +83,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // handle start and end dates
     const d = new Date(this.createOrUpdate.startDate);
-    this.startDate = d;
-    this.endDate = this.createOrUpdate.endDate;
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    const d2 = new Date(this.createOrUpdate.endDate);
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // handle grades
     this.goodGradeThreshold = this.createOrUpdate.goodGrade;
@@ -125,7 +126,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
     if (this.createOrUpdate != null) {
       console.log('change detected');
       this.setValues();
-      console.log(this.locationId);
     }
   }
 
@@ -155,12 +155,10 @@ export class BatchModalComponent implements OnInit, OnChanges {
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
 
     // account for time zone differences
-    const sdate = new Date(this.startDate);
-    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
-    this.startDate = sdate;
-    const edate = new Date(this.endDate);
-    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
-    this.endDate = edate;
+    const d = new Date(this.startDate);
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    const d2 = new Date(this.endDate);
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
@@ -175,12 +173,10 @@ export class BatchModalComponent implements OnInit, OnChanges {
   // updates the batch using form inputs
   updateBatch(): void {
     // set dates and account for time zone difference
-    const sdate = new Date(this.startDate);
-    sdate.setMinutes(sdate.getMinutes() + sdate.getTimezoneOffset());
-    this.startDate = sdate;
-    const edate = new Date(this.endDate);
-    edate.setMinutes(edate.getMinutes() + edate.getTimezoneOffset());
-    this.endDate = edate;
+    const d = new Date(this.startDate);
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    const d2 = new Date(this.endDate);
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // make updated batch
     const batch = new Batch(this.trainingName, this.trainingType,
@@ -210,6 +206,10 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
   // handles error checking for batch form when creating new batch
   checkDates(id: string): void {
+    const d = new Date(this.startDate);
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    const d2 = new Date(this.endDate);
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
     if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
       this.dateIsError = true;
       this.trainerIsError = true;
@@ -223,9 +223,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
-    }
-
-    if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
+    } else  {
       this.createBatch();
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true });
@@ -235,23 +233,31 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
   // handles error checking for batch when updating current batch
   checkDates2(id: string): void {
-    if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
+    const d = new Date(this.startDate);
+    d.setHours(0, 0, 0, 0);
+    const d2 = new Date(this.endDate);
+    d2.setHours(0, 0, 0, 0);
+    console.log(d + '|' + d2);
+    if (d >= d2 && this.trainer === this.coTrainer) {
+      console.log(1);
       this.dateIsError = true;
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
-    } else if (this.startDate >= this.endDate) {
+    } else if (d >= d2) {
+      console.log(2);
       this.dateIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
     } else if (this.trainer === this.coTrainer) {
+      console.log(3);
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
-    }
-
-    if (this.startDate < this.endDate && (this.trainer !== this.coTrainer)) {
+    } else {
+      console.log(5);
       this.updateBatch();
+      console.log(6);
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true });
       elem.dispatchEvent(evt);
