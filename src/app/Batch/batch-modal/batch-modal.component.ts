@@ -76,9 +76,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // handle start and end dates
     const d = new Date(this.createOrUpdate.startDate);
-    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.createOrUpdate.endDate);
-    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
 
     // handle grades
     this.goodGradeThreshold = this.createOrUpdate.goodGrade;
@@ -155,9 +155,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // account for time zone differences
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
 
     // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
@@ -175,9 +175,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
   updateBatch(): void {
     // set dates and account for time zone difference
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
 
     // make updated batch
     const batch = new Batch(this.trainingName, this.trainingType,
@@ -214,9 +214,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
    */
   checkDates(): void {
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
     if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
       this.dateIsError = true;
       this.trainerIsError = true;
