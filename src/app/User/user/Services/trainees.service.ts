@@ -16,22 +16,22 @@ const httpOptions = {
 /**
  * The url for getting all trainees by the batch id from the user service
  */
-const getUrl = 'http://localhost:9085/all/trainee?batch=';
+const getUrl = 'http://localhost:9090/all/trainee?batch=';
 
 /**
  * The url to update a trainee in the user service
  */
-const updateUrl = 'http://localhost:9085/all/trainee/update';
+const updateUrl = 'http://localhost:9090/all/trainee/update';
 
 /**
  * The url to create a trainee in the user service
  */
-const createUrl = 'http://localhost:9085/all/trainee/create';
+const createUrl = 'http://localhost:9090/all/trainee/create';
 
 /**
  * The url to delete a trainee by their id in the user service
  */
-const deleteUrl = 'http://localhost:9085/all/trainee/delete/';
+const deleteUrl = 'http://localhost:9090/all/trainee/delete/';
 
 /**
  * @ignore

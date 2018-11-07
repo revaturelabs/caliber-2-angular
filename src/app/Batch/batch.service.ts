@@ -35,7 +35,7 @@ export class BatchService {
 
   url = 'http://localhost:9090';
   batchAllURL = '/vp/batch/all';
-  allBatchURL = 'all/batch/';
+  allBatchURL = '/all/batch/';
   batchesYearURL = '/vp/batch/';
   batchCreateURL = '/all/batch/create';
   batchUpdateURL = '/all/batch/update';
@@ -43,8 +43,8 @@ export class BatchService {
   skillTypesAllURL = 'http://localhost:9090/types/skill/all';
   locationsAllURL = 'http://localhost:9090/all/location/all';
   trainersAllURL = 'http://localhost:9090/all/trainer/all';
-  batchAllYearsURL = '/valid_years';
-  traineeCountURL = 'http://localhost:9090/all/count/';
+  batchAllYearsURL = '/all/batch/valid_years';
+  traineeCountURL = 'http://localhost:9090/all/trainee/count/';
 
   constructor(private http: HttpClient) { }
 
