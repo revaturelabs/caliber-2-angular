@@ -4,6 +4,7 @@ import { BatchViewComponent } from './batch-view.component';
 import { BatchService } from '../batch.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 
+
 describe('BatchViewComponent', () => {
   let component: BatchViewComponent;
   let fixture: ComponentFixture<BatchViewComponent>;
@@ -23,15 +24,5 @@ describe('BatchViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-});
-
-describe('BatchViewMethods', () => {
-  let batchComponent: BatchViewComponent;
-  let batchService: BatchService;
-  let errorService: ErrorService;
-
-  beforeEach(() => {
-    batchComponent = new BatchViewComponent(batchService, errorService);
   });
 });
