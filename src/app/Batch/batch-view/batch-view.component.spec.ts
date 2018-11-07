@@ -4,6 +4,7 @@ import { BatchViewComponent } from './batch-view.component';
 import { BatchService } from '../batch.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 
+
 describe('BatchViewComponent', () => {
   let component: BatchViewComponent;
   let fixture: ComponentFixture<BatchViewComponent>;
