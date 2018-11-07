@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UserModule } from './User/user/user.module';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { BatchModule } from '../app/Batch/batch/batch.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ManageComponent } from './manage/manage.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { ErrorComponent } from './error-handling/error/error.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ManageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,6 @@ import { ManageComponent } from './manage/manage.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

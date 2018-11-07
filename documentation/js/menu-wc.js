@@ -1,153 +1,41 @@
 'use strict';
 
-customElements.define('compodoc-menu', class extends HTMLElement {
-    constructor() {
-        super();
-        this.isNormalMode = this.getAttribute('mode') === 'normal';
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+customElements.define('compodoc-menu', function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+
+        _this.isNormalMode = _this.getAttribute('mode') === 'normal';
+        return _this;
     }
 
-    connectedCallback() {
-        this.render(this.isNormalMode);
-    }
-
-    render(isNormalMode) {
-        let tp = lithtml.html(`<nav>
-    <ul class="list">
-        <li class="title">
-            <a href="index.html" data-type="index-link">caliber-ui documentation</a>
-        </li>
-        <li class="divider"></li>
-        ${ isNormalMode ? `<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-` : '' }
-        <li class="chapter">
-            <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
-            <ul class="links">
-                    <li class="link">
-                        <a href="overview.html" data-type="chapter-link">
-                            <span class="icon ion-ios-keypad"></span>Overview
-                        </a>
-                    </li>
-                    <li class="link">
-                        <a href="index.html" data-type="chapter-link">
-                            <span class="icon ion-ios-paper"></span>README
-                        </a>
-                    </li>
-                    <li class="link">
-                        <a href="dependencies.html"
-                            data-type="chapter-link">
-                            <span class="icon ion-ios-list"></span>Dependencies
-                        </a>
-                    </li>
-            </ul>
-        </li>
-        <li class="chapter modules">
-            <a data-type="chapter-link" href="modules.html">
-                <div class="menu-toggler linked" data-toggle="collapse"
-                    ${ isNormalMode ? 'data-target="#modules-links"' : 'data-target="#xs-modules-links"' }>
-                    <span class="icon ion-ios-archive"></span>
-                    <span class="link-name">Modules</span>
-                    <span class="icon ion-ios-arrow-down"></span>
-                </div>
-            </a>
-            <ul class="links collapse"
-            ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
-                    <li class="link">
-                        <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
-                    </li>
-                    <li class="link">
-                        <a href="modules/UserModule.html" data-type="entity-link">UserModule</a>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                    ${ isNormalMode ? 'data-target="#components-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' : 'data-target="#xs-components-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' }>
-                                    <span class="icon ion-md-cog"></span>
-                                    <span>Components</span>
-                                    <span class="icon ion-ios-arrow-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                    ${ isNormalMode ? 'id="components-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' : 'id="xs-components-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' }>
-                                        <li class="link">
-                                            <a href="components/ViewtraineesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">ViewtraineesComponent</a>
-                                        </li>
-                                </ul>
-                            </li>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                    ${ isNormalMode ? 'data-target="#pipes-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' : 'data-target="#xs-pipes-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' }>
-                                    <span class="icon ion-md-add"></span>
-                                    <span>Pipes</span>
-                                    <span class="icon ion-ios-arrow-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                    ${ isNormalMode ? 'id="pipes-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' : 'id="xs-pipes-links-module-UserModule-eee13ac90923730d9cbd619ad164bcbe"' }>
-                                        <li class="link">
-                                            <a href="pipes/TraineeTogglePipe.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TraineeTogglePipe</a>
-                                        </li>
-                                </ul>
-                            </li>
-                    </li>
-            </ul>
-        </li>
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-            ${ isNormalMode ? 'data-target="#classes-links"' : 'data-target="#xs-classes-links"' }>
-                <span class="icon ion-ios-paper"></span>
-                <span>Classes</span>
-                <span class="icon ion-ios-arrow-down"></span>
-            </div>
-            <ul class="links collapse"
-            ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
-                    <li class="link">
-                        <a href="classes/ViewTraineePage.html" data-type="entity-link">ViewTraineePage</a>
-                    </li>
-            </ul>
-        </li>
-                <li class="chapter">
-                    <div class="simple menu-toggler" data-toggle="collapse"
-                        ${ isNormalMode ? 'data-target="#injectables-links"' : 'data-target="#xs-injectables-links"' }>
-                        <span class="icon ion-md-arrow-round-down"></span>
-                        <span>Injectables</span>
-                        <span class="icon ion-ios-arrow-down"></span>
-                    </div>
-                    <ul class="links collapse"
-                    ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
-                            <li class="link">
-                                <a href="injectables/ViewAllTraineesService.html" data-type="entity-link">ViewAllTraineesService</a>
-                            </li>
-                            <li class="link">
-                                <a href="injectables/ViewBatchesService.html" data-type="entity-link">ViewBatchesService</a>
-                            </li>
-                    </ul>
-                </li>
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-            ${ isNormalMode ? 'data-target="#miscellaneous-links"' : 'data-target="#xs-miscellaneous-links"' }>
-                <span class="icon ion-ios-cube"></span>
-                <span>Miscellaneous</span>
-                <span class="icon ion-ios-arrow-down"></span>
-            </div>
-            <ul class="links collapse"
-            ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
-                    <li class="link">
-                      <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
-                    </li>
-            </ul>
-        </li>
-        <li class="chapter">
-            <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>
-        </li>
-        <li class="divider"></li>
-        <li class="copyright">
-                Documentation generated using <a href="https://compodoc.app/" target="_blank">
-                            <img data-src="images/compodoc-vectorise.svg" class="img-responsive" data-type="compodoc-logo">
-                </a>
-        </li>
-    </ul>
-</nav>`);
+    _createClass(_class, [{
+        key: 'connectedCallback',
+        value: function connectedCallback() {
+            this.render(this.isNormalMode);
+        }
+    }, {
+        key: 'render',
+        value: function render(isNormalMode) {
+            let tp = lithtml.html(
+'<nav>\n    <ul class="list">\n        <li class="title">\n            \n                <a href="index.html" data-type="index-link">caliber-ui documentation</a>\n            \n        </li>\n\n        <li class="divider"></li>\n        ' + (isNormalMode ? '<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>' : '') + '\n        <li class="chapter">\n            <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>\n            <ul class="links">\n                \n                    <li class="link">\n                        <a href="overview.html" data-type="chapter-link">\n                            <span class="icon ion-ios-keypad"></span>Overview\n                        </a>\n                    </li>\n                    <li class="link">\n                        <a href="index.html" data-type="chapter-link">\n                            <span class="icon ion-ios-paper"></span>README\n                        </a>\n                    </li>\n                \n                \n                \n                    <li class="link">\n                        <a href="dependencies.html"\n                            data-type="chapter-link">\n                            <span class="icon ion-ios-list"></span>Dependencies\n                        </a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n        <li class="chapter modules">\n            <a data-type="chapter-link" href="modules.html">\n                <div class="menu-toggler linked" data-toggle="collapse"\n                    ' + (isNormalMode ? 'data-target="#modules-links"' : 'data-target="#xs-modules-links"') + '>\n                    <span class="icon ion-ios-archive"></span>\n                    <span class="link-name">Modules</span>\n                    <span class="icon ion-ios-arrow-down"></span>\n                </div>\n            </a>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"') + '>\n                \n                    <li class="link">\n                        <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>\n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#components-links-module-AppModule-aede6003919595fa72a2bb4156a72fe8"' : 'data-target="#xs-components-links-module-AppModule-aede6003919595fa72a2bb4156a72fe8"') + '>\n                                    <span class="icon ion-md-cog"></span>\n                                    <span>Components</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="components-links-module-AppModule-aede6003919595fa72a2bb4156a72fe8"' : 'id="xs-components-links-module-AppModule-aede6003919595fa72a2bb4156a72fe8"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="components/ErrorComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">ErrorComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/FooterComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">FooterComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/HeaderComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">HeaderComponent</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/AppRoutingModule.html" data-type="entity-link">AppRoutingModule</a>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/BatchModule.html" data-type="entity-link">BatchModule</a>\n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#components-links-module-BatchModule-a3354e4bbaed2c04484d0fb2b69b29ce"' : 'data-target="#xs-components-links-module-BatchModule-a3354e4bbaed2c04484d0fb2b69b29ce"') + '>\n                                    <span class="icon ion-md-cog"></span>\n                                    <span>Components</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="components-links-module-BatchModule-a3354e4bbaed2c04484d0fb2b69b29ce"' : 'id="xs-components-links-module-BatchModule-a3354e4bbaed2c04484d0fb2b69b29ce"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="components/BatchModalComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">BatchModalComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/BatchViewComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">BatchViewComponent</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/BatchRouteModule.html" data-type="entity-link">BatchRouteModule</a>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/BatchRoutingModule.html" data-type="entity-link">BatchRoutingModule</a>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/HomeModule.html" data-type="entity-link">HomeModule</a>\n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#components-links-module-HomeModule-6595ac00eebce5b281d4bf8a4852720c"' : 'data-target="#xs-components-links-module-HomeModule-6595ac00eebce5b281d4bf8a4852720c"') + '>\n                                    <span class="icon ion-md-cog"></span>\n                                    <span>Components</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="components-links-module-HomeModule-6595ac00eebce5b281d4bf8a4852720c"' : 'id="xs-components-links-module-HomeModule-6595ac00eebce5b281d4bf8a4852720c"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="components/HomeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">HomeComponent</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/HomeRoutingModule.html" data-type="entity-link">HomeRoutingModule</a>\n                        \n                        \n                        \n                        \n                        \n                    </li>\n                \n                    <li class="link">\n                        <a href="modules/UserModule.html" data-type="entity-link">UserModule</a>\n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#components-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"' : 'data-target="#xs-components-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"') + '>\n                                    <span class="icon ion-md-cog"></span>\n                                    <span>Components</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="components-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"' : 'id="xs-components-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="components/DeleteTraineeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">DeleteTraineeComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/SwitchBatchComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">SwitchBatchComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/UpdateTraineeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">UpdateTraineeComponent</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="components/ViewTraineesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">ViewTraineesComponent</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                        \n                        \n                        \n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#pipes-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"' : 'data-target="#xs-pipes-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"') + '>\n                                    <span class="icon ion-md-add"></span>\n                                    <span>Pipes</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="pipes-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"' : 'id="xs-pipes-links-module-UserModule-b6b53c4b7c971e88d2885e0083e5d38f"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="pipes/TraineeTogglePipe.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TraineeTogglePipe</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n            \n        \n        \n        \n        \n        <li class="chapter">\n            <div class="simple menu-toggler" data-toggle="collapse"\n            ' + (isNormalMode ? 'data-target="#classes-links"' : 'data-target="#xs-classes-links"') + '>\n                <span class="icon ion-ios-paper"></span>\n                <span>Classes</span>\n                <span class="icon ion-ios-arrow-down"></span>\n            </div>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"') + '>\n                \n                    <li class="link">\n                        <a href="classes/Batch.html" data-type="entity-link">Batch</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="classes/BLocation.html" data-type="entity-link">BLocation</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="classes/ServiceError.html" data-type="entity-link">ServiceError</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="classes/Trainer.html" data-type="entity-link">Trainer</a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n            \n                <li class="chapter">\n                    <div class="simple menu-toggler" data-toggle="collapse"\n                        ' + (isNormalMode ? 'data-target="#injectables-links"' : 'data-target="#xs-injectables-links"') + '>\n                        <span class="icon ion-md-arrow-round-down"></span>\n                        <span>Injectables</span>\n                        <span class="icon ion-ios-arrow-down"></span>\n                    </div>\n                    <ul class="links collapse"\n                    ' + (isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"') + '>\n                        \n                            <li class="link">\n                                <a href="injectables/BatchService.html" data-type="entity-link">BatchService</a>\n                            </li>\n                        \n                            <li class="link">\n                                <a href="injectables/ErrorService.html" data-type="entity-link">ErrorService</a>\n                            </li>\n                        \n                    </ul>\n                </li>\n            \n        \n        \n        \n        \n        \n            \n        \n        \n        <li class="chapter">\n            <div class="simple menu-toggler" data-toggle="collapse"\n            ' + (isNormalMode ? 'data-target="#miscellaneous-links"' : 'data-target="#xs-miscellaneous-links"') + '>\n                <span class="icon ion-ios-cube"></span>\n                <span>Miscellaneous</span>\n                <span class="icon ion-ios-arrow-down"></span>\n            </div>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"') + '>\n                \n                    <li class="link">\n                      <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>\n                    </li>\n                \n                \n                \n                \n                    <li class="link">\n                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n            \n            <li class="chapter">\n                <a data-type="chapter-link" href="routes.html"><span class="icon ion-ios-git-branch"></span>Routes</a>\n            </li>\n            \n        \n        \n        <li class="chapter">\n            <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>\n        </li>\n        \n        \n        \n        <li class="divider"></li>\n        <li class="copyright">\n                Documentation generated using <a href="https://compodoc.app/" target="_blank">\n                    \n                        \n                            <img data-src="images/compodoc-vectorise.png" class="img-responsive" data-type="compodoc-logo">\n                        \n                    \n                </a>\n        </li>\n        \n    </ul>\n</nav>'
+);
         this.innerHTML = tp.strings;
-    }
-});
+        }
+    }]);
+
+    return _class;
+}(HTMLElement));

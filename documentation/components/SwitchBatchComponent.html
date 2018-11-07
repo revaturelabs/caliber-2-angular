@@ -1,0 +1,897 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>caliber-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">caliber-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>SwitchBatchComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/User/user/Components/switch-batch/switch-batch.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-switch-batch</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./switch-batch.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./switch-batch.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#allBatches">allBatches</a>
+                            </li>
+                            <li>
+                                <a href="#batches">batches</a>
+                            </li>
+                            <li>
+                                <a href="#switchBatch">switchBatch</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#switchBatchForTrainee">switchBatchForTrainee</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#trainee">trainee</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#switchBatchEvent">switchBatchEvent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(bs: <a href="../injectables/BatchService.html">BatchService</a>, ts: TraineesService, errorService: <a href="../injectables/ErrorService.html">ErrorService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bs</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/BatchService.html" target="_self" >BatchService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The batch service from the batch folder, used to communicate with the batch microservice</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>ts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TraineesService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The trainee service from the User folder, used to communicate with the user microservice</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>errorService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ErrorService.html" target="_self" >ErrorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The error service from the error handling folder,
+used to communicate with the error modal to display errors on failed http requests</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="trainee"></a>
+                        <code>trainee</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>expects a &#39;trainee&#39; as an input</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code>Trainee</code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="switchBatchEvent"></a>
+                        <code>switchBatchEvent</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>expects to output an &#39;EventEmitter<boolean>&#39;</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:39</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnChanges"></a>
+                        <span class="name">
+                            <b>
+                            ngOnChanges
+                            </b>
+                            <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnChanges()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:79</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>filters out current batch and returns all other batches</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>grabs all of the batches and puts them in the &#39;allBatches&#39; field when initialized</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="switchBatchForTrainee"></a>
+                        <span class="name">
+                            <b>
+                            switchBatchForTrainee
+                            </b>
+                            <a href="#switchBatchForTrainee"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>switchBatchForTrainee(switchBatch)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:91</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Will swap the trainee&#39;s current batch with the new, desired batch</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>switchBatch</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>the batch that is to be switched to</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="allBatches"></a>
+                        <span class="name">
+                            <b>
+                            allBatches
+                            </b>
+                            <a href="#allBatches"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>allBatches:     <code><a href="../classes/Batch.html" target="_self" >Array&lt;Batch&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >Array&lt;Batch&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>All of the current batches as retrieved from the Batch microservice</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="batches"></a>
+                        <span class="name">
+                            <b>
+                            batches
+                            </b>
+                            <a href="#batches"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>batches:     <code><a href="../classes/Batch.html" target="_self" >Array&lt;Batch&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Batch.html" target="_self" >Array&lt;Batch&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>All of the current batches minus the current batch</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="switchBatch"></a>
+                        <span class="name">
+                            <b>
+                            switchBatch
+                            </b>
+                            <a href="#switchBatch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>switchBatch:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/User/user/Components/switch-batch/switch-batch.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The batch id of the batch to be switched to as a string</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, OnChanges, Output } from &#x27;@angular/core&#x27;;
+import { Batch } from &#x27;src/app/Batch/type/batch&#x27;;
+import { BatchService } from &#x27;src/app/Batch/batch.service&#x27;;
+import { Trainee } from &#x27;../../Types/trainee&#x27;;
+import { TraineesService } from &#x27;../../Services/trainees.service&#x27;;
+import { EventEmitter } from &#x27;@angular/core&#x27;;
+import { ErrorService } from &#x27;src/app/error-handling/services/error.service&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+
+
+@Component({
+  selector: &#x27;app-switch-batch&#x27;,
+  templateUrl: &#x27;./switch-batch.component.html&#x27;,
+  styleUrls: [&#x27;./switch-batch.component.css&#x27;]
+})
+/**
+ * Component used for handling switching trainees from one batch to another
+ */
+export class SwitchBatchComponent implements OnInit, OnChanges {
+
+  /**
+   * All of the current batches minus the current batch
+   */
+  batches: Array&lt;Batch&gt; &#x3D; [];
+
+  /**
+   * All of the current batches as retrieved from the Batch microservice
+   */
+  allBatches: Array&lt;Batch&gt; &#x3D; [];
+
+  /**
+   * The batch id of the batch to be switched to as a string
+   */
+  switchBatch &#x3D; &#x27;&#x27;;
+
+  /**
+   * expects to output an &#x27;EventEmitter&lt;boolean&gt;&#x27;
+   */
+  @Output() switchBatchEvent &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+   * expects a &#x27;trainee&#x27; as an input
+   */
+  @Input() trainee: Trainee;
+
+  /**
+   * @param bs The batch service from the batch folder, used to communicate with the batch microservice
+   * @param ts The trainee service from the User folder, used to communicate with the user microservice
+   * @param errorService The error service from the error handling folder,
+   *   used to communicate with the error modal to display errors on failed http requests
+   */
+  constructor(
+    private bs: BatchService,
+    private ts: TraineesService,
+    private errorService: ErrorService) { }
+
+  /**
+   * grabs all of the batches and puts them in the &#x27;allBatches&#x27; field when initialized
+   */
+  ngOnInit() {
+    this.bs.getBatches().subscribe(data &#x3D;&gt; {
+      this.allBatches &#x3D; data;
+    },
+    issue &#x3D;&gt; {
+      if (issue instanceof HttpErrorResponse) {
+        const err &#x3D; issue as HttpErrorResponse;
+        this.errorService.setError(&#x27;ViewBatchService&#x27;,
+        &#x60;Issue getting batches. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}&#x60;);
+      }
+    });
+  }
+
+  /**
+   * filters out current batch and returns all other batches
+   */
+  ngOnChanges() {
+    if (this.batches &amp;&amp; this.trainee) {
+      this.batches &#x3D; this.allBatches.filter(batch &#x3D;&gt; {
+        return batch.batchId !&#x3D;&#x3D; this.trainee.batchId;
+      });
+    }
+  }
+
+  /**
+   * Will swap the trainee&#x27;s current batch with the new, desired batch
+   * @param switchBatch the batch that is to be switched to
+   */
+  switchBatchForTrainee(switchBatch) {
+    if (switchBatch) {
+      this.trainee.batchId &#x3D; Number(switchBatch);
+      this.ts.updateTrainee(this.trainee).subscribe(data &#x3D;&gt; {
+        if (data) {
+          const elem &#x3D; document.getElementById(&#x27;closeButton3&#x27;);
+          const evt &#x3D; new MouseEvent(&#x27;click&#x27;, { bubbles: true });
+          elem.dispatchEvent(evt);
+          this.switchBatchEvent.emit(true);
+        }
+      },
+      issue &#x3D;&gt; {
+        if (issue instanceof HttpErrorResponse) {
+          const err &#x3D; issue as HttpErrorResponse;
+          this.errorService.setError(&#x27;TraineesService&#x27;,
+          &#x60;Issue updating trainee ${this.trainee.name}. Please contact system administrator: \n
+          Status Code: ${err.status} \n
+          Status Text: ${err.statusText} \n
+          Error: ${err.message}&#x60;);
+        }
+      });
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form (submit)&#x3D;&quot;switchBatchForTrainee(switchBatch)&quot; name&#x3D;&quot;switchBatchForm&quot;&gt;
+	&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;switchBatchModal&quot; tabindex&#x3D;&quot;0&quot;
+		role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;traineeModalLabel&quot;&gt;
+		&lt;div class&#x3D;&quot;modal-dialog&quot; role&#x3D;&quot;document&quot;&gt;
+			&lt;div class&#x3D;&quot;modal-content&quot;&gt;
+				&lt;div class&#x3D;&quot;modal-header&quot;&gt;
+					&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot;
+						aria-label&#x3D;&quot;Close&quot;&gt;
+						&lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
+					&lt;/button&gt;
+					&lt;h4 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;traineeModalLabel&quot;&gt;Switch Batch&lt;/h4&gt;
+				&lt;/div&gt;
+				&lt;div class&#x3D;&quot;modal-body&quot;&gt;
+					&lt;div class&#x3D;&quot;row&quot;&gt;
+						&lt;div class&#x3D;&quot;form-group col-lg-12 col-md-12 col-sm-12&quot;&gt;
+							&lt;label for&#x3D;&quot;switchBatch&quot;&gt;Batch:&lt;/label&gt; &lt;select id&#x3D;&quot;switchBatch&quot;
+								class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;switchBatch&quot; name&#x3D;&quot;switchBatch&quot;&gt;
+								&lt;option *ngFor&#x3D;&quot;let batch of batches&quot; value&#x3D;&quot;{{batch.batchId}}&quot;&gt;{{batch.trainingName}} - {{batch.trainer}} - {{batch.batchId}}&lt;/option&gt;
+							&lt;/select&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+					&lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Switch&quot; class&#x3D;&quot;btn btn-lg btn-primary&quot;&gt;
+					&lt;button id&#x3D;&quot;closeButton3&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-default&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;Cancel&lt;/button&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./switch-batch.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form (submit)="switchBatchForTrainee(switchBatch)" name="switchBatchForm">	<div class="modal fade" id="switchBatchModal" tabindex="0"		role="dialog" aria-labelledby="traineeModalLabel">		<div class="modal-dialog" role="document">			<div class="modal-content">				<div class="modal-header">					<button type="button" class="close" data-dismiss="modal"						aria-label="Close">						<span aria-hidden="true">&times;</span>					</button>					<h4 class="modal-title" id="traineeModalLabel">Switch Batch</h4>				</div>				<div class="modal-body">					<div class="row">						<div class="form-group col-lg-12 col-md-12 col-sm-12">							<label for="switchBatch">Batch:</label> <select id="switchBatch"								class="form-control" [(ngModel)]="switchBatch" name="switchBatch">								<option *ngFor="let batch of batches" value="{{batch.batchId}}">{{batch.trainingName}} - {{batch.trainer}} - {{batch.batchId}}</option>							</select>						</div>					</div>				</div>				<div class="modal-footer">					<input type="submit" value="Switch" class="btn btn-lg btn-primary">					<button id="closeButton3" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>				</div>			</div>		</div>	</div></form></div>'
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SwitchBatchComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SwitchBatchComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

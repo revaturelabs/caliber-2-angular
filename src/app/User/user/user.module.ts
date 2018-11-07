@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddTraineeComponent } from './Components/add-trainee/add-trainee.component';
 import { UpdateTraineeComponent } from './Components/update-trainee/update-trainee.component';
 import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
+import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
 
 @NgModule({
   imports: [
@@ -14,13 +15,21 @@ import { DeleteTraineeComponent } from './Components/delete-trainee/delete-train
     FormsModule,
     HttpClientModule
   ],
-  declarations: [ViewTraineesComponent, TraineeTogglePipe, AddTraineeComponent, DeleteTraineeComponent, UpdateTraineeComponent],
+  declarations: [
+    ViewTraineesComponent,
+    SwitchBatchComponent,
+    TraineeTogglePipe,
+    AddTraineeComponent,
+    DeleteTraineeComponent,
+    UpdateTraineeComponent
+  ],
   exports: [
     AddTraineeComponent,
     ViewTraineesComponent,
     UpdateTraineeComponent,
     TraineeTogglePipe,
-    DeleteTraineeComponent
+    DeleteTraineeComponent,
+    SwitchBatchComponent
   ]
 })
 export class UserModule { }
