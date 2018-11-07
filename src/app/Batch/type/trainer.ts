@@ -6,6 +6,5 @@ export class Trainer {
     tier: string;
     password: string;
 
-    // constructor for trainer object
     constructor() {}
 }
