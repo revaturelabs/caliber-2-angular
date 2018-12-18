@@ -1,0 +1,6 @@
+<app-header></app-header>
+<div class="wrapper">
+    <router-outlet></router-outlet>
+    <app-error *ngIf="errorService.error" [currentError]="errorService.error"></app-error>
+</div>
+<app-footer></app-footer>

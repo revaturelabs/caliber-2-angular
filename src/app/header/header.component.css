@@ -1,0 +1,32 @@
+/**********************
+	Header
+**********************/
+.navbar-right {
+	margin-top: .75em;
+	margin-right: 5em;
+}
+
+.header-styles {
+	background-color: white;
+}
+
+a {
+	color: #F26925;
+}
+
+#logo-id {
+	padding-bottom: 14px;
+}
+
+.sticky-header {
+    padding: 10px;
+    padding-right: 55px;
+	/* padding-bottom:  */
+	font-size: 15px;
+	width: 1000px;
+
+}
+
+#logo-id {
+	padding-bottom: 14px;
+}

@@ -1,0 +1,12 @@
+.modal {
+	overflow-y:auto;
+  }
+
+/************************
+	Revature Fonts
+************************/
+
+html { 
+	font-size: 100%;
+	font-family: 'Futura-Std-Book';
+}

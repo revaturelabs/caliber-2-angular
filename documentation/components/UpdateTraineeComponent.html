@@ -1,0 +1,1001 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>caliber-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">caliber-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>UpdateTraineeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/User/user/Components/update-trainee/update-trainee.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>UpdateTrainee Component to update a trainee information using a modal.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-update-trainee</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./update-trainee.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./update-trainee.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#traineeTemp">traineeTemp</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close">close</a>
+                            </li>
+                            <li>
+                                <a href="#mergeTrainee">mergeTrainee</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refreshTrainee">refreshTrainee</a>
+                            </li>
+                            <li>
+                                <a href="#updateTrainee">updateTrainee</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#trainee">trainee</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#refreshList">refreshList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(ts: TraineesService, errorService: <a href="../injectables/ErrorService.html">ErrorService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Inject our TraineeService to call our UpdateTrainee (put) method</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>ts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TraineesService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>errorService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ErrorService.html" target="_self" >ErrorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="trainee"></a>
+                        <code>trainee</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Trainee object were passing from view-trainees component.
+Specifically passes the trainee object we want to update, depending
+on what row the update button was pressed.</p>
+</div>
+                            <p>
+                            <em>Type :</em>    <code>Trainee</code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:24</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="refreshList"></a>
+                        <code>refreshList</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Calls another get request to populate the trainees after we update a trainee.
+Passed as output to get back to our view-trainees component.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="close"></a>
+                        <span class="name">
+                            <b>
+                            close
+                            </b>
+                            <a href="#close"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>close()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:71</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called when &#39;Close&#39; button is clicked in our update modal.
+Sets temp Trainee back to original Trainee so values aren&#39;t saved in the update form.
+Refreshes view-all trainee using another get request.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mergeTrainee"></a>
+                        <span class="name">
+                            <b>
+                            mergeTrainee
+                            </b>
+                            <a href="#mergeTrainee"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>mergeTrainee()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:105</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called in updateTrainee().
+Sets our Trainee fields to the temp Trainee we have updated in our Update modal.
+Had to update every field because doing &#39;this.trainee = this.tempTrainee;&#39; wasn&#39;t working as expected.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnChanges"></a>
+                        <span class="name">
+                            <b>
+                            ngOnChanges
+                            </b>
+                            <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnChanges()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called when @input changes</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called when component is loaded</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="refreshTrainee"></a>
+                        <span class="name">
+                            <b>
+                            refreshTrainee
+                            </b>
+                            <a href="#refreshTrainee"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>refreshTrainee()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:82</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called in ngOnChanges()
+Sets our temp Trainee fields to the Trainee we are passing as Input to the component</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateTrainee"></a>
+                        <span class="name">
+                            <b>
+                            updateTrainee
+                            </b>
+                            <a href="#updateTrainee"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>updateTrainee()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:126</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Called when &#39;Update&#39; button is called in our Update Modal
+First merges the temp Trainee which is two-way bound in our Update Modal, to our actual trainee object
+Mocks a click event to the &#39;Close&#39; button id to close the modal when we want to update a trainee</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="traineeTemp"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            traineeTemp
+                            </b>
+                            <a href="#traineeTemp"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>traineeTemp:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Trainee()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/User/user/Components/update-trainee/update-trainee.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Use a Temp Trainee to two-way bind with our update form in our modal, so when
+the fields are changed but not updated, they&#39;re reverted to their original values.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from &#x27;@angular/core&#x27;;
+import { Trainee } from &#x27;../../Types/trainee&#x27;;
+import { TraineesService } from &#x27;../../Services/trainees.service&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import { ErrorService } from &#x27;src/app/error-handling/services/error.service&#x27;;
+
+/**
+  * UpdateTrainee Component to update a trainee information using a modal.
+  */
+@Component({
+  selector: &#x27;app-update-trainee&#x27;,
+  templateUrl: &#x27;./update-trainee.component.html&#x27;,
+  styleUrls: [&#x27;./update-trainee.component.css&#x27;]
+})
+export class UpdateTraineeComponent implements OnInit, OnChanges {
+
+  /**
+  * Trainee object were passing from view-trainees component.
+  * Specifically passes the trainee object we want to update, depending
+  * on what row the update button was pressed.
+  * @author Jacques Myette
+  */
+  @Input()
+  private trainee: Trainee;
+
+  /**
+  * Calls another get request to populate the trainees after we update a trainee.
+  * Passed as output to get back to our view-trainees component.
+  * @author Jacques Myette
+  */
+  @Output()
+  refreshList &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+  * Use a Temp Trainee to two-way bind with our update form in our modal, so when
+  * the fields are changed but not updated, they&#x27;re reverted to their original values.
+  * @author Jacques Myette
+  */
+  private traineeTemp &#x3D; new Trainee();
+
+  /**
+  * Inject our TraineeService to call our UpdateTrainee (put) method
+  * @author Jacques Myette
+  */
+  constructor(private ts: TraineesService, private errorService: ErrorService) { }
+
+  /**
+   * Called when @input changes
+   */
+  ngOnChanges() {
+    if (this.trainee) {
+      this.refreshTrainee();
+    }
+  }
+
+   /**
+   * Called when component is loaded
+   */
+  ngOnInit() {
+    this.trainee &#x3D; new Trainee();
+    this.trainee.email &#x3D; &#x27;&#x27;;
+  }
+
+
+  /**
+   * Called when &#x27;Close&#x27; button is clicked in our update modal.
+   * Sets temp Trainee back to original Trainee so values aren&#x27;t saved in the update form.
+   * Refreshes view-all trainee using another get request.
+   * @author Jacques Myette
+   */
+  close() {
+    // console.log(&#x27;in close() setting &#x27; + this.trainee.email + &#x27; to &#x27; + this.traineeTemp.email);
+    this.traineeTemp &#x3D; this.trainee;
+    this.refreshList.emit(true);
+  }
+
+  /**
+   * Called in ngOnChanges()
+   * Sets our temp Trainee fields to the Trainee we are passing as Input to the component
+   * @author Jacques Myette
+   */
+  refreshTrainee() {
+    if (this.trainee) {
+      this.traineeTemp.college &#x3D; this.trainee.college;
+      this.traineeTemp.degree &#x3D; this.trainee.degree;
+      this.traineeTemp.email &#x3D; this.trainee.email;
+      this.traineeTemp.major &#x3D; this.trainee.major;
+      this.traineeTemp.name &#x3D; this.trainee.name;
+      this.traineeTemp.phoneNumber &#x3D; this.trainee.phoneNumber;
+      this.traineeTemp.profileUrl &#x3D; this.trainee.profileUrl;
+      this.traineeTemp.projectCompletion &#x3D; this.trainee.projectCompletion;
+      this.traineeTemp.recruiterName &#x3D; this.trainee.recruiterName;
+      this.traineeTemp.techScreenerName &#x3D; this.trainee.techScreenerName;
+      this.traineeTemp.skypeId &#x3D; this.trainee.skypeId;
+      this.traineeTemp.trainingStatus &#x3D; this.trainee.trainingStatus;
+    }
+  }
+
+   /**
+   * Called in updateTrainee().
+   * Sets our Trainee fields to the temp Trainee we have updated in our Update modal.
+   * Had to update every field because doing &#x27;this.trainee &#x3D; this.tempTrainee;&#x27; wasn&#x27;t working as expected.
+   * @author Jacques Myette
+   */
+  mergeTrainee() {
+    this.trainee.college &#x3D; this.traineeTemp.college;
+    this.trainee.degree &#x3D; this.traineeTemp.degree;
+    this.trainee.email &#x3D; this.traineeTemp.email;
+    this.trainee.major &#x3D; this.traineeTemp.major;
+    this.trainee.name &#x3D; this.traineeTemp.name;
+    this.trainee.phoneNumber &#x3D; this.traineeTemp.phoneNumber;
+    this.trainee.profileUrl &#x3D; this.traineeTemp.profileUrl;
+    this.trainee.projectCompletion &#x3D; this.traineeTemp.projectCompletion;
+    this.trainee.recruiterName &#x3D; this.traineeTemp.recruiterName;
+    this.trainee.techScreenerName &#x3D; this.traineeTemp.techScreenerName;
+    this.trainee.skypeId &#x3D; this.traineeTemp.skypeId;
+    this.trainee.trainingStatus &#x3D; this.traineeTemp.trainingStatus;
+  }
+
+  /**
+   * Called when &#x27;Update&#x27; button is called in our Update Modal
+   * First merges the temp Trainee which is two-way bound in our Update Modal, to our actual trainee object
+   * Mocks a click event to the &#x27;Close&#x27; button id to close the modal when we want to update a trainee
+   * @author Jacques Myette
+   */
+  updateTrainee() {
+    this.mergeTrainee();
+    this.ts.updateTrainee(this.trainee).subscribe(data &#x3D;&gt; {
+      if (data) {
+        const elem &#x3D; document.getElementById(&#x27;closeButtonUpdate&#x27;);
+        const evt &#x3D; new MouseEvent(&#x27;click&#x27;, { bubbles: true });
+        elem.dispatchEvent(evt);
+        this.refreshList.emit(true);
+      }
+    },
+    issue &#x3D;&gt; {
+      if (issue instanceof HttpErrorResponse) {
+        const err &#x3D; issue as HttpErrorResponse;
+        this.errorService.setError(&#x27;TraineesService&#x27;,
+        &#x60;Issue updating trainee ${this.trainee.name}. Please contact system administrator: \n
+        Status Code: ${err.status} \n
+        Status Text: ${err.statusText} \n
+        Error: ${err.message}&#x60;);
+      }
+    });
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;div (onHidden)&#x3D;&quot;close()&quot; class&#x3D;&quot;modal fade in&quot; id&#x3D;&quot;updateTraineeModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;traineeModalLabel&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog modal-lg&quot; role&#x3D;&quot;document&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;close()&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;
+          &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;h4 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;traineeModalLabel&quot;&gt;Add Trainee&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        &lt;!-- Add New Trainee --&gt;
+        &lt;h3 id&#x3D;&quot;updateTraineeHeader&quot;&gt;Update Trainee&lt;/h3&gt;
+        &lt;form ngNativeValidate&gt;
+          &lt;div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeName&quot;&gt;Full Name:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeName&quot;
+                  placeholder&#x3D;&quot;Name&quot; name&#x3D;&quot;fullName&quot; [(ngModel)]&#x3D;&quot;traineeTemp.name&quot; required&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeEmail&quot;&gt;Email:&lt;/label&gt; &lt;input type&#x3D;&quot;email&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeEmail&quot;
+                  placeholder&#x3D;&quot;Email&quot; [(ngModel)]&#x3D;&quot;traineeTemp.email&quot; name&#x3D;&quot;email&quot; required&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeSkype&quot;&gt;Skype Id:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeSkype&quot;
+                  placeholder&#x3D;&quot;Skype Id&quot; [(ngModel)]&#x3D;&quot;traineeTemp.skypeId&quot; name&#x3D;&quot;skypeId&quot;&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineePhone&quot;&gt;Phone:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineePhone&quot;
+                  placeholder&#x3D;&quot;(xxx)-xxx-xxxx&quot; [(ngModel)]&#x3D;&quot;traineeTemp.phoneNumber&quot; name&#x3D;&quot;phoneNumber&quot;&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeCollege&quot;&gt;College:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeCollege&quot;
+                  placeholder&#x3D;&quot;College&quot; [(ngModel)]&#x3D;&quot;traineeTemp.college&quot; name&#x3D;&quot;college&quot;&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeDegree&quot;&gt;Degree:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeDegree&quot;
+                  placeholder&#x3D;&quot;Degree&quot; [(ngModel)]&#x3D;&quot;traineeTemp.degree &quot; name&#x3D;&quot;degree&quot;&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeMajor&quot;&gt;Major:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeMajor&quot;
+                  placeholder&#x3D;&quot;Major&quot; [(ngModel)]&#x3D;&quot;traineeTemp.major&quot; name&#x3D;&quot;major&quot;&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeRecruiterName&quot;&gt;Recruiter Name:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeRecruiterName&quot;
+                  placeholder&#x3D;&quot;Recruiter Name&quot; [(ngModel)]&#x3D;&quot;traineeTemp.recruiterName&quot; name&#x3D;&quot;recruiterName&quot;&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeTechScreenerName&quot;&gt;Tech Screener Name:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot;
+                  id&#x3D;&quot;traineeTechScreenerName&quot; placeholder&#x3D;&quot;Tech Screener Name&quot; [(ngModel)]&#x3D;&quot;traineeTemp.techScreenerName&quot;
+                  name&#x3D;&quot;techScreenerName&quot;&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-6 col-md-6 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeProjectCompletion&quot;&gt;Project Completion:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot;
+                  id&#x3D;&quot;traineeProjectCompletion&quot; placeholder&#x3D;&quot;0 %&quot; [(ngModel)]&#x3D;&quot;traineeTemp.projectCompletion&quot; name&#x3D;&quot;projectCompletion&quot;&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-12 col-md-12 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeProfile&quot;&gt;Profile URL:&lt;/label&gt; &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeName&quot;
+                  placeholder&#x3D;&quot;http://www.example.com/revature&quot; [(ngModel)]&#x3D;&quot;traineeTemp.profileUrl&quot; name&#x3D;&quot;profileUrl&quot;&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group col-lg-12 col-md-12 col-sm-12&quot;&gt;
+                &lt;label for&#x3D;&quot;traineeStatus&quot;&gt;Training Status&lt;/label&gt; &lt;select class&#x3D;&quot;form-control&quot; id&#x3D;&quot;traineeStatus&quot;
+                  required [(ngModel)]&#x3D;&quot;traineeTemp.trainingStatus&quot; name&#x3D;&quot;trainingStatus&quot;&gt;
+                  &lt;option value&#x3D;&quot;&quot; disabled&#x3D;&quot;&quot;&gt;Select Status&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Signed&quot;&gt;Signed&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Selected&quot;&gt;Selected&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Training&quot;&gt;Training&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Marketing&quot;&gt;Marketing&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Confirmed&quot;&gt;Confirmed&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Employed&quot;&gt;Employed&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Dropped&quot;&gt;Dropped&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Project&quot;&gt;Project&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Staging&quot;&gt;Staging&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+            &lt;button id&#x3D;&quot;saveButton1&quot; type&#x3D;&quot;submit&quot; value&#x3D;&quot;Save&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;updateTrainee()&quot;&gt;Update&lt;/button&gt;
+            &lt;button id&#x3D;&quot;closeButtonUpdate&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-default&quot; data-dismiss&#x3D;&quot;modal&quot; (click)&#x3D;&quot;close()&quot;&gt;Close&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./update-trainee.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.modal {
+	overflow-y:auto;
+}
+
+html { 
+	font-size: 100%;
+	font-family: &#x27;Futura-Std-Book&#x27;;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html><div (onHidden)="close()" class="modal fade in" id="updateTraineeModal" tabindex="-1" role="dialog" aria-labelledby="traineeModalLabel">  <div class="modal-dialog modal-lg" role="document">    <div class="modal-content">      <div class="modal-header">        <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close">          <span aria-hidden="true">&times;</span>        </button>        <h4 class="modal-title" id="traineeModalLabel">Add Trainee</h4>      </div>      <div class="modal-body">        <!-- Add New Trainee -->        <h3 id="updateTraineeHeader">Update Trainee</h3>        <form ngNativeValidate>          <div>            <div class="row">              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeName">Full Name:</label> <input type="text" class="form-control" id="traineeName"                  placeholder="Name" name="fullName" [(ngModel)]="traineeTemp.name" required>              </div>              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeEmail">Email:</label> <input type="email" class="form-control" id="traineeEmail"                  placeholder="Email" [(ngModel)]="traineeTemp.email" name="email" required>              </div>            </div>            <div class="row">              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeSkype">Skype Id:</label> <input type="text" class="form-control" id="traineeSkype"                  placeholder="Skype Id" [(ngModel)]="traineeTemp.skypeId" name="skypeId">              </div>              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineePhone">Phone:</label> <input type="text" class="form-control" id="traineePhone"                  placeholder="(xxx)-xxx-xxxx" [(ngModel)]="traineeTemp.phoneNumber" name="phoneNumber">              </div>            </div>            <div class="row">              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeCollege">College:</label> <input type="text" class="form-control" id="traineeCollege"                  placeholder="College" [(ngModel)]="traineeTemp.college" name="college">              </div>              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeDegree">Degree:</label> <input type="text" class="form-control" id="traineeDegree"                  placeholder="Degree" [(ngModel)]="traineeTemp.degree " name="degree">              </div>            </div>            <div class="row">              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeMajor">Major:</label> <input type="text" class="form-control" id="traineeMajor"                  placeholder="Major" [(ngModel)]="traineeTemp.major" name="major">              </div>              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeRecruiterName">Recruiter Name:</label> <input type="text" class="form-control" id="traineeRecruiterName"                  placeholder="Recruiter Name" [(ngModel)]="traineeTemp.recruiterName" name="recruiterName">              </div>            </div>            <div class="row">              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeTechScreenerName">Tech Screener Name:</label> <input type="text" class="form-control"                  id="traineeTechScreenerName" placeholder="Tech Screener Name" [(ngModel)]="traineeTemp.techScreenerName"                  name="techScreenerName">              </div>              <div class="form-group col-lg-6 col-md-6 col-sm-12">                <label for="traineeProjectCompletion">Project Completion:</label> <input type="text" class="form-control"                  id="traineeProjectCompletion" placeholder="0 %" [(ngModel)]="traineeTemp.projectCompletion" name="projectCompletion">              </div>            </div>            <div class="row">              <div class="form-group col-lg-12 col-md-12 col-sm-12">                <label for="traineeProfile">Profile URL:</label> <input type="text" class="form-control" id="traineeName"                  placeholder="http://www.example.com/revature" [(ngModel)]="traineeTemp.profileUrl" name="profileUrl">              </div>            </div>            <div class="row">              <div class="form-group col-lg-12 col-md-12 col-sm-12">                <label for="traineeStatus">Training Status</label> <select class="form-control" id="traineeStatus"                  required [(ngModel)]="traineeTemp.trainingStatus" name="trainingStatus">                  <option value="" disabled="">Select Status</option>                  <option value="Signed">Signed</option>                  <option value="Selected">Selected</option>                  <option value="Training">Training</option>                  <option value="Marketing">Marketing</option>                  <option value="Confirmed">Confirmed</option>                  <option value="Employed">Employed</option>                  <option value="Dropped">Dropped</option>                  <option value="Project">Project</option>                  <option value="Staging">Staging</option>                </select>              </div>            </div>          </div>          <div class="modal-footer">            <button id="saveButton1" type="submit" value="Save" class="btn btn-primary" (click)="updateTrainee()">Update</button>            <button id="closeButtonUpdate" type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">Close</button>          </div>        </form>      </div>    </div>  </div></div></html></div>'
+    var COMPONENTS = [{'name': 'BatchModalComponent', 'selector': 'app-batch-modal'},{'name': 'BatchViewComponent', 'selector': 'app-batch-view'},{'name': 'DeleteTraineeComponent', 'selector': 'app-delete-trainee'},{'name': 'ErrorComponent', 'selector': 'app-error'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'SwitchBatchComponent', 'selector': 'app-switch-batch'},{'name': 'UpdateTraineeComponent', 'selector': 'app-update-trainee'},{'name': 'ViewTraineesComponent', 'selector': 'app-view-trainees'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UpdateTraineeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UpdateTraineeComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
