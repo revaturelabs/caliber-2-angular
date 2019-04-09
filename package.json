@@ -7,8 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -w -s"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -21,9 +20,7 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
-    "@types/jest": "^23.3.8",
     "core-js": "^2.5.4",
-    "jQuery": "^1.7.4",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
@@ -41,7 +38,6 @@
     "karma": "~3.0.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
