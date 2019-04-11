@@ -5,6 +5,41 @@
 /************************
 	Revature Fonts
 ************************/
+@font-face {
+	font-family: 'Futura-Std-Medium';
+	src: url('../../../../../assets/fonts/Futura-Std-Medium.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Book';
+	src: url('../../../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Heavy';
+	src: url('../../../../../assets/fonts/Futura-Std-Heavy.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Bold';
+	src: url('../../../../../assets/fonts/Futura-Std-Bold.otf') format('opentype');
+}
+
+body {
+	font-family: 'Futura-Std-Book';
+}
+
+th {
+	font-family: 'Futura-Std-Bold';
+}
+
+td {
+	font-family: 'Futura-Std-Book';
+}
+
+li {
+	font-family: 'Futura-Std-Heavy';
+}
 
 html { 
 	font-size: 100%;

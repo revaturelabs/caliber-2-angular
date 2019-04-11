@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TraineesService } from '../../Services/trainees.service';
-import { Trainee } from '../../Types/trainee';
+import { Trainee } from '../../types/trainee';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 

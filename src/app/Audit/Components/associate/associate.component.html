@@ -1,0 +1,71 @@
+<div class = "container">
+    <!-- The max width is manually set to the same width as the original AngularJss webpage -->
+    <table class="table table-responsive table-condensed"
+            style="border-collapse: collapse; max-width: 1140px;">
+        <thead>
+            <tr>
+                <!-- Top row will span over all columns -->
+                <td colspan="5"> 
+                    <strong>Categories covered this week: </strong>
+                    <!-- Tracked last item in list to prevent last comma from being printed -->
+                    <span *ngFor="let cat of categories; let isLast=last">
+                        {{cat.name}}{{isLast ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <!-- Spans over flag column --->
+                <th colspan="2">
+                    Trainee
+                </th>
+                <!-- Spans over extra space column --->
+                <th colspan="2">
+                    Individual Feedback
+                </th>
+                <th>
+                    Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Every note contains an associate in the current batch -->
+            <!-- Every column is given a percentage of the table for simplicity -->
+            <tr *ngFor="let note of notes">
+                <td (click)="cycleFlagNotesInput(note.noteId, true); cycleFlag(note.noteId);" style="width: 11%;">
+                    {{ note.trainee.name }}
+                </td>
+                <td style="width: 3%; position:absolute;">
+                    <!-- Only shows the current flag, none if no flag is assigned -->
+                    <i *ngIf="note.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                    <i *ngIf="note.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                    <i *ngIf="note.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+                    <!-- Shows the flag notes popup if the user clicks the name column -->
+                    <div *ngIf="note.noteFlagInputActive===true" class = "flag-notes-popup">
+                        <input class = "form-control" type="text" placeholder=" comment"/>
+                        <button class ="btn btn-info flage-notes-save-btn">Save</button>
+                        <button (click)="cycleFlagNotesInput(note.noteId, false)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </td>
+                <td (click)="cycleIF(note.noteId)" style="width: 7%;text-align: center;">
+                    <!-- Only shows the icon that cooralates with the correct Qc Status -->
+                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
+                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
+                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
+                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
+                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
+                </td>
+                <!-- This is a small gap to add space in between columns -->
+                <td style="width: 3%;"></td>
+                <td style="width: 76%;">
+                    <textarea 
+                            (blur)="noteOnBlur(note.noteId, false)" 
+                            id="note-textarea-{{note.noteId}}" class="form-control"
+                            placeholder="Note on {{ note.trainee.name }}" 
+                            rows="3" cols="75" maxlength="4000">{{ note.content }}</textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
