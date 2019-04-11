@@ -12,6 +12,7 @@ export class Batch {
     goodGrade: number;
     passingGrade: number;
     traineeCount: number;
+    weeks: number;
 
     /**
      * constructor for batch
@@ -25,9 +26,10 @@ export class Batch {
      * @param endDate end date
      * @param goodGrade good grade
      * @param passingGrade minimal passing grade
+     * @param weeks number of weeks
      */
     constructor(trainingName: string, trainingType: string, skillType: string, trainer: string, coTrainer: string,
-        locationId: number, startDate: Date, endDate: Date, goodGrade: number, passingGrade: number) {
+        locationId: number, startDate: Date, endDate: Date, goodGrade: number, passingGrade: number, weeks: number) {
             this.trainingName = trainingName;
             this.trainingType = trainingType;
             this.skillType = skillType;
@@ -38,5 +40,6 @@ export class Batch {
             this.endDate = endDate;
             this.goodGrade = goodGrade;
             this.passingGrade = passingGrade;
+            this.weeks = weeks;
         }
 }

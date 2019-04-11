@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 top10">
+				<!-- top ui dropdown for available years -->
+				<ul class="nav nav-tabs">
+					<li role="button" class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown"> {{ selectedYear }} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li *ngFor="let year of years">
+                <a role="button" (click)="selectYear(year)">{{year}}</a>
+              </li>
+						</ul>
+
+					<!-- top ui for viewing all assessments -->
+					<li role="button" class="dropdown" *ngIf="selectedBatch">
+						<a class="dropdown-toggle" data-toggle="dropdown"> {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }}
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li *ngFor="let batch of batches">
+								<a role="button" (click)="selectBatch(batch)"> {{batch.trainer }} - {{ batch.startDate | date: 'shortDate' }} </a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--Weeks tabs-->
+			<div class="col-sm-12 col-md-12 col-lg-12 top5" *ngIf="selectedBatch">
+				<ul class="nav nav-tabs">
+					<li role="button" class="{{showActiveWeek(week)}}" 
+					(click)="selectWeek(week)" *ngFor="let week of weeks">
+						<a>Week {{week}}</a>
+					</li>
+					<li role="button" data-toggle="modal" data-target="#confirmingweeks">
+						<a>
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+    </div>
+  </div>
+</div>
+
+<!--Data dismiss modal-->
+<div id="confirmingweeks" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<div class="text-center">
+						<h4>Add a new week?</h4>
+						<h4>This process cannot be undone.</h4>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						(click)="addWeek()" data-dismiss="modal">Yes</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>

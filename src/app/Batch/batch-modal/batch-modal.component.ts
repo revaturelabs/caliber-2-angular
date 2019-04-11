@@ -55,6 +55,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   dateIsError: Boolean = false;
   trainerIsError: Boolean = false;
   myDate: Date;
+  weeks: number;
 
   constructor(
     private batchservice: BatchService,
@@ -76,13 +77,14 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // handle start and end dates
     const d = new Date(this.createOrUpdate.startDate);
-    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.createOrUpdate.endDate);
-    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // handle grades
     this.goodGradeThreshold = this.createOrUpdate.goodGrade;
     this.borderlineGradeThreshold = this.createOrUpdate.passingGrade;
+    this.weeks = this.createOrUpdate.weeks;
   }
 
   ngOnInit() {
@@ -151,18 +153,18 @@ export class BatchModalComponent implements OnInit, OnChanges {
   createBatch(): void {
     console.log(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
-      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold));
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks));
 
     // account for time zone differences
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
-      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold)).subscribe(result => {
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks)).subscribe(result => {
         console.log('created');
         this.someEvent.next('created');
         this.resetForm();
@@ -175,14 +177,14 @@ export class BatchModalComponent implements OnInit, OnChanges {
   updateBatch(): void {
     // set dates and account for time zone difference
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
     // make updated batch
     const batch = new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
-      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold);
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks);
     batch.batchId = this.createOrUpdate.batchId;
 
     // update batch in backend
@@ -214,9 +216,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
    */
   checkDates(): void {
     const d = new Date(this.startDate);
-    this.startDate = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+    this.startDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
     const d2 = new Date(this.endDate);
-    this.endDate = new Date(d2.getTime() + (d2.getTimezoneOffset() * 60000));
+    this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
     if (this.startDate >= this.endDate && this.trainer === this.coTrainer) {
       this.dateIsError = true;
       this.trainerIsError = true;

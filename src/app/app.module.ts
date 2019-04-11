@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { ErrorComponent } from './error-handling/error/error.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import * as $ from 'jquery';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Trainee } from '../../Types/trainee';
-import { TraineeFlag } from '../../Types/trainee-flag';
+import { Trainee } from '../../types/trainee';
+import { TraineeFlag } from '../../types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';

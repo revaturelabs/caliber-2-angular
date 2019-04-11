@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row centered">
+    <h4 class="text-center">Overall Feedback</h4>
+    <!-- Shows the status type (icons) -->
+    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[1])"
+      ng-disabled="processingNote">
+      <i class="fa fa-smile-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[1]}" style=""></i>
+    </button>
+    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[2])"
+      ng-disabled="processingNote">
+      <i class="fa fa-meh-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[2]}" style=""></i>
+    </button>
+    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[3])"
+      ng-disabled="processingNote">
+      <i class="fa fa-frown-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[3]}" style=""></i>
+    </button>
+    <!-- Show the QC feedback notes. Clicking textfield, editing and overwriting it will 
+      trigger the ng-blur to save the data  -->
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
+      <textarea ng-model="bnote.content" class="form-control ng-pristine ng-untouched ng-valid-maxlength ng-not-empty ng-valid ng-valid-required"
+        id="qcBatchNotes" ng-blur="saveQCNotes()" maxlength="4000" placeholder="Enter your overall feedback on the batch"
+        required="" ng-disabled="processingNote" style="">
+      </textarea>
+      <!-- QC Save burrito button (Burrito: wrap up edited objects, pack it tightly in the skin, and
+        save it all in your stomach/database -->
+      <div class="save-button-wrapper">
+        <a ng-click="saveQCandTrainee()" ng-show="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x"
+            aria-hidden="true"></span>Save
+        </a>
+        <!-- Events after clicking save button -->
+        <div class="spinner fa-style ng-hide" ng-show="showSaving">
+          <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+        </div>
+        <div id="checkMark" class="spinner fade fa-style ng-hide" ng-show="showCheck">
+          <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
