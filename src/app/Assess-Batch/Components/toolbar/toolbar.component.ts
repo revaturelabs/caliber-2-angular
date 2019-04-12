@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
+import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,6 +19,9 @@ export class ToolbarComponent implements OnInit {
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
+  createUpdate: Batch = null;
+  @ViewChild('batchModal') batchModal: BatchModalComponent;
+
 
   constructor(
     public auditService: AuditService
@@ -30,7 +34,20 @@ export class ToolbarComponent implements OnInit {
 
   }
 
-  
+     /**
+   * resets createorUpdate variable for child component
+   */
+  resetBatchForm(): void {
+    this.createUpdate = null;
+    this.batchModal.resetForm();
+  }
+
+  // ToDo: future implementation
+  // method for import button
+  resetImportModal(): void {
+
+  }
+
 
   getAllYears() {
     this.auditService.getAllYears()
