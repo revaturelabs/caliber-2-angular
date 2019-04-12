@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
