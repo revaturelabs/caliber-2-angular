@@ -11,7 +11,7 @@ import { ErrorComponent } from './error-handling/error/error.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
-
+import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import * as $ from 'jquery';
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
+    CreateModalComponent,
   ],
   imports: [
     BrowserModule,
