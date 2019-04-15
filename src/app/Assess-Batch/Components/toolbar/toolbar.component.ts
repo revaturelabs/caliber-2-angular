@@ -82,7 +82,7 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
-  selectQuarter(event: number) {
+  selectQuarter(event: String) {
     this.selectedQuarter = event;
     
   }
