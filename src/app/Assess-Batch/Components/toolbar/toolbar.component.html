@@ -14,10 +14,10 @@
 
 						<!-- sort by quarter-->
 						<li role="button" class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown"> {{ selectedYear }} <span class="caret"></span></a>
+							data-toggle="dropdown"> {{selectedQuarter}} <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li *ngFor="let year of years">
-					<a role="button" (click)="selectYear(year)">Quarter</a>
+								<li *ngFor="let quarter of quarters">
+					<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
 				  </li>
 							</ul>
 

@@ -9,12 +9,13 @@ import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-
+  quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: number;
+  selectedQuarter: String = "Q1";
   selectedBatch: Batch;
   selectedBatchId = 0;
   weeks = [];
@@ -22,7 +23,7 @@ export class ToolbarComponent implements OnInit {
   createUpdate: Batch = null;
   @ViewChild('batchModal') batchModal: BatchModalComponent;
 
-
+  
   constructor(
     public auditService: AuditService
   ) { }
@@ -79,6 +80,11 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.batches = result;
       });
+  }
+
+  selectQuarter(event: number) {
+    this.selectedQuarter = event;
+    
   }
 
   selectBatch(event: Batch) {
