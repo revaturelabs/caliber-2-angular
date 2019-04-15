@@ -7,16 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssociateComponent implements OnInit {
 
-  // List of test categories
-  categories = [
-    {
-      name: 'Java',
-    },
-    {
-      name: 'MySQL'
-    }
-  ];
-
   // List of test notes
   notes = [
     {

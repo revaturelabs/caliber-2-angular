@@ -1,5 +1,69 @@
 <div class = "container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
+    <div class="container" id="trainer-assess-table">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 top5">
+                <p class="bg-primary align center"></p>
+                <ul class="nav nav-tabs">
+                    <p class="bg-primary align center"></p>
+                    <ul class="nav nav-tabs">
+                        <!-- Accordian table -->
+                        <table class="table table-responsive"
+                            style="border-collapse: collapse;">
+                            <thead>
+                                <tr sticky class='sticky-header'>
+                                    <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
+                                    <th class="col-sm-1 col-md-1 col-lg-1"></th>
+                                    <div>
+                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center"
+                                            role="button" data-toggle="modal">
+                                            <div ui-view="trainer-edit-assess"></div>
+                                        </th>
+                                        <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
+                                    </div>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <td>Average</td>
+                                <td></td>
+                                <td class="text-center"></td>
+    
+                                <td><span style="font-weight: bold"></span>
+                                    <span></span><i
+                                     class='fa fa-cog fa-spin'></i>
+                                </td>
+                                <td></td>
+                            </tfoot>
+                        </table>
+                        <div
+                            class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
+                            <textarea ng-model="$parent.trainerBatchNote.content"
+                                class="form-control" id="tBatchNotes"
+                                ng-blur="saveTrainerNotes(trainerBatchNote.noteId)"
+                                placeholder="Enter your overall feedback on the batch" required>
+                        </textarea>
+                            <div class='save-button-wrapper'>
+                                <a ng-click="doBurrito()" ng-show="showFloppy"
+                                    class='save-button fade-in'> <span
+                                    class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save
+                                </a>
+                                <div class='spinner fa-style' ng-show="showSaving">
+                                    <i style="color: #F26925;" role="button"
+                                        class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                                </div>
+                                <div id="checkMark" class='spinner fade fa-style'
+                                    ng-show="showCheck">
+                                    <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
     <table class="table table-responsive table-condensed"
             style="border-collapse: collapse; max-width: 1140px;">
         <tbody>
@@ -22,14 +86,6 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                </td>
-                <td (click)="cycleIF(note.noteId)" style="width: 7%;text-align: center;">
-                    <!-- Only shows the icon that cooralates with the correct Qc Status -->
-                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
