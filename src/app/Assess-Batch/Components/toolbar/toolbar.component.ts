@@ -70,6 +70,7 @@ export class ToolbarComponent implements OnInit {
       this.batches = result;
       });
   }
+  
   selectQuarter(event: String) {
     this.selectedQuarter = event;
   }

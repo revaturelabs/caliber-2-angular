@@ -21,6 +21,16 @@
 			  		</li>
 					</ul>
 
+						<!-- sort by quarter-->
+						<li role="button" class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown"> {{selectedQuarter}} <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li *ngFor="let quarter of quarters">
+					<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
+				  </li>
+							</ul>
+
+
 					<!-- top ui for viewing all assessments -->
 					<li role="button" class="dropdown" *ngIf="selectedBatch">
 						<a class="dropdown-toggle" data-toggle="dropdown"> {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }}
@@ -37,6 +47,7 @@
 							Grades <span class="glyphicon glyphicon-download"
 							aria-hidden="true"> </span>
 						</a></li>
+						
 					<!-- Button Trigger for Create Assessment Modal -->
 						<li role="button" class="pull-right"
 							data-toggle="modal" data-target="#createAssessmentModal"><a>Create
