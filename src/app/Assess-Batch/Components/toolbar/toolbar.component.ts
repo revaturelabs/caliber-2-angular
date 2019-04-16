@@ -2,33 +2,54 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
+import { Trainee } from '../../../Batch/type/trainee';
+import { TraineeService } from '../../Services/trainee.service';
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
+
 export class ToolbarComponent implements OnInit {
   quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
-  selectedYear: number;
-  selectedQuarter: String = "Q1";
-  selectedBatch: Batch;
+  selectedYear: string = "Select Year";
+  selectedQuarter: string = "Select Quarter";
+
+  // selectedBatch: Batch;
+  selectedBatch: Batch = {
+    batchId: 0,
+    trainingName: "",
+    trainingType: "",
+    skillType: "",
+    trainer: "Select Batch",
+    coTrainer: "",
+    location: "",
+    locationId: 0,
+    startDate: null,
+    endDate: null,
+    goodGrade: 0,
+    passingGrade: 0,
+    traineeCount: 0,
+    weeks: 0
+  };
+
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
+  ourTrainee: Trainee[];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService
+    public auditService: AuditService, public traineeService: TraineeService
   ) { }
   ngOnInit() {
-    
     this.selectedWeek=1;
-    this.getAllYears();
   }
      /**
    * resets createorUpdate variable for child component
@@ -41,18 +62,27 @@ export class ToolbarComponent implements OnInit {
   // method for import button
   resetImportModal(): void {
   }
+
+  displayYears(){
+    this.getAllYears();
+  }
+
   getAllYears() {
     this.auditService.getAllYears()
     .subscribe(result => {
       this.years = result;
-      this.selectedYear = this.years[0];
+      this.selectedYear = this.years[0].toString();
       console.log(this.years);
-      this.getBatches();
     });
     
   }
+
+  showBatch() {
+    this.getBatches();
+  }
+  
   getBatches() {
-    this.auditService.getBatchesByYear(this.selectedYear)
+    this.auditService.getBatchesByYear(Number.parseInt(this.selectedYear))
     .subscribe(result => {
       this.batches = result;
       this.selectedBatch = this.batches[0];
@@ -60,18 +90,19 @@ export class ToolbarComponent implements OnInit {
       console.log(this.batches);
       this.getWeeks();
       });
-      
   }
+
   selectYear(event: number) {
-    this.selectedYear = event;
-    this.auditService.selectedYear = this.selectedYear;
+    this.selectedYear = event.toString();
+    this.auditService.selectedYear = Number.parseInt(this.selectedYear);
     this.auditService.getBatchesByYear(event)
     .subscribe(result => {
       this.batches = result;
       });
+    this.getBatches();
   }
   
-  selectQuarter(event: String) {
+  selectQuarter(event: string) {
     this.selectedQuarter = event;
   }
   
@@ -80,6 +111,7 @@ export class ToolbarComponent implements OnInit {
     this.auditService.selectedBatch = this.selectedBatch;
     this.getWeeks();
   }
+
   showActiveWeek(week: number) {
     if (week==this.selectedWeek) {
       return "active";
@@ -99,5 +131,13 @@ export class ToolbarComponent implements OnInit {
     for(var i = 0; i<this.selectedBatch.weeks; i++){
       this.weeks.push(i+1);
     }
+    this.getTraineesByBatchId();
   }
+
+  getTraineesByBatchId(){
+    this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
+      this.traineeService.storeTrainees(trainees);
+    })    
+  }
+
 }

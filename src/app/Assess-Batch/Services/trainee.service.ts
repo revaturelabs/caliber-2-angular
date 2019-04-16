@@ -14,9 +14,20 @@ export class TraineeService {
  traineeBatchIdURL = '/all/trainee?batch=';
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
+  ourTrainees: Trainee[] = [];
 
   getTraineesByBatchId(id: number): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(this.url + this.traineeBatchIdURL + id);
+     return this.http.get<Trainee[]>(this.url + this.traineeBatchIdURL + id);
+  }
+
+  storeTrainees(entry: Trainee[]) {
+    console.log("did we store anything");
+    this.ourTrainees = entry;
+    console.log(this.ourTrainees);
+  }
+
+  returnTrainees(): Trainee[] {
+    return this.ourTrainees;
   }
 
 
