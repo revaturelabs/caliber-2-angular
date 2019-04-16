@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule { }
