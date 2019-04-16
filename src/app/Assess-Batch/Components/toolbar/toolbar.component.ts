@@ -137,6 +137,7 @@ export class ToolbarComponent implements OnInit {
   getTraineesByBatchId(){
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
       this.traineeService.storeTrainees(trainees);
+      this.traineeService.trainees.emit(trainees);
     })    
   }
 

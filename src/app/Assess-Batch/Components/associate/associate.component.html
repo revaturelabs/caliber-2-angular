@@ -23,7 +23,11 @@
                                     </div>
                                 </tr>
                             </thead>
-
+                            <tbody>
+                                <tr *ngFor="let train of traineeArr">
+                                    <td>{{train.name}}</td>
+                                </tr>
+                            </tbody>
                             <tfoot>
                                 <td>Average</td>
                                 <td></td>

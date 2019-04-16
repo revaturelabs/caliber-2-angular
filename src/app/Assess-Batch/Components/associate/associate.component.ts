@@ -71,7 +71,11 @@ export class AssociateComponent implements OnInit {
 
   // Unimplemented functions
   constructor(private traineeService: TraineeService) { }
-  ngOnInit( ) { }
+  ngOnInit( ) {
+    this.traineeService.trainees.subscribe((traineeArr) => {
+      this.traineeArr = traineeArr;
+   });
+  }
 
   showTrainees(){
     this.traineeArr = this.traineeService.returnTrainees();
