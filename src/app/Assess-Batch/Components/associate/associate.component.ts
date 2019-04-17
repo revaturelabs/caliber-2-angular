@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TraineeService } from '../../Services/trainee.service';
+import { Trainee } from 'src/app/Batch/type/trainee';
 
 @Component({
   selector: 'app-associate',
@@ -65,9 +67,22 @@ export class AssociateComponent implements OnInit {
     }
   ];
 
+  traineeArr: Trainee[] = [];
+
   // Unimplemented functions
-  constructor() { }
-  ngOnInit() { }
+  constructor(private traineeService: TraineeService) { }
+  ngOnInit( ) {
+    this.traineeService.trainees.subscribe((traineeArr) => {
+      this.traineeArr = traineeArr;
+   });
+  }
+
+  showTrainees(){
+    this.traineeArr = this.traineeService.returnTrainees();
+    for(let train of this.traineeArr){
+      console.log(train);
+    }
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {
