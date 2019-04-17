@@ -6,7 +6,7 @@ import { Note } from 'src/app/Batch/type/note';
 @Injectable({
   providedIn: 'root'
 })
-.
+
 export class NoteService {
   constructor(private http: HttpClient) { }
   url = 'http://localhost:9090';
