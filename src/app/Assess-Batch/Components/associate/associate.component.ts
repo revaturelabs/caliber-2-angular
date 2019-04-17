@@ -77,13 +77,6 @@ export class AssociateComponent implements OnInit {
    });
   }
 
-  showTrainees(){
-    this.traineeArr = this.traineeService.returnTrainees();
-    for(let train of this.traineeArr){
-      console.log(train);
-    }
-  }
-
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {
 
