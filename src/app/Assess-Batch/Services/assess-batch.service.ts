@@ -35,7 +35,9 @@ export class AssessBatchService {
 
   //HTTPRequest for adding a week -- using a PUT request
   addWeek(updateBatch: Batch) {
-    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions);
+    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions).subscribe((ourBatch) => {
+      console.log(ourBatch);
+    });
   }
 
   
