@@ -18,9 +18,11 @@ export class NoteService {
   traineeBatchIdURL = '/all/trainee?batch=';
    batchesYearURL = '/vp/batch/';
    yearsURL = '/all/batch/valid_years';
-   noteAllURL = '/all/notes/all';
-  noteURL = '/all/notes/';
-  batchNotesByWeekUrl='/all/notes/all?batch=';
+   noteAllURL = '/all/note/all';
+  noteURL = '/all/note/';
+  notePut='/all/note/update';
+  notePost='all/note/create'
+  batchNotesByWeekUrl='/all/note/all?batch=';
   noteEmitter = new EventEmitter<Note[]>();
 
    getAllNotes(): Observable<Note[]>{
@@ -34,6 +36,10 @@ export class NoteService {
   }
 
   putNote(note: Note): Observable<Note>{
-    return this.http.put<Note>(this.url, note, httpOptions);
+    return this.http.put<Note>(this.url + this.notePut, note, httpOptions);
+  }
+
+  postNote(note: Note): Observable<Note>{
+    return this.http.post<Note>(this.url + this.notePost, note, httpOptions);
   }
 }
