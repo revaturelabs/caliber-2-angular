@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,12 @@ export class AssessBatchService {
 
   constructor(private http: HttpClient) { }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  }
+
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
@@ -29,7 +35,7 @@ export class AssessBatchService {
 
   //HTTPRequest for adding a week -- using a PUT request
   addWeek(updateBatch: Batch) {
-    this.http.post(this.url + this.updateWeekURL, updateBatch);
+    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions);
   }
 
   
