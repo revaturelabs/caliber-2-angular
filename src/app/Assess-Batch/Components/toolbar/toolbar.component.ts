@@ -4,6 +4,8 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
+import { NoteService } from '../../Services/note.service';
+import { Note } from 'src/app/Batch/type/note';
 
 @Component({
   selector: 'app-toolbar',
@@ -46,7 +48,7 @@ export class ToolbarComponent implements OnInit {
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService
+    public auditService: AuditService, public traineeService: TraineeService,  public noteService: NoteService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -88,6 +90,9 @@ export class ToolbarComponent implements OnInit {
         this.selectedWeek = this.weeks.length;
       });
   }
+
+  
+ 
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
@@ -135,7 +140,15 @@ export class ToolbarComponent implements OnInit {
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
+      this.getBatchNotesByWeek();
     })    
+  }
+  getBatchNotesByWeek(){
+    this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+      
+      this.noteService.noteEmitter.emit(notes);
+    })   
+
   }
 
 }
