@@ -13,7 +13,7 @@
                             <thead>
                                 <tr sticky class='sticky-header'>
                                     <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-                                    <th class="col-sm-1 col-md-1 col-lg-1"></th>
+                                    <th class="col-sm-1 col-md-1 col-lg-2"></th>
                                     <div>
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center"
                                             role="button" data-toggle="modal">
@@ -40,67 +40,9 @@
                                 <td></td>
                             </tfoot>
                         </table>
-                        <div
-                            class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
-                            <textarea ng-model="$parent.trainerBatchNote.content"
-                                class="form-control" id="tBatchNotes"
-                                ng-blur="saveTrainerNotes(trainerBatchNote.noteId)"
-                                placeholder="Enter your overall feedback on the batch" required>
-                        </textarea>
-                            <div class='save-button-wrapper'>
-                                <a ng-click="doBurrito()" ng-show="showFloppy"
-                                    class='save-button fade-in'> <span
-                                    class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save
-                                </a>
-                                <div class='spinner fa-style' ng-show="showSaving">
-                                    <i style="color: #F26925;" role="button"
-                                        class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
-                                </div>
-                                <div id="checkMark" class='spinner fade fa-style'
-                                    ng-show="showCheck">
-                                    <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
-                                </div>
-                            </div>
-    
-                        </div>
                     </ul>
                 </ul>
             </div>
         </div>
     </div>
-    <table class="table table-responsive table-condensed"
-            style="border-collapse: collapse; max-width: 1140px;">
-        <tbody>
-            <!-- Every note contains an associate in the current batch -->
-            <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let note of notes">
-                <td (click)="cycleFlagNotesInput(note.noteId, true); cycleFlag(note.noteId);" style="width: 11%;">
-                    {{ note.trainee.name }}
-                </td>
-                <td style="width: 3%; position:absolute;">
-                    <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="note.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="note.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="note.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
-                    <!-- Shows the flag notes popup if the user clicks the name column -->
-                    <div *ngIf="note.noteFlagInputActive===true" class = "flag-notes-popup">
-                        <input class = "form-control" type="text" placeholder=" comment"/>
-                        <button class ="btn btn-info flage-notes-save-btn">Save</button>
-                        <button (click)="cycleFlagNotesInput(note.noteId, false)" type="button" class="flage-notes-close-btn close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </td>
-                <!-- This is a small gap to add space in between columns -->
-                <td style="width: 3%;"></td>
-                <td style="width: 76%;">
-                    <textarea 
-                            (blur)="noteOnBlur(note.noteId, false)" 
-                            id="note-textarea-{{note.noteId}}" class="form-control"
-                            placeholder="Note on {{ note.trainee.name }}" 
-                            rows="3" cols="75" maxlength="4000">{{ note.content }}</textarea>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>
