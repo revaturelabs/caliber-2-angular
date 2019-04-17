@@ -29,13 +29,15 @@
 							aria-hidden="true"> </span>
 						</a></li>
 					<!-- Button Trigger for Create Assessment Modal -->
+						<!--   -->
 						<li role="button" class="pull-right" (click) = "openFormModal()"
-							data-toggle="modal" data-target="#createAssessmentModal"><a>Create
+							><a>Create
 							Assessment<span class="glyphicon glyphicon-plus"
 							aria-hidden="true"> </span>
 						</a></li>
 				</ul>
 			</div>
+			<button (click) = 'openFormModal()'>Face</button>
 			<!--Weeks tabs-->
 			<div class="col-sm-12 col-md-12 col-lg-12 top5" *ngIf="selectedBatch">
 				<ul class="nav nav-tabs">
@@ -74,7 +76,9 @@
 		</div>
 	</div>
 
-	<!-- <div class="modal fade" id="createAssessmentModal" tabindex="-1"
+	
+
+<!--	<div class="modal fade" id="createAssessmentModal" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

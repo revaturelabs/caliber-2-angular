@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
+import { BatchModalComponent } from './Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
 
 
 
@@ -22,6 +23,7 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
+    BatchModalComponent
     
   ],
   imports: [
@@ -33,6 +35,7 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [BatchModalComponent]
  
 })
 export class AppModule { }

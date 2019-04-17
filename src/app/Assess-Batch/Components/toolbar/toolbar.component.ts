@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
-import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
+// import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { BatchModalComponent } from './batch-modal/batch-modal.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,7 +22,7 @@ export class ToolbarComponent implements OnInit {
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
-  @ViewChild('batchModal') batchModal: BatchModalComponent;
+  @ViewChild(BatchModalComponent) batchModal: BatchModalComponent;
 
 
   constructor(
