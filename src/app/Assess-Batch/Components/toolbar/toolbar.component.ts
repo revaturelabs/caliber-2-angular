@@ -81,12 +81,13 @@ export class ToolbarComponent implements OnInit {
   }
 
   getBatches() {
-    this.auditService.getBatchesByYear(Number.parseInt(this.selectedYear))
+    console.log("our year is "+ this.selectedYear);
+    console.log("our quarter is " + this.selectedQuarter.slice(1,2));
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
       this.batches = result;
+      console.log(result);
       this.selectedBatch = this.batches[0];
-      this.auditService.selectedBatch = this.batches[0];
-      console.log(this.batches);
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
       });
@@ -95,10 +96,10 @@ export class ToolbarComponent implements OnInit {
   selectYear(event: number) {
     this.selectedYear = event.toString();
     this.auditService.selectedYear = Number.parseInt(this.selectedYear);
-    this.auditService.getBatchesByYear(event)
-    .subscribe(result => {
-      this.batches = result;
-      });
+    // this.auditService.getBatchesByYear(event)
+    // .subscribe(result => {
+    //   this.batches = result;
+    //   });
     this.showQ = true;
   }
   
