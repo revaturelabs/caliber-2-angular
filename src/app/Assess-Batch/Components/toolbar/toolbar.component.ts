@@ -12,6 +12,8 @@ import { TraineeService } from '../../Services/trainee.service';
 })
 
 export class ToolbarComponent implements OnInit {
+  showQ: boolean = false;
+  showBatch: boolean = false;
   quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
   years: number[];
   batches: Batch[];
@@ -96,11 +98,13 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.batches = result;
       });
-    this.getBatches();
+    this.showQ = true;
   }
   
   selectQuarter(event: string) {
     this.selectedQuarter = event;
+    this.showBatch = true;
+    this.getBatches();
   }
   
   selectBatch(event: Batch) {
