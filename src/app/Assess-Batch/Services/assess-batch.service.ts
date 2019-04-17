@@ -12,6 +12,7 @@ export class AssessBatchService {
   batchAllURL = '/vp/batch/all';
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
+  updateWeekURL = '/all/batch/update';
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;
@@ -24,6 +25,11 @@ export class AssessBatchService {
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
+  }
+
+  //HTTPRequest for adding a week -- using a PUT request
+  addWeek(updateBatch: Batch) {
+    this.http.post(this.url + this.updateWeekURL, updateBatch);
   }
 
   

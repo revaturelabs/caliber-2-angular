@@ -4,6 +4,7 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
+import { AssessBatchService } from '../../Services/assess-batch.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -48,7 +49,7 @@ export class ToolbarComponent implements OnInit {
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -126,6 +127,9 @@ export class ToolbarComponent implements OnInit {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
+    this.selectedBatch.weeks = last+1;
+    console.log(this.selectedBatch);
+    this.assessBatchService.addWeek(this.selectedBatch);
   }
   getWeeks() {
     this.weeks = [];

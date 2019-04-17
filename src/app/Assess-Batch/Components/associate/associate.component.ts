@@ -68,6 +68,8 @@ export class AssociateComponent implements OnInit {
   ];
 
   traineeArr: Trainee[] = [];
+  testArr: String[] = ["Hi", "bye", "test"];
+  testArr2: String[] = ["Hiaa", "byeaa", "testaa"];
 
   // Unimplemented functions
   constructor(private traineeService: TraineeService) { }
