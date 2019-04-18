@@ -7,6 +7,7 @@ import { AssociateComponent } from "../Assess-Batch/Components/associate/associa
 import { FeedbackComponent } from "../Assess-Batch/Components/feedback/feedback.component";
 import { ToolbarComponent } from "../Assess-Batch/Components/toolbar/toolbar.component";
 import { BatchModalComponent } from "../Assess-Batch/batch-modal/batch-modal.component";
+import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-save.component";
 
 @NgModule({
   imports: [CommonModule, AssessBatchRoutingModule, FormsModule],
@@ -15,7 +16,8 @@ import { BatchModalComponent } from "../Assess-Batch/batch-modal/batch-modal.com
       AssociateComponent,
       FeedbackComponent,
       ToolbarComponent,
-      BatchModalComponent
+      BatchModalComponent,
+      MockSaveComponent
     ],
 })
 export class AssessBatchModule {}
