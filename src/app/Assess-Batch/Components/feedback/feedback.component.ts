@@ -9,41 +9,35 @@ import { NoteService } from '../../Services/note.service';
  styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
- notes: Note[];
- selectedWeek: number;
+ noteArr: Note[];
  feedbackNote: Note;
- selectedBatchId: number;
- selectedWeekId: NumberConstructor;
- traineeId: number;
- @ViewChild('batchModal') batchModal: BatchModalComponent;
 
  constructor(private noteService: NoteService) { }
-
 //provides the traineer feedback note for the week
-getFeedbackNote(selectedBatchId, selectedWeek){
+getFeedbackNote(){
   //get all batch notes for the week
-  this.noteService.getBatchNotesByWeek(selectedBatchId, selectedWeek)
+  this.noteService.noteEmitter
   .subscribe(result => {
     //narrow down to the singlar feedback note
     for(let n of result){
       if(n.noteType == 'BATCH'){
-        this.notes.push(n);
+        this.noteArr.push(n);
       }
     }
-    if(this.notes.length = 1){
-      this.feedbackNote = this.notes[0];
+    if(this.noteArr.length = 1){
+      this.feedbackNote = this.noteArr[0];
     }
-    console.log(this.notes);
+    console.log(this.noteArr);
   });
  }
 
  //updates feedback note on blur
-updateFeedbackNote(){
+feedbackNoteOnBlur(){
   this.noteService.putNote(this.feedbackNote);
  }
 
 ngOnInit() {
-
+  this.getFeedbackNote();
  }
 }
 
