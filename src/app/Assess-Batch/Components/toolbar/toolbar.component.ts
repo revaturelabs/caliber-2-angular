@@ -96,11 +96,7 @@ export class ToolbarComponent implements OnInit {
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
-    this.auditService.selectedYear = Number.parseInt(this.selectedYear);
-    this.auditService.getBatchesByYear(event)
-    .subscribe(result => {
-      this.batches = result;
-      });
+   
     this.getBatches();
   }
   
