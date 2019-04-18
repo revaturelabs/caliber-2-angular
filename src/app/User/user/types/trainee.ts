@@ -1,9 +1,5 @@
-import { TrainingStatus } from './training-status';
-import { TraineeFlag } from './trainee-flag';
+import { TraineeFlag } from "./trainee-flag";
 
-/**
- * @ignore
- */
 export class Trainee {
 
     traineeId: number;
@@ -25,13 +21,17 @@ export class Trainee {
     flagNotes: string;
     flagStatus: TraineeFlag;
 
-    /**
-     *
-     * @param name Trainee's name
-     * @param email  Trainee's email
-     * @param trainingStatus Trainee's training status
-     * @param batchId Trainee's batch id
-     * @param phoneNumber Trainee's phone Number
-     */
     constructor() {}
 }
+
+export class TraineeGrades {
+    assessmentId: number;
+    rawScore: number;
+    assessmentTitle: string;
+    assessmentType: string;
+    weekNumber: number;
+    batchId: number;
+    assessmentCategory: number;
+}
+
+
