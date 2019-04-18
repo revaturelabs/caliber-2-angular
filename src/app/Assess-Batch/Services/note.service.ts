@@ -14,7 +14,7 @@ const httpOptions = {
 
 export class NoteService {
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:9090';
+  url = 'http://localhost:9097';
   traineeBatchIdURL = '/all/trainee?batch=';
    batchesYearURL = '/vp/batch/';
    yearsURL = '/all/batch/valid_years';

@@ -30,6 +30,7 @@ export class AssociateComponent implements OnInit {
 
   traineeArr: Trainee[] = [];
   noteArr: Note[] = [];
+  
 
   // Unimplemented functions
   constructor(private traineeService: TraineeService, private noteService: NoteService) { }
@@ -39,9 +40,33 @@ export class AssociateComponent implements OnInit {
     });
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = noteArr;
+      this.sortNoteArrayByTraineeId();
       console.log(noteArr);
     });
   }
+  change: Boolean;
+  i : number;
+  temp: Note;
+sortNoteArrayByTraineeId(){
+
+  do {
+    this.change=false;
+ for(this.i=0;this.i<this.noteArr.length-1;this.i++){
+if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
+{
+  this.temp=this.noteArr[this.i];
+  this.noteArr[this.i]=this.noteArr[this.i+1];
+  this.noteArr[this.i+1]=this.temp;
+  this.change=true
+}
+
+ }
+ 
+}while (this.change)
+return this.noteArr;
+}
+
+
 
   showTrainees(){
     this.traineeArr = this.traineeService.returnTrainees();
