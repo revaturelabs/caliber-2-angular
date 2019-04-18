@@ -1,42 +1,44 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
-import { ChildActivationEnd } from '@angular/router';
+
+import { CategoryService } from '../../../Services/category.service';
+
+import { EmitterVisitorContext } from '@angular/compiler';
+import { Category } from 'src/app/Assess-Batch/Models/Category';
+
 @Component({
   selector: 'app-batch-modal',
   templateUrl: './batch-modal.component.html',
-  styleUrls: ['./batch-modal.component.css'],
-  exportAs: 'child'
+  styleUrls: ['./batch-modal.component.css']
 })
 export class BatchModalComponent implements OnInit{
 
+  @Output() someEvent = new EventEmitter<string>();
+  @Output() closeEvent = new EventEmitter<string>();
+  categories: Category[];
   
-  // resetForm() {
-  //   throw new Error("Method not implemented.");
-  // }
-  constructor(public activeModal: NgbActiveModal, public batchModal: NgbModal) {
+
+  
+  resetForm() {
+     throw new Error("Method not implemented.");
+   }
+   
+  constructor(public categoryService: CategoryService) {
   }
-  closeModal(){
-    this.activeModal.close('Modal Closed');
+  
+  getCategories(){
+    this.categoryService.getCategories().subscribe(result=>{
+      this.categories = result;
+      // this.someEvent.next('get')
+      console.log(result);
+    })
   }
 
-
-
-  @ViewChild('createAssessmentModal')
-  modal: BatchModalComponent;
-  open(){
-    
-  }
   ngOnInit(){
-    // this.modal.open();
-    // this.open();
-    // this.batchModal.open();
-  
+    console.log('Init');
+    this.getCategories();
   }
-
-  
-  //  void {
-  //   throw new Error("Method not FACE implemented.");
   
 }
 

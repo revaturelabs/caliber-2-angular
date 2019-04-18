@@ -6,9 +6,9 @@ import { AssessBatchComponent } from "../Assess-Batch/Components/assess-batch/as
 import { AssociateComponent } from "../Assess-Batch/Components/associate/associate.component";
 import { FeedbackComponent } from "../Assess-Batch/Components/feedback/feedback.component";
 import { ToolbarComponent } from "../Assess-Batch/Components/toolbar/toolbar.component";
-//import { BatchModalComponent } from "../Assess-Batch/batch-modal/batch-modal.component";
-// import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
+import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -19,10 +19,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       AssociateComponent,
       FeedbackComponent,
       ToolbarComponent,
-      // BatchModalComponent,
+      BatchModalComponent,
      
     ],
-    // entryComponents :[ BatchModalComponent]
+    entryComponents :[ BatchModalComponent ]
     
    
 })

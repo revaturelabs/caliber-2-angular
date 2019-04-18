@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
-// import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { BatchModalComponent } from './batch-modal/batch-modal.component';
-
+import { BatchModalComponent } from '../../Components/toolbar/batch-modal/batch-modal.component';
+import { FormModalComponent } from './form-modal/form-modal.component';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  styleUrls: ['./toolbar.component.css'],
+  
 })
 export class ToolbarComponent implements OnInit {
 
@@ -22,11 +21,11 @@ export class ToolbarComponent implements OnInit {
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
-  @ViewChild(BatchModalComponent) batchModal: BatchModalComponent;
+  @ViewChild('batchModal') batchModal: BatchModalComponent;
 
 
-  constructor(
-    public auditService: AuditService, public modalService: NgbModal
+
+  constructor(public auditService: AuditService
   ) { }
 
   ngOnInit() {
@@ -39,9 +38,9 @@ export class ToolbarComponent implements OnInit {
      /**
    * resets createorUpdate variable for child component
    */
-  resetBatchForm(): void {
+  resetCreateForm(): void {
     this.createUpdate = null;
-   // this.batchModal.resetForm();
+   this.batchModal.resetForm();
   }
 
   // ToDo: future implementation
@@ -62,19 +61,18 @@ export class ToolbarComponent implements OnInit {
     
   }
 
-  openFormModal(){
-    let options: NgbModalOptions = {
-      backdrop: false
-    }
-    const modalRef = 
-    this.modalService.open(BatchModalComponent,options);
-
-    modalRef.result.then((result) => {
-      console.log(result);
-  }).catch((error)=>{
-    console.log(error);
-  });
-  }
+  // openFormModal(){
+  //   let options: NgbModalOptions = {
+  //     backdrop: false
+  //   }
+  //   const modalRef = this.modalService.open(BatchModalComponent,options);
+  //   modalRef.componentInstance
+  //   modalRef.result.then((result) => {
+  //     console.log(result);
+  // }).catch((error)=>{
+  //   console.log(error);
+  // });
+  // }
 
   getBatches() {
     this.auditService.getBatchesByYear(this.selectedYear)
