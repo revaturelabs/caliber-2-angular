@@ -81,29 +81,32 @@ export class ToolbarComponent implements OnInit {
   }
 
   getBatches() {
-    console.log("our year is "+ this.selectedYear);
-    console.log("our quarter is " + this.selectedQuarter.slice(1,2));
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
+        if(result.length > 0) {
       this.batches = result;
       this.selectedBatch = this.batches[0];
-      console.log(this.selectedBatch.trainer);
-      for(let b of this.batches){
-        console.log("these are our batches for :" + this.selectedYear + " :" + b.trainer);
-      }
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
+    }
       });
   }
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
     this.batches = [];
+    this.selectedBatch = null;
     console.log(this.batches);
     this.showBatch = false;
     this.showQ = true;
   }
   
+  showQs(){
+    this.showBatch = false;
+    this.batches = [];
+    this.selectedBatch = null;
+  }
+
   selectQuarter(event: string) {
     this.selectedQuarter = event;
     this.showBatch = true;
