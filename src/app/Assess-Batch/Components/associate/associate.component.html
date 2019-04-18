@@ -29,11 +29,13 @@
                                     <th class="col-sm-1 col-md-1 col-lg-2"></th>
                                     <td>
                                             <textarea
-                                          
+                                            (blur)="noteOnBlur(noteArr[i]?.noteId, noteArr[i].noteContent, false)" 
+                                            id="note-textarea-{{noteArr[i]?.noteId}}"
                                              class="form-control"
                                             placeholder="Note " 
-                                            rows="3" cols="75" maxlength="4000" >{{noteArr[i]?.noteContent}}</textarea>
+                                            rows="3" cols="75" maxlength="4000" [(ngModel)]="noteArr[i].noteContent" placeholder="note">{{noteArr[i]?.noteContent}}</textarea>
                                         </td>
+                                        <!-- input [(ngModel)]="noteArr[i]?.noteContent" placeholder="note" -->
                                 </tr>
                             </tbody>
                             <tfoot>

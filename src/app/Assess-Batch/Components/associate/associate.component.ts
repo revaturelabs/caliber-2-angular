@@ -45,8 +45,8 @@ export class AssociateComponent implements OnInit {
       this.noteArr = noteArr;
       this.sortNoteArrayByTraineeId();
       console.log(noteArr);
-      // this.addContentToEveryNote();
-      console.log(noteArr);
+      
+      
       
     });
   }
@@ -74,23 +74,15 @@ if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
 return this.noteArr;
 }
 
-addContentToEveryNote(){
-  for(this.i=0;this.i<this.noteArr.length;this.i++){
-if(this.noteArr[this.i].noteContent=null){
-  this.noteArr[this.i].noteContent="Notes";
-}
-  }
-  console.log("adding");
-  console.log(this.noteArr);
-}
+
 
  // Disables the associated notes text area box for 1 second.
- noteBlur(selectedNoteId: number, secondRound: boolean): void {
+ noteBlur(selectedNoteId: number, selectedNoteContent: string, secondRound: boolean): void {
 
   // The first call will recursivley call this function again to re-enable the input box after 1 second
   if (!secondRound) {
     $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-    setInterval(this.noteOnBlur, 1000, selectedNoteId, true);
+    setInterval(this.noteBlur, 500, selectedNoteId, true);
   } else {
     $('#note-textarea-' + selectedNoteId).prop('disabled', false);
   }
