@@ -86,7 +86,6 @@ export class ToolbarComponent implements OnInit {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
       this.batches = result;
-      console.log(result);
       this.selectedBatch = this.batches[0];
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
