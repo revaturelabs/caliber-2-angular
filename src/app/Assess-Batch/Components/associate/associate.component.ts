@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { NoteService } from '../../Services/note.service';
+import { Note } from 'src/app/Batch/type/note';
 
 @Component({
   selector: 'app-associate',
@@ -23,59 +25,48 @@ export class AssociateComponent implements OnInit {
         flagNotes: '',
         flagStatus: 'NONE'
       }
-    },
-    {
-      qcStatus: 'Superstar',
-      noteId: 1,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Michels, Alex',
-        // project: ''
-        flagNotes: '',
-        flagStatus: 'RED'
-      }
-    },
-    {
-      qcStatus: 'Good',
-      noteId: 2,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Smith, Carter',
-        flagNotes: '',
-        flagStatus: 'NONE'
-      }
-    },
-    {
-      qcStatus: 'Average',
-      noteId: 3,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Erwin, Eric',
-        flagNotes: '',
-        flagStatus: 'RED'
-      }
-    },
-    {
-      qcStatus: 'Poor',
-      noteId: 4,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Olney, Chris',
-        flagNotes: '',
-        flagStatus: 'NONE'
-      }
     }
   ];
 
   traineeArr: Trainee[] = [];
+  noteArr: Note[] = [];
+  
 
   // Unimplemented functions
-  constructor(private traineeService: TraineeService) { }
+  constructor(private traineeService: TraineeService, private noteService: NoteService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
-   });
+    });
+    this.noteService.noteEmitter.subscribe((noteArr) => {
+      this.noteArr = noteArr;
+      this.sortNoteArrayByTraineeId();
+      console.log(noteArr);
+    });
   }
+  change: Boolean;
+  i : number;
+  temp: Note;
+sortNoteArrayByTraineeId(){
+
+  do {
+    this.change=false;
+ for(this.i=0;this.i<this.noteArr.length-1;this.i++){
+if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
+{
+  this.temp=this.noteArr[this.i];
+  this.noteArr[this.i]=this.noteArr[this.i+1];
+  this.noteArr[this.i+1]=this.temp;
+  this.change=true
+}
+
+ }
+ 
+}while (this.change)
+return this.noteArr;
+}
+
+
 
   showTrainees(){
     this.traineeArr = this.traineeService.returnTrainees();

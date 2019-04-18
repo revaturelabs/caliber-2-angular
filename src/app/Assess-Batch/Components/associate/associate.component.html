@@ -24,8 +24,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let train of traineeArr">
-                                    <td>{{train.name}}</td>
+                                <tr *ngFor="let train of traineeArr; let i = index " >
+                                    <td class="col-sm-2 col-md-2 col-lg-2">{{train.name}}</td>
+                                    <th class="col-sm-1 col-md-1 col-lg-2"></th>
+                                    <td>
+                                            <textarea 
+                                             class="form-control"
+                                            placeholder="Note " 
+                                            rows="3" cols="75" maxlength="4000">{{noteArr[i].noteContent}}</textarea>
+                                        </td>
                                 </tr>
                             </tbody>
                             <tfoot>
