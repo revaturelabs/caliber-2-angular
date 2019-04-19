@@ -84,6 +84,7 @@ export class AssociateComponent implements OnInit {
    });
   }
 
+
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {
 

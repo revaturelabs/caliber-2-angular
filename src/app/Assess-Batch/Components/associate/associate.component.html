@@ -11,32 +11,32 @@
                         <table class="table table-responsive" style="border-collapse: collapse;">
                             <thead>
                                 <tr sticky class='sticky-header'>
-                                    <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-                                    <th class="col-sm-1 col-md-1 col-lg-2"></th>
-                                    <div>
-                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center" role="button"
-                                            data-toggle="modal">
-                                            <div ui-view="trainer-edit-assess"></div>
-                                        </th>
+									<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
+									<th class="col-sm-1 col-md-1 col-lg-1"></th>
+  
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center"
                                             *ngFor="let assessment of assessmentArr">
                                             {{ assessment.assessmentType }}
                                             ({{ assessment.rawScore }}%)
-                                        </th>
+										</th>
+
                                         <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
-                                    </div>
+         
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let train of traineeArr">
                                     <td><a
-                                            style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
-                                    </td>
-                                    <td class="text-center"
+                                        style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
+									</td>
+									<td class="text-center col-sm-1 col-md-1 col-lg-1"></td>
+                                    <td class="text-center col-sm-1 col-md-1 col-lg-1"
                                         *ngFor="let assessment of assessmentArr">
-                                        <input class="form-control" type="number" min="0" max="100" />
+                                        <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
                                     </td>
-                                    <td>Notesgit</td>
+                                    <td class="col-sm-8 col-md-8 col-lg-8">
+										<input class="form-control" type="text">
+									</td>
                                 </tr>
                             </tbody>
                             <tfoot>
