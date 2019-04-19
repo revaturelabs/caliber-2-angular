@@ -10,7 +10,7 @@ import { Assessment } from '../Models/Assesment';
 export class AssessmentService {
 
   constructor(private http: HttpClient) { }
-  url = "http://localhost:9097/all/assessment/create";
+  url = "http://localhost:9090/all/assessment/create";
 
   private assessment: Assessment = {
     assessmentId : 100000000000000000,

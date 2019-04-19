@@ -10,7 +10,7 @@ import { Category } from "../Models/Category";
 })
 export class CategoryService {
   constructor(private http: HttpClient) {}
-  url = "http://desktop-09krqra:8013/all/category/all";
+  url = "http:/localhost:9090/all/category/all";
 //   ourCategories: Category[] = [];
 //   categories = new EventEmitter<Category[]>();
 
