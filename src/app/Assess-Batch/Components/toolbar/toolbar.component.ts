@@ -115,7 +115,6 @@ export class ToolbarComponent implements OnInit {
     this.showBatch = false;
   }
 
-
   checkBatchExistanceInaQuarter(yearselect, quarter) {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
     .subscribe(result => {
@@ -128,11 +127,6 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
-
-
-
-
-  
   showQs(){
     this.batches = [];
     // this.selectedBatch = null;
