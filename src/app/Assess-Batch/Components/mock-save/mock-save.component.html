@@ -1,17 +1,20 @@
 <div class="container">
   <div class="row centered">
+      <div class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
 <!-- show floppy and provide global blur event for a mock save-->
     <div class="save-button-wrapper">
-      <a ng-click="saveQCandTrainee()" ng-show="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x"
+      <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x"
         aria-hidden="true"></span>Save
       </a>
   <!-- Events after clicking save button -->
-  <div class="spinner fa-style ng-hide" ng-show="showSaving">
+  <div class="spinner fa-style " *ngIf="showSaving">
     <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
   </div>
-  <div id="checkMark" class="spinner fade fa-style ng-hide" ng-show="showCheck">
-    <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
+  
+  <div id="checkMark" class="spinner fa-style fa-2x" *ngIf="showCheck">
+    <span class="fas fa-check" aria-hidden="true"></span>
   </div>
+</div>
 </div>
 </div>
 </div>
