@@ -74,7 +74,6 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0].toString();
-      console.log(this.years);
     });
     
   }
@@ -85,7 +84,6 @@ export class ToolbarComponent implements OnInit {
       this.batches = result;
       this.selectedBatch = this.batches[0];
       this.auditService.selectedBatch = this.batches[0];
-      console.log(this.batches);
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
       });

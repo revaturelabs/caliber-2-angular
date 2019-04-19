@@ -1,11 +1,12 @@
 .glyphicon-question-sign, .fa-question-circle {
-    padding-left: 0px;
+    padding: 1px;
+    background-color: none;
 }
 
-.qcStatusIcon {
-    
+.trainee-name:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
-
 
 .flag-notes-popup {
     position: relative;
@@ -20,6 +21,7 @@
     z-index: 1000;
     left: 2px;
     bottom: 2px;
+    margin-left: 1px;
 }
 
 .flag-notes-popup input {
@@ -32,7 +34,6 @@
     margin-left: 8px;
 }
 
-.flage-notes-close-btn {
-    margin-right: 5px;
-    padding-bottom: 14px;
+.valid-feedback{
+    margin-left: 8px !important;
 }

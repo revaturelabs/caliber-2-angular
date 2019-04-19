@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { AssessBatchService } from '../../Services/assess-batch.service';
 
 @Component({
   selector: 'app-associate',
@@ -9,68 +10,55 @@ import { Trainee } from 'src/app/Batch/type/trainee';
 })
 export class AssociateComponent implements OnInit {
 
-  // List of test notes
-  notes = [
-    {
-      qcStatus: 'Undefined',
-      noteId: 0,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Hajek, Alexander',
-        project: '89.45',
-        verbal: '79.23',
-        exam: '78.23',
-        flagNotes: '',
-        flagStatus: 'NONE'
-      }
-    },
-    {
-      qcStatus: 'Superstar',
-      noteId: 1,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Michels, Alex',
-        // project: ''
-        flagNotes: '',
-        flagStatus: 'RED'
-      }
-    },
-    {
-      qcStatus: 'Good',
-      noteId: 2,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Smith, Carter',
-        flagNotes: '',
-        flagStatus: 'NONE'
-      }
-    },
-    {
-      qcStatus: 'Average',
-      noteId: 3,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Erwin, Eric',
-        flagNotes: '',
-        flagStatus: 'RED'
-      }
-    },
-    {
-      qcStatus: 'Poor',
-      noteId: 4,
-      noteFlagInputActive: false,
-      trainee: {
-        name: 'Olney, Chris',
-        flagNotes: '',
-        flagStatus: 'NONE'
-      }
-    }
-  ];
+  noteFlagInputActive: boolean;
 
   traineeArr: Trainee[] = [];
+  flagNoteSwitch:Array<number> = [];
+
+ 
+  // List of test notes
+  // notes = [
+  //   {
+  //     qcStatus: 'Undefined',
+  //     noteId: 0,
+  //     noteFlagInputActive: false,
+  //     trainee: {
+  //       name: 'Hajek, Alexander',
+  //       project: '89.45',
+  //       verbal: '79.23',
+  //       exam: '78.23',
+  //       flagNotes: '',
+  //       flagStatus: 'NONE'
+  //     }
+  //   }
+  // ];
+
+  // [{
+  //   traineeId: 1,
+  //   resourceId: null,
+  //   name: "Howard Johnson",
+  //   email: "howard.johnson@hotmail.com",
+  //   trainingStatus: "Training",
+  //   batchId: 2003,
+  //   phoneNumber: "555-555-5555",
+  //   skypeId: null,
+  //   profileUrl: null,
+  //   recruiterName: null,
+  //   college: null,
+  //   degree: null,
+  //   major: null,
+  //   techScreenerName: null,
+  //   techScreenScore: null,
+  //   projectCompletion: null,
+  //   flagStatus: null,
+  //   flagNotes: null,
+  //   flagTimestamp: null,
+  //   flagAuthor: null
+  //   }]   private postloginService: PostloginService
+
 
   // Unimplemented functions
-  constructor(private traineeService: TraineeService) { }
+  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
@@ -78,97 +66,97 @@ export class AssociateComponent implements OnInit {
   }
 
   // Cycle the Individual Feedback Status
-  cycleFlag(selectedNoteId: number): void {
-
+  cycleFlag(selectedtraineeId: number): void {
     // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
+
+    for (let i = 0; i < this.traineeArr.length; i++) {
 
       // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
+      if (this.traineeArr[i].traineeId === selectedtraineeId) {
 
         // Create placeholder for new status string
         let newStatus = '';
+        //this.noteFlagInputActive= true;
+        console.log(this.traineeArr[i].flagStatus);
 
         // Determine the new status string
-        switch (this.notes[i].trainee.flagStatus) {
-          case 'NONE':
+        switch (this.traineeArr[i].flagStatus) {
+
+          case null:
             newStatus = 'RED';
             break;
           case 'RED':
             newStatus = 'GREEN';
             break;
           case 'GREEN':
-            newStatus = 'NONE';
+            newStatus = null;
             break;
         }
-
+        console.log(newStatus);
         // Update the status
-        this.notes[i].trainee.flagStatus = newStatus;
+        this.traineeArr[i].flagStatus = newStatus;
       }
     }
+  }
+
+  deleteFromSwitch(x:number){
+    delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
 
   // Cycle the flag notes popup
-  cycleFlagNotesInput(selectedNoteId: number, enable: boolean): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
+  cycleFlagNotesInput(selectedtraineeId: number, value: boolean): void {
+    console.log(selectedtraineeId)
+    // Loop through each trainer in traineeArr until the target is found
+    console.log( this.flagNoteSwitch);
+    for (let i = 0; i < this.traineeArr.length; i++) {
 
       // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
+      if (this.traineeArr[i].traineeId === selectedtraineeId) {
         
+        console.log(selectedtraineeId)
           // Enable or disable the notes box popup
-          this.notes[i].noteFlagInputActive = enable;
+          // this.traineeArr[i].noteFlagInputActive = enable;
+          if(this.flagNoteSwitch.indexOf(selectedtraineeId)==-1){
+            this.flagNoteSwitch.push(selectedtraineeId);
+          }
+          this.noteFlagInputActive=value;
       }
     }
   }
 
-  // Cycle the Individual Feedback Status
-  cycleIF(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].qcStatus) {
-          case 'Undefined':
-            newStatus = 'Superstar';
-            break;
-          case 'Superstar':
-            newStatus = 'Good';
-            break;
-          case 'Good':
-            newStatus = 'Average';
-            break;
-          case 'Average':
-            newStatus = 'Poor';
-            break;
-          case 'Poor':
-            newStatus = 'Undefined';
-            break;
-        }
-
-        // Update the status
-        this.notes[i].qcStatus = newStatus;
+  commentOnTrainee(trainee ,comment: string){
+    console.log(trainee);
+    console.log(comment);
+    trainee.flagNotes = comment; 
+    this.AssessBatchService.postComment(trainee).subscribe(response => {
+      if(Object != null){
+        console.log("Success");
+        this.deleteFromSwitch(trainee.traineeId);
+      }else{
+        console.log("Fails");
+        this.show = false;
       }
-    }
+    });
+
   }
+
+  show = true;
+
+
+
+
+
+
 
   // Disables the associated notes text area box for 1 second.
-  noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
+  noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
 
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-      setInterval(this.noteOnBlur, 1000, selectedNoteId, true);
+      $('#note-textarea-' + selectedtraineeId).prop('disabled', true);
+      setInterval(this.noteOnBlur, 1000, selectedtraineeId, true);
     } else {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', false);
+      $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
     }
   }
 }
