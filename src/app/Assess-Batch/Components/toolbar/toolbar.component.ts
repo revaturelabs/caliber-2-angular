@@ -46,6 +46,7 @@ export class ToolbarComponent implements OnInit {
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  batchExists: boolean = false;
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
@@ -84,10 +85,13 @@ export class ToolbarComponent implements OnInit {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
         if(result.length > 0) {
+          this.batchExists = true;
       this.batches = result;
       this.selectedBatch = this.batches[0];
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
+    } else {
+      this.batchExists = false;
     }
       });
   }
@@ -97,14 +101,13 @@ export class ToolbarComponent implements OnInit {
     this.batches = [];
     this.selectedBatch = null;
     console.log(this.batches);
-    this.showBatch = false;
     this.showQ = true;
+    this.showBatch = false;
   }
   
   showQs(){
-    this.showBatch = false;
     this.batches = [];
-    this.selectedBatch = null;
+    // this.selectedBatch = null;
   }
 
   selectQuarter(event: string) {
