@@ -515,6 +515,7 @@ footer a, footer a:hover {
 .save-button:hover {
 	cursor: pointer;
 	text-decoration: none;
+	color: black;
 }
 
 .save-button:active {
