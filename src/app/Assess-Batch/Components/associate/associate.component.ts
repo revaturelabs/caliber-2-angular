@@ -9,55 +9,15 @@ import { AssessBatchService } from '../../Services/assess-batch.service';
   styleUrls: ['./associate.component.css']
 })
 export class AssociateComponent implements OnInit {
-
+//boolean to show module if valid
   noteFlagInputActive: boolean;
-
+//Array to hold all trainnee
   traineeArr: Trainee[] = [];
+//Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
+//multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
 
- 
-  // List of test notes
-  // notes = [
-  //   {
-  //     qcStatus: 'Undefined',
-  //     noteId: 0,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Hajek, Alexander',
-  //       project: '89.45',
-  //       verbal: '79.23',
-  //       exam: '78.23',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   }
-  // ];
 
-  // [{
-  //   traineeId: 1,
-  //   resourceId: null,
-  //   name: "Howard Johnson",
-  //   email: "howard.johnson@hotmail.com",
-  //   trainingStatus: "Training",
-  //   batchId: 2003,
-  //   phoneNumber: "555-555-5555",
-  //   skypeId: null,
-  //   profileUrl: null,
-  //   recruiterName: null,
-  //   college: null,
-  //   degree: null,
-  //   major: null,
-  //   techScreenerName: null,
-  //   techScreenScore: null,
-  //   projectCompletion: null,
-  //   flagStatus: null,
-  //   flagNotes: null,
-  //   flagTimestamp: null,
-  //   flagAuthor: null
-  //   }]   private postloginService: PostloginService
-
-
-  // Unimplemented functions
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
@@ -76,9 +36,6 @@ export class AssociateComponent implements OnInit {
 
         // Create placeholder for new status string
         let newStatus = '';
-        //this.noteFlagInputActive= true;
-        console.log(this.traineeArr[i].flagStatus);
-
         // Determine the new status string
         switch (this.traineeArr[i].flagStatus) {
 
@@ -92,30 +49,25 @@ export class AssociateComponent implements OnInit {
             newStatus = null;
             break;
         }
-        console.log(newStatus);
         // Update the status
         this.traineeArr[i].flagStatus = newStatus;
       }
     }
   }
-
+//method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
   deleteFromSwitch(x:number){
     delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
 
   // Cycle the flag notes popup
   cycleFlagNotesInput(selectedtraineeId: number, value: boolean): void {
-    console.log(selectedtraineeId)
     // Loop through each trainer in traineeArr until the target is found
-    console.log( this.flagNoteSwitch);
     for (let i = 0; i < this.traineeArr.length; i++) {
 
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
         
-        console.log(selectedtraineeId)
-          // Enable or disable the notes box popup
-          // this.traineeArr[i].noteFlagInputActive = enable;
+          // add Id of trainee to "flagNoteSwitch" array 
           if(this.flagNoteSwitch.indexOf(selectedtraineeId)==-1){
             this.flagNoteSwitch.push(selectedtraineeId);
           }
@@ -124,28 +76,21 @@ export class AssociateComponent implements OnInit {
     }
   }
 
+  //send the object of the trainee to the service in order to include the flag note
   commentOnTrainee(trainee ,comment: string){
-    console.log(trainee);
-    console.log(comment);
     trainee.flagNotes = comment; 
     this.AssessBatchService.postComment(trainee).subscribe(response => {
       if(Object != null){
+        //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box 
+        // when the clicked on save button
         console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
       }else{
         console.log("Fails");
-        this.show = false;
       }
     });
 
   }
-
-  show = true;
-
-
-
-
-
 
 
   // Disables the associated notes text area box for 1 second.
