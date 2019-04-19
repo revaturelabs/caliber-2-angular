@@ -26,29 +26,52 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let train of traineeArr">
-                                    <td><a
-                                        style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
-									</td>
+									<td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
+										{{train.name}} 
+							   </td>
+							   <td>
+								<!-- Only shows the current flag, none if no flag is assigned -->
+								<i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+								<i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+								<i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+								<!-- Shows the flag notes popup if the user clicks the name column -->
+							</td>
+							<i>
+								<div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
+									<input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
+									<button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
+									<button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+									<span class="glyphicon glyphicon-remove-sign closing-button"></span>
+									</button>
+								</div>
+			
+							</i>
 									<td class="text-center col-sm-1 col-md-1 col-lg-1"></td>
                                     <td class="text-center col-sm-1 col-md-1 col-lg-1"
                                         *ngFor="let assessment of assessmentArr">
                                         <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
                                     </td>
-                                    <td class="col-sm-8 col-md-8 col-lg-8">
-										<input class="form-control" type="text">
+                                    <td >
+										<textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)" 
+										id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" 
+										id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
 									</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <td>Average</td>
-                                <td></td>
-                                <td class="text-center"></td>
-
-                                <td><span style="font-weight: bold"></span>
-                                    <span></span><i class='fa fa-cog fa-spin'></i>
-                                </td>
-                                <td></td>
-                            </tfoot>
+							<tfoot>
+								<tr>
+								<td><strong>Average</strong></td>
+								<!-- <td
+									ng-repeat="assessment in currentAssessments track by assessment.assessmentId">{{getTotalAssessmentAvgForWeek(assessment,trainees)
+									? (getTotalAssessmentAvgForWeek(assessment,trainees) |
+									number:2) + "%" : "-"}}</td>
+								<td>{{ (allAssessmentsAvgForWeek === false ? "Calculating
+									Weekly Batch Avg " : "Weekly Batch Avg= " +
+									allAssessmentsAvgForWeek) }}<i
+									ng-show="!allAssessmentsAvgForWeek" class='fa fa-cog fa-spin'></i>
+								</td> -->
+							</tr>
+							</tfoot>
                         </table>
                     </ul>
                 </ul>
@@ -56,3 +79,4 @@
         </div>
     </div>
 </div>
+
