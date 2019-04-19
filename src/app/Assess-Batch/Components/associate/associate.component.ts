@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+<<<<<<< HEAD
 import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
+=======
+import { NoteService } from '../../Services/note.service';
+import { Note } from 'src/app/Batch/type/note';
+import { stringify } from '@angular/compiler/src/util';
+>>>>>>> 1fb760a8d44bc95342a5865a731a6b92dfe5bc0f
 
 @Component({
   selector: 'app-associate',
@@ -17,6 +23,7 @@ export class AssociateComponent implements OnInit {
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
 
+<<<<<<< HEAD
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
@@ -31,7 +38,98 @@ export class AssociateComponent implements OnInit {
      this.assessmentArr = assessmentArr;
       
    });
+=======
+  // List of test notes
+  notes = [
+    {
+      qcStatus: 'Undefined',
+      noteId: 0,
+      noteFlagInputActive: false,
+      trainee: {
+        name: 'Hajek, Alexander',
+        project: '89.45',
+        verbal: '79.23',
+        exam: '78.23',
+        flagNotes: '',
+        flagStatus: 'NONE'
+      }
+    }
+  ];
+
+  traineeArr: Trainee[] = [];
+  noteArr: Note[] = [];
+  
+
+  // Unimplemented functions
+  constructor(private traineeService: TraineeService, private noteService: NoteService) { }
+  ngOnInit( ) {
+    this.traineeService.trainees.subscribe((traineeArr) => {
+      this.traineeArr = traineeArr;
+      console.log(traineeArr);
+    });
+    
+    this.noteService.noteEmitter.subscribe((noteArr) => {
+     
+      this.noteArr = noteArr;
+      this.sortNoteArrayByTraineeId();
+      console.log(noteArr);
+      this.makeContentArray();
+      
+      
+    });
+>>>>>>> 1fb760a8d44bc95342a5865a731a6b92dfe5bc0f
   }
+  
+  change: Boolean;
+  i : number;
+  temp: Note;
+sortNoteArrayByTraineeId(){
+
+  do {
+    this.change=false;
+ for(this.i=0;this.i<this.noteArr.length-1;this.i++){
+
+if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
+{
+  this.temp=this.noteArr[this.i];
+  this.noteArr[this.i]=this.noteArr[this.i+1];
+  this.noteArr[this.i+1]=this.temp;
+  this.change=true
+}
+
+ }
+ 
+}while (this.change)
+return this.noteArr;
+}
+content: string[]=[]
+makeContentArray(){
+  for(this.i=0;this.i<this.noteArr.length;this.i++){
+this.content[this.i]=this.noteArr[this.i].noteContent;
+console.log("console Array =  " + this.content);
+  }
+}
+
+
+str: string;
+ // Disables the associated notes text area box for 1 second.
+ noteBlur(index: number,  secondRound: boolean): void {
+
+  // The first call will recursivley call this function again to re-enable the input box after 1 second
+  if (!secondRound) {
+    
+    console.log(blur);
+    console.log(this.content[index]);
+   
+    this.noteArr[index].noteContent=this.content[index];
+    this.noteService.putNote(this.noteArr[index]);
+    $('#note-textarea-' + index).prop('disabled', true);
+    setInterval(this.noteBlur, 1000, index,  true);
+  } else {
+    $('#note-textarea-' + index).prop('disabled', false);
+  }
+}
+
 
 
   // Cycle the Individual Feedback Status
@@ -103,6 +201,7 @@ export class AssociateComponent implements OnInit {
 
 
   // Disables the associated notes text area box for 1 second.
+<<<<<<< HEAD
   noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
 
     // The first call will recursivley call this function again to re-enable the input box after 1 second
@@ -113,4 +212,7 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
     }
   }
+=======
+ 
+>>>>>>> 1fb760a8d44bc95342a5865a731a6b92dfe5bc0f
 }

@@ -22,7 +22,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let train of traineeArr">
+                                <tr *ngFor="let train of traineeArr; let i = index">
 									<td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
 										{{train.name}} 
 							   </td>
@@ -48,9 +48,15 @@
                                         <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
                                     </td>
                                     <td >
-										<textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)" 
-										id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" 
-										id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
+										<textarea
+                                            (blur)="noteBlur(i, false)" 
+                                            id="note-textarea-{{i}}"
+                                             class="form-control"
+                                            placeholder="Note " 
+                                            rows="3" cols="75" maxlength="4000"   [(ngModel)]="content[i]">{{content[i]}}</textarea>
+                                        </td>
+                                        <!-- input [(ngModel)]="noteArr[i]?.noteContent" placeholder="note" -->
+                                        <!-- {{noteArr[i]?.noteContent}} -->
 									</td>
                                 </tr>
                             </tbody>

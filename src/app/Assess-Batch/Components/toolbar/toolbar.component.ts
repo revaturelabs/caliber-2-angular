@@ -7,7 +7,8 @@ import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
-
+import { NoteService } from '../../Services/note.service';
+import { Note } from 'src/app/Batch/type/note';
 
 @Component({
   selector: 'app-toolbar',
@@ -63,7 +64,7 @@ export class ToolbarComponent implements OnInit {
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService, public noteService: NoteService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -118,6 +119,9 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
+  
+ 
+
   selectYear(event: number) {
     this.selectedYear = event.toString();
     this.auditService.selectedYear = Number.parseInt(this.selectedYear);
@@ -126,6 +130,7 @@ export class ToolbarComponent implements OnInit {
       this.batches = result;
       });
     this.showQ = true;
+    this.getBatches();
   }
   
   selectQuarter(event: string) {
@@ -149,7 +154,7 @@ export class ToolbarComponent implements OnInit {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
     this.getAssessmentsByBatchId();
-
+    this.getBatchNotesByWeek();
   }
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
@@ -168,7 +173,15 @@ export class ToolbarComponent implements OnInit {
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
+      this.getBatchNotesByWeek();
     })    
+  }
+  getBatchNotesByWeek(){
+    this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+      
+      this.noteService.noteEmitter.emit(notes);
+    })   
+
   }
 
   getAssessmentsByBatchId(){
