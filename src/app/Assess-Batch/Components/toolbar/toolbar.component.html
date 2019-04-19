@@ -5,7 +5,7 @@
 				<!-- top ui dropdown for available years -->
 				<ul class="nav nav-tabs">
 					<li role="button" class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" (click)="displayYears()"> {{selectedYear}} <span class="caret"></span></a>
+						data-toggle="dropdown" (click)='displayYears()'> {{selectedYear}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let year of years">
                 <a role="button" (click)="selectYear(year)">{{year}}</a>
