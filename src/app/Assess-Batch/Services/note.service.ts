@@ -36,10 +36,12 @@ export class NoteService {
   }
 
   putNote(note: Note): Observable<Note>{
+    console.log(note.noteContent);
     return this.http.put<Note>(this.url + this.notePut, note, httpOptions);
   }
 
   postNote(note: Note): Observable<Note>{
+   
     return this.http.post<Note>(this.url + this.notePost, note, httpOptions);
   }
 }

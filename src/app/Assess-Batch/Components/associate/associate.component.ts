@@ -3,6 +3,7 @@ import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-associate',
@@ -45,7 +46,7 @@ export class AssociateComponent implements OnInit {
       this.noteArr = noteArr;
       this.sortNoteArrayByTraineeId();
       console.log(noteArr);
-      
+      this.makeContentArray();
       
       
     });
@@ -73,18 +74,31 @@ if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
 }while (this.change)
 return this.noteArr;
 }
+content: string[]=[]
+makeContentArray(){
+  for(this.i=0;this.i<this.noteArr.length;this.i++){
+this.content[this.i]=this.noteArr[this.i].noteContent;
+console.log("console Array =  " + this.content);
+  }
+}
 
 
-
+str: string;
  // Disables the associated notes text area box for 1 second.
- noteBlur(selectedNoteId: number, selectedNoteContent: string, secondRound: boolean): void {
+ noteBlur(index: number,  secondRound: boolean): void {
 
   // The first call will recursivley call this function again to re-enable the input box after 1 second
   if (!secondRound) {
-    $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-    setInterval(this.noteBlur, 500, selectedNoteId, true);
+    
+    console.log(blur);
+    console.log(this.content[index]);
+   
+    this.noteArr[index].noteContent=this.content[index];
+    this.noteService.putNote(this.noteArr[index]);
+    $('#note-textarea-' + index).prop('disabled', true);
+    setInterval(this.noteBlur, 1000, index,  true);
   } else {
-    $('#note-textarea-' + selectedNoteId).prop('disabled', false);
+    $('#note-textarea-' + index).prop('disabled', false);
   }
 }
 
@@ -180,14 +194,5 @@ return this.noteArr;
   }
 
   // Disables the associated notes text area box for 1 second.
-  noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
-
-    // The first call will recursivley call this function again to re-enable the input box after 1 second
-    if (!secondRound) {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-      setInterval(this.noteOnBlur, 1000, selectedNoteId, true);
-    } else {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', false);
-    }
-  }
+ 
 }
