@@ -24,7 +24,7 @@ export class Trainee {
     constructor() {}
 }
 
-export class TraineeGrades {
+export class traineeAssessment {
     assessmentId: number;
     rawScore: number;
     assessmentTitle: string;

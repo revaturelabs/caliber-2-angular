@@ -4,6 +4,8 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
+import { traineeAssessment } from 'src/app/User/user/types/trainee';
+import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -40,15 +42,26 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
+  grades: traineeAssessment = {
+    assessmentId: 0,
+    rawScore: 0,
+    assessmentTitle: '',
+    assessmentType: '',
+    weekNumber: 0,
+    batchId: 0,
+    assessmentCategory: 0
+  }
+
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  weeklyGrades: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -121,6 +134,8 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
+    this.getAssessmentsByBatchId();
+
   }
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
@@ -140,6 +155,19 @@ export class ToolbarComponent implements OnInit {
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
     })    
+  }
+
+  getAssessmentsByBatchId(){
+    console.log(this.selectedBatch.batchId);
+    this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(grades => {
+      for(let i = 0; i < grades.length; i++){
+        if(grades[i].weekNumber == this.selectedWeek){
+          this.weeklyGrades.push(grades[i]);
+        }
+      }
+      this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
+      this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
+    })
   }
 
 }

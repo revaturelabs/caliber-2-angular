@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { traineeAssessment } from 'src/app/User/user/types/trainee';
+import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
 
 @Component({
   selector: 'app-associate',
@@ -68,12 +70,17 @@ export class AssociateComponent implements OnInit {
   ];
 
   traineeArr: Trainee[] = [];
+  assessmentArr: traineeAssessment[] = [];
 
   // Unimplemented functions
-  constructor(private traineeService: TraineeService) { }
+  constructor(private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
+   });
+   this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
+     this.assessmentArr = assessmentArr;
+      
    });
   }
 
