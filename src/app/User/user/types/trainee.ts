@@ -34,4 +34,12 @@ export class traineeAssessment {
     assessmentCategory: number;
 }
 
+export class Grades {
+    gradeId: number;
+    dateReceived: number;
+    score: number;
+    assessmentId: number;
+    traineeId: number;
+}
+
 

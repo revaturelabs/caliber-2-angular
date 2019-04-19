@@ -159,10 +159,11 @@ export class ToolbarComponent implements OnInit {
 
   getAssessmentsByBatchId(){
     console.log(this.selectedBatch.batchId);
-    this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(grades => {
-      for(let i = 0; i < grades.length; i++){
-        if(grades[i].weekNumber == this.selectedWeek){
-          this.weeklyGrades.push(grades[i]);
+    this.weeklyGrades=[];
+    this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
+      for(let i = 0; i < assessments.length; i++){
+        if(assessments[i].weekNumber == this.selectedWeek){
+          this.weeklyGrades.push(assessments[i]);
         }
       }
       this.assessBatchGradeService.storeAssessments(this.weeklyGrades);

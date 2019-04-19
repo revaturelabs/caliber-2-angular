@@ -1,8 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Batch } from '../../Batch/type/batch';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { traineeAssessment } from '../../User/user/types/trainee'
+import { traineeAssessment, Grades } from '../../User/user/types/trainee'
 
 
 @Injectable({
@@ -11,19 +10,21 @@ import { traineeAssessment } from '../../User/user/types/trainee'
 export class AssessBatchGradeService {
 
   url = 'http://localhost:9097';
-  gradesAllURL = '/all/assessment/all';
-  gradesByIdURL = '/all/assessment/batch/';
+  gradesByIdURL = '/all/grade/batch/';
+  assessmentsByIdURL = '/all/assessment/batch/';
   allAssessments: traineeAssessment[] = [];
+  allGrades: Grades[] = [];
   assessments = new EventEmitter<traineeAssessment[]>();
+  grades = new EventEmitter<Grades[]>();
 
   constructor(private http: HttpClient) { }
 
   getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {
-    return this.http.get<traineeAssessment[]>(this.url + this.gradesByIdURL + id);
+    return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id);
   }
 
-  getAllGrades(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + this.gradesAllURL);
+  getGradesByBatchId(id: number): Observable<number[]> {
+    return this.http.get<number[]>(this.url + this.gradesByIdURL);
   }
 
   storeAssessments(entry: traineeAssessment[]) {

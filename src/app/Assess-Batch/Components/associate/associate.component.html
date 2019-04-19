@@ -1,4 +1,4 @@
-<div class = "container">
+<div class="container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
     <div class="container" id="trainer-assess-table">
         <div class="row">
@@ -8,18 +8,18 @@
                     <p class="bg-primary align center"></p>
                     <ul class="nav nav-tabs">
                         <!-- Accordian table -->
-                        <table class="table table-responsive"
-                            style="border-collapse: collapse;">
+                        <table class="table table-responsive" style="border-collapse: collapse;">
                             <thead>
                                 <tr sticky class='sticky-header'>
                                     <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
                                     <th class="col-sm-1 col-md-1 col-lg-2"></th>
                                     <div>
-                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center"
-                                            role="button" data-toggle="modal">
+                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center" role="button"
+                                            data-toggle="modal">
                                             <div ui-view="trainer-edit-assess"></div>
                                         </th>
-                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let assessment of assessmentArr">
+                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center"
+                                            *ngFor="let assessment of assessmentArr">
                                             {{ assessment.assessmentType }}
                                             ({{ assessment.rawScore }}%)
                                         </th>
@@ -29,23 +29,23 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let train of traineeArr">
-                                    <td><a style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a></td>
-                                    <td class="col-sm-1 col-md-1 col-lg-1 text-center"
-									*ngFor="let assessment of assessmentArr">
-									<input
-									class="form-control" type="number" min="0" max="100"
-									 />
-								</td>
+                                    <td><a
+                                            style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
+                                    </td>
+                                    <td class="text-center"
+                                        *ngFor="let assessment of assessmentArr">
+                                        <input class="form-control" type="number" min="0" max="100" />
+                                    </td>
+                                    <td>Notesgit</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <td>Average</td>
                                 <td></td>
                                 <td class="text-center"></td>
-    
+
                                 <td><span style="font-weight: bold"></span>
-                                    <span></span><i
-                                     class='fa fa-cog fa-spin'></i>
+                                    <span></span><i class='fa fa-cog fa-spin'></i>
                                 </td>
                                 <td></td>
                             </tfoot>
