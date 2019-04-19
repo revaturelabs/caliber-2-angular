@@ -94,7 +94,17 @@ str: string;
     console.log(this.content[index]);
    
     this.noteArr[index].noteContent=this.content[index];
-    this.noteService.putNote(this.noteArr[index]);
+    console.log(this.noteArr[index]);
+    this.noteService.putNote(this.noteArr[index]).subscribe(response =>{
+      if(Object !=null){
+        console.log("success")
+      }else{
+        console.log("fail")
+      }
+    }
+
+    );
+    console.log(this.noteArr[index]);
     $('#note-textarea-' + index).prop('disabled', true);
     setInterval(this.noteBlur, 1000, index,  true);
   } else {

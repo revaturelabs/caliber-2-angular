@@ -15,6 +15,7 @@ const httpOptions = {
 export class NoteService {
   constructor(private http: HttpClient) { }
   url = 'http://localhost:9097';
+  url3 = 'http://localhost:9090/all/note/update';
   traineeBatchIdURL = '/all/trainee?batch=';
    batchesYearURL = '/vp/batch/';
    yearsURL = '/all/batch/valid_years';
@@ -35,9 +36,9 @@ export class NoteService {
     return this.http.get<Note[]>(this.url + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
   }
 
-  putNote(note: Note): Observable<Note>{
-    console.log(note.noteContent);
-    return this.http.put<Note>(this.url + this.notePut, note, httpOptions);
+  putNote(note): Observable<object>{
+    console.log(note);
+    return this.http.put<object>(this.url3, note);
   }
 
   postNote(note: Note): Observable<Note>{
