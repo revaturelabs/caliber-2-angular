@@ -76,6 +76,7 @@ return this.noteArr;
 }
 content: string[]=[]
 makeContentArray(){
+  this.content=[];
   for(this.i=0;this.i<this.noteArr.length;this.i++){
 this.content[this.i]=this.noteArr[this.i].noteContent;
 console.log("console Array =  " + this.content);
