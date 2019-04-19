@@ -38,13 +38,14 @@
 								ng-model="assessmentType.model" class="form-control"
 								id="assessmentType" required>
 								<option value="" disabled>Select Assessment Type</option>
-								<option *ngFor ="let cat of categories">{{cat.skillCategory}}</option>
+								<option *ngFor ="let type of assessmentTypeDisplay">{{type.name}}</option>
 							</select>
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
+					<button type="button" (click) = 'addAssessment()'>ADD Test</button>
 					<input type="submit" value="Save" class="btn btn-primary">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
