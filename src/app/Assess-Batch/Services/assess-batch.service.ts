@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AssessBatchService {
 
   url = 'http://localhost:9095';
+  Url2= 'http://localhost:9085/all/trainee/update';
   batchAllURL = '/vp/batch/all';
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
@@ -26,5 +27,7 @@ export class AssessBatchService {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
-  
+  postComment (trainee): Observable<object> { 
+    return this.http.put<object>(this.Url2, trainee );
+  }
 }

@@ -18,7 +18,6 @@ export class CategoryService {
     return this.http.get<[Category]>(this.url);
   }
 
-  
 //   storeCategories(entry: Category[]) {
 //     this.ourCategories = entry;
 //     console.log(this.ourCategories);

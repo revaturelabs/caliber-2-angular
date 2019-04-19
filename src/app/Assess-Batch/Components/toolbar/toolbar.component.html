@@ -5,15 +5,25 @@
 				<!-- top ui dropdown for available years -->
 				<ul class="nav nav-tabs">
 					<li role="button" class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown"> {{ selectedYear }} <span class="caret"></span></a>
+						data-toggle="dropdown" (click)="displayYears()"> {{selectedYear}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let year of years">
                 <a role="button" (click)="selectYear(year)">{{year}}</a>
               </li>
 						</ul>
+						
+					<!-- sort by quarter-->
+					<li role="button" class="dropdown" *ngIf="showQ"><a class="dropdown-toggle"
+						data-toggle="dropdown"> {{selectedQuarter}} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li *ngFor="let quarter of quarters">
+				<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
+			  		</li>
+					</ul>
 
+					<!-- {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }} -->
 					<!-- top ui for viewing all assessments -->
-					<li role="button" class="dropdown" *ngIf="selectedBatch">
+					<li role="button" class="dropdown" *ngIf="showBatch">
 						<a class="dropdown-toggle" data-toggle="dropdown"> {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }}
 							<span class="caret"></span>
 						</a>
@@ -28,6 +38,7 @@
 							Grades <span class="glyphicon glyphicon-download"
 							aria-hidden="true"> </span>
 						</a></li>
+						
 					<!-- Button Trigger for Create Assessment Modal -->
 						<!--   -->
 						<li role="button" class="pull-right" 

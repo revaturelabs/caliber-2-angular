@@ -99,7 +99,7 @@ export class AssociateComponent implements OnInit {
             newStatus = 'NONE';
             break;
         }
-
+console.log(newStatus);
         // Update the status
         this.notes[i].trainee.flagStatus = newStatus;
       }
@@ -115,8 +115,11 @@ export class AssociateComponent implements OnInit {
       // Find the clicked note
       if (this.notes[i].noteId === selectedNoteId) {
         
+        console.log(selectedNoteId);
+
           // Enable or disable the notes box popup
           this.notes[i].noteFlagInputActive = enable;
+
       }
     }
   }

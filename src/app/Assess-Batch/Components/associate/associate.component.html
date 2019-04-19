@@ -1,46 +1,82 @@
-<div class = "container">
+<div class="container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
-    <table class="table table-responsive table-condensed"
-            style="border-collapse: collapse; max-width: 1140px;">
-        <tbody>
-            <!-- Every note contains an associate in the current batch -->
-            <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let note of notes">
-                <td (click)="cycleFlagNotesInput(note.noteId, true); cycleFlag(note.noteId);" style="width: 11%;">
-                    {{ note.trainee.name }}
-                </td>
-                <td style="width: 3%; position:absolute;">
-                    <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="note.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="note.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="note.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
-                    <!-- Shows the flag notes popup if the user clicks the name column -->
-                    <div *ngIf="note.noteFlagInputActive===true" class = "flag-notes-popup">
-                        <input class = "form-control" type="text" placeholder=" comment"/>
-                        <button class ="btn btn-info flage-notes-save-btn">Save</button>
-                        <button (click)="cycleFlagNotesInput(note.noteId, false)" type="button" class="flage-notes-close-btn close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </td>
-                <td (click)="cycleIF(note.noteId)" style="width: 7%;text-align: center;">
-                    <!-- Only shows the icon that cooralates with the correct Qc Status -->
-                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
-                </td>
-                <!-- This is a small gap to add space in between columns -->
-                <td style="width: 3%;"></td>
-                <td style="width: 76%;">
-                    <textarea 
-                            (blur)="noteOnBlur(note.noteId, false)" 
-                            id="note-textarea-{{note.noteId}}" class="form-control"
-                            placeholder="Note on {{ note.trainee.name }}" 
-                            rows="3" cols="75" maxlength="4000">{{ note.content }}</textarea>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container" id="trainer-assess-table">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 top5">
+                <p class="bg-primary align center"></p>
+                <ul class="nav nav-tabs">
+                    <p class="bg-primary align center"></p>
+                    <ul class="nav nav-tabs">
+                        <!-- Accordian table -->
+                        <table class="table table-responsive" style="border-collapse: collapse;">
+                            <thead>
+                                <tr sticky class='sticky-header'>
+									<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
+									<th class="col-sm-1 col-md-1 col-lg-1"></th>
+  
+                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center"
+                                            *ngFor="let assessment of assessmentArr">
+                                            {{ assessment.assessmentType }}
+                                            ({{ assessment.rawScore }}%)
+										</th>
+
+                                        <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
+         
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let train of traineeArr">
+									<td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
+										{{train.name}} 
+							   </td>
+							   <td>
+								<!-- Only shows the current flag, none if no flag is assigned -->
+								<i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+								<i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+								<i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+								<!-- Shows the flag notes popup if the user clicks the name column -->
+							</td>
+							<i>
+								<div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
+									<input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
+									<button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
+									<button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+									<span class="glyphicon glyphicon-remove-sign closing-button"></span>
+									</button>
+								</div>
+			
+							</i>
+									<td class="text-center col-sm-1 col-md-1 col-lg-1"></td>
+                                    <td class="text-center col-sm-1 col-md-1 col-lg-1"
+                                        *ngFor="let assessment of assessmentArr">
+                                        <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
+                                    </td>
+                                    <td >
+										<textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)" 
+										id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" 
+										id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
+									</td>
+                                </tr>
+                            </tbody>
+							<tfoot>
+								<tr>
+								<td><strong>Average</strong></td>
+								<!-- <td
+									ng-repeat="assessment in currentAssessments track by assessment.assessmentId">{{getTotalAssessmentAvgForWeek(assessment,trainees)
+									? (getTotalAssessmentAvgForWeek(assessment,trainees) |
+									number:2) + "%" : "-"}}</td>
+								<td>{{ (allAssessmentsAvgForWeek === false ? "Calculating
+									Weekly Batch Avg " : "Weekly Batch Avg= " +
+									allAssessmentsAvgForWeek) }}<i
+									ng-show="!allAssessmentsAvgForWeek" class='fa fa-cog fa-spin'></i>
+								</td> -->
+							</tr>
+							</tfoot>
+                        </table>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
