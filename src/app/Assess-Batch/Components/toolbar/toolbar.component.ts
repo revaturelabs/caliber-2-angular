@@ -107,10 +107,8 @@ export class ToolbarComponent implements OnInit {
     //check which quarters have batch in them
     var q;
     for (q = 1; q < 5; q++) { 
-    this.checkBatchExistanceInaQuarter(this.selectedYear, q) ;
-    
+    this.checkBatchExistanceInaQuarter(this.selectedYear, q);
     }
-
     this.showQ = true;
     this.showBatch = false;
   }
@@ -118,10 +116,9 @@ export class ToolbarComponent implements OnInit {
   checkBatchExistanceInaQuarter(yearselect, quarter) {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
     .subscribe(result => {
-        if(result.length > 0) {
-          
+        if(result.length > 0) {  
           this.quarters.push("Q"+quarter)
-    } else {
+        } else {
      // this.batchExists = false;
     }
       });
