@@ -15,7 +15,7 @@ import { AssessBatchService } from '../../Services/assess-batch.service';
 export class ToolbarComponent implements OnInit {
   showQ: boolean = false;
   showBatch: boolean = false;
-  quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
+  quarters: String[]=[];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
@@ -98,12 +98,40 @@ export class ToolbarComponent implements OnInit {
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
+    this.selectedQuarter = "Select Quarter";
+    this.quarters=[];
     this.batches = [];
     this.selectedBatch = null;
     console.log(this.batches);
+
+    //check which quarters have batch in them
+    var q;
+    for (q = 1; q < 5; q++) { 
+    this.checkBatchExistanceInaQuarter(this.selectedYear, q) ;
+    
+    }
+
     this.showQ = true;
     this.showBatch = false;
   }
+
+
+  checkBatchExistanceInaQuarter(yearselect, quarter) {
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
+    .subscribe(result => {
+        if(result.length > 0) {
+          
+          this.quarters.push("Q"+quarter)
+    } else {
+     // this.batchExists = false;
+    }
+      });
+  }
+
+
+
+
+
   
   showQs(){
     this.batches = [];
