@@ -1,16 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
-import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
+import { BatchModalComponent } from '../../Components/toolbar/batch-modal/batch-modal.component';
+import { FormModalComponent } from './form-modal/form-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  styleUrls: ['./toolbar.component.css'],
 })
 
 export class ToolbarComponent implements OnInit {
@@ -69,9 +71,9 @@ export class ToolbarComponent implements OnInit {
      /**
    * resets createorUpdate variable for child component
    */
-  resetBatchForm(): void {
+  resetCreateForm(): void {
     this.createUpdate = null;
-    this.batchModal.resetForm();
+   this.batchModal.resetForm();
   }
   // ToDo: future implementation
   // method for import button
@@ -91,6 +93,19 @@ export class ToolbarComponent implements OnInit {
     });
     
   }
+
+  // openFormModal(){
+  //   let options: NgbModalOptions = {
+  //     backdrop: false
+  //   }
+  //   const modalRef = this.modalService.open(BatchModalComponent,options);
+  //   modalRef.componentInstance
+  //   modalRef.result.then((result) => {
+  //     console.log(result);
+  // }).catch((error)=>{
+  //   console.log(error);
+  // });
+  // }
 
   getBatches() {
     this.auditService.getBatchesByYear(Number.parseInt(this.selectedYear))
