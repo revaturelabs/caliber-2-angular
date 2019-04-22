@@ -30,7 +30,7 @@
                                 <tr *ngFor="let train of traineeArr">
                                     <td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
                                         {{train.name}} 
-                               </td>
+                                    </td>
                                <td>
                                 <!-- Only shows the current flag, none if no flag is assigned -->
                                 <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
@@ -50,13 +50,16 @@
                             
                                   
                                     <ng-container *ngFor="let grade of gradesArr">
-                                        <ng-container *ngIf="grade.score &&  train.traineeId == grade.traineeId;  else elseBlock">
-                                               <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="{{ grade.score }}" /></td>
+                                        <ng-container *ngIf="train.traineeId == grade.traineeId; else elseBlock">
+                                               
+                                            <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="{{ grade.score }}" /></td>
                                             
-                                            <ng-template #elseBlock><td class="text-center col-sm-1 col-md-1 col-lg-1" *ngIf="grade.score == null">
-                                                <input class="form-control" type="number" min="0" max="100" value=""/></td>
-                                            </ng-template>
+                                            
                                         </ng-container>
+                                        <ng-template #elseBlock>
+                                            <td class="text-center col-sm-1 col-md-1 col-lg-1">
+                                            <input class="form-control" type="number" min="0" max="100" value=""/></td>
+                                        </ng-template>
                                     </ng-container>
                                     
                                     <td >

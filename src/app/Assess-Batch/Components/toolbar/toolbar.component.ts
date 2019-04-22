@@ -35,22 +35,22 @@ export class ToolbarComponent implements OnInit {
     location: "",
     locationId: 0,
     startDate: null,
-    endDate: null,
+    endDate: null,   
     goodGrade: 0,
     passingGrade: 0,
     traineeCount: 0,
     weeks: 0
   };
 
-  assessments: traineeAssessment = {
-    assessmentId: 0,
-    rawScore: 0,
-    assessmentTitle: '',
-    assessmentType: '',
-    weekNumber: 0,
-    batchId: 0,
-    assessmentCategory: 0
-  }
+  // assessments: traineeAssessment = {
+  //   assessmentId: 0,
+  //   rawScore: 0,
+  //   assessmentTitle: '',
+  //   assessmentType: '',
+  //   weekNumber: 0,
+  //   batchId: 0,
+  //   assessmentCategory: 0
+  // }
 
   //  grades: Grade = {
   //   gradeId: 0,
