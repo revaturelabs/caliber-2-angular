@@ -33,7 +33,7 @@
                                     <td></td>
                                     <td class="text-center col-sm-1 col-md-1 col-lg-1"
                                         *ngFor="let assessment of assessmentArr">
-                                        <input class="form-control" type="number" min="0" max="100" />
+                                        <input class="form-control" type="number" min="0" max="100" (blur)="validateScore($event)"/>
                                     </td>
                                     <td>
                                         <textarea class="form-control"></textarea>

@@ -71,6 +71,7 @@ export class AssociateComponent implements OnInit {
 
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
+  isInvalid: boolean = false;
 
   // Unimplemented functions
   constructor(private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
@@ -177,5 +178,17 @@ export class AssociateComponent implements OnInit {
     } else {
       $('#note-textarea-' + selectedNoteId).prop('disabled', false);
     }
+  }
+
+  //Add this in blur event save function 
+  validateScore(e){
+   if(e.target.value < 0){
+    e.target.style = "border-color : red; background-color: #fff9f9";
+    e.target.placeholder = e.target.value;
+    e.target.value = "";
+   }else {
+    e.target.style = "";
+    e.target.placeholder = "";
+   }
   }
 }
