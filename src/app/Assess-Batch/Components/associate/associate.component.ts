@@ -102,4 +102,18 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
     }
   }
+
+  //Add this in blur event save function 
+  validateScore(e){
+   if(e.target.value < 0){
+    e.target.style = "border-color : red; background-color: #fff9f9";
+    e.target.placeholder = e.target.value;
+    e.target.value = "";
+   }else {
+    e.target.style = "";
+    e.target.placeholder = "";
+   }
+  }
 }
+
+
