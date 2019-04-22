@@ -105,9 +105,8 @@ export class ToolbarComponent implements OnInit {
     console.log(this.batches);
 
     //check which quarters have batch in them
-    var q;
-    for (q = 1; q < 5; q++) { 
-    this.checkBatchExistanceInaQuarter(this.selectedYear, q);
+    for (var q = 4; q > 0; q--) { 
+      this.checkBatchExistanceInaQuarter(this.selectedYear, q);
     }
     this.showQ = true;
     this.showBatch = false;
@@ -117,17 +116,23 @@ export class ToolbarComponent implements OnInit {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
     .subscribe(result => {
         if(result.length > 0) {
-
-          // this.quarters.push("Q"+quarter);
-
-          for(let i = 0; i < this.quarters.length; i++){
-            if(this.quarters[i] < this.quarters[i+1]){
-
-            }
-          }
+          this.quarters.push("Q"+quarter);
         } else {
      // this.batchExists = false;
     }
+
+    var temp: String[] = this.quarters.sort((n1, n2) => {
+      if (n1 > n2) {
+        return -1;
+      }
+
+      if (n1 < n2) {
+        return 1;
+      }
+
+      return 0;
+    });
+    this.quarters = temp;
       });
   }
 
