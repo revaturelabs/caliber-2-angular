@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
-import { BatchModalComponent } from '../../Components/toolbar/batch-modal/batch-modal.component';
+// import { BatchModalComponent } from '../../Components/toolbar/batch-modal/batch-modal.component';
 import { FormModalComponent } from './form-modal/form-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
@@ -25,6 +25,8 @@ export class ToolbarComponent implements OnInit {
   defaultYears: number[];
   selectedYear: string = "Select Year";
   selectedQuarter: string = "Select Quarter";
+
+
 
   // selectedBatch: Batch;
   selectedBatch: Batch = {
@@ -60,7 +62,7 @@ export class ToolbarComponent implements OnInit {
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
   weeklyGrades: any[] = [];
-  @ViewChild('batchModal') batchModal: BatchModalComponent;
+  // @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
@@ -71,10 +73,10 @@ export class ToolbarComponent implements OnInit {
      /**
    * resets createorUpdate variable for child component
    */
-  resetCreateForm(): void {
-    this.createUpdate = null;
-   this.batchModal.resetForm();
-  }
+  // resetCreateForm(): void {
+  //   this.createUpdate = null;
+  //  this.batchModal.resetForm();
+  // }
   // ToDo: future implementation
   // method for import button
   resetImportModal(): void {

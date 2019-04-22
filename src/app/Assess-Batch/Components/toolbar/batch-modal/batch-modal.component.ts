@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 
 import { CategoryService } from '../../../Services/category.service';
 import { AssessmentService } from '../../../Services/assessment.service';
-
+import { ToolbarComponent } from '../toolbar.component';
 import { EmitterVisitorContext } from '@angular/compiler';
 import { Category } from 'src/app/Assess-Batch/Models/Category';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
@@ -27,7 +27,7 @@ export class BatchModalComponent implements OnInit{
   assessment: Assessment;
 
   currentAssessment: Assessment;
-  assessmentId: number = null;
+  assessmentId: number = 4;
   rawScore: number = null;
   assessmentTitle: string = '';
   assessmentType: string = '';
@@ -35,7 +35,8 @@ export class BatchModalComponent implements OnInit{
   batchId: number = null;
   assessmentCategory: number = null;
 
-
+  selectedType = "default";
+  selectedCategory = "default";
   assessmentTypeDisplay = [
     {
     name : 'Verbal',
@@ -57,16 +58,16 @@ export class BatchModalComponent implements OnInit{
      throw new Error("Method not implemented.");
    }
    
-  constructor(public categoryService: CategoryService, public assessmentService: AssessmentService) {
+  constructor(public categoryService: CategoryService, public assessmentService: AssessmentService, public toolBar: ToolbarComponent) {
   }
   
-  addAssessment() : void {
-    console.log(new Assessment(this.assessmentId,this.rawScore,
-      this.assessmentTitle,this.assessmentType,this.weekNumber,
-      this.batchId,this.assessmentCategory));
-    this.assessmentService.createCategories(new Assessment(this.assessmentId,this.rawScore,
-      this.assessmentTitle,this.assessmentType,this.weekNumber,
-      this.batchId,this.assessmentCategory)).subscribe(result=>{
+  addAssessment(rawScore, assessmentType, categoryNumber) : void {
+    console.log(new Assessment(this.assessmentId,rawScore,
+      this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
+      this.toolBar.selectedBatch.batchId,categoryNumber));
+      this.assessmentService.createCategories(new Assessment(this.assessmentId,rawScore,
+      this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
+      this.toolBar.selectedBatch.batchId,categoryNumber)).subscribe(result=>{
       this.assessment = result;
       console.log(result);
     })
