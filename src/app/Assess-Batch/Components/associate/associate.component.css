@@ -5,19 +5,14 @@
 }
 
 .flag-notes-popup {
-    position: relative;
+    position: absolute;
     display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
     background-color: white;
-    width: 270px;
-    height: 47px;
     border: 1px solid rgb(204, 204, 204);
-    border-radius: 2px;
-    padding-top: 5px;
-    padding-left: 5px;
-    z-index: 1000;
-    left: 2px;
-    bottom: 2px;
-    margin-left: 1px;
+    z-index: 1;
 }
 
 .flag-notes-popup input {
@@ -27,9 +22,19 @@
 }
 
 .flage-notes-save-btn {
-    margin-left: 8px;
+    position: relative;
+    height: 35px;
+    bottom: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
 }
 
-.valid-feedback .closing-button{
-    margin: 0%;
+.icon-button {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
 }

@@ -29,7 +29,7 @@
 									<td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
 										{{train.name}} 
 							   </td>
-							   <td>
+							   <td >
 								<!-- Only shows the current flag, none if no flag is assigned -->
 								<i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
 								<i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
@@ -40,9 +40,9 @@
 								<div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
 									<input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
 									<button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
-									<button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
-									<span class="glyphicon glyphicon-remove-sign closing-button"></span>
-									</button>
+									<i (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn icon-button" aria-label="Close">
+									<span class="glyphicon glyphicon-remove-sign"></span>
+									</i>
 								</div>
 			
 							</i>
