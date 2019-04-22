@@ -16,6 +16,8 @@ export class AssessBatchService {
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;
+  yearParam = '/vp/batch/all?year=';
+  quarterParam = '&quarter='
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +31,10 @@ export class AssessBatchService {
 
   postComment (trainee): Observable<object> {
     return this.http.put<object>(this.Url2, trainee)
+  }
+  getBatchesByQuarter(year: number, quarter: string): Observable<Batch[]> {
+    console.log("getBatchesByQuarter--->" + this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter));
+    return this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter);
   }
   
 }

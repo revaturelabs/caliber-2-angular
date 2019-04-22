@@ -6,6 +6,7 @@ import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
+import { AssessBatchService } from '../../Services/assess-batch.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -71,10 +72,13 @@ export class ToolbarComponent implements OnInit {
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService,public assessBatchService: AssessBatchService
   ) { }
   ngOnInit() {
     this.selectedWeek=1; 
+    // this.selectYear(2019);
+    // this.selectQuarter("Q3"); 
+    
   }
      /**
    * resets createorUpdate variable for child component
@@ -110,11 +114,13 @@ export class ToolbarComponent implements OnInit {
       this.auditService.selectedBatch = this.batches[0];
       console.log(this.batches);
       this.getWeeks();
+      //select the week
         this.selectedWeek = this.weeks.length;
+        this.selectWeek(this.selectedWeek);
       });
   }
 
-  selectYear(event: number) {
+  selectYear(event: number) { 
     this.selectedYear = event.toString();
     this.auditService.selectedYear = Number.parseInt(this.selectedYear);
     this.auditService.getBatchesByYear(event)
@@ -122,6 +128,18 @@ export class ToolbarComponent implements OnInit {
       this.batches = result;
       });
     this.showQ = true;
+
+       //check which quarters have batch in them
+       var q;
+       this.quarters = [];
+       for (q = 4; q > 0; q--) { 
+       this.checkBatchExistanceInaQuarter(this.selectedYear, q);
+       
+       }
+       
+       this.showQ = true;
+       this.showBatch = false;
+
   }
   
   selectQuarter(event: string) {
@@ -169,6 +187,29 @@ export class ToolbarComponent implements OnInit {
     })    
   }
 
+  
+  checkBatchExistanceInaQuarter(yearselect, quarter) {
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
+    .subscribe(result => {
+     
+        if(result.length > 0) {  
+          this.quarters.push("Q"+quarter)
+          for(let i = 0; i<this.quarters.length; i++)
+            for(let j = i+1; j<this.quarters.length; j++)
+              if(Number.parseInt(this.quarters[i][1])< Number.parseInt(this.quarters[j][1])){
+                let temp = this.quarters[i];
+                this.quarters[i] = this.quarters[j];
+                this.quarters[j] = temp;
+          }
+        } else {
+     // this.batchExists = false;
+    }
+    
+      });
+      
+      
+  }
+
   getAssessmentsByBatchId(){
     console.log(this.selectedBatch.batchId);
     this.weeklyAssessments=[];
@@ -187,6 +228,9 @@ export class ToolbarComponent implements OnInit {
     })
   }
 
+
+
+  
   getGradesByBatchId(){
     console.log(this.selectedBatch.batchId);
     this.gradesArr=[];
