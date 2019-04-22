@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { traineeAssessment, Grades } from '../../User/user/types/trainee'
+import { traineeAssessment, Grade } from '../../User/user/types/trainee'
 
 
 @Injectable({
@@ -13,9 +13,9 @@ export class AssessBatchGradeService {
   gradesByIdURL = '/all/grade/batch/';
   assessmentsByIdURL = '/all/assessment/batch/';
   allAssessments: traineeAssessment[] = [];
-  allGrades: Grades[] = [];
+  allGrades: Grade[] = [];
   assessments = new EventEmitter<traineeAssessment[]>();
-  grades = new EventEmitter<Grades[]>();
+  grades = new EventEmitter<Grade[]>();
 
   constructor(private http: HttpClient) { }
 

@@ -12,11 +12,9 @@
                             <thead>
                                 <tr sticky class='sticky-header'>
                                     <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-                                    <th class="col-sm-1 col-md-1 col-lg-2"></th>
-                                    <div>
+                                    
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center" role="button"
                                             data-toggle="modal">
-                                            <div ui-view="trainer-edit-assess"></div>
                                         </th>
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center"
                                             *ngFor="let assessment of assessmentArr">
@@ -24,19 +22,22 @@
                                             ({{ assessment.rawScore }}%)
                                         </th>
                                         <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
-                                    </div>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let train of traineeArr">
-                                    <td><a
-                                            style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
+                                    <td>
+                                        <a style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
                                     </td>
-                                    <td class="text-center"
+                                    <td></td>
+                                    <td class="text-center col-sm-1 col-md-1 col-lg-1"
                                         *ngFor="let assessment of assessmentArr">
                                         <input class="form-control" type="number" min="0" max="100" />
                                     </td>
-                                    <td>Notesgit</td>
+                                    <td>
+                                        <textarea class="form-control"></textarea>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>

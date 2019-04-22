@@ -4,7 +4,7 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
-import { traineeAssessment } from 'src/app/User/user/types/trainee';
+import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
-  grades: traineeAssessment = {
+  assessments: traineeAssessment = {
     assessmentId: 0,
     rawScore: 0,
     assessmentTitle: '',
@@ -52,11 +52,20 @@ export class ToolbarComponent implements OnInit {
     assessmentCategory: 0
   }
 
+   grades: Grade = {
+    gradeId: 0,
+    dateReceived: 0,
+    score: 0,
+    assessmentId: 0,
+    traineeId: 0
+}
+
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  weeklyAssessments: any[] = [];
   weeklyGrades: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
@@ -64,7 +73,7 @@ export class ToolbarComponent implements OnInit {
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
   ) { }
   ngOnInit() {
-    this.selectedWeek=1;
+    this.selectedWeek=1; 
   }
      /**
    * resets createorUpdate variable for child component
@@ -159,16 +168,19 @@ export class ToolbarComponent implements OnInit {
 
   getAssessmentsByBatchId(){
     console.log(this.selectedBatch.batchId);
+    this.weeklyAssessments=[];
     this.weeklyGrades=[];
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
       for(let i = 0; i < assessments.length; i++){
         if(assessments[i].weekNumber == this.selectedWeek){
-          this.weeklyGrades.push(assessments[i]);
+          this.weeklyAssessments.push(assessments[i]);
+
         }
       }
-      this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
-      this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
+      this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
+      this.assessBatchGradeService.assessments.emit(this.weeklyAssessments);
     })
+    
   }
 
 }
