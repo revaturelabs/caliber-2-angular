@@ -52,13 +52,13 @@ export class ToolbarComponent implements OnInit {
     assessmentCategory: 0
   }
 
-   grades: Grade = {
-    gradeId: 0,
-    dateReceived: 0,
-    score: 0,
-    assessmentId: 0,
-    traineeId: 0
-}
+  //  grades: Grade = {
+  //   gradeId: 0,
+  //   dateReceived: 0,
+  //   score: 0,
+  //   assessmentId: 0,
+  //   traineeId: 0
+  // }
 
   selectedBatchId = 0;
   weeks = [];
@@ -67,6 +67,7 @@ export class ToolbarComponent implements OnInit {
   ourTrainee: Trainee[];
   weeklyAssessments: any[] = [];
   weeklyGrades: any[] = [];
+  gradesArr: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
@@ -144,6 +145,8 @@ export class ToolbarComponent implements OnInit {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
     this.getAssessmentsByBatchId();
+    this.getGradesByBatchId();
+    
 
   }
   addWeek() {
@@ -169,18 +172,35 @@ export class ToolbarComponent implements OnInit {
   getAssessmentsByBatchId(){
     console.log(this.selectedBatch.batchId);
     this.weeklyAssessments=[];
-    this.weeklyGrades=[];
+    this.weeklyGrades = [];
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
       for(let i = 0; i < assessments.length; i++){
         if(assessments[i].weekNumber == this.selectedWeek){
           this.weeklyAssessments.push(assessments[i]);
-
+          this.weeklyGrades.push(assessments[i]);
         }
       }
       this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
       this.assessBatchGradeService.assessments.emit(this.weeklyAssessments);
+      this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
+      this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
     })
-    
   }
 
+  getGradesByBatchId(){
+    console.log(this.selectedBatch.batchId);
+    this.gradesArr=[];
+    this.assessBatchGradeService.getGradesByBatchId(this.selectedBatch.batchId).subscribe(grades => {
+      for(let i = 0; i < grades.length; i++){
+      for(let y = 0; y < this.weeklyGrades.length; y++){
+       
+        if(grades[i].assessmentId == this.weeklyGrades[y].assessmentId){
+          this.gradesArr.push(grades[i]);
+         console.log(grades[i].assessmentId)
+        }
+      }}
+      this.assessBatchGradeService.storeGrades(this.gradesArr);
+      this.assessBatchGradeService.grades.emit(this.gradesArr);
+    })
+  }
 }
