@@ -10,45 +10,75 @@
                         <!-- Accordian table -->
                         <table class="table table-responsive" style="border-collapse: collapse;">
                             <thead>
+                                 
                                 <tr sticky class='sticky-header'>
+                                    <th></th>
                                     <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
                                     
-                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center" role="button"
-                                            data-toggle="modal">
-                                        </th>
+  
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center"
                                             *ngFor="let assessment of assessmentArr">
                                             {{ assessment.assessmentType }}
                                             ({{ assessment.rawScore }}%)
                                         </th>
                                         <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
-                                    
+         
                                 </tr>
                             </thead>
                             <tbody>
+                                  
                                 <tr *ngFor="let train of traineeArr">
-                                    <td>
-                                        <a style="cursor: pointer; color: black; text-decoration: none">{{train.name}}</a>
-                                    </td>
-                                    <td></td>
-                                    <td class="text-center col-sm-1 col-md-1 col-lg-1"
-                                        *ngFor="let assessment of assessmentArr">
-                                        <input class="form-control" type="number" min="0" max="100" />
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control"></textarea>
+                                    <td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
+                                        {{train.name}} 
+                               </td>
+                               <td>
+                                <!-- Only shows the current flag, none if no flag is assigned -->
+                                <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                                <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                                <i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+                                <!-- Shows the flag notes popup if the user clicks the name column -->
+                            </td>
+                            
+                                <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
+                                    <input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
+                                    <button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
+                                    <button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+                                    <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                                    </button>
+                                </div>
+            
+                            
+                                  
+                                    <ng-container *ngFor="let grade of gradesArr">
+                                        <ng-container *ngIf="grade.score &&  train.traineeId == grade.traineeId;  else elseBlock">
+                                               <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="{{ grade.score }}" /></td>
+                                            
+                                            <ng-template #elseBlock><td class="text-center col-sm-1 col-md-1 col-lg-1" *ngIf="grade.score == null">
+                                                <input class="form-control" type="number" min="0" max="100" value=""/></td>
+                                            </ng-template>
+                                        </ng-container>
+                                    </ng-container>
+                                    
+                                    <td >
+                                        <textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)" 
+                                        id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" 
+                                        id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
                                     </td>
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <td>Average</td>
-                                <td></td>
-                                <td class="text-center"></td>
-
-                                <td><span style="font-weight: bold"></span>
-                                    <span></span><i class='fa fa-cog fa-spin'></i>
-                                </td>
-                                <td></td>
+                                <tr>
+                                <td><strong>Average</strong></td>
+                                <!-- <td
+                                    ng-repeat="assessment in currentAssessments track by assessment.assessmentId">{{getTotalAssessmentAvgForWeek(assessment,trainees)
+                                    ? (getTotalAssessmentAvgForWeek(assessment,trainees) |
+                                    number:2) + "%" : "-"}}</td>
+                                <td>{{ (allAssessmentsAvgForWeek === false ? "Calculating
+                                    Weekly Batch Avg " : "Weekly Batch Avg= " +
+                                    allAssessmentsAvgForWeek) }}<i
+                                    ng-show="!allAssessmentsAvgForWeek" class='fa fa-cog fa-spin'></i>
+                                </td> -->
+                            </tr>
                             </tfoot>
                         </table>
                     </ul>
