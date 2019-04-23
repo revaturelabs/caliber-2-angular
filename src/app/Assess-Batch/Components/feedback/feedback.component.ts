@@ -10,7 +10,12 @@ import { NoteService } from '../../Services/note.service';
 })
 export class FeedbackComponent implements OnInit {
  noteArr: Note[];
- feedbackNote: Note;
+ feedbackNote: Note = { noteId: 5050,
+  noteContent: "",
+  noteType: "BATCH",
+  weekNumber: 1,
+  batchId: -1,
+  traineeId: 5358};
 
  constructor(private noteService: NoteService) { }
 //provides the traineer feedback note for the week
@@ -33,7 +38,11 @@ getFeedbackNote(){
 
  //updates feedback note on blur
 feedbackNoteOnBlur(){
-  this.noteService.putNote(this.feedbackNote);
+  console.log(this.feedbackNote);
+  this.noteService.putNote(this.feedbackNote)
+  .subscribe(result => {
+    console.log(result);
+  });
  }
 
 ngOnInit() {
