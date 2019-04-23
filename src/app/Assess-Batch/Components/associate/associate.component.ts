@@ -15,26 +15,50 @@ export class AssociateComponent implements OnInit {
 //Array to hold all trainnee
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
-  gradesArr: Grade[] =[];
-  gradesRow: Grade[] =[];
-  grade: any;
+  gradesArr: Grade[] = [];
+  superArr: Grade[][] = [];
+  score: number = 0;
+  count: number = 0;
 
-//Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
+//Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
-  ngOnInit() { 
+
+  ngOnInit() {
+    console.log('init of associate.component started');
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
-   });
+      this.count++;
+      this.myInit();
+    });
    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
      this.assessmentArr = assessmentArr;
+     this.count++;
+     this.myInit();
    });
    this.assessBatchGradeService.grades.subscribe((gradesArr) => {
-    this.gradesArr = gradesArr;
+       this.gradesArr = gradesArr;
+       this.count++;
+       this.myInit();
    });
-   
-    
+
+  }
+
+  myInit(){
+    if(this.count >= 3){
+      for(let i = 0; i < this.assessmentArr.length; i++){
+        var temp: Grade[] = [];
+        for(let j = 0; j < this.gradesArr.length; j++){
+          if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
+            temp.push(this.gradesArr[j]);
+          }
+        }
+        this.superArr.push(temp);
+      }
+      console.log('SuperArr:');
+      console.log(this.superArr);
+    }
   }
 
   // Cycle the Individual Feedback Status
@@ -43,7 +67,7 @@ export class AssociateComponent implements OnInit {
     for (let i = 0; i < this.traineeArr.length; i++) {
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-      
+
         // Create placeholder for new status string
         let newStatus = '';
         // Determine the new status string
@@ -73,8 +97,8 @@ export class AssociateComponent implements OnInit {
     for (let i = 0; i < this.traineeArr.length; i++) {
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-        
-          // add Id of trainee to "flagNoteSwitch" array 
+
+          // add Id of trainee to "flagNoteSwitch" array
           if(this.flagNoteSwitch.indexOf(selectedtraineeId)==-1){
             this.flagNoteSwitch.push(selectedtraineeId);
           }
@@ -84,10 +108,10 @@ export class AssociateComponent implements OnInit {
   }
   //send the object of the trainee to the service in order to include the flag note
   commentOnTrainee(trainee ,comment: string){
-    trainee.flagNotes = comment; 
+    trainee.flagNotes = comment;
     this.AssessBatchService.postComment(trainee).subscribe(response => {
       if(Object != null){
-        //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box 
+        //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
         console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
@@ -96,7 +120,7 @@ export class AssociateComponent implements OnInit {
       }
     });
   }
-  
+
   // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
     // The first call will recursivley call this function again to re-enable the input box after 1 second
@@ -108,7 +132,7 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-  //Add this in blur event save function 
+  //Add this in blur event save function
   validateScore(e){
    if(e.target.value < 0){
     e.target.style = "border-color : red; background-color: #fff9f9";
@@ -120,6 +144,14 @@ export class AssociateComponent implements OnInit {
    }
   }
 
+  checkForGrade(arr: Grade[], train: Trainee){
+    for(let i = 0; i < arr.length; i++){
+      if(arr[i].traineeId == train.traineeId){
+        this.score = arr[i].score;
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
-
-

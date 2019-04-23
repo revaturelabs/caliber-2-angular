@@ -20,6 +20,7 @@ export class AssessBatchGradeService {
 
 
   constructor(private http: HttpClient) { }
+
   getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {
     return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id);
   }
@@ -29,6 +30,11 @@ export class AssessBatchGradeService {
   getGradesByBatchId(id: number): Observable<Grade[]> {
     return this.http.get<Grade[]>(this.url + this.gradesByIdURL + id);
   }
+
+  getGradesByBatchIdAndWeekNum(id: number, week: number): Observable<Grade[]> {
+    return this.http.get<Grade[]>(this.url + this.gradesByIdURL + id + '?week=' + week);
+  }
+
   storeAssessments(entry: traineeAssessment[]) {
     this.allAssessments = entry;
     console.log(this.allAssessments);
@@ -43,6 +49,5 @@ export class AssessBatchGradeService {
   returnGrades(): Grade[] {
     return this.allGrades;
   }
-  
-}
 
+}
