@@ -1,15 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
-import { BatchModalComponent } from '../../batch-modal/batch-modal.component';
-import { Trainee } from '../../../Batch/type/trainee';
+import { BatchModalComponent } from '../../Components/toolbar/batch-modal/batch-modal.component';
+import { FormModalComponent } from './form-modal/form-modal.component';
+import { Trainee, traineeAssessment } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { AssessBatchService } from '../../Services/assess-batch.service';
+import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  styleUrls: ['./toolbar.component.css'],
 })
 
 export class ToolbarComponent implements OnInit {
@@ -40,16 +42,27 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
+  grades: traineeAssessment = {
+    assessmentId: 0,
+    rawScore: 0,
+    assessmentTitle: '',
+    assessmentType: '',
+    weekNumber: 0,
+    batchId: 0,
+    assessmentCategory: 0
+  }
+
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
   batchExists: boolean = false;
+  weeklyGrades: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService, public assessBatchGradeService: AssessBatchGradeService
   ) { }
   ngOnInit() {
     this.getAllYears();
@@ -57,9 +70,9 @@ export class ToolbarComponent implements OnInit {
      /**
    * resets createorUpdate variable for child component
    */
-  resetBatchForm(): void {
+  resetCreateForm(): void {
     this.createUpdate = null;
-    this.batchModal.resetForm();
+   this.batchModal.resetForm();
   }
   // ToDo: future implementation
   // method for import button
@@ -82,6 +95,19 @@ export class ToolbarComponent implements OnInit {
       this.selectedYear = "Select Year";
     });
   }
+
+  // openFormModal(){
+  //   let options: NgbModalOptions = {
+  //     backdrop: false
+  //   }
+  //   const modalRef = this.modalService.open(BatchModalComponent,options);
+  //   modalRef.componentInstance
+  //   modalRef.result.then((result) => {
+  //     console.log(result);
+  // }).catch((error)=>{
+  //   console.log(error);
+  // });
+  // }
 
   getBatches() {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
@@ -160,6 +186,8 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
+    this.getAssessmentsByBatchId();
+
   }
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
@@ -182,6 +210,20 @@ export class ToolbarComponent implements OnInit {
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
     })    
+  }
+
+  getAssessmentsByBatchId(){
+    console.log(this.selectedBatch.batchId);
+    this.weeklyGrades=[];
+    this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
+      for(let i = 0; i < assessments.length; i++){
+        if(assessments[i].weekNumber == this.selectedWeek){
+          this.weeklyGrades.push(assessments[i]);
+        }
+      }
+      this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
+      this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
+    })
   }
 
 }

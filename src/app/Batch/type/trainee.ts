@@ -19,13 +19,23 @@ export class Trainee {
     flagNotes: string;
     flagAuthor: string;
     flagTimeStamp: string;
-    
-    
-    
-    
-    
-    
-   
-
     constructor( ) {}
+}
+    
+export class traineeAssessment {
+        assessmentId: number;
+        rawScore: number;
+        assessmentTitle: string;
+        assessmentType: string;
+        weekNumber: number;
+        batchId: number;
+        assessmentCategory: number;
+}
+    
+export class Grade {
+        gradeId: number;
+        dateReceived: number;
+        score: number;
+        assessmentId: number;
+        traineeId: number;
 }

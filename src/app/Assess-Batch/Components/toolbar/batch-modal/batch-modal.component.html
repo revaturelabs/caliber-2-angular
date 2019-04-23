@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="createAssessmentModal" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -10,7 +11,7 @@
 
 				<h4 class="modal-title" id="myModalLabel">Create New Assessment</h4>
 			</div>
-			<!-- Add Assessment Info -->
+			Add Assessment Info
 			<form>
 				<div class="modal-body">
 
@@ -20,7 +21,7 @@
 								class="form-control" id="category"
 								required>
 								<option value="" disabled>Select Assessment Category</option>
-								<option></option>
+								<option *ngFor ="let cat of categories">{{cat.skillCategory}}</option>
 							</select>
 						</div>
 					</div>
@@ -37,7 +38,7 @@
 								ng-model="assessmentType.model" class="form-control"
 								id="assessmentType" required>
 								<option value="" disabled>Select Assessment Type</option>
-								<option></option>
+								<option *ngFor ="let cat of categories">{{cat.skillCategory}}</option>
 							</select>
 						</div>
 					</div>
@@ -51,5 +52,6 @@
 		</div>
 	</div>
 </div>
+
 
 

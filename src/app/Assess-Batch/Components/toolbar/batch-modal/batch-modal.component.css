@@ -3,22 +3,22 @@
 ************************/
 @font-face {
 	font-family: 'Futura-Std-Medium';
-	src: url('../../../assets/fonts/Futura-Std-Medium.otf') format('opentype');
+	src: url('src\assets\fonts\Futura-Std-Medium.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Book';
-	src: url('../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
+	src: url('src\assets\fonts\Futura-Std-Book.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Heavy';
-	src: url('../../../assets/fonts/Futura-Std-Heavy.otf') format('opentype');
+	src: url('src\assets\fonts\Futura-Std-Heavy.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'Futura-Std-Bold';
-	src: url('../../../assets/fonts/Futura-Std-Bold.otf') format('opentype');
+	src: url('src\assets\fonts\Futura-Std-Bold.otf') format('opentype');
 }
 
 body {
