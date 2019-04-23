@@ -6,6 +6,7 @@ import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
+import { AssessBatchService } from '../../Services/assess-batch.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,6 +15,8 @@ import { Note } from 'src/app/Batch/type/note';
 })
 
 export class ToolbarComponent implements OnInit {
+  showQ: boolean = false;
+  showBatch: boolean = false;
   quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
   years: number[];
   batches: Batch[];
@@ -50,7 +53,7 @@ export class ToolbarComponent implements OnInit {
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService,  public noteService: NoteService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService, public noteService: NoteService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -98,12 +101,18 @@ export class ToolbarComponent implements OnInit {
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
-   
-    this.getBatches();
+    this.auditService.selectedYear = Number.parseInt(this.selectedYear);
+    this.auditService.getBatchesByYear(event)
+    .subscribe(result => {
+      this.batches = result;
+      });
+    this.showQ = true;
   }
   
   selectQuarter(event: string) {
     this.selectedQuarter = event;
+    this.showBatch = true;
+    this.getBatches();
   }
   
   selectBatch(event: Batch) {
@@ -129,6 +138,7 @@ export class ToolbarComponent implements OnInit {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
+    this.assessBatchService.addWeek(this.selectedBatch);
 for(this.i=0;this.i<this.ourTrainee.length;this.i++){
   console.log("creating");
   console.log(this.selectedBatch.batchId);
@@ -136,6 +146,9 @@ for(this.i=0;this.i<this.ourTrainee.length;this.i++){
   this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.selectedBatchId, this.ourTrainee[this.i].traineeId );
 
 }
+   
+   
+    
   }
   getWeeks() {
     this.weeks = [];
