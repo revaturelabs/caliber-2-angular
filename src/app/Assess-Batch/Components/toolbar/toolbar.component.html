@@ -23,7 +23,7 @@
 
 					<!-- {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }} -->
 					<!-- top ui for viewing all assessments -->
-					<li role="button" class="dropdown">
+					<li role="button" class="dropdown" *ngIf="showBatch">
 						<a class="dropdown-toggle" data-toggle="dropdown" *ngIf="batchExists"> {{ selectedBatch?.trainer }} - {{ selectedBatch?.startDate | date:'shortDate' }}
 							<span class="caret"></span>
 						</a>
