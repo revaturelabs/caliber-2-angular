@@ -66,7 +66,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   displayYears(){
-    this.getAllYears();
+    this.selectedYear = "Select Year";
+
   }
 
   getAllYears() {
@@ -105,7 +106,7 @@ export class ToolbarComponent implements OnInit {
     this.selectedBatch = null;
     console.log(this.batches);
 
-    //check which quarters have batch in them
+    // check which quarters have batch in them
     for (var q = 4; q > 0; q--) { 
       this.checkBatchExistanceInaQuarter(this.selectedYear, q);
     }
@@ -141,6 +142,7 @@ export class ToolbarComponent implements OnInit {
 
   showQs(){
     this.batches = [];
+    this.selectedQuarter = "Select Quarter";
     // this.selectedBatch = null;
   }
 
