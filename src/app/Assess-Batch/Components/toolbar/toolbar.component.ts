@@ -13,15 +13,13 @@ import { AssessBatchService } from '../../Services/assess-batch.service';
 })
 
 export class ToolbarComponent implements OnInit {
-  showQ: boolean = false;
-  showBatch: boolean = false;
   quarters: String[]=[];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: string = "Select Year";
-  selectedQuarter: string = "Select Quarter";
+  selectedQuarter: String = "Select Quarter";
 
   // selectedBatch: Batch;
   selectedBatch: Batch = {
@@ -53,7 +51,7 @@ export class ToolbarComponent implements OnInit {
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService
   ) { }
   ngOnInit() {
-    this.selectedWeek=1;
+    this.getAllYears();
   }
      /**
    * resets createorUpdate variable for child component
@@ -76,7 +74,10 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0].toString();
-      console.log(this.years);
+      for (var q = 4; q > 0; q--) { 
+        this.checkBatchExistanceInaQuarter(this.years[0], q);
+      }
+      this.selectedYear = "Select Year";
     });
     
   }
@@ -108,8 +109,6 @@ export class ToolbarComponent implements OnInit {
     for (var q = 4; q > 0; q--) { 
       this.checkBatchExistanceInaQuarter(this.selectedYear, q);
     }
-    this.showQ = true;
-    this.showBatch = false;
   }
 
   checkBatchExistanceInaQuarter(yearselect, quarter) {
@@ -133,6 +132,10 @@ export class ToolbarComponent implements OnInit {
       return 0;
     });
     this.quarters = temp;
+    this.selectedYear = yearselect;
+    this.selectedQuarter = this.quarters[0];
+    this.selectedBatch = result[0];
+    this.getBatches();
       });
   }
 
@@ -143,7 +146,6 @@ export class ToolbarComponent implements OnInit {
 
   selectQuarter(event: string) {
     this.selectedQuarter = event;
-    this.showBatch = true;
     this.getBatches();
   }
   

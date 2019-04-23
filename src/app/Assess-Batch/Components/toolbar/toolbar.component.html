@@ -13,7 +13,7 @@
 						</ul>
 						
 					<!-- sort by quarter-->
-					<li role="button" class="dropdown" *ngIf="showQ"><a class="dropdown-toggle"
+					<li role="button" class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" (click)="showQs()"> {{selectedQuarter}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let quarter of quarters">
@@ -23,7 +23,7 @@
 
 					<!-- {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }} -->
 					<!-- top ui for viewing all assessments -->
-					<li role="button" class="dropdown" *ngIf="showBatch">
+					<li role="button" class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" *ngIf="batchExists"> {{ selectedBatch?.trainer }} - {{ selectedBatch?.startDate | date:'shortDate' }} -- 
 							{{ selectedBatch?.endDate | date:'shortDate'}}
 							<span class="caret"></span>
