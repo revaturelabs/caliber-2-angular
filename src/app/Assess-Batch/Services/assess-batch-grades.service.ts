@@ -23,6 +23,9 @@ export class AssessBatchGradeService {
   getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {
     return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id);
   }
+  getAssessmentsByBatchIdAndWeekNum(id: number, week: number): Observable<traineeAssessment[]> {
+    return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id + '?week=' + week);
+  }
   getGradesByBatchId(id: number): Observable<Grade[]> {
     return this.http.get<Grade[]>(this.url + this.gradesByIdURL + id);
   }

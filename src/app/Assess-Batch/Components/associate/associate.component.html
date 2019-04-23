@@ -51,16 +51,18 @@
                                         <input class="form-control" value= "{{ grade }}" type="number" min="0" max="100" (blur)="validateScore($event)"/>
                                     </td>  -->
 
+                                    <!-- train.traineeId == grade.traineeId -->
+
                                     <ng-container *ngFor="let grade of gradesArr">
-                                        <ng-container *ngIf="train.traineeId == grade.traineeId">
-                                            <ng-container *ngIf="grade.score != null; else elseBlock">
+                                        <ng-container *ngIf="train.traineeId == grade.traineeId"> 
                                                 <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="{{ grade.score }}" (blur)="validateScore($event)"/></td>
-                                            </ng-container>
-                                            <ng-template #elseBlock>
-                                                <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="" (blur)="validateScore($event)"/></td>
-                                            </ng-template>
                                         </ng-container>
+                                        <ng-template *ngIf="false">
+                                                <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="" (blur)="validateScore($event)"/></td>
+                                        </ng-template>
                                     </ng-container>
+
+                                    
                                         
                                     
                                     <td >

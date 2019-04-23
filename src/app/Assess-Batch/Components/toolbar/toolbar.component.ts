@@ -144,7 +144,7 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
-    this.getAssessmentsByBatchId();
+    this.getAssessmentsByBatchIdAndWeekNum();
     this.getGradesByBatchId();
     
 
@@ -169,17 +169,29 @@ export class ToolbarComponent implements OnInit {
     })    
   }
 
-  getAssessmentsByBatchId(){
+  getAssessmentsByBatchIdAndWeekNum(){
     console.log(this.selectedBatch.batchId);
     this.weeklyAssessments=[];
     this.weeklyGrades = [];
-    this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
-      for(let i = 0; i < assessments.length; i++){
-        if(assessments[i].weekNumber == this.selectedWeek){
-          this.weeklyAssessments.push(assessments[i]);
-          this.weeklyGrades.push(assessments[i]);
-        }
+    var assessId: number[] = [];
+    this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(assessments => {
+      for(var i = 0; i < assessments.length; i++){
+        assessId.push(assessments[i].assessmentId);
       }
+      assessId = assessId.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+      });
+
+      for(var i = 0; i < assessId.length; i++){
+        var temp: traineeAssessment[] = [];
+        for(var j = 0; j < assessments.length; j++){
+          if(assessments[j].assessmentId == assessId[i]){
+            temp.push(assessments[j]);
+          }
+        }
+        this.weeklyAssessments.push(temp);
+      }
+      
       this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
       this.assessBatchGradeService.assessments.emit(this.weeklyAssessments);
       this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
@@ -192,10 +204,11 @@ export class ToolbarComponent implements OnInit {
     this.gradesArr=[];
     this.assessBatchGradeService.getGradesByBatchId(this.selectedBatch.batchId).subscribe(grades => {
       for(let i = 0; i < grades.length; i++){
-      for(let y = 0; y < this.weeklyGrades.length; y++){
+        for(let y = 0; y < this.weeklyGrades.length; y++){
        
-        if(grades[i].assessmentId == this.weeklyGrades[y].assessmentId){
-          this.gradesArr.push(grades[i]);
+          if(grades[i].assessmentId == this.weeklyGrades[y].assessmentId){
+            this.gradesArr.push(grades[i]);
+          
         }
       }}
       this.assessBatchGradeService.storeGrades(this.gradesArr);

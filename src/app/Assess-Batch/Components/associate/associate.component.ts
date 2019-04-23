@@ -18,11 +18,12 @@ export class AssociateComponent implements OnInit {
   gradesArr: Grade[] =[];
   gradesRow: Grade[] =[];
   grade: any;
+
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
-  ngOnInit( ) { 
+  ngOnInit() { 
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
    });
