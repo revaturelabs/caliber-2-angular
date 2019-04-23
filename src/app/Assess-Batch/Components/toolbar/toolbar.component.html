@@ -14,7 +14,7 @@
 							
 						<!-- sort by quarter-->
 						<li role="button" class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown"> {{selectedQuarter}} <span class="caret"></span></a>
+							data-toggle="dropdown" (click)="showQs()"> {{selectedQuarter}} <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li *ngFor="let quarter of quarters">
 					<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>

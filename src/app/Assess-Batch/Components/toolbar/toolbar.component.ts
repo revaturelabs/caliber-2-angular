@@ -162,7 +162,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   showQs(){
-    this.batches = [];
     this.selectedQuarter = "Select Quarter";
   }
 
