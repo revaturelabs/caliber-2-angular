@@ -11,13 +11,14 @@
                         <table class="table table-responsive" style="border-collapse: collapse;">
                             <thead>
                                 <tr sticky class='sticky-header'>
+									<th></th>
 									<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-									<th class="col-sm-1 col-md-1 col-lg-1"></th>
-                                    <th class="col-sm-1 col-md-1 col-lg-1"></th>
-                                        <th class="col-sm-1 col-md-1 col-lg-1"></th><th class="col-sm-1 col-md-1 col-lg-1 text-center"
-                                            *ngFor="let assessment of assessmentArr">
+									
+                                    
+                                        <th  role = "button" class="col-sm-1 col-md-1 col-lg-1 text-center"  
+											*ngFor="let assessment of assessmentArr" data-toggle="modal" data-target ="#editAssessmentModal_" (click) = 'selectedId(assessment.assessmentId)'>
                                             {{ assessment.assessmentType }}
-                                            ({{ assessment.rawScore }}%)
+											({{ assessment.rawScore }}%)
 										</th>
 
                                         <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
@@ -36,7 +37,7 @@
 								<i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
 								<!-- Shows the flag notes popup if the user clicks the name column -->
 							</td>
-							<i>
+							
 								<div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
 									<input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
 									<button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
@@ -45,8 +46,7 @@
 									</button>
 								</div>
 			
-							</i>
-									<td class="text-center col-sm-1 col-md-1 col-lg-1"></td>
+									
                                     <td class="text-center col-sm-1 col-md-1 col-lg-1"
                                         *ngFor="let assessment of assessmentArr">
                                         <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
@@ -80,3 +80,4 @@
     </div>
 </div>
 
+<app-update-delete-assessment-modal></app-update-delete-assessment-modal>

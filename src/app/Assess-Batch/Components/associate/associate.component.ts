@@ -16,7 +16,7 @@ export class AssociateComponent implements OnInit {
 //Array to hold all trainnee
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
-
+  selectedAssessmentId: number;
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
@@ -33,6 +33,11 @@ export class AssociateComponent implements OnInit {
    });
   }
 
+  selectedId (assessmentId){
+    this.selectedAssessmentId = assessmentId;
+    console.log(this.selectedAssessmentId)
+    
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {

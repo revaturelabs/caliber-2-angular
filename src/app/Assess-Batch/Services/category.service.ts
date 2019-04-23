@@ -11,11 +11,19 @@ import { Category } from "../Models/Category";
 export class CategoryService {
   constructor(private http: HttpClient) {}
   url = "http://localhost:9090/all/category/all";
+  getUrl = "http://localhost:9090/all/category/"
 //   ourCategories: Category[] = [];
 //   categories = new EventEmitter<Category[]>();
 
+  
+  
+   
   getCategories(): Observable<[Category]> {
     return this.http.get<[Category]>(this.url);
+  }
+
+  getCategoryById(id:number):Observable<Category>{
+    return this.http.get<Category>(this.getUrl+id);
   }
 
 //   storeCategories(entry: Category[]) {

@@ -8,6 +8,7 @@ import { FeedbackComponent } from "../Assess-Batch/Components/feedback/feedback.
 import { ToolbarComponent } from "../Assess-Batch/Components/toolbar/toolbar.component";
 import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components/associate/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 
 
@@ -20,9 +21,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       FeedbackComponent,
       ToolbarComponent,
       BatchModalComponent,
+      UpdateDeleteAssessmentModalComponent
      
     ],
-    entryComponents :[ BatchModalComponent ]
+    entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ]
     
    
 })

@@ -11,6 +11,8 @@ export class AssessmentService {
 
   constructor(private http: HttpClient) { }
   url = "http://localhost:9090/all/assessment/create";
+  updateUrl = "http://localhost:9090/all/assessment/update";
+  getUrl = "http://localhost:9090/all/assessment/"
 
   private assessment: Assessment = {
     assessmentId : 100000000000000000,
@@ -29,5 +31,16 @@ export class AssessmentService {
  */
   createCategories(assessment: Assessment): Observable<Assessment> {
     return this.http.post<Assessment>(this.url, assessment);
+  }
+  /**
+   * 
+   * @param assessment
+   * 
+   */
+  updateAssessment(assessment: Assessment): Observable<Assessment>{
+    return this.http.put<Assessment>(this.updateUrl,assessment);
+  } 
+  getAssessment(assessmentId:number): Observable<Assessment>{
+    return this.http.get<Assessment>(this.getUrl+assessmentId);
   }
 }
