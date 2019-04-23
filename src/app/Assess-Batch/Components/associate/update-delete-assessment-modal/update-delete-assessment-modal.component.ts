@@ -13,18 +13,16 @@ import { EventEmitter } from 'events';
   styleUrls: ['./update-delete-assessment-modal.component.css']
 })
 export class UpdateDeleteAssessmentModalComponent implements OnInit{
-  // @Input() createOrUpdate: Category
-
-  // @Output() closeEvent = new EventEmitter<string>();
-  // @Output() someEvent = new EventEmitter<string>();
-
+  
   categories: Category[];
   currentCategory: Category;
   currentAssessment : Assessment;
+  
   currentCatId: number;
   currentAssessmentId: number = null;
   selectedType = "default";
   selectedCategory = "default";
+  score = undefined;
   assessmentTypeDisplay = [
     {
     name : 'Verbal',
@@ -39,17 +37,33 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     name : 'Other'
     }
   ] 
+
+  resetForm(){
+    this.selectedType = "default";
+    this.selectedCategory = "default";
+    this.score = this.currentAssessment.rawScore;
+  }
   
   constructor(public assessmentSerivce: AssessmentService, public associate: AssociateComponent,public categoryService: CategoryService) { }
 
 
+
   editAssessment(score,type,category) :void{
-    console.log(new Assessment(this.currentAssessment.assessmentId, score, 
-      this.currentAssessment.assessmentTitle, type, this.currentAssessment.weekNumber, 
-      this.currentAssessment.batchId, category));
-    this.assessmentSerivce.updateAssessment(new Assessment(this.currentAssessment.assessmentId, score, 
-      this.currentAssessment.assessmentTitle, type, this.currentAssessment.weekNumber, 
-      this.currentAssessment.batchId, category)).subscribe(result=>{
+    if(score !== undefined){
+      this.currentAssessment.rawScore = score
+    }
+    if(type !== "default"){
+      this.currentAssessment.assessmentType = type
+    }
+    if(category !== "default"){
+      this.currentAssessment.assessmentCategory = category
+    }
+    console.log(new Assessment(this.currentAssessment.assessmentId, this.currentAssessment.rawScore, 
+      this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber, 
+      this.currentAssessment.batchId, this.currentAssessment.assessmentCategory));
+    this.assessmentSerivce.updateAssessment(new Assessment(this.currentAssessment.assessmentId, this.currentAssessment.rawScore, 
+      this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber, 
+      this.currentAssessment.batchId, this.currentAssessment.assessmentCategory)).subscribe(result=>{
         this.currentAssessment = result;
       })
     console.log("working")
