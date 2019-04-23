@@ -47,7 +47,7 @@ export class AssociateComponent implements OnInit {
      
       this.noteArr = noteArr;
       this.sortNoteArrayByTraineeId();
-      console.log(noteArr.length);
+      console.log(noteArr);
       this.makeContentArray();
       
       

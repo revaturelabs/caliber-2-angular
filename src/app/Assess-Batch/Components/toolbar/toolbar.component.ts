@@ -138,15 +138,24 @@ export class ToolbarComponent implements OnInit {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
-    this.assessBatchService.addWeek(this.selectedBatch);
+    this.selectedBatch.weeks=last+1;
+    console.log(this.selectedBatch.batchId);
 for(this.i=0;this.i<this.ourTrainee.length;this.i++){
   console.log("creating");
-  console.log(this.selectedBatch.batchId);
-  console.log(this.ourTrainee[this.i].traineeId);
-  this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.selectedBatchId, this.ourTrainee[this.i].traineeId );
 
+  this.note=new Note(-1, "", "TRAINEE", this.selectedWeek, this.selectedBatch.batchId, this.ourTrainee[this.i].traineeId );
+  console.log(this.note);
+  this.noteService.postNote(this.note).subscribe(response =>{
+    if(Object !=null){
+      console.log("success")
+    }else{
+      console.log("fail")
+    }
+  });
 }
-   
+this.assessBatchService.addWeek(this.selectedBatch);
+console.log(this.selectedWeek);
+this.getBatchNotesByWeek();
    
     
   }
@@ -174,5 +183,6 @@ for(this.i=0;this.i<this.ourTrainee.length;this.i++){
     })   
 
   }
+  
 
 }
