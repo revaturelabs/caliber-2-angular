@@ -40,11 +40,13 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
+  note: Note;
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  i: number;
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
@@ -121,10 +123,19 @@ export class ToolbarComponent implements OnInit {
     this.getBatchNotesByWeek();
 
   }
+
+
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
+for(this.i=0;this.i<this.ourTrainee.length;this.i++){
+  console.log("creating");
+  console.log(this.selectedBatch.batchId);
+  console.log(this.ourTrainee[this.i].traineeId);
+  this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.selectedBatchId, this.ourTrainee[this.i].traineeId );
+
+}
   }
   getWeeks() {
     this.weeks = [];
@@ -136,6 +147,7 @@ export class ToolbarComponent implements OnInit {
 
   getTraineesByBatchId(){
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
+      this.ourTrainee=trainees;
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
       this.getBatchNotesByWeek();
@@ -143,7 +155,8 @@ export class ToolbarComponent implements OnInit {
   }
   getBatchNotesByWeek(){
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
-      
+      this.noteService.weekEmitter.emit(this.selectedWeek);
+      this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
     })   
 

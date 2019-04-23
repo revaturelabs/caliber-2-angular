@@ -31,7 +31,9 @@ export class AssociateComponent implements OnInit {
 
   traineeArr: Trainee[] = [];
   noteArr: Note[] = [];
-  
+  note: Note;
+  selectedWeek: number;
+  batchId: number;
 
   // Unimplemented functions
   constructor(private traineeService: TraineeService, private noteService: NoteService) { }
@@ -45,11 +47,28 @@ export class AssociateComponent implements OnInit {
      
       this.noteArr = noteArr;
       this.sortNoteArrayByTraineeId();
-      console.log(noteArr);
+      console.log(noteArr.length);
       this.makeContentArray();
       
       
     });
+
+    this.noteService.weekEmitter.subscribe((selectedWeek) => {
+     this.selectedWeek = selectedWeek;
+      console.log(this.selectedWeek);
+    });
+
+    this.noteService.batchIdEmitter.subscribe((batchId) => {
+      this.batchId = batchId;
+       console.log(this.selectedWeek);
+     });
+
+
+
+
+
+
+
   }
   
   change: Boolean;
@@ -87,9 +106,11 @@ console.log("console Array =  " + this.content);
 str: string;
  // Disables the associated notes text area box for 1 second.
  noteBlur(index: number,  secondRound: boolean): void {
+  console.log(this.noteArr.length);
+if (this.noteArr[index]!=null){
 
   // The first call will recursivley call this function again to re-enable the input box after 1 second
-  if (!secondRound) {
+  
     
     console.log(blur);
     console.log(this.content[index]);
@@ -106,13 +127,31 @@ str: string;
 
     );
     console.log(this.noteArr[index]);
-    $('#note-textarea-' + index).prop('disabled', true);
-    setInterval(this.noteBlur, 1000, index,  true);
-  } else {
-    $('#note-textarea-' + index).prop('disabled', false);
-  }
-}
+   
+}else{
+  
+    console.log("Creating note");
+    console.log(blur);
+   
+   this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
+   
+    console.log("Creating Note" + this.note);
+    // create note
+    this.noteService.postNote(this.note).subscribe(response =>{
+      if(Object !=null){
+        console.log("success")
+      }else{
+        console.log("fail")
+      }
+    }
 
+    );
+    console.log(this.noteArr[index]);
+   
+
+
+}
+ }
 
   showTrainees(){
     this.traineeArr = this.traineeService.returnTrainees();
