@@ -81,7 +81,6 @@ export class ToolbarComponent implements OnInit {
       }
       this.selectedYear = "Select Year";
     });
-    
   }
 
   getBatches() {
@@ -105,7 +104,6 @@ export class ToolbarComponent implements OnInit {
     this.batches = [];
     this.selectedBatch = null;
     this.showBatch = false;
-    console.log(this.batches);
   }
 
   checkBatchExistanceInaQuarter(yearselect, quarter) {
@@ -113,33 +111,33 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
         if(result.length > 0) {
           this.quarters.push("Q"+quarter);
+          this.selectedQuarter = this.quarters[0];
+         
+          var temp: String[] = this.quarters.sort((n1, n2) => {
+            if (n1 > n2) {
+              return -1;
+            }
+
+            if (n1 < n2) {
+              return 1;
+            }
+
+            return 0;
+          });
+
+          this.quarters = temp;
+          this.selectedYear = yearselect;
+          this.selectedBatch = result[0];
+          this.getBatches();
         } else {
-     // this.batchExists = false;
-    }
-
-    var temp: String[] = this.quarters.sort((n1, n2) => {
-      if (n1 > n2) {
-        return -1;
-      }
-
-      if (n1 < n2) {
-        return 1;
-      }
-
-      return 0;
-    });
-    this.quarters = temp;
-    this.selectedYear = yearselect;
-    this.selectedQuarter = this.quarters[0];
-    this.selectedBatch = result[0];
-    this.getBatches();
+          console.log("this quarter wasn't included " + quarter);
+        }
       });
   }
 
   showQs(){
     this.batches = [];
     this.selectedQuarter = "Select Quarter";
-    // this.selectedBatch = null;
   }
 
   selectQuarter(event: string) {
