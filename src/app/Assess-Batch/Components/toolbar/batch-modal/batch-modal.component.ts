@@ -34,6 +34,7 @@ export class BatchModalComponent implements OnInit{
   weekNumber: number = null;
   batchId: number = null;
   assessmentCategory: number = null;
+  score: number = null;
 
   selectedType = "default";
   selectedCategory = "default";
@@ -55,8 +56,10 @@ export class BatchModalComponent implements OnInit{
   
   
   resetForm() {
-     throw new Error("Method not implemented.");
-   }
+    this.selectedType = "default";
+    this.selectedCategory = "default";
+    this.score = null;
+    }
    
   constructor(public categoryService: CategoryService, public assessmentService: AssessmentService, public toolBar: ToolbarComponent) {
   }
@@ -71,6 +74,7 @@ export class BatchModalComponent implements OnInit{
       this.assessment = result;
       console.log(result);
     })
+    this.resetForm();
   }
 
   getCategories(){

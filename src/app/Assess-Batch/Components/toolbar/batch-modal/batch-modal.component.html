@@ -45,8 +45,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" (click) = 'addAssessment(score, selectedType, selectedCategory)'>ADD Test</button>
-					<input type="submit" value="Save" class="btn btn-primary">
+					<input (click) = 'addAssessment(score, selectedType, selectedCategory)' type="submit" value="Save" class="btn btn-primary" data-dismiss="modal">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</form>

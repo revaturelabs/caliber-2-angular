@@ -3,7 +3,8 @@ import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
-import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
+import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
+import { AssessmentService } from '../../Services/assessment.service';
 
 @Component({
   selector: 'app-associate',
@@ -17,12 +18,13 @@ export class AssociateComponent implements OnInit {
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
   selectedAssessmentId: number;
+  selectedAssessmentCategoryId: number;
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
 
 
-  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
+  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
@@ -33,11 +35,18 @@ export class AssociateComponent implements OnInit {
    });
   }
 
-  selectedId (assessmentId){
+  selectedId (assessmentId, assessmentCategory){
     this.selectedAssessmentId = assessmentId;
+    this.selectedAssessmentCategoryId= assessmentCategory;
+    this.assessmentService.getCurrentAssessmentId(assessmentId);
+    this.assessmentService.currentAssessmentId.emit(assessmentId);
+    this.assessmentService.getCurrentCategoryId(assessmentCategory);
+    this.assessmentService.currentCategoryId.emit(assessmentCategory);
     console.log(this.selectedAssessmentId)
     
   }
+  
+
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {
@@ -105,6 +114,8 @@ export class AssociateComponent implements OnInit {
     });
 
   }
+
+  
 
 
   // Disables the associated notes text area box for 1 second.

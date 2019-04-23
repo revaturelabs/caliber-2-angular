@@ -12,7 +12,7 @@ import { EventEmitter } from 'events';
   templateUrl: './update-delete-assessment-modal.component.html',
   styleUrls: ['./update-delete-assessment-modal.component.css']
 })
-export class UpdateDeleteAssessmentModalComponent implements OnInit, OnChanges {
+export class UpdateDeleteAssessmentModalComponent implements OnInit{
   // @Input() createOrUpdate: Category
 
   // @Output() closeEvent = new EventEmitter<string>();
@@ -21,6 +21,7 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit, OnChanges {
   categories: Category[];
   currentCategory: Category;
   currentAssessment : Assessment;
+  currentCatId: number;
   currentAssessmentId: number = null;
   selectedType = "default";
   selectedCategory = "default";
@@ -41,8 +42,28 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit, OnChanges {
   
   constructor(public assessmentSerivce: AssessmentService, public associate: AssociateComponent,public categoryService: CategoryService) { }
 
+
+  editAssessment(score,type,category) :void{
+    console.log(new Assessment(this.currentAssessment.assessmentId, score, 
+      this.currentAssessment.assessmentTitle, type, this.currentAssessment.weekNumber, 
+      this.currentAssessment.batchId, category));
+    this.assessmentSerivce.updateAssessment(new Assessment(this.currentAssessment.assessmentId, score, 
+      this.currentAssessment.assessmentTitle, type, this.currentAssessment.weekNumber, 
+      this.currentAssessment.batchId, category)).subscribe(result=>{
+        this.currentAssessment = result;
+      })
+    console.log("working")
+  }
+  deleteAssessment():void{
+    
+      this.assessmentSerivce.deleteAssessment(this.currentAssessment).subscribe(result=>{
+        this.currentAssessment =result;
+      })
+        
+  }
+
   getCategory(catId){
-    this.categoryService.getCategoryById(this.currentAssessment.assessmentCategory).subscribe(result =>{
+    this.categoryService.getCategoryById(catId).subscribe(result =>{
       this.currentCategory = result;
       console.log(this.currentCategory)
 
@@ -50,8 +71,8 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit, OnChanges {
     })
   }
 
-  getAssessmentById(): void {
-    this.assessmentSerivce.getAssessment(this.associate.selectedAssessmentId).subscribe(result =>{
+  getAssessmentById(assesId): void {
+    this.assessmentSerivce.getAssessment(assesId).subscribe(result =>{
       this.currentAssessment = result;
       console.log(this.currentAssessment);
 
@@ -67,15 +88,22 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit, OnChanges {
     })
   }
   ngOnInit() {
+    this.assessmentSerivce.currentCategoryId.subscribe((currentCatId)=>{
+      this.currentCatId = currentCatId;
+      this.getCategory(currentCatId);
+      console.log(currentCatId);
+    })
+   this.assessmentSerivce.currentAssessmentId.subscribe((currentAssessmentId)=>{
+     this.currentAssessmentId = currentAssessmentId;
+     this.getAssessmentById(this.currentAssessmentId);
+   })
     this.getCategories();
-    this.getCategory(4);
+    this.getCategory(this.currentCatId);
     console.log(this.currentAssessment);
     console.log(this.currentCategory);
     console.log(this.associate.selectedAssessmentId);
+    
   }
-  ngOnChanges(){
-    console.log(this.currentCategory)
-    this.getAssessmentById();
-  }
+ 
 
 }

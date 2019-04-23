@@ -16,7 +16,7 @@
 									
                                     
                                         <th  role = "button" class="col-sm-1 col-md-1 col-lg-1 text-center"  
-											*ngFor="let assessment of assessmentArr" data-toggle="modal" data-target ="#editAssessmentModal_" (click) = 'selectedId(assessment.assessmentId)'>
+											*ngFor="let assessment of assessmentArr" data-toggle="modal" data-target ="#editAssessmentModal_" (click) = 'selectedId(assessment.assessmentId, assessment.assessmentCategory)' >
                                             {{ assessment.assessmentType }}
 											({{ assessment.rawScore }}%)
 										</th>
