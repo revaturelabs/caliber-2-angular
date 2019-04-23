@@ -8,7 +8,7 @@ import { traineeAssessment, Grade } from '../../User/user/types/trainee'
   providedIn: 'root'
 })
 export class AssessBatchGradeService {
-  url = 'http://localhost:9097';
+  url = 'http://localhost:9090';
   gradesByIdURL = '/all/grade/batch/';
   gradeAll = '/all/grade/all';
   assessmentsByIdURL = '/all/assessment/batch/';

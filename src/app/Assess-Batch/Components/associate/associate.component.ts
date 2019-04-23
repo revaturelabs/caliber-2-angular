@@ -17,6 +17,7 @@ export class AssociateComponent implements OnInit {
   assessmentArr: traineeAssessment[] = [];
   gradesArr: Grade[] =[];
   gradesRow: Grade[] =[];
+  grade: any;
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
@@ -28,10 +29,13 @@ export class AssociateComponent implements OnInit {
    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
      this.assessmentArr = assessmentArr;
    });
-    this.assessBatchGradeService.grades.subscribe((gradesArr) => {
-      this.gradesArr = gradesArr;
+   this.assessBatchGradeService.grades.subscribe((gradesArr) => {
+    this.gradesArr = gradesArr;
    });
+   
+    
   }
+
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {
     // Loop through each note in notes until the target is found
@@ -114,6 +118,7 @@ export class AssociateComponent implements OnInit {
     e.target.placeholder = "";
    }
   }
+
 }
 
 
