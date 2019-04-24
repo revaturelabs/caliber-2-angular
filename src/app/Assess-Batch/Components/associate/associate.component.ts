@@ -6,6 +6,7 @@ import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-ba
 import { AssessmentService } from '../../Services/assessment.service';
 import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
 import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
+import { Assessment } from '../../Models/Assesment';
 
 @Component({
   selector: 'app-associate',
@@ -39,7 +40,6 @@ export class AssociateComponent implements OnInit {
   }
 
   populateAssess(): traineeAssessment[]{
-    console.log("is populateAssess rrunning?!?!");
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe((gradesArr) => {
@@ -65,13 +65,15 @@ export class AssociateComponent implements OnInit {
 
   }
 
-  selectedId (assessmentId, assessmentCategory){
-    this.selectedAssessmentId = assessmentId;
-    this.selectedAssessmentCategoryId= assessmentCategory;
-    this.assessmentService.getCurrentAssessmentId(assessmentId);
-    this.assessmentService.currentAssessmentId.emit(assessmentId);
-    this.assessmentService.getCurrentCategoryId(assessmentCategory);
-    this.assessmentService.currentCategoryId.emit(assessmentCategory);
+  selectedId (assessment:Assessment){
+    this.assessmentService.getCurrentAssessment(assessment);
+    this.assessmentService.currentAssessment.emit(assessment);
+    this.selectedAssessmentId = assessment.assessmentId;
+    this.selectedAssessmentCategoryId= assessment.assessmentCategory;
+    this.assessmentService.getCurrentAssessmentId(assessment.assessmentId);
+    this.assessmentService.currentAssessmentId.emit(assessment.assessmentId);
+    this.assessmentService.getCurrentCategoryId(assessment.assessmentCategory);
+    this.assessmentService.currentCategoryId.emit(assessment.assessmentCategory);
     console.log(this.selectedAssessmentId)
     
   }

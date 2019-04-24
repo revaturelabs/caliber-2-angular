@@ -65,6 +65,7 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
       this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber, 
       this.currentAssessment.batchId, this.currentAssessment.assessmentCategory)).subscribe(result=>{
         this.currentAssessment = result;
+        this.refreshPage();
       });
     console.log("working")
   }
@@ -72,15 +73,21 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
   deleteAssessment():void{
     
       this.assessmentSerivce.deleteAssessment(this.currentAssessment).subscribe(result=>{
-        this.currentAssessment =result;
+        this.refreshPage();
       });
-      setInterval(() => {this.refreshPage()}, 5000);
   }
 
   refreshPage(){
-    this.assessBatchGradeService.getAssessmentsByBatchId(this.tempId).subscribe(result => {
-      this.emitAssess.emit(result);
-    });
+    this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.assessmentSerivce.assessment.batchId, this.assessmentSerivce.assessment.weekNumber).subscribe(assessments => {
+    
+      this.assessBatchGradeService.storeAssessments(assessments);
+      this.assessBatchGradeService.assessments.emit(assessments);
+      this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.assessmentSerivce.assessment.batchId, this.assessmentSerivce.assessment.weekNumber).subscribe(grades => {
+
+        this.assessBatchGradeService.storeGrades(grades);
+        this.assessBatchGradeService.grades.emit(grades);
+      })
+    })
   }
 
   getCategory(catId){
