@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { traineeAssessment, Grade } from '../../User/user/types/trainee';
+import { traineeAssessment, Grade, Category } from '../../User/user/types/trainee';
 
 const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/json'})};
 
@@ -10,6 +10,7 @@ const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/jso
 })
 export class AssessBatchGradeService {
   url = 'http://localhost:9090';
+  catUrl = '/all/category/';
   gradesByBatchIdURL = '/all/grade/batch/';
   gradesById = '/all/grade/';
   gradeAll = '/all/grade/all';
@@ -28,6 +29,10 @@ export class AssessBatchGradeService {
   }
   getAssessmentsByBatchIdAndWeekNum(id: number, week: number): Observable<traineeAssessment[]> {
     return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id + '?week=' + week);
+  }
+
+  getCategoryByCategoryId(id: number):  Observable<Category> {
+    return this.http.get<Category>(this.url + this.catUrl + id);
   }
 
   getGradeById(id: number): Observable<Grade> {

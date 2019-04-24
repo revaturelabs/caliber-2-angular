@@ -42,4 +42,9 @@ export class Grade {
     traineeId: number;
 }
 
-
+export class Category {
+    categoryId: number;
+    skillCategory: string;
+    categoryOwner: string;
+    active: boolean;
+}

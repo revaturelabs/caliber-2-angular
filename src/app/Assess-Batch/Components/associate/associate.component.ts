@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
-import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
+import { traineeAssessment, Grade, Category } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
 @Component({
@@ -17,12 +17,15 @@ export class AssociateComponent implements OnInit {
   assessmentArr: traineeAssessment[] = [];
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
+
   score: number = 0;
+
 
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
   scoreId: number;
+  category = [];
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
 
   ngOnInit() {
@@ -51,7 +54,7 @@ export class AssociateComponent implements OnInit {
       }
       this.superArr.push(temp);
     }
-
+    this.category = this.getCategoryName();
   }
 
   // Cycle the Individual Feedback Status
@@ -156,6 +159,20 @@ export class AssociateComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  
+    getCategoryName() : any[] {
+      let temp = [];
+      for(let i = 0; i < this.assessmentArr.length; i++) {
+        this.assessBatchGradeService.getCategoryByCategoryId(this.assessmentArr[i].assessmentCategory).subscribe((category) => {
+          console.log("category" + category.skillCategory);
+          temp.push(category);
+      });   
+      }
+      return temp;
+     
+
   }
 
 }

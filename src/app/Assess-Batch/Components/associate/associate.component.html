@@ -17,7 +17,8 @@
 
 
                                         <th class="col-sm-1 col-md-1 col-lg-1 text-center"
-                                            *ngFor="let assessment of assessmentArr">
+                                            *ngFor="let assessment of assessmentArr; let i=index">
+                                            {{ category[i].skillCategory }} 
                                             {{ assessment.assessmentType }}
                                             ({{ assessment.rawScore }}%)
                                         </th>
