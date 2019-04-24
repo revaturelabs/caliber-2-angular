@@ -28,168 +28,164 @@ export class AssociateComponent implements OnInit {
       }
     }
   ];
- 
+
   traineeArr: Trainee[] = [];
   noteArr: Note[] = [];
-  weekNoteArr: Note[]=[];
+  weekNoteArr: Note[] = [];
   note: Note;
   selectedWeek: number;
   batchId: number;
-  i : number;
-  j : number;
+  i: number;
+  j: number;
+
   // Unimplemented functions
   constructor(private traineeService: TraineeService, private noteService: NoteService) { }
-  ngOnInit( ) {
-    
+  ngOnInit() {
+
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
       console.log(traineeArr);
-      });
-     
-      
+    });
+
+
 
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = [];
-     for(this.i=0;this.i<this.traineeArr.length;this.i++){
-        for(this.j=0;this.j<noteArr.length;this.j++){
-          if(noteArr[this.j].traineeId==this.traineeArr[this.i].traineeId){
-            this.noteArr[this.i]=noteArr[this.j];
+      for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
+        for (this.j = 0; this.j < noteArr.length; this.j++) {
+          if (noteArr[this.j].traineeId == this.traineeArr[this.i].traineeId) {
+            this.noteArr[this.i] = noteArr[this.j];
           }
         }
-if(this.noteArr[this.i]==null){
-  this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId );
-  this.noteArr[this.i]= this.note;
-}
+        if (this.noteArr[this.i] == null) {
+          this.note = new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId);
+          this.noteArr[this.i] = this.note;
+        }
 
-     }
-console.log(this.noteArr);
+      }
+      console.log(this.noteArr);
       // this.noteArr = noteArr;
       // this.sortNoteArrayByTraineeId();
 
       // console.log(noteArr);
       // this.makeContentArray();
 
-    //   for(this.i=0;this.i<this.traineeArr.length;this.i++){
-    //     console.log("hello");
-    //    this.noteService.getBatchNotesByTraineeId(this.traineeArr[this.i].traineeId).subscribe(notes => {
-    //      this.weekNoteArr=notes;
-         
-    //      this.content[this.i]= null;
-    //      if(this.noteArr.length>0){
-    //      for(this.j=0;this.j<this.weekNoteArr.length;this.j++){
-    //        if(this.weekNoteArr[this.j].weekNumber==this.selectedWeek && this.weekNoteArr[this.j].traineeId == this.traineeArr[this.i].traineeId){
-    //          this.content[this.i]=this.weekNoteArr[this.j].noteContent;
-    //        }
-    //      }
-    //    }
-    //    });  
- 
-       
-    //  }
-      
+      //   for(this.i=0;this.i<this.traineeArr.length;this.i++){
+      //     console.log("hello");
+      //    this.noteService.getBatchNotesByTraineeId(this.traineeArr[this.i].traineeId).subscribe(notes => {
+      //      this.weekNoteArr=notes;
+
+      //      this.content[this.i]= null;
+      //      if(this.noteArr.length>0){
+      //      for(this.j=0;this.j<this.weekNoteArr.length;this.j++){
+      //        if(this.weekNoteArr[this.j].weekNumber==this.selectedWeek && this.weekNoteArr[this.j].traineeId == this.traineeArr[this.i].traineeId){
+      //          this.content[this.i]=this.weekNoteArr[this.j].noteContent;
+      //        }
+      //      }
+      //    }
+      //    });  
+
+
+      //  }
+
     });
 
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
       this.selectedWeek = selectedWeek;
-       console.log(this.selectedWeek);
-     });
- 
-     this.noteService.batchIdEmitter.subscribe((batchId) => {
-       this.batchId = batchId;
-        console.log(this.selectedWeek);
-      }); 
+      console.log(this.selectedWeek);
+    });
 
-     
+    this.noteService.batchIdEmitter.subscribe((batchId) => {
+      this.batchId = batchId;
+      console.log(this.selectedWeek);
+    });
+
+
     console.log("this.contet=")
     console.log(this.content);
 
-
-
-
   }
-  
   change: Boolean;
-  
+
   temp: Note;
-sortNoteArrayByTraineeId(){
+  sortNoteArrayByTraineeId() {
 
-  do {
-    this.change=false;
- for(this.i=0;this.i<this.noteArr.length-1;this.i++){
+    do {
+      this.change = false;
+      for (this.i = 0; this.i < this.noteArr.length - 1; this.i++) {
 
-if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
-{
-  this.temp=this.noteArr[this.i];
-  this.noteArr[this.i]=this.noteArr[this.i+1];
-  this.noteArr[this.i+1]=this.temp;
-  this.change=true
-}
+        if (this.noteArr[this.i].traineeId > this.noteArr[this.i + 1].traineeId) {
+          this.temp = this.noteArr[this.i];
+          this.noteArr[this.i] = this.noteArr[this.i + 1];
+          this.noteArr[this.i + 1] = this.temp;
+          this.change = true
+        }
 
- }
- 
-}while (this.change)
-return this.noteArr;
-}
+      }
 
-content: string[]=[]
-makeContentArray(){
-  this.content=[];
-  for(this.i=0;this.i<this.noteArr.length;this.i++){
-this.content[this.i]=this.noteArr[this.i].noteContent;
-console.log("console Array =  " + this.content);
+    } while (this.change)
+    return this.noteArr;
   }
-}
 
-
-str: string;
- // Disables the associated notes text area box for 1 second.
- noteBlur(index: number,  secondRound: boolean): void {
-  console.log(this.noteArr[index].noteId);
-if (this.noteArr[index].noteId!=-1){
-
-  // The first call will recursivley call this function again to re-enable the input box after 1 second
-  
-    
-    console.log(blur);
-    
-   
-    // this.noteArr[index].noteContent=this.content[index];
-    console.log("posting" +this.noteArr[index]);
-    this.noteService.putNote(this.noteArr[index]).subscribe(response =>{
-      if(Object !=null){
-        console.log("success")
-      }else{
-        console.log("fail")
-      }
+  content: string[] = []
+  makeContentArray() {
+    this.content = [];
+    for (this.i = 0; this.i < this.noteArr.length; this.i++) {
+      this.content[this.i] = this.noteArr[this.i].noteContent;
+      console.log("console Array =  " + this.content);
     }
+  }
 
-    );
-    console.log(this.noteArr[index]);
-   
-}else{
-  
-    console.log("Creating note");
-    console.log(blur);
-   
-  //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
-   this.note=this.noteArr[index]
-    console.log("Creating Note" + this.note);
-    // create note
-    this.noteService.postNote(this.note).subscribe(response =>{
-      if(Object !=null){
-        console.log("success")
-      }else{
-        console.log("fail")
+
+  str: string;
+  // Disables the associated notes text area box for 1 second.
+  noteBlur(index: number, secondRound: boolean): void {
+    console.log(this.noteArr[index].noteId);
+    if (this.noteArr[index].noteId != -1) {
+
+      // The first call will recursivley call this function again to re-enable the input box after 1 second
+
+
+      console.log(blur);
+
+
+      // this.noteArr[index].noteContent=this.content[index];
+      console.log("posting" + this.noteArr[index]);
+      this.noteService.putNote(this.noteArr[index]).subscribe(response => {
+        if (Object != null) {
+          console.log("success")
+        } else {
+          console.log("fail")
+        }
       }
+
+      );
+      console.log(this.noteArr[index]);
+
+    } else {
+
+      console.log("Creating note");
+      console.log(blur);
+
+      //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
+      this.note = this.noteArr[index]
+      console.log("Creating Note" + this.note);
+      // create note
+      this.noteService.postNote(this.note).subscribe(response => {
+        if (Object != null) {
+          console.log("success")
+        } else {
+          console.log("fail")
+        }
+      }
+
+      );
+      console.log(this.noteArr[index]);
+
+
+
     }
-
-    );
-    console.log(this.noteArr[index]);
-   
-
-
-}
- }
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {
@@ -230,9 +226,9 @@ if (this.noteArr[index].noteId!=-1){
 
       // Find the clicked note
       if (this.notes[i].noteId === selectedNoteId) {
-        
-          // Enable or disable the notes box popup
-          this.notes[i].noteFlagInputActive = enable;
+
+        // Enable or disable the notes box popup
+        this.notes[i].noteFlagInputActive = enable;
       }
     }
   }
@@ -275,5 +271,5 @@ if (this.noteArr[index].noteId!=-1){
   }
 
   // Disables the associated notes text area box for 1 second.
- 
+
 }
