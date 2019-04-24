@@ -20,12 +20,6 @@ export class Trainee {
     flagAuthor: string;
     flagTimeStamp: string;
     
-    
-    
-    
-    
-    
-   
-
     constructor( ) {}
 }
+

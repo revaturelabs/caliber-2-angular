@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 import { AssessmentService } from '../../Services/assessment.service';
+import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 @Component({
   selector: 'app-associate',
@@ -19,20 +20,28 @@ export class AssociateComponent implements OnInit {
   assessmentArr: traineeAssessment[] = [];
   selectedAssessmentId: number;
   selectedAssessmentCategoryId: number;
+  totalRaw: number = 0;
+  calcArr: number[] = [];
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
 
 
-  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService) { }
+  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
    });
-   this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-     this.assessmentArr = assessmentArr;
-      
-   });
+   this.populateAssess();
+  }
+
+  populateAssess(): traineeAssessment[]{
+    console.log("is populateAssess rrunning?!?!");
+    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
+      this.assessmentArr = assessmentArr;
+       this.sumRawScores();
+    });
+    return this.assessmentArr;
   }
 
   selectedId (assessmentId, assessmentCategory){
@@ -46,7 +55,14 @@ export class AssociateComponent implements OnInit {
     
   }
   
-
+  //Sum of Assessment RawScores
+  sumRawScores(){
+    this.totalRaw = 0;
+    for(let assess of this.assessmentArr){
+      this.totalRaw += assess.rawScore;
+      console.log(this.totalRaw);
+    }
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {

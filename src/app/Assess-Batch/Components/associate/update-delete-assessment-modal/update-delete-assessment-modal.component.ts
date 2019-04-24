@@ -1,11 +1,12 @@
-import { Component, OnInit, OnChanges, Input, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { AssessmentService } from '../../../Services/assessment.service';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { Assessment } from '../../../Models/Assesment';
-import { AssociateComponent } from '../../associate/associate.component';
 import { CategoryService } from '../../../Services/category.service';
 import { Category } from 'src/app/Assess-Batch/Models/Category';
-import { EventEmitter } from 'events';
+
+import { traineeAssessment } from 'src/app/User/user/types/trainee';
+import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 
 @Component({
   selector: 'app-update-delete-assessment-modal',
@@ -14,10 +15,11 @@ import { EventEmitter } from 'events';
 })
 export class UpdateDeleteAssessmentModalComponent implements OnInit{
   
+  @Output() emitAssess = new EventEmitter();
   categories: Category[];
   currentCategory: Category;
   currentAssessment : Assessment;
-  
+  tempId: number = 0;
   currentCatId: number;
   currentAssessmentId: number = null;
   selectedType = "default";
@@ -44,9 +46,7 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     this.score = this.currentAssessment.rawScore;
   }
   
-  constructor(public assessmentSerivce: AssessmentService, public associate: AssociateComponent,public categoryService: CategoryService) { }
-
-
+  constructor(public assessmentSerivce: AssessmentService,  public assessBatchGradeService: AssessBatchGradeService,public categoryService: CategoryService) { }
 
   editAssessment(score,type,category) :void{
     if(score !== undefined){
@@ -65,34 +65,43 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
       this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber, 
       this.currentAssessment.batchId, this.currentAssessment.assessmentCategory)).subscribe(result=>{
         this.currentAssessment = result;
-      })
+      });
     console.log("working")
   }
+
   deleteAssessment():void{
     
       this.assessmentSerivce.deleteAssessment(this.currentAssessment).subscribe(result=>{
         this.currentAssessment =result;
-      })
-        
+      });
+      setInterval(() => {this.refreshPage()}, 5000);
+  }
+
+  refreshPage(){
+    this.assessBatchGradeService.getAssessmentsByBatchId(this.tempId).subscribe(result => {
+      this.emitAssess.emit(result);
+    });
   }
 
   getCategory(catId){
     this.categoryService.getCategoryById(catId).subscribe(result =>{
       this.currentCategory = result;
-      console.log(this.currentCategory)
-
-      
+      console.log(this.currentCategory);
     })
   }
 
-  getAssessmentById(assesId): void {
+  getAssessmentById(assesId): void{
     this.assessmentSerivce.getAssessment(assesId).subscribe(result =>{
       this.currentAssessment = result;
-      console.log(this.currentAssessment);
-
-    })
+      console.log(this.currentAssessment.assessmentId);
+      this.holdId(this.currentAssessment.batchId);
+    });
   }
 
+  holdId(batchId){
+    this.tempId = batchId;
+    console.log(this.tempId);
+  }
 
   getCategories(){
     this.categoryService.getCategories().subscribe(result=>{
@@ -115,7 +124,6 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     this.getCategory(this.currentCatId);
     console.log(this.currentAssessment);
     console.log(this.currentCategory);
-    console.log(this.associate.selectedAssessmentId);
     
   }
  

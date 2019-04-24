@@ -24,7 +24,8 @@ import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components
       UpdateDeleteAssessmentModalComponent
      
     ],
-    entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ]
+    entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ],
+  providers: [UpdateDeleteAssessmentModalComponent]
     
    
 })

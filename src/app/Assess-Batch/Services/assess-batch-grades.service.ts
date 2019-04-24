@@ -9,7 +9,7 @@ import { traineeAssessment, Grades } from '../../User/user/types/trainee'
 })
 export class AssessBatchGradeService {
 
-  url = 'http://localhost:9097';
+  url = 'http://localhost:9090';
   gradesByIdURL = '/all/grade/batch/';
   assessmentsByIdURL = '/all/assessment/batch/';
   allAssessments: traineeAssessment[] = [];
@@ -29,7 +29,6 @@ export class AssessBatchGradeService {
 
   storeAssessments(entry: traineeAssessment[]) {
     this.allAssessments = entry;
-    console.log(this.allAssessments);
   }
 
   returnAssessments(): traineeAssessment[] {

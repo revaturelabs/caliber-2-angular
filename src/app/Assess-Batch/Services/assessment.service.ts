@@ -14,7 +14,7 @@ export class AssessmentService {
   url = "http://localhost:9090/all/assessment/create";
   updateUrl = "http://localhost:9090/all/assessment/update";
   getUrl = "http://localhost:9090/all/assessment/";
-  deleteUrl = "http://localhost:9090/all/assessment/delete";
+  deleteUrl = "http://localhost:9090/all/assessment/delete/";
 
   assessment : Assessment;
   currentAssessment = new EventEmitter<Assessment>();
@@ -47,7 +47,8 @@ export class AssessmentService {
    */
 
    deleteAssessment(assessment:Assessment): Observable<Assessment>{
-     return this.http.request<Assessment>('delete' ,this.deleteUrl, {body:assessment});
+     console.log("our delete url is :"+ this.deleteUrl+assessment.assessmentId);
+     return this.http.request<Assessment>('delete', this.deleteUrl+assessment.assessmentId, {body:assessment});
    }
   updateAssessment(assessment: Assessment): Observable<Assessment>{
     return this.http.put<Assessment>(this.updateUrl,assessment);

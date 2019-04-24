@@ -5,7 +5,7 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { FormModalComponent } from './form-modal/form-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
-import { traineeAssessment } from 'src/app/User/user/types/trainee';
+import { traineeAssessment } from '../../../User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 
 
