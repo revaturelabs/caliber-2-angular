@@ -63,45 +63,22 @@ if(this.noteArr[this.i]==null){
 
      }
 console.log(this.noteArr);
-      // this.noteArr = noteArr;
-      // this.sortNoteArrayByTraineeId();
-
-      // console.log(noteArr);
-      // this.makeContentArray();
-
-    //   for(this.i=0;this.i<this.traineeArr.length;this.i++){
-    //     console.log("hello");
-    //    this.noteService.getBatchNotesByTraineeId(this.traineeArr[this.i].traineeId).subscribe(notes => {
-    //      this.weekNoteArr=notes;
-         
-    //      this.content[this.i]= null;
-    //      if(this.noteArr.length>0){
-    //      for(this.j=0;this.j<this.weekNoteArr.length;this.j++){
-    //        if(this.weekNoteArr[this.j].weekNumber==this.selectedWeek && this.weekNoteArr[this.j].traineeId == this.traineeArr[this.i].traineeId){
-    //          this.content[this.i]=this.weekNoteArr[this.j].noteContent;
-    //        }
-    //      }
-    //    }
-    //    });  
- 
-       
-    //  }
+     
       
     });
 
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
       this.selectedWeek = selectedWeek;
-       console.log(this.selectedWeek);
+       
      });
  
      this.noteService.batchIdEmitter.subscribe((batchId) => {
        this.batchId = batchId;
-        console.log(this.selectedWeek);
+       
       }); 
 
      
-    console.log("this.contet=")
-    console.log(this.content);
+    
 
 
 
@@ -111,34 +88,10 @@ console.log(this.noteArr);
   change: Boolean;
   
   temp: Note;
-sortNoteArrayByTraineeId(){
 
-  do {
-    this.change=false;
- for(this.i=0;this.i<this.noteArr.length-1;this.i++){
 
-if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
-{
-  this.temp=this.noteArr[this.i];
-  this.noteArr[this.i]=this.noteArr[this.i+1];
-  this.noteArr[this.i+1]=this.temp;
-  this.change=true
-}
 
- }
- 
-}while (this.change)
-return this.noteArr;
-}
 
-content: string[]=[]
-makeContentArray(){
-  this.content=[];
-  for(this.i=0;this.i<this.noteArr.length;this.i++){
-this.content[this.i]=this.noteArr[this.i].noteContent;
-console.log("console Array =  " + this.content);
-  }
-}
 
 
 str: string;
