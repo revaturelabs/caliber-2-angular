@@ -5,8 +5,9 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { FormModalComponent } from './form-modal/form-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
-import { traineeAssessment } from '../../../User/user/types/trainee';
+import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
+import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.component';
 
 
 @Component({
@@ -46,24 +47,34 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
-  grades: traineeAssessment = {
-    assessmentId: 0,
-    rawScore: 0,
-    assessmentTitle: '',
-    assessmentType: '',
-    weekNumber: 0,
-    batchId: 0,
-    assessmentCategory: 0
-  }
+  // assessments: traineeAssessment = {
+  //   assessmentId: 0,
+  //   rawScore: 0,
+  //   assessmentTitle: '',
+  //   assessmentType: '',
+  //   weekNumber: 0,
+  //   batchId: 0,
+  //   assessmentCategory: 0
+  // }
+
+  //  grades: Grade = {
+  //   gradeId: 0,
+  //   dateReceived: 0,
+  //   score: 0,
+  //   assessmentId: 0,
+  //   traineeId: 0
+  // }
 
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  weeklyAssessments: any[] = [];
   weeklyGrades: any[] = [];
-  // @ViewChild('batchModal') batchModal: BatchModalComponent;
-  
+  gradesArr: any[] = [];
+  @ViewChild('batchModal') batchModal: BatchModalComponent;
+
   constructor(
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
   ) { }
@@ -93,7 +104,7 @@ export class ToolbarComponent implements OnInit {
       this.selectedYear = this.years[0].toString();
       console.log(this.years);
     });
-    
+
   }
 
   // openFormModal(){
@@ -129,13 +140,13 @@ export class ToolbarComponent implements OnInit {
       });
     this.showQ = true;
   }
-  
+
   selectQuarter(event: string) {
     this.selectedQuarter = event;
     this.showBatch = true;
     this.getBatches();
   }
-  
+
   selectBatch(event: Batch) {
     this.selectedBatch = event;
     this.auditService.selectedBatch = this.selectedBatch;
@@ -150,8 +161,8 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
-    this.getAssessmentsByBatchId();
-
+    this.getAssessmentsByBatchIdAndWeekNum();
+    this.getGradesByBatchIdAndWeekNum();
   }
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
@@ -170,21 +181,60 @@ export class ToolbarComponent implements OnInit {
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
-    })    
+    })
   }
-
   getAssessmentsByBatchId(){
     console.log(this.selectedBatch.batchId);
-    this.weeklyGrades=[];
+    this.weeklyAssessments=[];
+
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
-      for(let i = 0; i < assessments.length; i++){
-        if(assessments[i].weekNumber == this.selectedWeek){
-          this.weeklyGrades.push(assessments[i]);
-        }
-      }
-      this.assessBatchGradeService.storeAssessments(this.weeklyGrades);
-      this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
+
+      this.weeklyAssessments = assessments;
+
+      this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
+      this.assessBatchGradeService.assessments.emit(this.weeklyAssessments);
     })
   }
 
+  getAssessmentsByBatchIdAndWeekNum(){
+    console.log(this.selectedBatch.batchId);
+    this.weeklyAssessments=[];
+
+    this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(assessments => {
+
+      this.weeklyAssessments = assessments;
+
+      this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
+      this.assessBatchGradeService.assessments.emit(this.weeklyAssessments);
+    })
+  }
+
+  getGradesByBatchIdAndWeekNum(){
+    console.log(this.selectedBatch.batchId);
+    this.gradesArr=[];
+    this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(grades => {
+
+      this.gradesArr = grades;
+
+      this.assessBatchGradeService.storeGrades(this.gradesArr);
+      this.assessBatchGradeService.grades.emit(this.gradesArr);
+    })
+  }
+
+  getGradesByBatchId(){
+    console.log(this.selectedBatch.batchId);
+    this.gradesArr=[];
+    this.assessBatchGradeService.getGradesByBatchId(this.selectedBatch.batchId).subscribe(grades => {
+      for(let i = 0; i < grades.length; i++){
+        for(let y = 0; y < this.weeklyGrades.length; y++){
+
+          if(grades[i].assessmentId == this.weeklyGrades[y].assessmentId){
+            this.gradesArr.push(grades[i]);
+
+        }
+      }}
+      this.assessBatchGradeService.storeGrades(this.gradesArr);
+      this.assessBatchGradeService.grades.emit(this.gradesArr);
+    })
+  }
 }

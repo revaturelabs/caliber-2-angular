@@ -10,6 +10,7 @@
                         <!-- Accordian table -->
                         <table class="table table-responsive" style="border-collapse: collapse;">
                             <thead>
+
                                 <tr sticky class='sticky-header'>
 									<th></th>
 									<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
@@ -26,52 +27,57 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr *ngFor="let train of traineeArr">
-									<td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
-										{{train.name}} 
-							   </td>
-							   <td>
-								<!-- Only shows the current flag, none if no flag is assigned -->
-								<i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-								<i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-								<i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
-								<!-- Shows the flag notes popup if the user clicks the name column -->
-							</td>
-							
-								<div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
-									<input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
-									<button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
-									<button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
-									<span class="glyphicon glyphicon-remove-sign closing-button"></span>
-									</button>
-								</div>
-			
-									
-                                    <td class="text-center col-sm-1 col-md-1 col-lg-1"
-                                        *ngFor="let assessment of assessmentArr">
-                                        <input class="form-control" type="number" min="0" max="100" placeholder="{{ assessment.rawScore }}" />
+                                    <td  class="trainee-name" (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);" style="width: 11%;">
+                                        {{train.name}}
                                     </td>
+                               <td>
+                                <!-- Only shows the current flag, none if no flag is assigned -->
+                                <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                                <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                                <i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+                                <!-- Shows the flag notes popup if the user clicks the name column -->
+                            </td>
+
+                                <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class = "flag-notes-popup" >
+                                    <input class = "form-control" type="text" placeholder={{train.flagNotes}} #comment/>
+                                    <button (click)="commentOnTrainee(train,comment.value)" class ="btn btn-secondary flage-notes-save-btn">Save</button>
+                                    <button (click)="deleteFromSwitch(train.traineeId)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+                                    <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                                    </button>
+                                </div>
+
+                                  <ng-container *ngFor="let arr of superArr">
+                                      <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
+                                              <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId" type="number" min="0" max="100" [value]="score" (blur)="validateScore($event)"/></td>
+                                      </ng-container>
+                                      <ng-template #elseBlock>
+                                              <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="" (blur)="validateScore($event)"/></td>
+                                      </ng-template>
+                                  </ng-container>
+
                                     <td >
-										<textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)" 
-										id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" 
-										id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
-									</td>
+                                        <textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)"
+                                        id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2"
+                                        id="note-textarea-0" placeholder="Note on {{train.name}} "></textarea>
+                                    </td>
                                 </tr>
                             </tbody>
-							<tfoot>
-								<tr>
-								<td><strong>Average</strong></td>
-								<!-- <td
-									ng-repeat="assessment in currentAssessments track by assessment.assessmentId">{{getTotalAssessmentAvgForWeek(assessment,trainees)
-									? (getTotalAssessmentAvgForWeek(assessment,trainees) |
-									number:2) + "%" : "-"}}</td>
-								<td>{{ (allAssessmentsAvgForWeek === false ? "Calculating
-									Weekly Batch Avg " : "Weekly Batch Avg= " +
-									allAssessmentsAvgForWeek) }}<i
-									ng-show="!allAssessmentsAvgForWeek" class='fa fa-cog fa-spin'></i>
-								</td> -->
-							</tr>
-							</tfoot>
+                            <tfoot>
+                                <tr>
+                                <td><strong>Average</strong></td>
+                                <!-- <td
+                                    ng-repeat="assessment in currentAssessments track by assessment.assessmentId">{{getTotalAssessmentAvgForWeek(assessment,trainees)
+                                    ? (getTotalAssessmentAvgForWeek(assessment,trainees) |
+                                    number:2) + "%" : "-"}}</td>
+                                <td>{{ (allAssessmentsAvgForWeek === false ? "Calculating
+                                    Weekly Batch Avg " : "Weekly Batch Avg= " +
+                                    allAssessmentsAvgForWeek) }}<i
+                                    ng-show="!allAssessmentsAvgForWeek" class='fa fa-cog fa-spin'></i>
+                                </td> -->
+                            </tr>
+                            </tfoot>
                         </table>
                     </ul>
                 </ul>

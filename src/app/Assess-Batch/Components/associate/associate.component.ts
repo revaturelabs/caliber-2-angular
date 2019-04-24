@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
-import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 import { AssessmentService } from '../../Services/assessment.service';
 import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
+import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
 
 @Component({
   selector: 'app-associate',
@@ -25,8 +25,11 @@ export class AssociateComponent implements OnInit {
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
-
-
+  gradesArr: Grade[] = [];
+  superArr: Grade[][] = [];
+  score: number = 0;
+  scoreId: number;
+  
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
@@ -39,9 +42,27 @@ export class AssociateComponent implements OnInit {
     console.log("is populateAssess rrunning?!?!");
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
       this.assessmentArr = assessmentArr;
-       this.sumRawScores();
+      this.assessBatchGradeService.grades.subscribe((gradesArr) => {
+          this.gradesArr = gradesArr;
+          this.myInit();
+          this.sumRawScores();
+      });
     });
     return this.assessmentArr;
+  }
+
+  myInit(){
+    this.superArr = [];
+    for(let i = 0; i < this.assessmentArr.length; i++){
+      var temp: Grade[] = [];
+      for(let j = 0; j < this.gradesArr.length; j++){
+        if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
+          temp.push(this.gradesArr[j]);
+        }
+      }
+      this.superArr.push(temp);
+    }
+
   }
 
   selectedId (assessmentId, assessmentCategory){
@@ -64,12 +85,11 @@ export class AssociateComponent implements OnInit {
     }
   }
 
+
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {
     // Loop through each note in notes until the target is found
-
     for (let i = 0; i < this.traineeArr.length; i++) {
-
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
 
@@ -77,7 +97,6 @@ export class AssociateComponent implements OnInit {
         let newStatus = '';
         // Determine the new status string
         switch (this.traineeArr[i].flagStatus) {
-
           case null:
             newStatus = 'RED';
             break;
@@ -97,7 +116,6 @@ export class AssociateComponent implements OnInit {
   deleteFromSwitch(x:number){
     delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
-
   // Cycle the flag notes popup
   cycleFlagNotesInput(selectedtraineeId: number, value: boolean): void {
     // Loop through each trainer in traineeArr until the target is found
@@ -114,13 +132,12 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-
   //send the object of the trainee to the service in order to include the flag note
   commentOnTrainee(trainee ,comment: string){
-    trainee.flagNotes = comment; 
+    trainee.flagNotes = comment;
     this.AssessBatchService.postComment(trainee).subscribe(response => {
       if(Object != null){
-        //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box 
+        //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
         console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
@@ -128,15 +145,10 @@ export class AssociateComponent implements OnInit {
         console.log("Fails");
       }
     });
-
   }
-
-  
-
 
   // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
-
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
       $('#note-textarea-' + selectedtraineeId).prop('disabled', true);
@@ -145,4 +157,38 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
     }
   }
+
+  //Add this in blur event save function
+  validateScore(e){
+   if(e.target.value < 0){
+    e.target.style = "border-color : red; background-color: #fff9f9";
+    e.target.placeholder = e.target.value;
+    e.target.value = "";
+   } else {
+    e.target.style = "";
+    e.target.placeholder = "";
+    let grade: Grade;
+    this.assessBatchGradeService.getGradeById(e.target.id).subscribe((response) => {
+      grade = response;
+      grade.score = e.target.value;
+
+      this.assessBatchGradeService.updateGrade(grade).subscribe((response) => {
+        console.log(response.gradeId + " has been updated to the score: " + response.score);
+      });
+
+    });
+   }
+  }
+
+  checkForGrade(arr: Grade[], train: Trainee){
+    for(let i = 0; i < arr.length; i++){
+      if(arr[i].traineeId == train.traineeId){
+        this.score = arr[i].score;
+        this.scoreId = arr[i].gradeId;
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
