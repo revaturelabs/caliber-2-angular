@@ -9,14 +9,14 @@ import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment
 import { Assessment } from '../../Models/Assesment';
 
 @Component({
-  selector: 'app-associate',
-  templateUrl: './associate.component.html',
-  styleUrls: ['./associate.component.css']
+  selector: "app-associate",
+  templateUrl: "./associate.component.html",
+  styleUrls: ["./associate.component.css"]
 })
 export class AssociateComponent implements OnInit {
-//boolean to show module if valid
+  //boolean to show module if valid
   noteFlagInputActive: boolean;
-//Array to hold all trainnee
+  //Array to hold all trainnee
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
   selectedAssessmentId: number;
@@ -28,13 +28,16 @@ export class AssociateComponent implements OnInit {
   flagNoteSwitch:Array<number> = [];
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
-
+  avgArr: Number[] = [];
+  batchAvgArrr: number;
   score: number = 0;
+  result: number = 0;;
   scoreId: number;
   category: Category[] = [];
   
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
   ngOnInit( ) {
+    this.avgArr =[];
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
    });
@@ -53,18 +56,36 @@ export class AssociateComponent implements OnInit {
     return this.assessmentArr;
   }
 
-  myInit(){
+  myInit() {
     this.superArr = [];
-    for(let i = 0; i < this.assessmentArr.length; i++){
+
+    let tempArr = [];
+    for (let i = 0; i < this.assessmentArr.length; i++) {
       var temp: Grade[] = [];
-      for(let j = 0; j < this.gradesArr.length; j++){
-        if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
+
+      this.assessBatchGradeService
+        .getAvgGradeByAssessmentId(this.assessmentArr[i].assessmentId)
+        .subscribe(response => {
+          tempArr[i] = response;
+        });
+
+      this.avgArr = tempArr;
+
+      for (let j = 0; j < this.gradesArr.length; j++) {
+        if (
+          this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId
+        ) {
           temp.push(this.gradesArr[j]);
         }
       }
       this.superArr.push(temp);
     }
     this.category = this.getCategoryName();
+    this.AssessBatchService.getBatchById(this.traineeArr[0].batchId).subscribe((result) => {
+      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, result.weeks).subscribe((batchAvg) => {
+        this.result = batchAvg;
+      });
+    })
   }
 
   selectedId (assessment:Assessment){
@@ -96,18 +117,17 @@ export class AssociateComponent implements OnInit {
     for (let i = 0; i < this.traineeArr.length; i++) {
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-
         // Create placeholder for new status string
-        let newStatus = '';
+        let newStatus = "";
         // Determine the new status string
         switch (this.traineeArr[i].flagStatus) {
           case null:
-            newStatus = 'RED';
+            newStatus = "RED";
             break;
-          case 'RED':
-            newStatus = 'GREEN';
+          case "RED":
+            newStatus = "GREEN";
             break;
-          case 'GREEN':
+          case "GREEN":
             newStatus = null;
             break;
         }
@@ -116,8 +136,8 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-//method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
-  deleteFromSwitch(x:number){
+  //method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
+  deleteFromSwitch(x: number) {
     delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
   // Cycle the flag notes popup
@@ -127,25 +147,24 @@ export class AssociateComponent implements OnInit {
 
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-        
-          // add Id of trainee to "flagNoteSwitch" array 
-          if(this.flagNoteSwitch.indexOf(selectedtraineeId)==-1){
-            this.flagNoteSwitch.push(selectedtraineeId);
-          }
-          this.noteFlagInputActive=value;
+        // add Id of trainee to "flagNoteSwitch" array
+        if (this.flagNoteSwitch.indexOf(selectedtraineeId) == -1) {
+          this.flagNoteSwitch.push(selectedtraineeId);
+        }
+        this.noteFlagInputActive = value;
       }
     }
   }
   //send the object of the trainee to the service in order to include the flag note
-  commentOnTrainee(trainee ,comment: string){
+  commentOnTrainee(trainee, comment: string) {
     trainee.flagNotes = comment;
     this.AssessBatchService.postComment(trainee).subscribe(response => {
-      if(Object != null){
+      if (Object != null) {
         //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
         console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
-      }else{
+      } else {
         console.log("Fails");
       }
     });
@@ -155,10 +174,10 @@ export class AssociateComponent implements OnInit {
   noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', true);
+      $("#note-textarea-" + selectedtraineeId).prop("disabled", true);
       setInterval(this.noteOnBlur, 1000, selectedtraineeId, true);
     } else {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
+      $("#note-textarea-" + selectedtraineeId).prop("disabled", false);
     }
   }
 
@@ -184,9 +203,9 @@ export class AssociateComponent implements OnInit {
    }
   }
 
-  checkForGrade(arr: Grade[], train: Trainee){
-    for(let i = 0; i < arr.length; i++){
-      if(arr[i].traineeId == train.traineeId){
+  checkForGrade(arr: Grade[], train: Trainee) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].traineeId == train.traineeId) {
         this.score = arr[i].score;
         this.scoreId = arr[i].gradeId;
         return true;

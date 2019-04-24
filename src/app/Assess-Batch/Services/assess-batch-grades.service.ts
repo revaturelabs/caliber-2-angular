@@ -15,13 +15,26 @@ export class AssessBatchGradeService {
   gradesById = '/all/grade/';
   gradeAll = '/all/grade/all';
   assessmentsByIdURL = '/all/assessment/batch/';
+  avgGrade = '/all/grade/average?assessment=';
+  batchGrade = '/all/grade/average?batch=';
+  batchAvgGrade = '&week='
 
+  url2 = 'http://localhost:9090/all/grade/average?batch=';
+ 
   allAssessments: traineeAssessment[] = [];
   allGrades: Grade[] = [];
   assessments = new EventEmitter<traineeAssessment[]>();
   grades = new EventEmitter<Grade[]>();
 
   constructor(private http: HttpClient) { }
+
+  getAvgGradeByAssessmentId(id: number): Observable<number> {
+    return this.http.get<number>(this.url + this.avgGrade + id);
+  }
+
+  getBatchAvgGradeByBatchIdAndWeek(batchId: number, weekId: number): Observable<number> {
+    return this.http.get<number>(this.url2 + batchId + '&week=' + weekId);
+  }
 
   getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {
     return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id);
@@ -58,7 +71,6 @@ export class AssessBatchGradeService {
   }
   storeGrades(entry: Grade[]) {
     this.allGrades = entry;
-    console.log(this.allGrades);
   }
   returnGrades(): Grade[] {
     return this.allGrades;
