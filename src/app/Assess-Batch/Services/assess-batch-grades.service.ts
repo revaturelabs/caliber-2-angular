@@ -43,7 +43,7 @@ export class AssessBatchGradeService {
   }
 
   updateGrade(grade: Grade): Observable<Grade> {
-    return this.http.put<Grade>(this.url + '/grade/update', grade, httpOptions);
+    return this.http.put<Grade>(this.url + '/all/grade/update', grade, httpOptions);
   }
 
   storeAssessments(entry: traineeAssessment[]) {

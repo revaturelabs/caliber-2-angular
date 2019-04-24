@@ -28,7 +28,6 @@ export class AssociateComponent implements OnInit {
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
 
   ngOnInit() {
-    console.log('init of associate.component started');
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
     });
@@ -54,9 +53,7 @@ export class AssociateComponent implements OnInit {
       }
       this.superArr.push(temp);
     }
-    console.log('SuperArr:');
-    console.log(this.superArr);
-    
+
   }
 
   // Cycle the Individual Feedback Status
@@ -140,13 +137,12 @@ export class AssociateComponent implements OnInit {
     e.target.style = "";
     e.target.placeholder = "";
     let grade: Grade;
-    console.log("Yoo the grade id is " + e.target.id);
-    this.assessBatchGradeService.getGradeById(e.target.id).subscribe((response) => { 
+    this.assessBatchGradeService.getGradeById(e.target.id).subscribe((response) => {
       grade = response;
-      grade.score = e.target.score;
+      grade.score = e.target.value;
 
       this.assessBatchGradeService.updateGrade(grade).subscribe((response) => {
-        console.log(response.gradeId + " has been updated.");
+        console.log(response.gradeId + " has been updated to the score: " + response.score);
       });
 
     });
