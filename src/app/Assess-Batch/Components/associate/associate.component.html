@@ -47,23 +47,14 @@
                                     </button>
                                 </div>
 
-                                    <!-- <td *ngFor="let assessment of assessmentArr" class="text-center col-sm-1 col-md-1 col-lg-1">
-                                        <input class="form-control" value= "{{ grade }}" type="number" min="0" max="100" (blur)="validateScore($event)"/>
-                                    </td>  -->
-
-                                    <!-- train.traineeId == grade.traineeId -->
-
-                                    <ng-container *ngFor="let arr of superArr">
-                                        <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
-                                                <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" [value]="score" (blur)="validateScore($event)"/></td>
-                                        </ng-container>
-                                        <ng-template #elseBlock>
-                                                <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="" (blur)="validateScore($event)"/></td>
-                                        </ng-template>
-                                    </ng-container>
-
-
-
+                                  <ng-container *ngFor="let arr of superArr">
+                                      <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
+                                              <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" [value]="score" (blur)="validateScore($event)"/></td>
+                                      </ng-container>
+                                      <ng-template #elseBlock>
+                                              <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number" min="0" max="100" value="" (blur)="validateScore($event)"/></td>
+                                      </ng-template>
+                                  </ng-container>
 
                                     <td >
                                         <textarea _ngcontent-c6="" class="form-control"  (blur)="noteOnBlur(train.traineeId, false)"

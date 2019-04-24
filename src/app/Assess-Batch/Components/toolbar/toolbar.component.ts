@@ -146,8 +146,6 @@ export class ToolbarComponent implements OnInit {
     this.auditService.selectedWeek = event;
     this.getAssessmentsByBatchIdAndWeekNum();
     this.getGradesByBatchIdAndWeekNum();
-
-
   }
   addWeek() {
     var last = this.weeks[this.weeks.length-1];

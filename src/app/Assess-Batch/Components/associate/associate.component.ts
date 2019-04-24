@@ -29,24 +29,23 @@ export class AssociateComponent implements OnInit {
     console.log('init of associate.component started');
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
-      this.count++;
-      this.myInit();
     });
    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
      this.assessmentArr = assessmentArr;
-     this.count++;
      this.myInit();
    });
    this.assessBatchGradeService.grades.subscribe((gradesArr) => {
        this.gradesArr = gradesArr;
-       this.count++;
        this.myInit();
    });
 
   }
 
   myInit(){
-    if(this.count >= 3){
+    this.superArr = [];
+    this.count++;
+
+    if(this.count >= 2){
       for(let i = 0; i < this.assessmentArr.length; i++){
         var temp: Grade[] = [];
         for(let j = 0; j < this.gradesArr.length; j++){
@@ -58,6 +57,7 @@ export class AssociateComponent implements OnInit {
       }
       console.log('SuperArr:');
       console.log(this.superArr);
+      this.count = 0;
     }
   }
 
