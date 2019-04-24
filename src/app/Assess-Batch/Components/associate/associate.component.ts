@@ -3,6 +3,9 @@ import { TraineeService } from '../../Services/trainee.service';
 import { Trainee, traineeAssessment } from 'src/app/Batch/type/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
+import { NoteService } from '../../Services/note.service';
+import { Note } from 'src/app/Batch/type/note';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-associate',
@@ -19,18 +22,79 @@ export class AssociateComponent implements OnInit {
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
+  noteArr: Note[] = [];
 
-
-  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
+  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService) { }
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr;
    });
    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-     this.assessmentArr = assessmentArr;
-      
+     this.assessmentArr = assessmentArr;  
    });
+
+       
+   this.noteService.noteEmitter.subscribe((noteArr) => {
+     
+    this.noteArr = noteArr;
+    this.sortNoteArrayByTraineeId();
+    console.log(noteArr);
+    this.makeContentArray();
+    
+    
+  });
   }
+  
+  change: Boolean;
+  i : number;
+  temp: Note;
+sortNoteArrayByTraineeId(){
+
+  do {
+    this.change=false;
+ for(this.i=0;this.i<this.noteArr.length-1;this.i++){
+
+if (this.noteArr[this.i].traineeId>this.noteArr[this.i+1].traineeId)
+{
+  this.temp=this.noteArr[this.i];
+  this.noteArr[this.i]=this.noteArr[this.i+1];
+  this.noteArr[this.i+1]=this.temp;
+  this.change=true
+}
+
+ }
+ 
+}while (this.change)
+return this.noteArr;
+}
+content: string[]=[]
+makeContentArray(){
+  for(this.i=0;this.i<this.noteArr.length;this.i++){
+this.content[this.i]=this.noteArr[this.i].noteContent;
+console.log("console Array =  " + this.content);
+  }
+}
+
+
+str: string;
+ // Disables the associated notes text area box for 1 second.
+ noteBlur(index: number,  secondRound: boolean): void {
+
+  // The first call will recursivley call this function again to re-enable the input box after 1 second
+  if (!secondRound) {
+    
+    console.log(blur);
+    console.log(this.content[index]);
+   
+    this.noteArr[index].noteContent=this.content[index];
+    this.noteService.putNote(this.noteArr[index]);
+    $('#note-textarea-' + index).prop('disabled', true);
+    setInterval(this.noteBlur, 1000, index,  true);
+  } else {
+    $('#note-textarea-' + index).prop('disabled', false);
+  }
+}
+
 
 
   // Cycle the Individual Feedback Status
