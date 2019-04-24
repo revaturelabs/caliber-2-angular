@@ -20,7 +20,6 @@ export class AssessBatchGradeService {
   assessments = new EventEmitter<traineeAssessment[]>();
   grades = new EventEmitter<Grade[]>();
 
-
   constructor(private http: HttpClient) { }
 
   getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {

@@ -9,6 +9,7 @@ import { EmitterVisitorContext } from '@angular/compiler';
 import { Category } from 'src/app/Assess-Batch/Models/Category';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { updateClassProp } from '@angular/core/src/render3/styling';
+import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 
 
 
@@ -61,18 +62,27 @@ export class BatchModalComponent implements OnInit{
     this.score = null;
     }
    
-  constructor(public categoryService: CategoryService, public assessmentService: AssessmentService, public toolBar: ToolbarComponent) {
+  constructor(public assessBatchGradeService: AssessBatchGradeService, public categoryService: CategoryService, public assessmentService: AssessmentService, public toolBar: ToolbarComponent) {
   }
   
   addAssessment(rawScore, assessmentType, categoryNumber) : void {
-    console.log(new Assessment(this.assessmentId,rawScore,
-      this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
-      this.toolBar.selectedBatch.batchId,categoryNumber));
+
+    
       this.assessmentService.createCategories(new Assessment(this.assessmentId,rawScore,
       this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
       this.toolBar.selectedBatch.batchId,categoryNumber)).subscribe(result=>{
       this.assessment = result;
-      console.log(result);
+
+      this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(result.batchId, result.weekNumber).subscribe(assessments => {
+        
+        this.assessBatchGradeService.storeAssessments(assessments);
+        this.assessBatchGradeService.assessments.emit(assessments);
+        this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.toolBar.selectedWeek, this.toolBar.selectedBatch.batchId).subscribe(grades => {
+  
+          this.assessBatchGradeService.storeGrades(grades);
+          this.assessBatchGradeService.grades.emit(grades);
+        })
+      })
     })
     this.resetForm();
   }
