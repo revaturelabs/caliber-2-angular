@@ -5,9 +5,13 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { FormModalComponent } from './form-modal/form-modal.component';
 import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
+<<<<<<< HEAD
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.component';
 
+=======
+import { AssessBatchService } from '../../Services/assess-batch.service';
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
 
 @Component({
   selector: 'app-toolbar',
@@ -16,15 +20,14 @@ import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.compo
 })
 
 export class ToolbarComponent implements OnInit {
-  showQ: boolean = false;
-  showBatch: boolean = false;
-  quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
+  showBatch: boolean  = true;
+  quarters: String[]=[];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: string = "Select Year";
-  selectedQuarter: string = "Select Quarter";
+  selectedQuarter: String = "Select Quarter";
 
 
 
@@ -69,16 +72,24 @@ export class ToolbarComponent implements OnInit {
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+<<<<<<< HEAD
   weeklyAssessments: any[] = [];
   weeklyGrades: any[] = [];
   gradesArr: any[] = [];
+=======
+  batchExists: boolean = false;
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
   @ViewChild('batchModal') batchModal: BatchModalComponent;
 
   constructor(
+<<<<<<< HEAD
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService
+=======
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
   ) { }
   ngOnInit() {
-    this.selectedWeek=1;
+    this.getAllYears();
   }
      /**
    * resets createorUpdate variable for child component
@@ -93,7 +104,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   displayYears(){
-    this.getAllYears();
+    this.selectedYear = "Select Year";
+
   }
 
   getAllYears() {
@@ -101,8 +113,16 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0].toString();
+<<<<<<< HEAD
     });
 
+=======
+      for (var q = 4; q > 0; q--) { 
+        this.checkBatchExistanceInaQuarter(this.years[0], q);
+      }
+      this.selectedYear = "Select Year";
+    });
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
   }
 
   // openFormModal(){
@@ -119,26 +139,69 @@ export class ToolbarComponent implements OnInit {
   // }
 
   getBatches() {
-    this.auditService.getBatchesByYear(Number.parseInt(this.selectedYear))
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
+        if(result.length > 0) {
+          this.batchExists = true;
       this.batches = result;
       this.selectedBatch = this.batches[0];
+<<<<<<< HEAD
       this.auditService.selectedBatch = this.batches[0];
+=======
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
+    } else {
+      this.batchExists = false;
+    }
       });
   }
 
   selectYear(event: number) {
     this.selectedYear = event.toString();
-    this.auditService.selectedYear = Number.parseInt(this.selectedYear);
-    this.auditService.getBatchesByYear(event)
-    .subscribe(result => {
-      this.batches = result;
-      });
-    this.showQ = true;
+    this.selectedQuarter = "Select Quarter";
+    this.batches = [];
+    this.selectedBatch = null;
+    this.showBatch = false;
   }
 
+  checkBatchExistanceInaQuarter(yearselect, quarter) {
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
+    .subscribe(result => {
+        if(result.length > 0) {
+          this.quarters.push("Q"+quarter);
+          this.selectedQuarter = this.quarters[0];
+         
+          var temp: String[] = this.quarters.sort((n1, n2) => {
+            if (n1 > n2) {
+              return -1;
+            }
+
+            if (n1 < n2) {
+              return 1;
+            }
+
+            return 0;
+          });
+
+          this.quarters = temp;
+          this.selectedYear = yearselect;
+          this.selectedBatch = result[0];
+          this.getBatches();
+        } else {
+          console.log("this quarter wasn't included " + quarter);
+        }
+      });
+  }
+
+<<<<<<< HEAD
+=======
+  showQs(){
+    this.batches = [];
+    this.selectedQuarter = "Select Quarter";
+  }
+
+>>>>>>> e6d7b23d53262b833449ff12ad21e146262dddb7
   selectQuarter(event: string) {
     this.selectedQuarter = event;
     this.showBatch = true;
@@ -166,6 +229,9 @@ export class ToolbarComponent implements OnInit {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
+    this.selectedBatch.weeks = last+1;
+    console.log(this.selectedBatch);
+    this.assessBatchService.addWeek(this.selectedBatch);
   }
   getWeeks() {
     this.weeks = [];
