@@ -14,7 +14,8 @@ const httpOptions = {
 
 export class NoteService {
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:9090';
+  url = 'http://localhost:9097/';
+  url3 = 'http://localhost:9090/all/note/update';
   traineeBatchIdURL = '/all/trainee?batch=';
    batchesYearURL = '/vp/batch/';
    yearsURL = '/all/batch/valid_years';
@@ -23,7 +24,10 @@ export class NoteService {
   notePut='/all/note/update';
   notePost='all/note/create'
   batchNotesByWeekUrl='/all/note/batch/';
+  batchNotesByTraineeId='/all/note/trainee/'
   noteEmitter = new EventEmitter<Note[]>();
+  weekEmitter= new EventEmitter<number>();
+  batchIdEmitter= new EventEmitter<number>();
 
    getAllNotes(): Observable<Note[]>{
     return this.http.get<Note[]>(this.url + this.noteAllURL);
@@ -34,12 +38,19 @@ export class NoteService {
     console.log(weekId);
     return this.http.get<Note[]>(this.url + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
   }
+  getBatchNotesByTraineeId(traineeId: number): Observable<Note[]>{
+    console.log("getting by TraineeId")
+    return this.http.get<Note[]>(this.url + this.batchNotesByTraineeId + traineeId);
+  }
 
-  putNote(note: Note): Observable<Note>{
-    return this.http.put<Note>(this.url + this.notePut, note, httpOptions);
+  putNote(note): Observable<object>{
+    console.log(note);
+    return this.http.put<object>(this.url3, note);
   }
 
   postNote(note: Note): Observable<Note>{
-    return this.http.post<Note>(this.url + this.notePost, note, httpOptions);
+   
+    return this.http.post<Note>(this.url + this.notePost, note);
   }
+
 }

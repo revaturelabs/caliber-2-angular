@@ -9,7 +9,7 @@ import { NoteService } from '../../Services/note.service';
  styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
- noteArr: Note[];
+ batchNoteArr: Note[];
  feedbackNote: Note = { 
   noteId: -1,
   noteContent: "",
@@ -27,20 +27,20 @@ getFeedbackNote(){
     //narrow down to the singlar feedback note
     for(let n of result){
       if(n.noteType == 'BATCH'){
-        this.noteArr.push(n);
+        this.batchNoteArr.push(n);
       }
     }
-    if(this.noteArr.length = 1){
-      this.feedbackNote = this.noteArr[0];
+    if(this.batchNoteArr.length = 1){
+      this.feedbackNote = this.batchNoteArr[0];
     }
-    console.log(this.noteArr);
+    console.log(this.batchNoteArr);
   });
  }
 
  //updates feedback note on blur
 feedbackNoteOnBlur(){
   console.log(this.feedbackNote);
-  if(this.noteArr.length = 0){
+  if(this.batchNoteArr.length = 0){
     this.noteService.postNote(this.feedbackNote)
     .subscribe(result => {
       console.log("post");

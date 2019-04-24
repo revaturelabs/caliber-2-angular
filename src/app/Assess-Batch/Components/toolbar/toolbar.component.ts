@@ -6,6 +6,7 @@ import { Trainee } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
+import { AssessBatchService } from '../../Services/assess-batch.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,6 +15,8 @@ import { Note } from 'src/app/Batch/type/note';
 })
 
 export class ToolbarComponent implements OnInit {
+  showQ: boolean = false;
+  showBatch: boolean = false;
   quarters: String[]=["Q1", "Q2", "Q3", "Q4"];
   years: number[];
   batches: Batch[];
@@ -40,15 +43,17 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
+  note: Note;
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
+  i: number;
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
   constructor(
-    public auditService: AuditService, public traineeService: TraineeService,  public noteService: NoteService
+    public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService, public noteService: NoteService
   ) { }
   ngOnInit() {
     this.selectedWeek=1;
@@ -101,11 +106,13 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.batches = result;
       });
-    this.getBatches();
+    this.showQ = true;
   }
   
   selectQuarter(event: string) {
     this.selectedQuarter = event;
+    this.showBatch = true;
+    this.getBatches();
   }
   
   selectBatch(event: Batch) {
@@ -125,10 +132,33 @@ export class ToolbarComponent implements OnInit {
     this.getBatchNotesByWeek();
 
   }
+
+
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
+    this.selectedBatch.weeks=last+1;
+    console.log(this.selectedBatch.batchId);
+    //creates new note objects for this week
+for(this.i=0;this.i<this.ourTrainee.length;this.i++){
+  console.log("creating");
+
+  this.note=new Note(-1, "", "TRAINEE", this.selectedWeek, this.selectedBatch.batchId, this.ourTrainee[this.i].traineeId );
+  console.log(this.note);
+  this.noteService.postNote(this.note).subscribe(response =>{
+    if(Object !=null){
+      console.log("success")
+    }else{
+      console.log("fail")
+    }
+  });
+}
+this.assessBatchService.addWeek(this.selectedBatch);
+console.log(this.selectedWeek);
+this.getBatchNotesByWeek();
+   
+    
   }
   getWeeks() {
     this.weeks = [];
@@ -140,6 +170,7 @@ export class ToolbarComponent implements OnInit {
 
   getTraineesByBatchId(){
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
+      this.ourTrainee=trainees;
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
       this.getBatchNotesByWeek();
@@ -147,10 +178,21 @@ export class ToolbarComponent implements OnInit {
   }
   getBatchNotesByWeek(){
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
-      
+      console.log("selected week is " + this.selectedWeek);
+      this.noteService.weekEmitter.emit(this.selectedWeek);
+      this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
     })   
 
   }
+
+  // getBatchNotesByTraineeId(){
+  //   this.noteService.getBatchNotesByTraineeId(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+  //     this.noteService.weekEmitter.emit(this.selectedWeek);
+  //     this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
+  //     this.noteService.noteEmitter.emit(notes);
+  //   })  
+  // }
+  
 
 }
