@@ -33,7 +33,7 @@
                                             id="note-textarea-{{i}}"
                                              class="form-control"
                                             placeholder="Notes for {{train.name}}. " 
-                                            rows="3" cols="75" maxlength="4000"   [(ngModel)]="content[i]">{{content[i]}}</textarea>
+                                            rows="3" cols="75" maxlength="4000"   [(ngModel)]="noteArr[i].noteContent" >{{noteArr[i].noteContent}}</textarea>
                                         </td>
                                         <!-- input [(ngModel)]="noteArr[i]?.noteContent" placeholder="note" -->
                                         <!-- {{noteArr[i]?.noteContent}} -->

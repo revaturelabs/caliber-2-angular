@@ -140,6 +140,7 @@ export class ToolbarComponent implements OnInit {
     this.selectedWeek=last+1;
     this.selectedBatch.weeks=last+1;
     console.log(this.selectedBatch.batchId);
+    //creates new note objects for this week
 for(this.i=0;this.i<this.ourTrainee.length;this.i++){
   console.log("creating");
 
@@ -177,12 +178,21 @@ this.getBatchNotesByWeek();
   }
   getBatchNotesByWeek(){
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+      console.log("selected week is " + this.selectedWeek);
       this.noteService.weekEmitter.emit(this.selectedWeek);
       this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
     })   
 
   }
+
+  // getBatchNotesByTraineeId(){
+  //   this.noteService.getBatchNotesByTraineeId(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+  //     this.noteService.weekEmitter.emit(this.selectedWeek);
+  //     this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
+  //     this.noteService.noteEmitter.emit(notes);
+  //   })  
+  // }
   
 
 }

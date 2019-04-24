@@ -24,6 +24,7 @@ export class NoteService {
   notePut='/all/note/update';
   notePost='all/note/create'
   batchNotesByWeekUrl='/all/note/batch/';
+  batchNotesByTraineeId='/all/note/trainee/'
   noteEmitter = new EventEmitter<Note[]>();
   weekEmitter= new EventEmitter<number>();
   batchIdEmitter= new EventEmitter<number>();
@@ -37,6 +38,10 @@ export class NoteService {
     console.log(weekId);
     return this.http.get<Note[]>(this.url + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
   }
+  getBatchNotesByTraineeId(traineeId: number): Observable<Note[]>{
+    console.log("getting by TraineeId")
+    return this.http.get<Note[]>(this.url + this.batchNotesByTraineeId + traineeId);
+  }
 
   putNote(note): Observable<object>{
     console.log(note);
@@ -47,4 +52,5 @@ export class NoteService {
    
     return this.http.post<Note>(this.url + this.notePost, note);
   }
+
 }
