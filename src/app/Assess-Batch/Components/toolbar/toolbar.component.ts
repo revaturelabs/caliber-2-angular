@@ -54,12 +54,14 @@ export class ToolbarComponent implements OnInit {
     assessmentCategory: 0
   }
 
+  note: Note;
   selectedBatchId = 0;
   weeks = [];
   selectedWeek: number;
   createUpdate: Batch = null;
   ourTrainee: Trainee[];
   batchExists: boolean = false;
+  i: number;
   weeklyGrades: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
   
@@ -126,9 +128,6 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
-  
- 
-
   selectYear(event: number) {
     this.selectedYear = event.toString();
     this.selectedQuarter = "Select Quarter";
@@ -187,20 +186,23 @@ export class ToolbarComponent implements OnInit {
       return "active";
     }
   }
+
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
     this.getAssessmentsByBatchId();
     this.getBatchNotesByWeek();
   }
+
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
     this.weeks.push(last+1);
     this.selectedWeek=last+1;
-    this.selectedBatch.weeks = last+1;
-    console.log(this.selectedBatch);
+    this.selectedBatch.weeks=last+1;
     this.assessBatchService.addWeek(this.selectedBatch);
+    this.getBatchNotesByWeek();
   }
+
   getWeeks() {
     this.weeks = [];
     for(var i = 0; i<this.selectedBatch.weeks; i++){
@@ -211,6 +213,7 @@ export class ToolbarComponent implements OnInit {
 
   getTraineesByBatchId(){
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
+      this.ourTrainee=trainees;
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
       this.getBatchNotesByWeek();
@@ -218,7 +221,9 @@ export class ToolbarComponent implements OnInit {
   }
   getBatchNotesByWeek(){
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
-      
+      console.log("selected week is " + this.selectedWeek);
+      this.noteService.weekEmitter.emit(this.selectedWeek);
+      this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
     })   
 
@@ -237,5 +242,13 @@ export class ToolbarComponent implements OnInit {
       this.assessBatchGradeService.assessments.emit(this.weeklyGrades);
     })
   }
+  // getBatchNotesByTraineeId(){
+  //   this.noteService.getBatchNotesByTraineeId(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
+  //     this.noteService.weekEmitter.emit(this.selectedWeek);
+  //     this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
+  //     this.noteService.noteEmitter.emit(notes);
+  //   })  
+  // }
+  
 
 }
