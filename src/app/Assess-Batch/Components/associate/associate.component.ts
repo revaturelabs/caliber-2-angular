@@ -18,11 +18,13 @@ export class AssociateComponent implements OnInit {
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
   score: number = 0;
-  count: number = 0;
+
+
 
 //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
 //multiple flag popup box in the same time.
   flagNoteSwitch:Array<number> = [];
+  scoreId: number;
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
 
   ngOnInit() {
@@ -32,33 +34,29 @@ export class AssociateComponent implements OnInit {
     });
    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
      this.assessmentArr = assessmentArr;
-     this.myInit();
-   });
-   this.assessBatchGradeService.grades.subscribe((gradesArr) => {
-       this.gradesArr = gradesArr;
-       this.myInit();
+     this.assessBatchGradeService.grades.subscribe((gradesArr) => {
+      this.gradesArr = gradesArr;
+      this.myInit();
+    });
    });
 
   }
 
   myInit(){
     this.superArr = [];
-    this.count++;
 
-    if(this.count >= 2){
-      for(let i = 0; i < this.assessmentArr.length; i++){
-        var temp: Grade[] = [];
-        for(let j = 0; j < this.gradesArr.length; j++){
-          if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
-            temp.push(this.gradesArr[j]);
-          }
+    for(let i = 0; i < this.assessmentArr.length; i++){
+      var temp: Grade[] = [];
+      for(let j = 0; j < this.gradesArr.length; j++){
+        if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
+          temp.push(this.gradesArr[j]);
         }
-        this.superArr.push(temp);
       }
-      console.log('SuperArr:');
-      console.log(this.superArr);
-      this.count = 0;
+      this.superArr.push(temp);
     }
+    console.log('SuperArr:');
+    console.log(this.superArr);
+    
   }
 
   // Cycle the Individual Feedback Status
@@ -138,9 +136,20 @@ export class AssociateComponent implements OnInit {
     e.target.style = "border-color : red; background-color: #fff9f9";
     e.target.placeholder = e.target.value;
     e.target.value = "";
-   }else {
+   } else {
     e.target.style = "";
     e.target.placeholder = "";
+    let grade: Grade;
+    console.log("Yoo the grade id is " + e.target.id);
+    this.assessBatchGradeService.getGradeById(e.target.id).subscribe((response) => { 
+      grade = response;
+      grade.score = e.target.score;
+
+      this.assessBatchGradeService.updateGrade(grade).subscribe((response) => {
+        console.log(response.gradeId + " has been updated.");
+      });
+
+    });
    }
   }
 
@@ -148,6 +157,7 @@ export class AssociateComponent implements OnInit {
     for(let i = 0; i < arr.length; i++){
       if(arr[i].traineeId == train.traineeId){
         this.score = arr[i].score;
+        this.scoreId = arr[i].gradeId;
         return true;
       }
     }
