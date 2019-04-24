@@ -18,7 +18,9 @@ export class AssociateComponent implements OnInit {
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
   avgArr: Number[] = [];
+  batchAvgArrr: number;
   score: number = 0;
+  result: number = 0;
 
   //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
   //multiple flag popup box in the same time.
@@ -30,6 +32,7 @@ export class AssociateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.avgArr = [];
     this.traineeService.trainees.subscribe(traineeArr => {
       this.traineeArr = traineeArr;
     });
@@ -37,26 +40,27 @@ export class AssociateComponent implements OnInit {
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe(gradesArr => {
         this.gradesArr = gradesArr;
-        this.resetAvgGrade();
+        // this.resetAvgGrade();
         this.myInit();
       });
     });
+    this.getBatchAvgGrade();
   }
 
   myInit() {
     this.superArr = [];
-    this.avgArr = [];
-    
+
+    let tempArr = [];
     for (let i = 0; i < this.assessmentArr.length; i++) {
       var temp: Grade[] = [];
 
       this.assessBatchGradeService
-      .getAvgGradeByAssessmentId(this.assessmentArr[i].assessmentId)
-      .subscribe(response => {
-        this.avgArr.push(response);
-        console.log("successfully push " + response);
-        console.log(this.avgArr);
-      });
+        .getAvgGradeByAssessmentId(this.assessmentArr[i].assessmentId)
+        .subscribe(response => {
+          tempArr[i] = response;
+        });
+
+      this.avgArr = tempArr;
 
       for (let j = 0; j < this.gradesArr.length; j++) {
         if (
@@ -65,28 +69,20 @@ export class AssociateComponent implements OnInit {
           temp.push(this.gradesArr[j]);
         }
       }
-
       this.superArr.push(temp);
     }
-
+    
+    this.AssessBatchService.getBatchById(this.traineeArr[0].batchId).subscribe((result) => {
+      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, result.weeks).subscribe((batchAvg) => {
+        this.result = batchAvg;
+      });
+    })
     
   }
 
-  resetAvgGrade() {
-    for (let i = this.avgArr.length; i > 0; i--) {
-      this.avgArr.pop();
-      // console.log("deleting index " + i);
-      // console.log(this.avgArr[i]);
-    }
+  getBatchAvgGrade() {
+    this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(2200, 3);
   }
-
-  // getAvgGradeByAssessmentId(assessmentId : number): number {
-  //   this.assessBatchGradeService.getAvgGradeByAssessmentId(assessmentId).subscribe(response =>{
-  //     console.log("average for " + assessmentId + " is " + response);
-  //     return response;
-  //   });
-  //   return null;
-  // }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {

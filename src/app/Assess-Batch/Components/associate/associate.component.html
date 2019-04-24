@@ -14,9 +14,9 @@
             >
               <thead>
                 <tr sticky class="sticky-header">
-                  <th></th>
+                  
                   <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-
+                  <th></th>
                   <th
                     class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr"
@@ -135,15 +135,10 @@
                     <strong>Average</strong>
                   </td>
                   <td></td>
-                  <td
-                    class="col-sm-1 col-md-1 col-lg-1 text-center"
-                    *ngFor="let average of avgArr"
-                >
-                    
-                   {{average | number:'1.1-2' }}
-
+                  <td class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let average of avgArr">
+                    {{average | number:'1.1-2' }}%
                   </td>
-
+                  <td><strong> Weekly Batch Avg: </strong>{{ result | number:'1.1-2' }}%</td>
                 </tr>
               </tfoot>
             </table>

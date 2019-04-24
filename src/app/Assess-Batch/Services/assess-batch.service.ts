@@ -37,4 +37,7 @@ export class AssessBatchService {
     return this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter);
   }
   
+  getBatchById(id: number): Observable<Batch>{
+    return this.http.get<Batch>("http://localhost:9090/all/batch/"+id);
+  }
 }
