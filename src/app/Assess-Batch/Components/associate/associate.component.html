@@ -12,12 +12,13 @@
                             <thead>
 
                                 <tr sticky class='sticky-header'>
-									<th></th>
-									<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-									
-                                    
-                                        <th  role = "button" class="col-sm-1 col-md-1 col-lg-1 text-center"  
-											*ngFor="let assessment of assessmentArr" data-toggle="modal" data-target ="#editAssessmentModal_" (click) = 'selectedId(assessment)' >
+                                    <th></th>
+                                    <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
+
+
+                                        <th class="col-sm-1 col-md-1 col-lg-1 text-center"
+                                            *ngFor="let assessment of assessmentArr; let i=index">
+                                            {{ category[i].skillCategory }} 
                                             {{ assessment.assessmentType }}
 											({{ ((assessment.rawScore/totalRaw)*100) | number : '1.0-0'}}%)
 										</th>

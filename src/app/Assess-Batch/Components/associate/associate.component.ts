@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { traineeAssessment, Grade, Category } from 'src/app/User/user/types/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 import { AssessmentService } from '../../Services/assessment.service';
 import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
-import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
 import { Assessment } from '../../Models/Assesment';
 
 @Component({
@@ -28,8 +28,10 @@ export class AssociateComponent implements OnInit {
   flagNoteSwitch:Array<number> = [];
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
+
   score: number = 0;
   scoreId: number;
+  category: Category[] = [];
   
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
   ngOnInit( ) {
@@ -62,7 +64,7 @@ export class AssociateComponent implements OnInit {
       }
       this.superArr.push(temp);
     }
-
+    this.category = this.getCategoryName();
   }
 
   selectedId (assessment:Assessment){
@@ -191,6 +193,20 @@ export class AssociateComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  
+    getCategoryName() : any[] {
+      let temp = [];
+      for(let i = 0; i < this.assessmentArr.length; i++) {
+        this.assessBatchGradeService.getCategoryByCategoryId(this.assessmentArr[i].assessmentCategory).subscribe((category) => {
+          console.log("category" + category.skillCategory);
+          temp.push(category);
+      });   
+      }
+      return temp;
+     
+
   }
 
 }
