@@ -33,6 +33,7 @@ export class AssociateComponent implements OnInit {
   j : number;
   change: Boolean;
   temp: Note;
+  str: string;
 
   ngOnInit( ) {
     this.traineeService.trainees.subscribe((traineeArr) => {
@@ -45,10 +46,10 @@ export class AssociateComponent implements OnInit {
 
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = [];
-     for(this.i=0;this.i<this.traineeArr.length;this.i++){
-        for(this.j=0;this.j<noteArr.length;this.j++){
-          if(noteArr[this.j].traineeId==this.traineeArr[this.i].traineeId){
-            this.noteArr[this.i]=noteArr[this.j];
+      for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
+        for (this.j = 0; this.j < noteArr.length; this.j++) {
+          if (noteArr[this.j].traineeId == this.traineeArr[this.i].traineeId) {
+            this.noteArr[this.i] = noteArr[this.j];
           }
         }
         if(this.noteArr[this.i]==null){
@@ -60,72 +61,59 @@ export class AssociateComponent implements OnInit {
 
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
       this.selectedWeek = selectedWeek;
-       
      });
  
      this.noteService.batchIdEmitter.subscribe((batchId) => {
        this.batchId = batchId;
-       
-      });
-    
+       });
 
+    }
+
+// Disables the associated notes text area box for 1 second.
+  noteBlur(index: number, secondRound: boolean): void {
+    console.log(this.noteArr[index].noteId);
+    if (this.noteArr[index].noteId != -1) {
+     
+// The first call will recursivley call this function again to re-enable the input box after 1 second
+
+
+
+      console.log(blur);
+
+
+      // this.noteArr[index].noteContent=this.content[index];
+      console.log("posting" + this.noteArr[index]);
+      this.noteService.putNote(this.noteArr[index]).subscribe(response => {
+        if (Object != null) {
+          console.log("success")
+        } else {
+          console.log("fail")
+        }
+      }
+
+      );
+      console.log(this.noteArr[index]);
+
+    } else {
+
+      console.log("Creating note");
+      console.log(blur);
+
+      //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
+      this.note = this.noteArr[index]
+      console.log("Creating Note" + this.note);
+      // create note
+      this.noteService.postNote(this.note).subscribe(response => {
+        if (Object != null) {
+          console.log("success")
+        } else {
+          console.log("fail")
+        }
+      }
+      );
+      console.log(this.noteArr[index]);
+    }
   }
-  
-
-
-
-
-
-
-str: string;
- // Disables the associated notes text area box for 1 second.
- noteBlur(index: number,  secondRound: boolean): void {
-  console.log(this.noteArr[index].noteId);
-if (this.noteArr[index].noteId!=-1){
-
-  // The first call will recursivley call this function again to re-enable the input box after 1 second
-  
-    
-    console.log(blur);
-    
-   
-    // this.noteArr[index].noteContent=this.content[index];
-    console.log("posting" +this.noteArr[index]);
-    this.noteService.putNote(this.noteArr[index]).subscribe(response =>{
-      if(Object !=null){
-        console.log("success")
-      }else{
-        console.log("fail")
-      }
-    }
-
-    );
-    console.log(this.noteArr[index]);
-   
-}else{
-  
-    console.log("Creating note");
-    console.log(blur);
-   
-  //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
-   this.note=this.noteArr[index]
-    console.log("Creating Note" + this.note);
-    // create note
-    this.noteService.postNote(this.note).subscribe(response =>{
-      if(Object !=null){
-        console.log("success")
-      }else{
-        console.log("fail")
-      }
-    }
-
-    );
-    console.log(this.noteArr[index]);
-   
-
-
-}
- }
 
 
   // Cycle the Individual Feedback Status
@@ -193,18 +181,5 @@ if (this.noteArr[index].noteId!=-1){
       }
     });
 
-  }
-
-
-  // Disables the associated notes text area box for 1 second.
-  noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
-
-    // The first call will recursivley call this function again to re-enable the input box after 1 second
-    if (!secondRound) {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', true);
-      setInterval(this.noteOnBlur, 1000, selectedtraineeId, true);
-    } else {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
-    }
   }
 }
