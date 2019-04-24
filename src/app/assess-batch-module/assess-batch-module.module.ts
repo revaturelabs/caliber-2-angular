@@ -8,6 +8,7 @@ import { FeedbackComponent } from "../Assess-Batch/Components/feedback/feedback.
 import { ToolbarComponent } from "../Assess-Batch/Components/toolbar/toolbar.component";
 import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-save.component";
 
 @NgModule({
   imports: [CommonModule, AssessBatchRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule],
@@ -17,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       FeedbackComponent,
       ToolbarComponent,
       BatchModalComponent,
-     
+      MockSaveComponent
     ],
     entryComponents :[ BatchModalComponent ]
     
