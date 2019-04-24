@@ -1,59 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import { TraineeService } from '../../Services/trainee.service';
-import { Trainee } from 'src/app/Batch/type/trainee';
-import { traineeAssessment, Grade } from 'src/app/User/user/types/trainee';
-import { AssessBatchService } from '../../Services/assess-batch.service';
-import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
+import { Component, OnInit } from "@angular/core";
+import { TraineeService } from "../../Services/trainee.service";
+import { Trainee } from "src/app/Batch/type/trainee";
+import { traineeAssessment, Grade } from "src/app/User/user/types/trainee";
+import { AssessBatchService } from "../../Services/assess-batch.service";
+import { AssessBatchGradeService } from "src/app/Assess-Batch/Services/assess-batch-grades.service";
 @Component({
-  selector: 'app-associate',
-  templateUrl: './associate.component.html',
-  styleUrls: ['./associate.component.css']
+  selector: "app-associate",
+  templateUrl: "./associate.component.html",
+  styleUrls: ["./associate.component.css"]
 })
 export class AssociateComponent implements OnInit {
-//boolean to show module if valid
+  //boolean to show module if valid
   noteFlagInputActive: boolean;
-//Array to hold all trainnee
+  //Array to hold all trainnee
   traineeArr: Trainee[] = [];
   assessmentArr: traineeAssessment[] = [];
   gradesArr: Grade[] = [];
   superArr: Grade[][] = [];
+  avgArr: Number[] = [];
   score: number = 0;
 
-//Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
-//multiple flag popup box in the same time.
-  flagNoteSwitch:Array<number> = [];
-  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService) { }
+  //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
+  //multiple flag popup box in the same time.
+  flagNoteSwitch: Array<number> = [];
+  constructor(
+    private AssessBatchService: AssessBatchService,
+    private traineeService: TraineeService,
+    private assessBatchGradeService: AssessBatchGradeService
+  ) {}
 
   ngOnInit() {
-    console.log('init of associate.component started');
-    this.traineeService.trainees.subscribe((traineeArr) => {
+    this.traineeService.trainees.subscribe(traineeArr => {
       this.traineeArr = traineeArr;
     });
-   this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-     this.assessmentArr = assessmentArr;
-     this.assessBatchGradeService.grades.subscribe((gradesArr) => {
-         this.gradesArr = gradesArr;
-         this.myInit();
-     });
-   });
-
+    this.assessBatchGradeService.assessments.subscribe(assessmentArr => {
+      this.assessmentArr = assessmentArr;
+      this.assessBatchGradeService.grades.subscribe(gradesArr => {
+        this.gradesArr = gradesArr;
+        this.resetAvgGrade();
+        this.myInit();
+      });
+    });
   }
 
-  myInit(){
+  myInit() {
     this.superArr = [];
-
-    for(let i = 0; i < this.assessmentArr.length; i++){
+    this.avgArr = [];
+    
+    for (let i = 0; i < this.assessmentArr.length; i++) {
       var temp: Grade[] = [];
-      for(let j = 0; j < this.gradesArr.length; j++){
-        if(this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId){
+
+      this.assessBatchGradeService
+      .getAvgGradeByAssessmentId(this.assessmentArr[i].assessmentId)
+      .subscribe(response => {
+        this.avgArr.push(response);
+        console.log("successfully push " + response);
+        console.log(this.avgArr);
+      });
+
+      for (let j = 0; j < this.gradesArr.length; j++) {
+        if (
+          this.assessmentArr[i].assessmentId == this.gradesArr[j].assessmentId
+        ) {
           temp.push(this.gradesArr[j]);
         }
       }
+
       this.superArr.push(temp);
     }
-    console.log('SuperArr:');
-    console.log(this.superArr);
+
+    
   }
+
+  resetAvgGrade() {
+    for (let i = this.avgArr.length; i > 0; i--) {
+      this.avgArr.pop();
+      // console.log("deleting index " + i);
+      // console.log(this.avgArr[i]);
+    }
+  }
+
+  // getAvgGradeByAssessmentId(assessmentId : number): number {
+  //   this.assessBatchGradeService.getAvgGradeByAssessmentId(assessmentId).subscribe(response =>{
+  //     console.log("average for " + assessmentId + " is " + response);
+  //     return response;
+  //   });
+  //   return null;
+  // }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedtraineeId: number): void {
@@ -61,18 +94,17 @@ export class AssociateComponent implements OnInit {
     for (let i = 0; i < this.traineeArr.length; i++) {
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-
         // Create placeholder for new status string
-        let newStatus = '';
+        let newStatus = "";
         // Determine the new status string
         switch (this.traineeArr[i].flagStatus) {
           case null:
-            newStatus = 'RED';
+            newStatus = "RED";
             break;
-          case 'RED':
-            newStatus = 'GREEN';
+          case "RED":
+            newStatus = "GREEN";
             break;
-          case 'GREEN':
+          case "GREEN":
             newStatus = null;
             break;
         }
@@ -81,8 +113,8 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-//method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
-  deleteFromSwitch(x:number){
+  //method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
+  deleteFromSwitch(x: number) {
     delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
   // Cycle the flag notes popup
@@ -91,25 +123,24 @@ export class AssociateComponent implements OnInit {
     for (let i = 0; i < this.traineeArr.length; i++) {
       // Find the clicked note
       if (this.traineeArr[i].traineeId === selectedtraineeId) {
-
-          // add Id of trainee to "flagNoteSwitch" array
-          if(this.flagNoteSwitch.indexOf(selectedtraineeId)==-1){
-            this.flagNoteSwitch.push(selectedtraineeId);
-          }
-          this.noteFlagInputActive=value;
+        // add Id of trainee to "flagNoteSwitch" array
+        if (this.flagNoteSwitch.indexOf(selectedtraineeId) == -1) {
+          this.flagNoteSwitch.push(selectedtraineeId);
+        }
+        this.noteFlagInputActive = value;
       }
     }
   }
   //send the object of the trainee to the service in order to include the flag note
-  commentOnTrainee(trainee ,comment: string){
+  commentOnTrainee(trainee, comment: string) {
     trainee.flagNotes = comment;
     this.AssessBatchService.postComment(trainee).subscribe(response => {
-      if(Object != null){
+      if (Object != null) {
         //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
         console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
-      }else{
+      } else {
         console.log("Fails");
       }
     });
@@ -119,33 +150,32 @@ export class AssociateComponent implements OnInit {
   noteOnBlur(selectedtraineeId: number, secondRound: boolean): void {
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', true);
+      $("#note-textarea-" + selectedtraineeId).prop("disabled", true);
       setInterval(this.noteOnBlur, 1000, selectedtraineeId, true);
     } else {
-      $('#note-textarea-' + selectedtraineeId).prop('disabled', false);
+      $("#note-textarea-" + selectedtraineeId).prop("disabled", false);
     }
   }
 
   //Add this in blur event save function
-  validateScore(e){
-   if(e.target.value < 0){
-    e.target.style = "border-color : red; background-color: #fff9f9";
-    e.target.placeholder = e.target.value;
-    e.target.value = "";
-   }else {
-    e.target.style = "";
-    e.target.placeholder = "";
-   }
+  validateScore(e) {
+    if (e.target.value < 0) {
+      e.target.style = "border-color : red; background-color: #fff9f9";
+      e.target.placeholder = e.target.value;
+      e.target.value = "";
+    } else {
+      e.target.style = "";
+      e.target.placeholder = "";
+    }
   }
 
-  checkForGrade(arr: Grade[], train: Trainee){
-    for(let i = 0; i < arr.length; i++){
-      if(arr[i].traineeId == train.traineeId){
+  checkForGrade(arr: Grade[], train: Trainee) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].traineeId == train.traineeId) {
         this.score = arr[i].score;
         return true;
       }
     }
     return false;
   }
-
 }

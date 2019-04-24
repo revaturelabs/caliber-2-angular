@@ -97,7 +97,6 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0].toString();
-      console.log(this.years);
     });
 
   }
@@ -108,7 +107,6 @@ export class ToolbarComponent implements OnInit {
       this.batches = result;
       this.selectedBatch = this.batches[0];
       this.auditService.selectedBatch = this.batches[0];
-      console.log(this.batches);
       this.getWeeks();
         this.selectedWeek = this.weeks.length;
       });
@@ -167,7 +165,6 @@ export class ToolbarComponent implements OnInit {
     })
   }
   getAssessmentsByBatchId(){
-    console.log(this.selectedBatch.batchId);
     this.weeklyAssessments=[];
 
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
@@ -180,7 +177,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   getAssessmentsByBatchIdAndWeekNum(){
-    console.log(this.selectedBatch.batchId);
     this.weeklyAssessments=[];
 
     this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(assessments => {
@@ -193,7 +189,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   getGradesByBatchIdAndWeekNum(){
-    console.log(this.selectedBatch.batchId);
     this.gradesArr=[];
     this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(grades => {
 
@@ -205,7 +200,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   getGradesByBatchId(){
-    console.log(this.selectedBatch.batchId);
     this.gradesArr=[];
     this.assessBatchGradeService.getGradesByBatchId(this.selectedBatch.batchId).subscribe(grades => {
       for(let i = 0; i < grades.length; i++){

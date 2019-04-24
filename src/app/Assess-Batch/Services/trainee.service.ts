@@ -23,7 +23,6 @@ export class TraineeService {
 
   storeTrainees(entry: Trainee[]) {
     this.ourTrainees = entry;
-    console.log(this.ourTrainees);
   }
 
   returnTrainees(): Trainee[] {
