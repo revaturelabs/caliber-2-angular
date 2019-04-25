@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.component';
-import { Trainee, traineeAssessment } from '../../../Batch/type/trainee';
+import { Trainee, traineeAssessment, Grade } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
@@ -45,23 +45,23 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
-  // assessments: traineeAssessment = {
-  //   assessmentId: 0,
-  //   rawScore: 0,
-  //   assessmentTitle: '',
-  //   assessmentType: '',
-  //   weekNumber: 0,
-  //   batchId: 0,
-  //   assessmentCategory: 0
-  // }
+  assessments: traineeAssessment = {
+    assessmentId: 0,
+    rawScore: 0,
+    assessmentTitle: '',
+    assessmentType: '',
+    weekNumber: 0,
+    batchId: 0,
+    assessmentCategory: 0
+  }
 
-  //  grades: Grade = {
-  //   gradeId: 0,
-  //   dateReceived: 0,
-  //   score: 0,
-  //   assessmentId: 0,
-  //   traineeId: 0
-  // }
+   grades: Grade = {
+    gradeId: 0,
+    dateReceived: 0,
+    score: 0,
+    assessmentId: 0,
+    traineeId: 0
+  }
 
   note: Note;
   selectedBatchId = 0;
@@ -201,7 +201,6 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) {
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
-    this.getAssessmentsByBatchId();
     this.getBatchNotesByWeek();
     this.getAssessmentsByBatchIdAndWeekNum();
     this.getGradesByBatchIdAndWeekNum();

@@ -43,7 +43,7 @@ export class AssociateComponent implements OnInit {
   avgArr: Number[] = [];
   batchAvgArrr: number;
   score: number = 0;
-  result: number = 0;;
+  result: number = 0;
   scoreId: number;
   category: Category[] = [];
   
@@ -71,6 +71,7 @@ export class AssociateComponent implements OnInit {
           this.noteArr[this.i]= this.note;
         }
      }
+     console.log(this.noteArr);
     });
 
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
@@ -81,11 +82,11 @@ export class AssociateComponent implements OnInit {
        this.batchId = batchId;
        });
 
-       this.populateAssess();
+    this.populateAssess();
     }
 
 // Disables the associated notes text area box for 1 second.
-  noteBlur(index: number, secondRound: boolean): void {
+  noteOnBlur(index: number, secondRound: boolean): void {
     console.log(this.noteArr[index].noteId);
     if (this.noteArr[index].noteId != -1) {
      
@@ -125,7 +126,7 @@ export class AssociateComponent implements OnInit {
   }
 }
 
-  populateAssess(): traineeAssessment[]{
+  populateAssess(){
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe((gradesArr) => {
@@ -134,13 +135,13 @@ export class AssociateComponent implements OnInit {
           this.sumRawScores();
       });
     });
-    return this.assessmentArr;
   }
 
   myInit() {
     this.superArr = [];
 
     let tempArr = [];
+    this.avgArr = [];
     for (let i = 0; i < this.assessmentArr.length; i++) {
       var temp: Grade[] = [];
 
@@ -162,11 +163,13 @@ export class AssociateComponent implements OnInit {
       this.superArr.push(temp);
     }
     this.category = this.getCategoryName();
-    this.AssessBatchService.getBatchById(this.traineeArr[0].batchId).subscribe((result) => {
-      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, result.weeks).subscribe((batchAvg) => {
+
+      console.log(this.traineeArr[0].batchId);
+      console.log("AssessArr" + this.assessmentArr);
+      this.result =0;
+      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
         this.result = batchAvg;
       });
-    })
   }
 
   selectedId (assessment:Assessment){
@@ -262,11 +265,9 @@ export class AssociateComponent implements OnInit {
     this.assessBatchGradeService.getGradeById(e.target.id).subscribe((response) => {
       grade = response;
       grade.score = e.target.value;
-
       this.assessBatchGradeService.updateGrade(grade).subscribe((response) => {
         console.log(response.gradeId + " has been updated to the score: " + response.score);
-      });
-
+      })
     });
    }
   }

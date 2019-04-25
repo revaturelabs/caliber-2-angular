@@ -18,7 +18,7 @@
                   <th role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
                     data-target="#editAssessmentModal_" (click)='selectedId(assessment)'>
-                    {{ category[i].skillCategory }}
+                    {{ category[i]?.skillCategory }}
                     {{ assessment.assessmentType }}
                     ({{ ((assessment.rawScore/totalRaw)*100) | number : '1.0-0'}}%)
                   </th>
@@ -28,8 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-
-                <tr *ngFor="let train of traineeArr">
+                <tr *ngFor="let train of traineeArr; let j = index">
                   <td class="trainee-name"
                     (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);"
                     style="width: 11%;">
@@ -66,9 +65,9 @@
                   </ng-container>
 
                   <td>
-                    <textarea _ngcontent-c6="" class="form-control" (blur)="noteOnBlur(train.traineeId, false)"
-                      id="note-textarea-{{train.traineeId}}" cols="75" maxlength="4000" rows="2" id="note-textarea-0"
-                      placeholder="Note on {{train.name}} "></textarea>
+                    <textarea (blur)="noteOnBlur(j, false)"
+                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
+                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
                   </td>
                 </tr>
               </tbody>
