@@ -3,7 +3,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" ng-click="closeModal" aria-label="Close">
+				<button type="button" class="close" ng-click="closeModal"  (click) = 'resetForm()'  data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">Edit Assessment {{currentCategory?.skillCategory}} {{currentAssessment?.assessmentType}}</h4>

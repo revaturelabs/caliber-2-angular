@@ -9,7 +9,7 @@ const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/jso
   providedIn: 'root'
 })
 export class AssessBatchGradeService {
-  url = 'http://localhost:9097';
+  url = 'http://localhost:9090';
   catUrl = '/all/category/';
   gradesByBatchIdURL = '/all/grade/batch/';
   gradesById = '/all/grade/';
@@ -20,7 +20,7 @@ export class AssessBatchGradeService {
   batchGrade = '/all/grade/average?batch=';
   batchAvgGrade = '&week='
 
-  url2 = 'http://localhost:9097/all/grade/average?batch=';
+  url2 = 'http://localhost:9090/all/grade/average?batch=';
  
   allAssessments: traineeAssessment[] = [];
   allGrades: Grade[] = [];

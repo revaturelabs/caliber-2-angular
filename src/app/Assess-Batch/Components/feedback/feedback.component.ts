@@ -11,7 +11,14 @@ export class FeedbackComponent implements OnInit {
  batchNoteArr: Note[] = [];
  selectedWeek: number;
  batchId: number;
- feedbackNote: Note;
+ feedbackNote: Note = {
+  noteId: undefined,
+  noteContent: undefined,
+  noteType: undefined,
+  weekNumber: undefined,
+  batchId: undefined,
+  traineeId: undefined
+ };
 
  constructor(private noteService: NoteService) { }
 //provides the traineer feedback note for the week

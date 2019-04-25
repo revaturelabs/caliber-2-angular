@@ -190,6 +190,8 @@ export class ToolbarComponent implements OnInit {
     this.selectedBatch = event;
     this.auditService.selectedBatch = this.selectedBatch;
     this.getWeeks();
+    this.showActiveWeek(this.auditService.selectedBatch.weeks);
+    this.selectWeek(this.auditService.selectedBatch.weeks);
   }
 
   showActiveWeek(week: number) {

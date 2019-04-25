@@ -9,11 +9,11 @@ import { AssessBatchModule } from './assess-batch-module/assess-batch-module.mod
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '#/vp/home', pathMatch: 'full' },
-  { path: '#/vp/home', loadChildren: './home-module/home-module.module#HomeModule' },
-  { path: '#/vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
-  { path: '#/vp/audit', loadChildren: './audit-module/audit-module.module#AuditModule'},
-  { path: '#/vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
+  { path: '', redirectTo: 'vp/home', pathMatch: 'full' },
+  { path: 'vp/home', loadChildren: './home-module/home-module.module#HomeModule' },
+  { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
+  { path: 'vp/audit', loadChildren: './audit-module/audit-module.module#AuditModule'},
+  { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
 ];
 
 @NgModule({

@@ -287,12 +287,13 @@ export class AssociateComponent implements OnInit {
   getCategoryName() : any[] {
     let temp = [];
     for(let i = 0; i < this.assessmentArr.length; i++) {
+      
       this.assessBatchGradeService.getCategoryByCategoryId(this.assessmentArr[i].assessmentCategory).subscribe((category) => {
         console.log(this.assessmentArr[i].assessmentCategory);
         console.log("category" + category.skillCategory);
-        temp.push(category);
-    });   
-    }
+        temp[i] = category;
+      }); 
+    };
     return temp;
   }
 

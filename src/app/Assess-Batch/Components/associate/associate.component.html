@@ -12,8 +12,9 @@
               <thead>
                 <tr sticky class="sticky-header">
 
-                  <th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
-                  <th></th>
+                  <th class="col-sm-1 col-md-1 col-lg-1">Trainee</th>
+                  <th class="col-sm-1 col-md-1 col-lg-1"></th>
+                  <th class="col-sm-1 col-md-1 col-lg-1"></th>
 
                   <th role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
@@ -34,7 +35,7 @@
                     style="width: 11%;">
                     {{train.name}}
                   </td>
-                  <td>
+                  <td style="width:25px !important">
                     <!-- Only shows the current flag, none if no flag is assigned -->
                     <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
                     <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
@@ -42,17 +43,18 @@
                       style="visibility: hidden;"></i>
                     <!-- Shows the flag notes popup if the user clicks the name column -->
                   </td>
-
+                  <i>
                   <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
                     <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
                     <button (click)="commentOnTrainee(train,comment.value)"
                       class="btn btn-secondary flage-notes-save-btn">Save</button>
-                    <button (click)="deleteFromSwitch(train.traineeId)" type="button"
-                      class="flage-notes-close-btn close" aria-label="Close">
+                    <i (click)="deleteFromSwitch(train.traineeId)" type="button"
+                      class="flage-notes-close-btn icon-button" aria-label="Close">
                       <span class="glyphicon glyphicon-remove-sign closing-button"></span>
-                    </button>
+                  </i>
                   </div>
-
+                </i>
+                  
                   <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
                       <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
@@ -69,6 +71,11 @@
                       id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
                       placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
                   </td>
+                  <!-- <td>
+                    <textarea _ngcontent-c6="" (blur)="noteOnBlur(j, false)"
+                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="2" cols="75"
+                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+                  </td> -->
                 </tr>
               </tbody>
               <tfoot>
@@ -76,6 +83,7 @@
                   <td class="col-sm-2 col-md-2 col-lg-2">
                     <strong>Average</strong>
                   </td>
+                  <td></td>
                   <td></td>
                   <td class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let average of avgArr">
                     {{average | number:'1.1-2' }}%
