@@ -39,3 +39,4 @@ export class Grade {
         assessmentId: number;
         traineeId: number;
 }
+

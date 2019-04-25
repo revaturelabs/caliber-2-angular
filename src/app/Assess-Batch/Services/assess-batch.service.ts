@@ -20,6 +20,7 @@ export class AssessBatchService {
   selectedBatch: Batch;
   selectedWeek = 1;
 
+
   constructor(private http: HttpClient) { }
 
   httpOptions = {
@@ -39,6 +40,10 @@ export class AssessBatchService {
   getAllYears(): Observable<number[]> {
     console.log("getAllYears---->" + this.http.get<number[]>(this.url + this.yearsURL ));
     return this.http.get<number[]>(this.url + this.yearsURL);
+  }
+  
+  getBatchById(id: number): Observable<Batch>{
+    return this.http.get<Batch>("http://localhost:9090/all/batch/"+id);
   }
 
   //HTTPRequest for adding a week -- using a PUT request

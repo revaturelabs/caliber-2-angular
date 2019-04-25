@@ -11,41 +11,41 @@
 
 				<h4 class="modal-title" id="myModalLabel">Create New Assessment</h4>
 			</div>
-			Add Assessment Info
+			<!-- Add Assessment Info -->
 			<form>
 				<div class="modal-body">
 
 					<div class="row">
 						<div class="form-group col-lg-12 col-md-12 col-sm-12">
-							<label for="category">Assessment Category:</label> <select
+							<label for="category">Assessment Category:</label> 
+							<select name = 'selectedCategory' [(ngModel)] = 'selectedCategory'
 								class="form-control" id="category"
-								required>
-								<option value="" disabled>Select Assessment Category</option>
-								<option *ngFor ="let cat of categories">{{cat.skillCategory}}</option>
+								required  [value] = 'default'>
+								<option value="default" disabled>Select Assessment Category</option>
+								<option *ngFor ="let cat of categories" [ngValue] = cat.categoryId>{{cat.skillCategory}}</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="form-group col-md-6 col-sm-6">
-							<label for="rawScore">Max Points:</label> <input type="number" class="form-control"
+							<label for="rawScore">Max Points:</label> <input [(ngModel)] = 'score' name = 'score' type="number" class="form-control"
 								id="rawScore" placeholder="99" min="0" step="1" required>
 						</div>
 
 
 						<div class="form-group col-md-6 col-sm-6">
-							<label for="assessmentType">Assessment Type:</label> <select
-								ng-model="assessmentType.model" class="form-control"
-								id="assessmentType" required>
-								<option value="" disabled>Select Assessment Type</option>
-								<option *ngFor ="let cat of categories">{{cat.skillCategory}}</option>
+							<label for="assessmentType">Assessment Type:</label> 
+							<select name = 'selectedType' [(ngModel)] = 'selectedType' [ngModelOptions]="{standalone: true}" class="form-control" id='selectedType' required>
+								<option value="default" disabled>Select Assessment Type</option>
+								<option *ngFor ="let type of assessmentTypeDisplay" [ngValue] = type.name>{{type.name}}</option>
 							</select>
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<input type="submit" value="Save" class="btn btn-primary">
+					<input (click) = 'addAssessment(score, selectedType, selectedCategory)' type="submit" value="Save" class="btn btn-primary" data-dismiss="modal">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</form>

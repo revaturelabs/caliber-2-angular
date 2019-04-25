@@ -9,6 +9,7 @@ import { ToolbarComponent } from "../Assess-Batch/Components/toolbar/toolbar.com
 import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-save.component";
+import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components/associate/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 @NgModule({
   imports: [CommonModule, AssessBatchRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule],
@@ -18,9 +19,11 @@ import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-sav
       FeedbackComponent,
       ToolbarComponent,
       BatchModalComponent,
-      MockSaveComponent
+      MockSaveComponent,
+      UpdateDeleteAssessmentModalComponent
     ],
-    entryComponents :[ BatchModalComponent ]
+    entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ],
+  providers: [UpdateDeleteAssessmentModalComponent]
     
    
 })
