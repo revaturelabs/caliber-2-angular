@@ -48,16 +48,14 @@ export class AssociateComponent implements OnInit {
   category: Category[] = [];
   
   constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
+  //Beginning of associate component lifecycle is populating the trainee array, assessment array, and getting all of the notes
   ngOnInit( ) {
     this.avgArr =[];
     this.traineeService.trainees.subscribe((traineeArr) => {
       this.traineeArr = traineeArr; 
     });
 
-    this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-      this.assessmentArr = assessmentArr;  
-    });
-
+    //noteEmitter just emits the array of notes that are coming from noteService
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = [];
       for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
@@ -66,66 +64,57 @@ export class AssociateComponent implements OnInit {
             this.noteArr[this.i] = noteArr[this.j];
           }
         }
+        //checks if index in noteArr is null -- if so creates a new note
         if(this.noteArr[this.i]==null){
           this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId );
           this.noteArr[this.i]= this.note;
         }
      }
-     console.log(this.noteArr);
     });
 
+    //Getting selected week
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
       this.selectedWeek = selectedWeek;
      });
  
+     //Getting batchId to pass it along components (coming from Toolbar component)
      this.noteService.batchIdEmitter.subscribe((batchId) => {
        this.batchId = batchId;
        });
 
+    //calling the method to populate all of the assessments 
     this.populateAssess();
     }
 
 // Disables the associated notes text area box for 1 second.
   noteOnBlur(index: number, secondRound: boolean): void {
-    console.log(this.noteArr[index].noteId);
     if (this.noteArr[index].noteId != -1) {
      
 // The first call will recursivley call this function again to re-enable the input box after 1 second
-      console.log(blur);
       // this.noteArr[index].noteContent=this.content[index];
-      console.log("posting" + this.noteArr[index]);
       this.noteService.putNote(this.noteArr[index]).subscribe(response => {
         if (Object != null) {
-          console.log("success")
         } else {
-          console.log("fail")
         }
       }
 
       );
-      console.log(this.noteArr[index]);
 
     } else {
 
-      console.log("Creating note");
-      console.log(blur);
-
       //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
       this.note = this.noteArr[index]
-      console.log("Creating Note" + this.note);
       // create note
       this.noteService.postNote(this.note).subscribe(response => {
         if (Object != null) {
-          console.log("success")
         } else {
-          console.log("fail")
         }
       }
       );
-      console.log(this.noteArr[index]);
   }
 }
 
+//Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
   populateAssess(){
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
       this.assessmentArr = assessmentArr;
@@ -137,6 +126,8 @@ export class AssociateComponent implements OnInit {
     });
   }
 
+  //Initializing the array of array (superArr) which is equal to the amount of assessments for that week.
+  //Within each inner array is the grades for each assignemnt
   myInit() {
     this.superArr = [];
 
@@ -164,14 +155,13 @@ export class AssociateComponent implements OnInit {
     }
     this.category = this.getCategoryName();
 
-      console.log(this.traineeArr[0].batchId);
-      console.log("AssessArr" + this.assessmentArr);
       this.result =0;
       this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
         this.result = batchAvg;
       });
   }
 
+  //This takes selected assessmentId to get the category to persist the assessment over to the modal.
   selectedId (assessment:Assessment){
     this.assessmentService.getCurrentAssessment(assessment);
     this.assessmentService.currentAssessment.emit(assessment);
@@ -181,7 +171,6 @@ export class AssociateComponent implements OnInit {
     this.assessmentService.currentAssessmentId.emit(assessment.assessmentId);
     this.assessmentService.getCurrentCategoryId(assessment.assessmentCategory);
     this.assessmentService.currentCategoryId.emit(assessment.assessmentCategory);
-    console.log(this.selectedAssessmentId)
     
   }
   
@@ -190,7 +179,6 @@ export class AssociateComponent implements OnInit {
     this.totalRaw = 0;
     for(let assess of this.assessmentArr){
       this.totalRaw += assess.rawScore;
-      console.log(this.totalRaw);
     }
   }
 
@@ -245,10 +233,8 @@ export class AssociateComponent implements OnInit {
       if (Object != null) {
         //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
-        console.log("Success");
         this.deleteFromSwitch(trainee.traineeId);
       } else {
-        console.log("Fails");
       }
     });
   }
@@ -266,12 +252,12 @@ export class AssociateComponent implements OnInit {
       grade = response;
       grade.score = e.target.value;
       this.assessBatchGradeService.updateGrade(grade).subscribe((response) => {
-        console.log(response.gradeId + " has been updated to the score: " + response.score);
       })
     });
    }
   }
 
+  //checking to see if a grade exists
   checkForGrade(arr: Grade[], train: Trainee) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].traineeId == train.traineeId) {
@@ -283,14 +269,12 @@ export class AssociateComponent implements OnInit {
     return false;
   }
 
-  
+  //Getting all category names
   getCategoryName() : any[] {
     let temp = [];
     for(let i = 0; i < this.assessmentArr.length; i++) {
       
       this.assessBatchGradeService.getCategoryByCategoryId(this.assessmentArr[i].assessmentCategory).subscribe((category) => {
-        console.log(this.assessmentArr[i].assessmentCategory);
-        console.log("category" + category.skillCategory);
         temp[i] = category;
       }); 
     };

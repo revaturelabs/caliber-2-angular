@@ -96,28 +96,24 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
   getCategory(catId){
     this.categoryService.getCategoryById(catId).subscribe(result =>{
       this.currentCategory = result;
-      console.log(this.currentCategory);
     })
   }
 
   getAssessmentById(assesId): void{
     this.assessmentSerivce.getAssessment(assesId).subscribe(result =>{
       this.currentAssessment = result;
-      console.log(this.currentAssessment.assessmentId);
       this.holdId(this.currentAssessment.batchId);
     });
   }
 
   holdId(batchId){
     this.tempId = batchId;
-    console.log(this.tempId);
   }
 
   getCategories(){
     this.categoryService.getCategories().subscribe(result=>{
       this.categories = result;
       // this.someEvent.next('get')
-      console.log(result);
     })
   }
 
@@ -125,7 +121,6 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     this.assessmentSerivce.currentCategoryId.subscribe((currentCatId)=>{
       this.currentCatId = currentCatId;
       this.getCategory(currentCatId);
-      console.log(currentCatId);
     })
    this.assessmentSerivce.currentAssessmentId.subscribe((currentAssessmentId)=>{
      this.currentAssessmentId = currentAssessmentId;
@@ -133,8 +128,6 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
    })
     this.getCategories();
     this.getCategory(this.currentCatId);
-    console.log(this.currentAssessment);
-    console.log(this.currentCategory);
   }
  
 

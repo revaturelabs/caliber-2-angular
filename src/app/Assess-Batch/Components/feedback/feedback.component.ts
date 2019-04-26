@@ -26,7 +26,6 @@ getFeedbackNote(){
   //get all batch notes for the week
   this.noteService.noteEmitter
   .subscribe(result => {
-    console.log(result);
     this.feedbackNote = new Note(-2, "", "BATCH", this.selectedWeek, this.batchId, -1);
     this.batchNoteArr = [];
     //narrow down to the singla1r feedback note
@@ -37,47 +36,37 @@ getFeedbackNote(){
     }
     if(this.batchNoteArr.length == 1){
       this.feedbackNote = this.batchNoteArr[0];
-      console.log("existing batch note");
-      console.log(this.feedbackNote);
     }
   });
 }
 
+//persists input text into textarea after leaving the focus area
 feedbackNoteOnBlur(){
-  console.log("Feedback Note on Blur" + this.feedbackNote);
-  console.log("length of Batch Note Array" + this.batchNoteArr.length)
   if(this.feedbackNote.noteId == -2){
     this.feedbackNote.noteId = -5;
     this.feedbackNote.batchId = this.batchId;
     this.feedbackNote.weekNumber = this.selectedWeek;
     this.noteService.postNote(this.feedbackNote)
     .subscribe(result => {
-      console.log("post");
-      console.log(this.feedbackNote);
-      console.log(result);
+
     });
   }
   else{
   this.feedbackNote.batchId = this.batchId;
-    console.log("put");
   this.noteService.putNote(this.feedbackNote)
   .subscribe(result => {
-    console.log("Printing result: ");
-    console.log(result);
-    console.log(this.feedbackNote);
   });
  }
 }
 
+//Component init grabs the selected week so it can get the appropriate overall feedback note.
 ngOnInit() {
   this.noteService.weekEmitter.subscribe((selectedWeek) => {
     this.selectedWeek = selectedWeek;
-     console.log(this.selectedWeek);
    });
 
    this.noteService.batchIdEmitter.subscribe((batchId) => {
      this.batchId = batchId;
-      console.log(this.batchId);
     }); 
   this.getFeedbackNote();
  }

@@ -13,6 +13,7 @@ export class MockSaveComponent implements OnInit {
   showCheck = false;
   showFloppy = true;
 
+  //doBurrito acts as the mock save
   doBurrito(){
     this.showFloppy = false;
     this.showSaving = true;

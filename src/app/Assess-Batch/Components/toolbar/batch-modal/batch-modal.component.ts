@@ -56,8 +56,7 @@ export class BatchModalComponent implements OnInit{
     }
   ] 
 
-  
-  
+  //Resets the form within the modal.
   resetForm() {
     this.selectedType = "default";
     this.selectedCategory = "default";
@@ -67,12 +66,14 @@ export class BatchModalComponent implements OnInit{
   constructor(public traineeService: TraineeService, public assessBatchGradeService: AssessBatchGradeService, public categoryService: CategoryService, public assessmentService: AssessmentService, public toolBar: ToolbarComponent) {
   }
   
+  //This function runs when user clicks create within the create assessment modal.
   addAssessment(rawScore, assessmentType, categoryNumber) : void {
       this.assessmentService.createCategories(new Assessment(this.assessmentId,rawScore,
       this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
       this.toolBar.selectedBatch.batchId,categoryNumber)).subscribe(result=>{
       this.assessment = result;
       
+      //Populating an empty grade to be made for every trainee that exists in the batch
       this.traineeService.getTraineesByBatchId(this.toolBar.selectedBatch.batchId).subscribe((batch) => {
         for(let b of batch){
           let g: Grade = {
@@ -82,9 +83,7 @@ export class BatchModalComponent implements OnInit{
             assessmentId: result.assessmentId,
             traineeId: b.traineeId
           }
-          console.log("looooooooook here"+g.assessmentId);
           this.assessBatchGradeService.postGrade(g).subscribe((postGrade) => {
-            console.log("poooooooooooost"+g.assessmentId);
           })
         }
       this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(result.batchId, result.weekNumber).subscribe(assessments => {
@@ -100,16 +99,15 @@ export class BatchModalComponent implements OnInit{
     this.resetForm();
   }
 
+  //Grabs all categories
   getCategories(){
     this.categoryService.getCategories().subscribe(result=>{
       this.categories = result;
       // this.someEvent.next('get')
-      console.log(result);
     })
   }
 
   ngOnInit(){
-    console.log('Init');
     this.getCategories();
     
   }

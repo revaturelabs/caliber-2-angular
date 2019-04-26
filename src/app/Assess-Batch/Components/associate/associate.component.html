@@ -16,6 +16,7 @@
                   <th class="col-sm-1 col-md-1 col-lg-1"></th>
                   <th class="col-sm-1 col-md-1 col-lg-1"></th>
 
+                  <!-- Displays the category as well as the assessment information-->
                   <th role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
                     data-target="#editAssessmentModal_" (click)='selectedId(assessment)'>
@@ -29,6 +30,7 @@
                 </tr>
               </thead>
               <tbody>
+                <!-- Displays the trainee names -->
                 <tr *ngFor="let train of traineeArr; let j = index">
                   <td class="trainee-name"
                     (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);"
@@ -55,6 +57,7 @@
                   </div>
                 </i>
                   
+                <!-- Displays the grades for each trainee by assessment -->
                   <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
                       <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
@@ -79,6 +82,7 @@
                 </tr>
               </tbody>
               <tfoot>
+                <!-- shows the average scores for each assessment as well as weekly batch average -->
                 <tr>
                   <td class="col-sm-2 col-md-2 col-lg-2">
                     <strong>Average</strong>

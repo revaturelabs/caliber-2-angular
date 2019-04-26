@@ -25,9 +25,6 @@ export class ToolbarComponent implements OnInit {
   selectedYear: string = "Select Year";
   selectedQuarter: String = "Select Quarter";
 
-
-
-  // selectedBatch: Batch;
   selectedBatch: Batch = {
     batchId: 0,
     trainingName: "",
@@ -111,19 +108,6 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  // openFormModal(){
-  //   let options: NgbModalOptions = {
-  //     backdrop: false
-  //   }
-  //   const modalRef = this.modalService.open(BatchModalComponent,options);
-  //   modalRef.componentInstance
-  //   modalRef.result.then((result) => {
-  //     console.log(result);
-  // }).catch((error)=>{
-  //   console.log(error);
-  // });
-  // }
-
   getBatches() {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
     .subscribe(result => {
@@ -171,7 +155,7 @@ export class ToolbarComponent implements OnInit {
           this.selectedBatch = result[0];
           this.getBatches();
         } else {
-          console.log("this quarter wasn't included " + quarter);
+
         }
       });
   }
@@ -235,7 +219,6 @@ export class ToolbarComponent implements OnInit {
   }
   getBatchNotesByWeek(){
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
-      console.log("selected week is " + this.selectedWeek);
       this.noteService.weekEmitter.emit(this.selectedWeek);
       this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
