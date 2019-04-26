@@ -34,17 +34,13 @@ export class NoteService {
   }
 
   getBatchNotesByWeek(batchId: number, weekId: number): Observable<Note[]>{
-    console.log(batchId);
-    console.log(weekId);
     return this.http.get<Note[]>(this.url + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
   }
   getBatchNotesByTraineeId(traineeId: number): Observable<Note[]>{
-    console.log("getting by TraineeId")
     return this.http.get<Note[]>(this.url + this.batchNotesByTraineeId + traineeId);
   }
 
   putNote(note): Observable<object>{
-    console.log(note);
     return this.http.put<object>(this.url3, note);
   }
 

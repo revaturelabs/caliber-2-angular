@@ -94,6 +94,7 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
   }
 
   getCategory(catId){
+    if(!(catId==undefined))
     this.categoryService.getCategoryById(catId).subscribe(result =>{
       this.currentCategory = result;
     })
