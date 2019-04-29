@@ -69,6 +69,7 @@ export class BatchViewComponent implements OnInit {
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
+      
     }, error => {
       const serviceName = 'Batch Service ';
       const errorMessage = 'Failed to make connection!';

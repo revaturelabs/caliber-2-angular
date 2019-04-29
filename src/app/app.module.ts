@@ -11,6 +11,11 @@ import { ErrorComponent } from './error-handling/error/error.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
+import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
+import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+//import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
+
+
 
 
 @NgModule({
@@ -19,6 +24,10 @@ import * as $ from 'jquery';
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
+    CreateModalComponent,
+    FormModalComponent,
+   // UpdateDeleteAssessmentModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -28,6 +37,8 @@ import * as $ from 'jquery';
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+   entryComponents: [FormModalComponent]
+ 
 })
 export class AppModule { }

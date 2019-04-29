@@ -1,0 +1,40 @@
+
+.trainee-name:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.flag-notes-popup {
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    background-color: white;
+    border: 1px solid rgb(204, 204, 204);
+    z-index: 1;
+}
+
+.flag-notes-popup input {
+    display: inline-block;
+    width: 175px;
+    height: 35px;
+}
+
+.flage-notes-save-btn {
+    position: relative;
+    height: 35px;
+    bottom: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.icon-button {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+}
