@@ -6,7 +6,8 @@
  * @ignore
  */
 export const environment = {
-  production: false
+  production: false,
+  serverRootURL: "http://localhost:10000" 
 };
 
 /*
