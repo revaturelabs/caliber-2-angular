@@ -1,5 +1,6 @@
 <div class = "container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
+    <button class="btn btn-success" (click)="toggleNotesArray()" id="toggleNoteSort">Sort Randomly</button>
     <table class="table table-responsive table-condensed"
             style="border-collapse: collapse; max-width: 1140px;">
         <thead>
@@ -30,7 +31,7 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let note of notes">
+            <tr *ngFor="let note of notes" >
                 <td (click)="cycleFlagNotesInput(note.noteId, true); cycleFlag(note.noteId);" style="width: 11%;">
                     {{ note.trainee.name }}
                 </td>

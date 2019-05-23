@@ -10,9 +10,9 @@ import { environment } from 'src/environments/environment';
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
   url = environment.serverRootURL;
-  batchAllURL = '/vp/batch/all';
-  batchesYearURL = '/vp/batch/';
-  yearsURL = '/all/batch/valid_years';
+  batchAllURL = '/batch/vp/batch/all';
+  batchesYearURL = '/batch/vp/batch/';
+  yearsURL = '/batch/all/batch/valid_years';
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;

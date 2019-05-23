@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 
 @Component({
   selector: 'app-associate',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./associate.component.css']
 })
 export class AssociateComponent implements OnInit {
+  sortRandom: boolean = false;
+
 
   // List of test categories
   categories = [
@@ -70,10 +73,35 @@ export class AssociateComponent implements OnInit {
       }
     }
   ];
-
+  
   // Unimplemented functions
   constructor() { }
-  ngOnInit() { }
+  ngOnInit() {
+    this.sortAlphabetically(this.notes);
+   }
+
+  
+  toggleNotesArray() : void {
+    if(this.sortRandom == true) {
+      this.sortAlphabetically(this.notes);
+      document.getElementById("toggleNoteSort").innerText = "Sort Randomly";
+    } else if(this.sortRandom == false) {
+      this.notes.sort(() => Math.random() - 0.5);
+      document.getElementById("toggleNoteSort").innerText = "Sort Alphabetically";
+    }
+    this.sortRandom = !this.sortRandom;
+  }
+
+  sortAlphabetically(notes : any){
+    notes.sort( (a: { trainee: { name: number; }; } ,b: { trainee: { name: number; }; }):any=>{
+      if(a.trainee.name > b.trainee.name){
+        return 1;
+      }
+      else{
+        return -1;
+      }
+    });
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {

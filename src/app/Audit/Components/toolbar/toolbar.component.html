@@ -14,12 +14,12 @@
 
 					<!-- top ui for viewing all assessments -->
 					<li role="button" class="dropdown" *ngIf="selectedBatch">
-						<a class="dropdown-toggle" data-toggle="dropdown"> {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }}
+						<a class="dropdown-toggle" data-toggle="dropdown"> {{selectedBatch.trainer }} ({{ selectedBatch.startDate | date:'shortDate' }} - {{ selectedBatch.endDate | date:'shortDate' }})
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let batch of batches">
-								<a role="button" (click)="selectBatch(batch)"> {{batch.trainer }} - {{ batch.startDate | date: 'shortDate' }} </a>
+								<a role="button" (click)="selectBatch(batch)"> {{batch.trainer }} ({{ batch.startDate | date: 'shortDate' }} - {{ batch.endDate | date: 'shortDate' }})</a>
 							</li>
 						</ul>
 					</li>
