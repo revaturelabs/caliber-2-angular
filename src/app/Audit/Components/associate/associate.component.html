@@ -48,16 +48,27 @@
                         </button>
                     </div>
                 </td>
-                <td (click)="cycleIF(note.noteId)" style="width: 7%;text-align: center;">
-                    <!-- Only shows the icon that cooralates with the correct Qc Status -->
-                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
+                <td>
+                        <div class="dropdown">
+                                <div class="dropdown-content" style= "margin: auto -97px;">
+                                        <a data-toggle="collapse"  (click) = "change('Undefined',note.noteId);" class = "qcStatusIcon fa fa-question-circle fa-2x pick"></a>
+                                        <a data-toggle="collapse"  (click) = "change('Superstar',note.noteId)"  class = "qcStatusIcon fa fa-star fa-2x pick"></a>
+                                        <a data-toggle="collapse"  (click) = "change('Good',note.noteId)"       class = "qcStatusIcon fa fa-smile-o fa-2x pick"></a>
+                                        <a data-toggle="collapse"  (click) = "change('Average',note.noteId)"    class = "qcStatusIcon fa fa-meh-o fa-2x pick"></a>
+                                        <a data-toggle="collapse"  (click) = "change('Poor',note.noteId)"       class = "qcStatusIcon fa fa-frown-o fa-2x pick"></a>
+                                    </div>    
+                            <div>
+                                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick" style = "width: 50px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"style = "width: 50px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick" style = "width: 50px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick" style = "width: 50px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick" style = "width: 50px; text-align: center;"></i> 
+                                </div>
+                              </div>
                 </td>
+
                 <!-- This is a small gap to add space in between columns -->
-                <td style="width: 3%;"></td>
+                <td style="width: 3%;"></td> 
                 <td style="width: 76%;">
                     <textarea 
                             (blur)="noteOnBlur(note.noteId, false)" 
@@ -67,5 +78,14 @@
                 </td>
             </tr>
         </tbody>
+    </table>
+    <table id = "SelectionList" hidden = true>
+        <tr>
+        <td><div class = "qcStatusIcon fa fa-question-circle fa-2x pick"></div></td>
+        <td><div class = "qcStatusIcon fa fa-star fa-2x pick"></div></td>
+        <td><div class = "qcStatusIcon fa fa-smile-o fa-2x pick"></div></td>
+        <td><div class = "qcStatusIcon fa fa-meh-o fa-2x pick"></div></td>
+        <td><div class = "qcStatusIcon fa fa-frown-o fa-2x pick"></div></td>
+        <tr>
     </table>
 </div>

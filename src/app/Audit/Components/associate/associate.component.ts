@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { createElement } from '@angular/core/src/view/element';
 
 @Component({
   selector: 'app-associate',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./associate.component.css']
 })
 export class AssociateComponent implements OnInit {
+
+  
+
+
 
   // List of test categories
   categories = [
@@ -72,8 +77,24 @@ export class AssociateComponent implements OnInit {
   ];
 
   // Unimplemented functions
-  constructor() { }
-  ngOnInit() { }
+  constructor() { 
+}
+  ngOnInit() { 
+}
+
+
+  
+
+  change(selection: string,selectedNoteId: number)
+  {
+    for (let i = 0; i < this.notes.length; i++) 
+    {
+      if (this.notes[i].noteId === selectedNoteId)
+      {
+        this.notes[i].qcStatus=selection;
+      }
+    }
+  }
 
   // Cycle the Individual Feedback Status
   cycleFlag(selectedNoteId: number): void {
@@ -124,6 +145,13 @@ console.log(newStatus);
     }
   }
 
+
+
+ 
+  /*
+  Find mouse location and spawn it at that point at hover over
+
+  */
   // Cycle the Individual Feedback Status
   cycleIF(selectedNoteId: number): void {
 
