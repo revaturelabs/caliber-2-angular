@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environment';
 export class AuditService {
 
   url = environment.serverRootURL;
-  batchAllURL = '/vp/batch/all';
-  batchesYearURL = '/vp/batch/';
-  yearsURL = '/all/batch/valid_years';
+  batchAllURL = '/batch/vp/batch/all';
+  batchesYearURL = '/batch/vp/batch/';
+  yearsURL = '/batch/all/batch/valid_years';
+  notesByBatchByYearURL: '/qa/audit/notes/';
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;
+  
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +27,10 @@ export class AuditService {
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
+  }
+
+  getNotesByBatchByWeek(batchId: number, week: number): Observable<Notes[]>{
+    return this.http.get<Notes[]>(this.url + this.notesByBatchByYearURL + batchId + '/' + week)
   }
   
 }
