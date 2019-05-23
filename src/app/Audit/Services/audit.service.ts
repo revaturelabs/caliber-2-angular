@@ -26,6 +26,5 @@ export class AuditService {
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
-
   
 }
