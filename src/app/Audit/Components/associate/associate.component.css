@@ -6,6 +6,14 @@
     
 }
 
+#toggleNoteSort {
+    width: 110px;
+    height: 20px;
+    font-size: 12px;
+    padding-bottom: 10px;
+    padding: 0px;
+    
+}
 
 .flag-notes-popup {
     position: relative;
