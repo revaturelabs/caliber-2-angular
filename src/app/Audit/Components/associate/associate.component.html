@@ -1,15 +1,24 @@
-<div class = "container">
+<div class="container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
     <table class="table table-responsive table-condensed"
             style="border-collapse: collapse; max-width: 1140px;">
         <thead>
             <tr>
                 <!-- Top row will span over all columns -->
-                <td colspan="5"> 
+                <td colspan="5">
                     <strong>Categories covered this week: </strong>
                     <!-- Tracked last item in list to prevent last comma from being printed -->
                     <span *ngFor="let cat of categories; let isLast=last">
                         {{cat.name}}{{isLast ? '' : ', '}}
+                    </span>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>
+                        <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
+                            Randomly</button>
                     </span>
                 </td>
             </tr>
