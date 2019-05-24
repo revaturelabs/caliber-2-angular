@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { createElement } from '@angular/core/src/view/element';
+import { Services } from '@angular/core/src/view';
+import { AuditService } from '../../Services/audit.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-associate',
