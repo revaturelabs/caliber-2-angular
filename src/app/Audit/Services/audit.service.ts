@@ -10,16 +10,17 @@ import { QcNote } from 'src/app/Audit/types/note';
 })
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
-  url = environment.serverRootURL;
-  batchAllURL = '/batch/vp/batch/all';
-  batchesYearURL = '/batch/vp/batch/';
-  yearsURL = '/batch/all/batch/valid_years';
-  notesByBatchByWeekURL = '/qa/audit/notes/';
-  selectedYear: number;
-  selectedBatch: Batch;
-  selectedWeek: number;
-  //selectedWeekChanged = new Subject<boolean>();
-  notes: QcNote[] = [];
+url = environment.serverRootURL;
+batchAllURL = '/batch/vp/batch/all';
+batchesYearURL = '/batch/vp/batch/';
+yearsURL = '/batch/all/batch/valid_years';
+notesByBatchByWeekURL = '/qa/audit/notes/';
+selectedYear: number;
+selectedBatch: Batch;
+selectedWeek: number;
+updateNoteURL = '/qa/audit/update';
+//selectedWeekChanged = new Subject<boolean>();
+notes: QcNote[] = [];
 
   constructor(private http: HttpClient) { }
   invokeAssosciateFunction = new EventEmitter();
@@ -41,6 +42,10 @@ export class AuditService {
   }
   setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
+  }
+
+  sendNote(noteToSend: QcNote): Observable<QcNote> {
+    return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }
 
   

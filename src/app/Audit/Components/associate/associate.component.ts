@@ -214,4 +214,17 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedNoteId).prop('disabled', false);
     }
   }
+
+  setScore(selection: string, selectedNoteId: number) {
+    
+    for (let i = 0; i < this.notes.length; i++) {
+      if (this.notes[i].noteId === selectedNoteId) {
+        this.notes[i].qcStatus = selection;
+        console.log(this.notes[i].qcStatus);
+       this.auditService.sendNote(this.notes[i]);
+      }
+    }
+  }
+
 }
+
