@@ -49,21 +49,22 @@
                     </div>
                 </td>
                 <td>
-                        <div class="dropdown">
-                                <div class="dropdown-content" style= "margin: auto -97px;">
-                                        <a data-toggle="collapse"  (click) = "change('Undefined',note.noteId);" class = "qcStatusIcon fa fa-question-circle fa-2x pick"></a>
-                                        <a data-toggle="collapse"  (click) = "change('Superstar',note.noteId)"  class = "qcStatusIcon fa fa-star fa-2x pick"></a>
-                                        <a data-toggle="collapse"  (click) = "change('Good',note.noteId)"       class = "qcStatusIcon fa fa-smile-o fa-2x pick"></a>
-                                        <a data-toggle="collapse"  (click) = "change('Average',note.noteId)"    class = "qcStatusIcon fa fa-meh-o fa-2x pick"></a>
-                                        <a data-toggle="collapse"  (click) = "change('Poor',note.noteId)"       class = "qcStatusIcon fa fa-frown-o fa-2x pick"></a>
-                                    </div>    
+                        
+                        <div class="dropdown">  
                             <div>
-                                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick" style = "width: 50px; text-align: center;"></i>
-                                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"style = "width: 50px; text-align: center;"></i>
-                                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick" style = "width: 50px; text-align: center;"></i>
-                                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick" style = "width: 50px; text-align: center;"></i>
-                                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick" style = "width: 50px; text-align: center;"></i> 
+                                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick" style = "margin: auto 30px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"style = "margin: auto 30px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick" style = "margin: auto 30px;text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick" style = "margin: auto 30px; text-align: center;"></i>
+                                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick" style = "margin: auto 30px; text-align: center;"></i> 
                                 </div>
+                                <div class="dropdown-content" style= "margin: auto -50px">
+                                    <a data-toggle="collapse"  (click) = "change('Undefined',note.noteId); " class = "qcStatusIcon fa fa-question-circle pick no-padding"></a>
+                                    <a data-toggle="collapse"  (click) = "change('Superstar',note.noteId); "  class = "qcStatusIcon fa fa-star  pick no-padding"></a>
+                                    <a data-toggle="collapse"  (click) = "change('Good',note.noteId); "       class = "qcStatusIcon fa fa-smile-o  pick no-padding"></a>
+                                    <a data-toggle="collapse"  (click) = "change('Average',note.noteId); "    class = "qcStatusIcon fa fa-meh-o  pick no-padding"></a>
+                                    <a data-toggle="collapse"  (click) = "change('Poor',note.noteId); "       class = "qcStatusIcon fa fa-frown-o  pick no-padding"></a>
+                                </div>  
                               </div>
                 </td>
 
@@ -79,13 +80,3 @@
             </tr>
         </tbody>
     </table>
-    <table id = "SelectionList" hidden = true>
-        <tr>
-        <td><div class = "qcStatusIcon fa fa-question-circle fa-2x pick"></div></td>
-        <td><div class = "qcStatusIcon fa fa-star fa-2x pick"></div></td>
-        <td><div class = "qcStatusIcon fa fa-smile-o fa-2x pick"></div></td>
-        <td><div class = "qcStatusIcon fa fa-meh-o fa-2x pick"></div></td>
-        <td><div class = "qcStatusIcon fa fa-frown-o fa-2x pick"></div></td>
-        <tr>
-    </table>
-</div>

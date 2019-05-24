@@ -129,14 +129,13 @@ a {
 }
 
 .glyphicon-download {
-	padding-left: .2em;
+	 padding-left: .2em;
 }
 
 .glyphicon-question-sign, .fa-question-circle {
-	padding-left: .25em;
 	color: #F26925 !important;
-	border-color: white !important;
-	background-color: white !important;
+	/* border-color: white !important;
+	background-color: white !important; */
 }
 
 .glyph-top-margin {

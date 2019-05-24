@@ -8,7 +8,6 @@ import { createElement } from '@angular/core/src/view/element';
 })
 export class AssociateComponent implements OnInit {
 
-  
 
 
 
