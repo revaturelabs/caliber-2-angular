@@ -85,33 +85,33 @@ export class AssociateComponent implements OnInit {
       invokeAssosciateFunction.subscribe(()=> {    
         this.getNotesByBatchByWeek();    
       });
-    this.sortAlphabetically(this.notes);
+    // this.sortAlphabetically(this.notes);
     this.notes = this.auditService.notes;
   }
 }
 
 
-  toggleNotesArray(): void {
-    if (this.sortRandom == true) {
-      this.sortAlphabetically(this.notes);
-      document.getElementById("toggleNoteSort").innerText = "Sort Randomly";
-    } else if (this.sortRandom == false) {
-      this.notes.sort(() => Math.random() - 0.5);
-      document.getElementById("toggleNoteSort").innerText = "Sort Alphabetically";
-    }
-    this.sortRandom = !this.sortRandom;
-  }
+  // toggleNotesArray(): void {
+  //   if (this.sortRandom == true) {
+  //     this.sortAlphabetically(this.notes);
+  //     document.getElementById("toggleNoteSort").innerText = "Sort Randomly";
+  //   } else if (this.sortRandom == false) {
+  //     this.notes.sort(() => Math.random() - 0.5);
+  //     document.getElementById("toggleNoteSort").innerText = "Sort Alphabetically";
+  //   }
+  //   this.sortRandom = !this.sortRandom;
+  // }
 
-  sortAlphabetically(notes: any) {
-    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-      if (a.trainee.name > b.trainee.name) {
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    });
-  }
+  // sortAlphabetically(notes: any) {
+  //   notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
+  //     if (a.trainee.name > b.trainee.name) {
+  //       return 1;
+  //     }
+  //     else {
+  //       return -1;
+  //     }
+  //   });
+  // }
   
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
