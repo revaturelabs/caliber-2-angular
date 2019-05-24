@@ -14,11 +14,6 @@ import { QcNote } from '../../types/note';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
-
-
-
-
-
   // List of test categories
   categories = [
     {
@@ -104,7 +99,6 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-
   toggleNotesArray(): void {
     if (this.sortRandom == true) {
       this.sortAlphabetically(this.notes);
@@ -180,53 +174,8 @@ export class AssociateComponent implements OnInit {
   //   }
   // }
 
-
-
-
-  /*
-  Find mouse location and spawn it at that point at hover over
-
-  */
-  // Cycle the Individual Feedback Status
-  cycleIF(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].qcStatus) {
-          case 'Undefined':
-            newStatus = 'Superstar';
-            break;
-          case 'Superstar':
-            newStatus = 'Good';
-            break;
-          case 'Good':
-            newStatus = 'Average';
-            break;
-          case 'Average':
-            newStatus = 'Poor';
-            break;
-          case 'Poor':
-            newStatus = 'Undefined';
-            break;
-        }
-
-        // Update the status
-        this.notes[i].qcStatus = newStatus;
-      }
-    }
-  }
-
   // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
-
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
       $('#note-textarea-' + selectedNoteId).prop('disabled', true);
@@ -235,4 +184,17 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedNoteId).prop('disabled', false);
     }
   }
+
+  setScore(selection: string, selectedNoteId: number) {
+    
+    for (let i = 0; i < this.notes.length; i++) {
+      if (this.notes[i].noteId === selectedNoteId) {
+        this.notes[i].qcStatus = selection;
+        console.log(this.notes[i].qcStatus);
+       this.auditService.sendNote(this.notes[i]);
+      }
+    }
+  }
+
 }
+
