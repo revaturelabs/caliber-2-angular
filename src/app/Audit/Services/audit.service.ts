@@ -48,7 +48,7 @@ export class AuditService {
   }
 
   
-  sendNote(note: Note): Observable<Note> {
+  sendNote(noteToSend: QcNote): Observable<Note> {
     return this.http.put<Note>(this.url + this.updateNoteURL, Note);
   }
 
