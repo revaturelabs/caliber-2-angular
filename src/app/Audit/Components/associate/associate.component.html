@@ -1,6 +1,5 @@
 <div class = "container">
     <!-- The max width is manually set to the same width as the original AngularJss webpage -->
-    <button class="btn btn-success" (click)="toggleNotesArray()" id="toggleNoteSort">Sort Randomly</button>
     <table class="table table-responsive table-condensed"
             style="border-collapse: collapse; max-width: 1140px;">
         <thead>
@@ -31,40 +30,40 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let note of notes" >
-                <td (click)="cycleFlagNotesInput(note.noteId, true); cycleFlag(note.noteId);" style="width: 11%;">
-                    {{ note.trainee.name }}
+            <tr *ngFor="let QcNote of notes" >
+                <td (click)="cycleFlagNotesInput(QcNote.noteId, true); cycleFlag(QcNote.noteId);" style="width: 11%;">
+                    {{ QcNote.trainee.name }}
                 </td>
                 <td style="width: 3%; position:absolute;">
                     <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="note.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="note.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="note.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
+                    <i *ngIf="QcNote.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                    <i *ngIf="QcNote.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                    <i *ngIf="QcNote.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag" style="visibility: hidden;"></i>
                     <!-- Shows the flag notes popup if the user clicks the name column -->
-                    <div *ngIf="note.noteFlagInputActive===true" class = "flag-notes-popup">
+                    <div *ngIf="QcNote.noteFlagInputActive===true" class = "flag-notes-popup">
                         <input class = "form-control" type="text" placeholder=" comment"/>
                         <button class ="btn btn-info flage-notes-save-btn">Save</button>
-                        <button (click)="cycleFlagNotesInput(note.noteId, false)" type="button" class="flage-notes-close-btn close" aria-label="Close">
+                        <button (click)="cycleFlagNotesInput(QcNote.noteId, false)" type="button" class="flage-notes-close-btn close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 </td>
-                <td (click)="cycleIF(note.noteId)" style="width: 7%;text-align: center;">
+                <td (click)="cycleIF(QcNote.noteId)" style="width: 7%;text-align: center;">
                     <!-- Only shows the icon that cooralates with the correct Qc Status -->
-                    <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
-                    <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
+                    <i *ngIf="QcNote.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"></i>
+                    <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"></i>
+                    <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"></i>
+                    <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"></i>
+                    <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"></i>
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
                     <textarea 
-                            (blur)="noteOnBlur(note.noteId, false)" 
-                            id="note-textarea-{{note.noteId}}" class="form-control"
-                            placeholder="Note on {{ note.trainee.name }}" 
-                            rows="3" cols="75" maxlength="4000">{{ note.content }}</textarea>
+                            (blur)="noteOnBlur(QcNote.noteId, false)" 
+                            id="note-textarea-{{QcNote.noteId}}" class="form-control"
+                            placeholder="Note on {{ QcNote.trainee.name }}" 
+                            rows="3" cols="75" maxlength="4000">{{ QcNote.content }}</textarea>
                 </td>
             </tr>
         </tbody>
