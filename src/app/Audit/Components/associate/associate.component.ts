@@ -96,10 +96,11 @@ export class AssociateComponent implements OnInit {
       this.notes = this.auditService.notes;
     }
   }
-  change(selection: string, selectedNoteId: number) {
+  setScore(selection: string, selectedNoteId: number) {
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId === selectedNoteId) {
         this.notes[i].qcStatus = selection;
+       this.auditService.sendNote(this.notes[i]);
       }
     }
   }

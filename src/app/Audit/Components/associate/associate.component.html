@@ -74,15 +74,15 @@
                                 style="margin: auto 30px; text-align: center;"></i>
                         </div>
                         <div class="dropdown-content" style="margin: auto -50px">
-                            <a data-toggle="collapse" (click)="change('Undefined',note.noteId); "
+                            <a data-toggle="collapse" (click)="setScore('Undefined',note.noteId); "
                                 class="qcStatusIcon fa fa-question-circle pick no-padding"></a>
-                            <a data-toggle="collapse" (click)="change('Superstar',note.noteId); "
+                            <a data-toggle="collapse" (click)="setScore('Superstar',note.noteId); "
                                 class="qcStatusIcon fa fa-star  pick no-padding"></a>
-                            <a data-toggle="collapse" (click)="change('Good',note.noteId); "
+                            <a data-toggle="collapse" (click)="setScore('Good',note.noteId); "
                                 class="qcStatusIcon fa fa-smile-o  pick no-padding"></a>
-                            <a data-toggle="collapse" (click)="change('Average',note.noteId); "
+                            <a data-toggle="collapse" (click)="setScore('Average',note.noteId); "
                                 class="qcStatusIcon fa fa-meh-o  pick no-padding"></a>
-                            <a data-toggle="collapse" (click)="change('Poor',note.noteId); "
+                            <a data-toggle="collapse" (click)="setScore('Poor',note.noteId); "
                                 class="qcStatusIcon fa fa-frown-o  pick no-padding"></a>
                         </div>
                     </div>
