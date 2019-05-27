@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { createElement } from '@angular/core/src/view/element';
 import { Services } from '@angular/core/src/view';
 import { AuditService } from '../../Services/audit.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
   selector: 'app-associate',
@@ -79,7 +80,7 @@ export class AssociateComponent implements OnInit {
   // ];
 
   // Unimplemented functions
-  constructor(public auditService: AuditService) { }
+  constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
     if (this.auditService.subsVar == undefined) {
@@ -179,12 +180,24 @@ export class AssociateComponent implements OnInit {
   }
 
   setScore(selection: string, selectedNoteId: number) {
-    
+
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId === selectedNoteId) {
         this.notes[i].qcStatus = selection;
-        console.log(this.notes[i].qcStatus);
-       this.auditService.sendNote(this.notes[i]);
+        this.auditService.sendNote(this.notes[i]).subscribe(
+          data => {
+          },
+          issue => {
+            if (issue instanceof HttpErrorResponse) {
+              const err = issue as HttpErrorResponse;
+              this.errorService.setError('AuditService',
+                `Issue updating QcNote with noteId ${selectedNoteId}. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
+            }
+          });
+        break;
       }
     }
   }
