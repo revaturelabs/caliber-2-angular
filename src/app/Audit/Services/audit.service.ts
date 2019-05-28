@@ -17,6 +17,7 @@ batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
+selectedQuarter: number = 1;
 selectedYear: number;
 selectedBatch: Batch;
 selectedWeek: number;
