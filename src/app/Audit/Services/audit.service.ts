@@ -43,5 +43,14 @@ export class AuditService {
     this.notes = notesToSet;
   }
 
-  
+  sortAlphabetically(notes: any) {
+    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
+      if (a.trainee.name > b.trainee.name) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
+  }
 }

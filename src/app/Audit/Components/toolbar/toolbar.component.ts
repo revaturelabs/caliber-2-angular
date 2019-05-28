@@ -89,6 +89,7 @@ export class ToolbarComponent implements OnInit {
     this.auditService.selectedWeek = this.selectedWeek; 
     this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
     .subscribe(result => {
+      this.auditService.sortAlphabetically(result);
       this.auditService.setNotes(result);
       console.log(result);
       this.auditService.onWeekClick();  

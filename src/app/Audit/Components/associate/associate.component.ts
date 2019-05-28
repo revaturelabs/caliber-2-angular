@@ -11,7 +11,7 @@ import { AuditService } from '../../Services/audit.service';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
-  
+  order: string = "Randomly";
 
   // List of test categories
   categories = [
@@ -84,34 +84,29 @@ export class AssociateComponent implements OnInit {
       this.auditService.subsVar = this.auditService.    
       invokeAssosciateFunction.subscribe(()=> {    
         this.getNotesByBatchByWeek();    
-      });
-    // this.sortAlphabetically(this.notes);
+      });  
     this.notes = this.auditService.notes;
+    
   
 }
 
+  //When you click week, it will reset button to default
+  toggleNotesArray(): void {
+    this.auditService.invokeAssosciateFunction.subscribe(()=> {    
+      this.sortRandom = false;
+      this.order = "Randomly";  
+    });
+    if (this.sortRandom == true) {
+      this.auditService.sortAlphabetically(this.notes);
+      this.order = "Randomly";
+    } else if (this.sortRandom == false) {
+      this.notes.sort(() => Math.random() - 0.5);
+      this.order = "Alphabetically";
+    }
+    this.sortRandom = !this.sortRandom;
+  }
 
-  // toggleNotesArray(): void {
-  //   if (this.sortRandom == true) {
-  //     this.sortAlphabetically(this.notes);
-  //     document.getElementById("toggleNoteSort").innerText = "Sort Randomly";
-  //   } else if (this.sortRandom == false) {
-  //     this.notes.sort(() => Math.random() - 0.5);
-  //     document.getElementById("toggleNoteSort").innerText = "Sort Alphabetically";
-  //   }
-  //   this.sortRandom = !this.sortRandom;
-  // }
-
-  // sortAlphabetically(notes: any) {
-  //   notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-  //     if (a.trainee.name > b.trainee.name) {
-  //       return 1;
-  //     }
-  //     else {
-  //       return -1;
-  //     }
-  //   });
-  // }
+  
   
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;

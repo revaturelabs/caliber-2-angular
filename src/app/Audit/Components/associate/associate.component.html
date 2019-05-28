@@ -14,14 +14,14 @@
                     <br>
                 </td>
             </tr>
-            <!-- <tr>
+            <tr>
                 <td>
                     <span>
                         <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
-                            Randomly</button>
+                            {{order}}</button>
                     </span>
                 </td>
-            </tr> -->
+            </tr>
             <tr>
                 <!-- Spans over flag column --->
                 <th colspan="2">
@@ -39,7 +39,7 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let QcNote of notes" >
+            <tr *ngFor="let QcNote of notes">
                 <td (click)="cycleFlagNotesInput(QcNote.noteId, true); cycleFlag(QcNote.noteId);" style="width: 11%;">
                     {{ QcNote.trainee.name }}
                 </td>
