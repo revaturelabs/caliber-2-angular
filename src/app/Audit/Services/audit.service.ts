@@ -18,7 +18,7 @@ yearsURL = '/qa/batch/valid-year';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
 selectedYear: number;
-selectedQuarter: number;
+selectedQuarter: number = 1;
 selectedBatch: Batch;
 selectedWeek: number;
 //selectedWeekChanged = new Subject<boolean>();
@@ -35,6 +35,7 @@ notes: QcNote[] = [];
   }
   
   getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
 
