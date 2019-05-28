@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { createElement } from '@angular/core/src/view/element';
+import { Services } from '@angular/core/src/view';
+import { AuditService } from '../../Services/audit.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
-import { AuditService } from '../../Services/audit.service';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
   selector: 'app-associate',
@@ -11,8 +15,6 @@ import { AuditService } from '../../Services/audit.service';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
-  
-
   // List of test categories
   categories = [
     {
@@ -78,7 +80,8 @@ export class AssociateComponent implements OnInit {
   // ];
 
   // Unimplemented functions
-  constructor(public auditService: AuditService) { }
+  constructor(private auditService: AuditService, private errorService: ErrorService) { }
+
   ngOnInit() {
     
       this.auditService.subsVar = this.auditService.    
@@ -112,7 +115,7 @@ export class AssociateComponent implements OnInit {
       }
     });
   }
-  
+
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
   }
@@ -166,46 +169,8 @@ export class AssociateComponent implements OnInit {
   //   }
   // }
 
-  // Cycle the Individual Feedback Status
-  cycleIF(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].qcStatus) {
-          case 'Undefined':
-            newStatus = 'Superstar';
-            break;
-          case 'Superstar':
-            newStatus = 'Good';
-            break;
-          case 'Good':
-            newStatus = 'Average';
-            break;
-          case 'Average':
-            newStatus = 'Poor';
-            break;
-          case 'Poor':
-            newStatus = 'Undefined';
-            break;
-        }
-
-        // Update the status
-        this.notes[i].qcStatus = newStatus;
-      }
-    }
-  }
-
   // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
-
     // The first call will recursivley call this function again to re-enable the input box after 1 second
     if (!secondRound) {
       $('#note-textarea-' + selectedNoteId).prop('disabled', true);
@@ -214,4 +179,29 @@ export class AssociateComponent implements OnInit {
       $('#note-textarea-' + selectedNoteId).prop('disabled', false);
     }
   }
+
+  setScore(selection: string, selectedNoteId: number) {
+
+    for (let i = 0; i < this.notes.length; i++) {
+      if (this.notes[i].noteId === selectedNoteId) {
+        this.notes[i].qcStatus = selection;
+        this.auditService.sendNote(this.notes[i]).subscribe(
+          data => {
+          },
+          issue => {
+            if (issue instanceof HttpErrorResponse) {
+              const err = issue as HttpErrorResponse;
+              this.errorService.setError('AuditService',
+                `Issue updating QcNote with noteId ${selectedNoteId}. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
+            }
+          });
+        break;
+      }
+    }
+  }
+
 }
+
