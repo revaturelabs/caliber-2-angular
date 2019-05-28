@@ -3,6 +3,7 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Note } from 'src/app/Batch/type/note';
 import { QcNote } from 'src/app/Audit/types/note';
 
 @Injectable({
@@ -10,16 +11,18 @@ import { QcNote } from 'src/app/Audit/types/note';
 })
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
-  url = environment.serverRootURL;
-  batchAllURL = '/batch/vp/batch/all';
-  batchesYearURL = '/batch/vp/batch/';
-  yearsURL = '/batch/all/batch/valid_years';
-  notesByBatchByWeekURL = '/qa/audit/notes/';
-  selectedYear: number;
-  selectedBatch: Batch;
-  selectedWeek: number;
-  //selectedWeekChanged = new Subject<boolean>();
-  notes: QcNote[] = [];
+url = environment.serverRootURL;
+batchAllURL = '/qa/batch/batches';
+batchesYearURL = '/qa/batch/';
+yearsURL = '/qa/batch/valid-year';
+notesByBatchByWeekURL = '/qa/audit/notes/';
+updateNoteURL = '/qa/audit/update';
+selectedYear: number;
+selectedQuarter: number;
+selectedBatch: Batch;
+selectedWeek: number;
+//selectedWeekChanged = new Subject<boolean>();
+notes: QcNote[] = [];
 
   constructor(private http: HttpClient) { }
   invokeAssosciateFunction = new EventEmitter();
@@ -29,6 +32,10 @@ export class AuditService {
   }    
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
+  }
+  
+  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+    return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
 
   getAllYears(): Observable<number[]> {
@@ -43,5 +50,7 @@ export class AuditService {
     this.notes = notesToSet;
   }
 
-  
+  sendNote(noteToSend: QcNote): Observable<QcNote> {
+    return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
+  }
 }

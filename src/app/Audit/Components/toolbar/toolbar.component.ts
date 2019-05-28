@@ -11,11 +11,13 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ToolbarComponent implements OnInit {
 
+  quarters: number[]=[1,2,3,4];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: number;
+  selectedQuarter: number;
   selectedBatch: Batch;
   selectedBatchId: number;
   weeks = [];
@@ -47,7 +49,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getBatches() {
-    this.auditService.getBatchesByYear(this.selectedYear)
+    this.auditService.getBatchesByYearByQuarter(this.selectedYear, this.selectedQuarter)
     .subscribe(result => {
       this.batches = result;
       this.selectedBatch = this.batches[0];
@@ -61,12 +63,22 @@ export class ToolbarComponent implements OnInit {
   selectYear(event: number) {
     this.selectedYear = event;
     this.auditService.selectedYear = this.selectedYear;
+    this.selectQuarter(this.quarters[0]);
+  }
+  selectQuarter(event: number) {
+    this.selectedQuarter = event;
+    this.auditService.selectedQuarter = this.selectedQuarter;
     this.getBatches();
-    this.auditService.getBatchesByYear(event)
+    this.auditService.getBatchesByYearByQuarter(this.selectedYear, this.selectedQuarter)
     .subscribe(result => {
       this.batches = result;
       this.selectBatch(this.batches[0]);
       });
+
+      console.log(event + " quarter value");
+      console.log(this.selectedQuarter + " quarter value");
+
+      
   }
 
   selectBatch(event: Batch) {
