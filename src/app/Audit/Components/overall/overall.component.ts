@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuditService } from '../../Services/audit.service';
 
 @Component({
   selector: 'app-overall',
@@ -7,11 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverallComponent implements OnInit {
 
-  constructor() { }
+	overallQcStatus: String;
+	batchId: number = 2003;
+	week: number = 1;
+	smile: string; meh: string; frown: string;
+
+  constructor(private auditService: AuditService) { }
 
   ngOnInit() {
+	this.getOverallQcSmiley();
   }
 
+  /**
+   * This function to get the overall qc status and display as a color code in the html
+   */
+  getOverallQcSmiley() {
+	this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
+		console.log(batchNote);
+		this.overallQcStatus = batchNote['qcStatus'];
+
+		if (this.overallQcStatus == 'Good') {
+			this.smile = 'fa-smile-o-color';
+		  } else if (this.overallQcStatus == 'Average') {
+			this.meh = 'fa-meh-o-color';
+		  } else if (this.overallQcStatus == 'Poor') {
+			this.frown = 'fa-frown-o-color';
+		  }
+	});
+  }
   /*
 	qc.getAssessmentsByBatchId = function(batchId) {
 		$log.debug("In assessment");

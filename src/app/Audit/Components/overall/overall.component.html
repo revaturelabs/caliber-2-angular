@@ -3,16 +3,16 @@
     <h4 class="text-center">Overall Feedback</h4>
     <!-- Shows the status type (icons) -->
     <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[1])"
-      ng-disabled="processingNote">
-      <i class="fa fa-smile-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[1]}" style=""></i>
+      ng-disabled="processingNote" >
+      <i class="fa fa-smile-o fa-2x {{smile}}"></i>
     </button>
     <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[2])"
       ng-disabled="processingNote">
-      <i class="fa fa-meh-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[2]}" style=""></i>
+      <i class="fa fa-meh-o fa-2x {{meh}}"></i>
     </button>
     <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[3])"
       ng-disabled="processingNote">
-      <i class="fa fa-frown-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[3]}" style=""></i>
+      <i class="fa fa-frown-o fa-2x {{frown}}"></i>
     </button>
     <!-- Show the QC feedback notes. Clicking textfield, editing and overwriting it will 
       trigger the ng-blur to save the data  -->

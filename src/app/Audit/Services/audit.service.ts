@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Note } from 'src/app/Batch/type/note';
 import { QcNote } from 'src/app/Audit/types/note';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +21,6 @@ selectedBatch: Batch;
 selectedWeek: number;
 //selectedWeekChanged = new Subject<boolean>();
 notes: QcNote[] = [];
-
   constructor(private http: HttpClient) { }
   invokeAssosciateFunction = new EventEmitter();
   subsVar: Subscription;  
@@ -32,11 +30,9 @@ notes: QcNote[] = [];
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
-
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
-
   getNotesByBatchByWeek(batchId: number, week: number): Observable<QcNote[]>{
     console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
     return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/'  + week);
@@ -44,8 +40,10 @@ notes: QcNote[] = [];
   setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
   }
-
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
+  }
+  getOverallBatchNoteByWeek(batchId: number, week:number) : Observable<QcNote>{
+    return this.http.get<QcNote>(this.url + this.notesByBatchByWeekURL + 'overall/' + batchId + '/'  + week);
   }
 }
