@@ -89,7 +89,7 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" id="note-textarea-{{QcNote.noteId}}"
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" [(ngModel)]="QcNote.content" id="note-textarea-{{QcNote.noteId}}"
                         class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
                         maxlength="4000">{{ QcNote.content }}</textarea>
                 </td>
