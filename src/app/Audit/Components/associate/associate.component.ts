@@ -80,14 +80,14 @@ export class AssociateComponent implements OnInit {
   // Unimplemented functions
   constructor(public auditService: AuditService) { }
   ngOnInit() {
-    if (this.auditService.subsVar==undefined) {    
+     
       this.auditService.subsVar = this.auditService.    
       invokeAssosciateFunction.subscribe(()=> {    
         this.getNotesByBatchByWeek();    
       });
     this.sortAlphabetically(this.notes);
     this.notes = this.auditService.notes;
-  }
+  
 }
 
 
