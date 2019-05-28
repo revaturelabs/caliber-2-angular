@@ -32,6 +32,11 @@ notes: QcNote[] = [];
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
+  
+  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
+    return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
+  }
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
