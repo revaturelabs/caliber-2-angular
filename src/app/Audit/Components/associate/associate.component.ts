@@ -173,15 +173,7 @@ export class AssociateComponent implements OnInit {
   //   }
   // }
 
-  // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
-    // The first call will recursivley call this function again to re-enable the input box after 1 second
-    // if (!secondRound) {
-    //   $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-    //   setInterval(this.noteOnBlur, 1000, selectedNoteId, true);
-    // } else {
-    //   $('#note-textarea-' + selectedNoteId).prop('disabled', false);
-    // }
     for (let note of this.notes) {
       if(note.noteId === selectedNoteId) {
         console.log(note);
