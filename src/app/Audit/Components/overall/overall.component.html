@@ -1,10 +1,73 @@
 <div class="container">
   <div class="row centered">
     <h4 class="text-center">Overall Feedback</h4>
+    
+    <table class="table table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
+            <!-- Every note contains an associate in the current batch -->
+            <!-- Every column is given a percentage of the table for simplicity -->
+            <tr>
+                <td>
+                    Overall Feedback
+                </td>
+                <td style="width: 3%; position:absolute;">
+                    <!-- Only shows the current flag, none if no flag is assigned -->
+                    <i *ngIf="QcNote.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                    <i *ngIf="QcNote.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                    <i *ngIf="QcNote.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag"
+                        style="visibility: hidden;"></i>
+                    <!-- Shows the flag notes popup if the user clicks the name column -->
+                    <div *ngIf="QcNote.noteFlagInputActive===true" class="flag-notes-popup">
+                        <input class="form-control" type="text" placeholder=" comment" />
+                        <button class="btn btn-info flage-notes-save-btn">Save</button>
+                        <button (click)="cycleFlagNotesInput(QcNote.noteId, false)" type="button"
+                            class="flage-notes-close-btn close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                   <div class="dropdown">
+                    <div>
+                        <i *ngIf="QcNote.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                            style="margin: auto 30px;text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                    </div>
+                    <div class="dropdown-content" style="margin: auto -95px">
+                        <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
+                            class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
+                            class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
+                    </div>
+                </div> 
+                </td>
+                <!-- This is a small gap to add space in between columns -->
+                <td style="width: 3%;"></td>
+                <td style="width: 76%;">
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" id="note-textarea-{{QcNote.noteId}}"
+                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+                        maxlength="4000">{{ QcNote.content }}</textarea>
+                </td>
+            </tr>
+    </table>
     <!-- Shows the status type (icons) -->
+<!--     
     <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[1])"
       ng-disabled="processingNote">
-      <i class="fa fa-smile-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[1]}" style=""></i>
+      <i class="fa fa-smile-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[1]}" style="">
+      </i>
     </button>
     <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[2])"
       ng-disabled="processingNote">
@@ -16,25 +79,25 @@
     </button>
     <!-- Show the QC feedback notes. Clicking textfield, editing and overwriting it will 
       trigger the ng-blur to save the data  -->
-    <div class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
+    <!--<div class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
       <textarea ng-model="bnote.content" class="form-control ng-pristine ng-untouched ng-valid-maxlength ng-not-empty ng-valid ng-valid-required"
         id="qcBatchNotes" ng-blur="saveQCNotes()" maxlength="4000" placeholder="Enter your overall feedback on the batch"
         required="" ng-disabled="processingNote" style="">
       </textarea>
       <!-- QC Save burrito button (Burrito: wrap up edited objects, pack it tightly in the skin, and
         save it all in your stomach/database -->
-      <div class="save-button-wrapper">
+      <!--<div class="save-button-wrapper">
         <a ng-click="saveQCandTrainee()" ng-show="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x"
             aria-hidden="true"></span>Save
         </a>
         <!-- Events after clicking save button -->
-        <div class="spinner fa-style ng-hide" ng-show="showSaving">
+       <!--<div class="spinner fa-style ng-hide" ng-show="showSaving">
           <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
         </div>
         <div id="checkMark" class="spinner fade fa-style ng-hide" ng-show="showCheck">
           <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
