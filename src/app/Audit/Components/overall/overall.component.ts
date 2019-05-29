@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuditService } from '../../Services/audit.service';
+import { QcNote } from '../../types/note';
 
 @Component({
   selector: 'app-overall',
@@ -7,7 +8,8 @@ import { AuditService } from '../../Services/audit.service';
   styleUrls: ['./overall.component.css']
 })
 export class OverallComponent implements OnInit {
-
+	notes: QcNote[] = this.auditService.notes;
+	
 	overallQcStatus: String;
 
 	batchId: number = 2003;
@@ -26,8 +28,7 @@ export class OverallComponent implements OnInit {
    * This function to get the overall qc status and display as a color code in the html
    */
   getOverallQcSmiley() {
-		this.week = this.auditService.selectedWeek;
-		console.log(this.week);
+		console.log("The notes: " + this.notes);
 		this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
 		console.log(batchNote);
 		this.overallQcStatus = batchNote['qcStatus'];

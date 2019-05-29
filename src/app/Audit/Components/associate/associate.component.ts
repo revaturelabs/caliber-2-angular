@@ -117,6 +117,7 @@ export class AssociateComponent implements OnInit {
 
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
+    console.log("Inside getNotesByBatchByWeek():" + this.notes);
   }
 
   // Cycle the Individual Feedback Status
