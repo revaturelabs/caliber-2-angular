@@ -1,47 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuditService } from '../../Services/audit.service';
 import { QcNote } from '../../types/note';
 
 @Component({
-  selector: 'app-overall',
-  templateUrl: './overall.component.html',
-  styleUrls: ['./overall.component.css']
+	selector: 'app-overall',
+	templateUrl: './overall.component.html',
+	styleUrls: ['./overall.component.css']
 })
 export class OverallComponent implements OnInit {
-	notes: QcNote[] = this.auditService.notes;
-	
 	overallQcStatus: String;
-
-	batchId: number = 2003;
-	week: number = 1;
+	noteContent: String;
+	batchId: number;
+	week: number;
 
 	//Smiley face status
 	smile: string; meh: string; frown: string;
 
-  constructor(private auditService: AuditService) { }
+	constructor(private auditService: AuditService) { }
 
-  ngOnInit() {
-	this.getOverallQcSmiley();
-  }
+	ngOnInit() {
+		this.auditService.invokeAssosciateFunction.subscribe(() => {
+			this.week = this.auditService.selectedWeek;
+			//console.log("Selected batch: " + this.auditService.selectedBatch['batchId']);
+			this.batchId = this.auditService.selectedBatch['batchId'];
+			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
+				console.log(batchNote);
+				this.overallQcStatus = batchNote['qcStatus'];
+				this.noteContent = batchNote['content'];
+				this.getOverallQcSmiley();
+			});
+			
+		});
+
+	}
+
+
 
   /**
    * This function to get the overall qc status and display as a color code in the html
    */
-  getOverallQcSmiley() {
-		console.log("The notes: " + this.notes);
-		this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
-		console.log(batchNote);
-		this.overallQcStatus = batchNote['qcStatus'];
+	getOverallQcSmiley() {
+			if (this.overallQcStatus == 'Good') {
+				this.smile = 'fa-smile-o-color';
+				this.meh = '';
+				this.frown = '';
+			} else if (this.overallQcStatus == 'Average') {
+				this.meh = 'fa-meh-o-color';
+				this.smile = '';
+				this.frown = '';
+			} else if (this.overallQcStatus == 'Poor') {
+				this.frown = 'fa-frown-o-color';
+				this.smile = '';
+				this.meh = '';
+			} else if (this.overallQcStatus == 'Undefined') {
+				this.smile = '';
+				this.meh = '';
+				this.frown = '';
+			}
+	}
 
-		if (this.overallQcStatus == 'Good') {
-			this.smile = 'fa-smile-o-color';
-		  } else if (this.overallQcStatus == 'Average') {
-			this.meh = 'fa-meh-o-color';
-		  } else if (this.overallQcStatus == 'Poor') {
-			this.frown = 'fa-frown-o-color';
-		  }
-	});
-  }
+
   /*
 	qc.getAssessmentsByBatchId = function(batchId) {
 		$log.debug("In assessment");

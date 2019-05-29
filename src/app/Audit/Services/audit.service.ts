@@ -25,8 +25,9 @@ notes: QcNote[] = [];
   invokeAssosciateFunction = new EventEmitter();
   subsVar: Subscription;  
   onWeekClick() {    
-    this.invokeAssosciateFunction.emit(); 
-  }    
+    this.invokeAssosciateFunction.emit();
+  }
+
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }

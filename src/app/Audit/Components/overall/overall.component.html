@@ -20,6 +20,7 @@
       <textarea ng-model="bnote.content" class="form-control ng-pristine ng-untouched ng-valid-maxlength ng-not-empty ng-valid ng-valid-required"
         id="qcBatchNotes" ng-blur="saveQCNotes()" maxlength="4000" placeholder="Enter your overall feedback on the batch"
         required="" ng-disabled="processingNote" style="">
+        {{noteContent}}
       </textarea>
       <!-- QC Save burrito button (Burrito: wrap up edited objects, pack it tightly in the skin, and
         save it all in your stomach/database -->

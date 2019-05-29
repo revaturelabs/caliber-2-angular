@@ -90,6 +90,7 @@ export class AssociateComponent implements OnInit {
         });
       this.sortAlphabetically(this.notes);
       this.notes = this.auditService.notes;
+      console.log("Inside ngOnInit():" + this.notes);
     }
   }
 
@@ -117,7 +118,6 @@ export class AssociateComponent implements OnInit {
 
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
-    console.log("Inside getNotesByBatchByWeek():" + this.notes);
   }
 
   // Cycle the Individual Feedback Status
@@ -144,7 +144,7 @@ export class AssociateComponent implements OnInit {
             newStatus = 'NONE';
             break;
         }
-        console.log(newStatus);
+        console.log("newStatus: " + newStatus);
         // Update the status
         this.notes[i].trainee.flagStatus = newStatus;
       }
@@ -181,7 +181,7 @@ export class AssociateComponent implements OnInit {
   }
 
   setScore(selection: string, selectedNoteId: number) {
-
+    
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId === selectedNoteId) {
         this.notes[i].qcStatus = selection;
