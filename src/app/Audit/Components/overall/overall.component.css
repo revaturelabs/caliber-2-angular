@@ -250,16 +250,28 @@ a {
 	color: #B9B9BA;
 }
 
+.fa-smile-o-color {
+	color: #18ad18;
+}
+
+.fa-meh-o-color {
+	color: #f9e900;
+}
+
+.fa-frown-o-color {
+	color: #ea2825;
+}
+
 .fa-smile-o:hover {
-	color: #81f575;
+	color: #18ad18;
 }
 
 .fa-meh-o:hover {
-	color: #fdff9e;
+	color: #f9e900;
 }
 
 .fa-frown-o:hover {
-	color: #ff7575;
+	color: #ea2825;
 }
 
 .fa-star:hover {
