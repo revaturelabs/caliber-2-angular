@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Trainee } from '../types/trainee';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { environment } from 'src/environments/environment';
 
 /**
  * sets the Http headers
@@ -14,24 +15,29 @@ const httpOptions = {
 };
 
 /**
+ * The root user service url
+ */
+const userUrl = environment.serverRootURL + '/user';
+
+/**
  * The url for getting all trainees by the batch id from the user service
  */
-const getUrl = 'http://localhost:9090/all/trainee?batch=';
+const getUrl = userUrl + '/all/trainee?batch=';
 
 /**
  * The url to update a trainee in the user service
  */
-const updateUrl = 'http://localhost:9090/all/trainee/update';
+const updateUrl =  userUrl + '/all/trainee/update';
 
 /**
  * The url to create a trainee in the user service
  */
-const createUrl = 'http://localhost:9090/all/trainee/create';
+const createUrl = userUrl + '/all/trainee/create';
 
 /**
  * The url to delete a trainee by their id in the user service
  */
-const deleteUrl = 'http://localhost:9090/all/trainee/delete/';
+const deleteUrl = userUrl + '/all/trainee/delete/';
 
 /**
  * @ignore
