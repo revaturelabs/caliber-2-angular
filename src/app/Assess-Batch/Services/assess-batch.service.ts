@@ -14,6 +14,7 @@ export class AssessBatchService {
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
   updateWeekURL = '/all/batch/update';
+  addWeekURL = '/batch/weeks/add';
   yearParam = '/vp/batch/all?year=';
   quarterParam = '&quarter='
   selectedYear: number;
@@ -47,12 +48,11 @@ export class AssessBatchService {
   }
 
   //HTTPRequest for adding a week -- using a PUT request
-  addWeek(updateBatch: Batch) {
+  addWeek(updateBatch: Batch){
+    updateBatch.weeks++;
     console.log("add week")
     console.log(updateBatch);
-    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions).subscribe((ourBatch) => {
-      console.log(ourBatch);
-    });
+    this.http.put(this.url + this.addWeekURL, updateBatch, this.httpOptions);
   }
 
   postComment (trainee): Observable<object> { 

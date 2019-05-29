@@ -10,9 +10,9 @@ import { environment } from 'src/environments/environment';
 export class AuditService {
 
   url = environment.serverRootURL;
-  batchAllURL = '/vp/batch/all';
-  batchesYearURL = '/vp/batch/';
-  yearsURL = '/all/batch/valid_years';
+  batchAllURL = '/batch/qc/batch/all';
+  batchesYearURL = '/batch/vp/batch/';
+  yearsURL = '/batch/all/batch/valid_years';
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;
@@ -26,6 +26,4 @@ export class AuditService {
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
-
-  
 }
