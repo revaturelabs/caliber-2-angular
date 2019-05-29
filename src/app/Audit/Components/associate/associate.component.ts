@@ -104,6 +104,26 @@ export class AssociateComponent implements OnInit {
     this.sortRandom = !this.sortRandom;
   }
 
+  getNote(NoteId: number)
+  {
+    for(let i = 0; i< this.notes.length;i++)
+    {
+      if(this.notes[i].noteId == NoteId)
+      {
+        return this.notes[i];
+      }
+    }
+  }
+
+  setFlag(selectedNoteId: number, selection: string)
+  {
+    this.getNote(selectedNoteId).trainee.flagStatus = selection;
+  }
+  
+  deployModal(selectedNoteId: number)
+  {
+    
+  } 
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
       if (a.trainee.name > b.trainee.name) {
@@ -117,37 +137,6 @@ export class AssociateComponent implements OnInit {
 
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
-  }
-
-  // Cycle the Individual Feedback Status
-  cycleFlag(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].trainee.flagStatus) {
-          case 'NONE':
-            newStatus = 'RED';
-            break;
-          case 'RED':
-            newStatus = 'GREEN';
-            break;
-          case 'GREEN':
-            newStatus = 'NONE';
-            break;
-        }
-        console.log(newStatus);
-        // Update the status
-        this.notes[i].trainee.flagStatus = newStatus;
-      }
-    }
   }
 
   // Cycle the flag notes popup

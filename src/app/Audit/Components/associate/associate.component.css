@@ -1,5 +1,28 @@
+.flag-note-area-red{
+width: 0;
+height: 0;
+border: solid 8px;
+border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 
+}
+.flag-note-area-green{
+  width: 0;
+  height: 0;
+  border: solid 8px;
+  border-color: green transparent transparent green;
   
+  }
+  .flag-note-area-empty{
+    width: 0;
+    height: 0;
+    border: solid 8px;
+    border-color: transparent transparent transparent transparent;
+    
+    }
+.NoteRow:hover .options { display: inline-block; }
+
+.options {display: none;}
+
   .dropdown {
     position: absolute;
     display: inline-block;

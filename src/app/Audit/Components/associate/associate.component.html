@@ -38,25 +38,20 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let QcNote of notes">
-                <td (click)="cycleFlagNotesInput(QcNote.noteId, true); cycleFlag(QcNote.noteId);" style="width: 11%;">
-                    {{ QcNote.trainee.name }}
+            
+            <tr *ngFor="let QcNote of notes" class = "NoteRow" >
+                <td style="width: 11%;">
+                    <div *ngIf = "QcNote.trainee.flagStatus === 'RED'" class = "flag-note-area-red"></div>
+                    <div *ngIf = "QcNote.trainee.flagStatus === 'GREEN'" class = "flag-note-area-green"></div>
+                    <div *ngIf = "QcNote.trainee.flagStatus === 'NONE'" class = "flag-note-area-empty"></div>
+                    &nbsp;&nbsp; {{ QcNote.trainee.name }}<br> 
+    
+                   <i (click) = "deployModal(QcNote.noteId)" class = "fa fa-ellipsis-h options" style = "margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;"></i>
+                   
+                    
                 </td>
                 <td style="width: 3%; position:absolute;">
-                    <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="QcNote.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="QcNote.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="QcNote.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag"
-                        style="visibility: hidden;"></i>
-                    <!-- Shows the flag notes popup if the user clicks the name column -->
-                    <div *ngIf="QcNote.noteFlagInputActive===true" class="flag-notes-popup">
-                        <input class="form-control" type="text" placeholder=" comment" />
-                        <button class="btn btn-info flage-notes-save-btn">Save</button>
-                        <button (click)="cycleFlagNotesInput(QcNote.noteId, false)" type="button"
-                            class="flage-notes-close-btn close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <!--Buffer area-->
                 </td>
                 <td>
                    <div class="dropdown">
