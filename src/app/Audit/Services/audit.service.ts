@@ -18,6 +18,7 @@ yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
 selectedYear: number;
+selectedQuarter: number = 1;
 selectedBatch: Batch;
 selectedWeek: number;
 //selectedWeekChanged = new Subject<boolean>();
@@ -32,6 +33,11 @@ notes: QcNote[] = [];
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
+  
+  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
+    return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
+  }
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
@@ -45,16 +51,6 @@ notes: QcNote[] = [];
     this.notes = notesToSet;
   }
 
-  sortAlphabetically(notes: any) {
-    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-      if (a.trainee.name > b.trainee.name) {
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    });
-  }
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }

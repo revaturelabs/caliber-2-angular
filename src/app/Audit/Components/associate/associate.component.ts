@@ -88,9 +88,13 @@ export class AssociateComponent implements OnInit {
       this.auditService.subsVar = this.auditService.    
       invokeAssosciateFunction.subscribe(()=> {    
         this.getNotesByBatchByWeek();    
-      });  
+      });
+    this.sortAlphabetically(this.notes);
+    if(this.auditService.notes === undefined){
+      this.notes = null;
+    }else{
     this.notes = this.auditService.notes;
-  
+    }
 }
 
   //When you click week, it will reset button to default

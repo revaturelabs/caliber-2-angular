@@ -11,11 +11,13 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ToolbarComponent implements OnInit {
 
+  quarters: number[]=[1,2,3,4];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: number;
+  selectedQuarter: number;
   selectedBatch: Batch;
   selectedBatchId: number;
   weeks = [];
@@ -26,15 +28,15 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.selectedQuarter = 1;
     this.selectedWeek=1;
     this.getAllYears();
-    
   }
 
   
 
   getAllYears() {
+    this.selectedQuarter = 1;
     this.auditService.getAllYears()
     .subscribe(result => {
       this.years = result;
@@ -47,10 +49,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   getBatches() {
-    this.auditService.getBatchesByYear(this.selectedYear)
+    this.auditService.getBatchesByYearByQuarter(this.selectedYear, this.selectedQuarter)
     .subscribe(result => {
       this.batches = result;
       this.selectedBatch = this.batches[0];
+      this.selectBatch(this.batches[0]);
       this.auditService.selectedBatch = this.batches[0];
       console.log(this.batches);
       this.getWeeks();
@@ -61,12 +64,13 @@ export class ToolbarComponent implements OnInit {
   selectYear(event: number) {
     this.selectedYear = event;
     this.auditService.selectedYear = this.selectedYear;
+    this.auditService.selectedQuarter = 1;
+    this.selectQuarter(this.auditService.selectedQuarter);
+  }
+  selectQuarter(event: number) {
+    this.selectedQuarter = event;
+    this.auditService.selectedQuarter = this.selectedQuarter;
     this.getBatches();
-    this.auditService.getBatchesByYear(event)
-    .subscribe(result => {
-      this.batches = result;
-      this.selectBatch(this.batches[0]);
-      });
   }
 
   selectBatch(event: Batch) {
@@ -87,6 +91,7 @@ export class ToolbarComponent implements OnInit {
   selectWeek(event: number) { 
     this.selectedWeek = event; 
     this.auditService.selectedWeek = this.selectedWeek; 
+    if(this.selectedBatch != undefined){
     this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
     .subscribe(result => {
       this.auditService.sortAlphabetically(result);
@@ -94,6 +99,10 @@ export class ToolbarComponent implements OnInit {
       console.log(result);
       this.auditService.onWeekClick();  
     });
+  }else{
+    this.auditService.setNotes(null);
+    this.auditService.onWeekClick();
+  }
      
   }
   addWeek() {
@@ -104,9 +113,11 @@ export class ToolbarComponent implements OnInit {
 
   getWeeks() {
     this.weeks = [];
-    for(var i = 0; i<this.selectedBatch.weeks; i++){
+    if(this.auditService.selectedBatch != undefined){
+    for(var i = 0; i<this.auditService.selectedBatch.weeks; i++){
       this.weeks.push(i+1);
     }
+  }
   }
 
 }
