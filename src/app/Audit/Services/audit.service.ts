@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Note } from 'src/app/Batch/type/note';
@@ -11,6 +11,7 @@ import { QcNote } from 'src/app/Audit/types/note';
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
 url = environment.serverRootURL;
+overallBatchNoteChanged = new Subject<QcNote>();
 batchAllURL = '/qa/batch/batches';
 batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';

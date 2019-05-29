@@ -16,7 +16,7 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
-
+  overallBatchNote;
   // List of test categories
   categories = [
     {
@@ -207,6 +207,8 @@ export class AssociateComponent implements OnInit {
         this.notes[i].qcStatus = selection;
         this.auditService.sendNote(this.notes[i]).subscribe(
           data => {
+            this.changeOverallBatchNotesInService();
+            this.auditService.overallBatchNoteChanged.next(this.overallBatchNote);
           },
           issue => {
             if (issue instanceof HttpErrorResponse) {
@@ -221,6 +223,12 @@ export class AssociateComponent implements OnInit {
         break;
       }
     }
+  }
+
+  changeOverallBatchNotesInService(){
+    this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek).subscribe(batchNote => {
+      this.overallBatchNote = batchNote;
+    });
   }
 
 }

@@ -202,6 +202,50 @@ a {
 /************************
 	QC Assess
 ************************/
+.overallHeaders{
+	font-family: 'Futura-Std-Bold';
+	font-size: 14px;
+}
+
+.dropdown {
+	position: absolute;
+	display: inline-block;
+	align-self: center;
+	z-index: 3;
+	width: 0;
+	
+}
+
+.dropdown-content {
+	display: none;
+	position: relative;
+	left: 20px;
+	z-index: 3;
+	margin: auto -85px;
+	background-color: #f1f1f1;
+	
+	box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
+	
+	align-self: center;
+	border-radius: 40px;
+	
+}
+
+.dropdown-content a 
+{
+	color: black;
+	padding: 5px 15px;
+	text-decoration: none;
+	display: inline-block;
+	align-self: center;
+	
+}
+.dropdown-content a:hover {background-color: lightgray; align-self: center; border-radius: 30px}
+
+.dropdown:hover .dropdown-content {display: block; }
+
+.dropdown:hover .dropbtn {background-color: #d39539;}
+
 .fa-smile-o, .fa-meh-o, .fa-frown-o, .fa-star {
 	color: #B9B9BA;
 }
@@ -317,6 +361,7 @@ a {
 .hiddenRow td {
 	padding: 0 !important;
 }
+
 
 /**********************
  	Input styles
