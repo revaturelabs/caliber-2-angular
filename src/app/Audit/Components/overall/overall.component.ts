@@ -9,8 +9,11 @@ import { AuditService } from '../../Services/audit.service';
 export class OverallComponent implements OnInit {
 
 	overallQcStatus: String;
+
 	batchId: number = 2003;
 	week: number = 1;
+
+	//Smiley face status
 	smile: string; meh: string; frown: string;
 
   constructor(private auditService: AuditService) { }
@@ -23,7 +26,9 @@ export class OverallComponent implements OnInit {
    * This function to get the overall qc status and display as a color code in the html
    */
   getOverallQcSmiley() {
-	this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
+		this.week = this.auditService.selectedWeek;
+		console.log(this.week);
+		this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week).subscribe(batchNote => {
 		console.log(batchNote);
 		this.overallQcStatus = batchNote['qcStatus'];
 
