@@ -89,7 +89,7 @@ export class AssociateComponent implements OnInit {
       invokeAssosciateFunction.subscribe(()=> {    
         this.getNotesByBatchByWeek();    
       });
-    this.sortAlphabetically(this.notes);
+    // this.sortAlphabetically(this.notes);
     if(this.auditService.notes === undefined){
       this.notes = null;
     }else{

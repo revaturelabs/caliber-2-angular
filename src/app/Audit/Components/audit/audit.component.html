@@ -1,3 +1,9 @@
 <app-toolbar></app-toolbar>
-<app-associate></app-associate>
-<app-overall></app-overall>
+<div *ngIf="this.auditService.notes != null; else noTrainees" id="noTrainees">
+    <app-associate></app-associate>
+    <app-overall></app-overall>
+</div>
+<ng-template #noTrainees>
+    <br>
+    <p>There are no batches in this quarter.</p>
+</ng-template>

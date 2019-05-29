@@ -17,8 +17,8 @@ batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
-selectedYear: number;
 selectedQuarter: number = 1;
+selectedYear: number;
 selectedBatch: Batch;
 selectedWeek: number;
 //selectedWeekChanged = new Subject<boolean>();
@@ -53,5 +53,15 @@ notes: QcNote[] = [];
 
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
+  }
+  sortAlphabetically(notes: any) {
+    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
+      if (a.trainee.name > b.trainee.name) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
   }
 }
