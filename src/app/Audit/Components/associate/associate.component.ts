@@ -16,6 +16,8 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
+  showCheck: boolean = false;
+  showSaving: boolean = false;
 
   // List of test categories
   categories = [
@@ -97,6 +99,7 @@ export class AssociateComponent implements OnInit {
     }
 }
 
+
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
     this.auditService.invokeAssosciateFunction.subscribe(()=> {    
@@ -176,13 +179,18 @@ export class AssociateComponent implements OnInit {
   //     }
   //   }
   // }
-
+  showSpinner(){
+    this.showCheck = false;
+    this.showSaving = true;
+  }
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
     for (let note of this.notes) {
       if(note.noteId === selectedNoteId) {
         console.log(note);
         this.auditService.sendNote(note).subscribe(
           data => {
+            this.showCheck = true;
+            this.showSaving = false;
           },
           issue => {
             if (issue instanceof HttpErrorResponse) {
