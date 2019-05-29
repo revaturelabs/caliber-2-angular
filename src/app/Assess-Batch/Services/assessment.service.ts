@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Assessment } from '../Models/Assesment';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -11,10 +12,11 @@ import { Assessment } from '../Models/Assesment';
 export class AssessmentService {
 
   constructor(private http: HttpClient) { }
-  url = "http://localhost:9090/all/assessment/create";
-  updateUrl = "http://localhost:9090/all/assessment/update";
-  getUrl = "http://localhost:9090/all/assessment/";
-  deleteUrl = "http://localhost:9090/all/assessment/delete/";
+  url = environment.serverRootURL + '/assessment';
+  createUrl = this.url + "/all/assessment/create";
+  updateUrl = this.url + "/all/assessment/update";
+  getUrl = this.url + "/all/assessment/";
+  deleteUrl = this.url + "/all/assessment/delete/";
 
   assessment : Assessment;
   currentAssessment = new EventEmitter<Assessment>();

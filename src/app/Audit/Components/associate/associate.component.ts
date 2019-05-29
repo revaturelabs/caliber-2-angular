@@ -15,6 +15,8 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
+  order: string = "Randomly";
+
   // List of test categories
   categories = [
     {
@@ -83,24 +85,30 @@ export class AssociateComponent implements OnInit {
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
-    if (this.auditService.subsVar == undefined) {
-      this.auditService.subsVar = this.auditService.
-        invokeAssosciateFunction.subscribe(() => {
-          this.getNotesByBatchByWeek();
-        });
-      this.sortAlphabetically(this.notes);
-      this.notes = this.auditService.notes;
-      console.log("Inside ngOnInit():" + this.notes);
+      this.auditService.subsVar = this.auditService.    
+      invokeAssosciateFunction.subscribe(()=> {    
+        this.getNotesByBatchByWeek();    
+      });
+    // this.sortAlphabetically(this.notes);
+    if(this.auditService.notes === undefined){
+      this.notes = null;
+    }else{
+    this.notes = this.auditService.notes;
     }
-  }
+}
 
+  //When you click week, it will reset button to default
   toggleNotesArray(): void {
+    this.auditService.invokeAssosciateFunction.subscribe(()=> {    
+      this.sortRandom = false;
+      this.order = "Randomly";  
+    });
     if (this.sortRandom == true) {
-      this.sortAlphabetically(this.notes);
-      document.getElementById("toggleNoteSort").innerText = "Sort Randomly";
+      this.auditService.sortAlphabetically(this.notes);
+      this.order = "Randomly";
     } else if (this.sortRandom == false) {
       this.notes.sort(() => Math.random() - 0.5);
-      document.getElementById("toggleNoteSort").innerText = "Sort Alphabetically";
+      this.order = "Alphabetically";
     }
     this.sortRandom = !this.sortRandom;
   }
@@ -169,14 +177,26 @@ export class AssociateComponent implements OnInit {
   //   }
   // }
 
-  // Disables the associated notes text area box for 1 second.
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
-    // The first call will recursivley call this function again to re-enable the input box after 1 second
-    if (!secondRound) {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', true);
-      setInterval(this.noteOnBlur, 1000, selectedNoteId, true);
-    } else {
-      $('#note-textarea-' + selectedNoteId).prop('disabled', false);
+    for (let note of this.notes) {
+      if(note.noteId === selectedNoteId) {
+        console.log(note);
+        this.auditService.sendNote(note).subscribe(
+          data => {
+          },
+          issue => {
+            if (issue instanceof HttpErrorResponse) {
+              const err = issue as HttpErrorResponse;
+              this.errorService.setError('AuditService',
+                `Issue updating QcNote with noteId ${selectedNoteId}. Please contact system administrator: \n
+            Status Code: ${err.status} \n
+            Status Text: ${err.statusText} \n
+            Error: ${err.message}`);
+            }
+          }
+        );
+        break;
+      }
     }
   }
 
