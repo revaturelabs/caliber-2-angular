@@ -11,7 +11,7 @@ export class OverallComponent implements OnInit {
 	//this is for dummy data. remove this after connecting to the actual backend.
 	note: QcNote = {
 		noteId: 4,
-		content: "exmaple",
+		content: "example",
 		week: 1,
 		batchId: 1,
 		trainee: null,
