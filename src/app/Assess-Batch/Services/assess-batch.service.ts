@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessBatchService {
 
-  url = 'http://localhost:9095';
-  Url2= 'http://localhost:9085/all/trainee/update';
+  url = environment.serverRootURL + '/batch';
+  Url2= environment.serverRootURL + '/user/all/trainee/update';
   batchAllURL = '/vp/batch/all';
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
@@ -43,7 +44,7 @@ export class AssessBatchService {
   }
   
   getBatchById(id: number): Observable<Batch>{
-    return this.http.get<Batch>("http://localhost:9090/all/batch/"+id);
+    return this.http.get<Batch>(this.url + "/all/batch/"+id);
   }
 
   //HTTPRequest for adding a week -- using a PUT request
