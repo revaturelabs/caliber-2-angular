@@ -1,59 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { QcNote } from '../../types/note';
 
 @Component({
-  selector: 'app-overall',
-  templateUrl: './overall.component.html',
-  styleUrls: ['./overall.component.css']
+	selector: 'app-overall',
+	templateUrl: './overall.component.html',
+	styleUrls: ['./overall.component.css']
 })
 export class OverallComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  /*
-	qc.getAssessmentsByBatchId = function(batchId) {
-		$log.debug("In assessment");
-		return $http({
-			url : "/qc/assessment/byBatchId/" + batchId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
+	//this is for dummy data. remove this after connecting to the actual backend.
+	note: QcNote = {
+		noteId: 4,
+		content: "exmaple",
+		week: 1,
+		batchId: 1,
+		trainee: null,
+    	traineeId: 1,
+		type: null,
+		qcStatus: "Poor",
+		updateTime: 1454462425353,
+		lastSavedBy: null,
+		lastSavedById: 1
 	};
 
-	// get all assessments
-	qc.getAllAssessments = function(weekId) {
-		return $http({
-			url : "/qc/assessment/byWeek/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-	};
-	
-	// get all assessment categories for the week
-	qc.getAllAssessmentCategories = function(batchId, weekId) {
-		return $http({
-			url : "/all/assessments/categories/batch/" + batchId + "/week/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments categories retrieved successfully");
-			$log.debug("response");
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-  }; */
+	constructor() { }
+
+	ngOnInit() {
+	}
+
+	setScore(qcStatus: string, noteId: number){
+		//TO-DO
+		// addd functionalities to post/update the changed score(smiley) in the backend.
+	}
 
 
 }
