@@ -219,9 +219,9 @@ a {
 .dropdown-content {
 	display: none;
 	position: relative;
-	left: 20px;
+	left: 10px;
 	z-index: 3;
-	margin: auto -85px;
+	margin: auto -110px;
 	background-color: #f1f1f1;
 	
 	box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);

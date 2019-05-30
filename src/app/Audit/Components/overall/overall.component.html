@@ -3,8 +3,9 @@
   <div class="row centered">
     <h4 class="text-center"><strong>Overall Feedback</strong></h4>
 
-    <table class="table table-borderless table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
-      
+    <table class="table table-borderless table-responsive table-condensed"
+      style="border-collapse: collapse; max-width: 1140px;">
+
       <tbody>
         <tr class='overallHeaders'>
           <td colspan="2" style="text-align: center">
@@ -18,6 +19,8 @@
           <td style="text-align: center;">
             <div class="dropdown">
               <div>
+                <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                  style="margin: auto 30px; text-align: center;"></i>
                 <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
                   style="margin: auto 10px; text-align: center;"></i>
                 <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
@@ -26,6 +29,8 @@
                   style="margin: auto 10px; text-align: center;"></i>
               </div>
               <div class="dropdown-content">
+                <a data-toggle="collapse" (click)="setScore('Undefined',note.noteId);"
+                  class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
                 <a data-toggle="collapse" (click)="setScore('Good',note.noteId);"
                   class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
                 <a data-toggle="collapse" (click)="setScore('Average',note.noteId); "
@@ -38,52 +43,11 @@
           <td style="width: 3%;"></td>
           <td style="width: 76%;">
             <textarea (blur)="noteOnBlur(note.noteId, false)" [(ngModel)]="note.content"
-              id="note-textarea-{{note.noteId}}" class="form-control" placeholder="Overall note"
-              rows="6" cols="75" maxlength="4000">{{ note.content }}</textarea>
+              id="note-textarea-{{note.noteId}}" class="form-control" placeholder="Overall note" rows="6" cols="75"
+              maxlength="4000">{{ note.content }}</textarea>
           </td>
         </tr>
       </tbody>
-
     </table>
-    <!-- Shows the status type (icons) -->
-    <!--     
-    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[1])"
-      ng-disabled="processingNote" >
-      <i class="fa fa-smile-o fa-2x {{smile}}"></i>
-      ng-disabled="processingNote">
-      <i class="fa fa-smile-o fa-2x" ng-class="{pick : qcBatchAssess === qcStatusTypes[1]}" style="">
-      </i>
-    </button>
-    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[2])"
-      ng-disabled="processingNote">
-      <i class="fa fa-meh-o fa-2x {{meh}}"></i>
-    </button>
-    <button class="hiddenButton col-lg-4 col-md-4 col-sm-4" ng-click="pickOverallStatus(currentBatch, qcStatusTypes[3])"
-      ng-disabled="processingNote">
-      <i class="fa fa-frown-o fa-2x {{frown}}"></i>
-    </button>
-    <!-- Show the QC feedback notes. Clicking textfield, editing and overwriting it will 
-      trigger the ng-blur to save the data  -->
-    <!--<div class="form-group col-lg-12 col-md-12 col-sm-12 overall-feedback">
-      <textarea ng-model="bnote.content" class="form-control ng-pristine ng-untouched ng-valid-maxlength ng-not-empty ng-valid ng-valid-required"
-        id="qcBatchNotes" ng-blur="saveQCNotes()" maxlength="4000" placeholder="Enter your overall feedback on the batch"
-        required="" ng-disabled="processingNote" style="">
-        {{noteContent}}
-      </textarea>
-      <!-- QC Save burrito button (Burrito: wrap up edited objects, pack it tightly in the skin, and
-        save it all in your stomach/database -->
-    <!--<div class="save-button-wrapper">
-        <a ng-click="saveQCandTrainee()" ng-show="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x"
-            aria-hidden="true"></span>Save
-        </a>
-        <!-- Events after clicking save button -->
-    <!--<div class="spinner fa-style ng-hide" ng-show="showSaving">
-          <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
-        </div>
-        <div id="checkMark" class="spinner fade fa-style ng-hide" ng-show="showCheck">
-          <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>

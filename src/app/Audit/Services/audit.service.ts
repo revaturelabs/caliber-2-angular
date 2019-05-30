@@ -11,6 +11,7 @@ import { QcNote } from 'src/app/Audit/types/note';
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
 url = environment.serverRootURL;
+overallBatchNote:QcNote;
 overallBatchNoteChanged = new Subject<QcNote>();
 batchAllURL = '/qa/batch/batches';
 batchesYearURL = '/qa/batch/';
@@ -52,8 +53,11 @@ notes: QcNote[] = [];
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }
-  getOverallBatchNoteByWeek(batchId: number, week:number) : Observable<QcNote>{
-    return this.http.get<QcNote>(this.url + this.notesByBatchByWeekURL + 'overall/' + batchId + '/'  + week);
+  getOverallBatchNoteByWeek(batchId: number, week:number) {
+    return this.http.get<QcNote>(this.url + this.notesByBatchByWeekURL + 'overall/' + batchId + '/'  + week).subscribe(batchNote => {
+      this.overallBatchNote = batchNote;
+      this.overallBatchNoteChanged.next(this.overallBatchNote);
+    });
   }
 
   sortAlphabetically(notes: any) {
