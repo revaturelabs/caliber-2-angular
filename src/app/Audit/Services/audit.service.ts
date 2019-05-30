@@ -17,6 +17,7 @@ batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
+updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
 selectedQuarter: number = 1;
 selectedYear: number;
 selectedBatch: Batch;
@@ -34,6 +35,10 @@ notes: QcNote[] = [];
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
   
+  updateBatch(updateBatch: Batch) {
+    return this.http.put(this.updateBatchURL, updateBatch);
+  }
+
   getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
     //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
