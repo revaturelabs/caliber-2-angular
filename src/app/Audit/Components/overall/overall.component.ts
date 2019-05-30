@@ -36,8 +36,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 	}
 
 	noteOnBlur(noteId: number, secondRound: boolean) {
-		if (this.note.noteId = noteId) {
-			console.log(this.note);
+		
 			this.auditService.sendNote(this.note).subscribe(
 				data => {
 				},
@@ -52,11 +51,13 @@ export class OverallComponent implements OnInit, OnDestroy {
 					}
 				}
 			)
-		}
+		
 	}
 
 	setScore(qcStatus: string, noteId: number) {
-		console.log(qcStatus)
+		console.log("im here")
+		this.note.qcStatus = qcStatus;
+		console.log(this.note)
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
 				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
