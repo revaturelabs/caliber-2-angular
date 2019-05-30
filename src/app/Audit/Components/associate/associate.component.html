@@ -38,48 +38,61 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            
-            <tr *ngFor="let QcNote of notes" class = "NoteRow" >
+            <!--
+<div class="dropup">
+  <button class="dropbtn">Dropup</button>
+  <div class="dropup-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>-->
+            <tr *ngFor="let QcNote of notes" class="NoteRow">
                 <td style="width: 11%;">
-                    <div *ngIf = "QcNote.trainee.flagStatus === 'RED'" class = "flag-note-area-red"></div>
-                    <div *ngIf = "QcNote.trainee.flagStatus === 'GREEN'" class = "flag-note-area-green"></div>
-                    <div *ngIf = "QcNote.trainee.flagStatus === 'NONE'" class = "flag-note-area-empty"></div>
-                    &nbsp;&nbsp; {{ QcNote.trainee.name }}<br> 
-    
-                   <i (click) = "deployModal(QcNote.noteId)" class = "fa fa-ellipsis-h options" style = "margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;"></i>
-                   
-                    
+                    <div class="dropup">
+                        <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE'" class="flag-note-area-empty dropbtn"></div>
+                        &nbsp; {{ QcNote.trainee.name }}<br>
+                        <i (click)="deployToModal(QcNote.noteId)" class="fa fa-ellipsis-h options"
+                            style="margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;" data-toggle="modal"
+                            data-target="#flagTrainee"></i>
+                        <div class="dropup-content">
+                            <li *ngIf = "QcNote.trainee.flagStatus != null">{{QcNote.trainee.flagNotes}}</li>
+                        </div>
+                    </div>
                 </td>
                 <td style="width: 3%; position:absolute;">
                     <!--Buffer area-->
                 </td>
                 <td>
-                   <div class="dropdown">
-                    <div>
-                        <i *ngIf="QcNote.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
-                            style="margin: auto 30px;text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
+                    <div class="dropdown">
+                        <div>
+                            <i *ngIf="QcNote.qcStatus=='Undefined'"
+                                class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                                style="margin: auto 30px;text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                        </div>
+                        <div class="dropdown-content" style="margin: auto -95px">
+                            <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
+                                class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
+                                class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
+                        </div>
                     </div>
-                    <div class="dropdown-content" style="margin: auto -95px">
-                        <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
-                            class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
-                            class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
-                    </div>
-                </div> 
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
@@ -91,4 +104,39 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<div id="flagTrainee" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label for="flagsStatus">Select Flag:</label>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li><i class="far fa-flag fa-3x" style="color:darkgreen; cursor: pointer;"
+                                (click)="setFlag((theNote), 'GREEN');"></i>
+                        <li><i class="far fa-flag fa-3x" style="color:red; cursor: pointer; margin: auto 550%;"
+                                (click)="setFlag((theNote), 'RED');"></i>
+                        <li><i class="fas fa-times fa-3x"
+                                style="color: rgba(0, 0, 0, 0.500); cursor: pointer; margin: auto 1550%;"
+                                (click)="setFlag((theNote), 'NONE');"></i></li>
+                        <br>
+                        <br>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="comment" #flagComment></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                    (click)="submitModal((theNote), flagComment.value); clearComment()"
+                    data-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="setFlag((theNote),'NONE')">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>

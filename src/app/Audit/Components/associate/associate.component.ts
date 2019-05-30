@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-associate',
@@ -15,6 +16,10 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
+  theNote: number;
+  flagStatus: string;
+  hoverComment: string;
+  flagComment: string;
   // List of test categories
   categories = [
     {
@@ -115,14 +120,37 @@ export class AssociateComponent implements OnInit {
     }
   }
 
+
   setFlag(selectedNoteId: number, selection: string)
   {
     this.getNote(selectedNoteId).trainee.flagStatus = selection;
   }
-  
-  deployModal(selectedNoteId: number)
+  clearComment()
   {
+    $('textarea').filter('[id*=comment]').val(' ');
+  }
+
+  showText(selectedNoteId: number)
+  {
+    this.hoverComment = this.getNote(selectedNoteId).trainee.flagNotes;
+  }
+
+  submitModal(selectedNoteId: number, comment: string)
+  {
+    console.log("Getting Comment");
+    let newNote = this.getNote(selectedNoteId);
+    newNote.trainee.flagNotes = comment;
+    console.log(newNote.trainee.flagNotes);
+    this.auditService.saveFlagModal(newNote).subscribe(data =>{
+      console.log(data);
+      
+    })
     
+  }
+
+  deployToModal(selectedNoteId: number)
+  {
+    this.theNote = selectedNoteId;
   } 
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
@@ -192,4 +220,3 @@ export class AssociateComponent implements OnInit {
   }
 
 }
-
