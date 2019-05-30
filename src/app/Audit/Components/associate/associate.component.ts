@@ -34,7 +34,7 @@ export class AssociateComponent implements OnInit {
 
   ngOnInit() {
     this.auditService.subsVar = this.auditService.
-      invokeAssosciateFunction.subscribe(() => {
+      invokeAssosciateFunction.subscribe(()=> {
         this.getNotesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
@@ -47,7 +47,7 @@ export class AssociateComponent implements OnInit {
 
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-    this.auditService.invokeAssosciateFunction.subscribe(() => {
+      this.auditService.invokeAssosciateFunction.subscribe(()=> {
       this.sortRandom = false;
       this.order = "Randomly";
     });
@@ -131,4 +131,3 @@ export class AssociateComponent implements OnInit {
   }
 
 }
-

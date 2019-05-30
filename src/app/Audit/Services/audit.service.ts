@@ -27,8 +27,8 @@ selectedWeek: number;
 notes: QcNote[] = [];
   constructor(private http: HttpClient) { }
   invokeAssosciateFunction = new EventEmitter();
-  subsVar: Subscription;  
-  onWeekClick() {    
+  subsVar: Subscription;
+  onWeekClick() {
     this.invokeAssosciateFunction.emit();
   }
 

@@ -35,8 +35,28 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 	}
 
+	noteOnBlur(noteId: number, secondRound: boolean) {
+		if (this.note.noteId = noteId) {
+			console.log(this.note);
+			this.auditService.sendNote(this.note).subscribe(
+				data => {
+				},
+				issue => {
+					if (issue instanceof HttpErrorResponse) {
+						const err = issue as HttpErrorResponse;
+						this.errorService.setError('AuditService',
+							`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
+					Status Code: ${err.status} \n
+					Status Text: ${err.statusText} \n
+					Error: ${err.message}`);
+					}
+				}
+			)
+		}
+	}
+
 	setScore(qcStatus: string, noteId: number) {
-		
+
 		// this.auditService.sendNote(this.note).subscribe(
 		// 	data => {
 		// 		this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);

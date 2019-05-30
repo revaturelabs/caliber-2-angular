@@ -68,6 +68,7 @@
                     </div>
                 </td>
                 <td>
+<<<<<<< HEAD
                     <div class="dropdown">
                         <div>
                             <i *ngIf="QcNote.qcStatus=='Undefined'"
@@ -95,17 +96,54 @@
                                 class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
                         </div>
                     </div>
+=======
+                   <div class="dropdown">
+                    <div>
+                        <i *ngIf="QcNote.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                            style="margin: auto 30px;text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                        <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                            style="margin: auto 30px; text-align: center;"></i>
+                    </div>
+                    <div class="dropdown-content" style="margin: auto -95px">
+                        <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
+                            class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
+                            class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
+                        <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
+                            class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
+                    </div>
+                </div>
+>>>>>>> parent of 6396cc3... Added 'Category covered this week' functionality in frontend.
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
+<<<<<<< HEAD
                     <textarea (blur)="noteOnBlur(QcNote.noteId, false)" (keypress)="showSpinner()"
                         (keydown.backspace)="showSpinner()" [(ngModel)]="QcNote.content"
                         id="note-textarea-{{QcNote.noteId}}" class="form-control"
                         placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+=======
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" [(ngModel)]="QcNote.content" id="note-textarea-{{QcNote.noteId}}"
+                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+>>>>>>> parent of 6396cc3... Added 'Category covered this week' functionality in frontend.
                         maxlength="4000">{{ QcNote.content }}</textarea>
                 </td>
             </tr>
         </tbody>
     </table>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> parent of 6396cc3... Added 'Category covered this week' functionality in frontend.
