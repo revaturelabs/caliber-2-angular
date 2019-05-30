@@ -1,59 +1,84 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { AuditService } from '../../Services/audit.service';
+import { QcNote } from '../../types/note';
+import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
-  selector: 'app-overall',
-  templateUrl: './overall.component.html',
-  styleUrls: ['./overall.component.css']
+	selector: 'app-overall',
+	templateUrl: './overall.component.html',
+	styleUrls: ['./overall.component.css']
 })
-export class OverallComponent implements OnInit {
+export class OverallComponent implements OnInit, OnDestroy {
+	batchId: number;
+	week: number;
+	note: QcNote;
+	noteSubscription: Subscription;
+	//Smiley face status
+	smile: string; meh: string; frown: string;
 
-  constructor() { }
+	constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
-  ngOnInit() {
-  }
-
-  /*
-	qc.getAssessmentsByBatchId = function(batchId) {
-		$log.debug("In assessment");
-		return $http({
-			url : "/qc/assessment/byBatchId/" + batchId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
+	ngOnInit() {
+		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {
+			console.log(data);
+			this.note = data;
 		});
-	};
 
-	// get all assessments
-	qc.getAllAssessments = function(weekId) {
-		return $http({
-			url : "/qc/assessment/byWeek/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
+		this.auditService.invokeAssosciateFunction.subscribe(() => {
+			this.week = this.auditService.selectedWeek;
+			this.batchId = this.auditService.selectedBatch['batchId'];
+			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
+
 		});
-	};
-	
-	// get all assessment categories for the week
-	qc.getAllAssessmentCategories = function(batchId, weekId) {
-		return $http({
-			url : "/all/assessments/categories/batch/" + batchId + "/week/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments categories retrieved successfully");
-			$log.debug("response");
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-  }; */
 
+	}
 
+	noteOnBlur(noteId: number, secondRound: boolean) {
+		
+			this.auditService.sendNote(this.note).subscribe(
+				data => {
+				},
+				issue => {
+					if (issue instanceof HttpErrorResponse) {
+						const err = issue as HttpErrorResponse;
+						this.errorService.setError('AuditService',
+							`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
+					Status Code: ${err.status} \n
+					Status Text: ${err.statusText} \n
+					Error: ${err.message}`);
+					}
+				}
+			)
+		
+	}
+
+	setScore(qcStatus: string, noteId: number) {
+		console.log("im here")
+		this.note.qcStatus = qcStatus;
+		console.log(this.note)
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
+			},
+			issue => {
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${this.note.noteId}. Please contact system administrator: \n
+				  Status Code: ${err.status} \n
+				  Status Text: ${err.statusText} \n
+				  Error: ${err.message}`);
+				}
+			});
+
+	}
+
+	ngOnDestroy() {
+		if (this.noteSubscription) {
+			this.noteSubscription.unsubscribe();
+		}
+
+	}
 }

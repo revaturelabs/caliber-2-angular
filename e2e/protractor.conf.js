@@ -7,7 +7,8 @@ exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
   allScriptsTimeout: 11000,
   specs: [
-    './src/**/*.e2e-spec.ts'
+    "D:\Revature\Revature Project 3\caliber-2-meta\frontend\e2e"
+    // './src/**/*.e2e-spec.ts'
     // './src/app/**/*.spec.ts'
   ],
   capabilities: {
