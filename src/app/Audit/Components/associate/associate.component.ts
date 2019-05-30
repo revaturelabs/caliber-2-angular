@@ -6,7 +6,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { Tag } from '../../types/tag';
 
 @Component({
   selector: 'app-associate',
@@ -15,9 +14,6 @@ import { Tag } from '../../types/tag';
 })
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
-  categoryTags: Map<string, Tag> = new Map<string, Tag>([
-    ['Java', new Tag(1, 'Java', 35, 45)],
-    ['MySql', new Tag(2, 'MySql', 35, 45)]]);
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
   overallBatchNote;
@@ -37,22 +33,22 @@ export class AssociateComponent implements OnInit {
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
-    this.auditService.subsVar = this.auditService.
-      invokeAssosciateFunction.subscribe(() => {
+      this.auditService.subsVar = this.auditService.
+      invokeAssosciateFunction.subscribe(()=> {
         this.getNotesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
-    if (this.auditService.notes === undefined) {
+    if(this.auditService.notes === undefined){
       this.notes = null;
-    } else {
-      this.notes = this.auditService.notes;
+    }else{
+    this.notes = this.auditService.notes;
     }
-  }
+}
 
 
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-    this.auditService.invokeAssosciateFunction.subscribe(() => {
+    this.auditService.invokeAssosciateFunction.subscribe(()=> {
       this.sortRandom = false;
       this.order = "Randomly";
     });
@@ -64,19 +60,6 @@ export class AssociateComponent implements OnInit {
       this.order = "Alphabetically";
     }
     this.sortRandom = !this.sortRandom;
-  }
-
-  addCategoryTag(tagInputText: string) {
-    if (tagInputText != '') {
-      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45));
-    }
-
-    console.log(this.categoryTags);
-  }
-
-  removeCategoryTag($event: any) {
-    this.categoryTags.delete($event.srcElement.previousSibling.data.trim());
-    console.log(this.categoryTags);
   }
 
   sortAlphabetically(notes: any) {
@@ -131,7 +114,7 @@ export class AssociateComponent implements OnInit {
   }
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
     for (let note of this.notes) {
-      if (note.noteId === selectedNoteId) {
+      if(note.noteId === selectedNoteId) {
         console.log(note);
         this.auditService.sendNote(note).subscribe(
           data => {
@@ -155,7 +138,7 @@ export class AssociateComponent implements OnInit {
   }
 
   setScore(selection: string, selectedNoteId: number) {
-    
+
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId === selectedNoteId) {
         this.notes[i].qcStatus = selection;

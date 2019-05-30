@@ -11,7 +11,7 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ToolbarComponent implements OnInit {
 
-  quarters: number[] = [1, 2, 3, 4];
+  quarters: number[]=[1,2,3,4];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
@@ -23,41 +23,42 @@ export class ToolbarComponent implements OnInit {
   weeks = [];
   selectedWeek: number;
   notes: QcNote[] = [];
-
   constructor(
     public auditService: AuditService
   ) { }
 
   ngOnInit() {
     this.selectedQuarter = 1;
-    this.selectedWeek = 1;
+    this.selectedWeek=1;
     this.getAllYears();
   }
+
+  
 
   getAllYears() {
     this.selectedQuarter = 1;
     this.auditService.getAllYears()
-      .subscribe(result => {
-        this.years = result;
-        this.selectedYear = this.years[0];
-        console.log(this.years);
-        this.getBatches();
-        this.selectYear(this.selectedYear);
-      });
-
+    .subscribe(result => {
+      this.years = result;
+      this.selectedYear = this.years[0];
+      console.log(this.years);
+      this.getBatches();
+      this.selectYear(this.selectedYear);
+    });
+    
   }
 
   getBatches() {
     this.auditService.getBatchesByYearByQuarter(this.selectedYear, this.selectedQuarter)
-      .subscribe(result => {
-        this.batches = result;
-        this.selectedBatch = this.batches[0];
-        this.selectBatch(this.batches[0]);
-        this.auditService.selectedBatch = this.batches[0];
-        console.log(this.batches);
-        this.getWeeks();
+    .subscribe(result => {
+      this.batches = result;
+      this.selectedBatch = this.batches[0];
+      this.selectBatch(this.batches[0]);
+      this.auditService.selectedBatch = this.batches[0];
+      console.log(this.batches);
+      this.getWeeks();
       });
-
+      
   }
 
   selectYear(event: number) {
@@ -66,7 +67,6 @@ export class ToolbarComponent implements OnInit {
     this.auditService.selectedQuarter = 1;
     this.selectQuarter(this.auditService.selectedQuarter);
   }
-
   selectQuarter(event: number) {
     this.selectedQuarter = event;
     this.auditService.selectedQuarter = this.selectedQuarter;
@@ -83,41 +83,41 @@ export class ToolbarComponent implements OnInit {
   }
 
   showActiveWeek(week: number) {
-    if (week == this.selectedWeek) {
+    if (week==this.selectedWeek) {
       return "active";
     }
   }
 
-  selectWeek(event: number) {
-    this.selectedWeek = event;
-    this.auditService.selectedWeek = this.selectedWeek;
-    if (this.selectedBatch != undefined) {
-      this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
-        .subscribe(result => {
-          this.auditService.sortAlphabetically(result);
-          this.auditService.setNotes(result);
-          console.log(result);
-          this.auditService.onWeekClick();
-        });
-    } else {
-      this.auditService.setNotes(null);
-      this.auditService.onWeekClick();
-    }
-
+  selectWeek(event: number) { 
+    this.selectedWeek = event; 
+    this.auditService.selectedWeek = this.selectedWeek; 
+    if(this.selectedBatch != undefined){
+    this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
+    .subscribe(result => {
+      this.auditService.sortAlphabetically(result);
+      this.auditService.setNotes(result);
+      console.log(result);
+      this.auditService.onWeekClick();  
+    });
+  }else{
+    this.auditService.setNotes(null);
+    this.auditService.onWeekClick();
+  }
+     
   }
   addWeek() {
-    var last = this.weeks[this.weeks.length - 1];
-    this.weeks.push(last + 1);
-    this.selectedWeek = last + 1;
+    var last = this.weeks[this.weeks.length-1];
+    this.weeks.push(last+1);
+    this.selectedWeek=last+1;
   }
 
   getWeeks() {
     this.weeks = [];
-    if (this.auditService.selectedBatch != undefined) {
-      for (var i = 0; i < this.auditService.selectedBatch.weeks; i++) {
-        this.weeks.push(i + 1);
-      }
+    if(this.auditService.selectedBatch != undefined){
+    for(var i = 0; i<this.auditService.selectedBatch.weeks; i++){
+      this.weeks.push(i+1);
     }
+  }
   }
 
 }
