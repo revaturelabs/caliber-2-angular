@@ -6,7 +6,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-associate',
@@ -140,7 +139,6 @@ export class AssociateComponent implements OnInit {
     console.log("Getting Comment");
     let newNote = this.getNote(selectedNoteId);
     newNote.trainee.flagNotes = comment;
-    console.log(newNote.trainee.flagNotes);
     this.auditService.saveFlagModal(newNote).subscribe(data =>{
       console.log(data);
       

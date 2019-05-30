@@ -52,6 +52,6 @@ notes: QcNote[] = [];
   }
 
   saveFlagModal(newNote: QcNote): Observable<Trainee>{
-    return this.http.put<Trainee>(this.url + this.saveFlagModal, newNote.trainee); 
+    return this.http.put<Trainee>(this.url + this.saveFlagModalURL, newNote.trainee); 
   }
 }
