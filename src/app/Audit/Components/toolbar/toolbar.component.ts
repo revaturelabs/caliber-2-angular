@@ -105,10 +105,16 @@ export class ToolbarComponent implements OnInit {
   }
      
   }
+  
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
-    this.weeks.push(last+1);
-    this.selectedWeek=last+1;
+    this.selectedBatch.weeks=last+1;
+    this.auditService.updateBatch(this.selectedBatch).subscribe(
+      data => {
+        this.weeks.push(last+1);
+        this.selectWeek(last+1);
+      }
+    )
   }
 
   getWeeks() {
