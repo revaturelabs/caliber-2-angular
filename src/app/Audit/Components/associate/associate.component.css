@@ -1,108 +1,136 @@
-
-  
-  .dropdown {
-    position: absolute;
-    display: inline-block;
-    align-self: center;
-    z-index: 3;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: relative;
-    background-color: #f1f1f1;
-    
-    box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
-    z-index: 3;
-    align-self: center;
-    border-radius: 40px;
-
-  }
-  
-  .dropdown-content a 
-  {
-    color: black;
-    padding: 5px 15px;
-    text-decoration: none;
-    display: inline-block;
-    align-self: center;
-    
-  }
-  .dropdown-content a:hover {background-color: lightgray; align-self: center; border-radius: 30px}
-
-  .dropdown:hover .dropdown-content {display: block; }
-
-  .dropdown:hover .dropbtn {background-color: #d39539;}
-
-#toggleNoteSort {
-    width: 110px;
-    height: 20px;
-    font-size: 12px;
-    padding-bottom: 10px;
-    padding: 0px;
-    
+#tagInput{
+  padding: 0px 10px;
+  width: 150px;
+  border-radius: 25px;
+}
+span.label {
+  margin: 5px;
+  padding: 2px 5px;
+  font-size: 10px;
+  text-align: center;
 }
 
-.flag-notes-popup {
-    position: relative;
-    display: inline-block;
-    background-color: white;
-    width: 270px;
-    height: 47px;
-    border: 1px solid rgb(204, 204, 204);
-    border-radius: 2px;
-    padding-top: 5px;
-    padding-left: 5px;
-    z-index: 1000;
-    left: 2px;
-    bottom: 2px;
+.closeChip{
+  cursor: pointer;
+  font-size: 15px;
 }
 
-.flag-notes-popup input {
-    display: inline-block;
-    width: 175px;
-    height: 35px;
-}
-
-.flage-notes-save-btn {
-    margin-left: 8px;
-}
-
-.flage-notes-close-btn {
-    margin-right: 5px;
-    padding-bottom: 14px;
+.closeChip:hover {
+  color: #000;
 }
 
 .dropdown {
-    position: absolute;
-    display: inline-block;
-    align-self: center;
-    z-index: 3;
-  }
+  position: absolute;
+  display: inline-block;
+  align-self: center;
+  z-index: 3;
+}
 
-  
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 6px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  align-self: center;
+  border-radius: 40px;
+}
 
-  .dropdown-content {
-    display: none;
-    position: relative;
-    background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
-    z-index: 3;
-    align-self: center;
-    border-radius: 40px;
-  }
+.dropdown-content a {
+  color: black;
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  align-self: center;
+}
 
-  .dropdown-content a 
-  {
-    color: black;
-    padding: 5px 15px;
-    text-decoration: none;
-    display: inline-block;
-    align-self: center;
-  }
+.dropdown-content a:hover {
+  background-color: lightgray;
+  align-self: center;
+  border-radius: 30px
+}
 
-  .dropdown-content a:hover {background-color: lightgray; align-self: center; border-radius: 30px}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-  .dropdown:hover .dropdown-content {display: block; }
+.dropdown:hover .dropbtn {
+  background-color: #d39539;
+}
 
-  .dropdown:hover .dropbtn {background-color: #d39539;}
+#toggleNoteSort {
+  width: 110px;
+  height: 20px;
+  font-size: 12px;
+  padding-bottom: 10px;
+  padding: 0px;
+}
+
+.flag-notes-popup {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  width: 270px;
+  height: 47px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 2px;
+  padding-top: 5px;
+  padding-left: 5px;
+  z-index: 1000;
+  left: 2px;
+  bottom: 2px;
+}
+
+.flag-notes-popup input {
+  display: inline-block;
+  width: 175px;
+  height: 35px;
+}
+
+.flage-notes-save-btn {
+  margin-left: 8px;
+}
+
+.flage-notes-close-btn {
+  margin-right: 5px;
+  padding-bottom: 14px;
+}
+
+.dropdown {
+  position: absolute;
+  display: inline-block;
+  align-self: center;
+  z-index: 3;
+}
+
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 6px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  align-self: center;
+  border-radius: 40px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  align-self: center;
+}
+
+.dropdown-content a:hover {
+  background-color: lightgray;
+  align-self: center;
+  border-radius: 30px
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #d39539;
+}

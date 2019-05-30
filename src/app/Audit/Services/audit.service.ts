@@ -34,8 +34,8 @@ notes: QcNote[] = [];
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
   }
-  
-  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+
+  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]> {
     //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
@@ -45,9 +45,10 @@ notes: QcNote[] = [];
   }
   getNotesByBatchByWeek(batchId: number, week: number): Observable<QcNote[]>{
     console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
-    return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/'  + week);
+    return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
   }
-  setNotes(notesToSet: QcNote[]){
+  
+  setNotes(notesToSet: QcNote[]) {
     this.notes = notesToSet;
   }
   sendNote(noteToSend: QcNote): Observable<QcNote> {
