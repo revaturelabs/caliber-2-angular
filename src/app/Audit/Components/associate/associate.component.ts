@@ -30,61 +30,6 @@ export class AssociateComponent implements OnInit {
     }
   ];
 
-  //List of test notes
-  // notes = [
-  //   {
-  //     qcStatus: 'Undefined',
-  //     noteId: 0,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Hajek, Alexander',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Superstar',
-  //     noteId: 1,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Michels, Alex',
-  //       flagNotes: '',
-  //       flagStatus: 'RED'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Good',
-  //     noteId: 2,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Smith, Carter',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Average',
-  //     noteId: 3,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Erwin, Eric',
-  //       flagNotes: '',
-  //       flagStatus: 'RED'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Poor',
-  //     noteId: 4,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Olney, Chris',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   }
-  // ];
-
-  // Unimplemented functions
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
@@ -163,23 +108,6 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-  // Cycle the flag notes popup
-  // cycleFlagNotesInput(selectedNoteId: number, enable: boolean): void {
-
-  //   // Loop through each note in notes until the target is found
-  //   for (let i = 0; i < this.notes.length; i++) {
-
-  //     // Find the clicked note
-  //     if (this.notes[i].noteId === selectedNoteId) {
-
-  //       console.log(selectedNoteId);
-
-  //         // Enable or disable the notes box popup
-  //         this.notes[i].noteFlagInputActive = enable;
-
-  //     }
-  //   }
-  // }
   showSpinner(){
     this.showCheck = false;
     this.showSaving = true;
@@ -216,8 +144,7 @@ export class AssociateComponent implements OnInit {
         this.notes[i].qcStatus = selection;
         this.auditService.sendNote(this.notes[i]).subscribe(
           data => {
-            this.changeOverallBatchNotesInService();
-            this.auditService.overallBatchNoteChanged.next(this.overallBatchNote);
+            this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
           },
           issue => {
             if (issue instanceof HttpErrorResponse) {
@@ -234,11 +161,6 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-  changeOverallBatchNotesInService(){
-    this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek).subscribe(batchNote => {
-      this.overallBatchNote = batchNote;
-    });
-  }
 
 }
 

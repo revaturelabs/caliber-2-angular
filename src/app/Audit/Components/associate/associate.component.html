@@ -35,11 +35,12 @@
                 </th>
                 <th>
                     <div class="spinner fa-style ng-hide" *ngIf="showSaving">
-                        <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
-                      </div>
-                      <div id="checkMark" class="spinner fa-style" *ngIf="showCheck">
+                        <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x"
+                            aria-hidden="true"></i>
+                    </div>
+                    <div id="checkMark" class="spinner fa-style" *ngIf="showCheck">
                         <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
-                      </div>
+                    </div>
                 </th>
             </tr>
         </thead>
@@ -98,8 +99,10 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" (keypress)="showSpinner()" (keydown.backspace)="showSpinner()" [(ngModel)]="QcNote.content" id="note-textarea-{{QcNote.noteId}}"
-                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" (keypress)="showSpinner()"
+                        (keydown.backspace)="showSpinner()" [(ngModel)]="QcNote.content"
+                        id="note-textarea-{{QcNote.noteId}}" class="form-control"
+                        placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
                         maxlength="4000">{{ QcNote.content }}</textarea>
                 </td>
             </tr>
