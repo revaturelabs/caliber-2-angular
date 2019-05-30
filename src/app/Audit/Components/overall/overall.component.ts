@@ -22,7 +22,6 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {
-			console.log(data);
 			this.note = data;
 		});
 
@@ -32,32 +31,28 @@ export class OverallComponent implements OnInit, OnDestroy {
 			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
 
 		});
-
 	}
 
 	noteOnBlur(noteId: number, secondRound: boolean) {
-		
-			this.auditService.sendNote(this.note).subscribe(
-				data => {
-				},
-				issue => {
-					if (issue instanceof HttpErrorResponse) {
-						const err = issue as HttpErrorResponse;
-						this.errorService.setError('AuditService',
-							`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
+
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+			},
+			issue => {
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
 					Status Code: ${err.status} \n
 					Status Text: ${err.statusText} \n
 					Error: ${err.message}`);
-					}
 				}
-			)
-		
+			}
+		)
 	}
 
 	setScore(qcStatus: string, noteId: number) {
-		console.log("im here")
 		this.note.qcStatus = qcStatus;
-		console.log(this.note)
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
 				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
@@ -72,13 +67,11 @@ export class OverallComponent implements OnInit, OnDestroy {
 				  Error: ${err.message}`);
 				}
 			});
-
 	}
 
 	ngOnDestroy() {
 		if (this.noteSubscription) {
 			this.noteSubscription.unsubscribe();
 		}
-
 	}
 }
