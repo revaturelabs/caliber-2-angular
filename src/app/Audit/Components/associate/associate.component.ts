@@ -33,22 +33,21 @@ export class AssociateComponent implements OnInit {
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
-      this.auditService.subsVar = this.auditService.
+    this.auditService.subsVar = this.auditService.
       invokeAssosciateFunction.subscribe(()=> {
         this.getNotesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
-    if(this.auditService.notes === undefined){
+    if (this.auditService.notes === undefined) {
       this.notes = null;
-    }else{
-    this.notes = this.auditService.notes;
+    } else {
+      this.notes = this.auditService.notes;
     }
-}
-
+  }
 
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-    this.auditService.invokeAssosciateFunction.subscribe(()=> {
+      this.auditService.invokeAssosciateFunction.subscribe(()=> {
       this.sortRandom = false;
       this.order = "Randomly";
     });
@@ -77,44 +76,14 @@ export class AssociateComponent implements OnInit {
     this.notes = this.auditService.notes;
   }
 
-  // Cycle the Individual Feedback Status
-  cycleFlag(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].trainee.flagStatus) {
-          case 'NONE':
-            newStatus = 'RED';
-            break;
-          case 'RED':
-            newStatus = 'GREEN';
-            break;
-          case 'GREEN':
-            newStatus = 'NONE';
-            break;
-        }
-        console.log("newStatus: " + newStatus);
-        // Update the status
-        this.notes[i].trainee.flagStatus = newStatus;
-      }
-    }
-  }
-
-  showSpinner(){
+  showSpinner() {
     this.showCheck = false;
     this.showSaving = true;
   }
+
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
     for (let note of this.notes) {
-      if(note.noteId === selectedNoteId) {
+      if (note.noteId === selectedNoteId) {
         console.log(note);
         this.auditService.sendNote(note).subscribe(
           data => {
@@ -160,6 +129,5 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-
 
 }
