@@ -38,8 +38,8 @@ describe('BatchService', () => {
         });
         const req = httpMock.expectOne('http://localhost:9095/vp/batch/all');
         expect(req.request.method).toEqual('GET');
-        const b1 = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45);
-        const b2 = new Batch('testing2', 'Revature', 'test2', 'test trainer', 'co trainer', 2, new Date(''), new Date(''), 45, 40);
+        const b1 = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45,1);
+        const b2 = new Batch('testing2', 'Revature', 'test2', 'test trainer', 'co trainer', 2, new Date(''), new Date(''), 45, 40,1);
         req.flush([b1, b2]);
       })
   );
@@ -48,14 +48,14 @@ describe('BatchService', () => {
     inject([HttpTestingController, BatchService],
       (httpMock: HttpTestingController, bs: BatchService) => {
         let batch: Batch;
-        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45);
+        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45, 1);
         testBatch.batchId = 1;
         bs.getBatch(testBatch).subscribe(b => {
           batch = b;
         });
         const req = httpMock.expectOne('http://localhost:9095/all/batch/1');
         expect(req.request.method).toEqual('GET');
-        const testBatch2 = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45);
+        const testBatch2 = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45, 1);
         testBatch2.batchId = 1;
         req.flush([testBatch2]);
       })
@@ -71,7 +71,7 @@ describe('BatchService', () => {
         const req = httpMock.expectOne('http://localhost:9095/vp/batch/');
         expect(req.request.method).toEqual('GET');
         const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1,
-          new Date('2018-10-04'), new Date(''), 50, 45);
+          new Date('2018-10-04'), new Date(''), 50, 45, 1);
         req.flush([testBatch]);
       })
   );
@@ -79,7 +79,7 @@ describe('BatchService', () => {
   it('should post a batch',
     inject([HttpTestingController, BatchService],
       (httpMock: HttpTestingController, bs: BatchService) => {
-        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45);
+        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45, 1);
         bs.postBatch(testBatch).subscribe(b => { });
         const req = httpMock.expectOne('http://localhost:9095/all/batch/create');
         expect(req.request.method).toEqual('POST');
@@ -89,7 +89,7 @@ describe('BatchService', () => {
   it('should update a batch',
     inject([HttpTestingController, BatchService],
       (httpMock: HttpTestingController, bs: BatchService) => {
-        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45);
+        const testBatch = new Batch('testing1', 'Revature', 'test1', 'test train1', 'cotrainer', 1, new Date(''), new Date(''), 50, 45, 1);
         bs.putBatch(testBatch).subscribe(b => { });
         const req = httpMock.expectOne('http://localhost:9095/all/batch/update');
         expect(req.request.method).toEqual('PUT');
