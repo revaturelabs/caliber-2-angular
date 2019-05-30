@@ -36,8 +36,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 	}
 
 	noteOnBlur(noteId: number, secondRound: boolean) {
-		if (this.note.noteId = noteId) {
-			console.log(this.note);
+		
 			this.auditService.sendNote(this.note).subscribe(
 				data => {
 				},
@@ -52,25 +51,27 @@ export class OverallComponent implements OnInit, OnDestroy {
 					}
 				}
 			)
-		}
+		
 	}
 
 	setScore(qcStatus: string, noteId: number) {
-
-		// this.auditService.sendNote(this.note).subscribe(
-		// 	data => {
-		// 		this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
-		// 	},
-		// 	issue => {
-		// 		if (issue instanceof HttpErrorResponse) {
-		// 			const err = issue as HttpErrorResponse;
-		// 			this.errorService.setError('AuditService',
-		// 				`Issue updating QcNote with noteId ${this.note.noteId}. Please contact system administrator: \n
-		// 		  Status Code: ${err.status} \n
-		// 		  Status Text: ${err.statusText} \n
-		// 		  Error: ${err.message}`);
-		// 		}
-		// 	});
+		console.log("im here")
+		this.note.qcStatus = qcStatus;
+		console.log(this.note)
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
+			},
+			issue => {
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${this.note.noteId}. Please contact system administrator: \n
+				  Status Code: ${err.status} \n
+				  Status Text: ${err.statusText} \n
+				  Error: ${err.message}`);
+				}
+			});
 
 	}
 
