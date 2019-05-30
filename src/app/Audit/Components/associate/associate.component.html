@@ -33,20 +33,12 @@
                 <th>
                     Notes
                 </th>
-                <th>
-                    <div class="spinner fa-style ng-hide" *ngIf="showSaving">
-                        <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
-                      </div>
-                      <div id="checkMark" class="spinner fa-style" *ngIf="showCheck">
-                        <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
-                      </div>
-                </th>
             </tr>
         </thead>
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let QcNote of notes">
+            <tr *ngFor="let QcNote of notes; let i = index;">
                 <td (click)="cycleFlagNotesInput(QcNote.noteId, true); cycleFlag(QcNote.noteId);" style="width: 11%;">
                     {{ QcNote.trainee.name }}
                 </td>
@@ -97,9 +89,22 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" (keypress)="showSpinner()" (keydown.backspace)="showSpinner()" [(ngModel)]="QcNote.content" id="note-textarea-{{QcNote.noteId}}"
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" (keypress)="showSpinner(i)" (keydown.backspace)="showSpinner(i)" [(ngModel)]="QcNote.content" id="note-textarea-{{QcNote.noteId}}"
                         class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
                         maxlength="4000">{{ QcNote.content }}</textarea>
+                </td>
+                <td>
+                    
+                        <div class="spinner fa-style ng-hide" *ngIf="showSaving && isTyping">
+                            <i name="saving" style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                          </div>
+                          <div id="checkMark" class="spinner fa-style" *ngIf="showCheck && isTyping">
+                            <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
+                          </div>
+                          <div id="redX" class="spinner fa-style" *ngIf="showRedX">
+                            <i role="button" class="fa fa-icon fa-2x" aria-hidden="true" style="color:red; font:bold; font-size: 30px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">X</i>
+                          </div>
+                    
                 </td>
             </tr>
         </tbody>

@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-associate',
@@ -18,6 +19,9 @@ export class AssociateComponent implements OnInit {
   order: string = "Randomly";
   showCheck: boolean = false;
   showSaving: boolean = false;
+  showRedX: boolean = false;
+  name: any;
+  isTyping : any;
 
   // List of test categories
   categories = [
@@ -179,10 +183,29 @@ export class AssociateComponent implements OnInit {
   //     }
   //   }
   // }
-  showSpinner(){
+  
+
+
+  //showSpinner is called when keystroke event occurs in a note
+  //it displays a "loading" icon until noteOnBlur is called..
+  //see noteOnBlur below
+  
+  showSpinner(i: number){
+    if (i == 1) {
+      this.isTyping = true;
+      
+    }
+    console.log(i);
+    console.log(this.name);
+    this. showRedX = false;
     this.showCheck = false;
     this.showSaving = true;
   }
+
+  //noteOnBlur will save a note to the backend when an onBlur event happens.
+  //if the function returns successfully, the check mark div will be displayed
+  //if the function returns an error, the X mark div will be displayed.. 
+  //these are displayed by setting the value of their ngIf variable to true
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
     for (let note of this.notes) {
       if(note.noteId === selectedNoteId) {
@@ -191,12 +214,16 @@ export class AssociateComponent implements OnInit {
           data => {
             this.showCheck = true;
             this.showSaving = false;
+            this.showRedX = false;
           },
           issue => {
+            this.showRedX = true;
+            this.showSaving = false;
+            this.showCheck = false;
             if (issue instanceof HttpErrorResponse) {
               const err = issue as HttpErrorResponse;
               this.errorService.setError('AuditService',
-                `Issue updating QcNote with noteId ${selectedNoteId}. Please contact system administrator: \n
+                `Issue updating QcNote with noteId ${note.trainee.name}. Please contact system administrator: \n
             Status Code: ${err.status} \n
             Status Text: ${err.statusText} \n
             Error: ${err.message}`);
