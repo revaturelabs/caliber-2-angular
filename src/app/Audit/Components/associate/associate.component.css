@@ -19,16 +19,12 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
     border-color: transparent transparent transparent transparent;
     
     }
-
-  .flag-note-area-empty,.flag-note-area-green,.flag-note-area-red
-  {
-  
-  }
-
 .NoteRow:hover .options { display: inline-block; }
 
 
-
+.dropbtn{
+  z-index: 2;
+}
 
 
 
@@ -36,6 +32,9 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 .dropup:hover .dropup-content 
 {
   display: block;
+  border: 1px;
+  border-style: outset;
+
 }
 
 /* Dropup content (Hidden by Default) */
@@ -44,17 +43,19 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
   position: absolute;
   bottom: 50px;
   margin: 30px auto;
-  background-color: rgba(223, 112, 48, 0.993);
+  background-color: rgba(255, 255, 255, 0.993);
   min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 4;
   font-family: sans-serif;
   border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.74);
 }
 
 /* Links inside the dropup */
 .dropup-content li {
-  color: white;
+  color: black;
   padding: 12px 16px;
   font-family: sans-serif;
   text-decoration: none;
@@ -182,3 +183,28 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
   .dropdown:hover .dropdown-content {display: block; }
 
   .dropdown:hover .dropbtn {background-color: #d39539;}
+
+
+  /* Fixing Module */
+
+  .objectButton
+  {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+  }
+
+  .fa-red
+  {
+    color: red;
+  }
+  .fa-green
+  {
+    color: darkgreen;
+  }
+  .fa-none
+  {
+    display: none;
+  }
+
+  

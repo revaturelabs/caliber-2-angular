@@ -16,9 +16,12 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
   theNote: number;
-  flagStatus: string;
+  tempFlagStatus: string;
+  preparedFlagStatus: string;
+  flagStatusVisual: string;
   hoverComment: string;
   flagComment: string;
+  
   // List of test categories
   categories = [
     {
@@ -118,11 +121,16 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-
+  prepareFlag(flagSelection: string)
+  {
+    this.preparedFlagStatus = flagSelection;
+    this.flagStatusVisual = "fa-"+flagSelection.toLowerCase();
+  }
 
   setFlag(selectedNoteId: number, selection: string)
   {
     this.getNote(selectedNoteId).trainee.flagStatus = selection;
+    console.log(this.getNote(selectedNoteId).trainee);
   }
   clearComment()
   {
@@ -139,6 +147,7 @@ export class AssociateComponent implements OnInit {
     console.log("Getting Comment");
     let newNote = this.getNote(selectedNoteId);
     newNote.trainee.flagNotes = comment;
+    newNote.trainee.flagStatus = this.preparedFlagStatus;
     this.auditService.saveFlagModal(newNote).subscribe(data =>{
       console.log(data);
       
@@ -146,10 +155,13 @@ export class AssociateComponent implements OnInit {
     
   }
 
-  deployToModal(selectedNoteId: number)
+  deployToModal(selectedNoteId: number, currentFlagStatus: string)
   {
     this.theNote = selectedNoteId;
+    this.tempFlagStatus = currentFlagStatus;
   } 
+
+
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
       if (a.trainee.name > b.trainee.name) {

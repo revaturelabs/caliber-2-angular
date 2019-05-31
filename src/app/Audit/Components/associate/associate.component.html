@@ -52,13 +52,14 @@
                     <div class="dropup">
                         <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
                         <div *ngIf="QcNote.trainee.flagStatus === 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE'" class="flag-note-area-empty dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE' || QcNote.trainee.flagStatus == null" class="flag-note-area-empty dropbtn"></div>
                         &nbsp; {{ QcNote.trainee.name }}<br>
-                        <i (click)="deployToModal(QcNote.noteId)" class="fa fa-ellipsis-h options"
+                        <i (click)="deployToModal(QcNote.noteId, QcNote.trainee.flagStatus); prepareFlag('NONE');" class="fa fa-ellipsis-h options"
                             style="margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;" data-toggle="modal"
                             data-target="#flagTrainee"></i>
-                        <div class="dropup-content">
-                            <li *ngIf = "QcNote.trainee.flagStatus != null">{{QcNote.trainee.flagNotes}}</li>
+
+                        <div *ngIf = "(QcNote.trainee.flagNotes.length > 2) && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN')" class="dropup-content">
+                            <li>{{QcNote.trainee.flagNotes}}</li>
                         </div>
                     </div>
                 </td>
@@ -114,28 +115,35 @@
                 <label for="flagsStatus">Select Flag:</label>
                 <div>
                     <ul class="nav nav-tabs">
-                        <li><i class="far fa-flag fa-3x" style="color:darkgreen; cursor: pointer;"
-                                (click)="setFlag((theNote), 'GREEN');"></i>
-                        <li><i class="far fa-flag fa-3x" style="color:red; cursor: pointer; margin: auto 550%;"
-                                (click)="setFlag((theNote), 'RED');"></i>
-                        <li><i class="fas fa-times fa-3x"
-                                style="color: rgba(0, 0, 0, 0.500); cursor: pointer; margin: auto 1550%;"
-                                (click)="setFlag((theNote), 'NONE');"></i></li>
+                        <li><button class = "objectButton" title = "Green Flag"><i class="far fa-flag fa-3x fa-green"
+                                (click)="prepareFlag('GREEN');"></i></button></li>
+                        <li><button class = "objectButton" title = "Red Flag" style = "margin: auto 200px;"><i class="far fa-flag fa-3x fa-red" 
+                                (click)="prepareFlag('RED');"></i></button></li>
+                        <li><button class = "objectButton "title = "no Flag" style = "margin: auto 24px;"><i class="fas fa-times fa-3x"
+                                style="color: rgba(0, 0, 0, 0.500);"
+                                (click)="prepareFlag('NONE');"></i></button></li>
+                        <br>
+                        <br>
                         <br>
                         <br>
                     </ul>
                 </div>
                 <div class="form-group">
                     <label for="comment">Comment:</label>
-                    <textarea class="form-control" rows="5" id="comment" #flagComment></textarea>
+                    <textarea class="form-control" rows="3" id="comment" #flagComment></textarea>
+                    selected color:
+                    <i *ngIf = "(flagStatusVisual) != null" class = "far fa-flag fa-2x {{flagStatusVisual}}"></i>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"
-                    (click)="submitModal((theNote), flagComment.value); clearComment()"
-                    data-dismiss="modal">Submit</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"
-                    (click)="setFlag((theNote),'NONE')">Cancel</button>
+                
+                <button class="btn btn-primary"
+                data-dismiss="modal"
+                *ngIf = "(preparedFlagStatus) != 'NONE'"
+                (click)="submitModal((theNote), flagComment.value); clearComment(); setFlag((theNote),(preparedFlagStatus));">
+                Submit</button>
+                <button class="btn btn-primary" data-dismiss="modal"
+                    (click)="setFlag((theNote),(tempFlagStatus)); clearComment();">Cancel</button>
             </div>
         </div>
     </div>
