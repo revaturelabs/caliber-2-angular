@@ -9,12 +9,24 @@
           <strong>Categories covered this week: </strong>
           <!-- Tracked last item in list to prevent last comma from being printed -->
 
+
+
           <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default">
             {{ tag.value.content }}
             <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
           </span>
 
-          <input id="tagInput" #tagInputText type="text" (keyup.enter) = "addCategoryTag(tagInputText.value); tagInputText.value=''" placeholder="Add Category...">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Categories
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngFor="let category of hardCodedCategories" (click)="addCategoryTag(category.content)">
+                <a routerLink="#">{{ category.content }}</a>
+              </li>
+            </ul>
+          </div>
+
           <br>
         </td>
       </tr>

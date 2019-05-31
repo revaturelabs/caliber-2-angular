@@ -15,9 +15,30 @@ import { Tag } from '../../types/tag';
 })
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
+
   categoryTags: Map<string, Tag> = new Map<string, Tag>([
-    ['Java', new Tag(1, 'Java', 35, 45)],
-    ['MySql', new Tag(2, 'MySql', 35, 45)]]);
+    ['Java', new Tag(1, 'Java', 35, 45, true)],
+    ['MySql', new Tag(2, 'MySql', 35, 45, true)]
+  ]);
+
+
+  hardCodedCategories: Tag[] = [
+    new Tag(1, 'Java', 35, 45, true),
+    new Tag(1, 'SQL', 35, 45, true),
+    new Tag(1, 'HTML', 35, 45, true),
+    new Tag(1, 'CSS', 35, 45, true),
+    new Tag(1, 'stuff1', 35, 45, true),
+    new Tag(1, 'stuff2', 35, 45, true),
+    new Tag(1, 'stuff3', 35, 45, true),
+    new Tag(1, 'stuff4', 35, 45, true),
+    new Tag(1, 'stuff5', 35, 45, true),
+    new Tag(1, 'akljashdlfjhasldkjhflkasjdhlkjahsdjfhjdjdjdjhfjdhfjdhlkjhasd', 35, 45, true),
+    new Tag(1, 'bdfdjfhjalsefhlaefalhdfhlasdlkfhaljsdhflkjashdlkjfhasljdhfla', 35, 45, true),
+    new Tag(1, 'asldkfjhlaksdhflkjjahsdlkjfhalskjdjhflajsdfasdjhflk', 35, 45, true),
+    new Tag(1, 'C', 35, 45, true),
+
+  ];
+
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
 
@@ -56,10 +77,8 @@ export class AssociateComponent implements OnInit {
 
   addCategoryTag(tagInputText: string) {
     if (tagInputText != '') {
-      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45));
+      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45, true));
     }
-
-    console.log(this.categoryTags);
   }
 
   removeCategoryTag($event: any) {
