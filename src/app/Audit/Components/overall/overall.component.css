@@ -5,14 +5,15 @@
 }
 
 .dropdown {
-	position: absolute;
+	position: relative;
 	text-align: center;
 	display: inline-block;
 	align-self: center;
+	overflow: visible;
 	z-index: 3;
-	width: 0;
-	padding: 0;
-	margin:0;	
+	padding: auto;
+	margin:auto;	
+	width: auto;
 }
 
 td{
@@ -23,8 +24,7 @@ td{
 	display: none;
 	position: relative;
 	left: 20px;
-	z-index: 3;
-	margin: auto -100px;
+	margin: auto;
 	background-color: #f1f1f1;
 	box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
 	align-self: center;
@@ -35,6 +35,7 @@ td{
 .dropdown-content a 
 {
 	color: black;
+	position: relative;
 	padding: 5px 15px;
 	text-decoration: none;
 	display: inline-block;
