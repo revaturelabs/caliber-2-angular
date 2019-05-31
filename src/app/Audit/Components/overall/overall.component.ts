@@ -81,7 +81,8 @@ export class OverallComponent implements OnInit, OnDestroy {
 				}
 			}
 		)
-
+		//Get rid of all marks after few seconds
+		setTimeout(() => {this.clearAllSavingIcon();}, 5000);
 	}
 
 	setScore(qcStatus: string, noteId: number) {

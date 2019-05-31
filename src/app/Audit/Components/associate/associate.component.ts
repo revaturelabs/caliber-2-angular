@@ -7,6 +7,7 @@ import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { element } from '@angular/core/src/render3/instructions';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-associate',
@@ -228,6 +229,8 @@ export class AssociateComponent implements OnInit {
         break;
       }
     }
+    //Get rid of all marks after few seconds
+    setTimeout(() => {this.clearAllSavingIcon(i);}, 5000);
   }
 
   setScore(selection: string, selectedNoteId: number) {
