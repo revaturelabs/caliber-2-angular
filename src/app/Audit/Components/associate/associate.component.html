@@ -1,43 +1,31 @@
 <div class="container">
+  <div class="categories">
+    <strong>Categories covered this week: </strong>
+
+
+    <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default">
+      {{ tag.value.content }}
+      <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
+    </span>
+
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Categories
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li *ngFor="let category of hardCodedCategories" (click)="addCategoryTag(category.content)">
+        <a routerLink="#">{{ category.content }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <br>
+  <span>
+    <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
+      {{order}}</button>
+  </span>
   <!-- The max width is manually set to the same width as the original AngularJss webpage -->
   <table class="table table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
     <thead>
-      <tr>
-        <!-- Top row will span over all columns -->
-        <td colspan="5">
-
-          <strong>Categories covered this week: </strong>
-          <!-- Tracked last item in list to prevent last comma from being printed -->
-
-
-
-          <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default">
-            {{ tag.value.content }}
-            <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
-          </span>
-
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Categories
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li *ngFor="let category of hardCodedCategories" (click)="addCategoryTag(category.content)">
-                <a routerLink="#">{{ category.content }}</a>
-              </li>
-            </ul>
-          </div>
-
-          <br>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span>
-            <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
-              {{order}}</button>
-          </span>
-        </td>
-      </tr>
       <tr>
         <!-- Spans over flag column --->
         <th colspan="2">
