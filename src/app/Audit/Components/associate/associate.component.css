@@ -113,3 +113,9 @@
 .dropdown:hover .dropbtn {
   background-color: #d39539;
 }
+
+.savingIconDiv {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -22px;
+}
