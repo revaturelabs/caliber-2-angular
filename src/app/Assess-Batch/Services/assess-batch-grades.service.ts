@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { traineeAssessment, Grade, Category } from '../../User/user/types/trainee';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/json'})};
 
@@ -9,8 +10,8 @@ const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/jso
   providedIn: 'root'
 })
 export class AssessBatchGradeService {
-  url = 'http://localhost:9090';
-  catUrl = '/all/category/';
+  url = environment.serverRootURL + '/assessment';
+  catUrl = environment.serverRootURL + '/category/all/category/';
   gradesByBatchIdURL = '/all/grade/batch/';
   gradesById = '/all/grade/';
   gradeAll = '/all/grade/all';
@@ -20,7 +21,7 @@ export class AssessBatchGradeService {
   batchGrade = '/all/grade/average?batch=';
   batchAvgGrade = '&week='
 
-  url2 = 'http://localhost:9090/all/grade/average?batch=';
+  url2 = this.url + '/all/grade/average?batch=';
  
   allAssessments: traineeAssessment[] = [];
   allGrades: Grade[] = [];
@@ -45,7 +46,7 @@ export class AssessBatchGradeService {
   }
 
   getCategoryByCategoryId(id: number):  Observable<Category> {
-    return this.http.get<Category>(this.url + this.catUrl + id);
+    return this.http.get<Category>(this.catUrl + id);
   }
 
   getGradeById(id: number): Observable<Grade> {

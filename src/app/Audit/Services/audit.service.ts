@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Note } from 'src/app/Batch/type/note';
@@ -13,32 +13,44 @@ import { Trainee } from 'src/app/Batch/type/trainee';
 export class AuditService {
 // http://localhost:9095/ environment.serverRootURL
 url = environment.serverRootURL;
+overallBatchNote:QcNote;
+overallBatchNoteChanged = new Subject<QcNote>();
 batchAllURL = '/qa/batch/batches';
 batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
 saveFlagModalURL= '/qa/trainee/update'; 
+updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
+selectedQuarter: number = 1;
 selectedYear: number;
 selectedBatch: Batch;
 selectedWeek: number;
 //selectedWeekChanged = new Subject<boolean>();
 notes: QcNote[] = [];
-
   constructor(private http: HttpClient) { }
   invokeAssosciateFunction = new EventEmitter();
-  subsVar: Subscription;  
-  onWeekClick() {    
-    this.invokeAssosciateFunction.emit(); 
-  }    
+  subsVar: Subscription;
+  onWeekClick() {
+    this.invokeAssosciateFunction.emit();
+  }
+
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year);
+  }
+  
+  updateBatch(updateBatch: Batch) {
+    return this.http.put(this.updateBatchURL, updateBatch);
+  }
+
+  getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]>{
+    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
+    return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
-
   getNotesByBatchByWeek(batchId: number, week: number): Observable<QcNote[]>{
     console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
     return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/'  + week);
@@ -46,12 +58,29 @@ notes: QcNote[] = [];
   setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
   }
-
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }
 
   saveFlagModal(newNote: QcNote): Observable<Trainee>{
     return this.http.put<Trainee>(this.url + this.saveFlagModalURL, newNote.trainee); 
+  }
+  
+  getOverallBatchNoteByWeek(batchId: number, week:number) {
+    return this.http.get<QcNote>(this.url + this.notesByBatchByWeekURL + 'overall/' + batchId + '/'  + week).subscribe(batchNote => {
+      this.overallBatchNote = batchNote;
+      this.overallBatchNoteChanged.next(this.overallBatchNote);
+    });
+  }
+
+  sortAlphabetically(notes: any) {
+    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
+      if (a.trainee.name > b.trainee.name) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
   }
 }

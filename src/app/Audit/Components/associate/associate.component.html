@@ -17,7 +17,7 @@
                 <td>
                     <span>
                         <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
-                            Randomly</button>
+                            {{order}}</button>
                     </span>
                 </td>
             </tr>
@@ -47,7 +47,7 @@
     <a href="#">Link 3</a>
   </div>
 </div>-->
-            <tr *ngFor="let QcNote of notes" class="NoteRow">
+            <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
                 <td style="width: 11%;">
                     <div class="dropup">
                         <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
@@ -58,7 +58,7 @@
                             style="margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;" data-toggle="modal"
                             data-target="#flagTrainee"></i>
 
-                        <div *ngIf = "(QcNote.trainee.flagNotes.length > 2) && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN')" class="dropup-content">
+                        <div *ngIf = "((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))" class="dropup-content">
                             <li>{{QcNote.trainee.flagNotes}}</li>
                         </div>
                     </div>
@@ -98,10 +98,36 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false)" id="note-textarea-{{QcNote.noteId}}"
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)" (keypress)="showSpinner(i); isTyping = true" (keydown.backspace)="showSpinner(i); isTyping = true"
+                        [(ngModel)]="QcNote.content"
                         class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
-                        maxlength="4000">{{ QcNote.content }}</textarea>
+                        maxlength="4000">{{ QcNote.content }}
+                    </textarea>
+
+                        
                 </td>
+                <!-- Status icons -->
+                <div style=" margin: 50px -34px; display: none; position: absolute; transition: 0.5s;" [attr.id]="'spinner' + i">
+                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                </div>
+                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'checkMark' + i">
+                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                </div>
+                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'errMark' + i">
+                    <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red;"></i>
+                </div>
+                
+                <!-- <td [attr.id]="'saveStatus' + i" style="display: none;">
+                        <div class="spinner fa-style ng-hide" *ngIf="showSaving">
+                            <i name="saving" style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                          </div>
+                          <div id="checkMark" class="spinner fa-style" *ngIf="showCheck">
+                            <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
+                          </div>
+                          <div id="redX" class="spinner fa-style" *ngIf="showRedX">
+                            <i role="button" class="fa fa-icon fa-2x" aria-hidden="true" style="color:red; font:bold; font-size: 30px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">X</i>
+                          </div>  
+                </td> -->
             </tr>
         </tbody>
     </table>
