@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Note } from 'src/app/Batch/type/note';
 import { QcNote } from 'src/app/Audit/types/note';
+import { Trainee } from 'src/app/Batch/type/trainee';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,7 @@ batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
+saveFlagModalURL= '/qa/trainee/update'; 
 updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
 selectedQuarter: number = 1;
 selectedYear: number;
@@ -58,6 +61,11 @@ notes: QcNote[] = [];
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }
+
+  saveFlagModal(newNote: QcNote): Observable<Trainee>{
+    return this.http.put<Trainee>(this.url + this.saveFlagModalURL, newNote.trainee); 
+  }
+  
   getOverallBatchNoteByWeek(batchId: number, week:number) {
     return this.http.get<QcNote>(this.url + this.notesByBatchByWeekURL + 'overall/' + batchId + '/'  + week).subscribe(batchNote => {
       this.overallBatchNote = batchNote;
