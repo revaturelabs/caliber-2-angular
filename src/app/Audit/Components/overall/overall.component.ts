@@ -15,8 +15,12 @@ export class OverallComponent implements OnInit, OnDestroy {
 	week: number;
 	note: QcNote;
 	noteSubscription: Subscription;
-	//Smiley face status
-	smile: string; meh: string; frown: string;
+
+	isSpinning: boolean = false;
+	isCheck: boolean = false;
+	isError: boolean = false;
+
+	isTyping: boolean;
 
 	constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
@@ -35,23 +39,49 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 	}
 
+	showSpinner() {
+		this.isSpinning = true;
+		this.isCheck = false;
+		this.isError = false;
+	}
+
+	clearAllSavingIcon() {
+		this.isSpinning = false;
+		this.isCheck = false;
+		this.isError = false;
+	}
+
 	noteOnBlur(noteId: number, secondRound: boolean) {
-		
-			this.auditService.sendNote(this.note).subscribe(
-				data => {
-				},
-				issue => {
-					if (issue instanceof HttpErrorResponse) {
-						const err = issue as HttpErrorResponse;
-						this.errorService.setError('AuditService',
-							`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
+		this.showSpinner();
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+				if (this.isTyping == true) {
+					this.isSpinning = false;
+					this.isCheck = true;
+					this.isError = false;
+				} else {
+					this.isSpinning = false;
+					this.isCheck = false;
+					this.isError = false;
+				}
+
+				this.isTyping = false;
+			},
+			issue => {
+				this.isSpinning = false;
+				this.isCheck = false;
+				this.isError = true;
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
 					Status Code: ${err.status} \n
 					Status Text: ${err.statusText} \n
 					Error: ${err.message}`);
-					}
 				}
-			)
-		
+			}
+		)
+
 	}
 
 	setScore(qcStatus: string, noteId: number) {

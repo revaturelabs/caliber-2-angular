@@ -38,25 +38,33 @@
         <tbody>
             <!-- Every note contains an associate in the current batch -->
             <!-- Every column is given a percentage of the table for simplicity -->
-            <tr *ngFor="let QcNote of notes; let i = index;">
-                <td (click)="cycleFlagNotesInput(QcNote.noteId, true); cycleFlag(QcNote.noteId);" style="width: 11%;">
-                    {{ QcNote.trainee.name }}
+            <!--
+<div class="dropup">
+  <button class="dropbtn">Dropup</button>
+  <div class="dropup-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>-->
+            <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
+                <td style="width: 11%;">
+                    <div class="dropup">
+                        <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE' || QcNote.trainee.flagStatus == null" class="flag-note-area-empty dropbtn"></div>
+                        &nbsp; {{ QcNote.trainee.name }}<br>
+                        <i (click)="deployToModal(QcNote.noteId, QcNote.trainee.flagStatus); prepareFlag('NONE');" class="fa fa-ellipsis-h options"
+                            style="margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;" data-toggle="modal"
+                            data-target="#flagTrainee"></i>
+
+                        <div *ngIf = "((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))" class="dropup-content">
+                            <li>{{QcNote.trainee.flagNotes}}</li>
+                        </div>
+                    </div>
                 </td>
                 <td style="width: 3%; position:absolute;">
-                    <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="QcNote.trainee.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="QcNote.trainee.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="QcNote.trainee.flagStatus==='NONE'" class="glyphicon glyphicon-flag"
-                        style="visibility: hidden;"></i>
-                    <!-- Shows the flag notes popup if the user clicks the name column -->
-                    <div *ngIf="QcNote.noteFlagInputActive===true" class="flag-notes-popup">
-                        <input class="form-control" type="text" placeholder=" comment" />
-                        <button class="btn btn-info flage-notes-save-btn">Save</button>
-                        <button (click)="cycleFlagNotesInput(QcNote.noteId, false)" type="button"
-                            class="flage-notes-close-btn close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <!--Buffer area-->
                 </td>
                 <td>
                     <div class="dropdown">
@@ -90,25 +98,24 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)" (keypress)="showSpinner(i); isTyping = true" (keydown.backspace)="showSpinner(i); isTyping = true"
-                        [(ngModel)]="QcNote.content"
-                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
-                        maxlength="4000">{{ QcNote.content }}
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)"
+                            (keypress)="clearAllSavingIcon(i); isTyping = true"
+                            (keydown.backspace)="clearAllSavingIcon(i); isTyping = true" [(ngModel)]="QcNote.content"
+                            class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+                            maxlength="4000">{{ QcNote.content }}
                     </textarea>
-
-                        
                 </td>
                 <!-- Status icons -->
-                <div style=" margin: 50px -34px; display: none; position: absolute; transition: 0.5s;" [attr.id]="'spinner' + i">
-                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                <div class="savingIconDiv" [attr.id]="'spinner' + i" style="display: none;">
+                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'checkMark' + i">
-                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                <div class="savingIconDiv" style="display: none;" [attr.id]="'checkMark' + i">
+                    <i class="fa fa-check fa-1x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'errMark' + i">
-                    <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red;"></i>
+                <div class="savingIconDiv" style="display: none;" [attr.id]="'errMark' + i">
+                    <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
                 </div>
-                
+
                 <!-- <td [attr.id]="'saveStatus' + i" style="display: none;">
                         <div class="spinner fa-style ng-hide" *ngIf="showSaving">
                             <i name="saving" style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
@@ -123,4 +130,46 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<div id="flagTrainee" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label for="flagsStatus">Select Flag:</label>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li><button class = "objectButton" title = "Green Flag"><i class="far fa-flag fa-3x fa-green"
+                                (click)="prepareFlag('GREEN');"></i></button></li>
+                        <li><button class = "objectButton" title = "Red Flag" style = "margin: auto 200px;"><i class="far fa-flag fa-3x fa-red" 
+                                (click)="prepareFlag('RED');"></i></button></li>
+                        <li><button class = "objectButton "title = "no Flag" style = "margin: auto 24px;"><i class="fas fa-times fa-3x"
+                                style="color: rgba(0, 0, 0, 0.500);"
+                                (click)="prepareFlag('NONE');"></i></button></li>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="3" id="comment" #flagComment></textarea>
+                    selected color:
+                    <i *ngIf = "(flagStatusVisual) != null" class = "far fa-flag fa-2x {{flagStatusVisual}}"></i>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn btn-primary"
+                data-dismiss="modal"
+                *ngIf = "(preparedFlagStatus) != 'NONE'"
+                (click)="submitModal((theNote), flagComment.value); clearComment(); setFlag((theNote),(preparedFlagStatus));">
+                Submit</button>
+                <button class="btn btn-primary" data-dismiss="modal"
+                    (click)="setFlag((theNote),(tempFlagStatus)); clearComment();">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>

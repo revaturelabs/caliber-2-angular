@@ -16,12 +16,19 @@ import { element } from '@angular/core/src/render3/instructions';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
+  theNote: number;
+  tempFlagStatus: string;
+  preparedFlagStatus: string;
+  flagStatusVisual: string;
+  hoverComment: string;
+  flagComment: string;
+  
   order: string = "Randomly";
   isTyping: boolean;
 
   spinner: HTMLElement;
   checkMark: HTMLElement;
-  errMark: HTMLElement
+  errMark: HTMLElement;
 
   // List of test categories
   categories = [
@@ -64,6 +71,57 @@ export class AssociateComponent implements OnInit {
     this.sortRandom = !this.sortRandom;
   }
 
+  getNote(NoteId: number)
+  {
+    for(let i = 0; i< this.notes.length;i++)
+    {
+      if(this.notes[i].noteId == NoteId)
+      {
+        return this.notes[i];
+      }
+    }
+  }
+  prepareFlag(flagSelection: string)
+  {
+    this.preparedFlagStatus = flagSelection;
+    this.flagStatusVisual = "fa-"+flagSelection.toLowerCase();
+  }
+
+  setFlag(selectedNoteId: number, selection: string)
+  {
+    this.getNote(selectedNoteId).trainee.flagStatus = selection;
+    console.log(this.getNote(selectedNoteId).trainee);
+  }
+  clearComment()
+  {
+    $('textarea').filter('[id*=comment]').val('');
+  }
+
+  showText(selectedNoteId: number)
+  {
+    this.hoverComment = this.getNote(selectedNoteId).trainee.flagNotes;
+  }
+
+  submitModal(selectedNoteId: number, comment: string)
+  {
+    console.log("Getting Comment");
+    let newNote = this.getNote(selectedNoteId);
+    newNote.trainee.flagNotes = comment;
+    newNote.trainee.flagStatus = this.preparedFlagStatus;
+    this.auditService.saveFlagModal(newNote).subscribe(data =>{
+      console.log(data);
+      
+    })
+    
+  }
+
+  deployToModal(selectedNoteId: number, currentFlagStatus: string)
+  {
+    this.theNote = selectedNoteId;
+    this.tempFlagStatus = currentFlagStatus;
+  } 
+
+
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
       if (a.trainee.name > b.trainee.name) {
@@ -77,37 +135,6 @@ export class AssociateComponent implements OnInit {
 
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
-  }
-
-  // Cycle the Individual Feedback Status
-  cycleFlag(selectedNoteId: number): void {
-
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.notes.length; i++) {
-
-      // Find the clicked note
-      if (this.notes[i].noteId === selectedNoteId) {
-
-        // Create placeholder for new status string
-        let newStatus = '';
-
-        // Determine the new status string
-        switch (this.notes[i].trainee.flagStatus) {
-          case 'NONE':
-            newStatus = 'RED';
-            break;
-          case 'RED':
-            newStatus = 'GREEN';
-            break;
-          case 'GREEN':
-            newStatus = 'NONE';
-            break;
-        }
-        console.log(newStatus);
-        // Update the status
-        this.notes[i].trainee.flagStatus = newStatus;
-      }
-    }
   }
 
   // Cycle the flag notes popup
@@ -143,6 +170,15 @@ export class AssociateComponent implements OnInit {
     this.errMark.style.display = "none";
   }
 
+  clearAllSavingIcon(i: number) {
+    this.spinner = document.getElementById('spinner' + i);
+    this.spinner.style.display = "none";
+    this.checkMark = document.getElementById('checkMark' + i);
+    this.checkMark.style.display = "none";
+    this.errMark = document.getElementById('errMark' + i);
+    this.errMark.style.display = "none";
+  }
+
   //noteOnBlur will save a note to the backend when an onBlur event happens.
   //if the function returns successfully, the check mark div will be displayed
   //if the function returns an error, the X mark div will be displayed.. 
@@ -151,20 +187,21 @@ export class AssociateComponent implements OnInit {
     for (let note of this.notes) {
       if (note.noteId === selectedNoteId) {
         //console.log(note);
+        this.showSpinner(i);
         this.auditService.sendNote(note).subscribe(
           data => {
-            if (this.isTyping == false) {
-              this.spinner = document.getElementById('spinner' + i);
-              this.spinner.style.display = "none";
-              this.checkMark = document.getElementById('checkMark' + i);
-              this.checkMark.style.display = "none";
-              this.errMark = document.getElementById('errMark' + i);
-              this.errMark.style.display = "none";
-            } else if (this.isTyping == true) {
+            if (this.isTyping == true) {
               this.spinner = document.getElementById('spinner' + i);
               this.spinner.style.display = "none";
               this.checkMark = document.getElementById('checkMark' + i);
               this.checkMark.style.display = "block";
+              this.errMark = document.getElementById('errMark' + i);
+              this.errMark.style.display = "none";
+            } else {
+              this.spinner = document.getElementById('spinner' + i);
+              this.spinner.style.display = "none";
+              this.checkMark = document.getElementById('checkMark' + i);
+              this.checkMark.style.display = "none";
               this.errMark = document.getElementById('errMark' + i);
               this.errMark.style.display = "none";
             }

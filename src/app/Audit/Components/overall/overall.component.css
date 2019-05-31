@@ -47,3 +47,9 @@ td{
 .dropdown:hover .dropdown-content {display: block; }
 
 .dropdown:hover .dropbtn {background-color: #d39539;}
+
+.savingIconDiv {
+	position: absolute;
+	margin-top: 7px;
+	margin-left: -19px;
+  }
