@@ -43,8 +43,8 @@
 
           <td>
             <textarea style=" margin-left: 5px;" (blur)="noteOnBlur(note.noteId, false)"
-              (keypress)="showSpinner(); isTyping = true"
-              (keydown.backspace)="showSpinner(); isTyping = true"
+              (keypress)="clearAllSavingIcon(); isTyping = true"
+              (keydown.backspace)="clearAllSavingIcon(); isTyping = true"
               [(ngModel)]="note.content" id="note-textarea-{{note.noteId}}" class="form-control"
               placeholder="Overall note" rows="6" cols="170" maxlength="4000">{{ note.content }}
             </textarea>

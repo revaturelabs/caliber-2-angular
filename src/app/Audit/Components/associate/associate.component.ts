@@ -170,6 +170,15 @@ export class AssociateComponent implements OnInit {
     this.errMark.style.display = "none";
   }
 
+  clearAllSavingIcon(i: number) {
+    this.spinner = document.getElementById('spinner' + i);
+    this.spinner.style.display = "none";
+    this.checkMark = document.getElementById('checkMark' + i);
+    this.checkMark.style.display = "none";
+    this.errMark = document.getElementById('errMark' + i);
+    this.errMark.style.display = "none";
+  }
+
   //noteOnBlur will save a note to the backend when an onBlur event happens.
   //if the function returns successfully, the check mark div will be displayed
   //if the function returns an error, the X mark div will be displayed.. 
@@ -178,6 +187,7 @@ export class AssociateComponent implements OnInit {
     for (let note of this.notes) {
       if (note.noteId === selectedNoteId) {
         //console.log(note);
+        this.showSpinner(i);
         this.auditService.sendNote(note).subscribe(
           data => {
             if (this.isTyping == true) {

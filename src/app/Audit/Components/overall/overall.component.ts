@@ -45,8 +45,14 @@ export class OverallComponent implements OnInit, OnDestroy {
 		this.isError = false;
 	}
 
-	noteOnBlur(noteId: number, secondRound: boolean) {
+	clearAllSavingIcon() {
+		this.isSpinning = false;
+		this.isCheck = false;
+		this.isError = false;
+	}
 
+	noteOnBlur(noteId: number, secondRound: boolean) {
+		this.showSpinner();
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
 				if (this.isTyping == true) {
