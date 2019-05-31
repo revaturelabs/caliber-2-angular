@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { createElement } from '@angular/core/src/view/element';
 import { Services } from '@angular/core/src/view';
 import { AuditService } from '../../Services/audit.service';
@@ -17,11 +17,11 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
-  showCheck: boolean = false;
-  showSaving: boolean = false;
-  showRedX: boolean = false;
-  name: any;
-  isTyping : any;
+  isTyping: boolean;
+
+  spinner: HTMLElement;
+  checkMark: HTMLElement;
+  errMark: HTMLElement
 
   // List of test categories
   categories = [
@@ -91,24 +91,24 @@ export class AssociateComponent implements OnInit {
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
-      this.auditService.subsVar = this.auditService.    
-      invokeAssosciateFunction.subscribe(()=> {    
-        this.getNotesByBatchByWeek();    
+    this.auditService.subsVar = this.auditService.
+      invokeAssosciateFunction.subscribe(() => {
+        this.getNotesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
-    if(this.auditService.notes === undefined){
+    if (this.auditService.notes === undefined) {
       this.notes = null;
-    }else{
-    this.notes = this.auditService.notes;
+    } else {
+      this.notes = this.auditService.notes;
     }
-}
+  }
 
 
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-    this.auditService.invokeAssosciateFunction.subscribe(()=> {    
+    this.auditService.invokeAssosciateFunction.subscribe(() => {
       this.sortRandom = false;
-      this.order = "Randomly";  
+      this.order = "Randomly";
     });
     if (this.sortRandom == true) {
       this.auditService.sortAlphabetically(this.notes);
@@ -183,43 +183,57 @@ export class AssociateComponent implements OnInit {
   //     }
   //   }
   // }
-  
+
 
 
   //showSpinner is called when keystroke event occurs in a note
   //it displays a "loading" icon until noteOnBlur is called..
   //see noteOnBlur below
-  
-  showSpinner(i: number){
-    if (i == 1) {
-      this.isTyping = true;
-      
-    }
-    console.log(i);
-    console.log(this.name);
-    this. showRedX = false;
-    this.showCheck = false;
-    this.showSaving = true;
+
+  showSpinner(i: number) {
+    this.spinner = document.getElementById('spinner' + i);
+    this.spinner.style.display = "block";
+    this.checkMark = document.getElementById('checkMark' + i);
+    this.checkMark.style.display = "none";
+    this.errMark = document.getElementById('errMark' + i);
+    this.errMark.style.display = "none";
   }
 
   //noteOnBlur will save a note to the backend when an onBlur event happens.
   //if the function returns successfully, the check mark div will be displayed
   //if the function returns an error, the X mark div will be displayed.. 
   //these are displayed by setting the value of their ngIf variable to true
-  noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
+  noteOnBlur(selectedNoteId: number, secondRound: boolean, i: number): void {
     for (let note of this.notes) {
-      if(note.noteId === selectedNoteId) {
-        console.log(note);
+      if (note.noteId === selectedNoteId) {
+        //console.log(note);
         this.auditService.sendNote(note).subscribe(
           data => {
-            this.showCheck = true;
-            this.showSaving = false;
-            this.showRedX = false;
+            if (this.isTyping == false) {
+              this.spinner = document.getElementById('spinner' + i);
+              this.spinner.style.display = "none";
+              this.checkMark = document.getElementById('checkMark' + i);
+              this.checkMark.style.display = "none";
+              this.errMark = document.getElementById('errMark' + i);
+              this.errMark.style.display = "none";
+            } else if (this.isTyping == true) {
+              this.spinner = document.getElementById('spinner' + i);
+              this.spinner.style.display = "none";
+              this.checkMark = document.getElementById('checkMark' + i);
+              this.checkMark.style.display = "block";
+              this.errMark = document.getElementById('errMark' + i);
+              this.errMark.style.display = "none";
+            }
+
+            this.isTyping = false;
           },
           issue => {
-            this.showRedX = true;
-            this.showSaving = false;
-            this.showCheck = false;
+            const checkMark: HTMLElement = document.getElementById('checkMark' + i);
+            checkMark.style.display = "none";
+            const spinner: HTMLElement = document.getElementById('spinner' + i);
+            spinner.style.display = "none";
+            const errMark: HTMLElement = document.getElementById('errMark' + i);
+            errMark.style.display = "block";
             if (issue instanceof HttpErrorResponse) {
               const err = issue as HttpErrorResponse;
               this.errorService.setError('AuditService',
