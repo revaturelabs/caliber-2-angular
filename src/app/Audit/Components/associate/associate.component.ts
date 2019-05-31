@@ -33,66 +33,11 @@ export class AssociateComponent implements OnInit {
     }
   ];
 
-  //List of test notes
-  // notes = [
-  //   {
-  //     qcStatus: 'Undefined',
-  //     noteId: 0,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Hajek, Alexander',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Superstar',
-  //     noteId: 1,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Michels, Alex',
-  //       flagNotes: '',
-  //       flagStatus: 'RED'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Good',
-  //     noteId: 2,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Smith, Carter',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Average',
-  //     noteId: 3,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Erwin, Eric',
-  //       flagNotes: '',
-  //       flagStatus: 'RED'
-  //     }
-  //   },
-  //   {
-  //     qcStatus: 'Poor',
-  //     noteId: 4,
-  //     noteFlagInputActive: false,
-  //     trainee: {
-  //       name: 'Olney, Chris',
-  //       flagNotes: '',
-  //       flagStatus: 'NONE'
-  //     }
-  //   }
-  // ];
-
-  // Unimplemented functions
   constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
   ngOnInit() {
     this.auditService.subsVar = this.auditService.
-      invokeAssosciateFunction.subscribe(() => {
+      invokeAssosciateFunction.subscribe(()=> {
         this.getNotesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
@@ -103,10 +48,9 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-    this.auditService.invokeAssosciateFunction.subscribe(() => {
+      this.auditService.invokeAssosciateFunction.subscribe(()=> {
       this.sortRandom = false;
       this.order = "Randomly";
     });
@@ -256,6 +200,7 @@ export class AssociateComponent implements OnInit {
         this.notes[i].qcStatus = selection;
         this.auditService.sendNote(this.notes[i]).subscribe(
           data => {
+            this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
           },
           issue => {
             if (issue instanceof HttpErrorResponse) {
@@ -273,4 +218,3 @@ export class AssociateComponent implements OnInit {
   }
 
 }
-

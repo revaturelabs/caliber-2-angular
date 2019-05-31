@@ -59,32 +59,33 @@
                     </div>
                 </td>
                 <td>
-                   <div class="dropdown">
-                    <div>
-                        <i *ngIf="QcNote.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
-                            style="margin: auto 30px;text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
-                        <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
-                            style="margin: auto 30px; text-align: center;"></i>
+                    <div class="dropdown">
+                        <div>
+                            <i *ngIf="QcNote.qcStatus=='Undefined'"
+                                class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                                style="margin: auto 30px;text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                            <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></i>
+                        </div>
+                        <div class="dropdown-content" style="margin: auto -95px">
+                            <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
+                                class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
+                                class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
+                            <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
+                                class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
+                        </div>
                     </div>
-                    <div class="dropdown-content" style="margin: auto -95px">
-                        <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
-                            class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
-                            class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
-                        <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
-                            class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
-                    </div>
-                </div> 
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
@@ -98,13 +99,13 @@
                         
                 </td>
                 <!-- Status icons -->
-                <div style=" margin: 50px -32px; display: none; position: absolute; transition: 0.5s;" [attr.id]="'spinner' + i">
+                <div style=" margin: 50px -34px; display: none; position: absolute; transition: 0.5s;" [attr.id]="'spinner' + i">
                     <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -32px; display: none; position: absolute;" [attr.id]="'checkMark' + i">
+                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'checkMark' + i">
                     <i class="fa fa-check fa-2x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -32px; display: none; position: absolute;" [attr.id]="'errMark' + i">
+                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'errMark' + i">
                     <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red;"></i>
                 </div>
                 
