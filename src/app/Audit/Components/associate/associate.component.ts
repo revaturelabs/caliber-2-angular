@@ -261,7 +261,7 @@ export class AssociateComponent implements OnInit {
             if (issue instanceof HttpErrorResponse) {
               const err = issue as HttpErrorResponse;
               this.errorService.setError('AuditService',
-                `Issue updating QcNote with noteId ${selectedNoteId}. Please contact system administrator: \n
+                `Issue updating QcNote with noteId ${this.notes[i].trainee.name}. Please contact system administrator: \n
             Status Code: ${err.status} \n
             Status Text: ${err.statusText} \n
             Error: ${err.message}`);
