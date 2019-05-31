@@ -3,15 +3,14 @@
   <div>
     <h4 class="text-center"><strong>Overall Feedback</strong></h4>
 
-    <table class="table table-responsive"
-      style="border-collapse: collapse;">
+    <table class="table table-responsive" style="border-collapse: collapse;">
 
       <thead>
         <tr class='overallHeaders'>
           <td style='width:24%; text-align: center'>
             <strong>Feedback</strong>
           </td>
-         
+
           <td style='width:76%'>
             <strong>Comments</strong>
           </td>
@@ -19,18 +18,18 @@
       </thead>
       <tbody>
         <tr>
-          <td style="width:24%">
+          <td>
             <div class="dropdown" style="margin: 0 -25px;">
-              
-                <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-3x pick"
-                  style="margin: auto 10px; text-align: center;"></i>
-                <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-3x pick"
-                  style="margin: auto 10px; text-align: center;"></i>
-                <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-3x pick"
-                  style="margin: auto 10px; text-align: center;"></i>
-                <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-3x pick"
-                  style="margin: auto 10px; text-align: center;"></i>
-              
+
+              <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-3x pick"
+                style="margin: auto 10px; text-align: center;"></i>
+              <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-3x pick"
+                style="margin: auto 10px; text-align: center;"></i>
+              <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-3x pick"
+                style="margin: auto 10px; text-align: center;"></i>
+              <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-3x pick"
+                style="margin: auto 10px; text-align: center;"></i>
+
               <div class="dropdown-content">
                 <a data-toggle="collapse" (click)="setScore('Good',note.noteId)"
                   class="qcStatusIcon fa fa-smile-o fa-3x pick no-padding"></a>
@@ -41,13 +40,26 @@
               </div>
             </div>
           </td>
-          
-          <td style="width: 76%;">
-            <textarea style="width: 100%; margin-left: -13px;" (blur)="noteOnBlur(note.noteId, false)" [(ngModel)]="note.content"
-              id="note-textarea-{{note.noteId}}" class="form-control"
-               placeholder="Overall note" rows="6" cols="150"
-              maxlength="4000">{{ note.content }}</textarea>
+
+          <td>
+            <textarea style=" margin-left: 5px;" (blur)="noteOnBlur(note.noteId, false)"
+              (keypress)="showSpinner(); isTyping = true"
+              (keydown.backspace)="showSpinner(); isTyping = true"
+              [(ngModel)]="note.content" id="note-textarea-{{note.noteId}}" class="form-control"
+              placeholder="Overall note" rows="6" cols="170" maxlength="4000">{{ note.content }}
+            </textarea>
           </td>
+
+          <!-- Status icons -->
+          <div class="savingIconDiv" *ngIf="isSpinning">
+            <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
+          </div>
+          <div class="savingIconDiv" *ngIf="isCheck">
+            <i class="fa fa-check fa-1x" aria-hidden="true"></i>
+          </div>
+          <div class="savingIconDiv" *ngIf="isError">
+            <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
+          </div>
         </tr>
       </tbody>
     </table>

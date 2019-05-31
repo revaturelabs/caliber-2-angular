@@ -98,25 +98,24 @@
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
-                    <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)" (keypress)="showSpinner(i); isTyping = true" (keydown.backspace)="showSpinner(i); isTyping = true"
-                        [(ngModel)]="QcNote.content"
-                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
-                        maxlength="4000">{{ QcNote.content }}
+                    <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)"
+                            (keypress)="showSpinner(i); isTyping = true"
+                            (keydown.backspace)="showSpinner(i); isTyping = true" [(ngModel)]="QcNote.content"
+                            class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+                            maxlength="4000">{{ QcNote.content }}
                     </textarea>
-
-                        
                 </td>
                 <!-- Status icons -->
-                <div style=" margin: 50px -34px; display: none; position: absolute; transition: 0.5s;" [attr.id]="'spinner' + i">
-                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+                <div class="savingIconDiv" [attr.id]="'spinner' + i" style="display: none;">
+                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'checkMark' + i">
-                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                <div class="savingIconDiv" style="display: none;" [attr.id]="'checkMark' + i">
+                    <i class="fa fa-check fa-1x" aria-hidden="true"></i>
                 </div>
-                <div style=" margin: 50px -34px; display: none; position: absolute;" [attr.id]="'errMark' + i">
-                    <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red;"></i>
+                <div class="savingIconDiv" style="display: none;" [attr.id]="'errMark' + i">
+                    <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
                 </div>
-                
+
                 <!-- <td [attr.id]="'saveStatus' + i" style="display: none;">
                         <div class="spinner fa-style ng-hide" *ngIf="showSaving">
                             <i name="saving" style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>

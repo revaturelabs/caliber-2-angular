@@ -28,7 +28,7 @@ export class AssociateComponent implements OnInit {
 
   spinner: HTMLElement;
   checkMark: HTMLElement;
-  errMark: HTMLElement
+  errMark: HTMLElement;
 
   // List of test categories
   categories = [
@@ -180,18 +180,18 @@ export class AssociateComponent implements OnInit {
         //console.log(note);
         this.auditService.sendNote(note).subscribe(
           data => {
-            if (this.isTyping == false) {
-              this.spinner = document.getElementById('spinner' + i);
-              this.spinner.style.display = "none";
-              this.checkMark = document.getElementById('checkMark' + i);
-              this.checkMark.style.display = "none";
-              this.errMark = document.getElementById('errMark' + i);
-              this.errMark.style.display = "none";
-            } else if (this.isTyping == true) {
+            if (this.isTyping == true) {
               this.spinner = document.getElementById('spinner' + i);
               this.spinner.style.display = "none";
               this.checkMark = document.getElementById('checkMark' + i);
               this.checkMark.style.display = "block";
+              this.errMark = document.getElementById('errMark' + i);
+              this.errMark.style.display = "none";
+            } else {
+              this.spinner = document.getElementById('spinner' + i);
+              this.spinner.style.display = "none";
+              this.checkMark = document.getElementById('checkMark' + i);
+              this.checkMark.style.display = "none";
               this.errMark = document.getElementById('errMark' + i);
               this.errMark.style.display = "none";
             }

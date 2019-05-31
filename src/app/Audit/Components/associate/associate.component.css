@@ -206,4 +206,41 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
     display: none;
   }
 
-  
+
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 6px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  align-self: center;
+  border-radius: 40px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  align-self: center;
+}
+
+.dropdown-content a:hover {
+  background-color: lightgray;
+  align-self: center;
+  border-radius: 30px
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #d39539;
+}
+
+.savingIconDiv {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -22px;
+}
