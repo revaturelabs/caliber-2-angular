@@ -9,9 +9,9 @@
 
     <span class="label label-default btn dropdown-toggle" style="padding: 4px; background-color: #F26925; float: left;" data-toggle="dropdown">
       <i class="fa fa-plus"></i>
-      <ul class="dropdown-menu">
-        <li *ngFor="let category of hardCodedCategories" (click)="addCategoryTag(category.content)">
-          <a routerLink="#">{{ category.content }}</a>
+      <ul class="dropdown-menu" style="overflow-y: scroll; height: 200px;">
+        <li *ngFor="let category of activeCategoryTags" (click)="addCategoryTag(category.skillCategory)">
+          <a>{{ category.skillCategory }}</a>
         </li>
       </ul>
     </span>

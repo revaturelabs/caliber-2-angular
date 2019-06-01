@@ -17,27 +17,12 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
 
   categoryTags: Map<string, Tag> = new Map<string, Tag>([
-    ['Java', new Tag(1, 'Java', 35, 45, true)],
-    ['MySql', new Tag(2, 'MySql', 35, 45, true)]
+    ['Java', new Tag(1, 'Java', 35, 45)],
+    ['MySql', new Tag(2, 'MySql', 35, 45)]
   ]);
 
 
-  hardCodedCategories: Tag[] = [
-    new Tag(1, 'Java', 35, 45, true),
-    new Tag(1, 'SQL', 35, 45, true),
-    new Tag(1, 'HTML', 35, 45, true),
-    new Tag(1, 'CSS', 35, 45, true),
-    new Tag(1, 'stuff1', 35, 45, true),
-    new Tag(1, 'stuff2', 35, 45, true),
-    new Tag(1, 'stuff3', 35, 45, true),
-    new Tag(1, 'stuff4', 35, 45, true),
-    new Tag(1, 'stuff5', 35, 45, true),
-    new Tag(1, 'akljashdlfjhasldkjhflkasjdhlkjahsdjfhjdjdjdjhfjdhfjdhlkjhasd', 35, 45, true),
-    new Tag(1, 'bdfdjfhjalsefhlaefalhdfhlasdlkfhaljsdhflkjashdlkjfhasljdhfla', 35, 45, true),
-    new Tag(1, 'asldkfjhlaksdhflkjjahsdlkjfhalskjdjhflajsdfasdjhflk', 35, 45, true),
-    new Tag(1, 'C', 35, 45, true),
-
-  ];
+  activeCategoryTags: Object[];
 
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
@@ -57,6 +42,27 @@ export class AssociateComponent implements OnInit {
     } else {
       this.notes = this.auditService.notes;
     }
+
+    this.getAllActiveCategories();
+
+  }
+
+  getAllActiveCategories(): void {
+    this.auditService.getAllActiveCategories().subscribe(
+      (activeTags: Object[]) => {
+        this.activeCategoryTags = activeTags;
+      }
+    );
+  }
+
+  addCategoryTag(tagInputText: string) {
+    if (tagInputText != '') {
+      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45));
+    }
+  }
+
+  removeCategoryTag($event: any) {
+    this.categoryTags.delete($event.srcElement.previousSibling.data.trim());
   }
 
   //When you click week, it will reset button to default
@@ -75,16 +81,6 @@ export class AssociateComponent implements OnInit {
     this.sortRandom = !this.sortRandom;
   }
 
-  addCategoryTag(tagInputText: string) {
-    if (tagInputText != '') {
-      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45, true));
-    }
-  }
-
-  removeCategoryTag($event: any) {
-    this.categoryTags.delete($event.srcElement.previousSibling.data.trim());
-    console.log(this.categoryTags);
-  }
 
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
@@ -131,24 +127,6 @@ export class AssociateComponent implements OnInit {
       }
     }
   }
-
-  // Cycle the flag notes popup
-  // cycleFlagNotesInput(selectedNoteId: number, enable: boolean): void {
-
-  //   // Loop through each note in notes until the target is found
-  //   for (let i = 0; i < this.notes.length; i++) {
-
-  //     // Find the clicked note
-  //     if (this.notes[i].noteId === selectedNoteId) {
-
-  //       console.log(selectedNoteId);
-
-  //         // Enable or disable the notes box popup
-  //         this.notes[i].noteFlagInputActive = enable;
-
-  //     }
-  //   }
-  // }
 
   noteOnBlur(selectedNoteId: number, secondRound: boolean): void {
     for (let note of this.notes) {
