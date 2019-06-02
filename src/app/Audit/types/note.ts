@@ -24,7 +24,7 @@ export class QcNote {
         this.trainee=trainee;
         this.traineeId=traineeId;
         this.type=type;
-        this.qcStatus=qcStatus;
+        this.qcStatus = qcStatus;
         this.updateTime=updateTime;
         this.lastSavedBy=lastSavedBy;
         this.lastSavedById=lastSavedById;
