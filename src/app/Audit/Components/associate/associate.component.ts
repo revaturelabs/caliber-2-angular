@@ -52,7 +52,7 @@ export class AssociateComponent implements OnInit {
       (activeTags: Tag[]) => {
         console.log(activeTags);
         for (let i = 0; i < activeTags.length; i++) {
-          let t: Tag = new Tag(activeTags[i].categoryId, -1, activeTags[i].skillCategory, -1, -1);
+          let t: Tag = new Tag(activeTags[i].categoryId, activeTags[i].skillCategory, -1, -1);
 
           this.activeCategoryTags.set(t.skillCategory, t);
         }
@@ -64,13 +64,17 @@ export class AssociateComponent implements OnInit {
     if (!this.categoryTags.has(tag.skillCategory)) {
 
       let t = new Tag(tag.categoryId,
-        tag.id,
         tag.skillCategory,
         this.auditService.selectedBatch.batchId,
         this.auditService.selectedWeek);
 
-      if (tag.id === -1) {
-        this.auditService.sendCategory(t).subscribe();
+      if (tag.id === undefined) {
+        this.auditService.sendCategory(t).subscribe(resultTag => {
+          t.setId(resultTag.id);
+        });
+      }
+      else{
+        t.setId(tag.id);
       }
       this.categoryTags.set(tag.skillCategory, t);
     }

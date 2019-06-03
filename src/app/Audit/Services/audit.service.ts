@@ -84,6 +84,7 @@ export class AuditService {
   }
 
   deleteCategory(categoryId: number): Observable<void>{
+    console.log('DELETE: ' + this.url + this.deleteCategoryURL + categoryId);
     return this.http.delete<void>(this.url + this.deleteCategoryURL + categoryId);
   }
 
