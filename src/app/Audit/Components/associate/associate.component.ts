@@ -61,7 +61,7 @@ export class AssociateComponent implements OnInit {
   }
 
   addCategoryTag(tag: Tag) {
-    if (!this.categoryTags.has(tag.skillCategory)) {
+    if (!this.categoryTags.has(tag.skillCategory) && this.auditService.selectedBatch != undefined) {
 
       let t = new Tag(tag.categoryId,
         tag.skillCategory,
