@@ -10,6 +10,7 @@ import { BatchService } from 'src/app/Batch/batch.service';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
 import { asElementData } from '@angular/core/src/view';
+import { environment } from 'src/environments/environment';
 
 fdescribe('AuditService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -17,10 +18,10 @@ fdescribe('AuditService', () => {
     providers: [AuditService],
   }))
   var batchNumberOfYears: number = 0; // storing this value to avoid making another API call.
-  var updateBatchURL = "http://localhost:10000/batch/all/batch/update";
-  var notesByBatchByWeekURL = "http://localhost:10000/qa/audit/notes";
-  var updateNoteURL = "http://localhost:10000/qa/audit/update"
-  var batchesYearURL = 'http://localhost:10000/qa/batch';
+  var updateBatchURL = environment.serverRootURL + "/batch/all/batch/update";
+  var notesByBatchByWeekURL = environment.serverRootURL + "/qa/audit/notes";
+  var updateNoteURL = environment.serverRootURL + "/qa/audit/update"
+  var batchesYearURL = environment.serverRootURL + '/qa/batch';
 
   it('should be created', () => {
     const service: AuditService = TestBed.get(AuditService);
