@@ -12,7 +12,7 @@ import { Note } from 'src/app/Batch/type/note';
 import { asElementData } from '@angular/core/src/view';
 import { environment } from 'src/environments/environment';
 
-fdescribe('AuditService', () => {
+describe('AuditService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [AuditService],

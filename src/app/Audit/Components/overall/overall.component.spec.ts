@@ -10,7 +10,7 @@ import { send } from 'q';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
-fdescribe('OverallComponent', () => {
+describe('OverallComponent', () => {
   let component: OverallComponent;
   let fixture: ComponentFixture<OverallComponent>;
   let overallNote: QcNote;
