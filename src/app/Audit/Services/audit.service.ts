@@ -20,7 +20,7 @@ batchesYearURL = '/qa/batch/';
 yearsURL = '/qa/batch/valid-years';
 notesByBatchByWeekURL = '/qa/audit/notes/';
 updateNoteURL = '/qa/audit/update';
-saveFlagModalURL= '/qa/trainee/update'; 
+saveFlagURL= '/qa/trainee/update'; 
 updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
 selectedQuarter: number = 1;
 selectedYear: number;
@@ -62,8 +62,8 @@ notes: QcNote[] = [];
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
   }
 
-  saveFlagModal(newNote: QcNote): Observable<Trainee>{
-    return this.http.put<Trainee>(this.url + this.saveFlagModalURL, newNote.trainee); 
+  saveFlag(trainee: Trainee): Observable<Trainee>{
+    return this.http.put<Trainee>(this.url + this.saveFlagURL, trainee); 
   }
   
   getOverallBatchNoteByWeek(batchId: number, week:number) {

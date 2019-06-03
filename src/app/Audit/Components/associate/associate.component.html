@@ -36,32 +36,70 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Every note contains an associate in the current batch -->
-            <!-- Every column is given a percentage of the table for simplicity -->
-            <!--
-<div class="dropup">
-  <button class="dropbtn">Dropup</button>
-  <div class="dropup-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>-->
+
             <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
                 <td style="width: 11%;">
                     <div class="dropup">
                         <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
                         <div *ngIf="QcNote.trainee.flagStatus === 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE' || QcNote.trainee.flagStatus == null" class="flag-note-area-empty dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE' || QcNote.trainee.flagStatus == null"
+                            class="flag-note-area-empty dropbtn"></div>
                         &nbsp; {{ QcNote.trainee.name }}<br>
-                        <i (click)="deployToModal(QcNote.noteId, QcNote.trainee.flagStatus); prepareFlag('NONE');" class="fa fa-ellipsis-h options"
+                        <i (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
+                            class="fa fa-ellipsis-h options"
                             style="margin: 10px 5px; color:rgba(0, 0, 0, 0.500); cursor: pointer;" data-toggle="modal"
                             data-target="#flagTrainee"></i>
 
-                        <div *ngIf = "((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))" class="dropup-content">
+                        <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
+                            class="dropup-content">
                             <li>{{QcNote.trainee.flagNotes}}</li>
                         </div>
                     </div>
+                    <!-- MODEL FOR FLAGGING STARTS -->
+                    <div *ngIf="isaddFlagClicked" id="flagTrainee" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <label for="flagsStatus">Select Flag:</label>
+                                    <div>
+                                        <ul class="nav nav-tabs">
+                                            <li><button class="objectButton" title="Green Flag"><i
+                                                        class="far fa-flag fa-3x fa-green"
+                                                        (click)="onFlagSelected('GREEN');"></i></button>
+                                            </li>
+                                            <li><button class="objectButton" title="Red Flag"
+                                                    style="margin: auto 200px;"><i class="far fa-flag fa-3x fa-red"
+                                                        (click)="onFlagSelected('RED');"></i></button>
+                                            </li>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">Comment:</label>
+                                        <textarea class="form-control" rows="3" id="comment"
+                                            [(ngModel)]="selectedTrainee.flagNotes">{{ selectedTrainee.flagNotes }}</textarea>
+                                        selected color:
+                                        <i *ngIf="(flagStatusVisual) != null"
+                                            class="far fa-flag fa-2x {{flagStatusVisual}}"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-dismiss="modal"
+                                        *ngIf="selectedTrainee.flagStatus != null && selectedTrainee.flagStatus != 'NONE'"
+                                        (click)="onFlagDelete()">Delete</button>
+                                    <button class="btn btn-primary" data-dismiss="modal"
+                                        *ngIf="selectedTrainee.flagStatus != null && selectedTrainee.flagStatus != 'NONE'"
+                                        (click)="onFlagSubmit()">Submit</button>
+                                    <button class="btn btn-primary" data-dismiss="modal"
+                                        (click)="onFlagCancel();">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MODEL FOR FLAGGING ENDS -->
                 </td>
                 <td style="width: 3%; position:absolute;">
                     <!--Buffer area-->
@@ -99,10 +137,10 @@
                 <td style="width: 3%;"></td>
                 <td style="width: 76%;">
                     <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)"
-                            (keypress)="clearAllSavingIcon(i); isTyping = true"
-                            (keydown.backspace)="clearAllSavingIcon(i); isTyping = true" [(ngModel)]="QcNote.content"
-                            class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
-                            maxlength="4000">{{ QcNote.content }}
+                        (keypress)="clearAllSavingIcon(i); isTyping = true"
+                        (keydown.backspace)="clearAllSavingIcon(i); isTyping = true" [(ngModel)]="QcNote.content"
+                        class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
+                        maxlength="4000">{{ QcNote.content }}
                     </textarea>
                 </td>
                 <!-- Status icons -->
@@ -115,61 +153,7 @@
                 <div class="savingIconDiv" style="display: none;" [attr.id]="'errMark' + i">
                     <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
                 </div>
-
-                <!-- <td [attr.id]="'saveStatus' + i" style="display: none;">
-                        <div class="spinner fa-style ng-hide" *ngIf="showSaving">
-                            <i name="saving" style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
-                          </div>
-                          <div id="checkMark" class="spinner fa-style" *ngIf="showCheck">
-                            <i role="button" class="fa fa-check fa-2x" aria-hidden="true"></i>
-                          </div>
-                          <div id="redX" class="spinner fa-style" *ngIf="showRedX">
-                            <i role="button" class="fa fa-icon fa-2x" aria-hidden="true" style="color:red; font:bold; font-size: 30px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">X</i>
-                          </div>  
-                </td> -->
             </tr>
         </tbody>
     </table>
-</div>
-
-
-<div id="flagTrainee" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <label for="flagsStatus">Select Flag:</label>
-                <div>
-                    <ul class="nav nav-tabs">
-                        <li><button class = "objectButton" title = "Green Flag"><i class="far fa-flag fa-3x fa-green"
-                                (click)="prepareFlag('GREEN');"></i></button></li>
-                        <li><button class = "objectButton" title = "Red Flag" style = "margin: auto 200px;"><i class="far fa-flag fa-3x fa-red" 
-                                (click)="prepareFlag('RED');"></i></button></li>
-                        <li><button class = "objectButton "title = "no Flag" style = "margin: auto 24px;"><i class="fas fa-times fa-3x"
-                                style="color: rgba(0, 0, 0, 0.500);"
-                                (click)="prepareFlag('NONE');"></i></button></li>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                    </ul>
-                </div>
-                <div class="form-group">
-                    <label for="comment">Comment:</label>
-                    <textarea class="form-control" rows="3" id="comment" #flagComment></textarea>
-                    selected color:
-                    <i *ngIf = "(flagStatusVisual) != null" class = "far fa-flag fa-2x {{flagStatusVisual}}"></i>
-                </div>
-            </div>
-            <div class="modal-footer">
-                
-                <button class="btn btn-primary"
-                data-dismiss="modal"
-                *ngIf = "(preparedFlagStatus) != 'NONE'"
-                (click)="submitModal((theNote), flagComment.value); clearComment(); setFlag((theNote),(preparedFlagStatus));">
-                Submit</button>
-                <button class="btn btn-primary" data-dismiss="modal"
-                    (click)="setFlag((theNote),(tempFlagStatus)); clearComment();">Cancel</button>
-            </div>
-        </div>
-    </div>
 </div>
