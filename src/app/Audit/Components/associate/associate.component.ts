@@ -16,13 +16,11 @@ import { Tag } from '../../types/tag';
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
 
-  categoryTags: Map<string, Tag> = new Map<string, Tag>([
-    ['Java', new Tag(1, 'Java', 35, 45)],
-    ['MySql', new Tag(2, 'MySql', 35, 45)]
-  ]);
+  // Category Tags that have been added to a week by user
+  categoryTags: Map<string, Tag> = new Map<string, Tag>();
 
-
-  activeCategoryTags: Object[];
+  // Active Category Tags retrieved from Category Service
+  activeCategoryTags: Map<string, Tag> = new Map<string, Tag>();
 
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
@@ -35,6 +33,7 @@ export class AssociateComponent implements OnInit {
     this.auditService.subsVar = this.auditService.
       invokeAssosciateFunction.subscribe(() => {
         this.getNotesByBatchByWeek();
+        this.getCategoriesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
     if (this.auditService.notes === undefined) {
@@ -43,26 +42,45 @@ export class AssociateComponent implements OnInit {
       this.notes = this.auditService.notes;
     }
 
-    this.getAllActiveCategories();
 
+    this.getAllActiveCategories();
   }
 
+  // Grab the active categories from the Category Service
   getAllActiveCategories(): void {
     this.auditService.getAllActiveCategories().subscribe(
-      (activeTags: Object[]) => {
-        this.activeCategoryTags = activeTags;
+      (activeTags: Tag[]) => {
+        console.log(activeTags);
+        for (let i = 0; i < activeTags.length; i++) {
+          let t: Tag = new Tag(activeTags[i].categoryId, -1, activeTags[i].skillCategory, -1, -1);
+
+          this.activeCategoryTags.set(t.skillCategory, t);
+        }
       }
     );
   }
 
-  addCategoryTag(tagInputText: string) {
-    if (tagInputText != '') {
-      this.categoryTags.set(tagInputText, new Tag(1, tagInputText, 35, 45));
+  addCategoryTag(tag: Tag) {
+    if (!this.categoryTags.has(tag.skillCategory)) {
+
+      let t = new Tag(tag.categoryId,
+        tag.id,
+        tag.skillCategory,
+        this.auditService.selectedBatch.batchId,
+        this.auditService.selectedWeek);
+
+      if (tag.id === -1) {
+        this.auditService.sendCategory(t).subscribe();
+      }
+      this.categoryTags.set(tag.skillCategory, t);
     }
   }
 
   removeCategoryTag($event: any) {
-    this.categoryTags.delete($event.srcElement.previousSibling.data.trim());
+    let tagName: string = $event.srcElement.previousSibling.data.trim();
+    let id = this.categoryTags.get(tagName).id;
+    this.auditService.deleteCategory(id).subscribe();
+    this.categoryTags.delete(tagName);
   }
 
   //When you click week, it will reset button to default
@@ -95,6 +113,14 @@ export class AssociateComponent implements OnInit {
 
   getNotesByBatchByWeek() {
     this.notes = this.auditService.notes;
+  }
+
+  getCategoriesByBatchByWeek() {
+    let categories: Tag[] = this.auditService.categoriesByBatchByWeek;
+    this.categoryTags.clear();
+    for (let i = 0; i < categories.length; i++) {
+      this.addCategoryTag(categories[i]);
+    }
   }
 
   // Cycle the Individual Feedback Status

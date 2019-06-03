@@ -1,9 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subscription } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Note } from 'src/app/Batch/type/note';
 import { QcNote } from 'src/app/Audit/types/note';
 import { Tag } from '../types/tag';
 
@@ -21,6 +20,9 @@ export class AuditService {
   yearsURL = '/qa/batch/valid-years';
   notesByBatchByWeekURL = '/qa/audit/notes/';
   updateNoteURL = '/qa/audit/update';
+  categoriesByBatchByWeekURL = '/qa/category/';
+  updateCategoryURL = '/qa/category';
+  deleteCategoryURL = '/qa/category/delete/';
 
   allActiveCategoriesURL = '/category/category/all/active';
 
@@ -29,14 +31,21 @@ export class AuditService {
   selectedBatch: Batch;
   selectedWeek: number;
   //selectedWeekChanged = new Subject<boolean>();
+
+  categoriesByBatchByWeek: Tag[] = [];
   notes: QcNote[] = [];
   invokeAssosciateFunction = new EventEmitter();
   subsVar: Subscription;
 
   constructor(private http: HttpClient) { }
 
-  getAllActiveCategories(): Observable<Object[]>{
-    return this.http.get<Object[]>(this.url + this.allActiveCategoriesURL);
+  getAllActiveCategories(): Observable<Tag[]>{
+    return this.http.get<Tag[]>(this.url + this.allActiveCategoriesURL);
+  }
+
+  getCategoriesByBatchByWeek(batchId: number, week: number) : Observable<Tag[]>{
+    console.log(this.url + this.categoriesByBatchByWeekURL + `${batchId}/${week}/all`);
+    return this.http.get<Tag[]>(this.url + this.categoriesByBatchByWeekURL + `${batchId}/${week}/all`);
   }
 
   onWeekClick() {
@@ -68,6 +77,14 @@ export class AuditService {
 
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
+  }
+
+  sendCategory(categoryToSend: Tag): Observable<Tag>{
+    return this.http.post<Tag>(this.url + this.updateCategoryURL, categoryToSend);
+  }
+
+  deleteCategory(categoryId: number): Observable<void>{
+    return this.http.delete<void>(this.url + this.deleteCategoryURL + categoryId);
   }
 
   sortAlphabetically(notes: any) {

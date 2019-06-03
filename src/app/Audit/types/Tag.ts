@@ -1,14 +1,16 @@
 export class Tag{
 
-  tagId: number;
-  content: string;
+  categoryId: number;
+  id: number;
+  skillCategory: string;
   batchId: number;
-  weekNum: number;
+  week: number;
 
-  constructor(tagId: number, content: string, batchId: number, weekNum: number){
-    this.tagId = tagId;
-    this.content = content;
+  constructor(categoryId: number, id: number, skillCategory: string, batchId: number, week: number){
+    this.categoryId = categoryId;
+    this.id = id;
+    this.skillCategory = skillCategory;
     this.batchId = batchId;
-    this.weekNum = weekNum;
+    this.week = week;
   }
 }
