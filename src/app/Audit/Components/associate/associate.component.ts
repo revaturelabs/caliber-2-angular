@@ -101,6 +101,7 @@ export class AssociateComponent implements OnInit {
     this.selectedTrainee.flagStatus = "NONE";
     this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
     });
+    this.isaddFlagClicked = false;
   }
 
   onFlagCancel() {
@@ -109,7 +110,7 @@ export class AssociateComponent implements OnInit {
     this.isaddFlagClicked = false;
   }
   
-  onAddFlagClicked(trainee: Trainee, index) {
+  onAddFlagClicked(trainee: Trainee, index: number) {
     this.selectedTrainee = trainee;
     this.selectedTraineeFlagNotesBeforeSelecting = trainee.flagNotes;
     this.selectedTraineeFlagStatusBeforeSelecting = trainee.flagStatus;
