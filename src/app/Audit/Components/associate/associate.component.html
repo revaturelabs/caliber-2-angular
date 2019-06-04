@@ -2,7 +2,7 @@
     <div style="overflow-y: auto;" class="categoriesContainer">
         <p style="float: left; margin-top: 7px"><strong>Categories covered this week: </strong></p>
 
-        <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default">
+        <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default" style="cursor: default;">
             {{ tag.value.skillCategory }}
             <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
         </span>
@@ -18,13 +18,22 @@
         </span>
 
     </div>
-    <br>
-    <span>
-        <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
-            {{order}}</button>
-    </span>
+    
+        
     <table class="table table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
         <thead>
+            
+        </thead>
+        <thead>
+            <tr>
+                
+            </tr>
+
+            <tr>
+                    <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
+                            {{order}}</button>
+                        
+            </tr>
             <tr>
                 <!-- Spans over flag column --->
                 <th colspan="2">
