@@ -13,15 +13,19 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 export class OverallComponent implements OnInit, OnDestroy {
 	batchId: number;
 	week: number;
-	note: QcNote;
+	note: QcNote = this.auditService.overallBatchNote;
 	noteSubscription: Subscription;
-	//Smiley face status
-	smile: string; meh: string; frown: string;
+
+	isSpinning: boolean = false;
+	isCheck: boolean = false;
+	isError: boolean = false;
+
+	isTyping: boolean;
 
 	constructor(private auditService: AuditService, private errorService: ErrorService) { }
 
 	ngOnInit() {
-		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {
+		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {	
 			this.note = data;
 		});
 
@@ -29,16 +33,41 @@ export class OverallComponent implements OnInit, OnDestroy {
 			this.week = this.auditService.selectedWeek;
 			this.batchId = this.auditService.selectedBatch['batchId'];
 			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
-
 		});
 	}
 
-	noteOnBlur(noteId: number, secondRound: boolean) {
+	showSpinner() {
+		this.isSpinning = true;
+		this.isCheck = false;
+		this.isError = false;
+	}
 
+	clearAllSavingIcon() {
+		this.isSpinning = false;
+		this.isCheck = false;
+		this.isError = false;
+	}
+
+	noteOnBlur(noteId: number, secondRound: boolean) {
+		this.showSpinner();
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
+				if (this.isTyping == true) {
+					this.isSpinning = false;
+					this.isCheck = true;
+					this.isError = false;
+				} else {
+					this.isSpinning = false;
+					this.isCheck = false;
+					this.isError = false;
+				}
+
+				this.isTyping = false;
 			},
 			issue => {
+				this.isSpinning = false;
+				this.isCheck = false;
+				this.isError = true;
 				if (issue instanceof HttpErrorResponse) {
 					const err = issue as HttpErrorResponse;
 					this.errorService.setError('AuditService',
@@ -49,6 +78,8 @@ export class OverallComponent implements OnInit, OnDestroy {
 				}
 			}
 		)
+		//Get rid of all marks after few seconds
+		setTimeout(() => {this.clearAllSavingIcon();}, 5000);
 	}
 
 	setScore(qcStatus: string, noteId: number) {

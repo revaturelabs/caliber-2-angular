@@ -12,8 +12,8 @@ import { environment } from "src/environments/environment"
 })
 export class CategoryService {
   constructor(private http: HttpClient) {}
-  url = environment.serverRootURL + "/category/category/all/category/all";
-  getUrl = environment.serverRootURL + "category/all/category/";
+  url = environment.serverRootURL + "/category/category/all/";
+  getUrl = environment.serverRootURL + "category/all/";
 
   getCategories(): Observable<[Category]> {
     return this.http.get<[Category]>(this.url);

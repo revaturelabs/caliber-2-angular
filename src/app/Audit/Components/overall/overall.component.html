@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr>
-          <td style="width:24%">
+          <td>
             <div class="dropdown" style="margin: 0 -25px;">
 
               <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-3x pick"
@@ -40,12 +40,25 @@
               </div>
             </div>
           </td>
-
-          <td style="width: 76%;">
-            <textarea style="width: 100%; margin-left: -13px;" (blur)="noteOnBlur(note.noteId, false)"
+          <td>
+            <textarea style=" margin-left: 5px;" (blur)="noteOnBlur(note.noteId, false)"
+              (keypress)="clearAllSavingIcon(); isTyping = true"
+              (keydown.backspace)="clearAllSavingIcon(); isTyping = true"
               [(ngModel)]="note.content" id="note-textarea-{{note.noteId}}" class="form-control"
-              placeholder="Overall note" rows="6" cols="150" maxlength="4000">{{ note.content }}</textarea>
+              placeholder="Overall note" rows="6" cols="170" maxlength="4000">{{ note.content }}
+            </textarea>
           </td>
+
+          <!-- Status icons -->
+          <div class="savingIconDiv" *ngIf="isSpinning">
+            <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
+          </div>
+          <div class="savingIconDiv" *ngIf="isCheck">
+            <i class="fa fa-check fa-1x" aria-hidden="true"></i>
+          </div>
+          <div class="savingIconDiv" *ngIf="isError">
+            <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
+          </div>
         </tr>
       </tbody>
     </table>
