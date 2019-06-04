@@ -32,9 +32,8 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 .dropup:hover .dropup-content 
 {
   display: block;
-  border: 1px;
-  border-style: outset;
-
+  border: none;
+  z-index: 99;
 }
 
 /* Dropup content (Hidden by Default) */
@@ -188,9 +187,7 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 
   .objectButton
   {
-    background-color: transparent;
-    border: 0px;
-    padding: 0px;
+    margin-left: 150px;
   }
 
   .fa-red
@@ -223,12 +220,13 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
   text-decoration: none;
   display: inline-block;
   align-self: center;
+  cursor: pointer;
 }
 
 .dropdown-content a:hover {
   background-color: lightgray;
   align-self: center;
-  border-radius: 30px
+  border-radius: 30px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -238,6 +236,7 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 .dropdown:hover .dropbtn {
   background-color: #d39539;
 }
+
 
 .savingIconDiv {
   position: absolute;
