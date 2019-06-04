@@ -1,26 +1,31 @@
 <div class="container">
-    <!-- The max width is manually set to the same width as the original AngularJss webpage -->
+    <div style="overflow-y: auto;" class="categoriesContainer">
+        <p style="float: left; margin-top: 7px"><strong>Categories covered this week: </strong></p>
+
+        <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default"
+            style="padding: 2.5px; float: left;">
+            {{ tag.value.skillCategory }}
+            <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
+        </span>
+
+        <span class="label label-default btn dropdown-toggle"
+            style="padding: 4px; background-color: #F26925; float: left;" data-toggle="dropdown">
+            <i class="fa fa-plus"></i>
+            <ul class="dropdown-menu" style="overflow-y: scroll; height: 200px;">
+                <li *ngFor="let category of activeCategoryTags | keyvalue" (click)="addCategoryTag(category.value)">
+                    <a>{{ category.value.skillCategory }}</a>
+                </li>
+            </ul>
+        </span>
+
+    </div>
+    <br>
+    <span>
+        <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
+            {{order}}</button>
+    </span>
     <table class="table table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
         <thead>
-            <tr>
-                <!-- Top row will span over all columns -->
-                <td colspan="5">
-                    <strong>Categories covered this week: </strong>
-                    <!-- Tracked last item in list to prevent last comma from being printed -->
-                    <span *ngFor="let cat of categories; let isLast=last">
-                        {{cat.name}}{{isLast ? '' : ', '}}
-                    </span>
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>
-                        <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
-                            {{order}}</button>
-                    </span>
-                </td>
-            </tr>
             <tr>
                 <!-- Spans over flag column --->
                 <th colspan="2">

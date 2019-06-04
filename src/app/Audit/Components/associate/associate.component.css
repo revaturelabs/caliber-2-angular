@@ -3,8 +3,14 @@ width: 0;
 height: 0;
 border: solid 8px;
 border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
-
 }
+
+span.label {
+  margin: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+
 .flag-note-area-green{
   width: 0;
   height: 0;

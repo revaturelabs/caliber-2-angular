@@ -9,6 +9,7 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { element } from '@angular/core/src/render3/instructions';
 import { timeout } from 'q';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { Tag } from '../../types/Tag';
 
 @Component({
   selector: 'app-associate',
@@ -17,13 +18,20 @@ import { Trainee } from 'src/app/Batch/type/trainee';
 })
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
+
+  // Category Tags that have been added to a week by user
+  categoryTags: Map<string, Tag> = new Map<string, Tag>();
+
+  // Active Category Tags retrieved from Category Service
+  activeCategoryTags: Map<string, Tag> = new Map<string, Tag>();
+
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
   isTyping: boolean;
   spinner: HTMLElement;
   checkMark: HTMLElement;
   errMark: HTMLElement;
-  
+
   flagStatusVisual: string;
   hoverComment: string;
   isaddFlagClicked: boolean = false;
@@ -48,6 +56,7 @@ export class AssociateComponent implements OnInit {
     this.auditService.subsVar = this.auditService.
       invokeAssosciateFunction.subscribe(() => {
         this.getNotesByBatchByWeek();
+        this.getCategoriesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
     if (this.auditService.notes === undefined) {
@@ -55,6 +64,50 @@ export class AssociateComponent implements OnInit {
     } else {
       this.notes = this.auditService.notes;
     }
+
+
+    this.getAllActiveCategories();
+  }
+
+  // Grab the active categories from the Category Service
+  getAllActiveCategories(): void {
+    this.auditService.getAllActiveCategories().subscribe(
+      (activeTags: Tag[]) => {
+        console.log(activeTags);
+        for (let i = 0; i < activeTags.length; i++) {
+          let t: Tag = new Tag(activeTags[i].categoryId, activeTags[i].skillCategory, -1, -1);
+
+          this.activeCategoryTags.set(t.skillCategory, t);
+        }
+      }
+    );
+  }
+
+  addCategoryTag(tag: Tag) {
+    if (!this.categoryTags.has(tag.skillCategory) && this.auditService.selectedBatch != undefined) {
+
+      let t = new Tag(tag.categoryId,
+        tag.skillCategory,
+        this.auditService.selectedBatch.batchId,
+        this.auditService.selectedWeek);
+
+      if (tag.id === undefined) {
+        this.auditService.sendCategory(t).subscribe(resultTag => {
+          t.setId(resultTag.id);
+        });
+      }
+      else {
+        t.setId(tag.id);
+      }
+      this.categoryTags.set(tag.skillCategory, t);
+    }
+  }
+
+  removeCategoryTag($event: any) {
+    let tagName: string = $event.srcElement.previousSibling.data.trim();
+    let id = this.categoryTags.get(tagName).id;
+    this.auditService.deleteCategory(id).subscribe();
+    this.categoryTags.delete(tagName);
   }
 
   //When you click week, it will reset button to default
@@ -72,7 +125,7 @@ export class AssociateComponent implements OnInit {
     }
     this.sortRandom = !this.sortRandom;
   }
-  
+
   getNote(NoteId: number) {
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId == NoteId) {
@@ -96,7 +149,7 @@ export class AssociateComponent implements OnInit {
     });
   }
 
-  onFlagDelete(){
+  onFlagDelete() {
     this.selectedTrainee.flagNotes = "";
     this.selectedTrainee.flagStatus = "NONE";
     this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
@@ -109,7 +162,7 @@ export class AssociateComponent implements OnInit {
     this.selectedTrainee.flagNotes = this.selectedTraineeFlagNotesBeforeSelecting;
     this.isaddFlagClicked = false;
   }
-  
+
   onAddFlagClicked(trainee: Trainee, index: number) {
     this.selectedTrainee = trainee;
     this.selectedTraineeFlagNotesBeforeSelecting = trainee.flagNotes;
@@ -121,6 +174,7 @@ export class AssociateComponent implements OnInit {
     this.flagStatusVisual = "fa-" + this.selectedTrainee.flagStatus.toLowerCase();
     this.isaddFlagClicked = false;
   }
+
 
   sortAlphabetically(notes: any) {
     notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
@@ -162,6 +216,14 @@ export class AssociateComponent implements OnInit {
   //if the function returns successfully, the check mark div will be displayed
   //if the function returns an error, the X mark div will be displayed.. 
   //these are displayed by setting the value of their ngIf variable to true
+  getCategoriesByBatchByWeek() {
+    let categories: Tag[] = this.auditService.categoriesByBatchByWeek;
+    this.categoryTags.clear();
+    for (let i = 0; i < categories.length; i++) {
+      this.addCategoryTag(categories[i]);
+    }
+  }
+
   noteOnBlur(selectedNoteId: number, secondRound: boolean, i: number): void {
     for (let note of this.notes) {
       if (note.noteId === selectedNoteId) {
