@@ -5,6 +5,14 @@ border: solid 8px;
 border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 }
 
+#redFlag:hover {
+  text-shadow: 0 0 5px red;
+}
+
+#greenFlag:hover {
+  text-shadow: 0 0 5px green;
+}
+
 span.label {
   margin: 3px;
   font-size: 12px;
