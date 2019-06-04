@@ -10,7 +10,6 @@ import { element } from '@angular/core/src/render3/instructions';
 import { timeout } from 'q';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { Tag } from '../../types/Tag';
-
 @Component({
   selector: 'app-associate',
   templateUrl: './associate.component.html',
@@ -20,7 +19,8 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
 
   // Category Tags that have been added to a week by user
-  categoryTags: Map<string, Tag> = new Map<string, Tag>();
+  categoryTags: Map<string, Tag> = this.auditService.categoryTags;
+
 
   // Active Category Tags retrieved from Category Service
   activeCategoryTags: Map<string, Tag> = new Map<string, Tag>();
@@ -31,7 +31,7 @@ export class AssociateComponent implements OnInit {
   spinner: HTMLElement;
   checkMark: HTMLElement;
   errMark: HTMLElement;
-
+  
   flagStatusVisual: string;
   hoverComment: string;
   isaddFlagClicked: boolean = false;
@@ -64,7 +64,7 @@ export class AssociateComponent implements OnInit {
     } else {
       this.notes = this.auditService.notes;
     }
-
+    console.log(this.notes);
 
     this.getAllActiveCategories();
   }
@@ -96,7 +96,7 @@ export class AssociateComponent implements OnInit {
           t.setId(resultTag.id);
         });
       }
-      else {
+      else{
         t.setId(tag.id);
       }
       this.categoryTags.set(tag.skillCategory, t);
@@ -125,7 +125,7 @@ export class AssociateComponent implements OnInit {
     }
     this.sortRandom = !this.sortRandom;
   }
-
+  
   getNote(NoteId: number) {
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId == NoteId) {
@@ -149,7 +149,7 @@ export class AssociateComponent implements OnInit {
     });
   }
 
-  onFlagDelete() {
+  onFlagDelete(){
     this.selectedTrainee.flagNotes = "";
     this.selectedTrainee.flagStatus = "NONE";
     this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
@@ -162,7 +162,7 @@ export class AssociateComponent implements OnInit {
     this.selectedTrainee.flagNotes = this.selectedTraineeFlagNotesBeforeSelecting;
     this.isaddFlagClicked = false;
   }
-
+  
   onAddFlagClicked(trainee: Trainee, index: number) {
     this.selectedTrainee = trainee;
     this.selectedTraineeFlagNotesBeforeSelecting = trainee.flagNotes;
@@ -212,10 +212,6 @@ export class AssociateComponent implements OnInit {
     this.errMark.style.display = "none";
   }
 
-  //noteOnBlur will save a note to the backend when an onBlur event happens.
-  //if the function returns successfully, the check mark div will be displayed
-  //if the function returns an error, the X mark div will be displayed.. 
-  //these are displayed by setting the value of their ngIf variable to true
   getCategoriesByBatchByWeek() {
     let categories: Tag[] = this.auditService.categoriesByBatchByWeek;
     this.categoryTags.clear();
@@ -223,7 +219,10 @@ export class AssociateComponent implements OnInit {
       this.addCategoryTag(categories[i]);
     }
   }
-
+  //noteOnBlur will save a note to the backend when an onBlur event happens.
+  //if the function returns successfully, the check mark div will be displayed
+  //if the function returns an error, the X mark div will be displayed.. 
+  //these are displayed by setting the value of their ngIf variable to true
   noteOnBlur(selectedNoteId: number, secondRound: boolean, i: number): void {
     for (let note of this.notes) {
       if (note.noteId === selectedNoteId) {

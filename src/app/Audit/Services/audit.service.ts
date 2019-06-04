@@ -23,24 +23,21 @@ export class AuditService {
   updateNoteURL = '/qa/audit/update';
   saveFlagURL = '/qa/trainee/update';
   updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
+  categoriesByBatchByWeekURL = '/qa/category/';
+  updateCategoryURL = '/qa/category';
+  deleteCategoryURL = '/qa/category/delete/';
+  allActiveCategoriesURL = '/category/category/all/active';
   selectedQuarter: number = 1;
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek: number;
   //selectedWeekChanged = new Subject<boolean>();
   notes: QcNote[] = [];
+  categoriesByBatchByWeek: Tag[] = [];
+  categoryTags: Map<string, Tag> = new Map<string,Tag>();
+
   invokeAssosciateFunction = new EventEmitter();
   subsVar: Subscription;
-  categoriesByBatchByWeekURL = '/qa/category/';
-  updateCategoryURL = '/qa/category';
-  deleteCategoryURL = '/qa/category/delete/';
-
-  allActiveCategoriesURL = '/category/category/all/active';
-
- 
-
-  categoriesByBatchByWeek: Tag[] = [];
-
 
   constructor(private http: HttpClient) { }
 
@@ -49,7 +46,6 @@ export class AuditService {
   }
 
   getCategoriesByBatchByWeek(batchId: number, week: number): Observable<Tag[]> {
-    console.log(this.url + this.categoriesByBatchByWeekURL + `${batchId}/${week}/all`);
     return this.http.get<Tag[]>(this.url + this.categoriesByBatchByWeekURL + `${batchId}/${week}/all`);
   }
 

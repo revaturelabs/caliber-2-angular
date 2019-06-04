@@ -16,4 +16,7 @@ export class Tag{
   setId(id: number): void {
     this.id = id;
   }
+  getSkillCategory() {
+    return this.skillCategory;
+  }
 }
