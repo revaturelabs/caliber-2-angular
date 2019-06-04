@@ -6,10 +6,21 @@ border-color: rgb(255, 33, 33) transparent transparent rgb(255,33,33);
 }
 
 span.label {
-  margin: 5px;
-  font-size: 10px;
+  margin: 3px;
+  font-size: 12px;
   text-align: center;
+  padding: 3.5px; 
+  float: left;
 }
+
+.closeChip{
+  cursor: pointer;
+  font-size: 15px;
+ }
+ 
+ .closeChip:hover {
+  color: #000;
+ }
 
 .flag-note-area-green{
   width: 0;

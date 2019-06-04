@@ -2,8 +2,7 @@
     <div style="overflow-y: auto;" class="categoriesContainer">
         <p style="float: left; margin-top: 7px"><strong>Categories covered this week: </strong></p>
 
-        <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default"
-            style="padding: 2.5px; float: left;">
+        <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default">
             {{ tag.value.skillCategory }}
             <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
         </span>
