@@ -68,7 +68,7 @@ export class BatchModalComponent implements OnInit{
   
   //This function runs when user clicks create within the create assessment modal.
   addAssessment(rawScore, assessmentType, categoryNumber) : void {
-      this.assessmentService.createCategories(new Assessment(this.assessmentId,rawScore,
+      this.assessmentService.createAssessment(new Assessment(this.assessmentId,rawScore,
       this.assessmentTitle,assessmentType,this.toolBar.selectedWeek,
       this.toolBar.selectedBatch.batchId,categoryNumber)).subscribe(result=>{
       this.assessment = result;

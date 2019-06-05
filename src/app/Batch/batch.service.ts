@@ -4,6 +4,7 @@ import { Batch } from './type/batch';
 import { BLocation } from './type/location';
 import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 /**
  * sets headers for recieving JSON objects
@@ -14,10 +15,12 @@ const httpOptions = {
   })
 };
 
+
+
 /**
 * The url for getting current batches from the batch microservice
 */
-const currentBatchUrl = 'http://localhost:9090/vp/batch/all/current';
+const currentBatchUrl = environment.serverRootURL + '/batch/vp/batch/all/current';
 
 
 /**
@@ -33,18 +36,18 @@ The batch service handles all of the http client methods used to send and reciev
 export class BatchService {
 
 
-  url = 'http://localhost:9090';
+  url = environment.serverRootURL + '/batch';
   batchAllURL = '/vp/batch/all';
   allBatchURL = '/all/batch/';
   batchesYearURL = '/vp/batch/';
   batchCreateURL = '/all/batch/create';
   batchUpdateURL = '/all/batch/update';
   batchDeleteURL = '/all/batch/delete/';
-  skillTypesAllURL = 'http://localhost:9090/types/skill/all';
-  locationsAllURL = 'http://localhost:9090/all/location/all';
-  trainersAllURL = 'http://localhost:9090/all/trainer/all';
+  skillTypesAllURL = environment.serverRootURL + '/skill/types/skill/all';
+  locationsAllURL = environment.serverRootURL + '/location/all/location/all';
+  trainersAllURL = environment.serverRootURL + '/user/all/trainer/all';
   batchAllYearsURL = '/all/batch/valid_years';
-  traineeCountURL = 'http://localhost:9090/all/trainee/count/';
+  traineeCountURL = environment.serverRootURL + '/user/all/trainee/count/';
 
   constructor(private http: HttpClient) { }
 

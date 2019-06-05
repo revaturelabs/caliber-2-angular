@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewTraineesComponent } from './view-trainees.component';
 import { FormsModule } from '@angular/forms';
-import { browser, by, element } from 'protractor';
+//import { browser, by, element } from 'protractor';
 import { UserModule } from '../../user.module';
 
 describe('ViewtraineesComponent', () => {
@@ -28,10 +28,10 @@ describe('ViewtraineesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should do something', () => {
-    browser.get('http://localhost:4200/caliber/%23/vp/manage');
-    // element(by.css;
-  });
+  // it('should do something', () => {
+  //   browser.get('http://localhost:4200/caliber/%23/vp/manage');
+  //   // element(by.css;
+  // });
 
   // Protractor Test for toggling between dropped and active trainees
   // it('should filter out dropped trainees', () => {

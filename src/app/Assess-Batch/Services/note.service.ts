@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Note } from 'src/app/Batch/type/note';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,39 +15,40 @@ const httpOptions = {
 
 export class NoteService {
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:9090/';
-  url3 = 'http://localhost:9090/all/note/update';
+  assessmentUrl = environment.serverRootURL + '/assessment';
+  userUrl = environment.serverRootURL + '/user';
+  updateNote = '/all/note/update';
   traineeBatchIdURL = '/all/trainee?batch=';
-   batchesYearURL = '/vp/batch/';
-   yearsURL = '/all/batch/valid_years';
-   noteAllURL = '/all/note/all';
+  batchesYearURL = '/vp/batch/';
+  yearsURL = '/all/batch/valid_years';
+  noteAllURL = '/all/note/all';
   noteURL = '/all/note/';
-  notePut='/all/note/update';
-  notePost='all/note/create'
-  batchNotesByWeekUrl='/all/note/batch/';
-  batchNotesByTraineeId='/all/note/trainee/'
+  notePut = '/all/note/update';
+  notePost = 'all/note/create'
+  batchNotesByWeekUrl = '/all/note/batch/';
+  batchNotesByTraineeId = '/all/note/trainee/'
   noteEmitter = new EventEmitter<Note[]>();
-  weekEmitter= new EventEmitter<number>();
-  batchIdEmitter= new EventEmitter<number>();
+  weekEmitter = new EventEmitter<number>();
+  batchIdEmitter = new EventEmitter<number>();
 
-   getAllNotes(): Observable<Note[]>{
-    return this.http.get<Note[]>(this.url + this.noteAllURL);
+  getAllNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>(this.assessmentUrl + this.noteAllURL);
   }
 
-  getBatchNotesByWeek(batchId: number, weekId: number): Observable<Note[]>{
-    return this.http.get<Note[]>(this.url + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
+  getBatchNotesByWeek(batchId: number, weekId: number): Observable<Note[]> {
+    return this.http.get<Note[]>(this.assessmentUrl + this.batchNotesByWeekUrl + batchId + "?week=" + weekId);
   }
-  getBatchNotesByTraineeId(traineeId: number): Observable<Note[]>{
-    return this.http.get<Note[]>(this.url + this.batchNotesByTraineeId + traineeId);
-  }
-
-  putNote(note): Observable<object>{
-    return this.http.put<object>(this.url3, note);
+  getBatchNotesByTraineeId(traineeId: number): Observable<Note[]> {
+    return this.http.get<Note[]>(this.assessmentUrl + this.batchNotesByTraineeId + traineeId);
   }
 
-  postNote(note: Note): Observable<Note>{
-   
-    return this.http.post<Note>(this.url + this.notePost, note);
+  putNote(note): Observable<object> {
+    return this.http.put<object>(this.assessmentUrl + this.updateNote, note);
+  }
+
+  postNote(note: Note): Observable<Note> {
+
+    return this.http.post<Note>(this.assessmentUrl + this.notePost, note);
   }
 
 }
