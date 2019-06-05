@@ -74,7 +74,8 @@ export class AuditService {
     console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
     return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
   }
-  setNotes(notesToSet: QcNote[]) {
+ 
+  setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
   }
   sendNote(noteToSend: QcNote): Observable<QcNote> {
