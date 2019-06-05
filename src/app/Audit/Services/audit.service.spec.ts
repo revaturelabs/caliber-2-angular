@@ -4,15 +4,15 @@ import { AuditService } from './audit.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QcNote } from '../types/note';
-import { Trainee } from 'src/app/User/user/types/trainee';
 import { Trainer } from 'src/app/Batch/type/trainer';
 import { BatchService } from 'src/app/Batch/batch.service';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
 import { asElementData } from '@angular/core/src/view';
 import { environment } from 'src/environments/environment';
+import { Trainee } from 'src/app/Batch/type/trainee';
 
-describe('AuditService', () => {
+fdescribe('AuditService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [AuditService],
@@ -115,15 +115,64 @@ describe('AuditService', () => {
       })
   );
 
-  it('notes',
+  it('sorts notes by trainee name',
     inject([AuditService, NoteService],
       (as: AuditService, ns: NoteService) => {
+        let trainee1 = new Trainee();
+        trainee1.batchId = 2;
+        trainee1.name = "Martin, Angela";
+        let trainee2 = new Trainee();
+        trainee2.batchId = 2;
+        trainee2.name = "Malone, Kevin";
+        let trainee3 = new Trainee();
+        trainee3.batchId = 2;
+        trainee3.name = "Bernard, Andy";
+        let notes:QcNote[] = [
+          new QcNote(
+            45,
+            "example45",
+            1,
+            2,
+            trainee1,
+            5477,
+            "QC_TRAINEE",
+            "Undefined",
+            1559573404816,
+            null,
+            null
+          ),
+          new QcNote(
+            46,
+            "example46",
+            1,
+            2,
+            trainee2,
+            5478,
+            "QC_TRAINEE",
+            "Average",
+            1559573404817,
+            null,
+            null
+          ),
+          new QcNote(
+            47,
+            "example47",
+            1,
+            2,
+            trainee3,
+            5479,
+            "QC_TRAINEE",
+            "Good",
+            1559573404818,
+            null,
+            null
+          )
+        ]
 
-        let qcNote: Note[];
-        ns.getAllNotes().subscribe(n => {
-          qcNote = n;
-        });
-          console.log("Hello" + as.sortAlphabetically(qcNote))
+        as.sortAlphabetically(notes);
+        expect(notes[0].noteId).toEqual(47);
+        expect(notes[1].noteId).toEqual(46);
+        expect(notes[2].noteId).toEqual(45);
       })
   );
 

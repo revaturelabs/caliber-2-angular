@@ -85,6 +85,7 @@ describe('AssociateComponent', () => {
       )
     ]
     auditService.notes = notes;
+    component.selectedTrainee = trainee1;
     // getNoteSpy = spyOn(component.auditService, 'getAllYears').and.returnValue(of([2017, 2018, 2019]));
     fixture.detectChanges();
   });
@@ -108,20 +109,14 @@ describe('AssociateComponent', () => {
 
   it('should select correct flag', ()=>
   {
-    component.prepareFlag('red');
-    expect((component.preparedFlagStatus == 'red'));
-  })
-
-  it('Should deploy to modal', ()=>
-  {
-    component.deployToModal(11,'green');
-    expect(component.theNote==11);
-    expect(component.tempFlagStatus=='green');
+    component.onFlagSelected('red');
+    expect((component.selectedTrainee.flagStatus == 'red'));
   })
 
   it('should get notes by batch week', ()=>
   {
-    expect(component.getNotesByBatchByWeek).toEqual(notes);
+    component.getNotesByBatchByWeek();
+    expect(component.notes).toEqual(notes);
   })
 
   
