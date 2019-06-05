@@ -8,7 +8,8 @@ import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { element } from '@angular/core/src/render3/instructions';
 import { timeout } from 'q';
-
+import { Trainee } from 'src/app/Batch/type/trainee';
+import { Tag } from '../../types/Tag';
 @Component({
   selector: 'app-associate',
   templateUrl: './associate.component.html',
@@ -16,20 +17,28 @@ import { timeout } from 'q';
 })
 export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
+
+  // Category Tags that have been added to a week by user
+  categoryTags: Map<string, Tag> = this.auditService.categoryTags;
+
+
+  // Active Category Tags retrieved from Category Service
+  activeCategoryTags: Map<string, Tag> = new Map<string, Tag>();
+
   notes: QcNote[] = this.auditService.notes;
-  theNote: number;
-  tempFlagStatus: string;
-  preparedFlagStatus: string;
-  flagStatusVisual: string;
-  hoverComment: string;
-  flagComment: string;
-  
   order: string = "Randomly";
   isTyping: boolean;
-
   spinner: HTMLElement;
   checkMark: HTMLElement;
   errMark: HTMLElement;
+  
+  flagStatusVisual: string;
+  hoverComment: string;
+  isaddFlagClicked: boolean = false;
+  selectedTrainee: Trainee;
+  selectedTraineeIndex: number;
+  selectedTraineeFlagNotesBeforeSelecting: string;
+  selectedTraineeFlagStatusBeforeSelecting: string;
 
   // List of test categories
   categories = [
@@ -45,8 +54,9 @@ export class AssociateComponent implements OnInit {
 
   ngOnInit() {
     this.auditService.subsVar = this.auditService.
-      invokeAssosciateFunction.subscribe(()=> {
+      invokeAssosciateFunction.subscribe(() => {
         this.getNotesByBatchByWeek();
+        this.getCategoriesByBatchByWeek();
       });
     // this.sortAlphabetically(this.notes);
     if (this.auditService.notes === undefined) {
@@ -54,11 +64,55 @@ export class AssociateComponent implements OnInit {
     } else {
       this.notes = this.auditService.notes;
     }
+    console.log(this.notes);
+
+    this.getAllActiveCategories();
+  }
+
+  // Grab the active categories from the Category Service
+  getAllActiveCategories(): void {
+    this.auditService.getAllActiveCategories().subscribe(
+      (activeTags: Tag[]) => {
+        console.log(activeTags);
+        for (let i = 0; i < activeTags.length; i++) {
+          let t: Tag = new Tag(activeTags[i].categoryId, activeTags[i].skillCategory, -1, -1);
+
+          this.activeCategoryTags.set(t.skillCategory, t);
+        }
+      }
+    );
+  }
+
+  addCategoryTag(tag: Tag) {
+    if (!this.categoryTags.has(tag.skillCategory) && this.auditService.selectedBatch != undefined) {
+
+      let t = new Tag(tag.categoryId,
+        tag.skillCategory,
+        this.auditService.selectedBatch.batchId,
+        this.auditService.selectedWeek);
+
+      if (tag.id === undefined) {
+        this.auditService.sendCategory(t).subscribe(resultTag => {
+          t.setId(resultTag.id);
+        });
+      }
+      else{
+        t.setId(tag.id);
+      }
+      this.categoryTags.set(tag.skillCategory, t);
+    }
+  }
+
+  removeCategoryTag($event: any) {
+    let tagName: string = $event.srcElement.previousSibling.data.trim();
+    let id = this.categoryTags.get(tagName).id;
+    this.auditService.deleteCategory(id).subscribe();
+    this.categoryTags.delete(tagName);
   }
 
   //When you click week, it will reset button to default
   toggleNotesArray(): void {
-      this.auditService.invokeAssosciateFunction.subscribe(()=> {
+    this.auditService.invokeAssosciateFunction.subscribe(() => {
       this.sortRandom = false;
       this.order = "Randomly";
     });
@@ -71,56 +125,55 @@ export class AssociateComponent implements OnInit {
     }
     this.sortRandom = !this.sortRandom;
   }
-
-  getNote(NoteId: number)
-  {
-    for(let i = 0; i< this.notes.length;i++)
-    {
-      if(this.notes[i].noteId == NoteId)
-      {
+  
+  getNote(NoteId: number) {
+    for (let i = 0; i < this.notes.length; i++) {
+      if (this.notes[i].noteId == NoteId) {
         return this.notes[i];
       }
     }
   }
-  prepareFlag(flagSelection: string)
-  {
-    this.preparedFlagStatus = flagSelection;
-    this.flagStatusVisual = "fa-"+flagSelection.toLowerCase();
+  onFlagSelected(selectedFlag: string) {
+    this.selectedTrainee.flagStatus = selectedFlag;
+    this.flagStatusVisual = "fa-" + this.selectedTrainee.flagStatus.toLowerCase();
   }
 
-  setFlag(selectedNoteId: number, selection: string)
-  {
-    this.getNote(selectedNoteId).trainee.flagStatus = selection;
-    console.log(this.getNote(selectedNoteId).trainee);
-  }
-  clearComment()
-  {
-    $('textarea').filter('[id*=comment]').val('');
-  }
-
-  showText(selectedNoteId: number)
-  {
+  showText(selectedNoteId: number) {
     this.hoverComment = this.getNote(selectedNoteId).trainee.flagNotes;
   }
 
-  submitModal(selectedNoteId: number, comment: string)
-  {
-    console.log("Getting Comment");
-    let newNote = this.getNote(selectedNoteId);
-    newNote.trainee.flagNotes = comment;
-    newNote.trainee.flagStatus = this.preparedFlagStatus;
-    this.auditService.saveFlagModal(newNote).subscribe(data =>{
+  onFlagSubmit() {
+    this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
       console.log(data);
-      
-    })
-    
+      this.isaddFlagClicked = false;
+    });
   }
 
-  deployToModal(selectedNoteId: number, currentFlagStatus: string)
-  {
-    this.theNote = selectedNoteId;
-    this.tempFlagStatus = currentFlagStatus;
-  } 
+  onFlagDelete(){
+    this.selectedTrainee.flagNotes = "";
+    this.selectedTrainee.flagStatus = "NONE";
+    this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
+    });
+    this.isaddFlagClicked = false;
+  }
+
+  onFlagCancel() {
+    this.selectedTrainee.flagStatus = this.selectedTraineeFlagStatusBeforeSelecting;
+    this.selectedTrainee.flagNotes = this.selectedTraineeFlagNotesBeforeSelecting;
+    this.isaddFlagClicked = false;
+  }
+  
+  onAddFlagClicked(trainee: Trainee, index: number) {
+    this.selectedTrainee = trainee;
+    this.selectedTraineeFlagNotesBeforeSelecting = trainee.flagNotes;
+    this.selectedTraineeFlagStatusBeforeSelecting = trainee.flagStatus;
+    this.selectedTraineeIndex = index;
+    if (this.selectedTrainee.flagStatus == null) {
+      this.onFlagSelected('NONE');
+    }
+    this.flagStatusVisual = "fa-" + this.selectedTrainee.flagStatus.toLowerCase();
+    this.isaddFlagClicked = false;
+  }
 
 
   sortAlphabetically(notes: any) {
@@ -138,31 +191,10 @@ export class AssociateComponent implements OnInit {
     this.notes = this.auditService.notes;
   }
 
-  // Cycle the flag notes popup
-  // cycleFlagNotesInput(selectedNoteId: number, enable: boolean): void {
-
-  //   // Loop through each note in notes until the target is found
-  //   for (let i = 0; i < this.notes.length; i++) {
-
-  //     // Find the clicked note
-  //     if (this.notes[i].noteId === selectedNoteId) {
-
-  //       console.log(selectedNoteId);
-
-  //         // Enable or disable the notes box popup
-  //         this.notes[i].noteFlagInputActive = enable;
-
-  //     }
-  //   }
-  // }
-
-
-
-  //showSpinner is called when keystroke event occurs in a note
-  //it displays a "loading" icon until noteOnBlur is called..
-  //see noteOnBlur below
-
   showSpinner(i: number) {
+    //showSpinner is called when keystroke event occurs in a note
+    //it displays a "loading" icon until noteOnBlur is called..
+    //see noteOnBlur below
     this.spinner = document.getElementById('spinner' + i);
     this.spinner.style.display = "block";
     this.checkMark = document.getElementById('checkMark' + i);
@@ -180,6 +212,13 @@ export class AssociateComponent implements OnInit {
     this.errMark.style.display = "none";
   }
 
+  getCategoriesByBatchByWeek() {
+    let categories: Tag[] = this.auditService.categoriesByBatchByWeek;
+    this.categoryTags.clear();
+    for (let i = 0; i < categories.length; i++) {
+      this.addCategoryTag(categories[i]);
+    }
+  }
   //noteOnBlur will save a note to the backend when an onBlur event happens.
   //if the function returns successfully, the check mark div will be displayed
   //if the function returns an error, the X mark div will be displayed.. 
@@ -230,7 +269,7 @@ export class AssociateComponent implements OnInit {
       }
     }
     //Get rid of all marks after few seconds
-    setTimeout(() => {this.clearAllSavingIcon(i);}, 5000);
+    setTimeout(() => { this.clearAllSavingIcon(i); }, 5000);
   }
 
   setScore(selection: string, selectedNoteId: number) {

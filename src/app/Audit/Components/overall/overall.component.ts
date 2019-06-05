@@ -34,7 +34,6 @@ export class OverallComponent implements OnInit, OnDestroy {
 			this.batchId = this.auditService.selectedBatch['batchId'];
 			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
 		});
-
 	}
 
 	showSpinner() {
@@ -84,9 +83,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 	}
 
 	setScore(qcStatus: string, noteId: number) {
-		console.log("im here")
 		this.note.qcStatus = qcStatus;
-		console.log(this.note)
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
 				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
@@ -101,13 +98,11 @@ export class OverallComponent implements OnInit, OnDestroy {
 				  Error: ${err.message}`);
 				}
 			});
-
 	}
 
 	ngOnDestroy() {
 		if (this.noteSubscription) {
 			this.noteSubscription.unsubscribe();
 		}
-
 	}
 }

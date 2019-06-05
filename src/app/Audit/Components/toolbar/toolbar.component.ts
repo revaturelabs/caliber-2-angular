@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QcNote } from '../../types/note';
-import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -23,6 +22,7 @@ export class ToolbarComponent implements OnInit {
   weeks = [];
   selectedWeek: number;
   notes: QcNote[] = [];
+
   constructor(
     public auditService: AuditService
   ) { }
@@ -88,22 +88,32 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  selectWeek(event: number) { 
-    this.selectedWeek = event; 
-    this.auditService.selectedWeek = this.selectedWeek; 
-    if(this.selectedBatch != undefined){
-    this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
-    .subscribe(result => {
-      this.auditService.sortAlphabetically(result);
-      this.auditService.setNotes(result);
-      console.log(result);
-      this.auditService.onWeekClick();  
-    });
-  }else{
-    this.auditService.setNotes(null);
-    this.auditService.onWeekClick();
-  }
-     
+  selectWeek(event: number) {
+    this.selectedWeek = event;
+    this.auditService.selectedWeek = this.selectedWeek;
+    if (this.selectedBatch != undefined) {
+      this.auditService.getNotesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
+        .subscribe(result => {
+          this.auditService.sortAlphabetically(result);
+          this.auditService.setNotes(result);
+          console.log(result);
+          this.auditService.onWeekClick();
+        });
+
+        this.auditService.getCategoriesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
+          .subscribe(result => {
+            this.auditService.categoriesByBatchByWeek = result;
+            console.log(result);
+            this.auditService.onWeekClick();
+          },
+          error => {
+            console.log(error);
+          });
+    } else {
+      this.auditService.setNotes(null);
+      this.auditService.onWeekClick();
+    }
+
   }
   
   addWeek() {
