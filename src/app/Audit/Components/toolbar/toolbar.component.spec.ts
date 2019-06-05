@@ -20,7 +20,7 @@ class MockAuditService {
   setNotes(notes) { }
 }
 
-fdescribe('ToolbarComponent', () => {
+describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
   let fixture: ComponentFixture<ToolbarComponent>;
   let auditService: AuditService;
