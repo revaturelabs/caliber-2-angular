@@ -1,59 +1,108 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { AuditService } from '../../Services/audit.service';
+import { QcNote } from '../../types/note';
+import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/error-handling/services/error.service';
 
 @Component({
-  selector: 'app-overall',
-  templateUrl: './overall.component.html',
-  styleUrls: ['./overall.component.css']
+	selector: 'app-overall',
+	templateUrl: './overall.component.html',
+	styleUrls: ['./overall.component.css']
 })
-export class OverallComponent implements OnInit {
+export class OverallComponent implements OnInit, OnDestroy {
+	batchId: number;
+	week: number;
+	note: QcNote = this.auditService.overallBatchNote;
+	noteSubscription: Subscription;
 
-  constructor() { }
+	isSpinning: boolean = false;
+	isCheck: boolean = false;
+	isError: boolean = false;
 
-  ngOnInit() {
-  }
+	isTyping: boolean;
 
-  /*
-	qc.getAssessmentsByBatchId = function(batchId) {
-		$log.debug("In assessment");
-		return $http({
-			url : "/qc/assessment/byBatchId/" + batchId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
+	constructor(private auditService: AuditService, private errorService: ErrorService) { }
+
+	ngOnInit() {
+		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {	
+			this.note = data;
 		});
-	};
 
-	// get all assessments
-	qc.getAllAssessments = function(weekId) {
-		return $http({
-			url : "/qc/assessment/byWeek/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments retrieved successfully");
-			$log.debug(response);
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
+		this.auditService.invokeAssosciateFunction.subscribe(() => {
+			this.week = this.auditService.selectedWeek;
+			this.batchId = this.auditService.selectedBatch['batchId'];
+			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
 		});
-	};
-	
-	// get all assessment categories for the week
-	qc.getAllAssessmentCategories = function(batchId, weekId) {
-		return $http({
-			url : "/all/assessments/categories/batch/" + batchId + "/week/" + weekId + "/",
-			method : "GET"
-		}).then(function(response) {
-			$log.debug("Assessments categories retrieved successfully");
-			$log.debug("response");
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-  }; */
+	}
 
+	showSpinner() {
+		this.isSpinning = true;
+		this.isCheck = false;
+		this.isError = false;
+	}
 
+	clearAllSavingIcon() {
+		this.isSpinning = false;
+		this.isCheck = false;
+		this.isError = false;
+	}
+
+	noteOnBlur(noteId: number, secondRound: boolean) {
+		this.showSpinner();
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+				if (this.isTyping == true) {
+					this.isSpinning = false;
+					this.isCheck = true;
+					this.isError = false;
+				} else {
+					this.isSpinning = false;
+					this.isCheck = false;
+					this.isError = false;
+				}
+
+				this.isTyping = false;
+			},
+			issue => {
+				this.isSpinning = false;
+				this.isCheck = false;
+				this.isError = true;
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${noteId}. Please contact system administrator: \n
+					Status Code: ${err.status} \n
+					Status Text: ${err.statusText} \n
+					Error: ${err.message}`);
+				}
+			}
+		)
+		//Get rid of all marks after few seconds
+		setTimeout(() => {this.clearAllSavingIcon();}, 5000);
+	}
+
+	setScore(qcStatus: string, noteId: number) {
+		this.note.qcStatus = qcStatus;
+		this.auditService.sendNote(this.note).subscribe(
+			data => {
+				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);
+			},
+			issue => {
+				if (issue instanceof HttpErrorResponse) {
+					const err = issue as HttpErrorResponse;
+					this.errorService.setError('AuditService',
+						`Issue updating QcNote with noteId ${this.note.noteId}. Please contact system administrator: \n
+				  Status Code: ${err.status} \n
+				  Status Text: ${err.statusText} \n
+				  Error: ${err.message}`);
+				}
+			});
+	}
+
+	ngOnDestroy() {
+		if (this.noteSubscription) {
+			this.noteSubscription.unsubscribe();
+		}
+	}
 }
