@@ -1,7 +1,7 @@
 import { TraineeTogglePipe } from './trainee-toggle.pipe';
 import { Trainee } from '../types/trainee';
 import { TrainingStatus } from '../types/training-status';
-import { browser, by, element } from 'protractor';
+//import { browser, by, element } from 'protractor';
 
 let traineeList = new Array<Trainee>();
 let trainee1: Trainee;

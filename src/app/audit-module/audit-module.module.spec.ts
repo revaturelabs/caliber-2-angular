@@ -1,10 +1,10 @@
-import { AuditModuleModule } from './audit-module.module';
+import { AuditModule } from './audit-module.module';
 
 describe('AuditModuleModule', () => {
-  let auditModuleModule: AuditModuleModule;
+  let auditModuleModule: AuditModule;
 
   beforeEach(() => {
-    auditModuleModule = new AuditModuleModule();
+    auditModuleModule = new AuditModule();
   });
 
   it('should create an instance', () => {

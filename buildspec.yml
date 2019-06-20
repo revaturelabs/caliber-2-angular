@@ -9,7 +9,7 @@ phases:
   pre_build:
     commands:
       - echo Building Angular project
-      - npm run build --aot
+      - npm run build --aot --prod --configuration=production
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
       - BUILD_ID=$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
