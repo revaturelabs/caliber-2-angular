@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment"
 })
 export class CategoryService {
   constructor(private http: HttpClient) {}
-  url = environment.serverRootURL + "/category/category/all/";
+  url = environment.serverRootURL + "/category/all/";
   getUrl = environment.serverRootURL + "category/all/";
 
   getCategories(): Observable<[Category]> {

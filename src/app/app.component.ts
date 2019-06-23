@@ -14,6 +14,6 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
 export class AppComponent {
   title = 'Caliber | Performance Management';
 
-  constructor(private errorService: ErrorService, private modalService: NgbModal) {}
+  constructor(public errorService: ErrorService, private modalService: NgbModal) {}
 
 }

@@ -24,7 +24,7 @@ export class NoteService {
   noteAllURL = '/all/note/all';
   noteURL = '/all/note/';
   notePut = '/all/note/update';
-  notePost = 'all/note/create'
+  notePost = '/all/note/create'
   batchNotesByWeekUrl = '/all/note/batch/';
   batchNotesByTraineeId = '/all/note/trainee/'
   noteEmitter = new EventEmitter<Note[]>();

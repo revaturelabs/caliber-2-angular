@@ -15,7 +15,7 @@ export class DeleteTraineeComponent implements OnInit {
    * expects a 'trainee' as an input
    */
   @Input()
-  private trainee: Trainee;
+  trainee: Trainee;
 
   /**
    * expects to output an 'EventEmitter<boolean>'
@@ -27,7 +27,7 @@ export class DeleteTraineeComponent implements OnInit {
    * calls the 'deleteTrainee' function from 'TraineeService' to delete the trainee
    * @param trainee the trainee that is to be deleted
    */
-  private deleteTrainee(trainee: Trainee) {
+  deleteTrainee(trainee: Trainee) {
     this.ts.deleteTrainee(trainee.traineeId).subscribe(data => {
       this.refreshList.emit(true);
     },

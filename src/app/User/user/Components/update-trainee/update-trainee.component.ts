@@ -21,7 +21,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   * @author Jacques Myette
   */
   @Input()
-  private trainee: Trainee;
+  trainee: Trainee;
 
   /**
   * Calls another get request to populate the trainees after we update a trainee.
@@ -36,7 +36,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   * the fields are changed but not updated, they're reverted to their original values.
   * @author Jacques Myette
   */
-  private traineeTemp = new Trainee();
+  traineeTemp = new Trainee();
 
   /**
   * Inject our TraineeService to call our UpdateTrainee (put) method
