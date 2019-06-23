@@ -20,7 +20,7 @@
 							<label for="category">Assessment Category:</label> 
 							<select name = 'selectedCategory' [(ngModel)] = 'selectedCategory'
 								class="form-control" id="category"
-								required  [value] = 'default'>
+								required  value = 'default'>
 								<option value="default" disabled>Select Assessment Category</option>
 								<option *ngFor ="let cat of categories" [ngValue] = cat.categoryId>{{cat.skillCategory}}</option>
 							</select>
