@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportService } from '../../Services/report.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-
-  constructor() { }
+  years: number[];
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
   }
 
+  displayYears(){
+    this.reportService.getAllYears().subscribe(result => {
+      this.years = result;
+    });
+  }
 }

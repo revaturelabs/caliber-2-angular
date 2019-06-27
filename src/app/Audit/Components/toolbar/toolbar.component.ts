@@ -40,6 +40,7 @@ export class ToolbarComponent implements OnInit {
     this.auditService.getAllYears()
     .subscribe(result => {
       this.years = result;
+      console.log(result);
       this.selectedYear = this.years[0];
       console.log(this.years);
       this.getBatches();
