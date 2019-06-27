@@ -5,7 +5,7 @@
         <!-- top ui dropdown for available years -->
         <ul class="nav nav-tabs">
           <li role="button" class="dropdown"><a class="dropdown-toggle"
-            data-toggle="dropdown" (click)="displayYears()"> Year: {{selectedYear}} <span class="caret"></span></a>
+            data-toggle="dropdown" (click)="showYears()">{{selectedYear}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li *ngFor="let year of years">
         <a role="button" (click)="selectYear(year)">{{year}}</a>
@@ -14,25 +14,25 @@
             
           <!-- sort by quarter-->
           <li role="button" class="dropdown"><a class="dropdown-toggle"
-            data-toggle="dropdown" (click)="showQs()"> Quarter: {{selectedQuarter}} <span class="caret"></span></a>
+            data-toggle="dropdown" (click)="showBatches()">{{selectedBatch.trainingName}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li *ngFor="let quarter of quarters">
-        <a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
+              <li *ngFor="let batch of batches">
+        <a role="button" (click)="selectBatch(batch)">{{batch.trainingName}}</a>
             </li>
           </ul>
         <!-- Now to find Week and Trainee -->
         <li role="button" class="dropdown"><a class="dropdown-toggle"
-          data-toggle="dropdown" (click)="showWeeks()"> Week: {{selectedWeek}} <span class="caret"></span></a>
+          data-toggle="dropdown" (click)="showWeeks()">{{titledWeek}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li *ngFor="let week of weeks">
-      <a role="button" (click)="selectWeek(week)">{{week}}</a> 
+      <a role="button" (click)="selectWeek(week)">Week {{week}}</a> 
           </li>
         </ul>
         <li role="button" class="dropdown"><a class="dropdown-toggle"
-          data-toggle="dropdown" (click)="showTrainees()"> Trainee: {{selectedTrainee}} <span class="caret"></span></a>
+          data-toggle="dropdown" (click)="showTrainees()">{{selectedTrainee.name}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li *ngFor="let trainee of trainees">
-      <a role="button" (click)="selectTrainee(trainee)">{{trainee}}</a>
+      <a role="button" (click)="selectTrainee(trainee)">{{trainee.name}}</a>
           </li>
         </ul>
       </ul>
