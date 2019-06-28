@@ -218,14 +218,17 @@ export class ToolbarComponent implements OnInit {
 
   assessReportOutput(){
     this.reportOutput = new ReportOutput();
-    this.reportOutput.selectedYear = this.selectedYear;
-    this.reportOutput.selectedBatches = this.batches;
-    this.reportOutput.selectedWeek = this.selectedWeek;
-    this.reportOutput.selectedTrainee = this.selectedTrainee;
-    this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
-    this.reportOutput.gradesDataStore = this.gradesDataStore;
-    this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
-    this.reportOutput.calculateGradesAverage = this.calculateGradesAverage;
+    // this.reportOutput.selectedYear = this.selectedYear;
+    // this.reportOutput.selectedBatches = this.batches;
+    // this.reportOutput.selectedWeek = this.selectedWeek;
+    // this.reportOutput.selectedTrainee = this.selectedTrainee;
+    // this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
+    // this.reportOutput.gradesDataStore = this.gradesDataStore;
+    // this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
+    // this.reportOutput.calculateGradesAverage = this.calculateGradesAverage;
+    this.reportService.setGradeDataStore(this.gradesDataStore);
+    this.reportService.setAssessmentDataStore(this.assessmentsDataStore);
+
     console.log(this.reportOutput);
     this.submitReportOutput.emit(this.reportOutput);
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { Grade } from 'src/app/User/user/types/trainee';
+import { ReportService } from '../../Services/report.service';
+import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 
 @Component({
   selector: 'app-tabular-trainee-average-list',
@@ -8,16 +10,24 @@ import { Grade } from 'src/app/User/user/types/trainee';
   styleUrls: ['./tabular-trainee-average-list.component.css']
 })
 export class TabularTraineeAverageListComponent implements OnInit {
-@Input() reportOutput: ReportOutput = new ReportOutput();
+  gradesDataStore : Grade[] =null;
+  assessmentsDataStore : Assessment[] = null;
 
-  constructor() { }
+
+  constructor(private reportService : ReportService) { }
 
   ngOnInit() {
-    let newGrade = new Grade();
-    newGrade.score=0;
-    newGrade.traineeId=-1;
-    newGrade.assessmentId=-1;
-
-    this.reportOutput.gradesDataStore = [newGrade];
   }
+
+  updateDataPull(){
+    console.log("I work!");
+    this.gradesDataStore = this.reportService.getGradeDataStore();
+    this.assessmentsDataStore = this.reportService.getAssessmentDataStore();
+    console.log("Grades:");
+    console.log(this.gradesDataStore);
+    console.log("Assessments:");
+    console.log(this.assessmentsDataStore);
+
+  }
+
 }

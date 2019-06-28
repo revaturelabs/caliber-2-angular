@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
+import { TabularTraineeAverageListComponent } from '../tabular-trainee-average-list/tabular-trainee-average-list.component';
 
 @Component({
   selector: 'app-reports',
@@ -8,6 +9,7 @@ import { ReportOutput } from '../../Models/report-output';
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
+  @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   constructor() { } 
 
   ngOnInit() {
@@ -16,5 +18,6 @@ export class ReportsComponent implements OnInit {
   updateReportOutput(reportOutput: ReportOutput){
     this.reportOutput = reportOutput;
     console.log("I got it! " + this.reportOutput.calculateAssessmentsAverage);
+    this.cumulativeScoreComponents.updateDataPull();
   }
 }
