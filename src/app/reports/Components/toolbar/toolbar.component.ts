@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ReportService } from '../../Services/report.service';
 import { Trainee, Grade, traineeAssessment } from 'src/app/Batch/type/trainee';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
@@ -6,6 +6,7 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
+import { ReportOutput } from '../../Models/report-output';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,7 +26,7 @@ export class ToolbarComponent implements OnInit {
   selectedWeek: number;
   selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
-
+  
   assessmentsDataStore:Assessment[] = [];
   gradesDataStore:Grade[]=[];
 
@@ -34,6 +35,12 @@ export class ToolbarComponent implements OnInit {
 
   batchExists: boolean = false;
   ourTrainee: Trainee[];
+
+  calculateGradesAverage: number =0;
+  calculateAssessmentsAverage:number =0;
+
+  reportOutput: ReportOutput;
+  @Output() submitReportOutput:EventEmitter<ReportOutput> = new EventEmitter<ReportOutput>();
 
   selectedBatch: Batch = {
     batchId: 0,
@@ -70,8 +77,6 @@ export class ToolbarComponent implements OnInit {
       // this.selectedYear = "Select Year";
       this.getBatch(this.years[0]);
     });
-    this.getAllAssessments();
-    this.getAllGrades();
   }
 
   getBatch(year:number){
@@ -96,6 +101,7 @@ export class ToolbarComponent implements OnInit {
     }
     this.selectedWeek = 0;
     this.titledWeek = "Weeks (all)";
+
   }
 
   getTraineesByBatchId(){
@@ -111,6 +117,7 @@ export class ToolbarComponent implements OnInit {
         allTrainee.name="Trainees (all)";
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
+        this.processAveragesAndOutput();
       }
     });    
   }
@@ -120,6 +127,7 @@ export class ToolbarComponent implements OnInit {
     // this.selectedWeek = "Select Week (All)";
     this.trainees = [];
     this.getBatch(event);
+    this.calculateGradeAverage();
   }
 
   selectTrainee(event: Trainee){
@@ -147,7 +155,8 @@ export class ToolbarComponent implements OnInit {
     // this.showActiveWeek(this.auditService.selectedBatch.weeks);
     // this.selectWeek(this.auditService.selectedBatch.weeks);
     this.getWeeks();
-    this.getTraineesByBatchId()
+    this.getTraineesByBatchId();
+    
   }
 
   showYears(){
@@ -169,6 +178,7 @@ export class ToolbarComponent implements OnInit {
       (assessments)=>{
         console.log(assessments);
         this.assessmentsDataStore = assessments;
+        this.calculateAssessmentAverage();
     });
   }
 
@@ -177,19 +187,51 @@ export class ToolbarComponent implements OnInit {
       (grades)=>{
         console.log(grades);
         this.gradesDataStore = grades;
+        this.calculateGradeAverage();
+        this.assessReportOutput();
     });
   }
 
-  // calculateGradeAverage(){
-  //   this.gradesDataStore.forEach()
-  // }
-  
-  // calculateAssessmentAverage(){
-  //   this.assessmentsDataStore.forEach()
-  // }
+  calculateAssessmentAverage(){
+    let totalScore: number = 0;
+    let calculateAssessmentsSampleCount = this.assessmentsDataStore.length;
+    this.assessmentsDataStore.forEach((item) => {
+      totalScore += item.rawScore;
+      
+    });
+    totalScore = totalScore/calculateAssessmentsSampleCount;
+    this.calculateAssessmentsAverage = totalScore;
+
+    console.log("QC average Score:" + this.calculateAssessmentsAverage + " over " + calculateAssessmentsSampleCount + " batch assessments.");
+  }
+
+  calculateGradeAverage(){
+    let totalScore: number = 0;
+    let calculateGradesSampleCount = this.gradesDataStore.length;
+    this.gradesDataStore.forEach((item) => {
+      totalScore += item.score;
+    });
+    totalScore = totalScore/calculateGradesSampleCount;
+    this.calculateGradesAverage = totalScore;
+    console.log("Quiz average Score:" + this.calculateGradesAverage + " over " + calculateGradesSampleCount + " administerred quizzes.");
+  }
+
+  assessReportOutput(){
+    this.reportOutput = new ReportOutput();
+    this.reportOutput.selectedYear = this.selectedYear;
+    this.reportOutput.selectedBatches = this.batches;
+    this.reportOutput.selectedWeek = this.selectedWeek;
+    this.reportOutput.selectedTrainee = this.selectedTrainee;
+    this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
+    this.reportOutput.gradesDataStore = this.gradesDataStore;
+    this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
+    this.reportOutput.calculateGradesAverage = this.calculateGradesAverage;
+    console.log(this.reportOutput);
+    this.submitReportOutput.emit(this.reportOutput);
+  }
+
+  processAveragesAndOutput(){
+    this.getAllAssessments();
+    this.getAllGrades();
+  }
 }
-// this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
-//   console.log(trainees)    
-//   //this.getBatchNotesByWeek();
-//   if(trainees.length>0){
-//     this.trainees = trainees;
