@@ -87,6 +87,7 @@ export class ToolbarComponent implements OnInit {
       if(results.length >0){
         this.selectedBatch = this.batches[0];
         this.batchExists = true;
+        this.reportService.setBatch(this.batches[0]);
         this.getWeeks();
         this.getTraineesByBatchId()
       }
@@ -100,6 +101,7 @@ export class ToolbarComponent implements OnInit {
       this.weeks.push(i+1);
     }
     this.selectedWeek = 0;
+    this.reportService.setWeek(0);
     this.titledWeek = "Weeks (all)";
 
   }
@@ -118,6 +120,7 @@ export class ToolbarComponent implements OnInit {
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
         this.processAveragesAndOutput();
+        this.reportService.setTrainee(trainees[0]);
       }
     });    
   }
@@ -132,16 +135,21 @@ export class ToolbarComponent implements OnInit {
 
   selectTrainee(event: Trainee){
     this.selectedTrainee = event;
+    this.reportService.setTrainee(event);
+    this.processAveragesAndOutput();
   }
 
   selectWeek(event: number) {
     this.selectedWeek = event;
     if(event){
       this.titledWeek = "Week " +event;
+      this.reportService.setWeek(event);
     }
     else{
       this.titledWeek = "Weeks (all)";
+      this.reportService.setWeek(0);
     }
+    this.processAveragesAndOutput();
     // this.auditService.selectedWeek = event;
     // this.getBatchNotesByWeek();
     // this.getAssessmentsByBatchIdAndWeekNum();
@@ -150,6 +158,7 @@ export class ToolbarComponent implements OnInit {
 
   selectBatch(event: Batch) {
     this.selectedBatch = event;
+    this.reportService.setBatch(event);
     this.auditService.selectedBatch = this.selectedBatch;
     // this.getWeeks();
     // this.showActiveWeek(this.auditService.selectedBatch.weeks);
