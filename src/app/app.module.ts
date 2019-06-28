@@ -14,6 +14,8 @@ import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component';
+import { IndividualQCResultsTableComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-table.component';
+import { MatTableModule } from '@angular/material';
 // import { MaterialModule } from './material.module';
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
@@ -28,6 +30,7 @@ import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
+    IndividualQCResultsTableComponent,
    // UpdateDeleteAssessmentModalComponent,
     
   ],
@@ -37,6 +40,7 @@ import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
