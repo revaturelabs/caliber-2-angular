@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ReportOutput } from '../../Models/report-output';
 
 @Component({
   selector: 'app-tabular-trainee-average-list',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabular-trainee-average-list.component.css']
 })
 export class TabularTraineeAverageListComponent implements OnInit {
-
+@Input() reportOutput: ReportOutput;
   constructor() { }
 
   ngOnInit() {
   }
-
 }
