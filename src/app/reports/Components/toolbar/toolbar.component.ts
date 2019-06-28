@@ -5,6 +5,7 @@ import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
+import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,8 +23,14 @@ export class ToolbarComponent implements OnInit {
   selectedBatches: Batch[];
   titledWeek: string = "Not Found";
   selectedWeek: number;
-  selectedTrainee: Trainee;
+  selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
+
+  assessmentsDataStore:Assessment[] = [];
+  gradesDataStore:Grade[]=[];
+
+  assessmentAverage:number[]=[]; 
+  gradesAverage: number[]=[];
 
   batchExists: boolean = false;
   ourTrainee: Trainee[];
@@ -45,6 +52,7 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
+
   constructor(private reportService: ReportService, private auditService : 
     AuditService, private assessBatchService : AssessBatchService,
     private traineeService: TraineeService) { }
@@ -54,6 +62,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getAllYears() {
+    this.selectedTrainee.name = "Hermo, Knighknee"
     this.reportService.getAllYears()
     .subscribe(result => {
       this.years = result;
@@ -61,6 +70,8 @@ export class ToolbarComponent implements OnInit {
       // this.selectedYear = "Select Year";
       this.getBatch(this.years[0]);
     });
+    this.getAllAssessments();
+    this.getAllGrades();
   }
 
   getBatch(year:number){
@@ -152,4 +163,33 @@ export class ToolbarComponent implements OnInit {
   showTrainees(){
 
   }
+
+  getAllAssessments(){
+    this.reportService.getAllAssessments().subscribe(
+      (assessments)=>{
+        console.log(assessments);
+        this.assessmentsDataStore = assessments;
+    });
+  }
+
+  getAllGrades(){
+    this.reportService.getAllGrades().subscribe(
+      (grades)=>{
+        console.log(grades);
+        this.gradesDataStore = grades;
+    });
+  }
+
+  // calculateGradeAverage(){
+  //   this.gradesDataStore.forEach()
+  // }
+  
+  // calculateAssessmentAverage(){
+  //   this.assessmentsDataStore.forEach()
+  // }
 }
+// this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
+//   console.log(trainees)    
+//   //this.getBatchNotesByWeek();
+//   if(trainees.length>0){
+//     this.trainees = trainees;
