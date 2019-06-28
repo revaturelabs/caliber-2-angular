@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
 import { traineeAssessment, Grade } from 'src/app/Batch/type/trainee';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
+import { Trainee } from 'src/app/User/user/types/trainee';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,7 +24,10 @@ export class ReportService {
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/all';
   assessmentsAllURL : string = '/assessment/all/assessment/all';
-  selectedYear: number;
+
+  gradesDataStore : Grade[];
+  assessmentsDataStore : Assessment[];
+  
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
@@ -41,4 +45,46 @@ export class ReportService {
   getAllGrades():Observable<Grade[]> {
     return this.http.get<Grade[]>(this.url + this.gradesAllURL, httpOptions)
   }
+
+  setGradeDataStore(gradesDataStore: Grade[]){
+    this.gradesDataStore = gradesDataStore;
+  }
+
+  setAssessmentDataStore(assessmentDataStore: Assessment[]){
+    this.assessmentsDataStore = assessmentDataStore;
+  }
+
+  getAssessmentDataStore(): Assessment[]{
+    return this.assessmentsDataStore;
+  }
+
+  getGradeDataStore() : Grade[]{
+    return this.gradesDataStore;
+  } 
+  // selectedYear: number;
+  // selectedBatches :Batch[];
+  // selectedWeek : number;
+  // selectedTrainee : Trainee;
+  // assessmentsDataStore : Assessment[];
+  // gradesDataStore: Grade[];
+  // calculateAssessmentsAverage : number;
+  // calculateGradesAverage : number;
 }
+/*
+
+
+
+
+*/
+// assessReportOutput(){
+//   this.reportOutput = new ReportOutput();
+//   this.reportOutput.selectedYear = this.selectedYear;
+//   this.reportOutput.selectedBatches = this.batches;
+//   this.reportOutput.selectedWeek = this.selectedWeek;
+//   this.reportOutput.selectedTrainee = this.selectedTrainee;
+//   this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
+//   this.reportOutput.gradesDataStore = this.gradesDataStore;
+//   this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
+//   this.reportOutput.calculateGradesAverage = this.calculateGradesAverage;
+//   console.log(this.reportOutput);
+//   this.submitReportOutput.emit(this.reportOutput);
