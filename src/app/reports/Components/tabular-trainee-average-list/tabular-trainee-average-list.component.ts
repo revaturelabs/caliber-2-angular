@@ -13,9 +13,8 @@ export class TabularTraineeAverageListComponent implements OnInit {
   gradesDataStore : Grade[] =null;
   assessmentsDataStore : Assessment[] = null;
 
-
   constructor(private reportService : ReportService) { }
-
+ 
   ngOnInit() {
   }
 
