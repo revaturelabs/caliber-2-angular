@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="">
+
+    <div class="" style="float:left; margin-left:100px; margin-right:50px; ">
+      <div *ngFor="let grade of reportOutput.gradesDataStore">
+        The QC score was {{grade.score}}  for trainee: {{grade.traineeId}} on during assessment {{grade.assessmentId}}     
+      </div>
+    </div>
+
+    <div class="" style="float:left;">
+      <div *ngFor="let assess of reportOutput.assessmentsDataStore">
+           The QC score was {{assess.rawScore}}  for assessment {{assess.assessmentId }} in batch {{assess.batchId}}
+      </div>
+    </div>
+    
+  </div>
+</div>

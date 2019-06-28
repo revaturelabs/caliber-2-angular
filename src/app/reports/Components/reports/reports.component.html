@@ -1,4 +1,2 @@
-<app-toolbar></app-toolbar>
-<div> 
-  reports works!
-</div>
+<app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
+<app-tabular-trainee-average-list [reportOutput]="reportOutput"></app-tabular-trainee-average-list>
