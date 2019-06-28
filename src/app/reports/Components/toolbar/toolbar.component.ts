@@ -144,7 +144,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   showBatches(){
-
+    
   }
   showWeeks(){
     this.titledWeek = "Select Week";

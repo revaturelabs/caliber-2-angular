@@ -14,8 +14,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReportService {
-  // url = environment.serverRootURL;
-  url = 'http://localhost:10000';
+  url = environment.serverRootURL;
+  // url = 'http://localhost:10000';
   batchesYearURL = '/qc/batch/';
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
@@ -29,4 +29,5 @@ export class ReportService {
   getBatchesByYear(year : number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
   }
+
 }
