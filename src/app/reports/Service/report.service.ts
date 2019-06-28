@@ -22,9 +22,12 @@ export class ReportService {
   batchesYearURL = '/vp/batch/';
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
-  gradesAllURL = '/assessment/all/grade/all';
-  assessmentsAllURL : string = '/assessment/all/assessment/all';
+  gradesAllURL = '/assessment/all/grade/batch/';
+  assessmentsAllURL : string = '/assessment/all/assessment/batch/';
 
+  batch: Batch;
+  week: number;
+  trainee:Trainee;
   gradesDataStore : Grade[];
   assessmentsDataStore : Assessment[];
   
@@ -39,11 +42,13 @@ export class ReportService {
   }
 
   getAllAssessments():Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL, httpOptions)
+    let weekStr = this.determineWeek(this.week);
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
   }
 
   getAllGrades():Observable<Grade[]> {
-    return this.http.get<Grade[]>(this.url + this.gradesAllURL, httpOptions)
+    let weekStr = this.determineWeek(this.week);
+    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
   }
 
   setGradeDataStore(gradesDataStore: Grade[]){
@@ -52,6 +57,25 @@ export class ReportService {
 
   setAssessmentDataStore(assessmentDataStore: Assessment[]){
     this.assessmentsDataStore = assessmentDataStore;
+  }
+
+  determineWeek(week:number):String{
+    if(week>0){
+      return "?week="+week;
+    }
+    return "";
+  }
+
+  setBatch(batch:Batch){
+    this.batch = batch;
+  }
+
+  setWeek(week){
+    this.week = week;
+  }
+
+  setTrainee(trainee){
+    this.trainee = trainee;
   }
 
   getAssessmentDataStore(): Assessment[]{
