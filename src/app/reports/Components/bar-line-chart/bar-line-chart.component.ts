@@ -49,6 +49,10 @@ export class BarLineChartComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  ngAfterViewInit() {
+    this.generateChart('bar', 40, 100, 20); //Sample chart (Junk data)
+  }
 
   public addDataPoint(data: number, pairWithDataset = 0, label: string, backColor = this.defaultBackgroundColor,
     borderColor = this.defaultBorderColor, borderWidth = this.defaultBorderWidth): void {
@@ -102,8 +106,12 @@ export class BarLineChartComponent implements OnInit {
     //Empty any existing datasets.
     this.chartDatasets = [];
 
-    //Creating an empty chart object:
-    this.chart = new Chart('canvas', {
+    this.generateChart(chartType, minimumYAxis, maximumYAxis, stepSize);
+  }
+
+  private generateChart(chartType : string, minimumYAxis : number, maximumYAxis : number, stepSize: number){
+  //Creating an empty chart object:
+  this.chart = new Chart('canvas', {
       type: chartType,
       data: {
         labels: this.chartLabels,
@@ -142,7 +150,7 @@ export class BarLineChartComponent implements OnInit {
       }
     });
   }
-  
+
   private incrementMaximumCategoryPoints() {
     //Creating an empty dataset:
     this.chartDatasets.push({
