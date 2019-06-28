@@ -1,4 +1,25 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+/*
+To utilize this chart, consider running these methods in order:
+  Initialize the chart, you can choose whether the chart will render as a bar chart, or line chart by putting 'bar' or 'line' as
+  the first parameter.
+
+initializeChart();
+
+  Next add a dataset to contain the data points you will add.
+
+addDataset('Category 1');
+
+  Finally, add as many data points as you want by calling addDataPoint() like below multiple times. 
+  
+  The first parameter is the data being added. The second parameter is the name of that data point. The third parameter is the 
+  dataset this datapoint will be added to. Since we added a dataset just before, there is only 1. The index for datasets begin 
+  at 0, so 'Category 1' will be dataset with the index of 0. There are other values you can specify for more customization like 
+  the background color and outline color, but these have a default value and can be omitted.
+
+addDataPoint(70, 'Trainee Score', 0);
+*/
+
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -19,13 +40,13 @@ export class BarLineChartComponent implements OnInit {
 
   private chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
+      backgroundColor: [ this.defaultBackgroundColor, this.defaultBackgroundColor2 ]
     }
   ];
 
   private chartDatasets: Array<any> = [
     {
-      data: [12, 8, 9],
+      data: [55, 85],
       fill: false,
       backgroundColor: this.chartColors,
       borderColor: this.defaultBorderColor,
@@ -33,7 +54,7 @@ export class BarLineChartComponent implements OnInit {
       label: ''
     },
     {
-      data: [12, 8, 9],
+      data: [75, 95],
       fill: false,
       backgroundColor: this.chartColors,
       borderColor: this.defaultBorderColor,
@@ -45,16 +66,17 @@ export class BarLineChartComponent implements OnInit {
   private chartLabels: Array<any> = ['test', 'test'];
   private chart = [];
 
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
   
   ngAfterViewInit() {
     this.generateChart('bar', 40, 100, 20); //Sample chart (Junk data)
+    this.cd.detectChanges();
   }
 
-  public addDataPoint(data: number, pairWithDataset = 0, label: string, backColor = this.defaultBackgroundColor,
+  public addDataPoint(data: number, label: string, backColor = this.defaultBackgroundColor, pairWithDataset = 0,
     borderColor = this.defaultBorderColor, borderWidth = this.defaultBorderWidth): void {
 
     let collision = false;
