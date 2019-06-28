@@ -63,6 +63,7 @@ export class BarLineChartComponent implements OnInit {
     },
   ];
 
+  @ViewChild('barLineChart') chartRef: ElementRef;
   private chartLabels: Array<any> = ['test', 'test'];
   private chart = [];
 
@@ -76,7 +77,7 @@ export class BarLineChartComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  public addDataPoint(data: number, label: string, backColor = this.defaultBackgroundColor, pairWithDataset = 0,
+  public addDataPoint(data: number, label: string, pairWithDataset = 0, backColor = this.defaultBackgroundColor,
     borderColor = this.defaultBorderColor, borderWidth = this.defaultBorderWidth): void {
 
     let collision = false;
@@ -133,7 +134,9 @@ export class BarLineChartComponent implements OnInit {
 
   private generateChart(chartType : string, minimumYAxis : number, maximumYAxis : number, stepSize: number){
   //Creating an empty chart object:
-  this.chart = new Chart('canvas', {
+  const ctx = this.chartRef.nativeElement.getContext('2d');
+  
+  this.chart = new Chart(ctx, {
       type: chartType,
       data: {
         labels: this.chartLabels,
