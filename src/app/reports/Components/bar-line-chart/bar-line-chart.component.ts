@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  selector: 'app-bar-line-chart',
+  templateUrl: './bar-line-chart.component.html',
+  styleUrls: ['./bar-line-chart.component.css']
 })
-export class BarChartComponent implements OnInit {
+export class BarLineChartComponent implements OnInit {
   public readonly defaultBackgroundColor = 'rgba(114, 164, 194, .5)';
   public readonly defaultBorderColor = 'rgba(114, 164, 194, 1)';
   public readonly defaultBackgroundColor2 = 'rgba(252, 180, 20, .6)';
@@ -48,7 +48,6 @@ export class BarChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 
   public addDataPoint(data: number, pairWithDataset = 0, label: string, backColor = this.defaultBackgroundColor,
