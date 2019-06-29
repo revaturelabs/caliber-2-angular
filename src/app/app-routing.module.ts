@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
   { path: 'vp/audit', loadChildren: './audit-module/audit-module.module#AuditModule'},
   { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
+  { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
 ];
 
 @NgModule({
