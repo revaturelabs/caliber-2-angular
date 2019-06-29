@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+import { ReportsModule } from './reports-module/reports-module.module';
 // import { MaterialModule } from './material.module';
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
@@ -27,6 +28,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
+
    // UpdateDeleteAssessmentModalComponent,
     
   ],

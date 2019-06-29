@@ -9,6 +9,8 @@ const routes: Routes = [
 
 @NgModule( {
   exports: [RouterModule],
+  declarations: [
+  ],
   imports: [RouterModule.forChild(routes)],
 })
 export class ReportsRoutingModule{}
