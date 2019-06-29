@@ -34,29 +34,3 @@ export class TechRadarComponent implements OnInit {
     console.log(event, active);
   }
 }
-
-
-
-
-
-//   private chart: Array<Chart>;
-//   private radarChart: HTMLElement;
-  
-//   // placeholder data until pulling from database is set up
-//   data = {
-//     labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
-//     datasets: [{
-//         data: [20, 10, 4, 2]
-//     }]
-// }
-//   constructor() { }
-
-//   ngOnInit() {
-//     this.radarChart = document.getElementById('techRadar');
-//   }
-
-//   createChart(){
-
-//   }
-// }
-
