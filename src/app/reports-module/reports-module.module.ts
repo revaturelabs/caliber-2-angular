@@ -14,10 +14,11 @@ import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scor
   imports: [
     CommonModule,
     ReportsRoutingModule,
-    OverallQCScoresComponent,
+    
   ],
   providers: [
     ReportService,
+    OverallQCScoresComponent,
   ]
 })
 export class ReportsModule { }

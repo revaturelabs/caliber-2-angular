@@ -16,8 +16,9 @@ export class ReportsComponent implements OnInit {
 
   updateReportOutput(reportOutput: ReportOutput){
     this.reportOutput = reportOutput;
+    console.log(this.reportOutput)
     console.log("The Reports Page has Received an Update Request for Data");
-    // this.cumulativeScoreComponents.updateDataPull();
+    //this.cumulativeScoreComponents.updateDataPull();
     console.log("The Cumulative Score component has been updated!");
   }
 }
