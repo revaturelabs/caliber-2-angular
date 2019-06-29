@@ -4,6 +4,7 @@ import { ReportsComponent } from '../reports/Components/reports/reports.componen
 import { ReportsRoutingModule } from './reports-routing.service';
 import { ReportService } from '../reports/Service/report.service';
 import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
+import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scores/overall-qc-scores.component'
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.componen
   imports: [
     CommonModule,
     ReportsRoutingModule,
-    
+    OverallQCScoresComponent,
   ],
   providers: [
     ReportService,

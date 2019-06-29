@@ -1,0 +1,35 @@
+<div class="row ng-scope">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Batch QC Report 
+            <i (click)="downloadReport()" class="clickableIcons glyphicon glyphicon-save"></i>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <div class="table table-bordered ng-scope">
+                <tbody>
+                    <tr>
+                        <th>Trainee</th>
+                        <!-- ngRepeat: item in allQCTraineeNotesAllWeeks[0] -->
+                        <th class="text-center ng-binding ng-scope" style="">
+                          Week 1
+                        </th>
+                      </tr>
+                      <tr *ngFor="let note of tempData" class="ng-scope" style ="">
+												<td class="col-sm-3 col-md-3 col-lg-3 ng-binding"> {{ note['traineeId'] }}</td>
+                        <td class="text-center ng-scope">
+                          <div class="{{ getStatus(note) }}"></div>
+                        </td>
+                      </tr>
+                </tbody>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
