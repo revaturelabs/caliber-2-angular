@@ -6,17 +6,19 @@ import { CommonModule } from '@angular/common';
 import { TechRadarComponent } from '../reports/Components/tech-radar/tech-radar.component';
 import { ChartsModule } from 'ng2-charts';
 import { ReportService } from '../reports/Service/report.service';
+import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     ReportsComponent,
     BatchOverallTechnologyCapabilityComponent,
-    TechRadarComponent
+    TechRadarComponent,
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
-    ChartsModule
+    ChartsModule,
   ],
   providers: [
     ReportService,
