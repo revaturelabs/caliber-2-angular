@@ -115,7 +115,7 @@ export class ToolbarComponent implements OnInit {
         this.traineeService.storeTrainees(trainees);
         this.traineeService.trainees.emit(trainees);
         let allTrainee = new Trainee();
-        allTrainee.traineeId=0;
+        allTrainee.traineeId=-1;
         allTrainee.name="Trainees (all)";
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
@@ -229,8 +229,8 @@ export class ToolbarComponent implements OnInit {
     this.reportOutput = new ReportOutput();
     // this.reportOutput.selectedYear = this.selectedYear;
     // this.reportOutput.selectedBatches = this.batches;
-    // this.reportOutput.selectedWeek = this.selectedWeek;
-    // this.reportOutput.selectedTrainee = this.selectedTrainee;
+    this.reportOutput.selectedWeek = this.selectedWeek;
+    this.reportOutput.selectedTrainee = this.selectedTrainee;
     // this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
     // this.reportOutput.gradesDataStore = this.gradesDataStore;
     // this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
