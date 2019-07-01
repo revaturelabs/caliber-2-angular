@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
+import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 
 @Component({
   selector: 'app-reports',
@@ -8,7 +9,8 @@ import { ReportOutput } from '../../Models/report-output';
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
-  // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   constructor() { } 
 
   ngOnInit() {
@@ -19,6 +21,7 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportOutput)
     console.log("The Reports Page has Received an Update Request for Data");
     //this.cumulativeScoreComponents.updateDataPull();
+    this.overAllQCReport.update();
     console.log("The Cumulative Score component has been updated!");
   }
 }

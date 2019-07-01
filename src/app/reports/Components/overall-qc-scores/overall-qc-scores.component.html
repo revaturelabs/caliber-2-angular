@@ -14,14 +14,14 @@
                     <tr>
                         <th>Trainee</th>
                         <!-- ngRepeat: item in allQCTraineeNotesAllWeeks[0] -->
-                        <th class="text-center ng-binding ng-scope" style="">
-                          Week 1
+                        <th *ngFor="let week of qcData; let i = index" class="text-center ng-binding ng-scope">
+                          Week {{ i+1 }}
                         </th>
                       </tr>
-                      <tr *ngFor="let note of tempData" class="ng-scope" style ="">
-												<td class="col-sm-3 col-md-3 col-lg-3 ng-binding"> {{ note['traineeId'] }}</td>
-                        <td class="text-center ng-scope">
-                          <div class="{{ getStatus(note) }}"></div>
+                      <tr *ngFor="let note of qcData[0]" id="getId" class="ng-scope">
+												<td class="ng-binding">{{ getName(note['traineeId']) }}</td>
+                        <td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
+                          <div class="{{ getStatus(j, note['traineeId']) }}"></div>
                         </td>
                       </tr>
                 </tbody>

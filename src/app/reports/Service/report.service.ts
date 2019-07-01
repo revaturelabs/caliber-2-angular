@@ -23,32 +23,32 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
-  assessmentsAllURL : string = '/assessment/all/assessment/batch/';
+  assessmentsAllURL: String = '/assessment/all/assessment/batch/';
 
   batch: Batch;
   week: number;
-  trainee:Trainee;
-  gradesDataStore : Grade[];
-  assessmentsDataStore : Assessment[];
-  
+  trainee: Trainee;
+  gradesDataStore: Grade[];
+  assessmentsDataStore: Assessment[];
+
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
-  getBatchesByYear(year : number): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
+  getBatchesByYear(year: number): Observable<Batch[]> {
+    return this.http.get<Batch[]>(this.url + '/batch' + this.batchesYearURL + year, httpOptions);
   }
 
-  getAllAssessments():Observable<Assessment[]> {
-    let weekStr = this.determineWeek(this.week);
-    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
+  getAllAssessments(): Observable<Assessment[]> {
+    const weekStr = this.determineWeek(this.week);
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions);
   }
 
-  getAllGrades():Observable<Grade[]> {
-    let weekStr = this.determineWeek(this.week);
-    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
+  getAllGrades(): Observable<Grade[]> {
+    const weekStr = this.determineWeek(this.week);
+    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions);
   }
 
   setGradeDataStore(gradesDataStore: Grade[]){
@@ -59,11 +59,11 @@ export class ReportService {
     this.assessmentsDataStore = assessmentDataStore;
   }
 
-  determineWeek(week:number):String{
-    if(week>0){
-      return "?week="+week;
+  determineWeek(week: number): String {
+    if (week > 0 ){
+      return '?week=' + week;
     }
-    return "";
+    return '';
   }
 
   setBatch(batch:Batch){
@@ -82,7 +82,7 @@ export class ReportService {
     return this.assessmentsDataStore;
   }
 
-  getGradeDataStore() : Grade[]{
+  getGradeDataStore(): Grade[]{
     return this.gradesDataStore;
-  } 
+  }
 }
