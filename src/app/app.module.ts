@@ -16,6 +16,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
 import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component';
 import { IndividualQCResultsTableComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-table.component';
 import { MatTableModule } from '@angular/material';
+import { IndividualQcresultsRowComponent } from './individual-qcresults-row/individual-qcresults-row.component';
 // import { MaterialModule } from './material.module';
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
@@ -31,6 +32,7 @@ import { MatTableModule } from '@angular/material';
     CreateModalComponent,
     FormModalComponent,
     IndividualQCResultsTableComponent,
+    IndividualQcresultsRowComponent,
    // UpdateDeleteAssessmentModalComponent,
     
   ],
