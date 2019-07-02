@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportOutput } from './Models/report-output';
 import { ReportService } from './Service/report.service';
+import { TechRadarComponent } from './Components/tech-radar/tech-radar.component';
 
 @Component({
   selector: 'app-reports',
@@ -11,6 +12,7 @@ import { ReportService } from './Service/report.service';
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(TechRadarComponent) techScoreComponents: TechRadarComponent;
   constructor(private reportService : ReportService) { } 
 
   ngOnInit() {
@@ -24,8 +26,9 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportOutput.selectedWeek);
     console.log("The Reports Page has Received an Update Request for Data");
     // this.cumulativeScoreComponents.updateDataPull();
-    console.log("The Cumulative Score component has been updated!");
-
+    // console.log("The Cumulative Score component has been updated!");
+    this.techScoreComponents.updateDataPull();
+    console.log('The TechRadar component has been updated!');
 
     console.log("Testing Report Service Data");
     console.log("Get Selected Batch");

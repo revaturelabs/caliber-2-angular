@@ -38,7 +38,6 @@ export class TechRadarComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.updateDataPull();
   }
 
   // events
@@ -55,6 +54,10 @@ export class TechRadarComponent implements OnInit {
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-
+    console.log('Printing data from updateDataPull() in tech-radar-component: ');
+    console.log(this.gradeDataStore);
+    console.log(this.categoryDataStore);
+    console.log(this.traineeDataStore);
+    console.log(this.assessmentDataStore);
   }
 }
