@@ -24,6 +24,7 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
+  gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
   categoryAllURL = '/category/all/active';
@@ -58,8 +59,12 @@ export class ReportService {
   }
 
   getAllGrades():Observable<Grade[]> {
-    let weekStr = this.determineWeek(this.week);
-    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
+    if(this.trainee != undefined && this.trainee != null && this.trainee.traineeId == -1){
+      let weekStr = this.determineWeek(this.week);
+      return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
+    }else if(this.trainee != undefined && this.trainee != null){
+      return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
+    }
   }
 
   getAllQANotes():Observable<QANote[]> {

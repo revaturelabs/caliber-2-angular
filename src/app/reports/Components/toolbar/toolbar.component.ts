@@ -125,8 +125,8 @@ export class ToolbarComponent implements OnInit {
         allTrainee.name="Trainees (all)";
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
-        this.processAveragesAndOutput();
         this.reportService.setTrainee(trainees[0]);
+        this.processAveragesAndOutput();
         this.reportService.setTraineeDataStore(trainees);
       }
     });    

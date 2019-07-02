@@ -21,6 +21,10 @@ export class TabularTraineeAverageListComponent implements OnInit {
     responsive: true,
     scales : {
       yAxes: [{
+        scaleLabel: {
+        display: true,
+        labelString: 'Average'
+      },
         ticks: {
           max : 100,
           min : 40,
@@ -28,6 +32,7 @@ export class TabularTraineeAverageListComponent implements OnInit {
           padding: 0,
           backdropPaddingX: 0,
           display: true,
+          
         }
       }]
     },
@@ -87,14 +92,19 @@ export class TabularTraineeAverageListComponent implements OnInit {
     let i:number =0;
     for(i=0; i<gradeArray.length;i++){
       gradeArray[i] = gradeArray[i]/this.assessmentDataStore.length;
+      gradeArray[i] = Math.round(gradeArray[i] * 100) / 100
+
     }
 
     console.log(gradeArray);
     this.insertionSort(gradeArray,students);
+    ////////////// place grade.toFixed(2) loop here
+    /////////// (maybe the issue was that it has to happen after sorting?)
     this.barChartLabels = students;
     this.gradeAverages = gradeArray;
+    
     this.barChartData= [
-      { data: gradeArray, label: 'Average Score', borderWidth: borderWidth}
+      { data: gradeArray, label: 'Batch Scores', borderWidth: borderWidth}
     ];
   }
 
