@@ -7,7 +7,16 @@
       </div>
       <div class="panel-body">
         <div class="chart-container top5">
-          <app-bar-line-chart></app-bar-line-chart>
+                  <canvas baseChart 
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [colors]="barChartColors"
+                    [chartType]="barChartType">
+                  </canvas>
+
           <div class="table-responsive">
             <table class="table">
               <tbody>
