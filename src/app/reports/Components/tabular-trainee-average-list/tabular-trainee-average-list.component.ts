@@ -94,7 +94,7 @@ export class TabularTraineeAverageListComponent implements OnInit {
     this.barChartLabels = students;
     this.gradeAverages = gradeArray;
     this.barChartData= [
-      { data: gradeArray, label: 'Batch Score', borderWidth: borderWidth}
+      { data: gradeArray, label: 'Average Score', borderWidth: borderWidth}
     ];
   }
 
