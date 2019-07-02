@@ -3,6 +3,7 @@ import { ReportOutput } from '../../Models/report-output';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { TabularTraineeAverageListComponent } from '../tabular-trainee-average-list/tabular-trainee-average-list.component';
+import { AssessmentBreakdownComponent } from '../assessment-breakdown/assessment-breakdown.component';
 
 @Component({
   selector: 'app-reports',
@@ -12,6 +13,7 @@ import { TabularTraineeAverageListComponent } from '../tabular-trainee-average-l
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
   @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(AssessmentBreakdownComponent) assessmentBreakdownComponent: AssessmentBreakdownComponent;
   constructor(private reportService : ReportService) { } 
 
   ngOnInit() {
@@ -26,6 +28,8 @@ export class ReportsComponent implements OnInit {
     console.log("The Reports Page has Received an Update Request for Data");
     this.cumulativeScoreComponents.updateDataPull();
     console.log("The Cumulative Score component has been updated!");
+    this.assessmentBreakdownComponent.updateDataPull();
+    console.log("The Assessment Breakdown Component has been updated!");
 
 
     console.log("Testing Report Service Data");
