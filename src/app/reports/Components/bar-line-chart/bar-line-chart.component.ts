@@ -78,7 +78,7 @@ export class BarLineChartComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    this.generateChart('bar',"Sample Title",false, 40, 100, 20); //Sample chart (Junk data)
+    //this.generateChart('bar',"Sample Title",false, 40, 100, 20); //Sample chart (Junk data)
     this.cd.detectChanges();
   }
 

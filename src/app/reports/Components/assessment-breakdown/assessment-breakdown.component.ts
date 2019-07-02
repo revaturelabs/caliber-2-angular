@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { BarLineChartComponent } from '../bar-line-chart/bar-line-chart.component';
+import { ReportService } from '../../Service/report.service';
 
 @Component({
   selector: 'app-assessment-breakdown',
@@ -19,10 +21,20 @@ export class AssessmentBreakdownComponent implements OnInit {
   public batchOther = "58.92";
   public batchVerbal = "89.45";
 
+  @ViewChild(BarLineChartComponent) chart : BarLineChartComponent;
 
-  constructor() { }
+
+  constructor(private reportsService : ReportService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(){
+
+    this.chart.initializeChart();
+    this.chart.addDataset("Category 1");
+    this.chart.addDataPoint(75, "Test Data", 0);
+    this.cd.detectChanges();
   }
 
   public onDownloadClick(e: any) : void {
