@@ -16,8 +16,13 @@ export class TabularTraineeAverageListComponent implements OnInit {
   traineeDataStore : Trainee[];
   assessmentDataStore : Assessment[];
   gradeAverages: number[] = [];
+  gradeTotalAverage: number;
 
   public barChartOptions: ChartOptions = {
+    hover: {
+      mode: 'nearest',
+      intersect: true
+   },
     responsive: true,
     scales : {
       yAxes: [{
@@ -32,7 +37,6 @@ export class TabularTraineeAverageListComponent implements OnInit {
           padding: 0,
           backdropPaddingX: 0,
           display: true,
-          
         }
       }]
     },
@@ -73,6 +77,7 @@ export class TabularTraineeAverageListComponent implements OnInit {
     let gradeArray=[];
     let students=[];
     let borderWidth=[];
+    let benchMark=[];
     this.traineeDataStore.forEach((element)=>{
       gradeArray.push(0);
       students.push(element.name);
@@ -90,10 +95,11 @@ export class TabularTraineeAverageListComponent implements OnInit {
     });
 
     let i:number =0;
+    this.gradeTotalAverage = this.reportService.getAverageGradeScore();
     for(i=0; i<gradeArray.length;i++){
       gradeArray[i] = gradeArray[i]/this.assessmentDataStore.length;
-      gradeArray[i] = Math.round(gradeArray[i] * 100) / 100
-
+      gradeArray[i] = Math.round(gradeArray[i] * 100) / 100;
+      benchMark.push(this.gradeTotalAverage);
     }
 
     console.log(gradeArray);
@@ -102,9 +108,10 @@ export class TabularTraineeAverageListComponent implements OnInit {
     /////////// (maybe the issue was that it has to happen after sorting?)
     this.barChartLabels = students;
     this.gradeAverages = gradeArray;
-    
+
     this.barChartData= [
-      { data: gradeArray, label: 'Batch Scores', borderWidth: borderWidth}
+      { data: benchMark, label: 'Benchmark', type:'line', fill:'false', pointRadius:0},
+      { data: gradeArray, label: 'Batch Scores', borderWidth: borderWidth},
     ];
   }
 

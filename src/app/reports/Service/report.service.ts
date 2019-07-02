@@ -141,6 +141,10 @@ export class ReportService {
     this.trainee = trainee;
   }
 
+  getTrainee(){
+    return this.trainee
+  }
+
   getGradeDataStore() : Grade[]{
     return this.gradesDataStore;
   }
@@ -164,5 +168,4 @@ export class ReportService {
   getAverageGradeScore(){
     return this.averageGradeScore;
   }
-
 }
