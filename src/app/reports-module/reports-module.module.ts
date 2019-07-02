@@ -14,7 +14,7 @@ import { ChartsModule } from 'ng2-charts';
   declarations: [
     ReportsComponent, 
     BarLineChartComponent,
-    AssessmentBreakdownComponent
+    AssessmentBreakdownComponent,
     ReportsComponent,
     ToolbarComponent,
     TabularTraineeAverageListComponent,
