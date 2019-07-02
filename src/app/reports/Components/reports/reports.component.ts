@@ -41,5 +41,7 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportService.getAssessmentDataStore());
     console.log("Get all Grades in Batch/week");
     console.log(this.reportService.getGradeDataStore());
+    console.log("Show Average Total Grade");
+    console.log(this.reportService.getAverageGradeScore());
   }
 }

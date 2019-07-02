@@ -24,6 +24,7 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
+  gradesTotalAverageURL = '/assessment/all/grade/all'
   gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
@@ -33,6 +34,7 @@ export class ReportService {
   batch: Batch;
   week: number;
   trainee:Trainee;
+  averageGradeScore : number;
   gradesDataStore : Grade[];
   qaNoteDataStore : QANote[];
   traineeDataStore: Trainee[];
@@ -51,6 +53,10 @@ export class ReportService {
 
   getBatchesByYear(year : number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
+  }
+
+  getAllGradesForTotalAverage(): Observable<Grade[]> {
+    return this.http.get<Grade[]>(this.url + this.gradesTotalAverageURL, httpOptions);
   }
 
   getAllAssessments():Observable<Assessment[]> {
@@ -111,6 +117,10 @@ export class ReportService {
     return "";
   }
 
+  setAverageGradeScore(averageGradeScore : number){
+    this.averageGradeScore = averageGradeScore;
+  }
+
   setBatch(batch:Batch){
     this.batch = batch;
   }
@@ -150,4 +160,9 @@ export class ReportService {
   getAssessmentDataStore(): Assessment[]{
     return this.assessmentsDataStore;
   } 
+
+  getAverageGradeScore(){
+    return this.averageGradeScore;
+  }
+
 }

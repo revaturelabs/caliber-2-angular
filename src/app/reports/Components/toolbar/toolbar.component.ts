@@ -29,7 +29,7 @@ export class ToolbarComponent implements OnInit {
   selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
   
-  
+  averageGradeScore: number = 0;
   gradesDataStore:Grade[] = [];
   qaNoteDataStore:QANote[] = [];
   categoryDataStore: Category[] = [];
@@ -74,6 +74,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getAllYears() {
+    this.processTotalAverageGrade();
     this.selectedTrainee.name = "Hermo, Knighknee"
     this.reportService.getAllYears()
     .subscribe(result => {
@@ -272,5 +273,19 @@ export class ToolbarComponent implements OnInit {
     this.getAllAssessments();
     this.getAllGrades();
     this.getQANotes();
+  }
+
+  processTotalAverageGrade(){
+    if(this.averageGradeScore == 0){
+      this.reportService.getAllGradesForTotalAverage().subscribe(
+        (grades)=>{
+        grades.forEach((element) =>{
+          this.averageGradeScore += element.score
+        });  
+        this.averageGradeScore = this.averageGradeScore/grades.length;
+        this.averageGradeScore = Math.round(this.averageGradeScore * 100) / 100;
+        this.reportService.setAverageGradeScore(this.averageGradeScore);
+      });
+    }  
   }
 }
