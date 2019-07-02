@@ -15,6 +15,7 @@ export class TabularTraineeAverageListComponent implements OnInit {
   gradeDataStore :Grade[];
   traineeDataStore : Trainee[];
   assessmentDataStore : Assessment[];
+  gradeAverages: number[] = [];
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -61,7 +62,8 @@ export class TabularTraineeAverageListComponent implements OnInit {
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
 
-    this.traineeDataStore.shift();
+    if(this.traineeDataStore.length>0 && this.traineeDataStore[0].traineeId == -1)
+      this.traineeDataStore.shift();
 
     let gradeArray=[];
     let students=[];
@@ -90,7 +92,7 @@ export class TabularTraineeAverageListComponent implements OnInit {
     console.log(gradeArray);
     this.insertionSort(gradeArray,students);
     this.barChartLabels = students;
-
+    this.gradeAverages = gradeArray;
     this.barChartData= [
       { data: gradeArray, label: 'Batch Score', borderWidth: borderWidth}
     ];

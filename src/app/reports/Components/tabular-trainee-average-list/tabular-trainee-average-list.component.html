@@ -20,6 +20,16 @@
                 </canvas>
               </div>
             </div>
+
+            <div class="table-responsive">
+              <table ng-if="batchOverAllLabels" class="table ng-scope" style="border-collapse: collapse;">
+              <tbody>
+                <tr ng-repeat="label in batchOverAllLabels track by $index" *ngFor="let grade of gradeAverages; index as i;" class="col-md-4 col-lg-4 col-sm-6 col-xs-6 ng-scope">
+                  <th class="pull-left ng-binding">{{barChartLabels[i]}}</th>
+                  <td class="pull-right ng-binding">{{grade.toFixed(2)}}</td>
+                </tr>
+              </tbody></table><!-- end ngIf: batchOverAllLabels -->
+            </div>
           </div>
         </div>
       </div>
