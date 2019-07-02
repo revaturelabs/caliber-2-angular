@@ -70,7 +70,7 @@ export class BarLineChartComponent implements OnInit {
 
   @ViewChild('barLineChart') chartRef: ElementRef;
   private chartLabels: Array<any> = ['test', 'test'];
-  private chart = [];
+  private chart : Chart;
 
   constructor(private cd: ChangeDetectorRef) { }
 
@@ -172,7 +172,7 @@ export class BarLineChartComponent implements OnInit {
             },
             ticks: {
               suggestedMin: minimumYAxis,
-              suggestedmax: maximumYAxis,
+              suggestedMax: maximumYAxis,
               stepSize: stepSize
             }
           }],

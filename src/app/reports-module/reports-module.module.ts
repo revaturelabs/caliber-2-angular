@@ -6,6 +6,9 @@ import { BarLineChartComponent } from '../reports/Components/bar-line-chart/bar-
 import { AssessmentBreakdownComponent } from './../reports/Components/assessment-breakdown/assessment-breakdown.component';
 import { ReportService } from '../reports/Service/report.service';
 import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
+import { TabularTraineeAverageListComponent } from '../reports/Components/tabular-trainee-average-list/tabular-trainee-average-list.component';
+import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -13,10 +16,13 @@ import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.componen
     BarLineChartComponent,
     AssessmentBreakdownComponent,
     ToolbarComponent,
+    TabularTraineeAverageListComponent,
   ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
+    FormsModule,
+    ChartsModule,
     
   ],
   providers: [

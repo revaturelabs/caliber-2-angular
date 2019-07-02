@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
+import { TabularTraineeAverageListComponent } from '../tabular-trainee-average-list/tabular-trainee-average-list.component';
 
 @Component({
   selector: 'app-reports',
@@ -10,7 +11,7 @@ import { ReportService } from '../../Service/report.service';
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
-  // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   constructor(private reportService : ReportService) { } 
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class ReportsComponent implements OnInit {
     console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
     console.log(this.reportOutput.selectedWeek);
     console.log("The Reports Page has Received an Update Request for Data");
-    // this.cumulativeScoreComponents.updateDataPull();
+    this.cumulativeScoreComponents.updateDataPull();
     console.log("The Cumulative Score component has been updated!");
 
 
