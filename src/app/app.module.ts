@@ -15,8 +15,7 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component';
 import { IndividualQCResultsTableComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-table.component';
-//import { IndividualQcresultsRowComponent } from './individual-qcresults-row/individual-qcresults-row.component';
-// import { MaterialModule } from './material.module';
+import { IndividualQcresultsRowComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-row/individual-qcresults-row.component';
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 
@@ -30,7 +29,7 @@ import { IndividualQCResultsTableComponent } from './reports/Components/individu
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
-    IndividualQCResultsTableComponent,
+    //IndividualQCResultsTableComponent,
     //IndividualQcresultsRowComponent,
    // UpdateDeleteAssessmentModalComponent,
     

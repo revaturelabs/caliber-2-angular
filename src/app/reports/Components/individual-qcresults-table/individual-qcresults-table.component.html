@@ -1,14 +1,14 @@
 
 <table>
     <tr>
-        <th>Week</th>
-        <th>Category</th>
-        <th>Quality Audit</th>
-        <th>QC Feedback</th>
-        <th>Trainer Feedback</th>
+        <th>Trainee</th>
+        <th>Individual Feedback</th>
+        <th>Notes</th>
     </tr>
 
-    <tr *ngFor= "let w of week">{{week.weekNumber}}
-    </tr>
+    <app-individual-qcresults-row *ngFor="let n of qcNotes" [qcNote]="n"></app-individual-qcresults-row>
     
+    <tr>
+        <td>Overall Feedback</td>
+    </tr>
 </table>
