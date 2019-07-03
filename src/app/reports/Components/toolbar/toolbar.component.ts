@@ -195,7 +195,6 @@ export class ToolbarComponent implements OnInit {
         this.titledWeek = "Weeks (all)";
         this.reportService.setWeek(0);
       }
-
       this.processAveragesAndOutput();//update Assessments, Notes, and Grades.
     }
   }
@@ -286,6 +285,7 @@ export class ToolbarComponent implements OnInit {
       // console.log("Getting all QA Notes of Batch");
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
+      this.getAllGrades();
     });
   }
 
@@ -315,8 +315,8 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     //update Assessments, Notes, and Grades.
     this.getAllAssessments();
+    //getting grades is chained in the async call on get QA notes
     this.getQANotes();
-    this.getAllGrades();
   }
 
   processTotalAverageGrade(){
@@ -340,14 +340,18 @@ export class ToolbarComponent implements OnInit {
     this.processTotalAverageGrade();
   }
 
-  arraysEqualPreventsReportOutput(array1, array2) {
+  arraysEqualPreventsReportOutput(array1 : any[], array2: any[]) {
     //Compare if the two arrays have the same contents, if so, return true.
-    if(array1.length !== array2.length)
-        return false;
-    for(var i = array1.length; i--;) {
-        if(array1[i] !== array2[i])
-            return false;
+    if(array1 != undefined && array2 != undefined){
+      if(array1.length !== array2.length)
+          return false;
+      for(var i = array1.length; i--;) {
+          if(array1[i] !== array2[i])
+              return false;
+      }
+      return true;
+    } else{
+      return false;
     }
-    return true;
   }
 }

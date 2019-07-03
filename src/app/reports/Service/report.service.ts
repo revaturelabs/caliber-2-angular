@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
@@ -18,8 +18,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReportService {
-  // url = environment.serverRootURL;
-  url = 'http://localhost:10000';
+  url = environment.serverRootURL;
+
   batchesYearURL = '/vp/batch/';
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
@@ -45,6 +45,7 @@ export class ReportService {
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
+    // console.log(environment);
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
@@ -84,12 +85,12 @@ export class ReportService {
     let url;
     if(this.week == 0){
       url = this.url + this.qaNotesAllURL + this.batch.batchId;
-      console.log(url);
+      // console.log(url);
       return this.http.get<QANote[]>(url, httpOptions)
     }
     else{
       url = this.url + this.qaNotesURL + this.batch.batchId +"/"+this.week;
-      console.log(url);
+      // console.log(url);
       return this.http.get<QANote[]>(url, httpOptions)
     }
   }
