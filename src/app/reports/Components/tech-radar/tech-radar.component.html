@@ -12,14 +12,13 @@
 								<thead>
 									<tr>
                     <th>Subject</th>
-										<th>Batch Name</th>
-										<th>Individual goes here</th>
+										<th id='dataHeader'>Scores</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Subject</td>
-                    <td>Score</td>
+                  <tr *ngFor="let arr of labelsAndAverages">
+                    <td id='label'>{{arr.label}}</td>
+                    <td id='data'>{{arr.data}}</td>
                   </tr>
                 </tbody>
         </table>
