@@ -7,6 +7,8 @@ import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ReportOutput } from '../../Models/report-output';
 import { ReportService } from '../../Service/report.service';
+import { Category } from 'src/app/User/user/types/trainee';
+import { QANote } from '../../Models/qanote';
 
 @Component({
   selector: 'app-toolbar',
@@ -27,8 +29,11 @@ export class ToolbarComponent implements OnInit {
   selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
   
+  
+  gradesDataStore:Grade[] = [];
+  qaNoteDataStore:QANote[] = [];
+  categoryDataStore: Category[] = [];
   assessmentsDataStore:Assessment[] = [];
-  gradesDataStore:Grade[]=[];
 
   assessmentAverage:number[]=[]; 
   gradesAverage: number[]=[];
@@ -77,6 +82,7 @@ export class ToolbarComponent implements OnInit {
       // this.selectedYear = "Select Year";
       this.getBatch(this.years[0]);
     });
+    this.getCategories();
   }
 
   getBatch(year:number){
@@ -89,7 +95,7 @@ export class ToolbarComponent implements OnInit {
         this.batchExists = true;
         this.reportService.setBatch(this.batches[0]);
         this.getWeeks();
-        this.getTraineesByBatchId()
+        this.getTraineesByBatchId();
       }
     });
   }
@@ -115,12 +121,13 @@ export class ToolbarComponent implements OnInit {
         this.traineeService.storeTrainees(trainees);
         this.traineeService.trainees.emit(trainees);
         let allTrainee = new Trainee();
-        allTrainee.traineeId=0;
+        allTrainee.traineeId=-1;
         allTrainee.name="Trainees (all)";
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
         this.processAveragesAndOutput();
         this.reportService.setTrainee(trainees[0]);
+        this.reportService.setTraineeDataStore(trainees);
       }
     });    
   }
@@ -130,6 +137,7 @@ export class ToolbarComponent implements OnInit {
     // this.selectedWeek = "Select Week (All)";
     this.trainees = [];
     this.getBatch(event);
+    this.getTraineesByBatchId();
     this.calculateGradeAverage();
   }
 
@@ -158,13 +166,14 @@ export class ToolbarComponent implements OnInit {
 
   selectBatch(event: Batch) {
     this.selectedBatch = event;
+    this.getTraineesByBatchId();
     this.reportService.setBatch(event);
     this.auditService.selectedBatch = this.selectedBatch;
+    this.reportService.setBatch(this.selectedBatch);
     // this.getWeeks();
     // this.showActiveWeek(this.auditService.selectedBatch.weeks);
     // this.selectWeek(this.auditService.selectedBatch.weeks);
     this.getWeeks();
-    this.getTraineesByBatchId();
     
   }
 
@@ -178,6 +187,7 @@ export class ToolbarComponent implements OnInit {
   showWeeks(){
     this.titledWeek = "Select Week";
   }
+
   showTrainees(){
 
   }
@@ -185,7 +195,7 @@ export class ToolbarComponent implements OnInit {
   getAllAssessments(){
     this.reportService.getAllAssessments().subscribe(
       (assessments)=>{
-        console.log("Updating Assessments");
+        // console.log("Updating Assessments");
         this.assessmentsDataStore = assessments;
         this.calculateAssessmentAverage();
     });
@@ -194,10 +204,28 @@ export class ToolbarComponent implements OnInit {
   getAllGrades(){
     this.reportService.getAllGrades().subscribe(
       (grades)=>{
-        console.log("Updating Grades");
+        // console.log("Updating Grades");
         this.gradesDataStore = grades;
         this.calculateGradeAverage();
         this.assessReportOutput();
+    });
+  }
+
+  getCategories(){
+    if(this.categoryDataStore.length == 0){
+      this.reportService.getAllCategories().subscribe((categories)=>{
+        // console.log("Getting all categories");
+        this.categoryDataStore = categories;
+        this.reportService.setCategoryDataStore(categories);
+      });
+    }
+  }
+
+  getQANotes(){ 
+    this.reportService.getAllQANotes().subscribe((qaNotes)=>{
+      // console.log("Getting all QA Notes of Batch");
+      this.qaNoteDataStore = qaNotes;
+      this.reportService.setQANoteDataStore(qaNotes);
     });
   }
 
@@ -210,7 +238,6 @@ export class ToolbarComponent implements OnInit {
     });
     totalScore = totalScore/calculateAssessmentsSampleCount;
     this.calculateAssessmentsAverage = totalScore;
-
     console.log("QC average Score:" + this.calculateAssessmentsAverage + " over " + calculateAssessmentsSampleCount + " batch assessments.");
   }
 
@@ -229,8 +256,8 @@ export class ToolbarComponent implements OnInit {
     this.reportOutput = new ReportOutput();
     // this.reportOutput.selectedYear = this.selectedYear;
     // this.reportOutput.selectedBatches = this.batches;
-    // this.reportOutput.selectedWeek = this.selectedWeek;
-    // this.reportOutput.selectedTrainee = this.selectedTrainee;
+    this.reportOutput.selectedWeek = this.selectedWeek;
+    this.reportOutput.selectedTrainee = this.selectedTrainee;
     // this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
     // this.reportOutput.gradesDataStore = this.gradesDataStore;
     // this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
@@ -245,5 +272,6 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     this.getAllAssessments();
     this.getAllGrades();
+    this.getQANotes();
   }
 }

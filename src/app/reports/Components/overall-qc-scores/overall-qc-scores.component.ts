@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ReportService } from '../../Service/report.service';
+import { QANote } from '../../Models/qanote';
+import { bloomAdd } from '@angular/core/src/render3/di';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-overall-qc-scores',
@@ -6,19 +10,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overall-qc-scores.component.css']
 })
 export class OverallQCScoresComponent implements OnInit {
-  qcData: object[][];
-  constructor() { }
+  qcData: QANote[][];
 
-  ngOnInit() {
+  // Modal atributes set by the displayNote method
+  name: String;
+  week: number;
+  message: String;
+
+  constructor(private reportService: ReportService, private modalService: NgbModal) {
+    if (!this.qcData) {
+      this.qcData = [];
+    }
   }
+
+  ngOnInit() {}
 
   downloadReport() {
     console.log('wat');
   }
 
-  getStatus(week, traineeId) {
-    let note = this.getNote(week, traineeId);
-    switch(note['qcStatus']){
+  // applies the correct class to the td based on the grad superstar, good ect.
+  getStatus(week: number, traineeId: number) {
+    const note = this.getNote(week, traineeId);
+    switch (note['qcStatus']) {
       case 'Superstar':
         return 'fa fa-star fa-2x pick mouse-over';
       case 'Good':
@@ -32,21 +46,94 @@ export class OverallQCScoresComponent implements OnInit {
     }
   }
 
-  getNote(week, traineeId){
-    for(var i = 0; i < this.qcData[week].length; i++){
-      if(this.qcData[week][i]['traineeId'] == traineeId){
-        return this.qcData[week][i]
+ //finds the correct Note based on the passed in trainee id
+  getNote(week: number, traineeId: number) {
+    for (let i = 0; i < this.qcData[week].length; i++) {
+      if (this.qcData[week][i]['traineeId'] === traineeId) {
+        return this.qcData[week][i];
       }
     }
   }
-  update(){
-    console.log('wat');
-  }
-  getId(traineeId){
-    if(traineeId == 0){
-      return 'overallRow';
+
+  /*
+  *Function called by the reports component to let this know to udate itself
+  *Grabs the QA notes and filters them into a two dimensional array based on the week
+  */
+  update() {
+    this.qcData = [];
+    const QAnotes = this.reportService.getQANoteDataStore();
+    let week = 1;
+    while (this.needWeek(week, QAnotes)) {
+      this.qcData.push(QAnotes.filter(function(value, index) {
+        if (value['week'] === week) {
+          return true;
+        } else {
+          return false;
+        }
+      }));
+      week++;
     }
-    return traineeId;
   }
 
+  // Takes in a week and the array of QA notes searchs the array to see if the specified 
+  // is in the array and returns true if it finds it and false otherwise
+  needWeek(week, QAnotes) {
+    for (let i = 0; i < QAnotes.length; i++) {
+      if (QAnotes[i]['week'] === week) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /*
+  * @param traineeID: This is the id of a particular trainee.
+  * If the trainee ID is 0, the font-family is specified. This would be the Overall QC note.
+  * Otherwise, the trainee name is found based on the passed in ID, and then is returned.
+  */
+
+  getName(traineeID) {
+    if (traineeID === 0) {
+      const myElement = document.getElementById('trainee' + traineeID);
+      myElement.style.setProperty('font-family', 'Futura-Std-Bold');
+      // const overAllRowElement = document.getElementById('note' + traineeID);
+      // const cssString = 'border-top: 1px solid #ddd; border-top-width: thick;';
+      // overAllRowElement.style.cssText = cssString;
+      return 'Overall';
+    } else {
+      const trainees = this.reportService.getTraineeDataStore();
+      for (let i = 1; i < trainees.length; i++) {
+        if (trainees[i].traineeId === traineeID) {
+          return trainees[i].name;
+        }
+      }
+    }
+  }
+
+
+  /*
+  * @param id : the Trainee ID
+  * This method takes in a trainee ID and if the id is 0, then that is a Overall Batch Note.
+  * The method returns the id for the td element for a specific CSS rule.
+  */
+  getID(id) {
+    if (id === 0) {
+      return 'overallRow';
+    }
+    return id;
+  }
+
+  /*
+  * @param name: the name of the trainee
+  * @param week: the week of the QC note
+  * @param message: the content of the QC note
+  * This method takes the information from a QC note and updates the name, week and message
+  *   properties of the component. Then when the modal shows up, the information is displayed
+  */
+  displayNote(name, week, message) {
+    this.name = name;
+    this.week = (week + 1);
+    this.message = message;
+  }
 }
+

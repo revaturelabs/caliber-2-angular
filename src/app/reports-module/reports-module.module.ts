@@ -6,21 +6,32 @@ import { ReportService } from '../reports/Service/report.service';
 import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
 import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scores/overall-qc-scores.component'
 import { BarLineChartComponent } from '../reports/Components/bar-line-chart/bar-line-chart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserModule } from '@angular/platform-browser';
+
+
 
 @NgModule({
   declarations: [
     ReportsComponent,
     OverallQCScoresComponent,
     BarLineChartComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
+    NgbModule
   ],
   providers: [
     ReportService,
     OverallQCScoresComponent,
-  ]
+  ],
+  exports: [
+    OverallQCScoresComponent,
+  ],
+  bootstrap: [
+    OverallQCScoresComponent
+  ],
 })
 export class ReportsModule { }
