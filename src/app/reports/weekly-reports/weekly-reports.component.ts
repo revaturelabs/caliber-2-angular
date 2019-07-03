@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BarLineChartComponent } from '../Components/bar-line-chart/bar-line-chart.component';
+import { ReportService } from '../Service/report.service';
+import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
+import { forEach } from '@angular/router/src/utils/collection';
+import { Grade } from 'src/app/Batch/type/trainee';
 
 @Component({
   selector: 'app-weekly-reports',
@@ -8,11 +12,16 @@ import { BarLineChartComponent } from '../Components/bar-line-chart/bar-line-cha
 })
 export class WeeklyReportsComponent implements OnInit {
 
-  constructor() {
+  private grades : Grade[];
+  private assessments: Assessment[];
+  public weekAverages : Map<number,number[]> ;
 
+
+  constructor(private reportService : ReportService) {
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.weekAverages = new Map<number, number[]>();
   }
 
   chartOptions = {
@@ -31,20 +40,44 @@ export class WeeklyReportsComponent implements OnInit {
     console.log(event);
   }
 
+  
+  update(){
+    this.grades = this.reportService.getGradeDataStore();
+    this.assessments = this.reportService.getAssessmentDataStore();
+    let gradeAverages = [];
+    let tempAverage = 0;
+    let tempCount = 0;
+
+    //matches each assessment to a week and puts it into an array
+    //matches each grade to an assessment and finds the average of all grades per assessment
+      this.assessments.forEach((tempAssessment)=>{
+        this.grades.forEach((tempGrade)=>{
+          if(tempAssessment.assessmentId == tempGrade.assessmentId){
+            tempCount++;
+            tempAverage+=tempGrade.score;
+          }
+        });
+        tempAverage /= tempCount;
+        gradeAverages.push(tempAverage);
+        tempAverage = 0;
+        tempCount = 0;
+      });
+
+      for(let i=0; i<this.assessments.length; i++){
+        let weekNumber = this.assessments[i].weekNumber;
+        if(this.weekAverages.has(weekNumber)){
+          let averages = this.weekAverages.get(weekNumber);
+          averages.push(gradeAverages[i]);
+          this.weekAverages.set(weekNumber, averages);
+        }
+        else{
+          this.weekAverages.set(weekNumber, [gradeAverages[i]]);
+        }
+      }
+    console.log("---------------------------------------------------------------------")
+    console.log(gradeAverages);
+    console.log("---------------------------------------------------------------------")
+    console.log(this.weekAverages);
+
+  }
 }
-
-// @ViewChild (BarLineChartComponent) chart : BarLineChartComponent;
-
-//   constructor() { }
-
-//   ngOnInit() {
-//     this.chart.initializeChart();
-//     this.chart.addDataset('Category 1');
-//     this.chart.addDataPoint(70, 'Trainee Score', 0);
-//   }
-
-//   ngAfterViewInit(){
-//     console.log(this.chart);
-   
-//   }
-// }

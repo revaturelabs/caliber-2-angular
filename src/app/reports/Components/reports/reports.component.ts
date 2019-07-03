@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
+import { WeeklyReportsComponent } from '../../weekly-reports/weekly-reports.component';
 
 @Component({
   selector: 'app-reports',
@@ -11,6 +12,7 @@ import { ReportService } from '../../Service/report.service';
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(WeeklyReportsComponent) weeklyReportsComponent: WeeklyReportsComponent;
   constructor(private reportService : ReportService) { } 
 
   ngOnInit() {
@@ -18,6 +20,8 @@ export class ReportsComponent implements OnInit {
 
   updateReportOutput(reportOutput: ReportOutput){
     this.reportOutput = reportOutput;
+    this.weeklyReportsComponent.update();
+
     console.log("Selected Trainee:"); // Adam needs these values for showing his component
     console.log(this.reportOutput.selectedTrainee);
     console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
