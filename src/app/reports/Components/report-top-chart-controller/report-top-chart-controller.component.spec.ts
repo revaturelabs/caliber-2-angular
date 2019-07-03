@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TabularTraineeAverageListComponent } from './tabular-trainee-average-list.component';
+import { ReportTopChartController } from './report-top-chart-controller.component';
 
 
 describe('TabularTraineeAverageListComponentComponent', () => {
-  let component: TabularTraineeAverageListComponent;
-  let fixture: ComponentFixture<TabularTraineeAverageListComponent>;
+  let component: ReportTopChartController;
+  let fixture: ComponentFixture<ReportTopChartController>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabularTraineeAverageListComponent ]
+      declarations: [ ReportTopChartController ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TabularTraineeAverageListComponent);
+    fixture = TestBed.createComponent(ReportTopChartController);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

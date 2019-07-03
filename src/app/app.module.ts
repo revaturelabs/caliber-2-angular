@@ -13,11 +13,6 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
-import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component';
-// import { MaterialModule } from './material.module';
-//import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
-
-
 
 
 @NgModule({
@@ -28,7 +23,6 @@ import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
-   // UpdateDeleteAssessmentModalComponent,
     
   ],
   imports: [
