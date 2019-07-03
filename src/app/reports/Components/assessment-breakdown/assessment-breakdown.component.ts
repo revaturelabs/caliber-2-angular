@@ -85,8 +85,10 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.gradeDataStore = this.reportService.getGradeDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
+    let currentTrainee = this.reportService.trainee;
 
     let gradeArray=[];
+    let assessmentArray=[];
     let students=[];
     let borderWidth=[];
     this.traineeDataStore.forEach((element)=>{
@@ -94,6 +96,22 @@ export class AssessmentBreakdownComponent implements OnInit {
       students.push(element.name);
       borderWidth.push(2);
     });
+
+    console.log(this.gradeDataStore);
+    console.log(this.assessmentDataStore);
+    for (let i = 0; i < this.assessmentDataStore.length; i++)
+    {
+      let assessment = this.assessmentDataStore[i];
+      let index = this.gradeDataStore.findIndex((currentGrade)=>{
+        return currentTrainee.traineeId == currentGrade.traineeId
+      });
+      let grade = this.gradeDataStore[index];
+
+      console.log("Assessment RAW SCORE: " + assessment.rawScore);
+      assessmentArray.push(assessment.rawScore);
+      gradeArray.push(grade.score);
+
+    }
 
     this.gradeDataStore.forEach((element)=>{
       
@@ -120,7 +138,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     
     this.barChartData= [
       { data: gradeArray, label: 'Trainee', borderWidth: borderWidth},
-      { data: gradeArray, label: 'Batch', borderWidth: borderWidth}
+      { data: assessmentArray, label: 'Batch', borderWidth: borderWidth}
     ];
   }
 
