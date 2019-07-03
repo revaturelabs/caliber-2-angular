@@ -323,7 +323,7 @@ export class ToolbarComponent implements OnInit {
     this.processTotalAverageGrade();
   }
 
-  arraysEqualPreventsReportOutput(array1, array2) {
+  arraysEqualPreventsReportOutput(array1 : any[], array2: any[]) {
     //Compare if the two arrays have the same contents, if so, return true.
     if(array1.length !== array2.length)
         return false;
