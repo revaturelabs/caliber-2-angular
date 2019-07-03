@@ -18,8 +18,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReportService {
-  // url = environment.serverRootURL;
-  url = 'http://localhost:10000';
+  url = (environment.production)? environment.serverRootURL : 'http://localhost:10000';
+
   batchesYearURL = '/vp/batch/';
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
