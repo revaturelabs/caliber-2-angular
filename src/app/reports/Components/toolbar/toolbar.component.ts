@@ -39,6 +39,7 @@ export class ToolbarComponent implements OnInit {
   qaNoteDataStore:QANote[] = [];
   categoryDataStore: Category[] = [];
   assessmentsDataStore:Assessment[] = [];
+  batchAssessmentsDataStore:Assessment[] = [];
   listedTrainees: Trainee[];
 
   reportOutput: ReportOutput;
@@ -223,6 +224,16 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+  getAllBatchAssessments(){
+    //update assessment datastore
+    this.reportService.getAllBatchAssessments().subscribe(
+      (assessments)=>{
+        // console.log("Updating Assessments");
+        this.batchAssessmentsDataStore = assessments;
+        this.reportService.setBatchAssessmentDataStore(assessments);
+    });
+  }
+
   getAllGrades(){
     //update grades datastore
     this.reportService.setGradesOfTraineeDataStore([]);
@@ -298,6 +309,7 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     //update Assessments, Notes, and Grades.
     this.getAllAssessments();
+    this.getAllBatchAssessments();
     this.getQANotes();
     this.getAllGrades();
   }

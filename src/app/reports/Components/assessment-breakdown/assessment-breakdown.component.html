@@ -2,44 +2,61 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Assessment Breakdown <!--<i (click)="onDownloadClick($event)"
+        Assessment Breakdown
+        <!--<i (click)="onDownloadClick($event)"
           class="clickableIcons glyphicon glyphicon-save"></i>-->
       </div>
       <div class="panel-body">
         <div class="chart-container top5">
-                  <canvas baseChart 
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [options]="barChartOptions"
-                    [plugins]="barChartPlugins"
-                    [legend]="barChartLegend"
-                    [colors]="barChartColors"
-                    [chartType]="barChartType">
-                  </canvas>
-
-          <div class="table-responsive">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
+          </canvas>
+          <br>
+          <div class="table-responsive" *ngIf="traineeSelected">
             <table class="table">
               <tbody>
                 <tr>
                   <th></th>
-                  <th class="col-sm-2 col-md-2 col-lg-2">{{tableHeader[0]}}</th>
-                  <th class="col-sm-2 col-md-2 col-lg-2">{{tableHeader[1]}}</th>
-                  <th class="col-sm-2 col-md-2 col-lg-2 ">{{tableHeader[2]}}</th>
-                  <th class="col-sm-2 col-md-2 col-lg-2">{{tableHeader[3]}}</th>
+                  <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[0]">{{tableHeader[0]}}</th>
+                  <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[1]">{{tableHeader[1]}}</th>
+                  <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[2]">{{tableHeader[2]}}</th>
+                  <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[3]">{{tableHeader[3]}}</th>
                 </tr>
-                <tr class="ng-scope">
-                  <th class="">Trainee</th>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{traineeRow[0]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{traineeRow[1]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{traineeRow[2]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{traineeRow[3]}}</td>
+                <tr>
+                  <th>Trainee</th>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[0]">{{traineeRow[0]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[1]">{{traineeRow[1]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[2]">{{traineeRow[2]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[3]">{{traineeRow[3]}}</td>
                 </tr>
-                <tr class="ng-scope">
-                  <th class="">Batch</th>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{batchRow[0]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{batchRow[1]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{batchRow[2]}}</td>
-                  <td class="col-sm-2 col-md-2 col-lg-2 ">{{batchRow[3]}}</td>
+                <tr>
+                  <th>Batch</th>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[0]">{{batchRow[0]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[1]">{{batchRow[1]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[2]">{{batchRow[2]}}</td>
+                  <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[3]">{{batchRow[3]}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-responsive" *ngIf="!traineeSelected">
+            <table class="table">
+              <tbody>
+                <tr class="col-md-6 col-sm-6 ">
+                  <th class="pull-left">{{tableHeader[0]}}</th>
+                  <td class="pull-right">{{batchRow[0]}}</td>
+                </tr>
+                <tr class="col-md-6 col-sm-6 ">
+                  <th class="pull-left">{{tableHeader[1]}}</th>
+                  <td class="pull-right">{{batchRow[1]}}</td>
+                </tr>
+                <tr class="col-md-6 col-sm-6 ">
+                  <th class="pull-left">{{tableHeader[2]}}</th>
+                  <td class="pull-right">{{batchRow[2]}}</td>
+                </tr>
+                <tr class="col-md-6 col-sm-6 ">
+                  <th class="pull-left">{{tableHeader[3]}}</th>
+                  <td class="pull-right">{{batchRow[3]}}</td>
                 </tr>
               </tbody>
             </table>
@@ -49,6 +66,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- <div class="container">
   <app-bar-line-chart></app-bar-line-chart>

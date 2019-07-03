@@ -13,6 +13,12 @@ import { Trainee, Grade } from 'src/app/Batch/type/trainee';
   styleUrls: ['./assessment-breakdown.component.css']
 })
 export class AssessmentBreakdownComponent implements OnInit {
+  public validHeader = [
+    true,
+    true,
+    true, true
+  ]
+  
   public tableHeader = [
     "Exam",
     "Project",
@@ -32,12 +38,22 @@ export class AssessmentBreakdownComponent implements OnInit {
     "89.45"
   ];
 
+  public traineeBackgroundColor = 'rgba(114, 164, 194, .5)';
+  public traineeBorderColor = 'rgba(114, 164, 194, 1)';
+
+  public batchBackgroundColor = 'rgba(252, 180, 20, .6)';
+  public batchBorderColor = 'rgba(252, 180, 20, 1)';
+
+  public hoverBatchBackgroundColor = '';
+
   public getBatchAverage = false;
 
   public traineeSelected : boolean = false;
 
+  public barBorderWidth = 2;
+
+  traineeGrades: Grade[];
   gradeDataStore :Grade[];
-  traineeDataStore : Trainee[];
   assessmentDataStore : Assessment[];
   gradeAverages: number[] = [];
 
@@ -52,64 +68,68 @@ export class AssessmentBreakdownComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales : {
-      yAxes: [{
-        scaleLabel: {
-        display: true,
-        labelString: 'Average'
-      },
-        ticks: {
-          max : 100,
-          min : 40,
-          stepSize: 20,
-          padding: 0,
-          backdropPaddingX: 0,
+    
+    tooltips: {
+      mode: 'label'
+    },
+      scales : {
+        yAxes: [{
+          scaleLabel: {
           display: true,
-          
-        }
-      }]
+          labelString: 'Average'
+        },
+          ticks: {
+            max : 100,
+            min : 40,
+            stepSize: 20,
+            padding: 0,
+            backdropPaddingX: 0,
+            display: true,
+            
+          }
+        }]
     },
   };
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
+  public barChartLegend = false;
   public barChartPlugins = [];
-  public barChartColors: Array<any> = [
-    { 
-      backgroundColor: 'rgba(114, 164, 194, .5)',
-      borderColor: 'rgba(114, 164, 194, 1)',
-      pointBackgroundColor: 'rgba(252, 180, 20, .6)',
-      pointBorderColor: 'rgba(252, 180, 20, 1)',
-      pointHoverBackgroundColor: 'rgba(252, 180, 20, .6)',
-      pointHoverBorderColor: 'rgba(252, 180, 20, 1)',
-    }]
 
   public barChartData: ChartDataSets[] = [
     { data: [], label: 'Series A'}
   ];
 
+
   updateDataPull(){
     this.traineeSelected = this.reportService.trainee.batchId > 0;
     
-    console.log("Updating Assessment Breakdown Score:");
-    this.gradeDataStore = this.reportService.getGradeDataStore();
-    this.traineeDataStore = this.reportService.getTraineeDataStore();
-    this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-    let currentTrainee = this.reportService.trainee;
+    this.assessmentDataStore = this.reportService.getBatchAssessmentDataStore();
+    if (this.assessmentDataStore == undefined || this.assessmentDataStore.length === 0)
+    {
+      this.reportService.getAllBatchAssessments().subscribe((assessments : Assessment[])=>{
+        this.assessmentDataStore = assessments;
 
+        this.gradeDataStore = this.reportService.getGradeDataStore();
+        this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
+        this.createChart();
+      });
+    }
+    else
+    {
+      this.gradeDataStore = this.reportService.getGradeDataStore();
+      this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
+      this.createChart();
+    }
+    
+  }
+
+  createChart() : void {
     let gradeArray=[];
-    let traineeAverageArray=[];
+    let traineeAverageArray=[]; 
     let traineeDisplayData=[];
     let batchAverageArray=[];
     let batchDisplayData=[];
-    let students=[];
     let borderWidth=[];
-
-    this.traineeDataStore.forEach((element)=>{
-      gradeArray.push(0);
-      students.push(element.name);
-      borderWidth.push(2);
-    });
 
     // The assessmentMap correlates a assessments id to the actual assessment
     let assessmentMap = new Map<number, Assessment> ()
@@ -118,46 +138,9 @@ export class AssessmentBreakdownComponent implements OnInit {
       assessmentMap.set(assessment.assessmentId, assessment);
     });
 
+    traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
     batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
-    console.log("Batch Averages");
-    console.log(batchAverageArray);
-    
 
-    console.log(this.gradeDataStore);
-    console.log(this.assessmentDataStore);
-    for (let i = 0; i < this.assessmentDataStore.length; i++)
-    {
-      let assessment = this.assessmentDataStore[i];
-      let index = this.gradeDataStore.findIndex((currentGrade)=>{
-        return currentTrainee.traineeId == currentGrade.traineeId
-      });
-      let grade = this.gradeDataStore[index];
-
-      console.log("Assessment RAW SCORE: " + assessment.rawScore);
-      // assessmentArray.push(assessment.rawScore);
-      // gradeArray.push(grade.score);
-
-    }
-    
-  
-    this.gradeDataStore.forEach((element)=>{
-      
-      let index = this.traineeDataStore.findIndex((trainee)=>{
-        return trainee.traineeId == element.traineeId
-      });
-      gradeArray[index] += element.score
-      // this.barChartLabels =[]
-      
-    });
-
-    let i:number =0;
-    for(i=0; i<gradeArray.length;i++){
-      gradeArray[i] = gradeArray[i]/this.assessmentDataStore.length;
-      gradeArray[i] = Math.round(gradeArray[i] * 100) / 100
-
-    }
-
-    console.log(gradeArray);
     ////////////// place grade.toFixed(2) loop here
     /////////// (maybe the issue was that it has to happen after sorting?)
     // this.barChartLabels = students;
@@ -166,6 +149,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.tableHeader = [];
     this.traineeRow = [];
     this.batchRow = [];
+    this.validHeader = [];
     let scoreString : string;
     let assessmentTypeString : string;
 
@@ -177,21 +161,69 @@ export class AssessmentBreakdownComponent implements OnInit {
       assessmentTypeString = assessmentScore.assessmentType.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
       });
-
       batchDisplayData.push(scoreString);
       this.barChartLabels.push(assessmentTypeString);
-      this.tableHeader.push(assessmentTypeString);
+      this.tableHeader.push(assessmentTypeString.trim());
       this.batchRow.push(scoreString);
+      borderWidth.push(this.barBorderWidth);
     });
+    
+    if (this.traineeSelected === true) {
+      traineeAverageArray.forEach((assessmentScore: AssessmentScore) => {
+        //This rounds the assessment score to the first two decimals.
+        scoreString = ""+Math.round(assessmentScore.score*100)/100;
+        this.validHeader.push(scoreString ? true : false);
+        //This turns the assessment type to title case.
+        assessmentTypeString = assessmentScore.assessmentType.replace(/\w\S*/g, function(txt){
+          return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+        });
+        
+        traineeDisplayData.push(scoreString);
+        this.traineeRow.push(scoreString);
 
-    let traineeData = {data: traineeDisplayData, label: 'Trainee', borderWidth: borderWidth};
-    let batchData = {data: batchDisplayData, label: 'Batch', borderWidth: borderWidth};
+        borderWidth.push(this.barBorderWidth);
+      });
+    }
+    
+    let traineeData = {
+      data: traineeDisplayData, 
+      label: 'Trainee', 
+      borderWidth: borderWidth
+    };
+    let batchData = {
+      data: batchDisplayData, 
+      label: 'Batch', 
+      borderWidth: borderWidth
+    };
+
+    this.applyTraineeColor(traineeData);
 
     this.barChartData= [];
     if (this.traineeSelected)
+    {
+      this.applyBatchColor(batchData);
       this.barChartData.push(traineeData);
+    }
+    else
+    {
+      this.applyTraineeColor(batchData);
+    }
     
     this.barChartData.push(batchData);
+  }
+
+  private applyTraineeColor(obj : Object) : void {
+    obj["backgroundColor"] = this.traineeBackgroundColor;
+    obj["borderColor"] = this.traineeBorderColor;
+    obj["hoverBackgroundColor"] = 'rgba(114, 164, 194, .57)';
+    obj["hoverBorderColor"] = 'rgba(114, 164, 194, 1)';
+  }
+
+  private applyBatchColor(obj : Object) : void {
+    obj["backgroundColor"] = this.batchBackgroundColor;
+    obj["borderColor"] = this.batchBorderColor;
+    obj["hoverBackgroundColor"] = 'rgba(252, 180, 20, .67)';
+    obj["hoverBorderColor"] = 'rgba(252, 180, 20, 1)';
   }
 
   private getAverageGradeObject(assessmentMap: Map<number, Assessment>, allGrades: Grade[]) : AssessmentScore[] {
@@ -206,8 +238,6 @@ export class AssessmentBreakdownComponent implements OnInit {
       }
       sortedGrades[currentGradeType].push(grade);
     });
-    console.log("Sorted Grades");
-    console.log(sortedGrades);
 
     let averageObject = {};
     Object.keys(sortedGrades).forEach(type => {
@@ -220,15 +250,12 @@ export class AssessmentBreakdownComponent implements OnInit {
         i++;
       });
       averageObject[type] /= i;
-      console.log(type)
-      console.log(averageObject[type]);
     });
     
     let assessmentAverage = [];
     Object.keys(averageObject).forEach((type) => {
       assessmentAverage.push(new AssessmentScore(type, averageObject[type]));
     });
-    console.log(assessmentAverage);
     
     // This sorts the elements by alphabetically order and forces other to be at the end.
     assessmentAverage.sort((assessment1 : AssessmentScore, assessment2 : AssessmentScore) => {
