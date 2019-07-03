@@ -164,7 +164,7 @@ export class BarLineChartComponent implements OnInit {
             },
             ticks: {
               suggestedMin: minimumYAxis,
-              suggestedmax: maximumYAxis,
+              suggestedMax: maximumYAxis,
               stepSize: stepSize
             }
           }],

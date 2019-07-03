@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TabularTraineeAverageListComponent } from './tabular-trainee-average-list.component';
 
-describe('TabularTraineeAverageListComponent', () => {
+
+describe('TabularTraineeAverageListComponentComponent', () => {
   let component: TabularTraineeAverageListComponent;
   let fixture: ComponentFixture<TabularTraineeAverageListComponent>;
 

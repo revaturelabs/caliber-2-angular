@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ReportService } from '../../Services/report.service';
 import { Trainee, Grade, traineeAssessment } from 'src/app/Batch/type/trainee';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
@@ -7,6 +6,9 @@ import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.s
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ReportOutput } from '../../Models/report-output';
+import { ReportService } from '../../Service/report.service';
+import { Category } from 'src/app/User/user/types/trainee';
+import { QANote } from '../../Models/qanote';
 
 @Component({
   selector: 'app-toolbar',
@@ -27,8 +29,11 @@ export class ToolbarComponent implements OnInit {
   selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
   
+  averageGradeScore: number = 0;
+  gradesDataStore:Grade[] = [];
+  qaNoteDataStore:QANote[] = [];
+  categoryDataStore: Category[] = [];
   assessmentsDataStore:Assessment[] = [];
-  gradesDataStore:Grade[]=[];
 
   assessmentAverage:number[]=[]; 
   gradesAverage: number[]=[];
@@ -69,6 +74,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getAllYears() {
+    this.processTotalAverageGrade();
     this.selectedTrainee.name = "Hermo, Knighknee"
     this.reportService.getAllYears()
     .subscribe(result => {
@@ -77,6 +83,7 @@ export class ToolbarComponent implements OnInit {
       // this.selectedYear = "Select Year";
       this.getBatch(this.years[0]);
     });
+    this.getCategories();
   }
 
   getBatch(year:number){
@@ -87,8 +94,9 @@ export class ToolbarComponent implements OnInit {
       if(results.length >0){
         this.selectedBatch = this.batches[0];
         this.batchExists = true;
+        this.reportService.setBatch(this.batches[0]);
         this.getWeeks();
-        this.getTraineesByBatchId()
+        this.getTraineesByBatchId();
       }
     });
   }
@@ -100,6 +108,7 @@ export class ToolbarComponent implements OnInit {
       this.weeks.push(i+1);
     }
     this.selectedWeek = 0;
+    this.reportService.setWeek(0);
     this.titledWeek = "Weeks (all)";
 
   }
@@ -113,11 +122,13 @@ export class ToolbarComponent implements OnInit {
         this.traineeService.storeTrainees(trainees);
         this.traineeService.trainees.emit(trainees);
         let allTrainee = new Trainee();
-        allTrainee.traineeId=0;
+        allTrainee.traineeId=-1;
         allTrainee.name="Trainees (all)";
         this.trainees.unshift(allTrainee);
         this.selectedTrainee = trainees[0];
+        this.reportService.setTrainee(trainees[0]);
         this.processAveragesAndOutput();
+        this.reportService.setTraineeDataStore(trainees);
       }
     });    
   }
@@ -132,16 +143,21 @@ export class ToolbarComponent implements OnInit {
 
   selectTrainee(event: Trainee){
     this.selectedTrainee = event;
+    this.reportService.setTrainee(event);
+    this.processAveragesAndOutput();
   }
 
   selectWeek(event: number) {
     this.selectedWeek = event;
     if(event){
       this.titledWeek = "Week " +event;
+      this.reportService.setWeek(event);
     }
     else{
       this.titledWeek = "Weeks (all)";
+      this.reportService.setWeek(0);
     }
+    this.processAveragesAndOutput();
     // this.auditService.selectedWeek = event;
     // this.getBatchNotesByWeek();
     // this.getAssessmentsByBatchIdAndWeekNum();
@@ -150,7 +166,9 @@ export class ToolbarComponent implements OnInit {
 
   selectBatch(event: Batch) {
     this.selectedBatch = event;
+    this.reportService.setBatch(event);
     this.auditService.selectedBatch = this.selectedBatch;
+    this.reportService.setBatch(this.selectedBatch);
     // this.getWeeks();
     // this.showActiveWeek(this.auditService.selectedBatch.weeks);
     // this.selectWeek(this.auditService.selectedBatch.weeks);
@@ -164,7 +182,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   showBatches(){
-    
   }
   showWeeks(){
     this.titledWeek = "Select Week";
@@ -176,7 +193,7 @@ export class ToolbarComponent implements OnInit {
   getAllAssessments(){
     this.reportService.getAllAssessments().subscribe(
       (assessments)=>{
-        console.log(assessments);
+        // console.log("Updating Assessments");
         this.assessmentsDataStore = assessments;
         this.calculateAssessmentAverage();
     });
@@ -185,10 +202,28 @@ export class ToolbarComponent implements OnInit {
   getAllGrades(){
     this.reportService.getAllGrades().subscribe(
       (grades)=>{
-        console.log(grades);
+        // console.log("Updating Grades");
         this.gradesDataStore = grades;
         this.calculateGradeAverage();
         this.assessReportOutput();
+    });
+  }
+
+  getCategories(){
+    if(this.categoryDataStore.length == 0){
+      this.reportService.getAllCategories().subscribe((categories)=>{
+        // console.log("Getting all categories");
+        this.categoryDataStore = categories;
+        this.reportService.setCategoryDataStore(categories);
+      });
+    }
+  }
+
+  getQANotes(){ 
+    this.reportService.getAllQANotes().subscribe((qaNotes)=>{
+      // console.log("Getting all QA Notes of Batch");
+      this.qaNoteDataStore = qaNotes;
+      this.reportService.setQANoteDataStore(qaNotes);
     });
   }
 
@@ -201,7 +236,6 @@ export class ToolbarComponent implements OnInit {
     });
     totalScore = totalScore/calculateAssessmentsSampleCount;
     this.calculateAssessmentsAverage = totalScore;
-
     console.log("QC average Score:" + this.calculateAssessmentsAverage + " over " + calculateAssessmentsSampleCount + " batch assessments.");
   }
 
@@ -220,8 +254,8 @@ export class ToolbarComponent implements OnInit {
     this.reportOutput = new ReportOutput();
     // this.reportOutput.selectedYear = this.selectedYear;
     // this.reportOutput.selectedBatches = this.batches;
-    // this.reportOutput.selectedWeek = this.selectedWeek;
-    // this.reportOutput.selectedTrainee = this.selectedTrainee;
+    this.reportOutput.selectedWeek = this.selectedWeek;
+    this.reportOutput.selectedTrainee = this.selectedTrainee;
     // this.reportOutput.assessmentsDataStore = this.assessmentsDataStore;
     // this.reportOutput.gradesDataStore = this.gradesDataStore;
     // this.reportOutput.calculateAssessmentsAverage = this.calculateAssessmentsAverage;
@@ -236,5 +270,20 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     this.getAllAssessments();
     this.getAllGrades();
+    this.getQANotes();
+  }
+
+  processTotalAverageGrade(){
+    if(this.averageGradeScore == 0){
+      this.reportService.getAllGradesForTotalAverage().subscribe(
+        (grades)=>{
+        grades.forEach((element) =>{
+          this.averageGradeScore += element.score
+        });  
+        this.averageGradeScore = this.averageGradeScore/grades.length;
+        this.averageGradeScore = Math.round(this.averageGradeScore * 100) / 100;
+        this.reportService.setAverageGradeScore(this.averageGradeScore);
+      });
+    }  
   }
 }

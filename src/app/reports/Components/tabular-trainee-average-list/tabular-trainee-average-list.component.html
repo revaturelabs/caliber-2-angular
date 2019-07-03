@@ -1,17 +1,38 @@
-<div class="container">
-  <div *ngIf="gradesDataStore != null && gradesDataStore.length > 0">
+<div class="row ng-scope" ng-if="batchOverall">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Cumulative Scores
+          </div>
+          <div class="panel-body">
+            <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+              <div style="display: block;">
+                <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [colors]="barChartColors"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
 
-    <div class="" style="float:left; margin-left:100px; margin-right:50px; ">
-      <div *ngFor="let grade of gradesDataStore">
-        The QC score was {{grade.score}}  for trainee: {{grade.traineeId}} on during assessment {{grade.assessmentId}}     
+            <div class="table-responsive">
+              <table ng-if="batchOverAllLabels" class="table ng-scope" style="border-collapse: collapse;">
+              <tbody>
+                <tr ng-repeat="label in batchOverAllLabels track by $index" *ngFor="let grade of gradeAverages; index as i;" class="col-md-4 col-lg-4 col-sm-6 col-xs-6 ng-scope">
+                  <th class="pull-left ng-binding">{{barChartLabels[i]}}</th>
+                  <td class="pull-right ng-binding">{{grade.toFixed(2)}}</td>
+                </tr>
+              </tbody></table><!-- end ngIf: batchOverAllLabels -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="" style="float:left;">
-      <div *ngFor="let assess of assessmentsDataStore">
-           The QC score was {{assess.rawScore}}  for assessment {{assess.assessmentId }} in batch {{assess.batchId}}
-      </div>
-    </div>
-    
   </div>
 </div>

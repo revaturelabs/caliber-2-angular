@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
