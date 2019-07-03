@@ -45,7 +45,7 @@ export class ReportService {
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
-    console.log(environment);
+    // console.log(environment);
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 

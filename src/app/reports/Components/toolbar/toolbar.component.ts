@@ -268,6 +268,7 @@ export class ToolbarComponent implements OnInit {
       // console.log("Getting all QA Notes of Batch");
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
+      this.getAllGrades();
     });
   }
 
@@ -297,8 +298,8 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     //update Assessments, Notes, and Grades.
     this.getAllAssessments();
+    //getting grades is chained in the async call on get QA notes
     this.getQANotes();
-    this.getAllGrades();
   }
 
   processTotalAverageGrade(){
