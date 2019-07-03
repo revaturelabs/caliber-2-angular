@@ -84,12 +84,12 @@ export class ReportService {
     let url;
     if(this.week == 0){
       url = this.url + this.qaNotesAllURL + this.batch.batchId;
-      console.log(url);
+      // console.log(url);
       return this.http.get<QANote[]>(url, httpOptions)
     }
     else{
       url = this.url + this.qaNotesURL + this.batch.batchId +"/"+this.week;
-      console.log(url);
+      // console.log(url);
       return this.http.get<QANote[]>(url, httpOptions)
     }
   }
