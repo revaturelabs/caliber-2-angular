@@ -40,6 +40,7 @@ export class ReportService {
   traineeDataStore: Trainee[];
   categoryDataStore : Category[];
   assessmentsDataStore : Assessment[];
+  gradesOfTraineeDataStore : Grade[];
   
   constructor(private http: HttpClient) { }
 
@@ -65,10 +66,16 @@ export class ReportService {
   }
 
   getAllGrades():Observable<Grade[]> {
-    if(this.trainee != undefined && this.trainee != null && this.trainee.traineeId == -1){
+    // if(this.trainee != undefined && this.trainee != null && this.trainee.traineeId == -1){
       let weekStr = this.determineWeek(this.week);
       return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
-    }else if(this.trainee != undefined && this.trainee != null){
+    // }else if(this.trainee != undefined && this.trainee != null){
+    //   return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
+    // }
+  }
+
+  getAllTraineeGrades():Observable<Grade[]> {
+    if(this.trainee != undefined && this.trainee != null){
       return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
     }
   }
@@ -108,6 +115,10 @@ export class ReportService {
 
   setAssessmentDataStore(assessmentDataStore: Assessment[]){
     this.assessmentsDataStore = assessmentDataStore;
+  }
+
+  setGradesOfTraineeDataStore(gradesOfTraineeDataStore : Grade[]){
+    this.gradesOfTraineeDataStore = gradesOfTraineeDataStore
   }
 
   determineWeek(week:number):String{
@@ -164,6 +175,10 @@ export class ReportService {
   getAssessmentDataStore(): Assessment[]{
     return this.assessmentsDataStore;
   } 
+
+  getGradesOfTraineeDataStore(){
+     return this.gradesOfTraineeDataStore;
+  }
 
   getAverageGradeScore(){
     return this.averageGradeScore;
