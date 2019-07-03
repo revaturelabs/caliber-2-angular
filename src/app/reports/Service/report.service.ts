@@ -25,7 +25,7 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
-  gradesTotalAverageURL = '/assessment/all/grade/all'
+  gradesTotalAverageURL = '/assessment/all/grade/all';
   gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
@@ -127,7 +127,7 @@ export class ReportService {
     if(week>0){
       return "?week="+week;
     }
-    return "";
+    return '';
   }
 
   setAverageGradeScore(averageGradeScore : number){
