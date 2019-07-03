@@ -9,34 +9,19 @@
                     [datasets]="chartData" 
                     [labels]="chartLabels" 
                     [options]="chartOptions"
-                    [legend]="true" 
+                    [legend]="false" 
                     (chartClick)="onChartClick($event)">
                 </canvas>
                   <div class="table-responsive">
-                    <!-- ngIf: weeklyProgressBatchOverallLabels --><table ng-if="weeklyProgressBatchOverallLabels" class="table ng-scope" style="border-collapse: collapse;">
-                      <tbody><!-- ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index" style="">
-                        <th class="pull-left ng-binding">Week 1</th>
-                        <td class="pull-right ng-binding">68.34</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 2</th>
-                        <td class="pull-right ng-binding">84.96</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 3</th>
-                        <td class="pull-right ng-binding">76.83</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 4</th>
-                        <td class="pull-right ng-binding">75.09</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 5</th>
-                        <td class="pull-right ng-binding">77.94</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 6</th>
-                        <td class="pull-right ng-binding">82.80</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index --><tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" ng-repeat="label in weeklyProgressBatchOverallLabels track by $index">
-                        <th class="pull-left ng-binding">Week 7</th>
-                        <td class="pull-right ng-binding">74.26</td>
-                      </tr><!-- end ngRepeat: label in weeklyProgressBatchOverallLabels track by $index -->
-                    </tbody></table><!-- end ngIf: weeklyProgressBatchOverallLabels -->
+                   <table ng-if="weeklyProgressBatchOverallLabels" class="table ng-scope" style="border-collapse: collapse;">
+                      <tbody>
+                        <ng-container *ngFor="let avg of avgData; let i = index">
+                          <tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" style="">
+                          <th class="pull-left ng-binding">Week {{i+1}}</th>
+                          <td class="pull-right ng-binding">{{avgData[i]}}</td>
+                        </ng-container> 
+                    </tbody>
+                  </table>  
                   </div>
                 </div>
               </div>

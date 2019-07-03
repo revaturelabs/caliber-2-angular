@@ -4,6 +4,7 @@ import { ReportService } from '../Service/report.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Grade } from 'src/app/Batch/type/trainee';
+import { defaults } from 'chart.js';
 
 @Component({
   selector: 'app-weekly-reports',
@@ -14,27 +15,22 @@ export class WeeklyReportsComponent implements OnInit {
 
   private grades : Grade[];
   private assessments: Assessment[];
-  public weekAverages : Map<number,number[]> ;
+  private weekAverages : Map<string,number[]> ;
+  public avgData: number[];
+
+  public chartOptions;
+  public chartData;
+  public chartLabels;
 
 
   constructor(private reportService : ReportService) {
   }
 
   ngOnInit() {
-    this.weekAverages = new Map<number, number[]>();
+    this.weekAverages = new Map<string, number[]>();  
+    this.avgData = [];
+
   }
-
-  chartOptions = {
-    responsive: true
-  };
-
-  chartData = [
-    { data: [330, 600, 260, 700], label: 'Account A' },
-    { data: [120, 455, 100, 340], label: 'Account B' },
-    { data: [45, 67, 800, 500], label: 'Account C' }
-  ];
-
-  chartLabels = ['January', 'February', 'Mars', 'April'];
 
   onChartClick(event) {
     console.log(event);
@@ -64,7 +60,9 @@ export class WeeklyReportsComponent implements OnInit {
       });
 
       for(let i=0; i<this.assessments.length; i++){
-        let weekNumber = this.assessments[i].weekNumber;
+        let tempWeekNumber = this.assessments[i].weekNumber;
+        let weekNumber = String(tempWeekNumber);
+
         if(this.weekAverages.has(weekNumber)){
           let averages = this.weekAverages.get(weekNumber);
           averages.push(gradeAverages[i]);
@@ -74,10 +72,38 @@ export class WeeklyReportsComponent implements OnInit {
           this.weekAverages.set(weekNumber, [gradeAverages[i]]);
         }
       }
-    console.log("---------------------------------------------------------------------")
-    console.log(gradeAverages);
-    console.log("---------------------------------------------------------------------")
-    console.log(this.weekAverages);
+      //generate the chart
+      this.generateChart();   
+  }
 
+  generateChart(){
+    this.chartOptions = {
+
+    };
+
+
+    let keys = Array.from(this.weekAverages.keys());
+    
+
+    //fill line
+    keys.forEach((key)=>{
+      let avg = 0;
+      this.weekAverages.get(key).forEach((grade)=>{
+        avg += grade;
+      });
+      //add the rounded averages into an array
+      this.avgData.push( Math.round( avg/this.weekAverages.get(key).length *100) /100);
+    });
+
+    this.chartData = [
+      { 
+        data: this.avgData, 
+        fill: false, 
+        borderColor: 'rgba(114,164,194,1)',
+      },
+    ];
+    
+    //set x axis labels
+    this.chartLabels = keys;
   }
 }
