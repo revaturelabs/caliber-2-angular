@@ -22,7 +22,7 @@
                     </tr>
                       
                     <tr *ngFor="let note of qcData[0]" id="{{getID(note['traineeId'])}}" class="ng-scope">
-                      <td class="ng-binding {{ isOverAll(note['traineeId']) }}" id="trainee{{note['traineeId']}}">
+                      <td class="ng-binding" id="trainee{{note['traineeId']}}">
                         {{ getName(note['traineeId']) }}
                       </td>
                       <td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
@@ -34,7 +34,7 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
+              </table>
               </div>
             </div>
           </div>

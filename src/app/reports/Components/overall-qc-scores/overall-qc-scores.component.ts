@@ -23,14 +23,14 @@ export class OverallQCScoresComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   downloadReport() {
     console.log('wat');
   }
 
-  // applies the correct class to the td based on the grad superstar, good ect.
-  getStatus(week: number, traineeId: number) {
+  getStatus(week, traineeId) {
     const note = this.getNote(week, traineeId);
     switch (note['qcStatus']) {
       case 'Superstar':
@@ -46,8 +46,8 @@ export class OverallQCScoresComponent implements OnInit {
     }
   }
 
- //finds the correct Note based on the passed in trainee id
-  getNote(week: number, traineeId: number) {
+  //finds the correct Note based on the passed
+  getNote(week, traineeId) {
     for (let i = 0; i < this.qcData[week].length; i++) {
       if (this.qcData[week][i]['traineeId'] === traineeId) {
         return this.qcData[week][i];
@@ -96,9 +96,6 @@ export class OverallQCScoresComponent implements OnInit {
     if (traineeID === 0) {
       const myElement = document.getElementById('trainee' + traineeID);
       myElement.style.setProperty('font-family', 'Futura-Std-Bold');
-      // const overAllRowElement = document.getElementById('note' + traineeID);
-      // const cssString = 'border-top: 1px solid #ddd; border-top-width: thick;';
-      // overAllRowElement.style.cssText = cssString;
       return 'Overall';
     } else {
       const trainees = this.reportService.getTraineeDataStore();
@@ -131,6 +128,7 @@ export class OverallQCScoresComponent implements OnInit {
   *   properties of the component. Then when the modal shows up, the information is displayed
   */
   displayNote(name, week, message) {
+    // console.log('wat');
     this.name = name;
     this.week = (week + 1);
     this.message = message;
