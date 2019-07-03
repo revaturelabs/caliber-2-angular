@@ -99,7 +99,7 @@ export class OverallQCScoresComponent implements OnInit {
       return 'Overall';
     } else {
       const trainees = this.reportService.getTraineeDataStore();
-      for (let i = 1; i < trainees.length; i++) {
+      for (let i = 0; i < trainees.length; i++) {
         if (trainees[i].traineeId === traineeID) {
           return trainees[i].name;
         }

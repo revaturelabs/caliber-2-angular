@@ -3,6 +3,7 @@ import { ReportOutput } from '../../Models/report-output';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
+import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
 
 @Component({
   selector: 'app-reports',
@@ -14,7 +15,8 @@ export class ReportsComponent implements OnInit {
   //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
-  constructor(private reportService: ReportService) { } 
+  @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
   }
@@ -48,5 +50,6 @@ export class ReportsComponent implements OnInit {
     console.log("Get all Grades in Batch/week");
     console.log(this.reportService.getGradeDataStore());
     this.overAllQCReport.update();
+    this.cumulativeScoreComponents.updateDataPull();
   }
 }

@@ -24,6 +24,8 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
+  gradesTotalAverageURL = '/assessment/all/grade/all';
+  gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
   categoryAllURL = '/category/all/active';
@@ -32,11 +34,13 @@ export class ReportService {
   batch: Batch;
   week: number;
   trainee:Trainee;
+  averageGradeScore : number;
   gradesDataStore : Grade[];
   qaNoteDataStore : QANote[];
   traineeDataStore: Trainee[];
   categoryDataStore : Category[];
   assessmentsDataStore : Assessment[];
+  gradesOfTraineeDataStore : Grade[];
   
   constructor(private http: HttpClient) { }
 
@@ -52,14 +56,28 @@ export class ReportService {
     return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
   }
 
-  getAllAssessments(): Observable<Assessment[]> {
-    const weekStr = this.determineWeek(this.week);
-    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions);
+  getAllGradesForTotalAverage(): Observable<Grade[]> {
+    return this.http.get<Grade[]>(this.url + this.gradesTotalAverageURL, httpOptions);
   }
 
-  getAllGrades(): Observable<Grade[]> {
-    const weekStr = this.determineWeek(this.week);
-    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions);
+  getAllAssessments():Observable<Assessment[]> {
+    let weekStr = this.determineWeek(this.week);
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
+  }
+
+  getAllGrades():Observable<Grade[]> {
+    // if(this.trainee != undefined && this.trainee != null && this.trainee.traineeId == -1){
+      let weekStr = this.determineWeek(this.week);
+      return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
+    // }else if(this.trainee != undefined && this.trainee != null){
+    //   return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
+    // }
+  }
+
+  getAllTraineeGrades():Observable<Grade[]> {
+    if(this.trainee != undefined && this.trainee != null){
+      return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
+    }
   }
 
   getAllQANotes():Observable<QANote[]> {
@@ -99,11 +117,19 @@ export class ReportService {
     this.assessmentsDataStore = assessmentDataStore;
   }
 
-  determineWeek(week: number): String {
-    if (week > 0 ){
-      return '?week=' + week;
+  setGradesOfTraineeDataStore(gradesOfTraineeDataStore : Grade[]){
+    this.gradesOfTraineeDataStore = gradesOfTraineeDataStore
+  }
+
+  determineWeek(week:number):String{
+    if(week>0){
+      return "?week="+week;
     }
     return '';
+  }
+
+  setAverageGradeScore(averageGradeScore : number){
+    this.averageGradeScore = averageGradeScore;
   }
 
   setBatch(batch:Batch){
@@ -127,10 +153,10 @@ export class ReportService {
   }
 
   getTrainee(){
-    return this.trainee;
+    return this.trainee
   }
 
-  getGradeDataStore(): Grade[]{
+  getGradeDataStore() : Grade[]{
     return this.gradesDataStore;
   }
 
@@ -149,4 +175,12 @@ export class ReportService {
   getAssessmentDataStore(): Assessment[]{
     return this.assessmentsDataStore;
   } 
+
+  getGradesOfTraineeDataStore(){
+     return this.gradesOfTraineeDataStore;
+  }
+
+  getAverageGradeScore(){
+    return this.averageGradeScore;
+  }
 }
