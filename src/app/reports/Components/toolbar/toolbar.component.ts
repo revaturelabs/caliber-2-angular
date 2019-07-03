@@ -210,7 +210,7 @@ export class ToolbarComponent implements OnInit {
     // this.showActiveWeek(this.auditService.selectedBatch.weeks);
     // this.selectWeek(this.auditService.selectedBatch.weeks);
     this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
-    this.getTraineesByBatchId(); // and I need to update the trainees in the batch
+    //this.getTraineesByBatchId(); // and I need to update the trainees in the batch
     
   }
 
@@ -280,7 +280,7 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  getQANotes(){ 
+  getQANotes(){
     //update reportService datastore
     this.reportService.getAllQANotes().subscribe((qaNotes)=>{
       // console.log("Getting all QA Notes of Batch");

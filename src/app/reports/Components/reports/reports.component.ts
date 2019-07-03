@@ -49,7 +49,7 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportService.getAssessmentDataStore());
     console.log("Get all Grades in Batch/week");
     console.log(this.reportService.getGradeDataStore());
-    this.overAllQCReport.update();
+    this.overAllQCReport.update(this.reportService.getQANoteDataStore());
     this.cumulativeScoreComponents.updateDataPull();
   }
 }

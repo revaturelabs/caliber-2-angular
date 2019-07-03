@@ -151,7 +151,7 @@ a {
 }
 
 .glyphicon-question-sign, .fa-question-circle {
-	padding-left: .25em;
+	/* padding-left: .25em; */
 	color: #F26925 !important;
 	border-color: white !important;
 	background-color: white !important;

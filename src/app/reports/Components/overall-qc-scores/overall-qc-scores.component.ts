@@ -16,7 +16,7 @@ export class OverallQCScoresComponent implements OnInit {
   name: String;
   week: number;
   message: String;
-
+  trainees;
   constructor(private reportService: ReportService, private modalService: NgbModal) {
     if (!this.qcData) {
       this.qcData = [];
@@ -46,7 +46,7 @@ export class OverallQCScoresComponent implements OnInit {
     }
   }
 
-  //finds the correct Note based on the passed
+  // finds the correct Note based on the passed
   getNote(week, traineeId) {
     for (let i = 0; i < this.qcData[week].length; i++) {
       if (this.qcData[week][i]['traineeId'] === traineeId) {
@@ -59,9 +59,10 @@ export class OverallQCScoresComponent implements OnInit {
   *Function called by the reports component to let this know to udate itself
   *Grabs the QA notes and filters them into a two dimensional array based on the week
   */
-  update() {
+  update(notes) {
     this.qcData = [];
-    const QAnotes = this.reportService.getQANoteDataStore();
+    const QAnotes = notes//this.reportService.getQANoteDataStore();
+
     let week = 1;
     while (this.needWeek(week, QAnotes)) {
       this.qcData.push(QAnotes.filter(function(value, index) {
@@ -73,9 +74,10 @@ export class OverallQCScoresComponent implements OnInit {
       }));
       week++;
     }
+    this.trainees = this.reportService.getTraineeDataStore();
   }
 
-  // Takes in a week and the array of QA notes searchs the array to see if the specified 
+  // Takes in a week and the array of QA notes searchs the array to see if the specified
   // is in the array and returns true if it finds it and false otherwise
   needWeek(week, QAnotes) {
     for (let i = 0; i < QAnotes.length; i++) {
