@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
@@ -18,7 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReportService {
-  url = (environment.production)? environment.serverRootURL : 'http://localhost:10000';
+  url = environment.serverRootURL;
 
   batchesYearURL = '/vp/batch/';
   batchAllURL = 'batchAllURL';
@@ -45,6 +45,7 @@ export class ReportService {
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
+    console.log(environment);
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 

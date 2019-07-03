@@ -190,7 +190,6 @@ export class ToolbarComponent implements OnInit {
         this.titledWeek = "Weeks (all)";
         this.reportService.setWeek(0);
       }
-
       this.processAveragesAndOutput();//update Assessments, Notes, and Grades.
     }
   }
