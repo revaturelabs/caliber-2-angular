@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 top10">
+          <!-- top ui dropdown for available years -->
+          <ul class="nav nav-tabs">
+            <li role="button" class="dropdown"><a class="dropdown-toggle"
+              data-toggle="dropdown">{{selectedYear}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li *ngFor="let year of years">
+          <a role="button" (click)="selectYear(year)">{{year}}</a>
+          </li>
+              </ul>
+              
+            <!-- sort by quarter-->
+            <li role="button" class="dropdown"><a class="dropdown-toggle"
+              data-toggle="dropdown">{{selectedBatch.trainingName}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li *ngFor="let batch of batches">
+          <a role="button" (click)="selectBatch(batch)">{{batch.trainingName}}</a>
+              </li>
+            </ul>
+          <!-- Now to find Week and Trainee -->
+          <li role="button" class="dropdown"><a class="dropdown-toggle"
+            data-toggle="dropdown">{{titledWeek}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let week of weeks">
+        <a role="button" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a> 
+            </li>
+          </ul>
+          <li role="button" class="dropdown"><a class="dropdown-toggle"
+            data-toggle="dropdown" (click)="showTrainees()">{{selectedTrainee.name}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let trainee of listedTrainees">
+        <a role="button" (click)="selectTrainee(trainee)">{{trainee.name}}</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
