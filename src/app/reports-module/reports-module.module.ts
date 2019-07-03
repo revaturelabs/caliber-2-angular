@@ -19,6 +19,7 @@ import { CumulativeScoresComponent } from '../reports/Components/cumulative-scor
     ReportTopChartController,
     CumulativeScoresComponent,
     BarLineChartComponent,
+  
   ],
 
   imports: [

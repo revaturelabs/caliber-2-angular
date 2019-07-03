@@ -26,7 +26,7 @@ export class ReportsComponent implements OnInit {
     //console.log(this.reportOutput.selectedTrainee);
     //console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
     //console.log(this.reportOutput.selectedWeek);
-
+    this.assessmentBreakdownComponent.updateDataPull();
     this.cumulativeScoreComponents.updateDataPull();//console.log("The Cumulative Score component has been updated!");
     //console.log("Testing Report Service Data");
     //console.log("Get Selected Batch");
