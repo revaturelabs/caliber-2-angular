@@ -7,7 +7,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-overall-qc-scores',
   templateUrl: './overall-qc-scores.component.html',
-  styleUrls: ['./overall-qc-scores.component.css']
+  // styleUrls: ['./overall-qc-scores.component.css']
 })
 export class OverallQCScoresComponent implements OnInit {
   qcData: QANote[][];
