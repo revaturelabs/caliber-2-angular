@@ -11,15 +11,25 @@ import { ReportTopChartController } from '../report-top-chart-controller/report-
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  reportOutput : ReportOutput;
-  @ViewChild(ReportTopChartController) reportTopChartController: ReportTopChartController;
+  reportOutput : ReportOutput = null;
+  
+  private reportTopChartController: ReportTopChartController;
+  @ViewChild(ReportTopChartController) set setReportTopChartController(content: ReportTopChartController) {
+    this.reportTopChartController = content;
+
+    if (this.reportTopChartController != undefined)
+    {
+      this.reportTopChartController.updateDataPull();
+    }
+    this.cd.detectChanges();
+  }
+
 
   private assessmentBreakdownComponent: AssessmentBreakdownComponent;
   @ViewChild(AssessmentBreakdownComponent) set setAssessmentBreakdown(content: AssessmentBreakdownComponent) {
     this.assessmentBreakdownComponent = content;
 
-    if (this.isWeekSelected ){
-      console.log("assessment breakdown component put data pull");
+    if (this.isWeekSelected && !this.isTraineeSelected){
       this.assessmentBreakdownComponent.updateDataPull();
     }
     this.cd.detectChanges();
@@ -62,6 +72,10 @@ export class ReportsComponent implements OnInit {
     //console.log(this.reportService.getAverageGradeScore());
     // console.log("Get all Batch Assessments");
     // console.log(this.reportService.getBatchAssessmentDataStore());
-    this.reportTopChartController.updateDataPull();
+    //this.reportTopChartController.updateDataPull();
+    if (this.reportTopChartController != undefined)
+    {
+      this.reportTopChartController.updateDataPull();
+    }
   }
 }

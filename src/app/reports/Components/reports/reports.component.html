@@ -1,5 +1,5 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
-<div id="caliber-container" class="container ng-scope" ng-if="currentBatch" >
+<div id="caliber-container" class="container" *ngIf="reportOutput !== null">
 	<div class="top10 data-container">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
 	</div>

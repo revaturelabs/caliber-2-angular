@@ -15,7 +15,6 @@ export class ReportTopChartController implements OnInit {
       this.assessmentBreakdownComponent = content;
 
       if (this.isTraineeSelected ){
-        console.log("assessment breakdown component put data pull");
         this.assessmentBreakdownComponent.updateDataPull();
       }
       this.cd.detectChanges();
@@ -28,7 +27,6 @@ export class ReportTopChartController implements OnInit {
       this.cumulativeScoresComponent = content;
 
       if (this.cumulativeScoresComponent != undefined) {
-        console.log("cumulative score component put data pull");
         this.cumulativeScoresComponent.updateDataPull();
       }
       this.cd.detectChanges();
@@ -44,12 +42,10 @@ export class ReportTopChartController implements OnInit {
   updateDataPull() {
     this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
     if (this.cumulativeScoresComponent != undefined) {
-      console.log("cumulative score component put data pull");
       this.cumulativeScoresComponent.updateDataPull();
     }
     
     if (this.assessmentBreakdownComponent != undefined){
-      console.log("assessment breakdown component put data pull");
       this.assessmentBreakdownComponent.updateDataPull();
     }
   }
