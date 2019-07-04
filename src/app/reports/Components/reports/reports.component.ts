@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
@@ -12,14 +12,30 @@ import { ReportTopChartController } from '../report-top-chart-controller/report-
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
-  @ViewChild(AssessmentBreakdownComponent) assessmentBreakdownComponent: AssessmentBreakdownComponent;
-  @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
-  constructor(private reportService : ReportService) { } 
+  @ViewChild(ReportTopChartController) reportTopChartController: ReportTopChartController;
+
+  private assessmentBreakdownComponent: AssessmentBreakdownComponent;
+  @ViewChild(AssessmentBreakdownComponent) set setAssessmentBreakdown(content: AssessmentBreakdownComponent) {
+    this.assessmentBreakdownComponent = content;
+
+    if (this.isWeekSelected ){
+      console.log("assessment breakdown component put data pull");
+      this.assessmentBreakdownComponent.updateDataPull();
+    }
+    this.cd.detectChanges();
+  }
+
+  public isTraineeSelected: boolean = false;
+  public isWeekSelected: boolean = false;
+
+  constructor(private reportService : ReportService, private cd: ChangeDetectorRef) { } 
 
   ngOnInit() {
   }
 
   updateReportOutput(reportOutput: ReportOutput){
+    this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
+    this.isWeekSelected = this.reportService.week > 0;
     this.reportOutput = reportOutput;
     //console.log("=====================================\n== The Report is Updating Children ==\n");
     //console.log("Selected Trainee:"); // Adam needs these values for showing his component
@@ -44,9 +60,8 @@ export class ReportsComponent implements OnInit {
     //console.log(this.reportService.getGradesOfTraineeDataStore());
     //console.log("Show Average Total Grade");
     //console.log(this.reportService.getAverageGradeScore());
-    console.log("Get all Batch Assessments");
-    console.log(this.reportService.getBatchAssessmentDataStore());
-    this.assessmentBreakdownComponent.updateDataPull();
-    this.cumulativeScoreComponents.updateDataPull();
+    // console.log("Get all Batch Assessments");
+    // console.log(this.reportService.getBatchAssessmentDataStore());
+    this.reportTopChartController.updateDataPull();
   }
 }

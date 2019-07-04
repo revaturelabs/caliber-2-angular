@@ -108,16 +108,27 @@ export class AssessmentBreakdownComponent implements OnInit {
     {
       this.reportService.getAllBatchAssessments().subscribe((assessments : Assessment[])=>{
         this.assessmentDataStore = assessments;
-
+        
         this.gradeDataStore = this.reportService.getGradeDataStore();
         this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
+        console.log("batch datum store");
+        console.log(this.gradeDataStore);
+        console.log("trainee grades");
+        console.log(this.traineeGrades);
+        console.log(this.reportService.trainee);
         this.createChart();
       });
     }
     else
     {
       this.gradeDataStore = this.reportService.getGradeDataStore();
-      this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
+      this.traineeGrades = this.gradeDataStore.filter((grade)=>{ return grade.traineeId === this.reportService.trainee.traineeId });
+      console.log("Selected trainee ID: " + this.reportService.trainee.traineeId);
+      console.log("batch datum store");
+        console.log(this.gradeDataStore);
+        console.log("trainee grades");
+        console.log(this.traineeGrades);
+        console.log(this.reportService.trainee);
       this.createChart();
     }
     
@@ -137,6 +148,9 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.assessmentDataStore.forEach((assessment) => {
       assessmentMap.set(assessment.assessmentId, assessment);
     });
+
+    console.log("Trainee Grades:");
+    console.log(this.traineeGrades);
 
     traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
     batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
@@ -167,12 +181,20 @@ export class AssessmentBreakdownComponent implements OnInit {
       this.batchRow.push(scoreString);
       borderWidth.push(this.barBorderWidth);
     });
+
+    console.log("Batch Average Array:");
+    console.log(batchAverageArray);
     
     if (this.traineeSelected === true) {
       traineeAverageArray.forEach((assessmentScore: AssessmentScore) => {
         //This rounds the assessment score to the first two decimals.
-        scoreString = ""+Math.round(assessmentScore.score*100)/100;
-        this.validHeader.push(scoreString ? true : false);
+        if (assessmentScore.score < 0)
+          scoreString = "";
+        else
+          scoreString = ""+Math.round(assessmentScore.score*100)/100;
+        
+          this.validHeader.push(scoreString ? true : false);
+      
         //This turns the assessment type to title case.
         assessmentTypeString = assessmentScore.assessmentType.replace(/\w\S*/g, function(txt){
           return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
@@ -185,6 +207,11 @@ export class AssessmentBreakdownComponent implements OnInit {
       });
     }
     
+    console.log("Valid Header");
+    console.log(this.validHeader);
+    console.log("Trainee Average Array:");
+    console.log(traineeAverageArray);
+
     let traineeData = {
       data: traineeDisplayData, 
       label: 'Trainee', 

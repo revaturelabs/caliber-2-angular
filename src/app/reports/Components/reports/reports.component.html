@@ -1,7 +1,10 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
 <div id="caliber-container" class="container ng-scope" ng-if="currentBatch" >
 	<div class="top10 data-container">
-        <app-report-top-chart-controller></app-report-top-chart-controller>
+		<app-report-top-chart-controller></app-report-top-chart-controller>
+	</div>
+	<div *ngIf="isWeekSelected && !isTraineeSelected">
+		<app-assessment-breakdown></app-assessment-breakdown>
 	</div>
 </div>
-<app-assessment-breakdown></app-assessment-breakdown>
+
