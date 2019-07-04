@@ -1,27 +1,30 @@
-<div id="radarPanel" class="panel panel-default" style="margin-top: 20px">
-  <div class="panel-heading">Technical Skills</div>
-    <div id="radarBody" class="panel-body">
-      <canvas width="100%" height="100%" id="radarCanvas" baseChart
-        [datasets]="radarChartData"
-        [options]="radarChartOptions"
-        [labels]="radarChartLabels"
-        [chartType]="radarChartType">
-      </canvas>
-      <table id="trainee-panel-status" class="table table-condensed"
-								style="width: 100%;">
-								<thead>
-									<tr>
-                    <th>Subject</th>
-										<th id='dataHeader'>Scores</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let arr of labelsAndAverages">
-                    <td id='label'>{{arr.label}}</td>
-                    <td id='data'>{{arr.data}}</td>
-                  </tr>
-                </tbody>
-        </table>
+<!-- This component does not render if a specific week is selected -->
+<div *ngIf="this.reportService.getWeek() === 0">
+  <div id="radarPanel" class="panel panel-default" style="margin-top: 20px">
+    <div class="panel-heading">Technical Skills</div>
+      <div id="radarBody" class="panel-body">
+        <canvas width="100%" height="100%" id="radarCanvas" baseChart
+          [datasets]="radarChartData"
+          [options]="radarChartOptions"
+          [labels]="radarChartLabels"
+          [chartType]="radarChartType">
+        </canvas>
+        <table id="trainee-panel-status" class="table table-condensed"
+                  style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>Subject</th>
+                      <th id='dataHeader'>Scores</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let arr of labelsAndAverages">
+                      <td id='label'>{{arr.label}}</td>
+                      <td id='data'>{{arr.data}}</td>
+                    </tr>
+                  </tbody>
+          </table>
 
+    </div>
   </div>
 </div>

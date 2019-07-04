@@ -25,28 +25,45 @@ export class TechRadarComponent implements OnInit {
   gradeAverages: number[] = [];
   labelsAndAverages: any[] = [];
 
-  // Radar
+  /* The following arrays are used for the configuration and data storage
+     of the radar chart and must be given to the <canvas> element. */
   public radarChartOptions: RadialChartOptions = {
+    // tooltips: {
+    //   callbacks: {
+    //     title: (items, data) => data.datasets[items[0].datasetIndex].data[items[0].index].myProperty1,
+    //     label: (item, data) => data.datasets[item.datasetIndex].data[item.index].myProperty2
+    //   }
+    // },
+    tooltips: {
+      mode: 'index'
+    },
     responsive: true,
+    legend: {
+      display: true,
+    },
     scale: {
       ticks: {
-        stepSize: 20,
+        beginAtZero: false,
+        stepSize: 10,
         max: 100,
-        min: 0,
+        suggestedMin: 40,
       }
     }
   };
   public radarChartLabels: Label[] = [];
-
-
   public radarChartData: ChartDataSets[] = [
-    { data: [65, 59, 90, 81, 56, 55, 40],
-      // specified the first color, after this it is randomized
+    { data: [],
+      // Specifies the first color, after this it is "randomized"
       label: 'default',
       backgroundColor: ['rgba(71, 163, 209, 0.3)'],
-      borderColor: ['lightblue'],
-      pointBorderColor:['lightblue'],
-      pointBackgroundColor:['lightblue']},
+      borderColor: ['rgba(71, 163, 209, 0.6)'],
+      pointBorderColor:['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+      pointBackgroundColor: ['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
+                             'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
+      pointHoverBackgroundColor:['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
+                                 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
+      pointHoverBorderColor:[''],
+    },
     //{ data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B' }
   ];
   public radarChartType: ChartType = 'radar';
@@ -66,7 +83,10 @@ export class TechRadarComponent implements OnInit {
     console.log(event, active);
   }
 
-  public updateDataPull(){
+  // This method is called by the toolbar each time data is pulled.
+  // It manages the data being presented in the radar chart.
+  public updateDataPull() {
+    // Getting new data.
     this.gradeDataStore = this.reportService.getGradeDataStore();
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
@@ -81,23 +101,39 @@ export class TechRadarComponent implements OnInit {
     console.log('Assessment Data: ');
     console.log(this.assessmentDataStore);
 
+    console.log('Resetting chart and table');
+    this.radarChartData[0].data = [];
+    this.radarChartLabels = [];
+    this.labelsAndAverages = [];
+
     console.log('Filling data arrays:');
-    // Filling data arrays
+    /* Filling data */
+
+    // An array representing the categories of evaluation. The index matches the category's index found in categoryDataStore.
+    // The values represent the number evaluations of those subjects to be found in gradeDataStore.
     let categoryCount: number[] = [];
+    // An array which holds the sum of all scores to be found in each category. Index matches categoryDataStore index.
     let categoryTotal: number[] = [];
-    for(let i = 0; i < this.categoryDataStore.length; i++){
+
+    // Looping through each category (Java, SQL, etc.) of evaluation.
+    // These categories represent a single week's primary subject, even if that week's curriculum consists of multiple subjects
+    for (let i = 0; i < this.categoryDataStore.length; i++) {
       categoryCount.push(0);
       categoryTotal.push(0);
-      for(let k = 0; k < this.assessmentDataStore.length; k++){
-        // console.log("this.assessmentDataStore.assesmenttype = " + this.assessmentDataStore[k].assessmentCategory);
-        // console.log("i = " + i);
 
-        if(+this.assessmentDataStore[k].assessmentCategory === i){
-          for(let j = 0; j < this.gradeDataStore.length; j++){
+      // Looping through each assessment
+      for (let k = 0; k < this.assessmentDataStore.length; k++) {
+
+        // If an assessment is on the category we are checking for, then want to get its scores.
+        if (+this.assessmentDataStore[k].assessmentCategory === i) {
+
+          // Loop through grades to find scores matching tied to the assessment's ID.
+          for (let j = 0; j < this.gradeDataStore.length; j++) {
             // console.log("this.gradeDateStore = " + this.gradeDataStore[j].assessmentId)
             // console.log("this.assessmentDataStore = " + this.assessmentDataStore[i].assessmentId);
 
-            if(this.gradeDataStore[j].assessmentId === this.assessmentDataStore[k].assessmentId){
+            // If a match is found, add the score and increment our count.
+            if (this.gradeDataStore[j].assessmentId === this.assessmentDataStore[k].assessmentId) {
               categoryTotal[i] += this.gradeDataStore[j].score;
               categoryCount[i] += 1;
               // console.log('Printing scores for category 1 and GradeID: ');
@@ -114,8 +150,8 @@ export class TechRadarComponent implements OnInit {
     console.log('Category Totals ' + categoryTotal);
 
     console.log('Filling average array');
-    let categoryAverages: number[] = [];
-    let averageIndex: number[] = [];
+    const categoryAverages: number[] = [];
+    const averageIndex: number[] = [];
     for(let i = 0; i < categoryCount.length; i++){
       if(categoryCount[i] !== 0) {
         categoryAverages.push(+(categoryTotal[i] / categoryCount[i]).toFixed(2));
@@ -125,8 +161,8 @@ export class TechRadarComponent implements OnInit {
 
     console.log('Printing the category names for this batch:');
     for (let i = 0; i < averageIndex.length; i++) {
-      console.log(this.categoryDataStore[averageIndex[i]].skillCategory);
-      this.radarChartLabels[i] = this.categoryDataStore[averageIndex[i]].skillCategory;
+      console.log(this.categoryDataStore[averageIndex[i] - 1].skillCategory);
+      this.radarChartLabels[i] = this.categoryDataStore[averageIndex[i] - 1].skillCategory;
       this.radarChartData[0].data[i] = categoryAverages[i];
     }
     console.log('Averages' + categoryAverages);
@@ -138,6 +174,31 @@ export class TechRadarComponent implements OnInit {
         data: this.radarChartData[0].data[i],
       });
     }
+    this.radarChartData[0].label = '';
     this.radarChartData[0].label = this.reportService.getBatch().trainingName;
+    console.log(this.radarChartData[0].label);
+    console.log('Printing getWeek(): ');
+    console.log(this.reportService.getWeek());
+
+    /* This block of code was used to validate that scores and
+       grades were matching
+    */
+    // let dataValidation: number[] = [];
+    // let ValidationTotal: number = 0;
+    // for (let i = 0; i < this.assessmentDataStore.length; i++) {
+    //   if(this.assessmentDataStore[i].assessmentCategory == 1) {
+    //     console.log(this.assessmentDataStore[i].assessmentId);
+    //     dataValidation.push(this.assessmentDataStore[i].assessmentId);
+    //     for(let j = 0; j<this.gradeDataStore.length; j++){
+    //       if(this.assessmentDataStore[i].assessmentId == this.gradeDataStore[j].assessmentId){
+    //         console.log(this.gradeDataStore[j].score);
+    //         ValidationTotal += this.gradeDataStore[j].score;
+    //         //console.log(ValidationTotal);
+    //       }
+    //     }
+    //   }
+    // }
   }
+
+
 }
