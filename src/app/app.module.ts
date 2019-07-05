@@ -18,8 +18,6 @@ import { ReportsModule } from './reports-module/reports-module.module';
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +26,6 @@ import { ReportsModule } from './reports-module/reports-module.module';
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
-
-   // UpdateDeleteAssessmentModalComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -40,8 +35,12 @@ import { ReportsModule } from './reports-module/reports-module.module';
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [FormModalComponent]
+  bootstrap: [
+    AppComponent,
+  ],
+  entryComponents: [
+    FormModalComponent,
+  ]
  
 })
 export class AppModule { }

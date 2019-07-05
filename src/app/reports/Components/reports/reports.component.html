@@ -1,0 +1,8 @@
+<app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
+<div id="caliber-container" class="container ng-scope" ng-if="currentBatch" >
+	<div class="top10 data-container">
+		<app-report-top-chart-controller></app-report-top-chart-controller>
+		<app-overall-qc-scores *ngIf="showOverAllQC()"></app-overall-qc-scores>
+	</div>
+	<app-tech-radar></app-tech-radar>
+</div>

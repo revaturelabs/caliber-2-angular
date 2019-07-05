@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportOutput } from '../../Models/report-output';
+import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 import { Trainee } from 'src/app/Batch/type/trainee';
-import { ReportOutput } from './Models/report-output';
-import { ReportService } from './Service/report.service';
-import { TechRadarComponent } from './Components/tech-radar/tech-radar.component';
+import { ReportService } from '../../Service/report.service';
+import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
+import { TechRadarComponent } from '../tech-radar/tech-radar.component';
 
 @Component({
   selector: 'app-reports',
@@ -10,12 +12,20 @@ import { TechRadarComponent } from './Components/tech-radar/tech-radar.component
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  reportOutput: ReportOutput;
+  reportOutput : ReportOutput;
+  //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
   @ViewChild(TechRadarComponent) techRadarComponents: TechRadarComponent;
+
   constructor(private reportService: ReportService) { }
 
   ngOnInit() {
+  }
+
+  showOverAllQC(){
+    return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
   }
 
   updateReportOutput(reportOutput: ReportOutput){
@@ -25,9 +35,9 @@ export class ReportsComponent implements OnInit {
     // console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
     // console.log(this.reportOutput.selectedWeek);
     // console.log("The Reports Page has Received an Update Request for Data");
-    // this.cumulativeScoreComponents.updateDataPull();
+    //this.cumulativeScoreComponents.updateDataPull();
     // console.log("The Cumulative Score component has been updated!");
-    this.techRadarComponents.updateDataPull();
+
 
     // console.log("Testing Report Service Data");
     // console.log("Get Selected Batch");
@@ -42,5 +52,8 @@ export class ReportsComponent implements OnInit {
     // console.log(this.reportService.getAssessmentDataStore());
     // console.log("Get all Grades in Batch/week");
     // console.log(this.reportService.getGradeDataStore());
+    this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    this.cumulativeScoreComponents.updateDataPull();
+    this.techRadarComponents.updateDataPull();
   }
 }
