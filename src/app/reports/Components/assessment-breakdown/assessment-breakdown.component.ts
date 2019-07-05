@@ -16,7 +16,8 @@ export class AssessmentBreakdownComponent implements OnInit {
   public validHeader = [
     true,
     true,
-    true, true
+    true, 
+    true
   ]
   
   public tableHeader = [

@@ -92,5 +92,8 @@ export class ReportsComponent implements OnInit {
     {
       this.reportTopChartController.updateDataPull();
     }
+    if (this.assessmentBreakdownComponent != undefined){
+      this.assessmentBreakdownComponent.updateDataPull();
+    }
   }
 }
