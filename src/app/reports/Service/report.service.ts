@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
@@ -18,13 +18,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReportService {
-  url = (environment.production)? environment.serverRootURL : 'http://localhost:10000';
+  url = environment.serverRootURL;
 
   batchesYearURL = '/vp/batch/';
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
-  gradesTotalAverageURL = '/assessment/all/grade/all'
+  gradesTotalAverageURL = '/assessment/all/grade/all';
   gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
@@ -46,6 +46,7 @@ export class ReportService {
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
+    // console.log(environment);
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
@@ -134,7 +135,7 @@ export class ReportService {
     if(week>0){
       return "?week="+week;
     }
-    return "";
+    return '';
   }
 
   setAverageGradeScore(averageGradeScore : number){

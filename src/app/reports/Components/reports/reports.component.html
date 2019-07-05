@@ -6,5 +6,9 @@
 	<div *ngIf="isWeekSelected && !isTraineeSelected">
 		<app-assessment-breakdown></app-assessment-breakdown>
 	</div>
+	<div>
+		<app-overall-qc-scores *ngIf="showOverAllQC()"></app-overall-qc-scores>
+	</div>
 </div>
+
 

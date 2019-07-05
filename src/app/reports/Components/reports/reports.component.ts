@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
+import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { AssessmentBreakdownComponent } from '../assessment-breakdown/assessment-breakdown.component';
@@ -39,8 +40,17 @@ export class ReportsComponent implements OnInit {
   public isWeekSelected: boolean = false;
 
   constructor(private reportService : ReportService, private cd: ChangeDetectorRef) { } 
+  //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
 
   ngOnInit() {
+  }
+
+  showOverAllQC(){
+    if (this.reportService.getTrainee != null) {
+      return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
+    }
+    return false;
   }
 
   updateReportOutput(reportOutput: ReportOutput){
@@ -73,6 +83,11 @@ export class ReportsComponent implements OnInit {
     // console.log("Get all Batch Assessments");
     // console.log(this.reportService.getBatchAssessmentDataStore());
     //this.reportTopChartController.updateDataPull();
+    
+    if (this.overAllQCReport != undefined)
+    {
+      this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    }
     if (this.reportTopChartController != undefined)
     {
       this.reportTopChartController.updateDataPull();
