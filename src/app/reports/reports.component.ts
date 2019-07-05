@@ -28,7 +28,6 @@ export class ReportsComponent implements OnInit {
     // this.cumulativeScoreComponents.updateDataPull();
     // console.log("The Cumulative Score component has been updated!");
     this.techRadarComponents.updateDataPull();
-    console.log('The TechRadar component has been updated!');
 
     // console.log("Testing Report Service Data");
     // console.log("Get Selected Batch");
