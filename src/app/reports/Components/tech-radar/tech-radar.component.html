@@ -12,19 +12,19 @@
         </canvas>
         <table id="trainee-panel-status" class="table table-condensed"
                   style="width: 100%;">
-                  <thead>
-                    <tr>
-                      <th>Subject</th>
-                      <th id='dataHeader'>Scores</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let arr of labelsAndAverages">
-                      <td id='label'>{{arr.label}}</td>
-                      <td id='data'>{{arr.data}}</td>
-                    </tr>
-                  </tbody>
-          </table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th id='dataHeader'>Scores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let arr of labelsAndAverages">
+              <td id='label'>{{arr.label}}</td>
+              <td id='data'>{{arr.data}}</td>
+            </tr>
+          </tbody>
+        </table>
 
     </div>
   </div>

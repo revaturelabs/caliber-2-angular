@@ -25,7 +25,10 @@ export class ReportsComponent implements OnInit {
   }
 
   showOverAllQC(){
-    return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
+    if (this.reportService.getTrainee() !== undefined) {
+      return ((this.reportService.getWeek() === 0) && this.reportService.getTrainee().traineeId === -1); 
+    }
+    return false;
   }
 
   updateReportOutput(reportOutput: ReportOutput){
