@@ -1,3 +1,4 @@
+import { WeeklyQualityAuditComponent } from './../weekly-quality-audit/weekly-quality-audit.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
@@ -12,12 +13,15 @@ import { ReportTopChartController } from '../report-top-chart-controller/report-
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
-  //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
-  // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
+  @ViewChild(WeeklyQualityAuditComponent) weeklyQualityAuditComponent: WeeklyQualityAuditComponent;
+  
+  public isTraineeSelected: boolean = false;
+  public isWeekSelected: boolean = false;
+  
   constructor(private reportService: ReportService) { }
-
+  
   ngOnInit() {
   }
 
@@ -26,30 +30,33 @@ export class ReportsComponent implements OnInit {
   }
 
   updateReportOutput(reportOutput: ReportOutput){
+    this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
+    this.isWeekSelected = this.reportService.week > 0;
     this.reportOutput = reportOutput;
-    console.log("Selected Trainee:"); // Adam needs these values for showing his component
-    console.log(this.reportOutput.selectedTrainee);
-    console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
-    console.log(this.reportOutput.selectedWeek);
-    console.log("The Reports Page has Received an Update Request for Data");
-    //this.cumulativeScoreComponents.updateDataPull();
-    console.log("The Cumulative Score component has been updated!");
+    // console.log("Selected Trainee:"); // Adam needs these values for showing his component
+    // console.log(this.reportOutput.selectedTrainee);
+    // console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
+    // console.log(this.reportOutput.selectedWeek);
+    // console.log("The Reports Page has Received an Update Request for Data");
+    // //this.cumulativeScoreComponents.updateDataPull();
+    // console.log("The Cumulative Score component has been updated!");
 
 
-    console.log("Testing Report Service Data");
-    console.log("Get Selected Batch");
-    console.log(this.reportService.getBatch());
-    console.log("Get All Trainees in Batch");
-    console.log(this.reportService.getTraineeDataStore());
-    console.log("Get All Categories in System");
-    console.log(this.reportService.getCategoryDataStore());
-    console.log("Get all QANotes in Batch");
-    console.log(this.reportService.getQANoteDataStore());
-    console.log("Get all Assessments in Batch");
-    console.log(this.reportService.getAssessmentDataStore());
-    console.log("Get all Grades in Batch/week");
-    console.log(this.reportService.getGradeDataStore());
+    // console.log("Testing Report Service Data");
+    // console.log("Get Selected Batch");
+    // console.log(this.reportService.getBatch());
+    // console.log("Get All Trainees in Batch");
+    // console.log(this.reportService.getTraineeDataStore());
+    // console.log("Get All Categories in System");
+    // console.log(this.reportService.getCategoryDataStore());
+    // console.log("Get all QANotes in Batch");
+    // console.log(this.reportService.getQANoteDataStore());
+    // console.log("Get all Assessments in Batch");
+    // console.log(this.reportService.getAssessmentDataStore());
+    // console.log("Get all Grades in Batch/week");
+    // console.log(this.reportService.getGradeDataStore());
     this.overAllQCReport.update(this.reportService.getQANoteDataStore());
     this.cumulativeScoreComponents.updateDataPull();
+    this.weeklyQualityAuditComponent.updateDataPull();
   }
 }

@@ -1,0 +1,38 @@
+<!-- <div> -->
+<div class="col-sm-4 col-md-4 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">Quality Audit</div>
+    <div class="panel-body">
+      <div class="chart-container top5 ">
+        <div >
+            <canvas baseChart width = "200%" height="250%"
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              [options]="pieChartOption"
+              [colors]="doughnutColors"
+              >
+            </canvas>
+          </div>
+        <div class="table-responsive">
+          <table class="table" style="border-collapse: collapse;">
+            <tbody>
+              <tr>
+                <th class="col-sm-3 col-md-3 col-lg-3 text-center">{{tableHeader[0]}}</th>
+                <th class="col-sm-3 col-md-3 col-lg-3 text-center">{{tableHeader[1]}}</th>
+                <th class="col-sm-3 col-md-3 col-lg-3 text-center ">{{tableHeader[2]}} </th>
+                <th class="col-sm-3 col-md-3 col-lg-3 text-center" >{{tableHeader[3]}}</th>
+              </tr>
+              <tr class="text-center">
+                <td class="col-sm-3 col-md-3 col-lg-3">{{auditValueRow[0]}}</td>
+                <td class="col-sm-3 col-md-3 col-lg-3">{{auditValueRow[1]}}</td>
+                <td class="col-sm-3 col-md-3 col-lg-3">{{auditValueRow[2]}}</td>
+                <td class="col-sm-3 col-md-3 col-lg-3">{{auditValueRow[3]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
