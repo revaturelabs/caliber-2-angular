@@ -1,5 +1,5 @@
 
-<table>
+<!-- <table>
     <tr>
         <th>Trainee</th>
         <th>Individual Feedback</th>
@@ -11,4 +11,96 @@
     <tr>
         <td>Overall Feedback</td>
     </tr>
-</table>
+</table> -->
+
+<div ui-view="qc-batchOverall" class="ng-scope"><div class="container ng-scope">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12 top5">
+			<div class="panel panel-default">
+				<div class="panel-heading ng-binding">Quality Audit Report - Week </div>
+				<strong>Categories covered this week: </strong><!-- ngRepeat: category in categories --><span ng-repeat="category in categories" class="ng-binding ng-scope" style="">JSP</span><!-- end ngRepeat: category in categories --><table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
+					<thead>
+						<tr>
+							
+							
+						</tr>
+						<tr>
+							<th>Trainee</th>
+							<th>Individual Feedback</th>
+							<th>Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Brasco, Nick</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Zebron, Patrick</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Boggs, Luke</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Michels, Alex</td>
+							<td class="ng-binding">Superstar</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Forsberg, Justin</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Smith, Carter</td>
+							<td class="ng-binding">Average</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Erwin, Eric</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Olney, Chris</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Andrzejewski, Walter</td>
+							<td class="ng-binding">Good</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Wheeler, Justin</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">McDeane, Trey</td>
+							<td class="ng-binding">Good</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Wan, William</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index --><tr ng-repeat="trainee in currentBatch.trainees track by $index" class="ng-scope">
+							<td class="col-sm-2 col-md-2 col-lg-2 ng-binding">Hajek, Alexander</td>
+							<td class="ng-binding">-</td>
+							<td class="col-sm-9 col-md-9 col-lg-9 ng-binding">-</td>
+						</tr><!-- end ngRepeat: trainee in currentBatch.trainees track by $index -->
+					</tbody>
+				</table>
+				<!-- QC batch note -- overall qualitative feedback -->
+				<table class="table">
+					<tbody><tr>
+						<td class="col-lg-2 col-md-2 col-sm-2 col-sm-offset-2 text-weight-bold"><strong>Overall
+								Feedback:</strong></td>
+						<td class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-10 ng-binding">
+							Good</td>
+					</tr>
+					<tr>
+						<td class="col-lg-2 col-md-2 col-sm-2 col-sm-offset-2 text-weight-bold"><strong>Notes:</strong></td>
+						<td class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-10 ng-binding">
+							-</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+</div></div>

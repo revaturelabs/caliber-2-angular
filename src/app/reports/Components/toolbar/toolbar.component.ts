@@ -158,6 +158,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   selectYear(event: number) {
+    this.selectedYear = event.toString();
+    // this.selectedWeek = "Select Week (All)";
+    this.trainees = [];
+    this.getBatch(event);
+    this.getTraineesByBatchId();
     //if you select a year, it has to be different than the current year to change to toolbar
     if(this.selectedYear != event.toString()){
       this.selectedYear = event.toString();
@@ -190,22 +195,33 @@ export class ToolbarComponent implements OnInit {
         this.titledWeek = "Weeks (all)";
         this.reportService.setWeek(0);
       }
-
       this.processAveragesAndOutput();//update Assessments, Notes, and Grades.
     }
   }
 
   selectBatch(event: Batch) {
-    //if you select a batch, it has to be different than the current batch to change to toolbar
-    if(this.selectedBatch.batchId != event.batchId){
-      this.selectedBatch = event;
-      this.reportService.setBatch(event);
-      this.auditService.selectedBatch = this.selectedBatch;
-      this.reportService.setBatch(this.selectedBatch);
-  
-      this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
-      this.getTraineesByBatchId(); // and I need to update the trainees in the batch
-    } 
+    this.selectedBatch = event;
+    this.getTraineesByBatchId();
+    this.reportService.setBatch(event);
+    this.auditService.selectedBatch = this.selectedBatch;
+    this.reportService.setBatch(this.selectedBatch);
+    // this.getWeeks();
+    // this.showActiveWeek(this.auditService.selectedBatch.weeks);
+    // this.selectWeek(this.auditService.selectedBatch.weeks);
+    this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
+    //this.getTraineesByBatchId(); // and I need to update the trainees in the batch
+    
+  }
+
+  showYears(){
+    this.selectedYear = "Select Year";
+  }
+
+  showBatches(){
+
+  }
+  showWeeks(){
+    this.titledWeek = "Select Week";
   }
 
   showTrainees(){
@@ -263,12 +279,13 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  getQANotes(){ 
+  getQANotes(){
     //update reportService datastore
     this.reportService.getAllQANotes().subscribe((qaNotes)=>{
       // console.log("Getting all QA Notes of Batch");
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
+      this.getAllGrades();
     });
   }
 
@@ -298,8 +315,8 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     //update Assessments, Notes, and Grades.
     this.getAllAssessments();
+    //getting grades is chained in the async call on get QA notes
     this.getQANotes();
-    this.getAllGrades();
   }
 
   processTotalAverageGrade(){
