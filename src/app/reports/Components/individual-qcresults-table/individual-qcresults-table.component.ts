@@ -23,7 +23,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
     this.week = this.reportService.week;
     this.batch = this.reportService.batch;
 
-    this.auditService.getNotesByBatchByWeek(this.week, this.batch.batchId).subscribe((notes)=>{
+    this.auditService.getNotesByBatchByWeek(1, 1).subscribe((notes)=>{
       this.qcNotes = notes;
     });
   }

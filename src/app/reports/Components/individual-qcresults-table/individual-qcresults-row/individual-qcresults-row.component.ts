@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QCWeek } from '../Models/qcweek';
 import { ReportService } from 'src/app/reports/Service/report.service';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { QcNote } from 'src/app/Audit/types/note';

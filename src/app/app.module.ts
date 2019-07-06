@@ -13,15 +13,6 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
-<<<<<<< HEAD
-import { ToolbarComponent } from './reports/Components/toolbar/toolbar.component';
-import { IndividualQCResultsTableComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-table.component';
-import { IndividualQcresultsRowComponent } from './reports/Components/individual-qcresults-table/individual-qcresults-row/individual-qcresults-row.component';
-//import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
-
-
-=======
->>>>>>> cfda34f3986e0875df9dee16a1ee2d30b4f3ee5d
 
 
 @NgModule({
@@ -32,12 +23,6 @@ import { IndividualQcresultsRowComponent } from './reports/Components/individual
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
-<<<<<<< HEAD
-    //IndividualQCResultsTableComponent,
-    //IndividualQcresultsRowComponent,
-   // UpdateDeleteAssessmentModalComponent,
-=======
->>>>>>> cfda34f3986e0875df9dee16a1ee2d30b4f3ee5d
     
   ],
   imports: [
