@@ -1,0 +1,9 @@
+<select #state (change)="calShowState(state.value)"
+class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
+  <option value="">All States</option>
+  <option value="wat">wat</option>
+</select>
+<select class="pull-right ng-pristine ng-untouched ng-valid ng-empty" *ngIf="showStates">
+  <option value="">All Locations</option>
+</select>
+  
