@@ -1,5 +1,5 @@
 import { WeeklyQualityAuditComponent } from './../weekly-quality-audit/weekly-quality-audit.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 import { Trainee } from 'src/app/Batch/type/trainee';
@@ -15,12 +15,20 @@ export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
-  @ViewChild(WeeklyQualityAuditComponent) weeklyQualityAuditComponent: WeeklyQualityAuditComponent;
-  
+  private weeklyQualityAuditComponent: WeeklyQualityAuditComponent;
+  @ViewChild(WeeklyQualityAuditComponent) set setWeeklyQualityAudit(content: WeeklyQualityAuditComponent) {
+    this.weeklyQualityAuditComponent = content;
+
+    if (this.isWeekSelected && !this.isTraineeSelected){
+      this.weeklyQualityAuditComponent.updateDataPull();
+    }
+    this.cd.detectChanges();
+  }
+
   public isTraineeSelected: boolean = false;
   public isWeekSelected: boolean = false;
   
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
   
   ngOnInit() {
   }
@@ -55,8 +63,14 @@ export class ReportsComponent implements OnInit {
     // console.log(this.reportService.getAssessmentDataStore());
     // console.log("Get all Grades in Batch/week");
     // console.log(this.reportService.getGradeDataStore());
-    this.overAllQCReport.update(this.reportService.getQANoteDataStore());
-    this.cumulativeScoreComponents.updateDataPull();
-    this.weeklyQualityAuditComponent.updateDataPull();
+    if (this.overAllQCReport != undefined){
+      this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    }
+    if (this.cumulativeScoreComponents != undefined){
+      this.cumulativeScoreComponents.updateDataPull();
+    }
+    if (this.weeklyQualityAuditComponent != undefined){
+      this.weeklyQualityAuditComponent.updateDataPull();
+    }
   }
 }
