@@ -5,6 +5,7 @@ import { AssessBatchService } from '../../../Assess-Batch/Services/assess-batch.
 import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from 'src/app/reports/Models/qanote';
 import { QanoteService } from '../../service/qanote.service';
+import { HomeService } from '../../service/home.service';
 
 
 @Component({
@@ -28,12 +29,11 @@ export class HomeToolbarComponent implements OnInit {
   allLocations:Location;
 
   constructor(private locationService: LocationService, private batchService: AssessBatchService,
-              private qaNoteService: QanoteService) {
+              private qaNoteService: QanoteService, private homeService: HomeService) {
     this.showStates = false;
   }
 
   ngOnInit() {
-    this.initializeCurrentBatches();
     this.initializeAllLocations();
   }
   //build array of cities of a give state
@@ -71,34 +71,39 @@ export class HomeToolbarComponent implements OnInit {
     }
   }
 
+  initializeAllLocations(){
+    this.locationService.getAllLocations().subscribe(
+      (locations)=>{
+        this.locations = locations;
+        this.selectedLocation = null;
+        if(this.locations.length>0){
+          this.initializeCurrentBatches();
+        }
+    });
+  }
+
   initializeCurrentBatches(){
     this.batchService.getAllBatches().subscribe(
       (batches)=>{
+        let locations = [];
         batches.forEach((batch)=>{
           const currentDateTime = new Date().getTime();
           const batchDateTime = Number.parseInt(batch.endDate.toString())
           if( batchDateTime > currentDateTime){
             this.batches.push(batch)
+            this.locations.forEach(
+              (batchLocation)=>{
+                if(batch.locationId === batchLocation.id)
+                  locations.push(batchLocation);
+            });
           }
         })
         console.log(this.batches);
-        this.initilaizeAllQANotes(this.batches);
-    });
-  }
-
-  initializeAllLocations(){
-    this.locationService.getAllLocations().subscribe(
-      (locations)=>{
-        this.locationService.setlocationsDataStore(locations);
         this.locations = locations;
-        this.states = [];
-        this.locations.forEach((element)=>{
-          if(!this.states.includes(element.state)){
-            this.states.push(element.state);
-          }
-        })
-        this.selectedLocation = null;
-        this.locationService.setSelectedLocation(null);
+        this.setStatesViaLocations()
+        this.homeService.setLocationsDataStore(this.locations)
+        this.homeService.setBatchesDataStore(this.batches)
+        this.initilaizeAllQANotes(this.batches);
     });
   }
 
@@ -116,17 +121,21 @@ export class HomeToolbarComponent implements OnInit {
             })
             this.qaNotesByBatch.push(tempBatchArray);
             console.log(this.qaNotesByBatch);
+            this.homeService.setQANotesDataStore(this.qaNotesByBatch);
             this.submitHomeOutput.emit(this.qaNotesByBatch.length);
           });
+
       })
   }
 
-  ///
-  /// 1611
-  /// 1611 Nov14 Java (AP)","trainingType":"Revature","skillType":"PEGA BPM","trainer":"Dan Pickles","coTrainer":null,"locationId":2,"location":"Connection t
-  /// current batch end date > current date = new Date()
-  ///                                  date.getTime() == 1562475723514
-  /// Need to set up qaservice to get all qa notes
-  /// Need to get all batches and find out which batches are ending after current date to present data.
+  setStatesViaLocations(){
+    this.states = [];
+    this.locations.forEach((element)=>{
+      if(!this.states.includes(element.state)){
+        this.states.push(element.state);
+      }
+    })
+  }
+///
 
 }

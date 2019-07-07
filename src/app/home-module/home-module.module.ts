@@ -9,6 +9,7 @@ import { LastQualityAuditComponent } from '../home/component/last-quality-audit/
 import { LocationService } from '../home/service/location.service';
 import { AssessBatchService } from '../Assess-Batch/Services/assess-batch.service';
 import { QanoteService } from '../home/service/qanote.service';
+import { HomeService } from '../home/service/home.service';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { QanoteService } from '../home/service/qanote.service';
     LocationService,
     AssessBatchService,
     QanoteService,
+    HomeService,
   ]
 })
 export class HomeModule { }
