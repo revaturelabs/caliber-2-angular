@@ -87,7 +87,8 @@ export class HomeToolbarComponent implements OnInit {
       (batches)=>{
         let locations = [];
         batches.forEach((batch)=>{
-          const currentDateTime = new Date().getTime();
+          // const currentDateTime = new Date().getTime();
+          const currentDateTime = 1541394000000;
           const batchDateTime = Number.parseInt(batch.endDate.toString())
           if( batchDateTime > currentDateTime){
             this.batches.push(batch)
