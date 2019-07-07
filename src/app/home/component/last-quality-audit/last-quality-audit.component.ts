@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LastQualityAuditTableComponent } from '../last-quality-audit-table/last-quality-audit-table.component';
+import { LastQualityAuditGraphComponent } from '../last-quality-audit-graph/last-quality-audit-graph.component';
 
 @Component({
   selector: 'app-last-quality-audit',
@@ -8,6 +9,7 @@ import { LastQualityAuditTableComponent } from '../last-quality-audit-table/last
 })
 export class LastQualityAuditComponent implements OnInit {
   @ViewChild(LastQualityAuditTableComponent) lastQualityAuditTable: LastQualityAuditTableComponent;
+  @ViewChild(LastQualityAuditGraphComponent) lastQualityAuditGraph: LastQualityAuditGraphComponent;
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +19,7 @@ export class LastQualityAuditComponent implements OnInit {
     console.log("LQA view Update");
     console.log(num);
     this.lastQualityAuditTable.update();
+    this.lastQualityAuditGraph.update();
   }
 
 }
