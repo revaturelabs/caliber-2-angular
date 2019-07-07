@@ -46,11 +46,11 @@ export class ReportService {
 
   getAllYears(): Observable<number[]> {
     // console.log(environment);
-    return this.http.get<number[]>(this.url + this.yearsURL);
+    return this.http.get<number[]>(this.url + this.yearsURL, httpOptions);
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url + this.categoryAllURL);
+    return this.http.get<Category[]>(this.url + this.categoryAllURL, httpOptions);
   }
 
   getBatchesByYear(year : number): Observable<Batch[]> {

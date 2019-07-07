@@ -22,7 +22,10 @@ export class ReportsComponent implements OnInit {
   }
 
   showOverAllQC(){
-    return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
+    if(this.reportService.getTrainee()!= undefined){
+      return (this.reportService.getWeek() == 0 && this.reportService.getTrainee()['traineeId'] == -1); 
+    }
+    return false;
   }
 
   updateReportOutput(reportOutput: ReportOutput){
@@ -49,7 +52,9 @@ export class ReportsComponent implements OnInit {
     //console.logg(this.reportService.getAssessmentDataStore());
     //console.logg("Get all Grades in Batch/week");
     //console.logg(this.reportService.getGradeDataStore());
-    this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    if(this.overAllQCReport != undefined){
+      this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    }
     this.cumulativeScoreComponents.updateDataPull();
   }
 }
