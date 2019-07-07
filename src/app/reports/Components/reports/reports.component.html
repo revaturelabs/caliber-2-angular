@@ -1,9 +1,15 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
-<div id="caliber-container" class="container ng-scope" ng-if="currentBatch" >
+<div id="caliber-container" class="container " >
 	<div class="top10 data-container">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
 		<app-overall-qc-scores *ngIf="showOverAllQC()"></app-overall-qc-scores>
+		<div class="row">
+			<div class="col-md-4">
+				<app-tech-radar></app-tech-radar>
+			</div>
+			<div class="col-md-8">
+				<!-- Weekly progress component goes here. -->
+			</div>
+		</div>
 	</div>
 </div>
-
-

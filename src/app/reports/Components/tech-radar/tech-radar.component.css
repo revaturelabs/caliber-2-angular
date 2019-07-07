@@ -1,0 +1,9 @@
+#label{
+    font-family: 'Futura-Std-Bold';
+    font-size: 13px;
+    vertical-align: auto;
+}
+#data{
+    font-size: 13px;
+    max-width: 20%;
+}
