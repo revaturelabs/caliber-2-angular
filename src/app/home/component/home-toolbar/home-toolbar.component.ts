@@ -8,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class HomeToolbarComponent implements OnInit {
-
-  constructor() { }
+  showStates: boolean;
+  constructor() {
+    this.showStates = false;
+  }
 
   ngOnInit() {
+  }
+
+  calShowState(value){
+    if(value){
+      this.showStates = true;
+    }else{
+      this.showStates = false;
+    }
   }
 
 }

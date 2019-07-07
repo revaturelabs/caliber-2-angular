@@ -1,13 +1,8 @@
-<div class="col-sm-12 col-md-12 col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">Last Quality Audit
-      <app-home-toolbar></app-home-toolbar>
-  </div>
   <div>
     <table class="table table-responsive ng-scope" style="border-collapse: collapse;">
       <tbody>
         <tr>
-          <th class="col-sm-2 col-md-2 col-lg-2"></th>
+          <th class="col-sm-2 col-md-2 col-lg-2">Batch</th>
           <th class="col-sm-2 col-md-2 col-lg-2" *ngFor="let status of statuses">{{ status }}</th>
         </tr>
         <tr *ngFor="let batch of batches">
@@ -20,4 +15,3 @@
       </tbody>
     </table><!-- end ngIf: stackedBarLabels -->
   </div>
-</div>
