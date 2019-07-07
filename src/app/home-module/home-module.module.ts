@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.service';
 import { HomeComponent } from '../home/component/home/home.component';
 import { HomeToolbarComponent } from '../home/component/home-toolbar/home-toolbar.component';
-import { LastQualityAuditComponent } from '../home/component/last-quality-audit/last-quality-audit.component'
 import { HttpClientModule } from '@angular/common/http';
 import { LastQualityAuditGraphComponent } from '../home/component/last-quality-audit-graph/last-quality-audit-graph.component';
 import { LastQualityAuditTableComponent } from '../home/component/last-quality-audit-table/last-quality-audit-table.component';

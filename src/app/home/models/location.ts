@@ -1,9 +1,9 @@
 export class Location {
     id: number;
-    name: String;
-    city: String;
-    zipcode: String;
-    address: String;
-    state: String;
+    name: string;
+    city: string;
+    zipcode: string;
+    address: string;
+    state: string;
     active: boolean;
 }

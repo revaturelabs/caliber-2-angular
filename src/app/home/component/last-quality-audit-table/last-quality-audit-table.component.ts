@@ -26,6 +26,7 @@ export class LastQualityAuditTableComponent implements OnInit {
   }
   update() {
     console.log("Last Quality Audit table is updating now")
+    console.log('wat');
   }
 
 }

@@ -32,8 +32,8 @@ export class HomeToolbarComponent implements OnInit {
               private qaNoteService: QanoteService, private homeService: HomeService,
               private lastQualityAuditService: LastQualityAuditService) {
     this.showStates = false;
-    this.getLocations();
-    this.cities = [''];
+    // this.getLocations();
+    // this.cities = [''];
   }
 
   ngOnInit() {
@@ -42,24 +42,24 @@ export class HomeToolbarComponent implements OnInit {
   //build array of cities of a give state
 
 
-  getLocations() {
-    this.lastQualityAuditService.getStateLocations().subscribe(
-      (locations) => {
-        this.locations = locations;
-    });
-  }
+  // getLocations() {
+  //   this.lastQualityAuditService.getStateLocations().subscribe(
+  //     (locations) => {
+  //       this.locations = locations;
+  //   });
+  // }
 
-  updateState(state) {
-    for (let locationIndex = 0; locationIndex < this.locations.length; locationIndex++) {
-      if (this.locations[locationIndex].state === state) {
-        if (!this.cities.includes(this.locations[locationIndex].city)) {
-          this.cities.push(this.locations[locationIndex].city);
-          console.log(this.cities);
-        }
-      }
-    this.cities.shift();
-    }
-  }
+  // updateState(state) {
+  //   for (let locationIndex = 0; locationIndex < this.locations.length; locationIndex++) {
+  //     if (this.locations[locationIndex].state === state) {
+  //       if (!this.cities.includes(this.locations[locationIndex].city)) {
+  //         this.cities.push(this.locations[locationIndex].city);
+  //         console.log(this.cities);
+  //       }
+  //     }
+  //   this.cities.shift();
+  //   }
+  // }
 
   calShowState(value){
     if(value){
@@ -70,12 +70,8 @@ export class HomeToolbarComponent implements OnInit {
     }
   }
 
-  updateCity(city, state) {
-    console.log(city + ', ' + state);
-  }
   selectState(state:string){
     this.citiesInLocation=[];
-    
     this.locations.forEach((city)=>{
       if(city.state == state){
         this.citiesInLocation.push(city);
