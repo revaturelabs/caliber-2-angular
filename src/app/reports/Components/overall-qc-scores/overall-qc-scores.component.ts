@@ -73,7 +73,17 @@ export class OverallQCScoresComponent implements OnInit {
   */
   update(notes) {
     this.qcData = [];
-    const QAnotes = notes; // this.reportService.getQANoteDataStore();
+
+    const QAnotes = this.reportService.getQANoteDataStore();
+    // console.log("AWESOME");
+    // console.log("AWESOME");
+    // console.log("AWESOME");
+    // console.log("AWESOME");
+    // console.log("AWESOME");
+    // console.log("AWESOME");
+    // console.log(QAnotes);
+
+    // const QAnotes = notes; // this.reportService.getQANoteDataStore();
 
     let week = 1;
     let weekNums = this.getWeekNums(QAnotes);

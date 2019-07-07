@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <select #state (change)="updateState(state.value)"
   class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
   <option value="" >All States</option>
@@ -12,3 +13,16 @@ class="pull-right ng-pristine ng-untouched ng-valid ng-empty" *ngIf="state.value
       {{ city }}
   </option>
 </select>
+=======
+<select class="pull-right ng-pristine ng-untouched ng-valid ng-empty width100" 
+(change)="selectCity(city)" *ngIf="showStates">
+    <option *ngFor="let city of citiesInLocation" value="{{city}}">{{city.city}}</option>
+  </select>
+<select #state (change)="calShowState(state.value)"
+  class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
+  <option value="">All States</option>
+  <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+</select>
+
+  
+>>>>>>> fc1894191e1de9602cbd318c0aa1e55c8ab20365
