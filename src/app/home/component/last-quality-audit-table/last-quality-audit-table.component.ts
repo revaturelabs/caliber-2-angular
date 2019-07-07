@@ -7,6 +7,7 @@ import { LastQualityAuditService } from '../../services/last-quality-audit.servi
   templateUrl: './last-quality-audit-table.component.html',
   styleUrls: ['./last-quality-audit-table.component.css']
 })
+
 export class LastQualityAuditTableComponent implements OnInit {
   statuses: string[];
   batches: Batch[];
@@ -20,4 +21,7 @@ export class LastQualityAuditTableComponent implements OnInit {
   ngOnInit() {
   }
 
+  updateBatches(state, city) {
+    console.log(state + ' ' + city);
+  }
 }

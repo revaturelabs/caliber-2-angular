@@ -1,9 +1,14 @@
-<select #state (change)="calShowState(state.value)"
-class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
-  <option value="">All States</option>
-  <option value="wat">wat</option>
+<select #state (change)="updateState(state.value)"
+  class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
+  <option value="" >All States</option>
+  <option *ngFor = "let location of locations" value="{{ location['state'] }}"> 
+    {{ location['state']}}
+  </option>
 </select>
-<select class="pull-right ng-pristine ng-untouched ng-valid ng-empty" *ngIf="showStates">
-  <option value="">All Locations</option>
+<select #city (change)="updateCity(city.value, state.value)"
+class="pull-right ng-pristine ng-untouched ng-valid ng-empty" *ngIf="state.value">
+  <option value="">All Cities</option>
+  <option *ngFor = "let city of cities" value="{{ city }}"> 
+      {{ city }}
+  </option>
 </select>
-  

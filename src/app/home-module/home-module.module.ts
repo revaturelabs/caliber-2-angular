@@ -4,6 +4,7 @@ import { HomeRoutingModule } from './home-routing.service';
 import { HomeComponent } from '../home/home.component';
 import { LastQualityAuditTableComponent } from '../home/component/last-quality-audit-table/last-quality-audit-table.component';
 import { HomeToolbarComponent } from '../home/component/home-toolbar/home-toolbar.component';
+import { LastQualityAuditComponent } from '../home/component/last-quality-audit/last-quality-audit.component'
 import { HttpClientModule } from '@angular/common/http';
 import { LastQualityAuditService } from '../home/services/last-quality-audit.service';
 
@@ -17,7 +18,8 @@ import { LastQualityAuditService } from '../home/services/last-quality-audit.ser
   declarations: [
     HomeComponent,
     LastQualityAuditTableComponent,
-    HomeToolbarComponent
+    HomeToolbarComponent,
+    LastQualityAuditComponent
   ],
   providers: [
     LastQualityAuditService,

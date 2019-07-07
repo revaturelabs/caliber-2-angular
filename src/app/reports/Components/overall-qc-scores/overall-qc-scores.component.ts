@@ -68,7 +68,7 @@ export class OverallQCScoresComponent implements OnInit {
 
 
   /*
-  *Function called by the reports component to let this know to udate itself
+  *Function called by the reports component to let this know to update itself
   *Grabs the QA notes and filters them into a two dimensional array based on the week
   */
   update(notes) {
