@@ -38,6 +38,11 @@ export class BarLineChartComponent implements OnInit {
   private defaultMaxYAxis = 100;
   private defaultStepSize = 20;
 
+  private titleDisplay = false;
+  private title = "Sample Title";
+
+  private legendDisplay = false;
+
   private chartColors: Array<any> = [
     {
       backgroundColor: [ this.defaultBackgroundColor, this.defaultBackgroundColor2 ]
@@ -73,7 +78,7 @@ export class BarLineChartComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    this.generateChart('bar', 40, 100, 20); //Sample chart (Junk data)
+    //this.generateChart('bar',"Sample Title",false, 40, 100, 20); //Sample chart (Junk data)
     this.cd.detectChanges();
   }
 
@@ -113,7 +118,7 @@ export class BarLineChartComponent implements OnInit {
     this.chartLabels.push(label);
   }
 
-  public initializeChart(chartType = 'bar', stepSize = this.defaultStepSize,
+  public initializeChart(chartType = 'bar', chartTitle = this.title, legendDisplay = this.legendDisplay,  stepSize = this.defaultStepSize,
     minimumYAxis = this.defaultMinimumYAxis, maximumYAxis = this.defaultMaxYAxis): void {
 
     //Emptying any existing colors
@@ -129,10 +134,10 @@ export class BarLineChartComponent implements OnInit {
     //Empty any existing datasets.
     this.chartDatasets = [];
 
-    this.generateChart(chartType, minimumYAxis, maximumYAxis, stepSize);
+    this.generateChart(chartType, chartTitle, legendDisplay, minimumYAxis, maximumYAxis, stepSize);
   }
 
-  private generateChart(chartType : string, minimumYAxis : number, maximumYAxis : number, stepSize: number){
+  private generateChart(chartType : string, chartTitle: string, legendDisplay: boolean, minimumYAxis : number, maximumYAxis : number, stepSize: number){
   //Creating an empty chart object:
   const ctx = this.chartRef.nativeElement.getContext('2d');
   
@@ -144,8 +149,8 @@ export class BarLineChartComponent implements OnInit {
       },
       options: {
         title: {
-          display: true,
-          text: "Sample title"
+          display: chartTitle ? true : false,
+          text: chartTitle
         },
         tooltips: {
           mode: 'label', //Note: setting mode to label displays all existing labels in a dataset at once. Without this, individual data points will display their own label independently.
@@ -154,7 +159,7 @@ export class BarLineChartComponent implements OnInit {
           }
         },
         legend: {
-          display: true
+          display: legendDisplay
         },
         scales: {
           xAxes: [{

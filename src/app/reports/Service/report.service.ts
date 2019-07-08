@@ -40,6 +40,7 @@ export class ReportService {
   traineeDataStore: Trainee[];
   categoryDataStore : Category[];
   assessmentsDataStore : Assessment[];
+  batchAssessmentsDataStore : Assessment[];
   gradesOfTraineeDataStore : Grade[];
   
   constructor(private http: HttpClient) { }
@@ -64,6 +65,10 @@ export class ReportService {
   getAllAssessments():Observable<Assessment[]> {
     let weekStr = this.determineWeek(this.week);
     return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
+  }
+
+  getAllBatchAssessments():Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId, httpOptions)
   }
 
   getAllGrades():Observable<Grade[]> {
@@ -116,6 +121,10 @@ export class ReportService {
 
   setAssessmentDataStore(assessmentDataStore: Assessment[]){
     this.assessmentsDataStore = assessmentDataStore;
+  }
+
+  setBatchAssessmentDataStore(batchAssessmentsDataStore: Assessment[]){
+    this.batchAssessmentsDataStore = batchAssessmentsDataStore;
   }
 
   setGradesOfTraineeDataStore(gradesOfTraineeDataStore : Grade[]){
@@ -176,6 +185,10 @@ export class ReportService {
   getAssessmentDataStore(): Assessment[]{
     return this.assessmentsDataStore;
   } 
+
+  getBatchAssessmentDataStore(): Assessment[]{
+    return this.batchAssessmentsDataStore;
+  }
 
   getGradesOfTraineeDataStore(){
      return this.gradesOfTraineeDataStore;
