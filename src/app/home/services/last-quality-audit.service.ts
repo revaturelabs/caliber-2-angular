@@ -29,14 +29,14 @@ export class LastQualityAuditService {
   constructor(private http: HttpClient) { }
 
   // This method gets all batches
-  // getBatches() {
-  //   return this.http.get<Batch[]>(this.url + this.batchesAllURL);
-  // }
+  getBatches() {
+    return this.http.get<Batch[]>(this.url + this.batchesAllURL);
+  }
 
   // This method is for getting all current batches.
-  getBatches() {
-    return this.http.get<Batch[]>(this.url + this.batchesCurrentURL)
-  }
+  // getBatches() {
+  //   return this.http.get<Batch[]>(this.url + this.batchesCurrentURL)
+  // }
 
   getStateLocations(): Observable<Location[]> {
     return this.http.get<Location[]>(this.url + this.locationsAllURL);

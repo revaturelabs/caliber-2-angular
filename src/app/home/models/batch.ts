@@ -7,8 +7,8 @@ export class Batch {
     coTrainer: string;
     locationId: number;
     location: string;
-    startDate: number;
-    endDate: number;
+    startDate: Date;
+    endDate: Date;
     goodGrade: number;
     passingGrade: number;
     weeks: number;
