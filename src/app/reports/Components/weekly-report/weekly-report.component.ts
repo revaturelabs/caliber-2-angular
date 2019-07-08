@@ -13,7 +13,8 @@ export class WeeklyReportComponent implements OnInit {
   private grades : Grade[];
   private assessments: Assessment[];
   private weekAverages : Map<string,number[]> ;
-  public avgData: number[];
+  public avgData;
+  public display : boolean;
 
   public chartOptions;
   public chartData;
@@ -24,9 +25,9 @@ export class WeeklyReportComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.display = false;
     this.weekAverages = new Map<string, number[]>();  
     this.avgData = [];
-
   }
 
   onChartClick(event) {
@@ -37,51 +38,51 @@ export class WeeklyReportComponent implements OnInit {
   update(){
     this.grades = this.reportService.getGradeDataStore();
     this.assessments = this.reportService.getAssessmentDataStore();
-    let gradeAverages = [];
-    let tempAverage = 0;
-    let tempCount = 0;
+    if(this.grades && this.assessments)
+    {
+      this.display = true;
+      let gradeAverages = [];
+      let tempAverage = 0;
+      let tempCount = 0;
 
-    //matches each assessment to a week and puts it into an array
-    //matches each grade to an assessment and finds the average of all grades per assessment
-      this.assessments.forEach((tempAssessment)=>{
-        this.grades.forEach((tempGrade)=>{
-          if(tempAssessment.assessmentId == tempGrade.assessmentId){
-            tempCount++;
-            tempAverage+=tempGrade.score;
-          }
+      //matches each assessment to a week and puts it into an array
+      //matches each grade to an assessment and finds the average of all grades per assessment
+        this.assessments.forEach((tempAssessment)=>{
+          this.grades.forEach((tempGrade)=>{
+            if(tempAssessment.assessmentId == tempGrade.assessmentId){
+              tempCount++;
+              tempAverage+=tempGrade.score;
+            }
+          });
+          tempAverage /= tempCount;
+          gradeAverages.push(tempAverage);
+          tempAverage = 0;
+          tempCount = 0;
         });
-        tempAverage /= tempCount;
-        gradeAverages.push(tempAverage);
-        tempAverage = 0;
-        tempCount = 0;
-      });
 
-      for(let i=0; i<this.assessments.length; i++){
-        let tempWeekNumber = this.assessments[i].weekNumber;
-        let weekNumber = String(tempWeekNumber);
+        for(let i=0; i<this.assessments.length; i++){
+          let tempWeekNumber = this.assessments[i].weekNumber;
+          let weekNumber = String(tempWeekNumber);
 
-        if(this.weekAverages.has(weekNumber)){
-          let averages = this.weekAverages.get(weekNumber);
-          averages.push(gradeAverages[i]);
-          this.weekAverages.set(weekNumber, averages);
+          if(this.weekAverages.has(weekNumber)){
+            let averages = this.weekAverages.get(weekNumber);
+            averages.push(gradeAverages[i]);
+            this.weekAverages.set(weekNumber, averages);
+          }
+          else{
+            this.weekAverages.set(weekNumber, [gradeAverages[i]]);
+          }
         }
-        else{
-          this.weekAverages.set(weekNumber, [gradeAverages[i]]);
-        }
+        //generate the chart
+        this.generateChart();   
       }
-      //generate the chart
-      this.generateChart();   
   }
 
   generateChart(){
     this.chartOptions = {
-
     };
 
-
     let keys = Array.from(this.weekAverages.keys());
-    
-
     //fill line
     keys.forEach((key)=>{
       let avg = 0;
