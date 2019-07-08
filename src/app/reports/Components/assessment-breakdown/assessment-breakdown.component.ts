@@ -147,9 +147,6 @@ export class AssessmentBreakdownComponent implements OnInit {
     traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
     batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
 
-    ////////////// place grade.toFixed(2) loop here
-    /////////// (maybe the issue was that it has to happen after sorting?)
-    // this.barChartLabels = students;
     this.gradeAverages = gradeArray;
     this.barChartLabels = [];
     this.tableHeader = [];
