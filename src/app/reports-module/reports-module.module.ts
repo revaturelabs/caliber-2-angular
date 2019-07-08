@@ -13,6 +13,7 @@ import { ReportTopChartController } from '../reports/Components/report-top-chart
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { CumulativeScoresComponent } from '../reports/Components/cumulative-scores/cumulative-scores.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CumulativeScoresComponent } from '../reports/Components/cumulative-scor
   providers: [
     ReportService,
     OverallQCScoresComponent,
+    HttpClient
   ],
   exports: [
     OverallQCScoresComponent,

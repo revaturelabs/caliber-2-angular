@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-const viewABatchUrl = '';
+const viewABatchUrl = 'manage';
 const buttonToOpenViewTraineesModal = '';
 
 export class AppPage {
@@ -30,7 +30,8 @@ export class AppPage {
 
   getNavHomeLink() {
     element(by.css('app-root #home-link')).click();
-    return element(by.css('app-root p')).getText();
+    // return element(by.css('app-root p')).getText();
+    return element(by.id('QABatch')).getText();
   }
 
   getNavManageLink() {
@@ -40,7 +41,8 @@ export class AppPage {
 
   getNavImgLink() {
     element(by.css('app-root #img-link')).click();
-    return element(by.css('app-root p')).getText();
+    // return element(by.css('app-root p')).getText();
+    return element(by.id('QABatch')).getText();
   }
 
   /* FOR FOOTER TESTS */

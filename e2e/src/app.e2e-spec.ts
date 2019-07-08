@@ -21,7 +21,7 @@ describe('workspace-project App', () => {
 
   it('should click the home link and navigate to the home page', () => {
     page.navigateTo();
-    expect(page.getNavHomeLink()).toEqual('home works!');
+    expect(page.getNavHomeLink()).toEqual('Batch');
   });
 
   it('should click the manage link and navigate to the manage page', () => {
@@ -31,7 +31,7 @@ describe('workspace-project App', () => {
 
   it('should click the logo and navigate to the home page', () => {
     page.navigateTo();
-    expect(page.getNavImgLink()).toEqual('home works!');
+    expect(page.getNavImgLink()).toEqual('Batch');
   });
 
   /* FOOTER TESTS */

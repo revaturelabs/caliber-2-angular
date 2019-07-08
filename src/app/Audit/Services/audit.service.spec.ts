@@ -12,7 +12,7 @@ import { asElementData } from '@angular/core/src/view';
 import { environment } from 'src/environments/environment';
 import { Trainee } from 'src/app/Batch/type/trainee';
 
-fdescribe('AuditService', () => {
+describe('AuditService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [AuditService],
@@ -87,7 +87,7 @@ fdescribe('AuditService', () => {
         as.getNotesByBatchByWeek(2018, 1).subscribe(n => {
           qcNotes = n;
         });
-        const req = httpMock.expectOne(notesByBatchByWeekURL + '/2018/1');
+          const req = httpMock.expectOne(notesByBatchByWeekURL + '/2018/1');
         console.log("notesbyweekURL = " + req);
         expect(req.request.method).toEqual('GET');
       })

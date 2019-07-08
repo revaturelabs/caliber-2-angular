@@ -50,17 +50,17 @@ export class OverallQCScoresComponent implements OnInit {
   // finds the correct Note based on the passed
   getNote(week, traineeId) {
     const weekArray = this.findWeek(week);
-    for (let i = 0; i < weekArray.length; i++){
-      if (weekArray[i]['traineeId'] === traineeId){
+    for (let i = 0; i < weekArray.length; i++) {
+      if (weekArray[i]['traineeId'] === traineeId) {
         return weekArray[i];
       }
     }
     return {'qcStatus': 'undefined'};
   }
 
-  findWeek(week){
-    for(let i = 0; i < this.qcData.length; i++){
-      if(this.qcData[i][0]['week'] === week){
+  findWeek(week) {
+    for (let i = 0; i < this.qcData.length; i++) {
+      if (this.qcData[i][0]['week'] === week) {
         return this.qcData[i];
       }
     }
@@ -103,10 +103,10 @@ export class OverallQCScoresComponent implements OnInit {
     return false;
   }
 
-  getWeekNums(QANotes){
+  getWeekNums(QANotes) {
     const ret = [];
-    for(let i = 0; i < QANotes.length; i++){
-      if(this.notInRet(ret, QANotes[i]['week'])){
+    for (let i = 0; i < QANotes.length; i++) {
+      if (this.notInRet(ret, QANotes[i]['week'])) {
         ret.push(QANotes[i]['week']);
       }
     }
@@ -114,7 +114,7 @@ export class OverallQCScoresComponent implements OnInit {
   }
 
   notInRet(ret, week) {
-    for (let i = 0; i < ret.length; i++){
+    for (let i = 0; i < ret.length; i++) {
       if (ret[i] === week) {
         return false;
       }
