@@ -52,7 +52,7 @@ export class ReportService {
 
   getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + this.categoryAllURL);
-  }
+  } 
 
   getBatchesByYear(year : number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
