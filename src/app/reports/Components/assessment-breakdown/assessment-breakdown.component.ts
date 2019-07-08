@@ -19,19 +19,24 @@ export class AssessmentBreakdownComponent implements OnInit {
     true, 
     true
   ]
-  
+
+  // Setting default values for headers, emptied when data is loaded
   public tableHeader = [
     "Exam",
     "Project",
     "Verbal",
     "Other"
   ];
+
+  // Setting default values for trainee, emptied when data is loaded
   public traineeRow = [
     "91.00",
     "84.89",
     "73.00",
     "91.43"
   ];
+
+  // Setting default values for batch, emptied when data is loaded
   public batchRow = [
     "91.92",
     "81.81",
