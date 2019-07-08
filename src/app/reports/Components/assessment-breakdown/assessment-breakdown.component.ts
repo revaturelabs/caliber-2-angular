@@ -1,11 +1,10 @@
 import { AssessmentScore } from './../../Models/assessment-score';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { BarLineChartComponent } from '../bar-line-chart/bar-line-chart.component';
 import { ReportService } from '../../Service/report.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { Trainee, Grade } from 'src/app/Batch/type/trainee';
+import { Grade } from 'src/app/Batch/type/trainee';
 
 @Component({
   selector: 'app-assessment-breakdown',
