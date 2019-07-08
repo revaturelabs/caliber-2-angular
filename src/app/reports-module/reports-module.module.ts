@@ -1,8 +1,9 @@
+import { ReportsComponent } from './../reports/Components/reports/reports.component';
+import { ReportsRoutingModule } from './reports-routing.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportsComponent } from '../reports/Components/reports/reports.component';
-import { ReportsRoutingModule } from './reports-routing.service';
-import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scores/overall-qc-scores.component'
+import { TechRadarComponent } from '../reports/Components/tech-radar/tech-radar.component';
+import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scores/overall-qc-scores.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { AssessmentBreakdownComponent } from './../reports/Components/assessment-breakdown/assessment-breakdown.component';
@@ -16,8 +17,8 @@ import { WeeklyQualityAuditComponent } from '../reports/Components/weekly-qualit
 
 @NgModule({
   declarations: [
-
-    ReportsComponent, 
+    ReportsComponent,
+    TechRadarComponent,
     AssessmentBreakdownComponent,
     OverallQCScoresComponent,
     ToolbarComponent,
