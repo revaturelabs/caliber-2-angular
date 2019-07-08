@@ -6,6 +6,7 @@ import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scor
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarLineChartComponent } from '../reports/Components/bar-line-chart/bar-line-chart.component';
+import { AssessmentBreakdownComponent } from './../reports/Components/assessment-breakdown/assessment-breakdown.component';
 import { ReportService } from '../reports/Service/report.service';
 import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
 import { ReportTopChartController } from '../reports/Components/report-top-chart-controller/report-top-chart-controller.component';
@@ -15,14 +16,14 @@ import { CumulativeScoresComponent } from '../reports/Components/cumulative-scor
 
 @NgModule({
   declarations: [
-
-    ReportsComponent,
+    ReportsComponent, 
+    AssessmentBreakdownComponent,
     OverallQCScoresComponent,
-    BarLineChartComponent,
     ToolbarComponent,
     ReportTopChartController,
     CumulativeScoresComponent,
     BarLineChartComponent,
+  
   ],
 
   imports: [
