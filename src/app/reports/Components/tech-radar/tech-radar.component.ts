@@ -85,15 +85,15 @@ export class TechRadarComponent implements OnInit {
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-    // console.log('Printing data from updateDataPull() in tech-radar-component: ');
-    // console.log('Grade Data: ');
-    // console.log(this.gradeDataStore);
-    // console.log('Category Data: ');
-    // console.log(this.categoryDataStore);
-    // console.log('Trainee Data: ');
-    // console.log(this.traineeDataStore);
-    // console.log('Assessment Data: ');
-    // console.log(this.assessmentDataStore);
+    console.log('Printing data from updateDataPull() in tech-radar-component: ');
+    console.log('Grade Data: ');
+    console.log(this.gradeDataStore);
+    console.log('Category Data: ');
+    console.log(this.categoryDataStore);
+    console.log('Trainee Data: ');
+    console.log(this.traineeDataStore);
+    console.log('Assessment Data: ');
+    console.log(this.assessmentDataStore);
 
     // Resetting chart
     this.radarChartData[0].data = [];
@@ -106,6 +106,8 @@ export class TechRadarComponent implements OnInit {
     let categoryCount: number[] = [];
     // An array which holds the sum of all scores to be found in each category. Index matches categoryDataStore index.
     let categoryTotal: number[] = [];
+
+    let studentScores: any[] = [];
 
     // Looping through each category (Java, SQL, etc.) of evaluation.
     // These categories represent a single week's primary subject, even if that week's curriculum consists of multiple subjects.
@@ -126,12 +128,19 @@ export class TechRadarComponent implements OnInit {
             if (this.gradeDataStore[j].assessmentId === this.assessmentDataStore[k].assessmentId) {
               categoryTotal[i] += this.gradeDataStore[j].score;
               categoryCount[i] += 1;
+
+              if (studentScores.keys.traineeId !== undefined) {
+                studentScores[j][this.gradeDataStore[j].traineeId] += this.gradeDataStore[j].score;
+              } else {
+              studentScores.push({[this.gradeDataStore[j].traineeId]: this.gradeDataStore[j].score});
+              }
             }
           }
         }
       }
     }
-
+    console.log('studentScores:');
+    console.log(studentScores);
     // Calculate average score for the categories.
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
