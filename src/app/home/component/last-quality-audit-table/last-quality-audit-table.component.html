@@ -10,13 +10,6 @@
           <th class="col-sm-2 col-md-2 col-lg-2"></th>
           <th class="col-sm-2 col-md-2 col-lg-2" *ngFor="let status of statuses">{{ status }}</th>
         </tr>
-        <tr *ngFor="let batch of batches">
-          <td>
-            {{ batch['trainer']}} 
-            <br>
-            {{ batch['startDate'] | date}}
-          </td>
-        </tr>
       </tbody>
     </table><!-- end ngIf: stackedBarLabels -->
   </div>

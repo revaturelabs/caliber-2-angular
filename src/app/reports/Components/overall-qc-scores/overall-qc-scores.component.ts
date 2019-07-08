@@ -16,9 +16,8 @@ export class OverallQCScoresComponent implements OnInit {
   name: String;
   week: number;
   message: String;
-  weeks: number[];
   trainees;
-  constructor(private reportService: ReportService) {
+  constructor(private reportService: ReportService, private modalService: NgbModal) {
     if (!this.qcData) {
       this.qcData = [];
     }
@@ -49,23 +48,12 @@ export class OverallQCScoresComponent implements OnInit {
 
   // finds the correct Note based on the passed
   getNote(week, traineeId) {
-    const weekArray = this.findWeek(week);
-    for (let i = 0; i < weekArray.length; i++){
-      if (weekArray[i]['traineeId'] === traineeId){
-        return weekArray[i];
-      }
-    }
-    return {'qcStatus': 'undefined'};
-  }
-
-  findWeek(week){
-    for(let i = 0; i < this.qcData.length; i++){
-      if(this.qcData[i][0]['week'] === week){
-        return this.qcData[i];
+    for (let i = 0; i < this.qcData[week].length; i++) {
+      if (this.qcData[week][i]['traineeId'] === traineeId) {
+        return this.qcData[week][i];
       }
     }
   }
-
 
   /*
   *Function called by the reports component to let this know to udate itself
@@ -73,15 +61,12 @@ export class OverallQCScoresComponent implements OnInit {
   */
   update(notes) {
     this.qcData = [];
-    const QAnotes = notes; // this.reportService.getQANoteDataStore();
+    const QAnotes = notes//this.reportService.getQANoteDataStore();
 
     let week = 1;
-    let weekNums = this.getWeekNums(QAnotes);
-    weekNums = weekNums.sort();
-    this.weeks = weekNums;
-     for (let i = 0; i < weekNums.length; i++) {
-      this.qcData.push(QAnotes.filter(function(value) {
-        if (value['week'] === weekNums[i]) {
+    while (this.needWeek(week, QAnotes)) {
+      this.qcData.push(QAnotes.filter(function(value, index) {
+        if (value['week'] === week) {
           return true;
         } else {
           return false;
@@ -101,25 +86,6 @@ export class OverallQCScoresComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  getWeekNums(QANotes){
-    const ret = [];
-    for(let i = 0; i < QANotes.length; i++){
-      if(this.notInRet(ret, QANotes[i]['week'])){
-        ret.push(QANotes[i]['week']);
-      }
-    }
-    return ret;
-  }
-
-  notInRet(ret, week) {
-    for (let i = 0; i < ret.length; i++){
-      if(ret[i] === week){
-        return false;
-      }
-    }
-    return true;
   }
 
   /*

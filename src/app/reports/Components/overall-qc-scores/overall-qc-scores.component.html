@@ -17,30 +17,11 @@
                       <th>Trainee</th>
                       <!-- ngRepeat: item in allQCTraineeNotesAllWeeks[0] -->
                       <th *ngFor="let week of qcData; let i = index" class="text-center ng-binding ng-scope">
-                        Week {{ week[0]['week'] }}
+                        Week {{ i+1 }}
                       </th>
                     </tr>
-                    <tr *ngFor="let trainee of trainees" class="ng-scope">
-                      <td class="ng-binding">{{ trainee['name'] }}</td>
-                      <td *ngFor="let week of weeks" class=text-center ng-scope>
-                        <div data-toggle="tooltip" data-placement="top" title="{{ getNote(week,trainee['traineeId'])['content'] }}"
-                         class="{{ getStatus(week, trainee['traineeId']) }} ng-scope"
-                         on-click="displayNote(trainee['name'], week, getNote(week, trainee['traineeId'])['content'])"
-                          data-toggle="modal" data-target="#myModal"></div>
-                      </td>
-                    </tr>
-                    <tr id="overallRow" class="ng-scope">
-                        <td style="font-family: Futura-Std-Bold" class="ng-binding">Overall</td>
-                        <td *ngFor="let week of weeks" class=text-center ng-scope>
-                            <div data-toggle="tooltip" data-placement="top" title="{{ getNote(week, 0)['content'] }}"
-                            class="{{ getStatus(week, 0) }} ng-scope"
-                            on-click="displayNote('Overall', week, getNote(week, 0)['content'])"
-                             data-toggle="modal" data-target="#myModal">
-                            </div>
-                          </td>
-                    </tr>
                       
-                    <!-- <tr *ngFor="let note of qcData[0]" id="{{getID(note['traineeId'])}}" class="ng-scope">
+                    <tr *ngFor="let note of qcData[0]" id="{{getID(note['traineeId'])}}" class="ng-scope">
                       <td class="ng-binding" id="trainee{{note['traineeId']}}">
                         {{ getName(note['traineeId']) }}
                       </td>
@@ -51,7 +32,7 @@
                           data-toggle="modal" data-target="#myModal">
                         </div>
                       </td>
-                    </tr> -->
+                    </tr>
                   </tbody>
               </table>
               </div>

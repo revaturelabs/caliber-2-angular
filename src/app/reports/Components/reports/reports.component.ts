@@ -27,28 +27,28 @@ export class ReportsComponent implements OnInit {
 
   updateReportOutput(reportOutput: ReportOutput){
     this.reportOutput = reportOutput;
-    //console.logg("Selected Trainee:"); // Adam needs these values for showing his component
-    //console.logg(this.reportOutput.selectedTrainee);
-    //console.logg("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
-    //console.logg(this.reportOutput.selectedWeek);
-    //console.logg("The Reports Page has Received an Update Request for Data");
+    console.log("Selected Trainee:"); // Adam needs these values for showing his component
+    console.log(this.reportOutput.selectedTrainee);
+    console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
+    console.log(this.reportOutput.selectedWeek);
+    console.log("The Reports Page has Received an Update Request for Data");
     //this.cumulativeScoreComponents.updateDataPull();
-    //console.logg("The Cumulative Score component has been updated!");
+    console.log("The Cumulative Score component has been updated!");
 
 
-    //console.logg("Testing Report Service Data");
-    //console.logg("Get Selected Batch");
-    //console.logg(this.reportService.getBatch());
-    //console.logg("Get All Trainees in Batch");
-    //console.logg(this.reportService.getTraineeDataStore());
-    //console.logg("Get All Categories in System");
-    //console.logg(this.reportService.getCategoryDataStore());
-    //console.logg("Get all QANotes in Batch");
-    //console.logg(this.reportService.getQANoteDataStore());
-    //console.logg("Get all Assessments in Batch");
-    //console.logg(this.reportService.getAssessmentDataStore());
-    //console.logg("Get all Grades in Batch/week");
-    //console.logg(this.reportService.getGradeDataStore());
+    console.log("Testing Report Service Data");
+    console.log("Get Selected Batch");
+    console.log(this.reportService.getBatch());
+    console.log("Get All Trainees in Batch");
+    console.log(this.reportService.getTraineeDataStore());
+    console.log("Get All Categories in System");
+    console.log(this.reportService.getCategoryDataStore());
+    console.log("Get all QANotes in Batch");
+    console.log(this.reportService.getQANoteDataStore());
+    console.log("Get all Assessments in Batch");
+    console.log(this.reportService.getAssessmentDataStore());
+    console.log("Get all Grades in Batch/week");
+    console.log(this.reportService.getGradeDataStore());
     this.overAllQCReport.update(this.reportService.getQANoteDataStore());
     this.cumulativeScoreComponents.updateDataPull();
   }
