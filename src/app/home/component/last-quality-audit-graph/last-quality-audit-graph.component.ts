@@ -69,7 +69,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
   ngOnInit() {
   }
 
-  update(){
+  update() {
     this.locationDataStore = this.homeService.getLocationsDataStore();
     this.batchDataStore = this.homeService.getBatchesDataStore();
     this.qaNoteDataStore = this.homeService.getQANotesDataStore();
@@ -79,7 +79,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       (batch) => {
       this.barChartLabels.push(
       batch.trainer + ' ' + new Date(Number.parseInt( batch.startDate.toString() ) ).toISOString().substring(0, 9));
-    })
+    });
 
     const poorArray: number[] = [];
     const averageArray: number[] = [];

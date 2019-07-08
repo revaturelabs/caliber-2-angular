@@ -162,8 +162,8 @@ export class ReportService {
     this.trainee = trainee;
   }
 
-  getTrainee(){
-    return this.trainee
+  getTrainee() {
+    return this.trainee;
   }
 
   getGradeDataStore() : Grade[]{

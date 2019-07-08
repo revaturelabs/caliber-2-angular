@@ -40,7 +40,7 @@ export class HomeToolbarComponent implements OnInit {
     this.initializeAllLocations();
   }
 
-  calShowState(value){
+  calShowState(value) {
     if (value) {
       this.showStates = true;
     } else {
@@ -75,7 +75,7 @@ export class HomeToolbarComponent implements OnInit {
       this.citiesInLocation = this.locations.map((element) => element);
     } else {
       this.locations.forEach((city) => {
-        if (city.state === state && cityLocation.city === city.city && this.citiesInLocation.indexOf(city) == -1){
+        if (city.state === state && cityLocation.city === city.city && this.citiesInLocation.indexOf(city) === -1) {
           this.citiesInLocation.push(city);
         }
       });
@@ -115,7 +115,7 @@ export class HomeToolbarComponent implements OnInit {
         batches.forEach((batch) => {
           // const currentDateTime = new Date().getTime();
           const currentDateTime = this.currentDateTime;
-          const batchDateTime = Number.parseInt(batch.endDate.toString())
+          const batchDateTime = Number.parseInt(batch.endDate.toString());
           if ( batchDateTime > currentDateTime) {
             this.batches.push(batch);
             this.locations.forEach(
@@ -135,13 +135,13 @@ export class HomeToolbarComponent implements OnInit {
     });
   }
 
-  initializeCurrentBatchesFromLocations(locations: Location[]){
+  initializeCurrentBatchesFromLocations(locations: Location[]) {
     this.batches = [];
     this.batchService.getAllBatches().subscribe(
       (batches) => {
         batches.forEach((batch) => {
           const currentDateTime = this.currentDateTime;
-          const batchDateTime = Number.parseInt(batch.endDate.toString())
+          const batchDateTime = Number.parseInt(batch.endDate.toString());
           if ( batchDateTime > currentDateTime) {
             let added = false;
             locations.forEach(
