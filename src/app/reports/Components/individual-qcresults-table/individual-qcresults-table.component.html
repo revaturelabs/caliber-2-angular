@@ -1,24 +1,11 @@
-
-<!-- <table>
-    <tr>
-        <th>Trainee</th>
-        <th>Individual Feedback</th>
-        <th>Notes</th>
-    </tr>
-
-    <app-individual-qcresults-row *ngFor="let n of qcNotes" [qcNote]="n"></app-individual-qcresults-row>
-    
-    <tr>
-        <td>Overall Feedback</td>
-    </tr>
-</table> -->
-
 <div ui-view="qc-batchOverall" class="ng-scope"><div class="container ng-scope">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 top5">
 			<div class="panel panel-default">
 				<div class="panel-heading ng-binding">Quality Audit Report - Week </div>
-				<strong>Categories covered this week: </strong><!-- ngRepeat: category in categories --><span ng-repeat="category in categories" class="ng-binding ng-scope" style="">JSP</span><!-- end ngRepeat: category in categories --><table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
+				<strong class="ng-scope">Categories covered this week: </strong>
+					<span *ngFor="let category of categoryDataStore" class="ng-binding" style=""></span>
+					<table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
 					<thead>
 						<tr>	
 						</tr>
@@ -29,18 +16,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let note of qcData[week]" id="{{getID(note['traineeId'])}}" class="ng-scope">
-							<td class="ng-binding" id="trainee{{note['traineeId']}}">{{getName(note['traineeId'])}}</td>
-							<!-- <td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
-								<div data-toggle="tooltip" data-placement="top" title="{{getNote(j, note['traineeId'])['content'] }}" class="{{ getStatus(j, note['traineeId']) }} ng-scope"
-									on-click="displayNote(getName(note['traineeId']), j, getNote(j, note['traineeId'])['content'])"
-									data-toggle="modal" data-target="#myModal">
-								</div>
-							</td>					 -->
-							<td class="ng-binding">{{getStatus(note['week'], note['traineeId'])}}</td>
+						<tr *ngFor="let note of qcData" id="{{note['traineeId']}}" class="ng-scope">
+							<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['trainee']['name'])}}</td>
+							<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['qcStatus'])}}</td>
+							<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['content'])}}</td>
+
 					</tbody>
 				</table>
-				<!-- QC batch note -- overall qualitative feedback -->
+				<!-- QC batch note -- overall qualitative feedback {{category['skillCategory']}}*ngFor="let category of categoryDataStore"-->
 				<table class="table">
 					<tbody>
 						<tr>
@@ -59,23 +42,3 @@
 		</div>
 	</div>
 </div>
-
-<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-	  
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">{{ name }}, Week {{ week }} Notes</h4>
-			</div>
-			<div class="modal-body">
-			  <p>{{ message }}</p>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		  </div>
-	  
-		</div>
-	  </div>

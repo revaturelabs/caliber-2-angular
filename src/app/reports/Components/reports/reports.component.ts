@@ -106,12 +106,8 @@ export class ReportsComponent implements OnInit {
     if (this.assessmentBreakdownComponent !== undefined) {
       this.assessmentBreakdownComponent.updateDataPull();
     }
-    if (this.individualWeekQCReport != undefined)
-    {
-      this.individualWeekQCReport.update(this.reportService.getQANoteDataStore());
-      if (this.techRadarComponents !== undefined) {
-        this.techRadarComponents.updateDataPull();
-      }
+    if (this.individualWeekQCReport !== undefined){
+      this.individualWeekQCReport.update();
     }
   }
 }
