@@ -44,7 +44,7 @@ export class TechRadarComponent implements OnInit {
       }
     }
   };
-  // This array represents the labels 
+  // This array represents the labels
   public radarChartLabels: Label[] = [];
   public radarChartData: ChartDataSets[] = [
     { data: [],
@@ -52,12 +52,12 @@ export class TechRadarComponent implements OnInit {
       label: 'default',
       backgroundColor: ['rgba(71, 163, 209, 0.3)'],
       borderColor: ['rgba(71, 163, 209, 0.6)'],
-      pointBorderColor:['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+      pointBorderColor: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
       pointBackgroundColor: ['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
                              'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
-      pointHoverBackgroundColor:['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
+      pointHoverBackgroundColor: ['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
                                  'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
-      pointHoverBorderColor:[''],
+      pointHoverBorderColor: [''],
     },
   ];
   public radarChartType: ChartType = 'radar';
@@ -66,15 +66,6 @@ export class TechRadarComponent implements OnInit {
    }
 
   ngOnInit() {
-  }
-
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    //console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    //console.log(event, active);
   }
 
   // This method is called by the toolbar component each time data is pulled.
@@ -103,9 +94,9 @@ export class TechRadarComponent implements OnInit {
     /* Filling data */
     // An array representing the categories of evaluation. The index matches the category's index found in categoryDataStore.
     // The values represent the number evaluations of those subjects to be found in gradeDataStore.
-    let categoryCount: number[] = [];
+    const categoryCount: number[] = [];
     // An array which holds the sum of all scores to be found in each category. Index matches categoryDataStore index.
-    let categoryTotal: number[] = [];
+    const categoryTotal: number[] = [];
 
     let studentScores: any[] = [];
 
