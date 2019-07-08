@@ -36,9 +36,19 @@ export class WeeklyReportComponent implements OnInit {
 
   
   update(){
+    if(this.reportService.getWeek() ===0 && this.reportService.getTrainee().traineeId === -1)
+    {
+      this.resetChart();
+      this.updateDataForAll();
+    }
+  }
+
+  updateDataForAll(){
     this.grades = this.reportService.getGradeDataStore();
     this.assessments = this.reportService.getAssessmentDataStore();
-    if(this.grades && this.assessments)
+    console.log(this.grades);
+    console.log(this.assessments);
+    if(this.grades.length || this.assessments.length)
     {
       this.display = true;
       let gradeAverages = [];
@@ -74,27 +84,28 @@ export class WeeklyReportComponent implements OnInit {
           }
         }
         //generate the chart
-        this.generateChart();   
+        this.fillChart();   
+      }
+      else{
+        this.display = false;
       }
   }
 
-  generateChart(){
+  fillChart(){
+    
     this.chartOptions = {
     };
 
     let keys = Array.from(this.weekAverages.keys());
     //fill line
-    let tempAvgData = [];
     keys.forEach((key)=>{
       let avg = 0;
       this.weekAverages.get(key).forEach((grade)=>{
         avg += grade;
       });
       //add the rounded averages into an array
-      tempAvgData.push( Math.round( avg/this.weekAverages.get(key).length *100) /100);
+      this.avgData.push( Math.round( avg/this.weekAverages.get(key).length *100) /100);
     });
-
-    this.avgData = tempAvgData;
 
     this.chartData = [
       { 
@@ -107,4 +118,13 @@ export class WeeklyReportComponent implements OnInit {
     //set x axis labels
     this.chartLabels = keys;
   }
+
+
+  resetChart(){
+    this.chartData=[];
+    this.chartLabels=[];
+    this.avgData = [];
+    this.chartOptions = [];
+  }
+
 }
