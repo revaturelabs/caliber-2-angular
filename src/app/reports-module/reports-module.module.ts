@@ -5,7 +5,6 @@ import { ReportsRoutingModule } from './reports-routing.service';
 import {  OverallQCScoresComponent } from '../reports/Components/overall-qc-scores/overall-qc-scores.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
-import { BarLineChartComponent } from '../reports/Components/bar-line-chart/bar-line-chart.component';
 import { AssessmentBreakdownComponent } from './../reports/Components/assessment-breakdown/assessment-breakdown.component';
 import { ReportService } from '../reports/Service/report.service';
 import { ToolbarComponent } from '../reports/Components/toolbar/toolbar.component';
@@ -22,7 +21,6 @@ import { CumulativeScoresComponent } from '../reports/Components/cumulative-scor
     ToolbarComponent,
     ReportTopChartController,
     CumulativeScoresComponent,
-    BarLineChartComponent,
   
   ],
 
