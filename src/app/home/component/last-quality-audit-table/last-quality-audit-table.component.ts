@@ -11,6 +11,10 @@ export class LastQualityAuditTableComponent implements OnInit {
   batches: Batch[];
   constructor() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    this.statuses = ['Poor', 'Average', 'Good', 'Superstar', 'Overall Batch Status'];
+>>>>>>> parent of 23fa929... fiixed bug on the overall qc table so it now accounts for missing data
 =======
     this.statuses = ['Poor', 'Average', 'Good', 'Superstar', 'Overall Batch Status'];
 >>>>>>> parent of 23fa929... fiixed bug on the overall qc table so it now accounts for missing data
