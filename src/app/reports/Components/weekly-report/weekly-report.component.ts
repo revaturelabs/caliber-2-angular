@@ -46,7 +46,7 @@ export class WeeklyReportComponent implements OnInit {
   updateDataForAll(){
     this.grades = this.reportService.getGradeDataStore();
     this.assessments = this.reportService.getAssessmentDataStore();
-    if(this.grades.length || this.assessments.length)
+    if(this.grades.length>0 && this.assessments.length>0)
     {
       this.display = true;
       let gradeAverages = [];
