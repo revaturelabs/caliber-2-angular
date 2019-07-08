@@ -7,7 +7,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-overall-qc-scores',
   templateUrl: './overall-qc-scores.component.html',
-  styleUrls: ['./overall-qc-scores.component.css']
+  // styleUrls: ['./overall-qc-scores.component.css']
 })
 export class OverallQCScoresComponent implements OnInit {
   qcData: QANote[][];
@@ -73,17 +73,7 @@ export class OverallQCScoresComponent implements OnInit {
   */
   update(notes) {
     this.qcData = [];
-
-    const QAnotes = this.reportService.getQANoteDataStore();
-    // console.log("AWESOME");
-    // console.log("AWESOME");
-    // console.log("AWESOME");
-    // console.log("AWESOME");
-    // console.log("AWESOME");
-    // console.log("AWESOME");
-    // console.log(QAnotes);
-
-    // const QAnotes = notes; // this.reportService.getQANoteDataStore();
+    const QAnotes = notes; // this.reportService.getQANoteDataStore();
 
     let week = 1;
     let weekNums = this.getWeekNums(QAnotes);
@@ -125,7 +115,7 @@ export class OverallQCScoresComponent implements OnInit {
 
   notInRet(ret, week) {
     for (let i = 0; i < ret.length; i++){
-      if(ret[i] === week){
+      if (ret[i] === week) {
         return false;
       }
     }

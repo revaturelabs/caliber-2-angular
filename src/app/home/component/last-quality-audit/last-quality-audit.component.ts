@@ -16,9 +16,7 @@ export class LastQualityAuditComponent implements OnInit {
   ngOnInit() {
   }
 
-  updateHomeOutput(num: number){
-    console.log("LQA view Update");
-    console.log(num);
+  updateHomeOutput(num: number) {
     this.lastQualityAuditTable.update();
     this.lastQualityAuditGraph.update();
   }

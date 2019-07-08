@@ -6,11 +6,11 @@
           <th class="col-sm-2 col-md-2 col-lg-2" *ngFor="let status of statuses"> {{ status }} </th>
         </tr>
         <tr *ngFor="let batch of batchDataStore; let i = index" >
-          <td>
+          <th>
             {{ batch['trainer']}} 
             <br>
             {{ batch['startDate'] | date}}
-          </td>
+          </th>
           <td>
             {{ poorArray[i] }}
           </td>
@@ -23,7 +23,7 @@
           <td>
             {{ starArray[i] }}
           </td>
-          <td>
+          <td [ngStyle]="{'color': statusColorArray[i]}">
             {{ overallStatusArray[i] }}
           </td>
         </tr>
