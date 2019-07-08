@@ -70,11 +70,28 @@ export class CumulativeScoresComponent implements OnInit {
 
   updateDataPull(){
     //console.log("Updating Cumulative Score:");
-    this.gradeTotalAverage = this.reportService.getAverageGradeScore();
     this.gradeDataStore = this.reportService.getGradeDataStore();
-    this.traineeDataStore = this.reportService.getTraineeDataStore();
+    if (this.gradeDataStore == undefined || this.gradeDataStore.length)
+    {
+      this.reportService.getAllGrades().subscribe((allGrades : Grade[])=>{
+        this.gradeDataStore = allGrades;
+        this.gradeTotalAverage = this.reportService.getAverageGradeScore();
+        this.traineeDataStore = this.reportService.getTraineeDataStore();
+        this.createChart();
+      });
+    }
+    else
+    {
+      this.gradeTotalAverage = this.reportService.getAverageGradeScore();
+      this.traineeDataStore = this.reportService.getTraineeDataStore();
+
+      this.createChart();
+    }
     // this.assessmentDataStore = this.reportService.getAssessmentDataStore();
 
+
+  }
+  createChart(){
     if(this.traineeDataStore.length>0 && this.traineeDataStore[0].traineeId == -1){
       this.traineeDataStore.shift();
     }
