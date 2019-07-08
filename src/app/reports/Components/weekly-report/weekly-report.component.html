@@ -1,0 +1,28 @@
+<div *ngIf = "display" class="panel panel-default">
+  <div class="panel-heading">
+    Weekly Progress <i ng-click="downloadChartButton($event)" class="clickableIcons glyphicon glyphicon-save"></i>
+  </div>
+  <div class="panel-body">
+    <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <canvas
+        baseChart [chartType]="'line'" 
+        [datasets]="chartData" 
+        [labels]="chartLabels" 
+        [options]="chartOptions"
+        [legend]="false" 
+        (chartClick)="onChartClick($event)">
+    </canvas>
+      <div class="table-responsive">
+       <table ng-if="weeklyProgressBatchOverallLabels" class="table ng-scope" style="border-collapse: collapse;">
+          <tbody>
+            <ng-container *ngFor="let avg of avgData; let i = index">
+              <tr class="col-sm-6 col-md-6 col-lg-6 ng-scope" style="">
+              <th class="pull-left ng-binding">Week {{i+1}}</th>
+              <td class="pull-right ng-binding">{{avgData[i]}}</td>
+            </ng-container> 
+        </tbody>
+      </table>  
+      </div>
+    </div>
+  </div>
+</div>
