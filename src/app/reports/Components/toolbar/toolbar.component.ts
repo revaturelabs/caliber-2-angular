@@ -158,6 +158,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   selectYear(event: number) {
+    this.selectedYear = event.toString();
+    // this.selectedWeek = "Select Week (All)";
+    this.trainees = [];
+    this.getBatch(event);
+    this.getTraineesByBatchId();
     //if you select a year, it has to be different than the current year to change to toolbar
     if(this.selectedYear != event.toString()){
       this.selectedYear = event.toString();
@@ -190,22 +195,33 @@ export class ToolbarComponent implements OnInit {
         this.titledWeek = "Weeks (all)";
         this.reportService.setWeek(0);
       }
-
       this.processAveragesAndOutput();//update Assessments, Notes, and Grades.
     }
   }
 
   selectBatch(event: Batch) {
-    //if you select a batch, it has to be different than the current batch to change to toolbar
-    if(this.selectedBatch.batchId != event.batchId){
-      this.selectedBatch = event;
-      this.reportService.setBatch(event);
-      this.auditService.selectedBatch = this.selectedBatch;
-      this.reportService.setBatch(this.selectedBatch);
-  
-      this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
-      this.getTraineesByBatchId(); // and I need to update the trainees in the batch
-    } 
+    this.selectedBatch = event;
+    this.getTraineesByBatchId();
+    this.reportService.setBatch(event);
+    this.auditService.selectedBatch = this.selectedBatch;
+    this.reportService.setBatch(this.selectedBatch);
+    // this.getWeeks();
+    // this.showActiveWeek(this.auditService.selectedBatch.weeks);
+    // this.selectWeek(this.auditService.selectedBatch.weeks);
+    this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
+    //this.getTraineesByBatchId(); // and I need to update the trainees in the batch
+    
+  }
+
+  showYears(){
+    this.selectedYear = "Select Year";
+  }
+
+  showBatches(){
+
+  }
+  showWeeks(){
+    this.titledWeek = "Select Week";
   }
   showTrainees(){
     //Show a list of trainees that shows all current trainees in batch, and a "Trainees (all)" dummy batch
@@ -262,12 +278,13 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  getQANotes(){ 
+  getQANotes(){
     //update reportService datastore
     this.reportService.getAllQANotes().subscribe((qaNotes)=>{
       // console.log("Getting all QA Notes of Batch");
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
+      this.getAllGrades();
     });
   }
 
@@ -297,8 +314,8 @@ export class ToolbarComponent implements OnInit {
   processAveragesAndOutput(){
     //update Assessments, Notes, and Grades.
     this.getAllAssessments();
+    //getting grades is chained in the async call on get QA notes
     this.getQANotes();
-    this.getAllGrades();
   }
 
   processTotalAverageGrade(){
@@ -322,14 +339,18 @@ export class ToolbarComponent implements OnInit {
     this.processTotalAverageGrade();
   }
 
-  arraysEqualPreventsReportOutput(array1, array2) {
+  arraysEqualPreventsReportOutput(array1 : any[], array2: any[]) {
     //Compare if the two arrays have the same contents, if so, return true.
-    if(array1.length !== array2.length)
-        return false;
-    for(var i = array1.length; i--;) {
-        if(array1[i] !== array2[i])
-            return false;
+    if(array1 != undefined && array2 != undefined){
+      if(array1.length !== array2.length)
+          return false;
+      for(var i = array1.length; i--;) {
+          if(array1[i] !== array2[i])
+              return false;
+      }
+      return true;
+    } else{
+      return false;
     }
-    return true;
   }
 }
