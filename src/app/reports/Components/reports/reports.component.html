@@ -1,4 +1,5 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
+
 <div id="caliber-container" class="container" *ngIf="reportOutput !== null">
 	<div class="top10 data-container">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
@@ -11,4 +12,4 @@
 	</div>
 </div>
 
-
+<app-weekly-report></app-weekly-report>

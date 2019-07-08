@@ -5,6 +5,7 @@ import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { AssessmentBreakdownComponent } from '../assessment-breakdown/assessment-breakdown.component';
 import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
+import { WeeklyReportComponent } from '../weekly-report/weekly-report.component';
 
 @Component({
   selector: 'app-reports',
@@ -24,6 +25,8 @@ export class ReportsComponent implements OnInit {
     }
     this.cd.detectChanges();
   }
+
+  @ViewChild(WeeklyReportComponent) weeklyReportsComponent: WeeklyReportComponent;
 
 
   private assessmentBreakdownComponent: AssessmentBreakdownComponent;
@@ -94,6 +97,10 @@ export class ReportsComponent implements OnInit {
     }
     if (this.assessmentBreakdownComponent != undefined){
       this.assessmentBreakdownComponent.updateDataPull();
+    }
+    if (this.weeklyReportsComponent != undefined)
+    {
+      this.weeklyReportsComponent.update();
     }
   }
 }
