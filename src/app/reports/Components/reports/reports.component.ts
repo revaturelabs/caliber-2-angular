@@ -4,6 +4,7 @@ import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
+import { IndividualQCResultsTableComponent } from '../individual-qcresults-table/individual-qcresults-table.component';
 
 @Component({
   selector: 'app-reports',
@@ -16,6 +17,7 @@ export class ReportsComponent implements OnInit {
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
+  @ViewChild(IndividualQCResultsTableComponent) individualResults : IndividualQCResultsTableComponent;
   constructor(private reportService: ReportService) { }
 
   ngOnInit() {
