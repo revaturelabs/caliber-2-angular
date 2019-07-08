@@ -148,15 +148,8 @@ export class WeeklyQualityAuditComponent implements OnInit {
         this.doughnutChartData.push(qcStatusObject[status]);
         this.doughnutColors[0]["hoverBackgroundColor"].push(this.getHoverColorByQCStatus(status));
         this.doughnutColors[0]["backgroundColor"].push(this.getColorByQCStatus(status));
-
-
-        console.log("Background Colors:");
-        console.log(this.doughnutColors);
       }
     });
-
-    console.log("QC Status object:");
-    console.log(qcStatusObject);
   }
 
   getColorByQCStatus(status : string) : string {
