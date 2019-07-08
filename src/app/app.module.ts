@@ -17,8 +17,6 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
 //import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,8 +25,6 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent,
-   // UpdateDeleteAssessmentModalComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -38,8 +34,12 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [FormModalComponent]
+  bootstrap: [
+    AppComponent,
+  ],
+  entryComponents: [
+    FormModalComponent,
+  ]
  
 })
 export class AppModule { }

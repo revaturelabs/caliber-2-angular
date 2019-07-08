@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
+import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { WeeklyReportsComponent } from '../../weekly-reports/weekly-reports.component';
+import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
 
 @Component({
   selector: 'app-reports',
@@ -11,11 +13,19 @@ import { WeeklyReportsComponent } from '../../weekly-reports/weekly-reports.comp
 })
 export class ReportsComponent implements OnInit {
   reportOutput : ReportOutput;
+  //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
+  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(WeeklyReportsComponent) weeklyReportsComponent: WeeklyReportsComponent;
-  constructor(private reportService : ReportService) { } 
+
+  @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
+  }
+
+  showOverAllQC(){
+    return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
   }
 
   updateReportOutput(reportOutput: ReportOutput){
@@ -27,7 +37,7 @@ export class ReportsComponent implements OnInit {
     console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
     console.log(this.reportOutput.selectedWeek);
     console.log("The Reports Page has Received an Update Request for Data");
-    // this.cumulativeScoreComponents.updateDataPull();
+    //this.cumulativeScoreComponents.updateDataPull();
     console.log("The Cumulative Score component has been updated!");
 
 
@@ -44,5 +54,7 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportService.getAssessmentDataStore());
     console.log("Get all Grades in Batch/week");
     console.log(this.reportService.getGradeDataStore());
+    this.overAllQCReport.update(this.reportService.getQANoteDataStore());
+    this.cumulativeScoreComponents.updateDataPull();
   }
 }
