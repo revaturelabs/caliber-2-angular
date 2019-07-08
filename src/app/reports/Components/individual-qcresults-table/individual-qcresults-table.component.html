@@ -4,7 +4,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading ng-binding">Quality Audit Report - Week </div>
 				<strong class="ng-scope">Categories covered this week: </strong>
-					<span *ngFor="let category of categoryDataStore" class="ng-binding" style=""></span>
+					<span *ngFor="let category of categoryForWeek" class="ng-binding">{{category['skillCategory']}}</span>
 					<table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
 					<thead>
 						<tr>	
@@ -30,7 +30,7 @@
 						<td class="col-lg-2 col-md-2 col-sm-2 col-sm-offset-2 text-weight-bold"><strong>Overall
 								Feedback:</strong></td>
 						<td class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-10 ng-binding">
-							Good</td>
+							{{overallFeedbackString}}</td>
 						</tr>
 					<tr>
 						<td class="col-lg-2 col-md-2 col-sm-2 col-sm-offset-2 text-weight-bold"><strong>Notes:</strong></td>
