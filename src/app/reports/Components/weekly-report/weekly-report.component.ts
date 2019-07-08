@@ -84,14 +84,17 @@ export class WeeklyReportComponent implements OnInit {
 
     let keys = Array.from(this.weekAverages.keys());
     //fill line
+    let tempAvgData = [];
     keys.forEach((key)=>{
       let avg = 0;
       this.weekAverages.get(key).forEach((grade)=>{
         avg += grade;
       });
       //add the rounded averages into an array
-      this.avgData.push( Math.round( avg/this.weekAverages.get(key).length *100) /100);
+      tempAvgData.push( Math.round( avg/this.weekAverages.get(key).length *100) /100);
     });
+
+    this.avgData = tempAvgData;
 
     this.chartData = [
       { 
