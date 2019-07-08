@@ -66,7 +66,6 @@ export class HomeToolbarComponent implements OnInit {
       if(this.citiesInLocation.length>0){
       }else{
         this.selectedLocation = null;
-        this.locationService.setSelectedLocation(null);
       }
     }
     this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
@@ -87,7 +86,6 @@ export class HomeToolbarComponent implements OnInit {
       if(this.citiesInLocation.length>0){
       }else{
         this.selectedLocation = null;
-        this.locationService.setSelectedLocation(null);
       }
     }
     this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
