@@ -31,7 +31,7 @@ export class WeeklyReportComponent implements OnInit {
   }
 
   onChartClick(event) {
-    console.log(event);
+
   }
 
   
@@ -46,8 +46,6 @@ export class WeeklyReportComponent implements OnInit {
   updateDataForAll(){
     this.grades = this.reportService.getGradeDataStore();
     this.assessments = this.reportService.getAssessmentDataStore();
-    console.log(this.grades);
-    console.log(this.assessments);
     if(this.grades.length || this.assessments.length)
     {
       this.display = true;
