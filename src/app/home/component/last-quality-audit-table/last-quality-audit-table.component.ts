@@ -67,7 +67,7 @@ export class LastQualityAuditTableComponent implements OnInit {
             }
             if (qaNote.week === week && qaNote.traineeId === 0) {
               let color;
-              this.overallStatusArray[index] = qaNote.qcStatus;
+              this.overallStatusArray[index] = 'N/A';
               switch (qaNote.qcStatus) {
                 case 'Undefined': color = 'orange'; break;
                 case 'Poor': color = 'red'; break;

@@ -115,7 +115,7 @@ export class HomeToolbarComponent implements OnInit {
         batches.forEach((batch) => {
           // const currentDateTime = new Date().getTime();
           const currentDateTime = this.currentDateTime;
-          const batchDateTime = Number.parseInt(batch.endDate.toString());
+          const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
           if ( batchDateTime > currentDateTime) {
             this.batches.push(batch);
             this.locations.forEach(
@@ -141,7 +141,7 @@ export class HomeToolbarComponent implements OnInit {
       (batches) => {
         batches.forEach((batch) => {
           const currentDateTime = this.currentDateTime;
-          const batchDateTime = Number.parseInt(batch.endDate.toString());
+          const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
           if ( batchDateTime > currentDateTime) {
             let added = false;
             locations.forEach(

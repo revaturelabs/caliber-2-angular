@@ -78,7 +78,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
     this.batchDataStore.forEach(
       (batch) => {
       this.barChartLabels.push(
-      batch.trainer + ' ' + new Date(Number.parseInt( batch.startDate.toString() ) ).toISOString().substring(0, 9));
+      batch.trainer + ' ' + new Date(Number.parseInt(batch.startDate.toString(), 0)).toISOString().substring(0, 9));
     });
 
     const poorArray: number[] = [];
