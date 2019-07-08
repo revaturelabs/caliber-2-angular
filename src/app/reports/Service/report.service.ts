@@ -24,7 +24,7 @@ export class ReportService {
   batchAllURL = 'batchAllURL';
   yearsURL = '/qa/batch/valid-years';
   gradesAllURL = '/assessment/all/grade/batch/';
-  gradesTotalAverageURL = '/assessment/all/grade/all'
+  gradesTotalAverageURL = '/assessment/all/grade/all';
   gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
@@ -40,12 +40,13 @@ export class ReportService {
   traineeDataStore: Trainee[];
   categoryDataStore : Category[];
   assessmentsDataStore : Assessment[];
+  batchAssessmentsDataStore : Assessment[];
   gradesOfTraineeDataStore : Grade[];
   
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
-    console.log(environment);
+    // console.log(environment);
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
@@ -64,6 +65,10 @@ export class ReportService {
   getAllAssessments():Observable<Assessment[]> {
     let weekStr = this.determineWeek(this.week);
     return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
+  }
+
+  getAllBatchAssessments():Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId, httpOptions)
   }
 
   getAllGrades():Observable<Grade[]> {
@@ -118,6 +123,10 @@ export class ReportService {
     this.assessmentsDataStore = assessmentDataStore;
   }
 
+  setBatchAssessmentDataStore(batchAssessmentsDataStore: Assessment[]){
+    this.batchAssessmentsDataStore = batchAssessmentsDataStore;
+  }
+
   setGradesOfTraineeDataStore(gradesOfTraineeDataStore : Grade[]){
     this.gradesOfTraineeDataStore = gradesOfTraineeDataStore
   }
@@ -126,7 +135,7 @@ export class ReportService {
     if(week>0){
       return "?week="+week;
     }
-    return "";
+    return '';
   }
 
   setAverageGradeScore(averageGradeScore : number){
@@ -176,6 +185,10 @@ export class ReportService {
   getAssessmentDataStore(): Assessment[]{
     return this.assessmentsDataStore;
   } 
+
+  getBatchAssessmentDataStore(): Assessment[]{
+    return this.batchAssessmentsDataStore;
+  }
 
   getGradesOfTraineeDataStore(){
      return this.gradesOfTraineeDataStore;
