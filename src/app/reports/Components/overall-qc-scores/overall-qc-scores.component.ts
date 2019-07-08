@@ -53,6 +53,7 @@ export class OverallQCScoresComponent implements OnInit {
         return this.qcData[week][i];
       }
     }
+    console.log('wat');
   }
 
   /*

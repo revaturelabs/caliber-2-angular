@@ -68,15 +68,6 @@ export class TechRadarComponent implements OnInit {
   ngOnInit() {
   }
 
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    //console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    //console.log(event, active);
-  }
-
   // This method is called by the toolbar component each time data is pulled.
   // It manages the data being presented in the radar chart.
   public updateDataPull() {
