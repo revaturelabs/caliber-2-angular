@@ -36,7 +36,7 @@ export class WeeklyReportComponent implements OnInit {
 
   
   update(){
-    if(this.reportService.getWeek() ===0 && this.reportService.getTrainee().traineeId === -1)
+    if(this.reportService.getWeek() === 0 && this.reportService.getTrainee().traineeId === -1)
     {
       this.resetChart();
       this.updateDataForAll();

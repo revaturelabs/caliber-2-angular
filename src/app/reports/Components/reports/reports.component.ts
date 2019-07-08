@@ -1,3 +1,5 @@
+
+import { WeeklyQualityAuditComponent } from './../weekly-quality-audit/weekly-quality-audit.component';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ReportOutput } from '../../Models/report-output';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
@@ -15,7 +17,10 @@ import { TechRadarComponent } from '../tech-radar/tech-radar.component';
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  reportOutput : ReportOutput = null;
+  
+  @ViewChild(TechRadarComponent) techRadarComponents: TechRadarComponent;
+  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
+  private weeklyQualityAuditComponent: WeeklyQualityAuditComponent;
   
   private reportTopChartController: ReportTopChartController;
   @ViewChild(ReportTopChartController) set setReportTopChartController(content: ReportTopChartController) {
@@ -40,17 +45,22 @@ export class ReportsComponent implements OnInit {
     }
     this.cd.detectChanges();
   }
+  
+  @ViewChild(WeeklyQualityAuditComponent) set setWeeklyQualityAudit(content: WeeklyQualityAuditComponent) {
+    this.weeklyQualityAuditComponent = content;
+      if (this.isWeekSelected && !this.isTraineeSelected){
+        this.weeklyQualityAuditComponent.updateDataPull();
+      }
+      this.cd.detectChanges();
+    }
 
   public isTraineeSelected: boolean = false;
   public isWeekSelected: boolean = false;
+  private reportOutput : ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
-  @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
-  // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
-  @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
-  @ViewChild(TechRadarComponent) techRadarComponents: TechRadarComponent;
-
-
+  
+  
   ngOnInit() {
   }
 
@@ -65,6 +75,7 @@ export class ReportsComponent implements OnInit {
     this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
     this.isWeekSelected = this.reportService.week > 0;
     this.reportOutput = reportOutput;
+
     //console.log("=====================================\n== The Report is Updating Children ==\n");
     //console.log("Selected Trainee:"); // Adam needs these values for showing his component
     //console.log(this.reportOutput.selectedTrainee);
@@ -90,21 +101,27 @@ export class ReportsComponent implements OnInit {
     //console.log(this.reportService.getAverageGradeScore());
     // console.log("Get all Batch Assessments");
     // console.log(this.reportService.getBatchAssessmentDataStore());
-
-    if (this.overAllQCReport !== undefined) {
+    //this.reportTopChartController.updateDataPull();
+    
+    if (this.weeklyQualityAuditComponent !== undefined && this.weeklyQualityAuditComponent !== null){
+      this.weeklyQualityAuditComponent.updateDataPull();
+    }
+    if (this.overAllQCReport !== undefined && this.overAllQCReport !== null)
+    {
       this.overAllQCReport.update(this.reportService.getQANoteDataStore());
     }
-    if (this.reportTopChartController !== undefined) {
+    if (this.reportTopChartController !== undefined && this.reportTopChartController !== null)
+    {
       this.reportTopChartController.updateDataPull();
     }
-    if (this.assessmentBreakdownComponent !== undefined) {
+    if (this.assessmentBreakdownComponent !== undefined && this.assessmentBreakdownComponent !== null){
       this.assessmentBreakdownComponent.updateDataPull();
     }
     if (this.weeklyReportsComponent != undefined)
     {
       this.weeklyReportsComponent.update();
     }
-    if (this.techRadarComponents !== undefined) {
+    if (this.techRadarComponents !== undefined && this.techRadarComponents !== null) {
       this.techRadarComponents.updateDataPull();
     }
   }

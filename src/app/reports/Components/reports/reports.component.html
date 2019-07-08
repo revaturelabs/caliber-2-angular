@@ -1,11 +1,16 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
 
 <div id="caliber-container" class="container" *ngIf="reportOutput !== null">
-	<div class="top10 data-container">
+	<div class="top10">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
 	</div>
-	<div *ngIf="isWeekSelected && !isTraineeSelected">
-		<app-assessment-breakdown></app-assessment-breakdown>
+	<div class="row">
+		<div *ngIf="isWeekSelected && !isTraineeSelected">
+			<app-weekly-quality-audit></app-weekly-quality-audit>
+		</div>
+		<div *ngIf="isWeekSelected && !isTraineeSelected">
+			<app-assessment-breakdown></app-assessment-breakdown>
+		</div>
 	</div>
 	<div>
 		<app-overall-qc-scores *ngIf="showOverAllQC()"></app-overall-qc-scores>
