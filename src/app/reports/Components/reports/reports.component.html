@@ -1,5 +1,6 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
-<div id="caliber-container" class="container" *ngIf="reportOutput !== null">
+
+<div name="reports-component-container" id="caliber-container" class="container" *ngIf="reportOutput !== null">
 	<div class="top10">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
 	</div>
@@ -19,7 +20,9 @@
 			<app-tech-radar></app-tech-radar>
 		</div>
 		<div class="col-md-8">
-			<!-- Weekly progress component goes here. -->
+			<app-weekly-report></app-weekly-report>
 		</div>
 	</div>
 </div>
+
+
