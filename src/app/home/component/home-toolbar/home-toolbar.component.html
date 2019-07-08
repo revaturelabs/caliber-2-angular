@@ -1,6 +1,7 @@
-<select class="pull-right ng-pristine ng-untouched ng-valid ng-empty width100" 
-(change)="selectCity(city)" *ngIf="showStates">
-    <option *ngFor="let city of citiesInLocation" value="{{city}}">{{city.city}}</option>
+<select #city class="pull-right ng-pristine ng-untouched ng-valid ng-empty width100" 
+(change)="selectCity(city.value)" *ngIf="showStates">
+    <option value="-1">All Cities</option>
+    <option *ngFor="let city of citiesInLocation; let i = index" value="{{i}}">{{city.city}}</option>
   </select>
 <select #state (change)="calShowState(state.value)"
   class="pull-right ng-pristine ng-untouched ng-valid ng-empty">

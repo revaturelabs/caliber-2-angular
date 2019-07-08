@@ -19,13 +19,17 @@ export class HomeToolbarComponent implements OnInit {
   @Output() submitHomeOutput:EventEmitter<number> = new EventEmitter<number>();
   locations: Location[];
   states: string[];
+  selectedState: string;
   batches: Batch[] = [];
+  selectableLocations: Location[] = [];
   citiesInLocation: Location[] = [];
   selectedLocation: Location;
   showStates: boolean;
   qaNotesAllNotes: QANote[];
   qaNotesByBatch: QANote[][];
-  cities: String[];
+  // currentDateTime: number = new Date().getTime();
+  currentDateTime: number = 1541394000000;
+
   allLocations:Location;
 
   constructor(private locationService: LocationService, private batchService: AssessBatchService,
@@ -39,7 +43,6 @@ export class HomeToolbarComponent implements OnInit {
   ngOnInit() {
     this.initializeAllLocations();
   }
-  //build array of cities of a give state
 
 
   // getLocations() {
@@ -63,33 +66,60 @@ export class HomeToolbarComponent implements OnInit {
 
   calShowState(value){
     if(value){
-      this.showStates = true;
-      this.selectState(value);
+      this.showStates = true; 
     }else{
       this.showStates = false;
     }
+    this.selectState(value);
   }
 
   selectState(state:string){
+    this.selectedState = state;
+    console.log(state)
     this.citiesInLocation=[];
-    this.locations.forEach((city)=>{
-      if(city.state == state){
-        this.citiesInLocation.push(city);
+    if(state === ""){
+      console.log("All states selected")
+      this.citiesInLocation = this.locations.map((element)=>element)
+    }else{     
+      this.locations.forEach((city)=>{
+        if(city.state == state && this.citiesInLocation.indexOf(city) == -1){
+          this.citiesInLocation.push(city);
+        }
+      });
+      if(this.citiesInLocation.length>0){
+      }else{
+        this.selectedLocation = null;
       }
-    });
-    if(this.citiesInLocation.length>0){
-      this.selectedLocation = this.citiesInLocation[0];
-      this.locationService.setSelectedLocation(this.citiesInLocation[0]);
-    }else{
-      this.selectedLocation = null;
-      this.locationService.setSelectedLocation(null);
     }
+    this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
   }
 
-  selectCity(city : Location){
-    if(city != null){
-      this.selectedLocation = city;
-      this.locationService.setSelectedLocation(city);
+  selectStateAndCity(state:string, cityLocation:Location){
+    this.selectedState = state;
+    this.citiesInLocation=[];
+    if(state === ""){
+      console.log("All states selected")
+      this.citiesInLocation = this.locations.map((element)=>element)
+    }else{     
+      this.locations.forEach((city)=>{
+        if(city.state == state && cityLocation.city === city.city && this.citiesInLocation.indexOf(city) == -1){
+          this.citiesInLocation.push(city);
+        }
+      });
+      if(this.citiesInLocation.length>0){
+      }else{
+        this.selectedLocation = null;
+      }
+    }
+    this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
+  }
+
+  selectCity(city :number){
+
+    if(city != -1){
+      this.selectStateAndCity(this.selectedState, this.citiesInLocation[city]);
+    }else{
+      this.selectState(this.selectedState);
     }
   }
 
@@ -105,26 +135,60 @@ export class HomeToolbarComponent implements OnInit {
   }
 
   initializeCurrentBatches(){
+    this.batches=[];
     this.batchService.getAllBatches().subscribe(
       (batches)=>{
         let locations = [];
         batches.forEach((batch)=>{
-          const currentDateTime = new Date().getTime();
+          // const currentDateTime = new Date().getTime();
+          const currentDateTime = this.currentDateTime;
           const batchDateTime = Number.parseInt(batch.endDate.toString())
           if( batchDateTime > currentDateTime){
-            this.batches.push(batch)
+            this.batches.push(batch);
             this.locations.forEach(
               (batchLocation)=>{
                 if(batch.locationId === batchLocation.id)
                   locations.push(batchLocation);
             });
           }
-        })
+        });
         console.log(this.batches);
         this.locations = locations;
-        this.setStatesViaLocations()
-        this.homeService.setLocationsDataStore(this.locations)
-        this.homeService.setBatchesDataStore(this.batches)
+        this.setStatesViaLocations();
+        this.homeService.setLocationsDataStore(locations);
+        this.homeService.setBatchesDataStore(this.batches);
+        this.initilaizeAllQANotes(this.batches);
+    });
+  }
+
+  initializeCurrentBatchesFromLocations(locations: Location[]){
+    this.batches=[];
+    console.log("trying");
+    this.batchService.getAllBatches().subscribe(
+      (batches)=>{
+        batches.forEach((batch)=>{
+          // const currentDateTime = new Date().getTime();
+          const currentDateTime = this.currentDateTime;
+          const batchDateTime = Number.parseInt(batch.endDate.toString())
+          if( batchDateTime > currentDateTime){
+            
+            let added = false;
+            locations.forEach(
+              (batchLocation)=>{
+                if(batch.locationId === batchLocation.id && !added){
+                  this.batches.push(batch);
+                  added = true
+                }
+                  
+            });
+          }
+        });
+        console.log(this.batches);
+        console.log("responded");
+
+        this.setStatesViaLocations();
+        this.homeService.setLocationsDataStore(this.locations);
+        this.homeService.setBatchesDataStore(this.batches);
         this.initilaizeAllQANotes(this.batches);
     });
   }

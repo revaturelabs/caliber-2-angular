@@ -22,7 +22,7 @@ export class QanoteService {
 
   getAllQANotes(batch):Observable<QANote[]> {
     let url = this.url + this.qaNotesAllURL + batch.batchId;
-    return this.http.get<QANote[]>(url, httpOptions);
+    return this.http.get<QANote[]>(url, httpOptions);//
   }
 }
 
