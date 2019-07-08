@@ -43,6 +43,7 @@ export class ReportsComponent implements OnInit {
   constructor(private reportService : ReportService, private cd: ChangeDetectorRef) { } 
   //@ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
+  @ViewChild(IndividualQCResultsTableComponent) individualWeekQCReport : IndividualQCResultsTableComponent;
 
   ngOnInit() {
     
@@ -53,6 +54,13 @@ export class ReportsComponent implements OnInit {
       return (this.reportService.getWeek() == 0) && this.reportService.getTrainee()['traineeId'] == -1; 
     }
     return false;
+  }
+
+  showIndividualQCWeek(week){
+    if (this.reportService.getTrainee() != null){
+      this.individualWeekQCReport.week = week;
+      return (this.reportService.getWeek() != 0) && this.reportService.getTrainee()['traineeId'] == -1;
+    }
   }
 
   updateReportOutput(reportOutput: ReportOutput){
@@ -96,6 +104,10 @@ export class ReportsComponent implements OnInit {
     }
     if (this.assessmentBreakdownComponent != undefined){
       this.assessmentBreakdownComponent.updateDataPull();
+    }
+    if (this.individualWeekQCReport != undefined)
+    {
+      this.individualWeekQCReport.update(this.reportService.getQANoteDataStore());
     }
   }
 }

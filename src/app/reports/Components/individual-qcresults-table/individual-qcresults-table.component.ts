@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from '../../Models/qanote';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-individual-qcresults-table',
@@ -13,12 +14,13 @@ export class IndividualQCResultsTableComponent implements OnInit {
   
   week : number;
   batch : Batch;
+  message : String;
   overallNote : QANote;
   trainees;
 
 
 
-  constructor(private reportService : ReportService) {
+  constructor(private reportService : ReportService, private modalService : NgbModal) {
     if (!this.qcData){
       this.qcData=[];
     }
@@ -26,20 +28,25 @@ export class IndividualQCResultsTableComponent implements OnInit {
 
   ngOnInit() {}
 
-  getStatus(week, traineeId) {
+  // getStatus(week, traineeId) {
+  //   const note = this.getNote(week, traineeId);
+  //   switch (note['qcStatus']) {
+  //     case 'Superstar':
+  //       return 'fa fa-star fa-2x pick mouse-over';
+  //     case 'Good':
+  //       return 'fa fa-smile-o fa-2x pick mouse-over';
+  //     case 'Average':
+  //       return 'fa fa-meh-o fa-2x pick mouse-over';
+  //     case 'Poor':
+  //       return 'fa fa-frown-o fa-2x pick mouse-over';
+  //     default:
+  //       return 'fa fa-question-circle fa-2x mouse-over';
+  //   }
+  // }
+
+  getStatus(week, traineeId){
     const note = this.getNote(week, traineeId);
-    switch (note['qcStatus']) {
-      case 'Superstar':
-        return 'fa fa-star fa-2x pick mouse-over';
-      case 'Good':
-        return 'fa fa-smile-o fa-2x pick mouse-over';
-      case 'Average':
-        return 'fa fa-meh-o fa-2x pick mouse-over';
-      case 'Poor':
-        return 'fa fa-frown-o fa-2x pick mouse-over';
-      default:
-        return 'fa fa-question-circle fa-2x mouse-over';
-    }
+    return note.qcStatus;
   }
 
   // finds the correct Note based on the passed
@@ -104,7 +111,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
       }
     }
   }
-  
+
   /*
   * @param id : the Trainee ID
   * This method takes in a trainee ID and if the id is 0, then that is a Overall Batch Note.

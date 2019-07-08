@@ -29,14 +29,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let note of qcData[0]" id="{{getID(note['traineeId'])}}" class="ng-scope">
+						<tr *ngFor="let note of qcData[week]" id="{{getID(note['traineeId'])}}" class="ng-scope">
 							<td class="ng-binding" id="trainee{{note['traineeId']}}">{{getName(note['traineeId'])}}</td>
-							<td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
+							<!-- <td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
 								<div data-toggle="tooltip" data-placement="top" title="{{getNote(j, note['traineeId'])['content'] }}" class="{{ getStatus(j, note['traineeId']) }} ng-scope"
 									on-click="displayNote(getName(note['traineeId']), j, getNote(j, note['traineeId'])['content'])"
 									data-toggle="modal" data-target="#myModal">
 								</div>
-							
+							</td>					 -->
+							<td class="ng-binding">{{getStatus(note['week'], note['traineeId'])}}</td>
 					</tbody>
 				</table>
 				<!-- QC batch note -- overall qualitative feedback -->
