@@ -7,8 +7,14 @@
     </div>
     <div class="panel-body">
       <div class="chart-container top5">
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [plugins]="barChartPlugins" [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
+        <canvas baseChart id="traineeBatchAverageChart" 
+        [datasets]="barChartData" 
+        [labels]="barChartLabels" 
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins" 
+        [legend]="barChartLegend" 
+        [colors]="barChartColors" 
+        [chartType]="barChartType">
         </canvas>
         <br>
         <div class="table-responsive">
@@ -16,24 +22,24 @@
             <tbody>
               <tr>
                 <th></th>
-                <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[0]">{{tableHeader[0]}}</th>
-                <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[1]">{{tableHeader[1]}}</th>
-                <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[2]">{{tableHeader[2]}}</th>
-                <th class="col-sm-2 col-md-2 col-lg-2" *ngIf="validHeader[3]">{{tableHeader[3]}}</th>
+                <th class="col-sm-2 col-md-2 col-lg-2" id="abtbHeader1" *ngIf="validHeader[0]">{{tableHeader[0]}}</th>
+                <th class="col-sm-2 col-md-2 col-lg-2" id="abtbHeader2" *ngIf="validHeader[1]">{{tableHeader[1]}}</th>
+                <th class="col-sm-2 col-md-2 col-lg-2" id="abtbHeader3" *ngIf="validHeader[2]">{{tableHeader[2]}}</th>
+                <th class="col-sm-2 col-md-2 col-lg-2" id="abtbHeader4" *ngIf="validHeader[3]">{{tableHeader[3]}}</th>
               </tr>
               <tr>
                 <th>Trainee</th>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[0]">{{traineeRow[0]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[1]">{{traineeRow[1]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[2]">{{traineeRow[2]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[3]">{{traineeRow[3]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbTrainee1" *ngIf="validHeader[0]">{{traineeRow[0]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbTrainee2" *ngIf="validHeader[1]">{{traineeRow[1]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbTrainee3" *ngIf="validHeader[2]">{{traineeRow[2]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbTrainee4" *ngIf="validHeader[3]">{{traineeRow[3]}}</td>
               </tr>
               <tr>
                 <th>Batch</th>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[0]">{{batchRow[0]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[1]">{{batchRow[1]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[2]">{{batchRow[2]}}</td>
-                <td class="col-sm-2 col-md-2 col-lg-2 " *ngIf="validHeader[3]">{{batchRow[3]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbBatch1" *ngIf="validHeader[0]">{{batchRow[0]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbBatch2" *ngIf="validHeader[1]">{{batchRow[1]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbBatch3" *ngIf="validHeader[2]">{{batchRow[2]}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2 " id="abtbBatch4" *ngIf="validHeader[3]">{{batchRow[3]}}</td>
               </tr>
             </tbody>
           </table>
@@ -51,8 +57,14 @@
     </div>
     <div class="panel-body">
       <div class="chart-container top5">
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [plugins]="barChartPlugins" [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
+        <canvas baseChart id="batchAverageChart" 
+        [datasets]="barChartData" 
+        [labels]="barChartLabels" 
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins" 
+        [legend]="barChartLegend" 
+        [colors]="barChartColors" 
+        [chartType]="barChartType">
         </canvas>
         <br>
         <div class="table-responsive">
