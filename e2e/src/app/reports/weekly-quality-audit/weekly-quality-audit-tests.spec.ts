@@ -8,21 +8,21 @@ describe("Weekly quality audit component displays", () => {
    it('should go to the reports page.', () =>{
       
       let reportsPage = element(by.css('app-root #reports-link'));
-
-      /*
       reportsPage.click().then(()=>{
+         browser.pause();
 
-      let yearDropdown = element(by.xpath("/html/body/app-root/div/app-reports/app-toolbar/div/div/div/div/ul/li[1]/a"));
+      let yearDropdown = element(by.id("toolbarYearDropdown"));
       yearDropdown.click().then(()=>{
 
-      let option2017 = element(by.xpath("/html/body/app-root/div/app-reports/app-toolbar/div/div/div/div/ul/li[1]/ul/li[3]/a"));
+      let option2017 = element(by.name("toolbarYear2017"));
       option2017.click().then(()=>{
 
-      let weekDropdown = element(by.xpath("/html/body/app-root/div/app-reports/app-toolbar/div/div/div/div/ul/li[3]/a"));
+      let weekDropdown = element(by.id("toolbarWeekDropdown"));
       weekDropdown.click().then(()=>{
 
-      let week2Button = element(by.xpath("/html/body/app-root/div/app-reports/app-toolbar/div/div/div/div/ul/li[3]/ul/li[3]/a"));
+      let week2Button = element(by.name("toolbarWeek2"));
       week2Button.click().then(()=>{
+         browser.sleep(2000);
 
       let doughnutChart = element(by.id("weeklyQualityAuditDonut"));
 
@@ -37,7 +37,6 @@ describe("Weekly quality audit component displays", () => {
       });
 
       });
-      */
 
       //console.log(reportsPage);
 
