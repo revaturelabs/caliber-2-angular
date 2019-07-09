@@ -6,7 +6,38 @@
       [options]="barChartOptions"
       [plugins]="barChartPlugins"
       [legend]="barChartLegend"
-      [chartType]="barChartType">
+      [chartType]="barChartType"
+      (chartClick)="chartClicked($event)"
+      >
     </canvas>
+  </div>
+</div>
+
+
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Quality Audit Report - Week{{chartWeekReference[index]}}</h4>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>  
+            <th>Trainee:</th> <th>Feedback:</th> <th>Notes:</th>
+          </tr>
+          <tr *ngFor="let qaNote of qaNotesForModal" >
+              <td>{{qaNote.traineeId}}</td> <td>{{qaNote.qcStatus}}</td> <td>{{qaNote.content}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

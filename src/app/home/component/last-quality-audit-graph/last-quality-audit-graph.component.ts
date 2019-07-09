@@ -16,6 +16,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
   private locationDataStore: Location[];
   private batchDataStore: Batch[];
   private qaNoteDataStore: QANote[][];
+  private qaNotesForModal: QANote[];
+  private index: number;
 
 
   public barChartOptions: ChartOptions = {
@@ -25,7 +27,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       // individual data points will display their own label independently.
       itemSort: function(a, b) { return b.datasetIndex - a.datasetIndex; },
       callbacks: {
-        // Callback function could go here, to say, dynamically generate a label.
+        
       }
     },
     responsive: true,
@@ -50,6 +52,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
+  public chartIdReference: number[];
+  public chartWeekReference: number[];
 
   public readonly superstarBackgroundColor = 'rgba(57, 63, 239, 0.3)';
   public readonly goodBackgroundColor = 'rgba(24, 173, 24, 0.3)';
@@ -70,6 +74,22 @@ export class LastQualityAuditGraphComponent implements OnInit {
   ngOnInit() {
   }
 
+  chartClicked(event: any){
+    if(event.active.length>0) {
+      this.index = event.active[0]._index;
+      // console.log( this.chartIdReference[index] + " at week " + this.chartWeekReference[index]);
+      this.qaNotesForModal = this.qaNoteDataStore.find((element) => {
+        if(element.length>0){
+          return (element[0].batchId === this.chartIdReference[this.index])
+        }
+        return false;
+      });
+
+      console.log(this.qaNotesForModal);
+      document.getElementById("openModalButton").click();
+    }
+  }
+
   update() {
     this.locationDataStore = this.homeService.getLocationsDataStore();
     this.batchDataStore = this.homeService.getBatchesDataStore();
@@ -84,6 +104,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       batchIdLead.push(batch.batchId);
     });
 
+    this.chartWeekReference = [];
     const batchIdFollow: number[] = [];
     const poorArray: number[] = [];
     const averageArray: number[] = [];
@@ -100,11 +121,12 @@ export class LastQualityAuditGraphComponent implements OnInit {
         week = 0;
         qaArray.forEach(
           (qaNote) => {
-            if (qaNote.week > week) {
-              week = qaNote.week;
-            }
-          });
+          if (qaNote.week > week) {
+            week = qaNote.week;
+          }
+        });
 
+        this.chartWeekReference.push(week);
         batchIdFollow.push(qaArray[0].batchId);
         poorArray.push(0);
         averageArray.push(0);
@@ -140,6 +162,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       if(ctIndex < batchIdFollow.length && element !== batchIdFollow[ctIndex]){
         let i: number = 0;
         let temp: number;
+        let tempWeek: number;
         let poorArrayTemp: number;
         let averageArrayTemp: number;
         let goodArrayTemp: number;
@@ -147,18 +170,21 @@ export class LastQualityAuditGraphComponent implements OnInit {
         for(i = 0; i < batchIdFollow.length; i++){
           if(batchIdFollow[i] == element){
             temp = batchIdFollow[i];
+            tempWeek = this.chartWeekReference[i];
             poorArrayTemp = poorArray[i];
             averageArrayTemp = averageArray[i];
             goodArrayTemp = goodArray[i];
             starArrayTemp = starArray[i];
 
             batchIdFollow[i] = batchIdFollow[ctIndex];
+            this.chartWeekReference[i] = this.chartWeekReference[ctIndex];
             poorArray[i] = poorArray[ctIndex];
             averageArray[i] = averageArray[ctIndex];
             goodArray[i] = goodArray[ctIndex];
             starArray[i] = starArray[ctIndex];
 
             batchIdFollow[ctIndex] = temp;
+            this.chartWeekReference[ctIndex] = tempWeek;
             poorArray[ctIndex] = poorArrayTemp;
             averageArray[ctIndex] = averageArrayTemp;
             goodArray[ctIndex] = goodArrayTemp;
@@ -167,6 +193,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
         }
       }
     });
+
+    this.chartIdReference = batchIdFollow;
 
     this.barChartData = [
       { data: poorArray,      label: 'Poor',        borderWidth: borderWidth,
