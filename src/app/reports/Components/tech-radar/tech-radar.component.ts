@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { RadialChartOptions, ChartDataSets, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ReportService } from '../../Service/report.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 // This radar chart is made with ng2-charts, which provides directives to use chart.js more easily.
 @Component({
@@ -98,7 +99,19 @@ export class TechRadarComponent implements OnInit {
     // An array which holds the sum of all scores to be found in each category. Index matches categoryDataStore index.
     const categoryTotal: number[] = [];
 
-    let studentScores: any[] = [];
+    let studentScores: any = {};
+
+    // Garbage please delete.
+    // studentScores.push({[this.gradeDataStore[4].traineeId]: this.gradeDataStore[4].score});
+    // console.log('Printing studentScore test:');
+    // console.log(studentScores[0]);
+    // console.log('Logging this.gradeDataStore[4].score');
+    // console.log(this.gradeDataStore[4].traineeId);
+    // console.log('Checking if key in studentScores:');
+    // console.log(this.gradeDataStore[4].traineeId in studentScores[0]);
+    // console.log('Checking if index in studentScores:');
+    // console.log(studentScores.indexOf(this.gradeDataStore[4].traineeId));
+
 
     // Looping through each category (Java, SQL, etc.) of evaluation.
     // These categories represent a single week's primary subject, even if that week's curriculum consists of multiple subjects.
@@ -120,18 +133,54 @@ export class TechRadarComponent implements OnInit {
               categoryTotal[i] += this.gradeDataStore[j].score;
               categoryCount[i] += 1;
 
-              if (studentScores.keys.traineeId !== undefined) {
-                studentScores[j][this.gradeDataStore[j].traineeId] += this.gradeDataStore[j].score;
+              // console.log('Logging stuff:');
+              // console.log(this.gradeDataStore[j]);
+              // console.log(studentScores);
+              // console.log(this.gradeDataStore[j].traineeId in studentScores);
+
+              if (!(this.gradeDataStore[j].traineeId in studentScores)) {
+                studentScores[this.gradeDataStore[j].traineeId] = {};
+              }
+
+              // console.log('logging studentScores:');
+              // console.log(studentScores[this.gradeDataStore[j].traineeId]);
+              // console.log('This:');
+              // console.log(this.categoryDataStore[i].skillCategory);
+              // console.log('In this:');
+              // console.log(studentScores[this.gradeDataStore[j].traineeId]);
+              // console.log('T/F: ' + this.categoryDataStore[i].skillCategory in
+              // studentScores[this.gradeDataStore[j].traineeId]);
+              if (this.categoryDataStore[i].skillCategory in studentScores[this.gradeDataStore[j].traineeId]) {
+                console.log('getting here');
+                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['totalScore'] += this.gradeDataStore[j].score;
+                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['count'] += 1;
               } else {
-              studentScores.push({[this.gradeDataStore[j].traineeId]: this.gradeDataStore[j].score});
+                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory] = {
+                  totalScore: this.gradeDataStore[j].score,
+                  count: 1,
+                };
+                //studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['totalScore'] = this.gradeDataStore[j].score;
+                // studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['count'] = 1;
               }
             }
           }
         }
       }
     }
+    for (let i = 1; i < this.traineeDataStore.length; i++) {
+      studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
+      studentScores[this.traineeDataStore[i].traineeId]['data'] = [];
+
+      for (const x in studentScores[this.traineeDataStore[i].traineeId]) {
+        if (x !== 'name' && x !== 'data') {
+          studentScores[this.traineeDataStore[i].traineeId]['data'].
+                push((studentScores[this.traineeDataStore[i].traineeId][x]['totalScore'] /
+                      studentScores[this.traineeDataStore[i].traineeId][x]['count']).toFixed(2));
+        }
+      }
+    }
     console.log('studentScores:');
-    console.log(studentScores);
+    console.log(studentScores[this.traineeDataStore[4].traineeId]['data'][0]);
     // Calculate average score for the categories.
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
@@ -142,7 +191,7 @@ export class TechRadarComponent implements OnInit {
       }
     }
 
-    // Set the data being shown on chart.
+    // Set the overall tech data to be shown on chart.
     for (let i = 0; i < averageIndex.length; i++) {
       this.radarChartLabels[i] = this.categoryDataStore[averageIndex[i] - 1].skillCategory;
       this.radarChartData[0].data[i] = categoryAverages[i];
