@@ -16,7 +16,7 @@ export class ViewToolBarInReportsPage {
         return browser.get('/caliber/vp/reports');
     }
 
-    private sleepTime = 5000;
+    private sleepTime = 500;
     getYear2017(): ElementFinder {
         browser.sleep(this.sleepTime);
         element(by.id('toolbarYearDropdown')).click();
