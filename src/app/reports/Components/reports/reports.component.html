@@ -19,7 +19,7 @@
 	<div *ngIf="isWeekSelected && !isTraineeSelected">
 		<app-individual-qcresults-table></app-individual-qcresults-table>
 	</div>
-	<div *ngIf="reportService.getWeek() === 0" class="row">
+	<div *ngIf="reportService.getWeek() === 0 || reportService.getTrainee() !== -1" class="row">
 		<div class="col-md-4">
 			<app-tech-radar></app-tech-radar>
 		</div>

@@ -89,6 +89,15 @@ export class TechRadarComponent implements OnInit {
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
 
+    console.log('Grades:');
+    console.log(this.reportService.getGradeDataStore());
+    console.log('Categories:');
+    console.log(this.reportService.getCategoryDataStore());
+    console.log('Trainees:');
+    console.log(this.reportService.getTraineeDataStore());
+    console.log('Assessment:');
+    console.log(this.reportService.getAssessmentDataStore());
+
     // Resetting chart
     this.radarChartData[0].data = [];
     this.radarChartData.splice(1);
@@ -139,8 +148,7 @@ export class TechRadarComponent implements OnInit {
         }
       }
     }
-    console.log('Logging some stuff:');
-    console.log(this.traineeDataStore);
+
     for (let i = 1; i < this.traineeDataStore.length; i++) {
 
       this.studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
@@ -157,6 +165,7 @@ export class TechRadarComponent implements OnInit {
 
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
+    console.log('Category count: ' + categoryCount);
     for (let i = 0; i < categoryCount.length; i++){
       if (categoryCount[i] !== 0) {
         categoryAverages.push(+(categoryTotal[i] / categoryCount[i]).toFixed(2));
@@ -196,6 +205,11 @@ export class TechRadarComponent implements OnInit {
     for (let i = 0 ; i < elements.length ; i++) {
       (elements[i] as HTMLInputElement).checked = false;
     }
+    console.log('Logging studentScores stuff:');
+    console.log(this.studentScores);
+
+    console.log('logging chart stuff');
+    console.log(this.radarChartData);
   }
 
   // Handles the updating of chart from modal checkboxes
