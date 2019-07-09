@@ -5,6 +5,7 @@ import { HomeService } from '../../service/home.service';
 import { Location } from '../../models/location';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from 'src/app/reports/Models/qanote';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
   selector: 'app-last-quality-audit-graph',
@@ -75,12 +76,15 @@ export class LastQualityAuditGraphComponent implements OnInit {
     this.qaNoteDataStore = this.homeService.getQANotesDataStore();
 
     this.barChartLabels = [];
+    const batchIdLead: number[] = [];
     this.batchDataStore.forEach(
       (batch) => {
       this.barChartLabels.push(
       batch.trainer + ' ' + new Date(Number.parseInt(batch.startDate.toString(), 0)).toISOString().substring(0, 9));
+      batchIdLead.push(batch.batchId);
     });
 
+    const batchIdFollow: number[] = [];
     const poorArray: number[] = [];
     const averageArray: number[] = [];
     const goodArray: number[] = [];
@@ -92,6 +96,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
 
     this.qaNoteDataStore.forEach(
       (qaArray) => {
+        if(qaArray.length > 0) {
         week = 0;
         qaArray.forEach(
           (qaNote) => {
@@ -100,6 +105,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
             }
           });
 
+        batchIdFollow.push(qaArray[0].batchId);
         poorArray.push(0);
         averageArray.push(0);
         goodArray.push(0);
@@ -115,12 +121,53 @@ export class LastQualityAuditGraphComponent implements OnInit {
                 case 'Average': averageArray[index] += 1; break;
                 case 'Good': goodArray[index] += 1; break;
                 case 'Superstar': starArray[index] += 1; break;
-                // case 'Undefined': undefinedArray[index] += 1; break;
               }
             }
           });
         index++;
-      });
+        }
+      });  
+
+    let batchIdLeader: number[] = [];
+
+    for(let i = 0; i< batchIdLead.length; i++){
+      if(batchIdFollow.includes(batchIdLead[i])){
+        batchIdLeader.push(batchIdLead[i]);
+      }
+    }
+
+    batchIdLeader.forEach((element, ctIndex) => {
+      if(ctIndex < batchIdFollow.length && element !== batchIdFollow[ctIndex]){
+        let i: number = 0;
+        let temp: number;
+        let poorArrayTemp: number;
+        let averageArrayTemp: number;
+        let goodArrayTemp: number;
+        let starArrayTemp: number;
+        for(i = 0; i < batchIdFollow.length; i++){
+          if(batchIdFollow[i] == element){
+            temp = batchIdFollow[i];
+            poorArrayTemp = poorArray[i];
+            averageArrayTemp = averageArray[i];
+            goodArrayTemp = goodArray[i];
+            starArrayTemp = starArray[i];
+
+            batchIdFollow[i] = batchIdFollow[ctIndex];
+            poorArray[i] = poorArray[ctIndex];
+            averageArray[i] = averageArray[ctIndex];
+            goodArray[i] = goodArray[ctIndex];
+            starArray[i] = starArray[ctIndex];
+
+            batchIdFollow[ctIndex] = temp;
+            poorArray[ctIndex] = poorArrayTemp;
+            averageArray[ctIndex] = averageArrayTemp;
+            goodArray[ctIndex] = goodArrayTemp;
+            starArray[ctIndex] = starArrayTemp;
+          }
+        }
+      }
+    });
+
     this.barChartData = [
       { data: poorArray,      label: 'Poor',        borderWidth: borderWidth,
       stack: 'a', backgroundColor: this.poorBackgroundColor,      borderColor: this.poorHoverColor,
