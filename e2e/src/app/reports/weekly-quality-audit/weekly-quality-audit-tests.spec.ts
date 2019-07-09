@@ -5,7 +5,7 @@ browser.ignoreSynchronization = true;
 describe("Weekly quality audit component displays", () => {
    
    
-   it('should go to the reports page.', () =>{
+   it('should go to the reports page and see the doughnut chart.', () =>{
       
       let reportsPage = element(by.css('app-root #reports-link'));
       reportsPage.click().then(()=>{
@@ -37,13 +37,28 @@ describe("Weekly quality audit component displays", () => {
       });
 
       });
-
-      //console.log(reportsPage);
-
-
-
-
    });
+
+   it ('should see some number or output for the first doughnut chart value.', ()=>{
+      let doughnutChart = element(by.id("wqaAuditValue1")); //Ensures there is no blank space at this stage (as there shouldn't be).
+      expect(doughnutChart.getText()).toBeTruthy();
+   });
+
+   it ('should see some number or output for the second doughnut chart value.', ()=>{
+      let doughnutChart = element(by.id("wqaAuditValue2"));
+      expect(doughnutChart.getText()).toBeTruthy();
+   });
+
+   it ('should see some number or output for the third doughnut chart value.', ()=>{
+      let doughnutChart = element(by.id("wqaAuditValue3"));
+      expect(doughnutChart.getText()).toBeTruthy();
+   });
+
+   it ('should see some number or output for the fourth doughnut chart value.', ()=>{
+      let doughnutChart = element(by.id("wqaAuditValue4"));
+      expect(doughnutChart.getText()).toBeTruthy();
+   });
+
 
 });
 
