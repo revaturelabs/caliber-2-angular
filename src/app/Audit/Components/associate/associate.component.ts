@@ -58,13 +58,11 @@ export class AssociateComponent implements OnInit {
         this.getNotesByBatchByWeek();
         this.getCategoriesByBatchByWeek();
       });
-    // this.sortAlphabetically(this.notes);
     if (this.auditService.notes === undefined) {
       this.notes = null;
     } else {
       this.notes = this.auditService.notes;
     }
-    console.log(this.notes);
 
     this.getAllActiveCategories();
   }
@@ -73,7 +71,6 @@ export class AssociateComponent implements OnInit {
   getAllActiveCategories(): void {
     this.auditService.getAllActiveCategories().subscribe(
       (activeTags: Tag[]) => {
-        console.log(activeTags);
         for (let i = 0; i < activeTags.length; i++) {
           let t: Tag = new Tag(activeTags[i].categoryId, activeTags[i].skillCategory, -1, -1);
 
@@ -144,7 +141,6 @@ export class AssociateComponent implements OnInit {
 
   onFlagSubmit() {
     this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
-      console.log(data);
       this.isaddFlagClicked = false;
     });
   }
@@ -226,7 +222,6 @@ export class AssociateComponent implements OnInit {
   noteOnBlur(selectedNoteId: number, secondRound: boolean, i: number): void {
     for (let note of this.notes) {
       if (note.noteId === selectedNoteId) {
-        //console.log(note);
         this.showSpinner(i);
         this.auditService.sendNote(note).subscribe(
           data => {

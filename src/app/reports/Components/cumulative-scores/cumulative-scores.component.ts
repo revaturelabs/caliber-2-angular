@@ -69,7 +69,6 @@ export class CumulativeScoresComponent implements OnInit {
   }
 
   updateDataPull(){
-    //console.log("Updating Cumulative Score:");
     this.gradeDataStore = this.reportService.getGradeDataStore();
     if (this.gradeDataStore == undefined || this.gradeDataStore.length)
     {

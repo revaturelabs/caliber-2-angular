@@ -92,7 +92,6 @@ export class ToolbarComponent implements OnInit {
     //This is the initial pull of data in the toolbar for getting all batches for a year
     this.reportService.getBatchesByYear(year)
     .subscribe(results =>{
-      // console.log(results);
       // only update the information if results differs from the current this.batches
       if(!this.arraysEqualPreventsReportOutput(results,this.batches)){
         this.batches = results;
@@ -129,7 +128,6 @@ export class ToolbarComponent implements OnInit {
     //Get all the trainees within a batch
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(
       trainees => {
-      // console.log(trainees)    
       
       if(!this.arraysEqualPreventsReportOutput(trainees,this.trainees) ){   
         //if the trainees aray length is greater than one, set new data 
@@ -235,7 +233,6 @@ export class ToolbarComponent implements OnInit {
     //update assessment datastore
     this.reportService.getAllAssessments().subscribe(
       (assessments)=>{
-        // console.log("Updating Assessments");
         this.assessmentsDataStore = assessments;
     });
   }
@@ -244,7 +241,6 @@ export class ToolbarComponent implements OnInit {
     //update assessment datastore
     this.reportService.getAllBatchAssessments().subscribe(
       (assessments)=>{
-        // console.log("Updating Assessments");
         this.batchAssessmentsDataStore = assessments;
         this.reportService.setBatchAssessmentDataStore(assessments);
     });
@@ -255,7 +251,6 @@ export class ToolbarComponent implements OnInit {
     this.reportService.setGradesOfTraineeDataStore([]);
     this.reportService.getAllGrades().subscribe(
       (grades)=>{
-        // console.log("Updating Grades");
         this.gradesDataStore = grades;
         this.getAllGradesofTrainee();
     });
@@ -266,9 +261,7 @@ export class ToolbarComponent implements OnInit {
     if(this.selectedTrainee != null && this.selectedTrainee.traineeId>0){
       this.reportService.getAllTraineeGrades().subscribe(
         (traineeGrades)=>{
-          // console.log("Updating Grades///////");
           this.reportService.setGradesOfTraineeDataStore(traineeGrades);
-          // console.log(this.reportService.getGradesOfTraineeDataStore())
           //call for report page to update charts
           this.assessReportOutput();
       });
@@ -283,7 +276,6 @@ export class ToolbarComponent implements OnInit {
     //update category datastore
     if(this.categoryDataStore.length == 0){
       this.reportService.getAllCategories().subscribe((categories)=>{
-        // console.log("Getting all categories");
         this.categoryDataStore = categories;
         this.reportService.setCategoryDataStore(categories);
       });
@@ -293,7 +285,6 @@ export class ToolbarComponent implements OnInit {
   getQANotes(){
     //update reportService datastore
     this.reportService.getAllQANotes().subscribe((qaNotes)=>{
-      // console.log("Getting all QA Notes of Batch");
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
       this.getAllGrades();

@@ -69,7 +69,6 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
    * @author Jacques Myette
    */
   close() {
-    // console.log('in close() setting ' + this.trainee.email + ' to ' + this.traineeTemp.email);
     this.traineeTemp = this.trainee;
     this.refreshList.emit(true);
   }
