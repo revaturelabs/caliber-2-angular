@@ -1,6 +1,7 @@
 <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-  <div style="display: block;">
-    <canvas baseChart 
+  <div style="display: block;" *ngIf="displaying">
+
+    <canvas baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [options]="barChartOptions"
@@ -14,29 +15,43 @@
 </div>
 
 
-<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<div *ngIf="displaying">
 
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Quality Audit Report - Week{{chartWeekReference[index]}}</h4>
-      </div>
-      <div class="modal-body">
-        <table>
-          <tr>  
-            <th>Trainee:</th> <th>Feedback:</th> <th>Notes:</th>
-          </tr>
-          <tr *ngFor="let qaNote of qaNotesForModal" >
-              <td>{{qaNote.traineeId}}</td> <td>{{qaNote.qcStatus}}</td> <td>{{qaNote.content}}</td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Quality Audit Report - Week{{chartWeekReference[index]}}</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-responsive" >
+            <tr>  
+              <th class="col-sm-2 col-md-2 col-lg-2" >Trainee:</th> <th class="col-sm-2 col-md-2 col-lg-2" >Feedback:</th> <th class="col-sm-8 col-md-8 col-lg-8" >Notes:</th>
+            </tr>
+            <tr *ngFor="let qaNote of qaNotesForModal; let i = index;" >
+                <td>{{traineeNames[i]}}</td> 
+                <td>{{(qaNote.qcStatus !== 'Undefined')? qaNote.qcStatus : '-'}}</td> 
+                <td>{{(qaNote.content !== '')? qaNote.content : '-'}}</td>
+            </tr>
+            <tr *ngIf="overallDisplayQANote != null">
+                <td><strong>Overall:</strong></td> 
+                <td>{{(overallDisplayQANote.qcStatus !== 'Undefined')? overallDisplayQANote.qcStatus : '-'}}</td>
+                <td></td>
+            </tr>
+          </table>
+          <table class="table " *ngIf="overallDisplayQANote != null">
+              <tr>
+                  <td class="col-sm-1 col-md-1 col-lg-1"><strong>Notes:</strong></td>
+                  <td class="col-sm-9 col-md-9 col-lg-9">{{overallDisplayQANote.content}}</td>
+              </tr>
+            </table>
+
+        </div>
       </div>
     </div>
   </div>
