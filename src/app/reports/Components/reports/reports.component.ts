@@ -18,7 +18,9 @@ import { TechRadarComponent } from '../tech-radar/tech-radar.component';
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
+
   private weeklyQualityAuditComponent: WeeklyQualityAuditComponent;
+
   private reportTopChartController: ReportTopChartController;
   @ViewChild(ReportTopChartController) set setReportTopChartController(content: ReportTopChartController) {
     this.reportTopChartController = content;
@@ -57,8 +59,8 @@ export class ReportsComponent implements OnInit {
       this.cd.detectChanges();
     }
 
-  public isTraineeSelected: boolean = false;
-  public isWeekSelected: boolean = false;
+  public isTraineeSelected = false;
+  public isWeekSelected = false;
   private reportOutput: ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }

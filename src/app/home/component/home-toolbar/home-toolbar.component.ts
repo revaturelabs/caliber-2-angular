@@ -27,7 +27,6 @@ export class HomeToolbarComponent implements OnInit {
   qaNotesAllNotes: QANote[];
   qaNotesByBatch: QANote[][];
   currentDateTime: number = new Date().getTime();
-  // currentDateTime = 1541394000000;
 
   allLocations: Location;
 

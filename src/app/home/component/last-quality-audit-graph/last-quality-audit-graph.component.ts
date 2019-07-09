@@ -115,6 +115,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
             
           });
           this.overallDisplayQANote = null;
+          this.qaNoteCategory = "";
+
           if(this.traineeNames[this.traineeNames.length -1] == "Overall") {
             this.overallDisplayQANote = this.qaNotesForModal.pop();
           } 
@@ -128,12 +130,15 @@ export class LastQualityAuditGraphComponent implements OnInit {
                     (categoryObject) => {
                       this.qaNoteCategory = categoryObject.skillCategory;
                       console.log(this.qaNoteCategory);
+                      document.getElementById("openModalButton").click();
                       
                     }
                   );
+                 } else {
+                  document.getElementById("openModalButton").click();
                  }
              });
-          document.getElementById("openModalButton").click();
+          
         }
       );
     }
