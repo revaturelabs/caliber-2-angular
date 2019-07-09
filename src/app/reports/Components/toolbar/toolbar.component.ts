@@ -222,7 +222,6 @@ export class ToolbarComponent implements OnInit {
   showWeeks(){
     this.titledWeek = "Select Week";
   }
-
   showTrainees(){
     //Show a list of trainees that shows all current trainees in batch, and a "Trainees (all)" dummy batch
     this.listedTrainees = this.trainees.map((element)=>{return element});

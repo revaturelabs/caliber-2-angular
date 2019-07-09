@@ -48,6 +48,7 @@ describe('workspace-project App', () => {
   });
 });
 
+
 describe('tests for view trainees in a batch modal', () => {
   let page: ViewTraineesInBatchPage;
 
