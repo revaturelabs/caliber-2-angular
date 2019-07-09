@@ -47,7 +47,6 @@ describe('ViewtraineesComponent', () => {
   it('displays a modal', () => {
     page.navigateTo();
     page.clickModalButton();
-    console.log(page.getModal());
     expect(page.getModal()).toBeTruthy();
   });*/
 });

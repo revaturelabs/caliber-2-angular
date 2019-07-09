@@ -28,7 +28,7 @@ export class OverallQCScoresComponent implements OnInit {
   }
 
   downloadReport() {
-    console.log('wat');
+
   }
 
   getStatus(week, traineeId) {
@@ -164,7 +164,6 @@ export class OverallQCScoresComponent implements OnInit {
   *   properties of the component. Then when the modal shows up, the information is displayed
   */
   displayNote(name, week, message) {
-    // console.log('wat');
     this.name = name;
     this.week = (week + 1);
     this.message = message;

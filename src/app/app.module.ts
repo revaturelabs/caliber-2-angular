@@ -16,7 +16,6 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
 import { ReportsModule } from './reports-module/reports-module.module';
 // import { MaterialModule } from './material.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,7 @@ import { ReportsModule } from './reports-module/reports-module.module';
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent,
+    FormModalComponent
   ],
   imports: [
     BrowserModule,

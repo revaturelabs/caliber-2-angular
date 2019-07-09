@@ -8,7 +8,7 @@ import { AuditModule } from './audit-module/audit-module.module';
 import { AssessBatchModule } from './assess-batch-module/assess-batch-module.module';
 
 
-const routes: Routes = [
+const routes: Routes = [ 
   { path: '', redirectTo: 'vp/home', pathMatch: 'full' },
   { path: 'vp/home', loadChildren: './home-module/home-module.module#HomeModule' },
   { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
