@@ -1,4 +1,4 @@
-<div class="row ng-scope">
+<div class="row ng-scope" id="overallQCScores">
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
@@ -21,10 +21,10 @@
                       </th>
                     </tr>
                     <tr *ngFor="let trainee of trainees" class="ng-scope">
-                      <td class="ng-binding">{{ trainee['name'] }}</td>
+                      <td class="ng-binding" id="{{ trainee['name'] }}">{{ trainee['name'] }}</td>
                       <td *ngFor="let week of weeks" class=text-center ng-scope>
                         <div data-toggle="tooltip" data-placement="top" title="{{ getNote(week,trainee['traineeId'])['content'] }}"
-                         class="{{ getStatus(week, trainee['traineeId']) }} ng-scope"
+                         class="{{ getStatus(week, trainee['traineeId']) }} ng-scope" id="{{trainee['name']}} {{week}}"
                          on-click="displayNote(trainee['name'], week, getNote(week, trainee['traineeId'])['content'])"
                           data-toggle="modal" data-target="#myModal"></div>
                       </td>
@@ -32,8 +32,8 @@
                     <tr id="overallRow" class="ng-scope">
                         <td style="font-family: Futura-Std-Bold" class="ng-binding">Overall</td>
                         <td *ngFor="let week of weeks" class=text-center ng-scope>
-                            <div data-toggle="tooltip" data-placement="top" title="{{ getNote(week, 0)['content'] }}"
-                            class="{{ getStatus(week, 0) }} ng-scope"
+                          <div data-toggle="tooltip" data-placement="top" title="{{ getNote(week, 0)['content'] }}"
+                            class="{{ getStatus(week, 0) }} ng-scope" id="Overall{{week}}"
                             on-click="displayNote('Overall', week, getNote(week, 0)['content'])"
                              data-toggle="modal" data-target="#myModal">
                             </div>
@@ -71,7 +71,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">{{ name }} - Week {{ week }} Notes</h4>
+          <h4 class="modal-title" id="{{ name }} - Week {{ week }} Notes">{{ name }} - Week {{ week }} Notes</h4>
         </div>
         <div class="modal-body">
           <p>{{ message }}</p>

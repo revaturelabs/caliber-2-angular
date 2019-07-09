@@ -43,7 +43,6 @@ export class ReportsComponent implements OnInit {
     }
     this.cd.detectChanges();
   }
-
   @ViewChild(WeeklyQualityAuditComponent) set setWeeklyQualityAudit(content: WeeklyQualityAuditComponent) {
     this.weeklyQualityAuditComponent = content;
       if (this.isWeekSelected && !this.isTraineeSelected) {
