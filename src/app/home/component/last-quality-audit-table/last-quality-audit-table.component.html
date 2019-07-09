@@ -24,7 +24,7 @@
             {{ starArray[i] }}
           </td>
           <td [ngStyle]="{'color': statusColorArray[i]}">
-            {{ overallStatusArray[i] }}
+            {{ overallStatusArray[i] ?  overallStatusArray[i] : "N/A"}}
           </td>
         </tr>
       </tbody>
