@@ -14,7 +14,6 @@
   </div>
 </div>
 
-
 <div *ngIf="displaying">
 
   <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
@@ -26,9 +25,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Quality Audit Report - Week{{chartWeekReference[index]}}</h4>
+          <h4 class="modal-title">Quality Audit Report - Week {{chartWeekReference[index]}}</h4>
         </div>
         <div class="modal-body">
+          <strong>
+            <p *ngIf="(qaNoteCategory)">Categories covered this week: {{qaNoteCategory}}</p>
+          </strong>
           <table class="table table-responsive" >
             <tr>  
               <th class="col-sm-2 col-md-2 col-lg-2" >Trainee:</th> <th class="col-sm-2 col-md-2 col-lg-2" >Feedback:</th> <th class="col-sm-8 col-md-8 col-lg-8" >Notes:</th>

@@ -17,6 +17,8 @@ export class AssessmentService {
   updateUrl = this.url + "/all/assessment/update";
   getUrl = this.url + "/all/assessment/";
   deleteUrl = this.url + "/all/assessment/delete/";
+  batchUrl = this.getUrl + 'batch/';
+  // batch/2050?week=2
 
   assessment: Assessment;
   currentAssessment = new EventEmitter<Assessment>();
@@ -60,6 +62,11 @@ export class AssessmentService {
   }
   getAssessment(assessmentId: number): Observable<Assessment> {
     return this.http.get<Assessment>(this.getUrl + assessmentId);
+  }
+  getAssessmentByBatch(batchId: number, week: number): Observable<Assessment[]> {
+    if(week > 0 && batchId > 0){
+      return this.http.get<Assessment[]>(this.batchUrl + batchId + "?week=" + week);
+    }
   }
 
 

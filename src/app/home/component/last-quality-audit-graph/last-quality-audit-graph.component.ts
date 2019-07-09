@@ -7,6 +7,8 @@ import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from 'src/app/reports/Models/qanote';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { Trainee } from 'src/app/Batch/type/trainee';
+import { AssessmentService } from 'src/app/Assess-Batch/Services/assessment.service';
+import { CategoryService } from 'src/app/Assess-Batch/Services/category.service';
 
 @Component({
   selector: 'app-last-quality-audit-graph',
@@ -21,6 +23,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
   private traineeDataStore: Trainee[];
   private traineeNames: string[];
   private index: number;
+  private qaNoteCategory: string;
   private displaying: boolean = false; // used for displaying directives
   private overallDisplayQANote: QANote;
 
@@ -73,7 +76,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
     { data: [], label: 'Series A'}
   ];
 
-  constructor(private homeService: HomeService, private traineeService: TraineeService) { }
+  constructor(private homeService: HomeService, private traineeService: TraineeService,
+  private assessmentService: AssessmentService, private categoryService: CategoryService) { }
 
   ngOnInit() {
   }
@@ -99,6 +103,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
             }
           });
 
+          // this.assessmentService
+
           this.qaNotesForModal.forEach((qaNote) => {
             if(qaNote.traineeId > 0) {
               let name: string = trainees.find((element) => {return element.traineeId === qaNote.traineeId}).name;
@@ -111,9 +117,23 @@ export class LastQualityAuditGraphComponent implements OnInit {
           this.overallDisplayQANote = null;
           if(this.traineeNames[this.traineeNames.length -1] == "Overall") {
             this.overallDisplayQANote = this.qaNotesForModal.pop();
-          }  
+          } 
+          
+          this.assessmentService.getAssessmentByBatch(this.chartIdReference[this.index],
+             this.chartWeekReference[this.index]).subscribe(
+               (assessment) => {
+                 if(assessment.length >0){
+                   let categoryId: number = assessment[0].assessmentCategory;
+                  this.categoryService.getCategoryById(categoryId).subscribe(
+                    (categoryObject) => {
+                      this.qaNoteCategory = categoryObject.skillCategory;
+                      console.log(this.qaNoteCategory);
+                      
+                    }
+                  );
+                 }
+             });
           document.getElementById("openModalButton").click();
-
         }
       );
     }
