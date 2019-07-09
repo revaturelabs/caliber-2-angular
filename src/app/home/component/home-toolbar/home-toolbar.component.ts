@@ -26,8 +26,7 @@ export class HomeToolbarComponent implements OnInit {
   showStates: boolean;
   qaNotesAllNotes: QANote[];
   qaNotesByBatch: QANote[][];
-  // currentDateTime: number = new Date().getTime();
-  currentDateTime = 1541394000000;
+  currentDateTime: number = new Date().getTime();
 
   allLocations: Location;
 
