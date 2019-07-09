@@ -59,7 +59,6 @@ export class BatchViewComponent implements OnInit {
    * @param batch batch to populate the child component form
    */
   populateBatch(batch: Batch) {
-    console.log(batch);
     this.createUpdate = batch;
   }
 
@@ -104,7 +103,6 @@ export class BatchViewComponent implements OnInit {
         allids.push(batch.batchId);
       }
     }
-    console.log('ids: ' + allids);
     this.batchservice.getTraineeCount(allids).subscribe( count => {
       this.populateTraineeCount(count);
     }, error => {
@@ -141,8 +139,6 @@ export class BatchViewComponent implements OnInit {
    * @param batchId batchid of the batch to be deleted
    */
   deleteBatch(batchId: number) {
-    console.log('delete');
-    console.log(batchId);
     this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage(), error => {
       const serviceName = 'Batch Service ';
       const errorMessage = 'Failed to make connection!';

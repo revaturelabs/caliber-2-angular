@@ -66,7 +66,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
    * populates form modal if updating batch and not creating new
    */
   setValues() {
-    console.log(this.createOrUpdate);
     this.trainingName = this.createOrUpdate.trainingName;
     this.trainingType = this.createOrUpdate.trainingType;
     this.skillType = this.createOrUpdate.skillType;
@@ -88,7 +87,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('generated');
     // generate all the skilltypes
     this.batchservice.getAllSkillTypes().subscribe(results => {
       this.skillTypes = results;
@@ -121,7 +119,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
    */
   ngOnChanges() {
     if (this.createOrUpdate != null) {
-      console.log('change detected');
       this.setValues();
     }
   }
@@ -130,7 +127,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
    * resets the form info to default values
    */
   resetForm() {
-    console.log('inside resetForm');
     this.trainingName = null;
     this.trainingType = undefined;
     (<HTMLFormElement>document.getElementById('formId')).reset();
@@ -151,9 +147,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
    * creates a brand new batch with form inputs
    */
   createBatch(): void {
-    console.log(new Batch(this.trainingName, this.trainingType,
-      this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
-      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks));
 
     // account for time zone differences
     const d = new Date(this.startDate);
@@ -165,7 +158,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks)).subscribe(result => {
-        console.log('created');
         this.someEvent.next('created');
         this.resetForm();
       });
@@ -189,7 +181,6 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
     // update batch in backend
     this.batchservice.putBatch(batch).subscribe(result => {
-      console.log('updated');
       this.someEvent.next('created');
       this.resetForm();
     });
@@ -248,27 +239,21 @@ export class BatchModalComponent implements OnInit, OnChanges {
     d.setHours(0, 0, 0, 0);
     const d2 = new Date(this.endDate);
     d2.setHours(0, 0, 0, 0);
-    console.log(d + '|' + d2);
     if (d >= d2 && this.trainer === this.coTrainer) {
-      console.log(1);
       this.dateIsError = true;
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
     } else if (d >= d2) {
-      console.log(2);
       this.dateIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
     } else if (this.trainer === this.coTrainer) {
-      console.log(3);
       this.trainerIsError = true;
       document.getElementById('checkBatchModalDate').className = 'show';
       return;
     } else {
-      console.log(5);
       this.updateBatch();
-      console.log(6);
       const elem = document.getElementById('closeBtn');
       const evt = new MouseEvent('click', { bubbles: true });
       elem.dispatchEvent(evt);

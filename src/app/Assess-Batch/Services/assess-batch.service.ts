@@ -37,22 +37,18 @@ export class AssessBatchService {
   getBatchesByQuarter(year: number, quarter: string): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter);
   }
-  
+
   getAllYears(): Observable<number[]> {
-    console.log("getAllYears---->" + this.http.get<number[]>(this.url + this.yearsURL ));
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
-  
+
   getBatchById(id: number): Observable<Batch>{
     return this.http.get<Batch>(this.url + "/all/batch/"+id);
   }
 
   //HTTPRequest for adding a week -- using a PUT request
   addWeek(updateBatch: Batch) {
-    console.log("add week")
-    console.log(updateBatch);
     this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions).subscribe((ourBatch) => {
-      console.log(ourBatch);
     });
   }
 
