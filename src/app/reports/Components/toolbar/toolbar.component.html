@@ -28,7 +28,7 @@
         <a role="button" name="toolbarWeek{{week}}" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a> 
             </li>
           </ul>
-          <li role="button" class="dropdown"><a class="dropdown-toggle"
+          <li role="button" class="dropdown"><a class="dropdown-toggle" id = "toolbarTraineeDropdown"
             data-toggle="dropdown" (click)="showTrainees()">{{selectedTrainee.name}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li *ngFor="let trainee of listedTrainees">
