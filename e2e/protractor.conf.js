@@ -9,9 +9,8 @@ exports.config = {
   specs: [
     // "D:\Revature\Revature Project 3\caliber-2-meta\frontend\e2e",
      './src/**/*.e2e-spec.ts',
-     //'./src/app/**/*.spec.ts',
+     './src/app/**/*.spec.ts',
      //'./src/*.spec.ts'
-     './src/app/reports/weekly-quality-audit/weekly-quality-audit-tests.spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
