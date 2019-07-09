@@ -23,7 +23,7 @@
           <td>
             {{ starArray[i] }}
           </td>
-          <td [ngStyle]="{'color': statusColorArray[i]}">
+          <td [ngStyle]="{'color': (statusColorArray[i])? statusColorArray[i] : 'orange'}">
             {{ overallStatusArray[i] ?  overallStatusArray[i] : "N/A"}}
           </td>
         </tr>
