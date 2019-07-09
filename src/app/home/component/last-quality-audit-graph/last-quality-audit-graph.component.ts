@@ -5,7 +5,6 @@ import { HomeService } from '../../service/home.service';
 import { Location } from '../../models/location';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from 'src/app/reports/Models/qanote';
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
   selector: 'app-last-quality-audit-graph',
