@@ -129,6 +129,7 @@ export class AssessmentBreakdownComponent implements OnInit {
   }
 
   createChart() : void {
+    
     let gradeArray=[];
     let traineeAverageArray=[]; 
     let traineeDisplayData=[];
@@ -142,10 +143,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.assessmentDataStore.forEach((assessment) => {
       assessmentMap.set(assessment.assessmentId, assessment);
     });
-
-    traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
-    batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
-
+    
     this.gradeAverages = gradeArray;
     this.barChartLabels = [];
     this.tableHeader = [];
@@ -154,6 +152,14 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.validHeader = [];
     let scoreString : string;
     let assessmentTypeString : string;
+
+    // This occurs if there are no assessments, therefore there are no data to display
+    if (assessmentMap.size <= 0) {
+      return;
+    }
+    
+    traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
+    batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
 
     batchAverageArray.forEach((assessmentScore: AssessmentScore) => {
       //This rounds the assessment score to the first two decimals.

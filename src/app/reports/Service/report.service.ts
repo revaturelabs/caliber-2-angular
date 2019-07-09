@@ -42,7 +42,7 @@ export class ReportService {
   assessmentsDataStore : Assessment[];
   batchAssessmentsDataStore : Assessment[];
   gradesOfTraineeDataStore : Grade[];
-  
+
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
@@ -51,7 +51,7 @@ export class ReportService {
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url + this.categoryAllURL, httpOptions);
+    return this.http.get<Category[]>(this.url + this.categoryAllURL);
   }
 
   getBatchesByYear(year : number): Observable<Batch[]> {

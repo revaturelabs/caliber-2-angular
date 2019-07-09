@@ -1,42 +1,38 @@
-<div class="container">
+<div class="container" id = "toolbar">
     <div class="container">
-      <div class="row">
+      <div class="row" id = "toolbarRow">
         <div class="col-md-12 col-lg-12 top10">
           <!-- top ui dropdown for available years -->
           <ul class="nav nav-tabs">
-            <li role="button" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" id="years">
-                {{selectedYear}} <span class="caret"></span>
-              </a>
+            <li role="button" class="dropdown"><a class="dropdown-toggle" id ="toolbarYearDropdown"
+              data-toggle="dropdown">{{selectedYear}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li *ngFor="let year of years">
-          <a role="button" id="{{year}}" (click)="selectYear(year)">{{year}}</a>
+          <a role="button" name ="toolbarYear{{year}}" (click)="selectYear(year)">{{year}}</a>
           </li>
               </ul>
               
             <!-- sort by quarter-->
-            <li role="button" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" id="batches">
-                {{selectedBatch.trainingName}} <span class="caret"></span>
-              </a>
+            <li role="button" class="dropdown"><a class="dropdown-toggle" id="toolbarBatchDropdown"
+              data-toggle="dropdown">{{selectedBatch.trainingName}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li *ngFor="let batch of batches">
-          <a role="button" id={{batch.trainingName}} (click)="selectBatch(batch)">{{batch.trainingName}}</a>
+          <a role="button" name="toolbarBatch{{batch.batchId}}" (click)="selectBatch(batch)">{{batch.trainingName}}</a>
               </li>
             </ul>
           <!-- Now to find Week and Trainee -->
-          <li role="button" class="dropdown"><a class="dropdown-toggle"
-            data-toggle="dropdown" id="weeks">{{titledWeek}} <span class="caret"></span></a>
+          <li role="button" class="dropdown"><a class="dropdown-toggle" id = "toolbarWeekDropdown"
+            data-toggle="dropdown">{{titledWeek}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li *ngFor="let week of weeks">
-        <a role="button" id="Week{{week}}" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a> 
+        <a role="button" name="toolbarWeek{{week}}" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a> 
             </li>
           </ul>
-          <li role="button" class="dropdown"><a class="dropdown-toggle"
-            data-toggle="dropdown" id="trainees" (click)="showTrainees()">{{selectedTrainee.name}} <span class="caret"></span></a>
+          <li role="button" class="dropdown"><a class="dropdown-toggle" id = "toolbarTraineeDropdown"
+            data-toggle="dropdown" (click)="showTrainees()">{{selectedTrainee.name}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li *ngFor="let trainee of listedTrainees">
-        <a role="button" id="Trainee: {{trainee.name}}" (click)="selectTrainee(trainee)">{{trainee.name}}</a>
+        <a role="button" name="toolbarTrainee{{trainee.traineeId}}" (click)="selectTrainee(trainee)">{{trainee.name}}</a>
             </li>
           </ul>
         </ul>
