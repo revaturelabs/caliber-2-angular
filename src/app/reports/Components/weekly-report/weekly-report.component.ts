@@ -100,7 +100,7 @@ export class WeeklyReportComponent implements OnInit {
     }
   }
 
-  fillChart() {
+  fillChartByTrainee() {
 
     this.chartOptions = {
     };
@@ -144,14 +144,42 @@ export class WeeklyReportComponent implements OnInit {
 
     // set x axis labels
     this.chartLabels = keys;
-    // keys.b( (obj) => {
+  }
+
+  fillChart() {
+
+    this.chartOptions = {
+    };
+
+    const keys = Array.from(this.weekAverages.keys());
+    // fill line
+    keys.forEach((key) => {
+      let avg = 0;
+      this.weekAverages.get(key).forEach((grade) => {
+        avg += grade;
+      });
+      // add the rounded averages into an array
+      this.avgData.push( Math.round( avg / this.weekAverages.get(key).length * 100) / 100);
+    });
+
+    // keys.map( (obj) => {
     //   obj = "Trainee" + obj;
     //   return obj;
     // });
+    this.chartData = [
+      {
+        data: this.avgData,
+        fill: false,
+        borderColor: 'rgba(114,164,194,1)',
+      },
+    ];
+
+    // set x axis labels
+    this.chartLabels = keys;
   }
 
-
   resetChart() {
+
     this.chartData = [];
     this.chartLabels = [];
     this.avgData = [];
@@ -202,7 +230,7 @@ export class WeeklyReportComponent implements OnInit {
         }
       }
       // generate the chart
-      this.fillChart();
+      this.fillChartByTrainee();
     }
   }
 }
