@@ -29,136 +29,132 @@ export class ReportService {
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
   categoryAllURL = '/category/all/active';
-  assessmentsAllURL : string = '/assessment/all/assessment/batch/';
+  assessmentsAllURL: string = '/assessment/all/assessment/batch/';
 
   batch: Batch;
   week: number;
-  trainee:Trainee;
-  averageGradeScore : number;
-  gradesDataStore : Grade[];
-  qaNoteDataStore : QANote[];
+  trainee: Trainee;
+  averageGradeScore: number;
+  gradesDataStore: Grade[];
+  qaNoteDataStore: QANote[];
   traineeDataStore: Trainee[];
-  categoryDataStore : Category[];
-  assessmentsDataStore : Assessment[];
-  batchAssessmentsDataStore : Assessment[];
-  gradesOfTraineeDataStore : Grade[];
+  categoryDataStore: Category[];
+  assessmentsDataStore: Assessment[];
+  batchAssessmentsDataStore: Assessment[];
+  gradesOfTraineeDataStore: Grade[];
 
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
-    // console.log(environment);
-    return this.http.get<number[]>(this.url + this.yearsURL, httpOptions);
+    return this.http.get<number[]>(this.url + this.yearsURL);
   }
 
   getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + this.categoryAllURL);
   }
 
-  getBatchesByYear(year : number): Observable<Batch[]> {
-    return this.http.get<Batch[]>(this.url +'/batch' + this.batchesYearURL + year, httpOptions);
+  getBatchesByYear(year: number): Observable<Batch[]> {
+    return this.http.get<Batch[]>(this.url + '/batch' + this.batchesYearURL + year, httpOptions);
   }
 
   getAllGradesForTotalAverage(): Observable<Grade[]> {
     return this.http.get<Grade[]>(this.url + this.gradesTotalAverageURL, httpOptions);
   }
 
-  getAllAssessments():Observable<Assessment[]> {
-    let weekStr = this.determineWeek(this.week);
-    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions)
+  getAllAssessments(): Observable<Assessment[]> {
+    const weekStr = this.determineWeek(this.week);
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId + weekStr, httpOptions);
   }
 
-  getAllBatchAssessments():Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId, httpOptions)
+  getAllBatchAssessments(): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(this.url + this.assessmentsAllURL + this.batch.batchId, httpOptions);
   }
 
-  getAllGrades():Observable<Grade[]> {
+  getAllGrades(): Observable<Grade[]> {
     // if(this.trainee != undefined && this.trainee != null && this.trainee.traineeId == -1){
-      let weekStr = this.determineWeek(this.week);
-      return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions)
+      const weekStr = this.determineWeek(this.week);
+      return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId + weekStr, httpOptions);
     // }else if(this.trainee != undefined && this.trainee != null){
     //   return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
     // }
   }
 
-  getAllTraineeGrades():Observable<Grade[]> {
-    if(this.trainee != undefined && this.trainee != null){
-      return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions)
+  getAllTraineeGrades(): Observable<Grade[]> {
+    if (this.trainee !== undefined && this.trainee != null) {
+      return this.http.get<Grade[]>(this.url + this.gradesByTraineeURL + this.trainee.traineeId, httpOptions);
     }
   }
 
-  getAllQANotes():Observable<QANote[]> {
+  getAllQANotes(): Observable<QANote[]> {
     let url;
-    if(this.week == 0){
+    if (this.week === 0) {
       url = this.url + this.qaNotesAllURL + this.batch.batchId;
-      // console.log(url);
-      return this.http.get<QANote[]>(url, httpOptions)
-    }
-    else{
-      url = this.url + this.qaNotesURL + this.batch.batchId +"/"+this.week;
-      // console.log(url);
-      return this.http.get<QANote[]>(url, httpOptions)
+      return this.http.get<QANote[]>(url, httpOptions);
+    } else {
+      url = this.url + this.qaNotesURL + this.batch.batchId + '/' + this.week;
+      return this.http.get<QANote[]>(url, httpOptions);
     }
   }
 
   //// add a query for all weeks
   //// http://localhost:10000/qa/audit/notes/2050/1
 
-  setGradeDataStore(gradesDataStore: Grade[]){
+  setGradeDataStore(gradesDataStore: Grade[]) {
     this.gradesDataStore = gradesDataStore;
   }
 
-  setQANoteDataStore(qaNoteDataStore: QANote[]){
+  setQANoteDataStore(qaNoteDataStore: QANote[]) {
     this.qaNoteDataStore = qaNoteDataStore;
   }
 
-  setTraineeDataStore(traineeDataStore: Trainee[]){
+  setTraineeDataStore(traineeDataStore: Trainee[]) {
     this.traineeDataStore = traineeDataStore;
   }
 
-  setCategoryDataStore(categoryDataStore: Category[]){
+  setCategoryDataStore(categoryDataStore: Category[]) {
     this.categoryDataStore = categoryDataStore;
   }
 
-  setAssessmentDataStore(assessmentDataStore: Assessment[]){
+  setAssessmentDataStore(assessmentDataStore: Assessment[]) {
     this.assessmentsDataStore = assessmentDataStore;
   }
 
-  setBatchAssessmentDataStore(batchAssessmentsDataStore: Assessment[]){
+  setBatchAssessmentDataStore(batchAssessmentsDataStore: Assessment[]) {
     this.batchAssessmentsDataStore = batchAssessmentsDataStore;
   }
 
-  setGradesOfTraineeDataStore(gradesOfTraineeDataStore : Grade[]){
-    this.gradesOfTraineeDataStore = gradesOfTraineeDataStore
+  setGradesOfTraineeDataStore(gradesOfTraineeDataStore: Grade[]) {
+    this.gradesOfTraineeDataStore = gradesOfTraineeDataStore;
   }
 
-  determineWeek(week:number):String{
-    if(week>0){
-      return "?week="+week;
+  determineWeek(week: number): String {
+    if (week > 0) {
+      return '?week=' + week;
     }
     return '';
   }
 
-  setAverageGradeScore(averageGradeScore : number){
+  setAverageGradeScore(averageGradeScore: number) {
     this.averageGradeScore = averageGradeScore;
   }
 
-  setBatch(batch:Batch){
+  setBatch(batch: Batch) {
     this.batch = batch;
   }
 
-  getBatch(){
-    return this.batch
+  getBatch() {
+    return this.batch;
   }
 
-  setWeek(week){
+  setWeek(week) {
     this.week = week;
   }
 
-  getWeek():number{
-    return this.week
+  getWeek(): number {
+    return this.week;
   }
 
-  setTrainee(trainee){
+  setTrainee(trainee) {
     this.trainee = trainee;
   }
 
@@ -166,35 +162,35 @@ export class ReportService {
     return this.trainee;
   }
 
-  getGradeDataStore() : Grade[]{
+  getGradeDataStore(): Grade[] {
     return this.gradesDataStore;
   }
 
-  getQANoteDataStore(): QANote[]{
+  getQANoteDataStore(): QANote[] {
     return this.qaNoteDataStore;
   }
 
-  getTraineeDataStore() : Trainee[]{
+  getTraineeDataStore(): Trainee[] {
     return this.traineeDataStore;
   }
 
-  getCategoryDataStore() :Category[]{
+  getCategoryDataStore(): Category[] {
     return this.categoryDataStore;
   }
 
-  getAssessmentDataStore(): Assessment[]{
+  getAssessmentDataStore(): Assessment[] {
     return this.assessmentsDataStore;
-  } 
+  }
 
-  getBatchAssessmentDataStore(): Assessment[]{
+  getBatchAssessmentDataStore(): Assessment[] {
     return this.batchAssessmentsDataStore;
   }
 
-  getGradesOfTraineeDataStore(){
+  getGradesOfTraineeDataStore() {
      return this.gradesOfTraineeDataStore;
   }
 
-  getAverageGradeScore(){
+  getAverageGradeScore() {
     return this.averageGradeScore;
   }
 }

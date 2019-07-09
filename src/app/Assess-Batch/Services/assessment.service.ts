@@ -54,7 +54,6 @@ export class AssessmentService {
     return this.http.post<Assessment>(this.createUrl, assessment);
   }
   deleteAssessment(assessment: Assessment): Observable<Assessment> {
-    console.log("our delete url is :" + this.deleteUrl + assessment.assessmentId);
     return this.http.request<Assessment>('delete', this.deleteUrl + assessment.assessmentId, { body: assessment });
   }
   updateAssessment(assessment: Assessment): Observable<Assessment> {
