@@ -22,4 +22,11 @@ describe('WeeklyQualityAuditComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it ('should create title case strings', () => {
+    component = fixture.componentInstance;
+    let titleCaseString = component.toTitleCase("TEST");
+    expect(titleCaseString).toBe('Test');
+
+  });
 });
