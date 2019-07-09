@@ -151,14 +151,12 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   * Used to repopulate the trainee list after an update, delete, swap
   */
   refreshList() {
-    console.log('refreshing');
     this.ts.getTrainees(this.batchId).subscribe(data => {
       if (data) {
         this.trainees = data;
         this.showCommentForm = new Array<boolean>(this.trainees.length);
         this.showCommentForm = new Array<boolean>(this.trainees.length);
         this.showNotes = new Array<boolean>(this.trainees.length);
-        console.log('refreshed');
       }
     },
     issue => {

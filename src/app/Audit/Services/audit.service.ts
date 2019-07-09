@@ -65,7 +65,6 @@ export class AuditService {
   }
 
   getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]> {
-    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
 
@@ -73,7 +72,6 @@ export class AuditService {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
   getNotesByBatchByWeek(batchId: number, week: number): Observable<QcNote[]> {
-    console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
     return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
   }
 
@@ -104,7 +102,6 @@ export class AuditService {
   }
 
   deleteCategory(categoryId: number): Observable<void>{
-    console.log('DELETE: ' + this.url + this.deleteCategoryURL + categoryId);
     return this.http.delete<void>(this.url + this.deleteCategoryURL + categoryId);
   }
 
