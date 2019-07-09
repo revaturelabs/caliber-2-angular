@@ -67,7 +67,6 @@ export class ReportsComponent implements OnInit {
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
   @ViewChild(IndividualQCResultsTableComponent) individualWeekQCReport: IndividualQCResultsTableComponent;
-  // @ViewChild(TabularTraineeAverageListComponent) cumulativeScoreComponents: TabularTraineeAverageListComponent;
   @ViewChild(ReportTopChartController) cumulativeScoreComponents: ReportTopChartController;
   @ViewChild(TechRadarComponent) techRadarComponents: TechRadarComponent;
 
@@ -87,7 +86,6 @@ export class ReportsComponent implements OnInit {
 
   showIndividualQCWeek() {
     if (this.reportService.getTrainee() != null) {
-      // this.individualWeekQCReport.week = week;
       return ((this.reportService.getWeek() !== 0) && (this.reportService.getTrainee().traineeId === -1));
     }
   }
@@ -96,33 +94,6 @@ export class ReportsComponent implements OnInit {
     this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
     this.isWeekSelected = this.reportService.week > 0;
     this.reportOutput = reportOutput;
-
-    // console.log("=====================================\n== The Report is Updating Children ==\n");
-    // console.log("Selected Trainee:"); // Adam needs these values for showing his component
-    // console.log(this.reportOutput.selectedTrainee);
-    // console.log("Selected Week:");// Let Jimmy know if you need other custom values on the reportOutput object
-    // console.log(this.reportOutput.selectedWeek);
-    // console.log("The Cumulative Score component has been updated!");
-    // console.log("Testing Report Service Data");
-    // console.log("Get Selected Batch");
-    // console.log(this.reportService.getBatch());
-    // console.log("Get All Trainees in Batch");
-    // console.log(this.reportService.getTraineeDataStore());
-    // console.log("Get All Categories in System");
-    // console.log(this.reportService.getCategoryDataStore());
-    // console.log("Get all QANotes in Batch");
-    // console.log(this.reportService.getQANoteDataStore());
-    // console.log("Get all Assessments in Batch");
-    // console.log(this.reportService.getAssessmentDataStore());
-    // console.log("Get all Grades by Batch/week");
-    // console.log(this.reportService.getGradeDataStore());
-    // console.log("Get all Grades of Trainee");
-    // console.log(this.reportService.getGradesOfTraineeDataStore());
-    // console.log("Show Average Total Grade");
-    // console.log(this.reportService.getAverageGradeScore());
-    // console.log("Get all Batch Assessments");
-    // console.log(this.reportService.getBatchAssessmentDataStore());
-    // this.reportTopChartController.updateDataPull();
 
     if (this.weeklyQualityAuditComponent !== undefined && this.weeklyQualityAuditComponent !== null) {
       this.weeklyQualityAuditComponent.updateDataPull();
