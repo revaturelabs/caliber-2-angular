@@ -10,7 +10,7 @@ exports.config = {
     // "D:\Revature\Revature Project 3\caliber-2-meta\frontend\e2e",
      './src/**/*.e2e-spec.ts',
      './src/app/**/*.spec.ts',
-     //'./src/*.spec.ts'
+     //'./src/*.spec.ts',
   ],
   capabilities: {
     'browserName': 'chrome'
