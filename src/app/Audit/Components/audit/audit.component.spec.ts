@@ -14,7 +14,7 @@ class AssociateStubComponent{}
 class OverallStubComponent{}
 
 describe('AuditComponent', () => {
-  let component: AuditComponent;
+    let component: AuditComponent;
   let fixture: ComponentFixture<AuditComponent>;
 
   beforeEach(async(() => {

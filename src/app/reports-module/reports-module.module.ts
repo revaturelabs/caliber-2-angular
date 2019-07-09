@@ -15,6 +15,7 @@ import { ReportTopChartController } from '../reports/Components/report-top-chart
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { CumulativeScoresComponent } from '../reports/Components/cumulative-scores/cumulative-scores.component';
+import { HttpClient } from '@angular/common/http';
 import { WeeklyReportComponent } from '../reports/Components/weekly-report/weekly-report.component';
 import { WeeklyQualityAuditComponent } from '../reports/Components/weekly-quality-audit/weekly-quality-audit.component';
 
@@ -42,6 +43,7 @@ import { WeeklyQualityAuditComponent } from '../reports/Components/weekly-qualit
   providers: [
     ReportService,
     OverallQCScoresComponent,
+    HttpClient
   ],
   exports: [
     OverallQCScoresComponent,

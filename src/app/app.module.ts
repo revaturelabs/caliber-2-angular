@@ -15,7 +15,6 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import { ReportsModule } from './reports-module/reports-module.module';
 // import { MaterialModule } from './material.module';
-//import { UpdateDeleteAssessmentModalComponent } from './Assess-Batch/Components/toolbar/update-delete-assessment-modal/update-delete-assessment-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +39,5 @@ import { ReportsModule } from './reports-module/reports-module.module';
   entryComponents: [
     FormModalComponent,
   ]
- 
 })
 export class AppModule { }
