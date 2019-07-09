@@ -1,11 +1,11 @@
-import { AppPage } from './app.po';
+import { HomePage } from './app.po';
 import { ViewTraineesInBatchPage } from './app.po';
 
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let page: HomePage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new HomePage();
   });
 
   /* HEADER TESTS */
@@ -38,6 +38,11 @@ describe('workspace-project App', () => {
   it('should create footer with contact information', () => {
     page.navigateTo();
     expect(page.getFooterRevature()).toBeTruthy();
+  });
+
+  it('Should see the Last Quality Audit Table on the Home Page', () => {
+    page.navigateTo();
+    expect(page.getLastQATable().isPresent()).toBeTruthy();
   });
 });
 
