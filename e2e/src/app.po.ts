@@ -103,11 +103,11 @@ export class ViewReportsPage {
 
   viewBatchScores() {
     browser.sleep(1000);
-    element(by.id('years')).click().then(() => {
-      element(by.id('2018')).click().then(() => {
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
         browser.sleep(1000);
-        element(by.id('batches')).click().then(() => {
-          element(by.id('1802 Oct16 Java')).click().then(() => {
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
             browser.sleep(1000);
           });
         });
@@ -118,8 +118,8 @@ export class ViewReportsPage {
 
   selectSpecificWeek() {
     browser.sleep(1000);
-    element(by.id('weeks')).click().then(() => {
-      element(by.id('Week1')).click().then(() => {
+    element(by.id('toolbarWeekDropdown')).click().then(() => {
+      element(by.name('toolbarWeek1')).click().then(() => {
         browser.sleep(1000);
       });
     });
@@ -128,14 +128,14 @@ export class ViewReportsPage {
 
   selectSpecificTrainee() {
     // browser.sleep(1000);
-    element(by.id('years')).click().then(() => {
-      element(by.id('2018')).click().then(() => {
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
         // browser.sleep(1000);
-        element(by.id('batches')).click().then(() => {
-          element(by.id('1802 Oct16 Java')).click().then(() => {
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
             // browser.sleep(1000);
-            element(by.id('trainees')).click().then(() => {
-              element(by.id('Trainee: Spruce, Jason')).click().then(() => {
+            element(by.id('toolbarTraineeDropdown')).click().then(() => {
+              element(by.name('toolbarTrainee5360')).click().then(() => {
                 // browser.sleep(1000);
               });
             });
@@ -148,11 +148,11 @@ export class ViewReportsPage {
 
   selectSmileyModal() {
     browser.sleep(1000);
-    element(by.id('years')).click().then(() => {
-      element(by.id('2018')).click().then(() => {
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
         browser.sleep(1000);
-        element(by.id('batches')).click().then(() => {
-          element(by.id('1802 Oct16 Java')).click().then(() => {
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
             browser.sleep(1000);
             element(by.id('Spruce, Jason 1')).click().then(() => {
               browser.sleep(1000);
@@ -165,11 +165,11 @@ export class ViewReportsPage {
   }
 
   viewModal() {
-    element(by.id('years')).click().then(() => {
-      element(by.id('2018')).click().then(() => {
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
         browser.sleep(1000);
-        element(by.id('batches')).click().then(() => {
-          element(by.id('1802 Oct16 Java')).click().then(() => {
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
             browser.sleep(1000);
           });
         });
