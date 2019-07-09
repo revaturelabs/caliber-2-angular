@@ -60,8 +60,8 @@ export class ReportsComponent implements OnInit {
       this.cd.detectChanges();
     }
 
-  public isTraineeSelected: boolean = false;
-  public isWeekSelected: boolean = false;
+  public isTraineeSelected = false;
+  public isWeekSelected = false;
   private reportOutput: ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
