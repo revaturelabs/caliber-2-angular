@@ -5,7 +5,7 @@ import { Trainee } from './../../../Batch/type/trainee';
 import { Grade } from 'src/app/Batch/type/trainee';
 import { Component, OnInit } from '@angular/core';
 import { RadialChartOptions, ChartDataSets, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
 import { ReportService } from '../../Service/report.service';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -22,10 +22,25 @@ export class TechRadarComponent implements OnInit {
   categoryDataStore: Category[];
   batchDataStore: Batch[];
   labelsAndAverages: any[] = [];
+  studentScores: any = {};
+  // ng2-charts is capable to automatically providing colors, but we were unable to use that functionality
+  colorsArray: any[] = [   'rgba(255, 0, 0, 0.6)',
+                           'rgba(0, 255, 0, 0.6)',
+                           'rgba(0, 0, 255, 0.6)',
+                           'rgba(255, 255, 0, 0.6)',
+                           'rgba(255, 0, 255, 0.6)',
+                           'rgba(0, 255, 255, 0.6)',
+                           'rgba(255, 128, 0, 0.6)',
+                           'rgba(0, 255, 191, 0.6)',
+                           'rgba(191, 0, 255, 0.6)',
+                           'rgba(0, 0, 0, 0.6)',
+                          ];
 
   /* The following arrays are used for the configuration and data storage
      of the radar chart and must be given to the <canvas> element. */
   public radarChartOptions: RadialChartOptions = {
+    // Sets auto resizing of graph, true by default.
+    responsive: true,
     // This tooltips block controls the hover tooltip for data points on the graph. This should be the default
     // functionality of chart.js, but an issue in version 2.8.0 causes it to not display the value properly.
     tooltips: {
@@ -51,13 +66,11 @@ export class TechRadarComponent implements OnInit {
     { data: [],
       // Specifies the first color, after this it is "randomized"
       label: 'default',
-      backgroundColor: ['rgba(71, 163, 209, 0.3)'],
+      backgroundColor: ['rgba(71, 163, 209, 0.2)'],
       borderColor: ['rgba(71, 163, 209, 0.6)'],
-      pointBorderColor: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
-      pointBackgroundColor: ['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
-                             'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
-      pointHoverBackgroundColor: ['lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue',
-                                 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue', 'lightblue'],
+      pointBorderColor: ['white', ],
+      pointBackgroundColor: ['lightblue', ],
+      pointHoverBackgroundColor: ['lightblue', ],
       pointHoverBorderColor: [''],
     },
   ];
@@ -77,20 +90,20 @@ export class TechRadarComponent implements OnInit {
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-    console.log('Printing data from updateDataPull() in tech-radar-component: ');
-    console.log('Grade Data: ');
-    console.log(this.gradeDataStore);
-    console.log('Category Data: ');
-    console.log(this.categoryDataStore);
-    console.log('Trainee Data: ');
-    console.log(this.traineeDataStore);
-    console.log('Assessment Data: ');
-    console.log(this.assessmentDataStore);
+    // console.log('Printing data from updateDataPull() in tech-radar-component: ');
+    // console.log('Grade Data: ');
+    // console.log(this.gradeDataStore);
+    // console.log('Category Data: ');
+    // console.log(this.categoryDataStore);
+    // console.log('Trainee Data: ');
+    // console.log(this.traineeDataStore);
+    // console.log('Assessment Data: ');
+    // console.log(this.assessmentDataStore);
 
     // Resetting chart
     this.radarChartData[0].data = [];
-    this.radarChartLabels = [];
-    this.labelsAndAverages = [];
+    this.radarChartData.splice(1);
+    this.labelsAndAverages.splice(0);
 
     /* Filling data */
     // An array representing the categories of evaluation. The index matches the category's index found in categoryDataStore.
@@ -98,8 +111,6 @@ export class TechRadarComponent implements OnInit {
     const categoryCount: number[] = [];
     // An array which holds the sum of all scores to be found in each category. Index matches categoryDataStore index.
     const categoryTotal: number[] = [];
-
-    let studentScores: any = {};
 
     // Garbage please delete.
     // studentScores.push({[this.gradeDataStore[4].traineeId]: this.gradeDataStore[4].score});
@@ -138,8 +149,8 @@ export class TechRadarComponent implements OnInit {
               // console.log(studentScores);
               // console.log(this.gradeDataStore[j].traineeId in studentScores);
 
-              if (!(this.gradeDataStore[j].traineeId in studentScores)) {
-                studentScores[this.gradeDataStore[j].traineeId] = {};
+              if (!(this.gradeDataStore[j].traineeId in this.studentScores)) {
+                this.studentScores[this.gradeDataStore[j].traineeId] = {};
               }
 
               // console.log('logging studentScores:');
@@ -150,12 +161,11 @@ export class TechRadarComponent implements OnInit {
               // console.log(studentScores[this.gradeDataStore[j].traineeId]);
               // console.log('T/F: ' + this.categoryDataStore[i].skillCategory in
               // studentScores[this.gradeDataStore[j].traineeId]);
-              if (this.categoryDataStore[i].skillCategory in studentScores[this.gradeDataStore[j].traineeId]) {
-                console.log('getting here');
-                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['totalScore'] += this.gradeDataStore[j].score;
-                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory]['count'] += 1;
+              if (this.categoryDataStore[i - 1].skillCategory in this.studentScores[this.gradeDataStore[j].traineeId]) {
+                this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory]['totalScore'] += this.gradeDataStore[j].score;
+                this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory]['count'] += 1;
               } else {
-                studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i].skillCategory] = {
+                this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory] = {
                   totalScore: this.gradeDataStore[j].score,
                   count: 1,
                 };
@@ -168,20 +178,18 @@ export class TechRadarComponent implements OnInit {
       }
     }
     for (let i = 1; i < this.traineeDataStore.length; i++) {
-      studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
-      studentScores[this.traineeDataStore[i].traineeId]['data'] = [];
+      this.studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
+      this.studentScores[this.traineeDataStore[i].traineeId]['data'] = [];
 
-      for (const x in studentScores[this.traineeDataStore[i].traineeId]) {
+      for (const x in this.studentScores[this.traineeDataStore[i].traineeId]) {
         if (x !== 'name' && x !== 'data') {
-          studentScores[this.traineeDataStore[i].traineeId]['data'].
-                push((studentScores[this.traineeDataStore[i].traineeId][x]['totalScore'] /
-                      studentScores[this.traineeDataStore[i].traineeId][x]['count']).toFixed(2));
+          this.studentScores[this.traineeDataStore[i].traineeId]['data'].
+                push((this.studentScores[this.traineeDataStore[i].traineeId][x]['totalScore'] /
+                      this.studentScores[this.traineeDataStore[i].traineeId][x]['count']).toFixed(2));
         }
       }
     }
-    console.log('studentScores:');
-    console.log(studentScores[this.traineeDataStore[4].traineeId]['data'][0]);
-    // Calculate average score for the categories.
+
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
     for (let i = 0; i < categoryCount.length; i++){
@@ -207,5 +215,42 @@ export class TechRadarComponent implements OnInit {
 
     // Set the chart's title.
     this.radarChartData[0].label = this.reportService.getBatch().trainingName;
+
+    // Shows data for a specific trainee when one is selected
+    if (this.reportService.getTrainee().traineeId !== -1) {
+      this.radarChartData.push({
+        data: this.studentScores[this.reportService.getTrainee().traineeId]['data'],
+        label: this.studentScores[this.reportService.getTrainee().traineeId]['name'],
+        backgroundColor: ['rgba(0, 0, 0, 0)'],
+        borderColor: this.colorsArray[0],
+      });
+    }
+
+    // Reset checkboxes on page change
+    let elements = document.getElementsByClassName('checkboxCustomClass');
+    for (let i = 0 ; i < elements.length ; i++) {
+      (elements[i] as HTMLInputElement).checked = false;
+    }
+console.log('traineeid:');
+    console.log(this.reportService.getTrainee().traineeId);
+  }
+
+  // Handles the updating of chart from modal checkboxes
+  checkboxUpdate(values: any) {
+    if (values.currentTarget.checked === true) {
+      this.radarChartData.push({
+        data: this.studentScores[values.currentTarget.name]['data'],
+        label: this.studentScores[values.currentTarget.name]['name'],
+        backgroundColor: ['rgba(0, 0, 0, 0)'],
+        borderColor: this.colorsArray[this.radarChartData.length - 1],
+      });
+    } else {
+      for (let i = 1; i < this.radarChartData.length; i ++){
+        if (this.radarChartData[i].label === this.studentScores[values.currentTarget.name]['name']) {
+          this.radarChartData.splice(i, 1);
+          break;
+        }
+      }
+    }
   }
 }
