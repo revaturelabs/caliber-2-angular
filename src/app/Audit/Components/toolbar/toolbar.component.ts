@@ -33,7 +33,6 @@ export class ToolbarComponent implements OnInit {
     this.getAllYears();
   }
 
-  
 
   getAllYears() {
     this.selectedQuarter = 1;
@@ -41,11 +40,9 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0];
-      console.log(this.years);
       this.getBatches();
       this.selectYear(this.selectedYear);
     });
-    
   }
 
   getBatches() {
@@ -55,10 +52,9 @@ export class ToolbarComponent implements OnInit {
       this.selectedBatch = this.batches[0];
       this.selectBatch(this.batches[0]);
       this.auditService.selectedBatch = this.batches[0];
-      console.log(this.batches);
       this.getWeeks();
       });
-      
+
   }
 
   selectYear(event: number) {
@@ -96,18 +92,13 @@ export class ToolbarComponent implements OnInit {
         .subscribe(result => {
           this.auditService.sortAlphabetically(result);
           this.auditService.setNotes(result);
-          console.log(result);
           this.auditService.onWeekClick();
         });
 
         this.auditService.getCategoriesByBatchByWeek(this.selectedBatch.batchId, this.selectedWeek)
           .subscribe(result => {
             this.auditService.categoriesByBatchByWeek = result;
-            console.log(result);
             this.auditService.onWeekClick();
-          },
-          error => {
-            console.log(error);
           });
     } else {
       this.auditService.setNotes(null);
