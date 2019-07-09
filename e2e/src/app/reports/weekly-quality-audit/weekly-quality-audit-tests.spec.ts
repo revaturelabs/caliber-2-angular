@@ -5,8 +5,7 @@ browser.ignoreSynchronization = true;
 describe("Weekly quality audit component displays", () => {
 
 
-   it('should go to the reports page and see the weekly quality audit chart.', () => {
-
+   it('should go to the reports page, then select the second week and see the weekly quality audit chart.', () => {
       let reportsPage = element(by.css('app-root #reports-link'));
       reportsPage.click().then(() => {
          browser.pause();
@@ -39,22 +38,56 @@ describe("Weekly quality audit component displays", () => {
       });
    });
 
-   it('should see some number or output for the first weekly quality audit chart value.', () => {
+   it('should see some number or output for the second week for the first weekly quality audit chart value.', () => {
       let doughnutChartValue1 = element(by.id("wqaAuditValue1")); //Ensures there is no blank space at this stage (as there shouldn't be).
       expect(doughnutChartValue1.getText()).toBeTruthy();
    });
 
-   it('should see some number or output for the second weekly quality audit chart value.', () => {
+   it('should see some number or output for the second week for the second weekly quality audit chart value.', () => {
       let doughnutChartValue2 = element(by.id("wqaAuditValue2"));
       expect(doughnutChartValue2.getText()).toBeTruthy();
    });
 
-   it('should see some number or output for the third weekly quality audit chart value.', () => {
+   it('should see some number or output for the second week for the third weekly quality audit chart value.', () => {
       let doughnutChartValue3 = element(by.id("wqaAuditValue3"));
       expect(doughnutChartValue3.getText()).toBeTruthy();
    });
 
-   it('should see some number or output for the fourth weekly quality audit chart value.', () => {
+   it('should see some number or output for the second week for the fourth weekly quality audit chart value.', () => {
+      let doughnutChartValue4 = element(by.id("wqaAuditValue4"));
+      expect(doughnutChartValue4.getText()).toBeTruthy();
+   });
+
+   it ('should change to the fifth week and see the weekly quality audit chart.', () => {
+      let weekDropdown = element(by.id("toolbarWeekDropdown"));
+      weekDropdown.click().then(() => {
+
+         let week2Button = element(by.name("toolbarWeek5"));
+         week2Button.click().then(() => {
+            browser.sleep(2000);
+            let doughnutChart = element(by.id("weeklyQualityAuditDonut"));
+
+            expect(doughnutChart.isDisplayed()).toBeTruthy();
+         });
+      });
+   });
+
+   it('should see some number or output for the fifth week for the first weekly quality audit chart value.', () => {
+      let doughnutChartValue1 = element(by.id("wqaAuditValue1")); //Ensures there is no blank space at this stage (as there shouldn't be).
+      expect(doughnutChartValue1.getText()).toBeTruthy();
+   });
+
+   it('should see some number or output for the fifth week for the second weekly quality audit chart value.', () => {
+      let doughnutChartValue2 = element(by.id("wqaAuditValue2"));
+      expect(doughnutChartValue2.getText()).toBeTruthy();
+   });
+
+   it('should see some number or output for the fifth week for the third weekly quality audit chart value.', () => {
+      let doughnutChartValue3 = element(by.id("wqaAuditValue3"));
+      expect(doughnutChartValue3.getText()).toBeTruthy();
+   });
+
+   it('should see some number or output for the fifth week for the fourth weekly quality audit chart value.', () => {
       let doughnutChartValue4 = element(by.id("wqaAuditValue4"));
       expect(doughnutChartValue4.getText()).toBeTruthy();
    });
@@ -74,7 +107,6 @@ describe("Weekly quality audit component displays", () => {
    });
 
    it('should view a trainee\'s analytics for a specific week and not see the weekly quality audit chart.', () => {
-
       let weekDropdown = element(by.id("toolbarWeekDropdown"));
       weekDropdown.click().then(() => {
 
