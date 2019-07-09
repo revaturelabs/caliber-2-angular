@@ -1,6 +1,7 @@
 import { browser, by, element } from 'protractor';
 
-const viewABatchUrl = 'manage';
+const viewABatchUrl = 'vp/manage';
+const viewReportUrl = 'vp/reports';
 const buttonToOpenViewTraineesModal = '';
 
 export class AppPage {
@@ -92,5 +93,92 @@ export class ViewTraineesInBatchPage {
     element.all(by.css('app-root .glyphicon-remove')).first().click();
     browser.sleep(3000);
     return element(by.css('app-root #deleteTraineeHeader')).getText();
+  }
+}
+
+export class ViewReportsPage {
+  navigateTo() {
+    return browser.get('/' + viewReportUrl);
+  }
+
+  viewBatchScores() {
+    browser.sleep(1000);
+    element(by.id('years')).click().then(() => {
+      element(by.id('2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('batches')).click().then(() => {
+          element(by.id('1802 Oct16 Java')).click().then(() => {
+            browser.sleep(1000);
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason'));
+  }
+
+  selectSpecificWeek() {
+    browser.sleep(1000);
+    element(by.id('weeks')).click().then(() => {
+      element(by.id('Week1')).click().then(() => {
+        browser.sleep(1000);
+      });
+    });
+    return element(by.id('overallQCScores'));
+  }
+
+  selectSpecificTrainee() {
+    // browser.sleep(1000);
+    element(by.id('years')).click().then(() => {
+      element(by.id('2018')).click().then(() => {
+        // browser.sleep(1000);
+        element(by.id('batches')).click().then(() => {
+          element(by.id('1802 Oct16 Java')).click().then(() => {
+            // browser.sleep(1000);
+            element(by.id('trainees')).click().then(() => {
+              element(by.id('Trainee: Spruce, Jason')).click().then(() => {
+                // browser.sleep(1000);
+              });
+            });
+          });
+        });
+      });
+    });
+    return element(by.id('overallQCScores'));
+  }
+
+  selectSmileyModal() {
+    browser.sleep(1000);
+    element(by.id('years')).click().then(() => {
+      element(by.id('2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('batches')).click().then(() => {
+          element(by.id('1802 Oct16 Java')).click().then(() => {
+            browser.sleep(1000);
+            element(by.id('Spruce, Jason 1')).click().then(() => {
+              browser.sleep(1000);
+            });
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason - Week 1 Notes')).getText();
+  }
+
+  viewModal() {
+    element(by.id('years')).click().then(() => {
+      element(by.id('2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('batches')).click().then(() => {
+          element(by.id('1802 Oct16 Java')).click().then(() => {
+            browser.sleep(1000);
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason - Week 1 Notes'));
+  }
+
+  overallQCScores() {
+    return element(by.id('overallQCScores'));
   }
 }

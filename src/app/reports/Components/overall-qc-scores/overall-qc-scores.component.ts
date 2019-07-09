@@ -166,7 +166,7 @@ export class OverallQCScoresComponent implements OnInit {
   displayNote(name, week, message) {
     // console.log('wat');
     this.name = name;
-    this.week = (week + 1);
+    this.week = week;
     this.message = message;
   }
 }
