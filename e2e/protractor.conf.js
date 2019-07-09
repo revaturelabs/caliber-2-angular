@@ -8,8 +8,9 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     // "D:\Revature\Revature Project 3\caliber-2-meta\frontend\e2e",
-    './src/**/*.e2e-spec.ts',
-    './src/app/**/*.spec.ts'
+     './src/**/*.e2e-spec.ts',
+     './src/app/**/*.spec.ts',
+     //'./src/*.spec.ts',
   ],
   capabilities: {
     'browserName': 'chrome'

@@ -95,7 +95,6 @@ describe('AssociateComponent', () => {
   });
 
   it('should get note', () => {
-    console.log(component.notes);
     let testNote: QcNote;
     testNote = component.getNote(47);
     expect(testNote.noteId).toEqual(47);
