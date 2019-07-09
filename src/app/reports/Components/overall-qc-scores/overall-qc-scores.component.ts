@@ -28,7 +28,7 @@ export class OverallQCScoresComponent implements OnInit {
   }
 
   downloadReport() {
-    console.log('wat');
+
   }
 
   getStatus(week, traineeId) {
@@ -68,7 +68,7 @@ export class OverallQCScoresComponent implements OnInit {
 
 
   /*
-  *Function called by the reports component to let this know to udate itself
+  *Function called by the reports component to let this know to update itself
   *Grabs the QA notes and filters them into a two dimensional array based on the week
   */
   update(notes) {
@@ -115,7 +115,7 @@ export class OverallQCScoresComponent implements OnInit {
 
   notInRet(ret, week) {
     for (let i = 0; i < ret.length; i++){
-      if(ret[i] === week){
+      if (ret[i] === week) {
         return false;
       }
     }
@@ -164,7 +164,6 @@ export class OverallQCScoresComponent implements OnInit {
   *   properties of the component. Then when the modal shows up, the information is displayed
   */
   displayNote(name, week, message) {
-    // console.log('wat');
     this.name = name;
     this.week = (week + 1);
     this.message = message;

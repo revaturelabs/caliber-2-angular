@@ -88,15 +88,6 @@ export class TechRadarComponent implements OnInit {
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.traineeDataStore = this.reportService.getTraineeDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-    console.log('Printing data from updateDataPull() in tech-radar-component: ');
-    console.log('Grade Data: ');
-    console.log(this.gradeDataStore);
-    console.log('Category Data: ');
-    console.log(this.categoryDataStore);
-    console.log('Trainee Data: ');
-    console.log(this.traineeDataStore);
-    console.log('Assessment Data: ');
-    console.log(this.assessmentDataStore);
 
     // Resetting chart
     this.radarChartData[0].data = [];

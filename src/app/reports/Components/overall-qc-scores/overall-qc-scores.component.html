@@ -11,7 +11,7 @@
             <div class="table-responsive">
               <div class="table ng-scope">
                 <table class="table table-bordered ng-scope" 
-                  style="border-collapse: collapse;">
+                  >
                   <tbody>
                     <tr class="ng-scope">
                       <th>Trainee</th>
@@ -45,10 +45,11 @@
                         {{ getName(note['traineeId']) }}
                       </td>
                       <td *ngFor="let week of qcData; let j = index" class="text-center ng-scope">
-
-                        <div data-toggle="tooltip" data-placement="top" title="{{getNote(j, note['traineeId'])['content'] }}" class="{{ getStatus(j, note['traineeId']) }} ng-scope"
-                          on-click="displayNote(getName(note['traineeId']), j, getNote(j, note['traineeId'])['content'])"
-                          data-toggle="modal" data-target="#myModal">
+                        <div *ngIf="getNote(j,note['traineeId'] != undefined)"> 
+                          <div data-toggle="tooltip" data-placement="top" title="{{getNote(j, note['traineeId'])['content'] }}" class="{{ getStatus(j, note['traineeId']) }} ng-scope"
+                            on-click="displayNote(getName(note['traineeId']), j, getNote(j, note['traineeId'])['content'])"
+                            data-toggle="modal" data-target="#myModal">
+                          </div> 
                         </div>
                       </td>
                     </tr> -->

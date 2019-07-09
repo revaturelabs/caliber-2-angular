@@ -1,20 +1,31 @@
 <app-toolbar (submitReportOutput)="updateReportOutput($event)"></app-toolbar>
-<div id="caliber-container" class="container" *ngIf="reportOutput !== null">
-	<div class="top10 data-container">
+
+<div name="reports-component-container" id="caliber-container" class="container" *ngIf="reportOutput !== null">
+	<div class="top10">
 		<app-report-top-chart-controller></app-report-top-chart-controller>
 	</div>
-	<div *ngIf="isWeekSelected && !isTraineeSelected">
-		<app-assessment-breakdown></app-assessment-breakdown>
+	<div class="row">
+		<div *ngIf="isWeekSelected && !isTraineeSelected">
+			<app-weekly-quality-audit></app-weekly-quality-audit>
+		</div>
+		<div *ngIf="isWeekSelected && !isTraineeSelected">
+			<app-assessment-breakdown></app-assessment-breakdown>
+		</div>
 	</div>
 	<div>
 		<app-overall-qc-scores *ngIf="showOverAllQC()"></app-overall-qc-scores>
 	</div>
-	<div *ngIf="reportService.getWeek() === 0" class="row">
-		<div class="col-md-4">
+	<div *ngIf="isWeekSelected && !isTraineeSelected">
+		<app-individual-qcresults-table></app-individual-qcresults-table>
+	</div>
+	<div class="row">
+		<div class="col-md-4" *ngIf="reportService.getWeek() === 0" class="row"></div>
 			<app-tech-radar></app-tech-radar>
 		</div>
 		<div class="col-md-8">
-			<!-- Weekly progress component goes here. -->
+			<app-weekly-report></app-weekly-report>
 		</div>
 	</div>
 </div>
+
+

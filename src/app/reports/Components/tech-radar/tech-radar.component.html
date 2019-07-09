@@ -1,6 +1,4 @@
 <meta charset="UTF-8">
-<!-- This component does not render if a specific week is selected and a trainee is not-->
-<!-- <div *ngIf="this.reportService.getWeek() === 0"> -->
   <div id="radarPanel" class="panel panel-default">
     <div class="panel-heading">Technical Skills 
         <div *ngIf="this.reportService.getTrainee().traineeId === -1" role="button" class="pull-right" data-toggle="modal" data-target="#insert-trainee">
@@ -34,7 +32,7 @@
       </div>
     </div>
   </div>
-<!-- </div> -->
+
 <div class="modal fade" id="insert-trainee" tabindex="-1" role="dialog"
 	aria-labelledby="batchModalLabel">
 	<div class="modal-dialog" role="document">

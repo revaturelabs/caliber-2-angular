@@ -20,6 +20,7 @@ export class AuditService {
   batchesYearURL = '/qa/batch/';
   yearsURL = '/qa/batch/valid-years';
   notesByBatchByWeekURL = '/qa/audit/notes/';
+  notesByTrainee = '/qa/notes/trainee/';
   updateNoteURL = '/qa/audit/update';
   saveFlagURL = '/qa/trainee/update';
   updateBatchURL = environment.serverRootURL + '/batch/all/batch/update';
@@ -31,6 +32,7 @@ export class AuditService {
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek: number;
+  selectedTrainee : Trainee;
   //selectedWeekChanged = new Subject<boolean>();
   notes: QcNote[] = [];
   categoriesByBatchByWeek: Tag[] = [];
@@ -63,7 +65,6 @@ export class AuditService {
   }
 
   getBatchesByYearByQuarter(year: number, quarter: number): Observable<Batch[]> {
-    //console.log(this.url + this.batchesYearURL + year + '/' + quarter);
     return this.http.get<Batch[]>(this.url + this.batchesYearURL + year + '/' + quarter);
   }
 
@@ -71,8 +72,11 @@ export class AuditService {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
   getNotesByBatchByWeek(batchId: number, week: number): Observable<QcNote[]> {
-    console.log(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
     return this.http.get<QcNote[]>(this.url + this.notesByBatchByWeekURL + batchId + '/' + week);
+  }
+
+  getNotesForTrainee(traineeId : number) : Observable<QcNote[]>{
+    return this.http.get<QcNote[]>(this.url + this.notesByTrainee + this.selectedTrainee.traineeId);
   }
  
   setNotes(notesToSet: QcNote[]){
@@ -92,12 +96,12 @@ export class AuditService {
       this.overallBatchNoteChanged.next(this.overallBatchNote);
     });
   }
+
   sendCategory(categoryToSend: Tag): Observable<Tag>{
     return this.http.post<Tag>(this.url + this.updateCategoryURL, categoryToSend);
   }
 
   deleteCategory(categoryId: number): Observable<void>{
-    console.log('DELETE: ' + this.url + this.deleteCategoryURL + categoryId);
     return this.http.delete<void>(this.url + this.deleteCategoryURL + categoryId);
   }
 

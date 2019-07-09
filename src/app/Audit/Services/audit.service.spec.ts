@@ -12,7 +12,7 @@ import { asElementData } from '@angular/core/src/view';
 import { environment } from 'src/environments/environment';
 import { Trainee } from 'src/app/Batch/type/trainee';
 
-fdescribe('AuditService', () => {
+describe('AuditService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [AuditService],
@@ -69,14 +69,11 @@ fdescribe('AuditService', () => {
   it('should get all years', () => {
 
     const service: AuditService = TestBed.get(AuditService);
-    console.log("Inside function")
     service.getAllYears().subscribe(result => {
       this.bathYears = result;
-      console.log(this.batchYears);
     });
     batchNumberOfYears = service.getAllYears().subscribe.length;
     expect(service.getAllYears().subscribe.length).toBeGreaterThan(0);
-    console.log("Number of years in Batch " + batchNumberOfYears);
   });
 
   //getNotesByBatchByWeek -- 
@@ -88,7 +85,6 @@ fdescribe('AuditService', () => {
           qcNotes = n;
         });
         const req = httpMock.expectOne(notesByBatchByWeekURL + '/2018/1');
-        console.log("notesbyweekURL = " + req);
         expect(req.request.method).toEqual('GET');
       })
   );
