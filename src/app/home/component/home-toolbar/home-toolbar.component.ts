@@ -26,8 +26,8 @@ export class HomeToolbarComponent implements OnInit {
   showStates: boolean;
   qaNotesAllNotes: QANote[];
   qaNotesByBatch: QANote[][];
-  // currentDateTime: number = new Date().getTime();
-  currentDateTime = 1541394000000;
+  currentDateTime: number = new Date().getTime();
+  // currentDateTime = 1541394000000;
 
   allLocations: Location;
 
@@ -126,7 +126,6 @@ export class HomeToolbarComponent implements OnInit {
             });
           }
         });
-        console.log(this.batches);
         this.locations = locations;
         this.setStatesViaLocations();
         this.homeService.setLocationsDataStore(locations);
@@ -173,7 +172,6 @@ export class HomeToolbarComponent implements OnInit {
               tempBatchArray.push(qaNote);
             });
             this.qaNotesByBatch.push(tempBatchArray);
-            console.log(this.qaNotesByBatch);
             this.homeService.setQANotesDataStore(this.qaNotesByBatch);
             this.submitHomeOutput.emit(this.qaNotesByBatch.length);
           });

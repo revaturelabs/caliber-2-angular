@@ -5,6 +5,10 @@ import { HomeService } from '../../service/home.service';
 import { Location } from '../../models/location';
 import { Batch } from 'src/app/Batch/type/batch';
 import { QANote } from 'src/app/reports/Models/qanote';
+import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
+import { Trainee } from 'src/app/Batch/type/trainee';
+import { AssessmentService } from 'src/app/Assess-Batch/Services/assessment.service';
+import { CategoryService } from 'src/app/Assess-Batch/Services/category.service';
 
 @Component({
   selector: 'app-last-quality-audit-graph',
@@ -16,8 +20,12 @@ export class LastQualityAuditGraphComponent implements OnInit {
   private batchDataStore: Batch[];
   private qaNoteDataStore: QANote[][];
   private qaNotesForModal: QANote[];
+  private traineeDataStore: Trainee[];
+  private traineeNames: string[];
   private index: number;
-
+  private qaNoteCategory: string;
+  private displaying: boolean = false; // used for displaying directives
+  private overallDisplayQANote: QANote;
 
   public barChartOptions: ChartOptions = {
     tooltips: {
@@ -68,25 +76,71 @@ export class LastQualityAuditGraphComponent implements OnInit {
     { data: [], label: 'Series A'}
   ];
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private traineeService: TraineeService,
+  private assessmentService: AssessmentService, private categoryService: CategoryService) { }
 
   ngOnInit() {
   }
 
   chartClicked(event: any){
-    if(event.active.length>0) {
+    if(event.active.length > 0) {
       this.index = event.active[0]._index;
       // console.log( this.chartIdReference[index] + " at week " + this.chartWeekReference[index]);
       this.qaNotesForModal = this.qaNoteDataStore.find((element) => {
-        if(element.length>0){
+        if(element.length >0){
           return (element[0].batchId === this.chartIdReference[this.index])
         }
         return false;
       });
+      this.traineeNames = [];
+      this.traineeService.getTraineesByBatchId(this.qaNotesForModal[0].batchId).subscribe(
+        (trainees) => { 
+          this.traineeDataStore = trainees;
 
-      console.log(this.qaNotesForModal);
-      document.getElementById("openModalButton").click();
+          this.qaNotesForModal = this.qaNotesForModal.filter((element) => {
+            if(element.week === this.chartWeekReference[this.index]){
+              return element;
+            }
+          });
+
+          // this.assessmentService
+
+          this.qaNotesForModal.forEach((qaNote) => {
+            if(qaNote.traineeId > 0) {
+              let name: string = trainees.find((element) => {return element.traineeId === qaNote.traineeId}).name;
+              this.traineeNames.push(name);
+            } else {
+              this.traineeNames.push("Overall");
+            }
+            
+          });
+          this.overallDisplayQANote = null;
+          if(this.traineeNames[this.traineeNames.length -1] == "Overall") {
+            this.overallDisplayQANote = this.qaNotesForModal.pop();
+          } 
+          
+          this.assessmentService.getAssessmentByBatch(this.chartIdReference[this.index],
+             this.chartWeekReference[this.index]).subscribe(
+               (assessment) => {
+                 if(assessment.length >0){
+                   let categoryId: number = assessment[0].assessmentCategory;
+                  this.categoryService.getCategoryById(categoryId).subscribe(
+                    (categoryObject) => {
+                      this.qaNoteCategory = categoryObject.skillCategory;
+                      console.log(this.qaNoteCategory);
+                      
+                    }
+                  );
+                 }
+             });
+          document.getElementById("openModalButton").click();
+        }
+      );
     }
+  }
+
+  mapTrainerIdToTraineeName(id: string){
+    return this.traineeDataStore.find((element) => element.batchId === Number.parseInt(id));
   }
 
   update() {
@@ -212,5 +266,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       // stack: 'a', backgroundColor: 'rgba(114, 164, 194, .5)',    borderColor: 'rgba(114, 164, 194, .5)',
       // hoverBackgroundColor: 'rgba(114, 164, 194, .5)',hoverBorderColor: 'rgba(114, 164, 194, .5)'},
     ];
+
+    this.displaying = true;
   }
 }

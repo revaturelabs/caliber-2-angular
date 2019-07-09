@@ -12,6 +12,7 @@ import { AssessBatchService } from '../Assess-Batch/Services/assess-batch.servic
 import { QanoteService } from '../home/service/qanote.service';
 import { HomeService } from '../home/service/home.service';
 import { ChartsModule } from 'ng2-charts';
+import { TraineeService } from '../Assess-Batch/Services/trainee.service';
 
 
 
@@ -35,6 +36,7 @@ import { ChartsModule } from 'ng2-charts';
     AssessBatchService,
     QanoteService,
     HomeService,
+    TraineeService,
   ]
 })
 export class HomeModule { }
