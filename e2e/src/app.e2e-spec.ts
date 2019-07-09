@@ -1,11 +1,13 @@
-import { HomePage } from './app.po';
+import { AppPage, ViewReportsPage } from './app.po';
 import { ViewTraineesInBatchPage } from './app.po';
+import { browser, WebDriver } from 'protractor';
+import { protractor } from 'protractor';
 
 describe('workspace-project App', () => {
-  let page: HomePage;
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new HomePage();
+    page = new AppPage();
   });
 
   /* HEADER TESTS */
@@ -21,7 +23,7 @@ describe('workspace-project App', () => {
 
   it('should click the home link and navigate to the home page', () => {
     page.navigateTo();
-    expect(page.getNavHomeLink()).toEqual('home works!');
+    expect(page.getNavHomeLink()).toEqual('Batch');
   });
 
   it('should click the manage link and navigate to the manage page', () => {
@@ -31,7 +33,7 @@ describe('workspace-project App', () => {
 
   it('should click the logo and navigate to the home page', () => {
     page.navigateTo();
-    expect(page.getNavImgLink()).toEqual('home works!');
+    expect(page.getNavImgLink()).toEqual('Batch');
   });
 
   /* FOOTER TESTS */
@@ -84,3 +86,43 @@ describe('workspace-project App', () => {
 //   });
 
 // });
+
+describe('tests for looking at the reports page', () => {
+  let page: ViewReportsPage;
+
+  beforeEach(() => {
+    page = new ViewReportsPage();
+  });
+
+  /* Add Comment Form pops up after clicking on a name */
+  it('When navigating to the reports page, the overall QC scores component should exist', () => {
+    page.navigateTo();
+    expect(page.overallQCScores().isPresent()).toBeTruthy();
+  });
+
+  it('When on the reports page, I can navigate the dropdowns and get specific data', () => {
+    page.navigateTo();
+    expect((page.viewBatchScores()).isPresent()).toBeTruthy();
+  });
+
+  it('When I select a specific week, the Batch QC scores Table should disappear', () => {
+    page.navigateTo();
+    expect((page.selectSpecificWeek()).isPresent()).toBeFalsy();
+  });
+
+  it('When I select a specific trainee, the Batch QC scores Table should disappear', () => {
+    page.navigateTo();
+    expect((page.selectSpecificTrainee()).isPresent()).toBeFalsy();
+  });
+
+  it('When I select a smiley, a modal appears', () => {
+    page.navigateTo();
+    expect(page.selectSmileyModal()).toEqual('Spruce, Jason - Week 1 Notes');
+  });
+
+  it('When I do not select a smiley, the modal should not be there', () => {
+    page.navigateTo();
+    expect((page.viewModal()).isPresent()).toBeFalsy();
+  });
+
+});

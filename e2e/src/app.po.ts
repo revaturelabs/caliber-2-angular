@@ -4,7 +4,7 @@ const viewABatchUrl = 'vp/manage';
 const viewReportUrl = 'vp/reports';
 const buttonToOpenViewTraineesModal = '';
 
-export class HomePage {
+export class AppPage {
   navigateTo() {
     return browser.get('/');
   }
