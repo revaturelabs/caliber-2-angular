@@ -83,12 +83,10 @@ export class IndividualQCResultsTableComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.categoryId.length; i++) {
-      console.log(this.categoryId[i]);
       for (let j = 0; j < this.categoryDataStore.length; j++) {
         if (this.categoryId[i] === this.categoryDataStore[j].categoryId) {
           if (this.categoryForWeek.includes(this.categoryDataStore[j]) === false) {
           this.categoryForWeek.push(this.categoryDataStore[j]);
-          console.log(this.categoryDataStore[j]);
           }
         }
       }
