@@ -46,41 +46,41 @@ describe('workspace-project App', () => {
   });
 });
 
-describe('tests for view trainees in a batch modal', () => {
-  let page: ViewTraineesInBatchPage;
+// describe('tests for view trainees in a batch modal', () => {
+//   let page: ViewTraineesInBatchPage;
 
-  beforeEach(() => {
-    page = new ViewTraineesInBatchPage();
-  });
+//   beforeEach(() => {
+//     page = new ViewTraineesInBatchPage();
+//   });
 
-  /* Check modal pops up
-  it('should display all links', () => {
-    page.navigateTo();
-    expect(page.getPopupTraineesinBatchModalH4()).toEqual('View/Add Trainees');
-  }); */
+//   /* Check modal pops up
+//   it('should display all links', () => {
+//     page.navigateTo();
+//     expect(page.getPopupTraineesinBatchModalH4()).toEqual('View/Add Trainees');
+//   }); */
 
-  /* Add trainee window pops up */
-  it('should click on add trainee button and pop up modal', () => {
-    page.navigateTo();
-    expect(page.getAnAddTraineeModal()).toEqual('Add Trainee');
-  });
+//   /* Add trainee window pops up */
+//   it('should click on add trainee button and pop up modal', () => {
+//     page.navigateTo();
+//     expect(page.getAnAddTraineeModal()).toEqual('Add Trainee');
+//   });
 
-  /* Add Comment Form pops up after clicking on a name */
-  it('should click on a trainee and pop up comment form', () => {
-    page.navigateTo();
-    expect(page.getATraineeCommentForm()).toEqual('comment');
-  });
+//   /* Add Comment Form pops up after clicking on a name */
+//   it('should click on a trainee and pop up comment form', () => {
+//     page.navigateTo();
+//     expect(page.getATraineeCommentForm()).toEqual('comment');
+//   });
 
-  /* Edit Trainee Form pops up after clicking on button */
-  it('should click on a trainee update and pop up update form', () => {
-    page.navigateTo();
-    expect(page.getATraineeUpdateForm()).toEqual('Update Trainee');
-  });
+//   /* Edit Trainee Form pops up after clicking on button */
+//   it('should click on a trainee update and pop up update form', () => {
+//     page.navigateTo();
+//     expect(page.getATraineeUpdateForm()).toEqual('Update Trainee');
+//   });
 
-  /* Edit Trainee Form pops up after clicking on button */
-  it('should click on a trainee delete and pop up delete form', () => {
-    page.navigateTo();
-    expect(page.getATraineeDeleteForm()).toEqual('Delete Trainee');
-  });
+//   /* Edit Trainee Form pops up after clicking on button */
+//   it('should click on a trainee delete and pop up delete form', () => {
+//     page.navigateTo();
+//     expect(page.getATraineeDeleteForm()).toEqual('Delete Trainee');
+//   });
 
-});
+// });
