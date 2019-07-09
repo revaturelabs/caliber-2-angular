@@ -38,7 +38,7 @@ export class ReportsComponent implements OnInit {
   @ViewChild(AssessmentBreakdownComponent) set setAssessmentBreakdown(content: AssessmentBreakdownComponent) {
     this.assessmentBreakdownComponent = content;
 
-    if (this.isWeekSelected && !this.isTraineeSelected){
+    if (this.isWeekSelected && !this.isTraineeSelected) {
       this.assessmentBreakdownComponent.updateDataPull();
     }
     this.cd.detectChanges();
@@ -46,15 +46,23 @@ export class ReportsComponent implements OnInit {
 
   @ViewChild(WeeklyQualityAuditComponent) set setWeeklyQualityAudit(content: WeeklyQualityAuditComponent) {
     this.weeklyQualityAuditComponent = content;
-      if (this.isWeekSelected && !this.isTraineeSelected){
+      if (this.isWeekSelected && !this.isTraineeSelected) {
         this.weeklyQualityAuditComponent.updateDataPull();
+      }
+      this.cd.detectChanges();
+    }
+
+  @ViewChild(IndividualQCResultsTableComponent) set setIndividualWeekQCReport(content: IndividualQCResultsTableComponent) {
+    this.individualWeekQCReport = content;
+      if (this.isWeekSelected && !this.isTraineeSelected) {
+        this.individualWeekQCReport.update();
       }
       this.cd.detectChanges();
     }
 
   public isTraineeSelected: boolean = false;
   public isWeekSelected: boolean = false;
-  private reportOutput : ReportOutput = null;
+  private reportOutput: ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
@@ -77,10 +85,10 @@ export class ReportsComponent implements OnInit {
     return false;
   }
 
-  showIndividualQCWeek(week){
-    if (this.reportService.getTrainee() != null){
-      this.individualWeekQCReport.week = week;
-      return (this.reportService.getWeek() !== 0) && this.reportService.getTrainee()['traineeId'] === -1;
+  showIndividualQCWeek() {
+    if (this.reportService.getTrainee() != null) {
+      // this.individualWeekQCReport.week = week;
+      return ((this.reportService.getWeek() !== 0) && (this.reportService.getTrainee().traineeId === -1));
     }
   }
 
@@ -128,7 +136,7 @@ export class ReportsComponent implements OnInit {
     if (this.assessmentBreakdownComponent !== undefined && this.assessmentBreakdownComponent !== null) {
       this.assessmentBreakdownComponent.updateDataPull();
     }
-    if (this.individualWeekQCReport !== undefined) {
+    if (this.individualWeekQCReport !== undefined && this.individualWeekQCReport !== null) {
       this.individualWeekQCReport.update();
     }
     if (this.weeklyReportsComponent !== undefined) {

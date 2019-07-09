@@ -35,10 +35,6 @@ export class IndividualQCResultsTableComponent implements OnInit {
 
   ngOnInit() {}
 
-  /*
-  *Function called by the reports component to let this know to udate itself
-  *Grabs the QA notes and filters them into a two dimensional array based on the week
-  */
   update() {
     this.weekSelected = this.reportService.week > 0;
 
@@ -66,17 +62,12 @@ export class IndividualQCResultsTableComponent implements OnInit {
       this.qcData = this.reportService.getQANoteDataStore();
       this.categoryDataStore = this.reportService.getCategoryDataStore();
       this.assessmentDataStore = this.reportService.getAssessmentDataStore();
-      this.trainee = this.reportService.getTrainee();
 
+      this.removeUndefineStatus();
       this.determineCategoryForWeek();
       this.determineBatchAverage();
       this.determineOverallString();
     }
-    console.log(this.categoryForWeek);
-    console.log(this.overallFeedback);
-    console.log(this.determineOverallString);
-    console.log(this.trainee);
-    console.log(this.qcData);
   }
 
   determineCategoryForWeek() {
@@ -129,11 +120,8 @@ export class IndividualQCResultsTableComponent implements OnInit {
           break;
       }
     }
-    console.log('Raw Overall: ' + this.overallFeedback);
     this.overallFeedback = this.overallFeedback / numberOfPeople;
-    console.log('Raw Average Overall: ' + this.overallFeedback);
     this.overallFeedback = Math.round(this.overallFeedback);
-    console.log(this.overallFeedback);
   }
 
   determineOverallString() {
@@ -157,6 +145,14 @@ export class IndividualQCResultsTableComponent implements OnInit {
       default: {
         this.overallFeedbackString = 'No data';
         break;
+      }
+    }
+  }
+
+  removeUndefineStatus() {
+    for (let i = 0; i < this.qcData.length; i++) {
+      if (this.qcData[i].qcStatus === 'Undefined') {
+        this.qcData[i].qcStatus = '-';
       }
     }
   }
