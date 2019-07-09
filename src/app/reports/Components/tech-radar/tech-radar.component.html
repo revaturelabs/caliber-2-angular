@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <!-- This component does not render if a specific week is selected and a trainee is not-->
 <!-- <div *ngIf="this.reportService.getWeek() === 0"> -->
-  <div id="radarPanel" class="panel panel-default" style="margin-top: 20px">
+  <div id="radarPanel" class="panel panel-default">
     <div class="panel-heading">Technical Skills 
         <div *ngIf="this.reportService.getTrainee().traineeId === -1" role="button" class="pull-right" data-toggle="modal" data-target="#insert-trainee">
           <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
