@@ -185,6 +185,7 @@ export class ViewReportsPage {
   }
 
   overallQCScores() {
+    browser.sleep(500);
     return element(by.id('overallQCScores'));
   }
 }
