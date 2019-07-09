@@ -1,31 +1,63 @@
 <meta charset="UTF-8">
-<!-- This component does not render if a specific week is selected -->
-<div *ngIf="this.reportService.getWeek() === 0">
+<!-- This component does not render if a specific week is selected and a trainee is not-->
+<!-- <div *ngIf="this.reportService.getWeek() === 0"> -->
   <div id="radarPanel" class="panel panel-default" style="margin-top: 20px">
-    <div class="panel-heading">Technical Skills</div>
-      <div id="radarBody" class="panel-body">
-        <canvas width="100%" height="100%" id="radarCanvas" baseChart
-          [datasets]="radarChartData"
-          [options]="radarChartOptions"
-          [labels]="radarChartLabels"
-          [chartType]="radarChartType">
-        </canvas>
+    <div class="panel-heading">Technical Skills 
+        <div *ngIf="this.reportService.getTrainee().traineeId === -1" role="button" class="pull-right" data-toggle="modal" data-target="#insert-trainee">
+          <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div id="radarBody" class="panel-body">
+      <canvas width="100%" height="100%" id="radarCanvas" baseChart
+        [datasets]="radarChartData"
+        [options]="radarChartOptions"
+        [labels]="radarChartLabels"
+        [chartType]="radarChartType">
+      </canvas>
+      <div class="table-responsive">
         <table id="trainee-panel-status" class="table table-condensed"
-                  style="width: 100%;">
+                  style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr>
               <th>Subject</th>
-              <th id='dataHeader'>Scores</th>
+              <th class="tableHeadLabels" *ngFor="let data of radarChartData">{{data.label}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let arr of labelsAndAverages">
+
+            <tr *ngFor="let arr of labelsAndAverages; let i = index">
               <td id='label'>{{arr.label}}</td>
-              <td id='data'>{{arr.data}}</td>
+              <td *ngFor="let data of radarChartData">{{data.data[i]}}</td>
             </tr>
           </tbody>
         </table>
-
+      </div>
     </div>
   </div>
+<!-- </div> -->
+<div class="modal fade" id="insert-trainee" tabindex="-1" role="dialog"
+	aria-labelledby="batchModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Trainee Comparison</h4>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="table">
+            <tr class="col-xs-6 col-sm-6 col-md-4" *ngFor = "let trainee of traineeDataStore">
+              <td class="col-sm-2 col-md-2 col-lg-2">{{trainee.name}}
+                <input
+								type="checkbox" class="pull-right checkboxCustomClass" (change)="checkboxUpdate($event)" name="{{trainee.traineeId}}" id="checkboxID"/>
+              </td>
+            </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
