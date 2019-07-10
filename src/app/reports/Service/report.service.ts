@@ -41,6 +41,7 @@ export class ReportService {
   categoryDataStore: Category[];
   assessmentsDataStore: Assessment[];
   batchAssessmentsDataStore: Assessment[];
+  gradesOfBatchDataStore: Grade[];
   gradesOfTraineeDataStore: Grade[];
 
   constructor(private http: HttpClient) { }
@@ -95,6 +96,18 @@ export class ReportService {
       url = this.url + this.qaNotesURL + this.batch.batchId + '/' + this.week;
       return this.http.get<QANote[]>(url, httpOptions);
     }
+  }
+
+  getAllBatchGrades(): Observable<Grade[]> {
+    return this.http.get<Grade[]>(this.url + this.gradesAllURL + this.batch.batchId, httpOptions);
+  }
+
+  setGradesOfBatchDataStore(gradesOfBatchDataStore: Grade[]) {
+    this.gradesOfBatchDataStore = gradesOfBatchDataStore;
+  }
+
+  getGradesOfBatchDataStore(): Grade[] {
+    return this.gradesOfBatchDataStore;
   }
 
   //// add a query for all weeks
