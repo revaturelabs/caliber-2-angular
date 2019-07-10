@@ -1,6 +1,7 @@
 import { browser, by, element } from 'protractor';
 
-const viewABatchUrl = '';
+const viewABatchUrl = 'vp/manage';
+const viewReportUrl = 'vp/reports';
 const buttonToOpenViewTraineesModal = '';
 
 export class AppPage {
@@ -30,7 +31,8 @@ export class AppPage {
 
   getNavHomeLink() {
     element(by.css('app-root #home-link')).click();
-    return element(by.css('app-root p')).getText();
+    // return element(by.css('app-root p')).getText();
+    return element(by.id('QABatch')).getText();
   }
 
   getNavManageLink() {
@@ -40,13 +42,20 @@ export class AppPage {
 
   getNavImgLink() {
     element(by.css('app-root #img-link')).click();
-    return element(by.css('app-root p')).getText();
+    // return element(by.css('app-root p')).getText();
+    return element(by.id('QABatch')).getText();
   }
 
   /* FOR FOOTER TESTS */
 
   getFooterRevature() {
     return element(by.css('app-root #footer-id')).getText();
+  }
+
+  /* FOR CONTENT TESTS */
+
+  getLastQATable() {
+    return element(by.id('lastQATable'));
   }
 }
 
@@ -90,5 +99,93 @@ export class ViewTraineesInBatchPage {
     element.all(by.css('app-root .glyphicon-remove')).first().click();
     browser.sleep(3000);
     return element(by.css('app-root #deleteTraineeHeader')).getText();
+  }
+}
+
+export class ViewReportsPage {
+  navigateTo() {
+    return browser.get('/' + viewReportUrl);
+  }
+
+  viewBatchScores() {
+    browser.sleep(1000);
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
+            browser.sleep(1000);
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason'));
+  }
+
+  selectSpecificWeek() {
+    browser.sleep(1000);
+    element(by.id('toolbarWeekDropdown')).click().then(() => {
+      element(by.name('toolbarWeek1')).click().then(() => {
+        browser.sleep(1000);
+      });
+    });
+    return element(by.id('overallQCScores'));
+  }
+
+  selectSpecificTrainee() {
+    // browser.sleep(1000);
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
+        // browser.sleep(1000);
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
+            // browser.sleep(1000);
+            element(by.id('toolbarTraineeDropdown')).click().then(() => {
+              element(by.name('toolbarTrainee5360')).click().then(() => {
+                // browser.sleep(1000);
+              });
+            });
+          });
+        });
+      });
+    });
+    return element(by.id('overallQCScores'));
+  }
+
+  selectSmileyModal() {
+    browser.sleep(1000);
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
+            browser.sleep(1000);
+            element(by.id('Spruce, Jason 1')).click().then(() => {
+              browser.sleep(1000);
+            });
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason - Week 1 Notes')).getText();
+  }
+
+  viewModal() {
+    element(by.id('toolbarYearDropdown')).click().then(() => {
+      element(by.name('toolbarYear2018')).click().then(() => {
+        browser.sleep(1000);
+        element(by.id('toolbarBatchDropdown')).click().then(() => {
+          element(by.name('toolbarBatch2100')).click().then(() => {
+            browser.sleep(1000);
+          });
+        });
+      });
+    });
+    return element(by.id('Spruce, Jason - Week 1 Notes'));
+  }
+
+  overallQCScores() {
+    browser.sleep(500);
+    return element(by.id('overallQCScores'));
   }
 }

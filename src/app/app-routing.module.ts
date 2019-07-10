@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/component/home/home.component';
 import { BatchViewComponent } from './Batch/batch-view/batch-view.component';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { HomeModule } from './home-module/home-module.module';
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

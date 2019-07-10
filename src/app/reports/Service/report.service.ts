@@ -43,15 +43,22 @@ export class ReportService {
   batchAssessmentsDataStore: Assessment[];
   gradesOfTraineeDataStore: Grade[];
 
+  //for Techn Radar Last Minute Changes
+  cacheGradeStore: Grade[];
+  cacheCategoryStore: Category[];
+  cacheTraineeStore: Trainee[];
+  cacheAssessmentStore: Assessment[];
+
   constructor(private http: HttpClient) { }
 
   getAllYears(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + this.yearsURL);
+    // console.log(environment);
+    return this.http.get<number[]>(this.url + this.yearsURL, httpOptions);
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url + this.categoryAllURL);
-  } 
+    return this.http.get<Category[]>(this.url + this.categoryAllURL, httpOptions);
+  }
 
   getBatchesByYear(year: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(this.url + '/batch' + this.batchesYearURL + year, httpOptions);
@@ -140,6 +147,38 @@ export class ReportService {
 
   setBatch(batch: Batch) {
     this.batch = batch;
+  }
+
+  setCacheGradeStore(cacheGradeStore : Grade[]){
+    this.cacheGradeStore = cacheGradeStore;
+  }
+
+  setCacheCategoryStore(cacheCategoryStore: Category[]){
+    this.cacheCategoryStore = cacheCategoryStore;
+  }
+
+  setCacheTraineeStore(cacheTraineeStore: Trainee[]){
+    this.cacheTraineeStore = cacheTraineeStore;
+  }
+
+  setCacheAssessmentStore(cacheAssessmentStore: Assessment[]){
+    this.cacheAssessmentStore = cacheAssessmentStore;
+  }
+
+  getCacheGradeStore(): Grade[]{
+    return this.cacheGradeStore;
+  }
+
+  getCacheCategoryStore(): Category[]{
+    return this.cacheCategoryStore;
+  }
+
+  getCacheTraineeStore(): Trainee[]{
+    return this.cacheTraineeStore
+  }
+
+  getCacheAssessmentStore(): Assessment[]{
+    return this.cacheAssessmentStore
   }
 
   getBatch() {

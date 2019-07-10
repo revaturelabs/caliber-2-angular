@@ -13,4 +13,5 @@ import { BatchModule } from '../Batch/batch/batch.module';
     BatchModule
   ],
 })
+
 export class BatchRouteModule { }

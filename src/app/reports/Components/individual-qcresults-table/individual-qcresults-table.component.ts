@@ -24,6 +24,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
   overallFeedbackString: String;
   trainee;
   public weekSelected: boolean;
+  loadable: boolean;
 
 
 
@@ -36,16 +37,13 @@ export class IndividualQCResultsTableComponent implements OnInit {
   ngOnInit() {}
 
   update() {
+    this.loadable = false;
     this.weekSelected = this.reportService.week > 0;
 
     this.qcData = this.reportService.getQANoteDataStore();
     this.categoryDataStore = this.reportService.getCategoryDataStore();
     this.assessmentDataStore = this.reportService.getAssessmentDataStore();
     this.trainee = this.reportService.getTrainee();
-
-    this.determineCategoryForWeek();
-    this.determineBatchAverage();
-    this.determineOverallString();
 
     if (this.qcData === undefined || this.qcData.length === 0) {
       this.reportService.getAllQANotes().subscribe((qcNotes: QANote[]) => {
@@ -54,19 +52,23 @@ export class IndividualQCResultsTableComponent implements OnInit {
         this.assessmentDataStore = this.reportService.getAssessmentDataStore();
         this.trainee = this.reportService.getTrainee();
 
+        this.removeUndefineStatus();
         this.determineCategoryForWeek();
         this.determineBatchAverage();
         this.determineOverallString();
+        this.loadable = true;
       });
     } else {
       this.qcData = this.reportService.getQANoteDataStore();
       this.categoryDataStore = this.reportService.getCategoryDataStore();
       this.assessmentDataStore = this.reportService.getAssessmentDataStore();
+      this.trainee = this.reportService.getTrainee();
 
       this.removeUndefineStatus();
       this.determineCategoryForWeek();
       this.determineBatchAverage();
       this.determineOverallString();
+      this.loadable = true;
     }
   }
 
@@ -86,7 +88,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
       for (let j = 0; j < this.categoryDataStore.length; j++) {
         if (this.categoryId[i] === this.categoryDataStore[j].categoryId) {
           if (this.categoryForWeek.includes(this.categoryDataStore[j]) === false) {
-          this.categoryForWeek.push(this.categoryDataStore[j]);
+            this.categoryForWeek.push(this.categoryDataStore[j]);
           }
         }
       }
