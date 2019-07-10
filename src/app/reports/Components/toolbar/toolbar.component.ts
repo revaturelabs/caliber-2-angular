@@ -102,6 +102,7 @@ export class ToolbarComponent implements OnInit {
           this.reportService.setBatch(this.batches[0]);
           //Get all weeks of selected batch and get trainees
           this.getWeeks();
+          this.getAllGradesOfBatch();
           this.getTraineesByBatchId();
         }else{
           //Set selectedBatch and Service no display having no batches
@@ -204,12 +205,9 @@ export class ToolbarComponent implements OnInit {
     this.reportService.setBatch(event);
     this.auditService.selectedBatch = this.selectedBatch;
     this.reportService.setBatch(this.selectedBatch);
-    // this.getWeeks();
-    // this.showActiveWeek(this.auditService.selectedBatch.weeks);
-    // this.selectWeek(this.auditService.selectedBatch.weeks);
+    this.getAllGradesOfBatch();
+
     this.getWeeks();// if I get a new batch, I need to recalculate the weeks to show
-    //this.getTraineesByBatchId(); // and I need to update the trainees in the batch
-    
   }
 
   showYears(){
@@ -252,6 +250,15 @@ export class ToolbarComponent implements OnInit {
       (grades)=>{
         this.gradesDataStore = grades;
         this.getAllGradesofTrainee();
+    });
+  }
+
+  getAllGradesOfBatch(){
+    //update grades datastore
+    this.reportService.setGradesOfBatchDataStore([]);
+    this.reportService.getAllBatchGrades().subscribe(
+      (grades)=>{
+        this.reportService.setGradesOfBatchDataStore(grades);
     });
   }
 
