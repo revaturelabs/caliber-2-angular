@@ -43,6 +43,7 @@ export class TechRadarComponent implements OnInit {
     // This tooltips block controls the hover tooltip for data points on the graph. This should be the default
     // functionality of chart.js, but an issue in version 2.8.0 causes it to not display the value properly.
     tooltips: {
+      mode: 'label',
       callbacks: {
         label: function(tooltipItems, data) {
             return 'Score: ' + tooltipItems.yLabel;
@@ -67,9 +68,9 @@ export class TechRadarComponent implements OnInit {
       label: 'default',
       backgroundColor: ['rgba(71, 163, 209, 0.2)'],
       borderColor: ['rgba(71, 163, 209, 0.6)'],
-      pointBackgroundColor: [''],
-      pointHoverBackgroundColor: [''],
-      pointHoverBorderColor: ['']
+      pointBackgroundColor: ['lightblue'],
+      pointHoverBackgroundColor: ['lightblue'],
+      pointHoverBorderColor: ['lightblue']
     },
   ];
   public radarChartType: ChartType = 'radar';
@@ -114,6 +115,13 @@ export class TechRadarComponent implements OnInit {
 
     // Looping through each category (Java, SQL, etc.) of evaluation.
     // These categories represent a single week's primary subject, even if that week's curriculum consists of multiple subjects.
+
+    const colorArray: string[] = [];
+    for (let i = 0; i < this.categoryDataStore.length; i++) {
+      colorArray.push('lightblue');
+    }
+    this.radarChartData[0].pointHoverBackgroundColor = colorArray;
+
     for (let i = 0; i < this.categoryDataStore.length; i++) {
       categoryCount.push(0);
       categoryTotal.push(0);
@@ -152,19 +160,20 @@ export class TechRadarComponent implements OnInit {
       }
     }
 
-    for (let i = 1; i < this.traineeDataStore.length; i++) {
-
-      this.studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
-      this.studentScores[this.traineeDataStore[i].traineeId]['data'] = [];
-
-      for (const x in this.studentScores[this.traineeDataStore[i].traineeId]) {
-        if (x !== 'name' && x !== 'data') {
-          this.studentScores[this.traineeDataStore[i].traineeId]['data'].
-                push((this.studentScores[this.traineeDataStore[i].traineeId][x]['totalScore'] /
-                      this.studentScores[this.traineeDataStore[i].traineeId][x]['count']).toFixed(2));
+      for (let i = 1; i < this.traineeDataStore.length; i++) {
+        if (this.studentScores[this.traineeDataStore[i].traineeId] === undefined) {
+          break;
+        }
+        this.studentScores[this.traineeDataStore[i].traineeId]['name'] = this.traineeDataStore[i].name;
+        this.studentScores[this.traineeDataStore[i].traineeId]['data'] = [];
+        for (const x in this.studentScores[this.traineeDataStore[i].traineeId]) {
+          if (x !== 'name' && x !== 'data') {
+            this.studentScores[this.traineeDataStore[i].traineeId]['data'].
+                  push((this.studentScores[this.traineeDataStore[i].traineeId][x]['totalScore'] /
+                        this.studentScores[this.traineeDataStore[i].traineeId][x]['count']).toFixed(2));
+          }
         }
       }
-    }
 
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
@@ -193,12 +202,14 @@ export class TechRadarComponent implements OnInit {
     this.radarChartData[0].label = this.reportService.getBatch().trainingName;
 
     // Shows data for a specific trainee when one is selected
-    if (this.reportService.getTrainee().traineeId !== -1) {
+
+    if (this.reportService.getTrainee().traineeId !== -1 && this.studentScores[this.reportService.getTrainee().traineeId] !== undefined) {
       this.radarChartData.push({
         data: this.studentScores[this.reportService.getTrainee().traineeId]['data'],
         label: this.studentScores[this.reportService.getTrainee().traineeId]['name'],
         backgroundColor: ['rgba(0, 0, 0, 0)'],
         borderColor: this.colorsArray[0],
+        pointHoverBackgroundColor: ['lightblue'],
       });
     }
 
@@ -217,6 +228,7 @@ export class TechRadarComponent implements OnInit {
         label: this.studentScores[values.currentTarget.name]['name'],
         backgroundColor: ['rgba(0, 0, 0, 0)'],
         borderColor: this.colorsArray[this.radarChartData.length - 1],
+        pointBackgroundColor: this.colorsArray[this.radarChartData.length - 1],
       });
     } else {
       for (let i = 1; i < this.radarChartData.length; i ++) {
