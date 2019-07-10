@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import {Grade, Trainee} from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
-import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-weekly-report',
@@ -10,8 +9,6 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./weekly-report.component.css']
 })
 export class WeeklyReportComponent implements OnInit {
-
-  @ViewChild(BaseChartDirective) public chartname: BaseChartDirective;
 
   private grades: Grade[];
   private gradesByTrainee: Grade[];
@@ -109,8 +106,6 @@ export class WeeklyReportComponent implements OnInit {
 
     // set x axis labels
     this.chartLabels = keys;
-    console.log(keys);
-    //this.chart.update();
   }
 
   fillChartByTraineeAndWeek() {
@@ -163,11 +158,6 @@ export class WeeklyReportComponent implements OnInit {
     // set x axis labels
     const xAxis = Array.from(this.weekAveragesByTrainee.keys());
     this.chartLabels = xAxis;
-    console.log(xAxis);
-    // setTimeout(() => {
-    //   console.log("resizing");
-    //       this.chartname.chart.resize();
-    // });
   }
 
   fillChart() {
@@ -201,7 +191,6 @@ export class WeeklyReportComponent implements OnInit {
 
     // set x axis labels
     this.chartLabels = keys;
-    console.log(keys);
   }
 
   resetChart() {
