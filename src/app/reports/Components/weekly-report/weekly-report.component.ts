@@ -11,7 +11,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class WeeklyReportComponent implements OnInit {
 
-  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
+  @ViewChild(BaseChartDirective) public chartname: BaseChartDirective;
 
   private grades: Grade[];
   private gradesByTrainee: Grade[];
@@ -47,68 +47,27 @@ export class WeeklyReportComponent implements OnInit {
   update() {
     this.display = false;
     const trainee = this.reportService.getTrainee();
-    if (this.reportService.getWeek() === 0 && trainee.traineeId === -1) {
+    if (this.reportService.getWeek() !== 0 && trainee.traineeId !== -1) {
+      this.overallByTrainee = true;
+      this.weekAveragesByTrainee = new Map<string, number[]>();
+      this.resetChart();
+      this.updateDataForTraineeAndWeek(trainee);
+    } else if (this.reportService.getWeek() === 0 && trainee.traineeId !== -1) {
+      this.overallByTrainee = true;
+      this.weekAveragesByTrainee = new Map<string, number[]>();
+      this.resetChart();
+      this.updateDataForTrainee(trainee);
+    } else if (this.reportService.getWeek() === 0 && trainee.traineeId === -1) {
       this.overallByTrainee = false;
       this.resetChart();
       this.updateDataForAll();
-    } else if (this.reportService.getWeek() === 0 && trainee.traineeId !== -1) {
-      this.overallByTrainee = true;
-      this.resetChart();
-      // this.updateDataForTrainee(trainee);
-      this.updateDataForTraineeAndWeek(trainee);
-    } else if (this.reportService.getWeek() !== 0 && trainee.traineeId !== -1) {
-      this.overallByTrainee = true;
-      this.resetChart();
-      this.updateDataForTraineeAndWeek(trainee);
-    }
-  }
-
-  updateDataForAll() {
-    this.grades = this.reportService.getGradeDataStore();
-    this.assessments = this.reportService.getAssessmentDataStore();
-    if (this.grades.length > 0 && this.assessments.length > 0) {
-      this.display = true;
-      const gradeAverages = [];
-      let tempAverage = 0;
-      let tempCount = 0;
-
-      // matches each assessment to a week and puts it into an array
-      // matches each grade to an assessment and finds the average of all grades per assessment
-      this.assessments.forEach((tempAssessment) => {
-        this.grades.forEach((tempGrade) => {
-          if (tempAssessment.assessmentId == tempGrade.assessmentId) {
-            tempCount++;
-            tempAverage += tempGrade.score;
-          }
-        });
-        tempAverage /= tempCount;
-        gradeAverages.push(tempAverage);
-        tempAverage = 0;
-        tempCount = 0;
-      });
-
-      for (let i = 0; i < this.assessments.length; i++) {
-        const tempWeekNumber = this.assessments[i].weekNumber;
-        const weekNumber = String(tempWeekNumber);
-
-        if (this.weekAverages.has(weekNumber)) {
-          const averages = this.weekAverages.get(weekNumber);
-          averages.push(gradeAverages[i]);
-          this.weekAverages.set(weekNumber, averages);
-        } else {
-          this.weekAverages.set(weekNumber, [gradeAverages[i]]);
-        }
-      }
-      // generate the chart
-      this.fillChart();
-    } else {
-      this.display = false;
     }
   }
 
   fillChartByTrainee() {
 
     this.chartOptions = {
+      responsive: true
     };
 
     const keys = Array.from(this.weekAverages.keys());
@@ -150,6 +109,8 @@ export class WeeklyReportComponent implements OnInit {
 
     // set x axis labels
     this.chartLabels = keys;
+    console.log(keys);
+    //this.chart.update();
   }
 
   fillChartByTraineeAndWeek() {
@@ -161,8 +122,7 @@ export class WeeklyReportComponent implements OnInit {
     const keys = Array.from(this.weekAverages.keys());
     // fill line
     keys.forEach((key) => {
-      if (+key <= 4) {
-      // if (+key <= this.reportService.getWeek()) {
+      if (+key <= this.reportService.getWeek()) {
         let avg = 0;
         this.weekAverages.get(key).forEach((grade) => {
           avg += grade;
@@ -174,8 +134,7 @@ export class WeeklyReportComponent implements OnInit {
 
     const keysByTrainee = Array.from(this.weekAveragesByTrainee.keys());
     keysByTrainee.forEach((key) => {
-      if (+key <= 4) {
-      // if (+key <= this.reportService.getWeek()) {
+      if (+key <= this.reportService.getWeek()) {
         let avg = 0;
         this.weekAveragesByTrainee.get(key).forEach((grade) => {
           avg += grade;
@@ -202,7 +161,13 @@ export class WeeklyReportComponent implements OnInit {
     ];
 
     // set x axis labels
-    this.chartLabels = keys;
+    const xAxis = Array.from(this.weekAveragesByTrainee.keys());
+    this.chartLabels = xAxis;
+    console.log(xAxis);
+    // setTimeout(() => {
+    //   console.log("resizing");
+    //       this.chartname.chart.resize();
+    // });
   }
 
   fillChart() {
@@ -236,6 +201,7 @@ export class WeeklyReportComponent implements OnInit {
 
     // set x axis labels
     this.chartLabels = keys;
+    console.log(keys);
   }
 
   resetChart() {
@@ -244,6 +210,49 @@ export class WeeklyReportComponent implements OnInit {
     this.avgData = [];
     this.avgDataByTrainee = [];
     this.chartOptions = [];
+  }
+
+  updateDataForAll() {
+    this.grades = this.reportService.getGradesOfBatchDataStore();
+    this.assessments = this.reportService.getBatchAssessmentDataStore();
+    if (this.grades.length > 0 && this.assessments.length > 0) {
+      this.display = true;
+      const gradeAverages = [];
+      let tempAverage = 0;
+      let tempCount = 0;
+
+      // matches each assessment to a week and puts it into an array
+      // matches each grade to an assessment and finds the average of all grades per assessment
+      this.assessments.forEach((tempAssessment) => {
+        this.grades.forEach((tempGrade) => {
+          if (tempAssessment.assessmentId == tempGrade.assessmentId) {
+            tempCount++;
+            tempAverage += tempGrade.score;
+          }
+        });
+        tempAverage /= tempCount;
+        gradeAverages.push(tempAverage);
+        tempAverage = 0;
+        tempCount = 0;
+      });
+
+      for (let i = 0; i < this.assessments.length; i++) {
+        const tempWeekNumber = this.assessments[i].weekNumber;
+        const weekNumber = String(tempWeekNumber);
+
+        if (this.weekAverages.has(weekNumber)) {
+          const averages = this.weekAverages.get(weekNumber);
+          averages.push(gradeAverages[i]);
+          this.weekAverages.set(weekNumber, averages);
+        } else {
+          this.weekAverages.set(weekNumber, [gradeAverages[i]]);
+        }
+      }
+      // generate the chart
+      this.fillChart();
+    } else {
+      this.display = false;
+    }
   }
 
   private updateDataForTrainee(trainee: Trainee) {
@@ -293,9 +302,8 @@ export class WeeklyReportComponent implements OnInit {
     }
   }
   private updateDataForTraineeAndWeek(trainee: Trainee) {
-    this.gradesByTrainee = this.reportService.getGradeDataStore();
-    this.assessmentsByTrainee = this.reportService.getAssessmentDataStore();
-    console.log(this.reportService.getAssessmentDataStore());
+    this.gradesByTrainee = this.reportService.getGradesOfBatchDataStore();
+    this.assessmentsByTrainee = this.reportService.getBatchAssessmentDataStore();
     // If there are no grades or assessments then set flag to display chart to false
     if (!(this.gradesByTrainee.length > 0 && this.assessmentsByTrainee.length > 0)) {
       this.display = false;
@@ -308,11 +316,7 @@ export class WeeklyReportComponent implements OnInit {
       // matches each assessment to a week and puts it into an array
       // matches each grade to an assessment and finds the average of all grades per assessment
       this.assessmentsByTrainee.forEach((tempAssessment) => {
-        console.log(tempAssessment);
-        console.log("currentWeek "+tempAssessment.weekNumber);
-        console.log("max week " + this.reportService.getWeek());
-        // if (tempAssessment.weekNumber <= this.reportService.getWeek()) {
-          if (tempAssessment.weekNumber <= 4) {
+        if (tempAssessment.weekNumber <= this.reportService.getWeek()) {
           this.gradesByTrainee.forEach((tempGrade) => {
           if (tempAssessment.assessmentId == tempGrade.assessmentId) {
              if (trainee.traineeId == tempGrade.traineeId) {
@@ -320,8 +324,8 @@ export class WeeklyReportComponent implements OnInit {
                 tempAverage += tempGrade.score;
               }
             }
-        });
-       }
+          });
+        }
         tempAverage /= tempCount;
         gradeAverages.push(tempAverage);
         tempAverage = 0;
@@ -332,12 +336,14 @@ export class WeeklyReportComponent implements OnInit {
         const tempWeekNumber = this.assessmentsByTrainee[i].weekNumber;
         const weekNumber = String(tempWeekNumber);
 
-        if (this.weekAveragesByTrainee.has(weekNumber)) {
-          const averages = this.weekAveragesByTrainee.get(weekNumber);
-          averages.push(gradeAverages[i]);
-          this.weekAveragesByTrainee.set(weekNumber, averages);
-        } else {
-          this.weekAveragesByTrainee.set(weekNumber, [gradeAverages[i]]);
+        if (tempWeekNumber <= this.reportService.getWeek()){
+          if (this.weekAveragesByTrainee.has(weekNumber)) {
+            const averages = this.weekAveragesByTrainee.get(weekNumber);
+            averages.push(gradeAverages[i]);
+            this.weekAveragesByTrainee.set(weekNumber, averages);
+          } else {
+            this.weekAveragesByTrainee.set(weekNumber, [gradeAverages[i]]);
+          }
         }
       }
       // generate the chart
