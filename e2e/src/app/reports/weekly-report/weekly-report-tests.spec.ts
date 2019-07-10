@@ -41,7 +41,7 @@ describe('Weekly report component displays', () => {
             });
         });
     });
-    it('should not display component line chart on week selection, ', () => {
+    it('should not display component line chart on week and no trainee selection , ', () => {
         const reportsPage = element(by.css('app-root #reports-link'));
         reportsPage.click().then(() => {
             browser.pause();
@@ -62,7 +62,7 @@ describe('Weekly report component displays', () => {
             });
         });
     });
-    it('should not display component line chart on week and trainee selection, ', () => {
+    it('should display component line chart on week and trainee selection, ', () => {
         const reportsPage = element(by.css('app-root #reports-link'));
         reportsPage.click().then(() => {
             browser.pause();
@@ -82,7 +82,7 @@ describe('Weekly report component displays', () => {
                                 traineeButton.click().then(() => {
                                     browser.sleep(2000);
                                     const lineChart = element(by.id('weekly-report'));
-                                    expect(lineChart.isPresent()).toBeFalsy();
+                                    expect(lineChart.isDisplayed()).toBeTruthy();
                                 });
                             });
                         });

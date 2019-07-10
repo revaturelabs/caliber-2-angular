@@ -1,11 +1,12 @@
 <div *ngIf = "display" id="weekly-report" class="panel panel-default">
   <div class="panel-heading">
-    Weekly Progress <i ng-click="downloadChartButton($event)" class="clickableIcons glyphicon glyphicon-save"></i>
+    Weekly Progress 
   </div>
   <div id="chart" class="panel-body">
     <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
       <canvas
-        baseChart [chartType]="'line'"
+        baseChart
+        [chartType]="'line'"
         [datasets]="chartData"
         [labels]="chartLabels"
         [options]="chartOptions"
