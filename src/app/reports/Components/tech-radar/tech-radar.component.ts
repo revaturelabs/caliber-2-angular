@@ -84,19 +84,24 @@ export class TechRadarComponent implements OnInit {
   // It manages the data being presented in the radar chart.
   public updateDataPull() {
     // Getting new data.
-    this.gradeDataStore = this.reportService.getGradeDataStore();
-    this.categoryDataStore = this.reportService.getCategoryDataStore();
-    this.traineeDataStore = this.reportService.getTraineeDataStore();
-    this.assessmentDataStore = this.reportService.getAssessmentDataStore();
+    //if getTrainee and getWeek, then don't reset
+    console.log(this.reportService.getWeek());
+    if (this.reportService.getWeek() === 0) {
+      console.log('NEW DATA');
+      this.gradeDataStore = this.reportService.getGradeDataStore();
+      this.categoryDataStore = this.reportService.getCategoryDataStore();
+      this.traineeDataStore = this.reportService.getTraineeDataStore();
+      this.assessmentDataStore = this.reportService.getAssessmentDataStore();
+    }
 
-    console.log('Grades:');
-    console.log(this.reportService.getGradeDataStore());
-    console.log('Categories:');
-    console.log(this.reportService.getCategoryDataStore());
-    console.log('Trainees:');
-    console.log(this.reportService.getTraineeDataStore());
-    console.log('Assessment:');
-    console.log(this.reportService.getAssessmentDataStore());
+    // console.log('Grades:');
+    // console.log(this.reportService.getGradeDataStore());
+    // console.log('Categories:');
+    // console.log(this.reportService.getCategoryDataStore());
+    // console.log('Trainees:');
+    // console.log(this.reportService.getTraineeDataStore());
+    // console.log('Assessment:');
+    // console.log(this.reportService.getAssessmentDataStore());
 
     // Resetting chart
     this.radarChartData[0].data = [];
@@ -205,11 +210,15 @@ export class TechRadarComponent implements OnInit {
     for (let i = 0 ; i < elements.length ; i++) {
       (elements[i] as HTMLInputElement).checked = false;
     }
+
     console.log('Logging studentScores stuff:');
     console.log(this.studentScores);
 
     console.log('logging chart stuff');
     console.log(this.radarChartData);
+
+    console.log('Logging conditions:');
+    // console.log(this.reportService.getTrainee() !== -1 && this.reportService.getWeek() !== 0));
   }
 
   // Handles the updating of chart from modal checkboxes
