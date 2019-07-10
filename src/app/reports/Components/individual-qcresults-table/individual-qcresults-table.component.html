@@ -1,30 +1,27 @@
-<div ui-view="qc-batchOverall" class="ng-scope"><div class="container data-container ng-scope margin">
+<div ui-view="qc-batchOverall" class="ng-scope"><div class="ng-scope">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 top5">
 			<div class="panel panel-default">
 				<div class="panel-heading ng-binding">Quality Audit Report - Week </div>
 				<div class="panel-body">
-				<p><strong class="ng-scope margin-bottom">Categories covered this week: </strong></p>
-				
-					<span *ngFor="let category of categoryForWeek" class="ng-binding">{{category['skillCategory']}}</span>
+				<p><strong class="ng-scope margin-bottom">Categories covered this week: <span *ngFor="let category of categoryForWeek" class="ng-binding">{{category['skillCategory']}}</span></strong></p>
+
 					<table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
 						<thead>
 							<tr>	
 							</tr>
 							<tr>
-								<th>Trainee</th>
-								<th>Individual Feedback</th>
-								<th>Notes</th>
+								<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
+								<th class="col-sm-2 col-md-2 col-lg-2">Individual Feedback</th>
+								<th class="col-sm-8 col-md-8 col-lg-8">Notes</th>
 							</tr>
 						</thead>
 						<tbody>
-							<div *ngIf="loadable">
 								<tr *ngFor="let note of qcData" id="{{note['traineeId']}}" class="ng-scope">
-									<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['trainee']['name'])}}</td>
-									<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['qcStatus'])}}</td>
-									<td class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['content'])}}</td>
+									<td *ngIf="loadable && note['trainee'] != null" class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['trainee']['name'])}}</td>
+									<td *ngIf="loadable && note['trainee'] != null" class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['qcStatus'])}}</td>
+									<td *ngIf="loadable && note['trainee'] != null" class="ng-binding" id="trainee{{note['traineeId']}}">{{(note['content'])}}</td>
 								</tr>
-							</div>
 						</tbody>
 					</table>
 				<!-- QC batch note -- overall qualitative feedback {{category['skillCategory']}}*ngFor="let category of categoryDataStore"-->
