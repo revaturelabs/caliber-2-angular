@@ -85,7 +85,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
   chartClicked(event: any){
     if(event.active.length > 0) {
       this.index = event.active[0]._index;
-      // console.log( this.chartIdReference[index] + " at week " + this.chartWeekReference[index]);
+
       this.qaNotesForModal = this.qaNoteDataStore.find((element) => {
         if(element.length >0){
           return (element[0].batchId === this.chartIdReference[this.index])
@@ -104,21 +104,31 @@ export class LastQualityAuditGraphComponent implements OnInit {
           });
 
           // this.assessmentService
-
-          this.qaNotesForModal.forEach((qaNote) => {
+          let overallIndex: number = 0;
+          this.qaNotesForModal.forEach((qaNote, index) => {
+            
             if(qaNote.traineeId > 0) {
-              let name: string = trainees.find((element) => {return element.traineeId === qaNote.traineeId}).name;
-              this.traineeNames.push(name);
+              let trainee: Trainee = trainees.find(
+                (element) => {
+                  if(element !== undefined && element !== null && element.name != "") {
+                    return element.traineeId === qaNote.traineeId
+                  } 
+                  return false;
+                });
+              if(trainee !== undefined && trainee !== null){
+                let name: string = trainee.name;
+                this.traineeNames.push(name);
+              }
             } else {
               this.traineeNames.push("Overall");
+              overallIndex = index;
             }
-            
           });
           this.overallDisplayQANote = null;
           this.qaNoteCategory = "";
 
-          if(this.traineeNames[this.traineeNames.length -1] == "Overall") {
-            this.overallDisplayQANote = this.qaNotesForModal.pop();
+          if(overallIndex >= 0 && overallIndex < this.qaNotesForModal.length) {
+            this.overallDisplayQANote = this.qaNotesForModal.splice(overallIndex)[0];
           } 
           
           this.assessmentService.getAssessmentByBatch(this.chartIdReference[this.index],
