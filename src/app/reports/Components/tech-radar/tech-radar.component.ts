@@ -83,25 +83,22 @@ export class TechRadarComponent implements OnInit {
   // This method is called by the toolbar component each time data is pulled.
   // It manages the data being presented in the radar chart.
   public updateDataPull() {
-    // Getting new data.
-    //if getTrainee and getWeek, then don't reset
-    console.log(this.reportService.getWeek());
+    // Getting data.
     if (this.reportService.getWeek() === 0) {
-      console.log('NEW DATA');
       this.gradeDataStore = this.reportService.getGradeDataStore();
+      this.reportService.setCacheGradeStore(this.gradeDataStore);
       this.categoryDataStore = this.reportService.getCategoryDataStore();
+      this.reportService.setCacheCategoryStore(this.categoryDataStore);
       this.traineeDataStore = this.reportService.getTraineeDataStore();
+      this.reportService.setCacheTraineeStore(this.traineeDataStore);
       this.assessmentDataStore = this.reportService.getAssessmentDataStore();
+      this.reportService.setCacheAssessmentStore(this.assessmentDataStore);
+    } else {
+      this.gradeDataStore = this.reportService.getCacheGradeStore();
+      this.categoryDataStore = this.reportService.getCacheCategoryStore();
+      this.traineeDataStore = this.reportService.getCacheTraineeStore();
+      this.assessmentDataStore = this.reportService.getCacheAssessmentStore();
     }
-
-    // console.log('Grades:');
-    // console.log(this.reportService.getGradeDataStore());
-    // console.log('Categories:');
-    // console.log(this.reportService.getCategoryDataStore());
-    // console.log('Trainees:');
-    // console.log(this.reportService.getTraineeDataStore());
-    // console.log('Assessment:');
-    // console.log(this.reportService.getAssessmentDataStore());
 
     // Resetting chart
     this.radarChartData[0].data = [];
@@ -140,7 +137,8 @@ export class TechRadarComponent implements OnInit {
               }
 
               if (this.categoryDataStore[i - 1].skillCategory in this.studentScores[this.gradeDataStore[j].traineeId]) {
-                this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory]['totalScore'] += this.gradeDataStore[j].score;
+                this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory]['totalScore'] +=
+                                                                                                         this.gradeDataStore[j].score;
                 this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory]['count'] += 1;
               } else {
                 this.studentScores[this.gradeDataStore[j].traineeId][this.categoryDataStore[i - 1].skillCategory] = {
@@ -170,8 +168,7 @@ export class TechRadarComponent implements OnInit {
 
     const categoryAverages: number[] = [];
     const averageIndex: number[] = [];
-    console.log('Category count: ' + categoryCount);
-    for (let i = 0; i < categoryCount.length; i++){
+    for (let i = 0; i < categoryCount.length; i++) {
       if (categoryCount[i] !== 0) {
         categoryAverages.push(+(categoryTotal[i] / categoryCount[i]).toFixed(2));
         averageIndex.push(i);
@@ -206,19 +203,10 @@ export class TechRadarComponent implements OnInit {
     }
 
     // Reset checkboxes on page change
-    let elements = document.getElementsByClassName('checkboxCustomClass');
+    const elements = document.getElementsByClassName('checkboxCustomClass');
     for (let i = 0 ; i < elements.length ; i++) {
       (elements[i] as HTMLInputElement).checked = false;
     }
-
-    console.log('Logging studentScores stuff:');
-    console.log(this.studentScores);
-
-    console.log('logging chart stuff');
-    console.log(this.radarChartData);
-
-    console.log('Logging conditions:');
-    // console.log(this.reportService.getTrainee() !== -1 && this.reportService.getWeek() !== 0));
   }
 
   // Handles the updating of chart from modal checkboxes
@@ -231,7 +219,7 @@ export class TechRadarComponent implements OnInit {
         borderColor: this.colorsArray[this.radarChartData.length - 1],
       });
     } else {
-      for (let i = 1; i < this.radarChartData.length; i ++){
+      for (let i = 1; i < this.radarChartData.length; i ++) {
         if (this.radarChartData[i].label === this.studentScores[values.currentTarget.name]['name']) {
           this.radarChartData.splice(i, 1);
           break;
