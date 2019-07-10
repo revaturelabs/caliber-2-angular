@@ -64,6 +64,9 @@ export class WeeklyReportComponent implements OnInit {
   fillChartByTrainee() {
 
     this.chartOptions = {
+      tooltips: {
+        mode: 'label'
+      },
       responsive: true
     };
 
@@ -111,6 +114,9 @@ export class WeeklyReportComponent implements OnInit {
   fillChartByTraineeAndWeek() {
 
     this.chartOptions = {
+      tooltips: {
+        mode: 'label'
+      },
       responsive: true
     };
 
@@ -163,6 +169,9 @@ export class WeeklyReportComponent implements OnInit {
   fillChart() {
 
     this.chartOptions = {
+      tooltips: {
+        mode: 'label'
+      },
       responsive: true
     };
 
