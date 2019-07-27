@@ -9,11 +9,13 @@ import { UpdateTraineeComponent } from './Components/update-trainee/update-train
 import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
 import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
 import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.component';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    UserRoutingModule,
     HttpClientModule
   ],
   declarations: [
