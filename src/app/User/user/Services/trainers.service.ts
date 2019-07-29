@@ -11,6 +11,12 @@ const userUrl = environment.serverRootURL + '/user';
 //The url for getting all trainers
 const getAllUrl = userUrl + '/all/trainer/all';
 
+const addURL = userUrl + 'all/trainer/add';
+
+const editURL = userUrl + 'all/trainer/edit';
+
+
+
 // /**
 //  * The url for getting all trainees by the batch id from the user service
 //  */
