@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+import { AddCategoryComponent } from './Assess-Categories/Components/add-category/add-category.component';
+import { EditCategoryComponent } from './Assess-Categories/Components/edit-category/edit-category.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent
+ 
   ],
   imports: [
     BrowserModule,
