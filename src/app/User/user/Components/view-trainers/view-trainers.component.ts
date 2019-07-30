@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
 
 @Component({
   selector: 'app-view-trainers',
@@ -17,8 +18,17 @@ export class ViewTrainersComponent implements OnInit {
 
   trainersList : Trainer[] = [];
 
-  ngOnInit() {
+  @ViewChild('updateTrainerModal') EditTrainer: EditTrainerComponent;
+
+  ngOnInit() 
+  {
     this.getAllTrainers();
+  }
+
+  assignTrainerToUpdate(trainer:Trainer)
+  {
+    this.EditTrainer.updateTrainerToEdit(trainer);
+
   }
 
   getAllTrainers() 

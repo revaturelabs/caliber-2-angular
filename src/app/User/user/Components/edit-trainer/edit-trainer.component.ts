@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Trainer } from '../../types/trainer';
 
 @Component({
   selector: 'app-edit-trainer',
@@ -9,7 +10,22 @@ export class EditTrainerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  trainerToEdit : Trainer;
+
+  ngOnInit() 
+  {
+
+  }
+
+  updateTrainerToEdit(trainer:Trainer)
+  {
+    this.trainerToEdit = trainer;
+  }
+
+  getTrainerToEdit(trainer:Trainer)
+  {
+    return this.trainerToEdit;
+
   }
 
 }
