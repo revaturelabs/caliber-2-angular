@@ -18,7 +18,7 @@ export class ViewTrainersComponent implements OnInit {
 
   trainersList : Trainer[] = [];
 
-  @ViewChild('updateTrainerModal') EditTrainer: EditTrainerComponent;
+  @ViewChild('editTrainerModal') EditTrainer: EditTrainerComponent;
 
   ngOnInit() 
   {

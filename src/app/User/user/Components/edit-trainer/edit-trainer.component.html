@@ -13,6 +13,40 @@
         <!-- Edit Trainer -->
         <h3 id="editTrainerHeader">Edit Trainer</h3>
         <form ngNativeValidate>
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <label for="trainerName">Full Name:</label> <input type="text" class="form-control" id="trainerName"
+                    placeholder="Name" name="fullName" [(ngModel)]="trainerToEdit.name" required>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <label for="trainerEmail">Email:</label> <input type="email" class="form-control" id="trainerEmail"
+                    placeholder="Email" [(ngModel)]="trainerToEdit.email" name="email" required>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="title">Title:</label> <input type="text" class="form-control" id="title"
+                      placeholder="Title" name="title" [(ngModel)]="trainerToEdit.title" required>
+                  </div>
+                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="trainerPassword">Password:</label> <input type="text" class="form-control" id="trainerPassword"
+                      placeholder="Password" [(ngModel)]="trainerToEdit.password" name="password" required>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                      <label for="trainerTier">Trainer Tier</label> <select class="form-control" id="trainerTier"
+                        required [(ngModel)]="trainerToEdit.tier" name="trainerTier">
+                        <option value="" disabled="">Select Tier</option>
+                        <option value="ROLE_VP">ROLE_VP</option>
+                        <option value="ROLE_PANEL">ROLE_PANEL</option>
+                        <option value="ROLE_QC">ROLE_QC</option>
+                        <option value="ROLE_TRAINER">ROLE_TRAINER</option>
+                        <option value="ROLE_STAGING">ROLE_STAGING</option>
+                        <option value="ROLE_INACTIVE">ROLE_INACTIVE</option>
+                      </select>
+                    </div>
+              </div>
           <div class="modal-footer">
             <button id="updateButton1" type="submit" value="Update" class="btn btn-primary" >Update</button>
             <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -27,6 +27,13 @@ const editURL = userUrl + 'all/trainer/edit';
 })
 export class TrainersService {
 
+  private roles:String[] = ["ROLE_VP",
+                     "ROLE_PANEL",
+                    "ROLE_QC",
+                    "ROLE_TRAINER",
+                    "ROLE_STAGING",
+                    "ROLE_INACTIVE"];
+
   constructor(private http:HttpClient) { }
 
   getAllTrainers(): Observable<Trainer[]> {
