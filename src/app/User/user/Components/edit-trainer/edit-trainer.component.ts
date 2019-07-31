@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './edit-trainer.component.html',
   styleUrls: ['./edit-trainer.component.css']
 })
-export class EditTrainerComponent implements OnInit, OnChanges {
+export class EditTrainerComponent implements OnInit{
 
   //Trainer passed from View Trainers Component.
   @Input() trainerToEdit : Trainer;
@@ -24,20 +24,23 @@ export class EditTrainerComponent implements OnInit, OnChanges {
 
   constructor(private trService: TrainersService, private errorService: ErrorService, private router:Router ) { }
 
-  ngOnChanges(){
-    console.log("Something changed.");
-  }
-
   ngOnInit() 
   {
     
   }
 
+  /** 
+   *      This method, which is called in the ViewTrainersComponent, displays the trainer
+   * information in the modal to be edited. We store the trainerObj parameter into an originalTrainer
+   * variable, and set the "trainer" variable, which is two-way bound in the edit-trainer HTML, to the trainerObj parameter.
+   * In order to remove two-way data-binding referencing, we converted "trainer" into a JSON.
+   * Thus, we are able to distinguish between the original trainer, and the new trainer object. 
+   * @author Carl Pacquing
+  */
   displayTrainer(trainerObj:Trainer)
   { //A setter method to set our initial Trainer information.
     //Display the information in the modal.
     console.log(trainerObj);
-    //console.log(this.originalTrainer);
     this.originalTrainer = trainerObj;//Store original trainer to the trainerObj parameter.    
     this.trainer = JSON.parse(JSON.stringify(trainerObj)); // actual trainer data;
     console.log(this.originalTrainer);
@@ -51,10 +54,7 @@ export class EditTrainerComponent implements OnInit, OnChanges {
         console.log("Original trainer: ", this.originalTrainer);
         console.log("New Trainer: ", this.trainer);
         this.trService.editTrainer(this.trainer).subscribe(response => {
-          console.log("Hello");
-          //this.originalTrainer= this.trainer;
-          //console.log("After Update: ", this.originalTrainer);
-          this.router.navigateByUrl("vp/trainers");
+          window.location.reload();
         },
         issue => {
           if (issue instanceof HttpErrorResponse) {
@@ -72,7 +72,7 @@ export class EditTrainerComponent implements OnInit, OnChanges {
     //I.e. The trainer information should remain unchanged.
     console.log("Revert to original fields.");
     console.log("Original Trainer:",this.originalTrainer);
-    console.log("TrainerToEdit:", this.trainer);
+    console.log("Before Cancellation:", this.trainer);
     this.trainer = this.originalTrainer;
     console.log("After Revert:", this.trainer);
     //this.router.navigate(['vp/trainers']);
