@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.component';
 
 const routes: Routes = [
-  { path: '', component: ViewTrainersComponent}
+  { path: 'viewTrainers', component: ViewTrainersComponent}
 ];
 
 @NgModule( {
   exports: [RouterModule],
-  imports: [RouterModule.forChild(routes),CommonModule],
+  declarations: [
+  ],
+  imports: [RouterModule.forChild(routes)],
 })
 export class UserRoutingModule {}

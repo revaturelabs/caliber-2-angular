@@ -11,11 +11,6 @@ const userUrl = environment.serverRootURL + '/user';
 //The url for getting all trainers
 const getAllUrl = userUrl + '/all/trainer/all';
 
-// /**
-//  * The url for getting all trainees by the batch id from the user service
-//  */
-// const getUrl = userUrl + '/all/trainee?batch=';
-
 @Injectable({
   providedIn: 'root'
 })
