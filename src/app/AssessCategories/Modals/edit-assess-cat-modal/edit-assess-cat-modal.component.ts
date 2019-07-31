@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryServiceService } from 'src/app/AssessCategories/Services/category-service.service';
+import { Category } from 'src/app/User/user/types/trainee';
 
 @Component({
   selector: 'app-edit-assess-cat-modal',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditAssessCatModalComponent implements OnInit {
 
-  constructor() { }
+  category:Category;
+  categories:any;
 
-  ngOnInit() {
+  constructor(private categoryService:CategoryServiceService) { 
+
   }
 
+  ngOnInit() {
+  
+  }
+
+  getActive(){
+    this.categoryService.listActive().subscribe((res)=>{});
+  }
 }
