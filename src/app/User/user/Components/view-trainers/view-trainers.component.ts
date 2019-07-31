@@ -25,9 +25,9 @@ export class ViewTrainersComponent implements OnInit {
     this.getAllTrainers();
   }
 
-  assignTrainerToUpdate(trainer:Trainer)
+  displayTrainerUpdateModal(trainer:Trainer)
   {
-    this.EditTrainer.updateTrainerToEdit(trainer);
+    this.EditTrainer.displayTrainer(trainer);
 
   }
 
