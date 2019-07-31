@@ -9,34 +9,34 @@
         </button>
         <h4 class="modal-title" id="trainerModalLabel">Edit Trainer</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="trainer">
         <!-- Edit Trainer -->
         <h3 id="editTrainerHeader">Edit Trainer</h3>
-        <form ngNativeValidate>
+        <form ngNativeValidate #f="ngForm" >
             <div class="row">
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                   <label for="trainerName">Full Name:</label> <input type="text" class="form-control" id="trainerName"
-                    placeholder="Name" name="fullName" [(ngModel)]="originalTrainer.name" required>
+                    placeholder="Name" name="fullName" [(ngModel)]="trainer.name" required>
                 </div>
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                   <label for="trainerEmail">Email:</label> <input type="email" class="form-control" id="trainerEmail"
-                    placeholder="Email" [(ngModel)]="originalTrainer.email" name="email" required>
+                    placeholder="Email" [(ngModel)]="trainer.email" name="email" required>
                 </div>
               </div>
               <div class="row">
                   <div class="form-group col-lg-6 col-md-6 col-sm-12">
                     <label for="title">Title:</label> <input type="text" class="form-control" id="title"
-                      placeholder="Title" name="title" [(ngModel)]="originalTrainer.title" required>
+                      placeholder="Title" name="title" [(ngModel)]="trainer.title" required>
                   </div>
                   <div class="form-group col-lg-6 col-md-6 col-sm-12">
                     <label for="trainerPassword">Password:</label> <input type="text" class="form-control" id="trainerPassword"
-                      placeholder="Password" [(ngModel)]="originalTrainer.password" name="password">
+                      placeholder="Password" [(ngModel)]="trainer.password" name="password">
                   </div>
               </div>
               <div class="row">
                   <div class="form-group col-lg-12 col-md-12 col-sm-12">
                       <label for="trainerTier">Trainer Tier</label> <select class="form-control" id="trainerTier"
-                        required [(ngModel)]="originalTrainer.tier" name="trainerTier">
+                        required [(ngModel)]="trainer.tier" name="trainerTier">
                         <option value="" disabled="">Select Tier</option>
                         <option value="ROLE_VP">ROLE_VP</option>
                         <option value="ROLE_PANEL">ROLE_PANEL</option>
@@ -49,7 +49,7 @@
               </div>
           <div class="modal-footer">
             <button id="updateButton1" type="submit" value="Update" class="btn btn-primary" (click)="updateTrainerToEdit()" data-dismiss="modal">Update</button>
-            <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeTrainer()" routerLink="">Close</button>
+            <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeTrainer(f)" >Close</button>
           </div>
         </form>
       </div>
