@@ -6,14 +6,13 @@ import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.
 import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
 
 const routes: Routes = [
-  { path: 'edit', component: EditTrainerComponent},
-
-  { path: '', component: ViewTrainersComponent}
-
+  { path: 'viewTrainers', component: ViewTrainersComponent}
 ];
 
 @NgModule( {
   exports: [RouterModule],
-  imports: [RouterModule.forChild(routes),CommonModule],
+  declarations: [
+  ],
+  imports: [RouterModule.forChild(routes)],
 })
 export class UserRoutingModule {}
