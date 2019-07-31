@@ -26,11 +26,6 @@ const editURL = userUrl + '/all/trainer/edit';
 
 
 
-// /**
-//  * The url for getting all trainees by the batch id from the user service
-//  */
-// const getUrl = userUrl + '/all/trainee?batch=';
-
 @Injectable({
   providedIn: 'root'
 })
