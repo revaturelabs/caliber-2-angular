@@ -23,15 +23,14 @@ export class ViewTrainersComponent implements OnInit {
 
   @ViewChild('editTrainerModal') EditTrainer: EditTrainerComponent;
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.getAllTrainers();
   }
 
   /**     This method redirects to the EditTrainerComponent
    * to display the trainer's information in the modal which is
    * specified in the *ngFor loop..
-   * @author Carl Pacquing 
+   * @author Carl Pacquing
    */
   displayTrainerUpdateModal(trainer: Trainer) {
     this.EditTrainer.displayTrainer(trainer);

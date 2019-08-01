@@ -11,35 +11,33 @@ import { NgForm } from '@angular/forms';
   templateUrl: './edit-trainer.component.html',
   styleUrls: ['./edit-trainer.component.css']
 })
-export class EditTrainerComponent implements OnInit{
+export class EditTrainerComponent implements OnInit {
 
-  //Trainer passed from View Trainers Component.
-  @Input() trainerToEdit : Trainer;
+  // Trainer passed from View Trainers Component.
+  @Input() trainerToEdit: Trainer;
 
-  //Used to store the original trainer fields.
+  // Used to store the original trainer fields.
   originalTrainer = new Trainer();
-  //Used to store the new trainer inputs.
-  trainer:Trainer;
+  // Used to store the new trainer inputs.
+  trainer: Trainer;
 
   constructor(private trService: TrainersService, private errorService: ErrorService) { }
 
-  ngOnInit() 
-  {
-    
+  ngOnInit() {
   }
-  /** 
-   *      This method displays the trainer information in the modal to be edited. 
-   * We store the trainerObj parameter into an originalTrainer variable, and set the "trainer" variable, 
+  /**
+   *      This method displays the trainer information in the modal to be edited.
+   * We store the trainerObj parameter into an originalTrainer variable, and set the "trainer" variable,
    * which is two-way bound in the edit-trainer view, to the trainerObj parameter.
    * In order to remove two-way data-binding referencing, we converted "trainer" into a JSON.
-   * Thus, we are able to distinguish between the original trainer, and the new trainer object. 
+   * Thus, we are able to distinguish between the original trainer, and the new trainer object.
    * @author Carl Pacquing
   */
-  displayTrainer(trainerObj:Trainer)
-  { //A setter method to set our initial Trainer information.
-    //Display the information in the modal.
+  displayTrainer(trainerObj: Trainer) {
+    // A setter method to set our initial Trainer information.
+    // Display the information in the modal.
     console.log(trainerObj);
-    this.originalTrainer = trainerObj;//Store original trainer to the trainerObj parameter.    
+    this.originalTrainer = trainerObj; // Store original trainer to the trainerObj parameter.
     this.trainer = JSON.parse(JSON.stringify(trainerObj)); // actual trainer data;
     console.log(this.originalTrainer);
   }
@@ -49,12 +47,12 @@ export class EditTrainerComponent implements OnInit{
  * and the page reloads to display the changes.
  * @author Carl Pacquing
  */
-  updateTrainerToEdit(){
-        //Update the trainer
+  updateTrainerToEdit() {
+        // Update the trainer
        // this.trainerToEdit = this.originalTrainer;
-        console.log("Updating trainer");
-        console.log("Original trainer: ", this.originalTrainer);
-        console.log("New Trainer: ", this.trainer);
+        console.log('Updating trainer');
+        console.log('Original trainer: ', this.originalTrainer);
+        console.log('New Trainer: ', this.trainer);
         this.trService.editTrainer(this.trainer).subscribe(response => {
           window.location.reload();
         },
@@ -67,14 +65,15 @@ export class EditTrainerComponent implements OnInit{
       });
   }
 
-  closeTrainer(form:NgForm){
+  closeTrainer(form: NgForm) {
     form.reset();
-    //This function should close the modal, and omit any changes made in the modal.
-    //I.e. The trainer information should remain unchanged.
-    console.log("Revert to original fields.");
-    console.log("Original Trainer:",this.originalTrainer);
-    //console.log("Before Cancellation:", this.trainer);
+    // This function should close the modal, and omit any changes made in the modal.
+    // I.e. The trainer information should remain unchanged.
+    console.log('Revert to original fields.');
+    console.log('Original Trainer:', this.originalTrainer);
+    // console.log("Before Cancellation:", this.trainer);
     this.trainer = this.originalTrainer;
-    console.log("After Revert:", this.trainer);
+    console.log('After Revert:', this.trainer);
   }
+
 }
