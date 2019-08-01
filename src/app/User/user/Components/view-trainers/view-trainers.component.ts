@@ -17,7 +17,7 @@ export class ViewTrainersComponent implements OnInit {
     private errorService: ErrorService) { }
 
   trainersList : Trainer[] = [];
-
+  
   @ViewChildren('addTrainerModal') AddTrainer: AddTrainerComponent;
 
   ngOnInit() {
