@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
 
 @Component({
   selector: 'app-view-trainers',
@@ -20,27 +21,40 @@ export class ViewTrainersComponent implements OnInit {
    * The trainer bound to the disable component
    */
 
-  ngOnInit() {
+  @ViewChild('editTrainerModal') EditTrainer: EditTrainerComponent;
+
+  ngOnInit() 
+  {
     this.getAllTrainers();
+  }
+
+  /**     This method redirects to the EditTrainerComponent
+   * to display the trainer's information in the modal which is
+   * specified in the *ngFor loop..
+   * @author Carl Pacquing 
+   */
+  displayTrainerUpdateModal(trainer: Trainer) {
+    this.EditTrainer.displayTrainer(trainer);
+
   }
 
   getAllTrainers() {
     this.trainerservice.getAllTrainers().subscribe(trainer => {
-      trainer.forEach(trainers => {
-        this.trainersList.push(trainers);
+        trainer.forEach(trainers => {
+          this.trainersList.push(trainers);
+        });
+      }, error => {
+        const serviceName = 'User Service ';
+        const errorMessage = 'Failed to make connection!';
+        this.errorService.setError(serviceName, errorMessage);
       });
-    }, error => {
-      const serviceName = 'User Service';
-      const errorMessage = 'Failed to make connection!';
-      this.errorService.setError(serviceName, errorMessage);
-    });
   }
 
   disableTrainer(t: Trainer) {
 
     this.trainerservice.disableTrainer(t).subscribe(trainer => {
-      // this.trainersList.push(trainer);
       console.log('yay');
+      window.location.reload();
     }, error => {
       const serviceName = 'User Service';
       const errorMessage = 'Failed to make connection!';
