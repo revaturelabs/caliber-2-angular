@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+import { DisableTrainerComponent } from './User/user/Components/disable-trainer/disable-trainer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent
+    FormModalComponent,
+    DisableTrainerComponent
   ],
   imports: [
     BrowserModule,

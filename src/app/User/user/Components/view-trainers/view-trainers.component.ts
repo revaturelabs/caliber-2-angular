@@ -12,28 +12,40 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 })
 export class ViewTrainersComponent implements OnInit {
 
-  constructor(private trainerservice : TrainersService,
+  constructor(private trainerservice: TrainersService,
     private errorService: ErrorService) { }
+  trainersList: Trainer[] = [];
 
-  trainersList : Trainer[] = [];
+  /**
+   * The trainer bound to the disable component
+   */
 
   ngOnInit() {
     this.getAllTrainers();
   }
 
-  getAllTrainers() 
-  {
-    this.trainerservice.getAllTrainers().subscribe(trainer => 
-      {
-        trainer.forEach(trainer => {
-          this.trainersList.push(trainer);
-        });
-      }, error => {
-        const serviceName = 'User Service ';
-        const errorMessage = 'Failed to make connection!';
-        this.errorService.setError(serviceName, errorMessage);
+  getAllTrainers() {
+    this.trainerservice.getAllTrainers().subscribe(trainer => {
+      trainer.forEach(trainers => {
+        this.trainersList.push(trainers);
       });
+    }, error => {
+      const serviceName = 'User Service';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
+    });
+  }
 
+  disableTrainer(t: Trainer) {
+
+    this.trainerservice.disableTrainer(t).subscribe(trainer => {
+      // this.trainersList.push(trainer);
+      console.log('yay');
+    }, error => {
+      const serviceName = 'User Service';
+      const errorMessage = 'Failed to make connection!';
+      this.errorService.setError(serviceName, errorMessage);
+    });
   }
 
 }
