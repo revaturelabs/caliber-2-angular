@@ -18,7 +18,12 @@
 
           <app-edit-assess-cat-modal> </app-edit-assess-cat-modal>
 
+       
+
       </ul>
+      <div *ngFor="let category of categoriesList">
+        <span>{{category.categoryId}} - {{category.skillCategory}} - <button (click)="disableCategory(category)">disable trainer</button></span>
+      </div>
     </div>
   </div>
 </div>
