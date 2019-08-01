@@ -16,23 +16,21 @@ export class EditTrainerComponent implements OnInit{
   //Trainer passed from View Trainers Component.
   @Input() trainerToEdit : Trainer;
 
-  @Output() refreshList = new EventEmitter<boolean>();
   //Used to store the original trainer fields.
   originalTrainer = new Trainer();
   //Used to store the new trainer inputs.
   trainer:Trainer;
 
-  constructor(private trService: TrainersService, private errorService: ErrorService, private router:Router ) { }
+  constructor(private trService: TrainersService, private errorService: ErrorService) { }
 
   ngOnInit() 
   {
     
   }
-
   /** 
-   *      This method, which is called in the ViewTrainersComponent, displays the trainer
-   * information in the modal to be edited. We store the trainerObj parameter into an originalTrainer
-   * variable, and set the "trainer" variable, which is two-way bound in the edit-trainer HTML, to the trainerObj parameter.
+   *      This method displays the trainer information in the modal to be edited. 
+   * We store the trainerObj parameter into an originalTrainer variable, and set the "trainer" variable, 
+   * which is two-way bound in the edit-trainer view, to the trainerObj parameter.
    * In order to remove two-way data-binding referencing, we converted "trainer" into a JSON.
    * Thus, we are able to distinguish between the original trainer, and the new trainer object. 
    * @author Carl Pacquing
@@ -46,7 +44,11 @@ export class EditTrainerComponent implements OnInit{
     console.log(this.originalTrainer);
   }
 
-
+/**Updates the trainer's information when the "Update" button is clicked.
+ * When a valid request is sent, the trainer's information gets updated,
+ * and the page reloads to display the changes.
+ * @author Carl Pacquing
+ */
   updateTrainerToEdit(){
         //Update the trainer
        // this.trainerToEdit = this.originalTrainer;
@@ -62,7 +64,6 @@ export class EditTrainerComponent implements OnInit{
             const errorMessage = 'Failed to make connection!';
             this.errorService.setError(serviceName, errorMessage);
           }
-        
       });
   }
 
@@ -72,17 +73,8 @@ export class EditTrainerComponent implements OnInit{
     //I.e. The trainer information should remain unchanged.
     console.log("Revert to original fields.");
     console.log("Original Trainer:",this.originalTrainer);
-    console.log("Before Cancellation:", this.trainer);
+    //console.log("Before Cancellation:", this.trainer);
     this.trainer = this.originalTrainer;
     console.log("After Revert:", this.trainer);
-    //this.router.navigate(['vp/trainers']);
-    //this.refreshList.emit(true);
   }
-
-  getTrainerToEdit(trainer:Trainer)
-  {
-    return this.trainerToEdit;
-
-  }
-
 }

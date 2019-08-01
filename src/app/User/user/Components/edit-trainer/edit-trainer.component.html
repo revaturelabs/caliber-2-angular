@@ -11,7 +11,7 @@
       </div>
       <div class="modal-body" *ngIf="trainer">
         <!-- Edit Trainer -->
-        <h3 id="editTrainerHeader">Edit Trainer</h3>
+        <h3 id="editTrainerHeader">{{originalTrainer.name}}</h3>
         <form ngNativeValidate #f="ngForm" >
             <div class="row">
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
@@ -24,13 +24,9 @@
                 </div>
               </div>
               <div class="row">
-                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12">
                     <label for="title">Title:</label> <input type="text" class="form-control" id="title"
                       placeholder="Title" name="title" [(ngModel)]="trainer.title" required>
-                  </div>
-                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                    <label for="trainerPassword">Password:</label> <input type="text" class="form-control" id="trainerPassword"
-                      placeholder="Password" [(ngModel)]="trainer.password" name="password">
                   </div>
               </div>
               <div class="row">
