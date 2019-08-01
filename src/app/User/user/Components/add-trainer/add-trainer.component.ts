@@ -15,11 +15,11 @@ export class AddTrainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  private newTrainer:Trainer;
+  private newTrainer:Trainer = new Trainer();
   
   addTrainer()
   {
-    this.trainerServ.addTrainer(this.newTrainer).subscribe(() => 
+    this.trainerServ.addTrainer(this.newTrainer).subscribe(response => 
     {
       alert("Trainer added successfully!");
     }, error => {
@@ -27,6 +27,12 @@ export class AddTrainerComponent implements OnInit {
       const errorMessage = 'Failed to add trainer to database!';
       this.errorService.setError(serviceName, errorMessage);
     });
+
+  }
+
+  closeAddTrainerModal()
+  {
+    this.resetAddTrainerForm();
 
   }
 

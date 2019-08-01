@@ -41,7 +41,7 @@ export class ViewTrainersComponent implements OnInit {
 
   resetAddTrainerForm()
   {
-    
+    this.AddTrainer.resetAddTrainerForm();
   }
 
 }

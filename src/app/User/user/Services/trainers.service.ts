@@ -42,7 +42,6 @@ export class TrainersService {
   addTrainer(trainer:Trainer)
   {
     return this.http.post(addTrainerUrl, trainer, httpOptions);
-
   }
 
 }
