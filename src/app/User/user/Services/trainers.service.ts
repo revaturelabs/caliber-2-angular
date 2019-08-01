@@ -43,6 +43,7 @@ export class TrainersService {
 
   disableTrainer(t: Trainer): Observable<Trainer> {
     console.log(disableUrl);
+    console.log(t);
     return this.http.put<Trainer>(disableUrl, t, httpOptions);
   }
 }
