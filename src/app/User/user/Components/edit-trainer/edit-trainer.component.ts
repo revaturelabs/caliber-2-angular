@@ -67,13 +67,12 @@ export class EditTrainerComponent implements OnInit{
       });
   }
 
-  closeTrainer(form:NgForm){
-    form.reset();
+  closeTrainer(){
     //This function should close the modal, and omit any changes made in the modal.
     //I.e. The trainer information should remain unchanged.
     console.log("Revert to original fields.");
     console.log("Original Trainer:",this.originalTrainer);
-    //console.log("Before Cancellation:", this.trainer);
+    console.log("Before Cancellation:", this.trainer);
     this.trainer = this.originalTrainer;
     console.log("After Revert:", this.trainer);
   }
