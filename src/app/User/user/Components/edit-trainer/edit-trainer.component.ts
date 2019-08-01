@@ -60,8 +60,8 @@ export class EditTrainerComponent implements OnInit{
         },
         issue => {
           if (issue instanceof HttpErrorResponse) {
-            const serviceName = 'User Service ';
-            const errorMessage = 'Failed to make connection!';
+            const serviceName = 'User Service';
+            const errorMessage = 'Invalid input! Please try again.';
             this.errorService.setError(serviceName, errorMessage);
           }
       });
