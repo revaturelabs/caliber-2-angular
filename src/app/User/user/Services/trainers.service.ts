@@ -18,16 +18,25 @@ const httpOptions = {
  */
 const userUrl = environment.serverRootURL + '/user';
 
-// The url for getting all trainers
-const getAllUrl = userUrl + '/all/trainer/all';
+/**
+ * The url for getting all trainers
+ */
+const getAllUrl = userUrl + '/trainers';
 
 /**
- * The url to update a trainee in the user service
+ * The url to disable a trainer in the user service
  */
-const disableUrl =  userUrl + '/all/trainer/disable';
-const addURL = userUrl + '/all/trainer/add';
+const disableUrl =  userUrl + '/trainers/:';
 
-const editURL = userUrl + '/all/trainer/edit';
+/**
+ * The url to add a trainer to the user service
+ */
+const addURL = userUrl + '/trainers';
+
+/**
+ * The url to update a trainer in the user service
+ */
+const editURL = userUrl + '/trainers/:';
 
 
 
@@ -53,18 +62,29 @@ export class TrainersService {
     return this.http.get<Trainer[]>(getAllUrl);
   }
 
+  /**
+   * Sends a put request to set a trainer's state to inactive
+   */
   disableTrainer(t: Trainer): Observable<Trainer> {
-    console.log(disableUrl);
-    console.log(t);
-    return this.http.put<Trainer>(disableUrl, t, httpOptions);
+    const URL = disableUrl + t.trainerId;
+    return this.http.put<Trainer>(URL, t, httpOptions);
   }
+
+  /**
+   * Sends a post request to add a trainer to the database
+   */
   addTrainer(tr: Trainer): Observable<Trainer> {
     // We are returning an Observable
     // Use generics to specify the return type of the post method.
     return this.http.post<Trainer>(addURL, tr, httpOptions);
   }
+
+  /**
+   * Sends a put request to update a trainer
+   */
   editTrainer(tr: Trainer): Observable<Trainer> {
-    return this.http.put<Trainer>(editURL, tr, httpOptions);
+    const URL = editURL + tr.trainerId;
+    return this.http.put<Trainer>(URL, tr, httpOptions);
   }
 
 }

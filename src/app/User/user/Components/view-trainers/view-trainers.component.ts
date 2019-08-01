@@ -49,10 +49,13 @@ export class ViewTrainersComponent implements OnInit {
       });
   }
 
+  /**
+   * This method redirects takes a trainer to the backend to be updated to the inactive role.
+   */
   disableTrainer(t: Trainer) {
 
     this.trainerservice.disableTrainer(t).subscribe(trainer => {
-      console.log('yay');
+      console.log('Disabling Trainer: ' + t);
       window.location.reload();
     }, error => {
       const serviceName = 'User Service';
