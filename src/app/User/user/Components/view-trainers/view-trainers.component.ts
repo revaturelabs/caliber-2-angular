@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
 
 @Component({
   selector: 'app-view-trainers',
@@ -16,6 +17,8 @@ export class ViewTrainersComponent implements OnInit {
     private errorService: ErrorService) { }
 
   trainersList : Trainer[] = [];
+
+  @ViewChildren('addTrainerModal') AddTrainer: AddTrainerComponent;
 
   ngOnInit() {
     this.getAllTrainers();
@@ -34,6 +37,11 @@ export class ViewTrainersComponent implements OnInit {
         this.errorService.setError(serviceName, errorMessage);
       });
 
+  }
+
+  resetAddTrainerForm()
+  {
+    
   }
 
 }

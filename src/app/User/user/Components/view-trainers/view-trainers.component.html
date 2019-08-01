@@ -3,8 +3,9 @@
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <ul class="nav nav-tabs">
-          <!--Add Trainer Button-->
-          <li role="button" class="pull-right" data-toggle="modal" data-target="#createBatchModal" (click)="resetBatchForm()"><a>Add Trainer
+          
+          <li class="pull-right">
+            <a id="addTrainerButton" role="button" data-toggle="modal" data-target="#addTrainerModal" type="button" (click)="resetAddTrainerForm()">Add Trainer
             <span class="glyphicon glyphicon-plus" aria-hidden="true">
               </span>
             </a></li>
@@ -44,3 +45,4 @@
     </div>
   </div>
 </div>
+<app-add-trainer #addTrainerModal></app-add-trainer>
