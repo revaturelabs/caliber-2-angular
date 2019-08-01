@@ -8,7 +8,19 @@
           <h4 class="modal-title">Edit Category Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+        <!--***********************************************************-->
+        <div class="row">
+          <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="category">Select Assessment Category</label> 
+            <select name = 'selectedCategory' [(ngModel)] = 'selectedCategory'
+              class="form-control" id="category"
+              required  value = 'default'>
+              <option value="default" disabled>Select Assessment Category</option>
+              <option *ngFor ="let cat of categories" [ngValue] = cat.categoryId>{{cat.skillCategory}}</option>
+            </select>
+          </div>
+        </div>
+        <!--***********************************************************-->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

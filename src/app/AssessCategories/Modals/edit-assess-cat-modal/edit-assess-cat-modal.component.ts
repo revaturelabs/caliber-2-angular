@@ -20,9 +20,15 @@ export class EditAssessCatModalComponent implements OnInit {
   
   }
 
-  getActive(){
-    this.categoryService.listActive().subscribe((res)=>{
+  getAll(){
+    this.categoryService.listAll().subscribe((res)=>{
+      this.categories = res;
+    });
+  }
 
+  getCategory(id: number){
+    this.categoryService.getCategory(id).subscribe((res)=>{
+      this.categories = res;
     });
   }
 }

@@ -8,24 +8,24 @@ import { Category } from 'src/app/User/user/types/trainee';
 })
 export class CategoryService {
 
-  serverUrl= environment.serverRootURL + '/category/';
+  serverUrl= environment.serverRootURL + '/assessment/categories/';
 
 
   constructor(private http: HttpClient) { }
 
-  listAll(){
-    return this.http.get(this.serverUrl + "list");
+  getCategory(id: number){
+    return this.http.get(this.serverUrl + id);
   }
 
-  listActive(){
-    return this.http.get(this.serverUrl + "listActive");//to be changed 
+  listAll(){
+    return this.http.get(this.serverUrl + "list");
   }
 
   edit(id:number, skillCategory:string, categoryOwner:string, isActive:boolean){
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,
-                     "isActive": isActive};
+                     "active": isActive};
     return this.http.put(this.serverUrl + "update", params);
   }
 
@@ -33,7 +33,7 @@ export class CategoryService {
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,
-                     "isActive": "false"};
+                     "active": "false"};
     return this.http.put(this.serverUrl + "update", params);
   }
 }
