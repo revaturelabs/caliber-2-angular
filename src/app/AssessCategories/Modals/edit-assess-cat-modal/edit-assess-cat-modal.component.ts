@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryServiceService } from 'src/app/AssessCategories/Services/category-service.service';
+import { CategoryService } from 'src/app/AssessCategories/Services/category-service';
 import { Category } from 'src/app/User/user/types/trainee';
 
 @Component({
@@ -12,7 +12,7 @@ export class EditAssessCatModalComponent implements OnInit {
   category:Category;
   categories:any;
 
-  constructor(private categoryService:CategoryServiceService) { 
+  constructor(private categoryService:CategoryService) { 
 
   }
 
@@ -21,6 +21,8 @@ export class EditAssessCatModalComponent implements OnInit {
   }
 
   getActive(){
-    this.categoryService.listActive().subscribe((res)=>{});
+    this.categoryService.listActive().subscribe((res)=>{
+
+    });
   }
 }

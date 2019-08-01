@@ -6,7 +6,7 @@ import { Category } from 'src/app/User/user/types/trainee';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryServiceService {
+export class CategoryService {
 
   //serverUrl = 'http://localhost:10000/';
   serverUrl= environment.serverRootURL;
