@@ -7,6 +7,7 @@ import { CategoriesComponent} from '../AssessCategories/Components/categories/ca
 import { AssessCategoriesRoutingModule } from "../assess-categories-module/assess-categories-routing.module";
 import { AddAssessCatModalComponent } from '../AssessCategories/Modals/add-assess-cat-modal/add-assess-cat-modal.component';
 import { EditAssessCatModalComponent } from '../AssessCategories/Modals/edit-assess-cat-modal/edit-assess-cat-modal.component';
+//import { CategoryService } from '../AssessCategories/Services/category-service.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { EditAssessCatModalComponent } from '../AssessCategories/Modals/edit-ass
   imports: [
     CommonModule, AssessCategoriesRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule
   ],
-  entryComponents :[CategoriesComponent]
+  entryComponents :[CategoriesComponent],
+  providers: []
 })
 export class AssessCategoriesModule { }

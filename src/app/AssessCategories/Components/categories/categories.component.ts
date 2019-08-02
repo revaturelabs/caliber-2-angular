@@ -7,9 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 
+  
+  
   constructor() { }
 
+  
+
+
   ngOnInit() {
+    this.loadIntoStorage();
   }
+
+  loadIntoStorage(){
+    //let id = 1;
+    let keyThing = "id";
+    localStorage.setItem(keyThing, '1');
+
+
+  }
+   
+
+  
 
 }
