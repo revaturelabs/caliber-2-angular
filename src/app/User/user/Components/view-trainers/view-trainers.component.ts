@@ -23,11 +23,9 @@ export class ViewTrainersComponent implements OnInit {
 
   getAllTrainers() 
   {
-    this.trainerservice.getAllTrainers().subscribe(trainer => 
+    this.trainerservice.getAllTrainers().subscribe(trainers => 
       {
-        trainer.forEach(trainer => {
-          this.trainersList.push(trainer);
-        });
+        this.trainersList = trainers;
       }, error => {
         const serviceName = 'User Service ';
         const errorMessage = 'Failed to make connection!';
