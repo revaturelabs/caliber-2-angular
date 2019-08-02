@@ -61,7 +61,7 @@ export class EditTrainerComponent implements OnInit{
         issue => {
           if (issue instanceof HttpErrorResponse) {
             const serviceName = 'User Service';
-            const errorMessage = 'Invalid input! Please try again.';
+            const errorMessage = 'Email must be unique.';
             this.errorService.setError(serviceName, errorMessage);
           }
       });
