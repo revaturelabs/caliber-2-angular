@@ -20,6 +20,12 @@ export class AddAssessCatModalComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  clearModal(){
+    this.displayResultSuccess = false;
+    this.displayResultError = false;
+    this.category.skillCategory = ''
+  }
   
   addCategory(){
     this.category.categoryOwner = localStorage.getItem("id");
@@ -30,16 +36,18 @@ export class AddAssessCatModalComponent implements OnInit {
       let result = JSON.parse(myJSON);
       this.displayResultSuccess = true;
       this.successMessage = result.skillCategory + " has been successfully created";
-      //alert(result.skillCategory + " has been successfully created" );
+     
     }
   }, (err)=>{
     this.displayResultError = true;
-        //alert(err.error.message);
+      
     this.errorMessage = err.error.message;
   });
     this.displayResultError = false;
     this.displayResultSuccess = false;
     this.category.skillCategory = ''
   }
+
+  
  
 }
