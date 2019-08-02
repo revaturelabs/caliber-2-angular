@@ -27,11 +27,20 @@ export class CategoryService {
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,
-                     "isActive": isActive};
+                     "active": isActive};
     return this.http.put(this.serverUrl + "update", params);
   }
 
   disable(id:number, skillCategory:string, categoryOwner:string){
+    console.log(id);
+    const params = { "categoryId":id,
+                     "skillCategory":skillCategory,
+                     "categoryOwner":categoryOwner,
+                     "active": false};
+    return this.http.put(this.serverUrl + "/assessment/categories/update", params);
+  }
+
+  enable(id:number, skillCategory:string, categoryOwner:string){
     console.log(id);
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,

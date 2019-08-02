@@ -26,15 +26,24 @@ getAllCategories(){
   this.categoryService.listAll().subscribe(res => {
     this.categoriesList = res;
     this.categoriesList1 = this.categoriesList.filter(d => d.active == true);
-    this.categoriesList2 = this.categoriesList.filter(d => d.active == false)
+    this.categoriesList2 = this.categoriesList.filter(d => d.active == false);
 
   });
 }
 
 disableCategory(category){
-  console.log(category);
+ 
   this.categoryService.disable(category.categoryId, category.categoryOwner, category.skillCategory).subscribe(res=>{});
+  setTimeout(() => {
+    this.getAllCategories();
+  }, 1000);
+}
+
+enableCategory(category){
+ this.categoryService.enable(category.categoryId, category.categoryOwner, category.skillCategory).subscribe(res => {});
+ setTimeout(() => {
   this.getAllCategories();
+}, 1000);
 }
 
 }
