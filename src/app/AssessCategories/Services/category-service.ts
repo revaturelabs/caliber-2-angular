@@ -23,7 +23,7 @@ export class CategoryService {
     return this.http.get(this.serverUrl + "listActive");//to be changed 
   }
 
-  edit(id:number, skillCategory:string, categoryOwner:string, isActive:boolean){
+  edit(id:number, categoryOwner:string, skillCategory:string, isActive:boolean){
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,

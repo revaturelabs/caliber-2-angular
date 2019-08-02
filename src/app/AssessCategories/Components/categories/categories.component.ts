@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/User/user/types/trainee';
-import { CategoryServiceService } from '../../Services/category-service.service';
+import { CategoryService } from '../../Services/category-service';
 
 
 @Component({
@@ -10,45 +10,24 @@ import { CategoryServiceService } from '../../Services/category-service.service'
 })
 export class CategoriesComponent implements OnInit {
 
-dummyList = [
-  {
-    "categoryId": 1,
-    "skillCategory": "test3",
-    "categoryOwner": "testPerson",
-    "active": false
-  },
-  {
-    "categoryId": 2,
-    "skillCategory": "test4",
-    "categoryOwner": "testPerson",
-    "active": false
-  },
-  {
-    "categoryId": 3,
-    "skillCategory": "test5",
-    "categoryOwner": "testPerson",
-    "active": true
-  }
-] 
-
-//this.dummyList
 
  // categoriesList : Category[] =[];
- categoriesList:any;
-  constructor(private categoryService: CategoryServiceService) { }
+ categoriesList: any;
+ categoriesList1:any;
+ categoriesList2:any;
+
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.getAllCategories();
+   this.getAllCategories();
   }
 
 getAllCategories(){
   this.categoryService.listAll().subscribe(res => {
-    console.log(res);
     this.categoriesList = res;
+    this.categoriesList1 = this.categoriesList.filter(d => d.active == true);
+    this.categoriesList2 = this.categoriesList.filter(d => d.active == false)
 
-  //  this.categoriesList.push(res);
-
-    console.log("bummer");
   });
 }
 

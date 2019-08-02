@@ -21,9 +21,13 @@
        
 
       </ul>
-      <div *ngFor="let category of categoriesList">
-        <span>{{category.categoryId}} - {{category.skillCategory}} - <button (click)="disableCategory(category)">disable trainer</button></span>
+      <div *ngFor="let category of categoriesList1">
+        <span class="good">{{category.categoryId}} - {{category.skillCategory}} - <button (click)="disableCategory(category)">disable trainer</button></span>
       </div>
+      <div *ngFor="let category of categoriesList2">
+        <span class="stale">{{category.categoryId}} - {{category.skillCategory}} - <button (click)="disableCategory(category)">disable trainer</button></span>
+      </div>
+      <div>board stuff</div>
     </div>
   </div>
 </div>
