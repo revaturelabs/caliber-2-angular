@@ -19,12 +19,14 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+
    this.getAllCategories();
   }
 
 getAllCategories(){
   this.categoryService.listAll().subscribe(res => {
     this.categoriesList = res;
+    console.log(res);
     this.categoriesList1 = this.categoriesList.filter(d => d.active == true);
     this.categoriesList2 = this.categoriesList.filter(d => d.active == false);
 
@@ -33,17 +35,17 @@ getAllCategories(){
 
 disableCategory(category){
  
-  this.categoryService.disable(category.categoryId, category.categoryOwner, category.skillCategory).subscribe(res=>{});
+  this.categoryService.disable(category.categoryId,  category.skillCategory, category.categoryOwner).subscribe(res=>{});
   setTimeout(() => {
     this.getAllCategories();
-  }, 1000);
+  }, 500);
 }
 
 enableCategory(category){
- this.categoryService.enable(category.categoryId, category.categoryOwner, category.skillCategory).subscribe(res => {});
+ this.categoryService.enable(category.categoryId, category.skillCategory, category.categoryOwner).subscribe(res => {});
  setTimeout(() => {
   this.getAllCategories();
-}, 1000);
+}, 500);
 }
 
 }
