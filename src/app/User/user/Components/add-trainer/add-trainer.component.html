@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeAddTrainerModal()">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="trainerModalLabel">Add Trainer</h4>
@@ -24,13 +24,9 @@
                 </div>
               </div>
               <div class="row">
-                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12">
                     <label for="title">Title:</label> <input type="text" class="form-control" id="title"
                       placeholder="Title" name="title" [(ngModel)]="newTrainer.title" required>
-                  </div>
-                  <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                    <label for="trainerPassword">Password:</label> <input type="text" class="form-control" id="trainerPassword"
-                      placeholder="Password" [(ngModel)]="newTrainer.password" name="password">
                   </div>
               </div>
               <div class="row">
@@ -49,7 +45,7 @@
               </div>
           <div class="modal-footer">
             <button id="updateButton1" type="submit" value="Submit" class="btn btn-primary" (click)="addTrainer()" data-dismiss="modal">Submit</button>
-            <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeTrainer()" >Close</button>
+            <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeAddTrainerModal()" >Close</button>
           </div>
         </form>
       </div>

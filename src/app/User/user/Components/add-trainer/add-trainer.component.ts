@@ -22,10 +22,12 @@ export class AddTrainerComponent implements OnInit {
     this.trainerServ.addTrainer(this.newTrainer).subscribe(response => 
     {
       alert("Trainer added successfully!");
+      window.location.reload();
     }, error => {
       const serviceName = 'User Service ';
-      const errorMessage = 'Failed to add trainer to database!';
+      const errorMessage = 'Failed to add trainer to database! Please fill out all fields correctly, and give a unique email.';
       this.errorService.setError(serviceName, errorMessage);
+      this.closeAddTrainerModal();
     });
 
   }
@@ -38,6 +40,7 @@ export class AddTrainerComponent implements OnInit {
 
   resetAddTrainerForm() 
   {
+    console.log(this.newTrainer);
     if (this.newTrainer === undefined)
     {
       return;
