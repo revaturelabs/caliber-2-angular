@@ -19,7 +19,11 @@ export class CategoryService {
     return this.http.get(this.serverUrl + "/assessment/categories/list");
   }
 
-  edit(id:number, skillCategory:string, categoryOwner:string, isActive:boolean){
+  listActive(){
+    return this.http.get(this.serverUrl + "listActive");//to be changed 
+  }
+
+  edit(id:number, categoryOwner:string, skillCategory:string, isActive:boolean){
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,
@@ -28,6 +32,15 @@ export class CategoryService {
   }
 
   disable(id:number, skillCategory:string, categoryOwner:string){
+    console.log(id);
+    const params = { "categoryId":id,
+                     "skillCategory":skillCategory,
+                     "categoryOwner":categoryOwner,
+                     "active": false};
+    return this.http.put(this.serverUrl + "/assessment/categories/update", params);
+  }
+
+  enable(id:number, skillCategory:string, categoryOwner:string){
     console.log(id);
     const params = { "categoryId":id,
                      "skillCategory":skillCategory,

@@ -1,0 +1,10 @@
+.good{
+ text-decoration: underline;
+ text-decoration-color: #F26925;
+
+}
+
+.stale{
+    text-decoration: line-through;
+ text-decoration-color: rgb(141, 126, 118);
+}
