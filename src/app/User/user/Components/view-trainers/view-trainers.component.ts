@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
+import { DisableTrainerComponent } from '../disable-trainer/disable-trainer.component';
 
 @Component({
   selector: 'app-view-trainers',
@@ -22,6 +23,8 @@ export class ViewTrainersComponent implements OnInit {
    */
 
   @ViewChild('editTrainerModal') EditTrainer: EditTrainerComponent;
+
+  @ViewChild('disableTrainerModal') DisableTrainer: DisableTrainerComponent;
 
   ngOnInit() {
     this.getAllTrainers();
@@ -52,16 +55,8 @@ export class ViewTrainersComponent implements OnInit {
   /**
    * This method redirects takes a trainer to the backend to be updated to the inactive role.
    */
-  disableTrainer(t: Trainer) {
-
-    this.trainerservice.disableTrainer(t).subscribe(trainer => {
-      console.log('Disabling Trainer: ' + t);
-      window.location.reload();
-    }, error => {
-      const serviceName = 'User Service';
-      const errorMessage = 'Failed to make connection!';
-      this.errorService.setError(serviceName, errorMessage);
-    });
+  displayDisableTrainerModal(trainer: Trainer) {
+    this.DisableTrainer.displayConfirmation(trainer);
   }
 
 }

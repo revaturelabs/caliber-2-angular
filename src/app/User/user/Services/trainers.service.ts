@@ -26,17 +26,17 @@ const getAllURL = userURL + '/trainers';
 /**
  * The url to disable a trainer in the user service
  */
-const disableURL =  userURL + '/trainers/:';
+const disableURL =  userURL + '/trainers/';
 
 /**
  * The url to add a trainer to the user service
  */
-const addURL = userURL + '/trainer';
+const addURL = userURL + '/trainers';
 
 /**
  * The url to update a trainer in the user service
  */
-const editURL = userURL + '/trainer/:';
+const editURL = userURL + '/trainers/';
 
 
 
@@ -67,7 +67,7 @@ export class TrainersService {
    */
   disableTrainer(trainer: Trainer): Observable<Trainer> {
     const URL = disableURL + trainer.trainerId;
-    return this.http.put<Trainer>(URL, trainer, httpOptions);
+    return this.http.patch<Trainer>(URL, trainer, httpOptions);
   }
 
   /**
