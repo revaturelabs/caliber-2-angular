@@ -11,9 +11,9 @@ import { LocationService } from '../home/service/location.service';
 import { AssessBatchService } from '../Assess-Batch/Services/assess-batch.service';
 import { QanoteService } from '../home/service/qanote.service';
 import { HomeService } from '../home/service/home.service';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { TraineeService } from '../Assess-Batch/Services/trainee.service';
-
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { TraineeService } from '../Assess-Batch/Services/trainee.service';
     HomeRoutingModule,
     CommonModule,
     HttpClientModule,
-    ChartsModule,
+    ChartsModule
   ],
   declarations: [
     HomeComponent,
@@ -36,7 +36,7 @@ import { TraineeService } from '../Assess-Batch/Services/trainee.service';
     AssessBatchService,
     QanoteService,
     HomeService,
-    TraineeService,
+    TraineeService
   ]
 })
 export class HomeModule { }

@@ -9,7 +9,7 @@
 
         <span class="label label-default btn dropdown-toggle"
             style="padding: 4px; background-color: #F26925; float: left;" data-toggle="dropdown">
-            <i class="fa fa-plus"></i>
+            <em class="fa fa-plus"></em>
             <ul class="dropdown-menu" style="overflow-y: scroll; height: 200px;">
                 <li *ngFor="let category of activeCategoryTags | keyvalue" (click)="addCategoryTag(category.value)">
                     <a>{{ category.value.skillCategory }}</a>
@@ -53,15 +53,15 @@
             <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
                 <td style="width: 11%;">
                     <div class="dropup">
-                        <div *ngIf="QcNote.trainee.flagStatus === 'RED'" class="flag-note-area-red dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus === 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus === 'NONE' || QcNote.trainee.flagStatus == null"
+                        <div *ngIf="QcNote.trainee.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
                             class="flag-note-area-empty dropbtn"></div>
                         &nbsp; {{ QcNote.trainee.name }}
                         <br>
-                        <i (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
+                        <em (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
                             class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
-                            data-toggle="modal" data-target="#flagTrainee"></i>
+                            data-toggle="modal" data-target="#flagTrainee"></em>
 
                         <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
                             class="dropup-content">
@@ -76,13 +76,13 @@
                                     <label for="flagsStatus">Select a Flag:</label>
                                     <div>
                                         <ul class="nav nav-tabs">
-                                            <li><i title="Green Flag" role="button" id="greenFlag"
+                                            <li><em title="Green Flag" role="button" id="greenFlag"
                                                     class="fas fa-flag fa-3x fa-green objectButton"
-                                                    (click)="onFlagSelected('GREEN');"></i>
+                                                    (click)="onFlagSelected('GREEN');"></em>
                                             </li>
-                                            <li><i title="Red Flag" role="button" id="redFlag"
+                                            <li><em title="Red Flag" role="button" id="redFlag"
                                                     class="fas fa-flag fa-3x fa-red objectButton"
-                                                    (click)="onFlagSelected('RED');"></i>
+                                                    (click)="onFlagSelected('RED');"></em>
                                             </li>
                                             <br>
                                             <br>
@@ -94,8 +94,8 @@
                                         <textarea class="form-control" rows="3" id="comment"
                                             [(ngModel)]="selectedTrainee.flagNotes">{{ selectedTrainee.flagNotes }}</textarea>
                                         <div style="margin-top: 10px;">Selected flag:
-                                            <i *ngIf="(flagStatusVisual) != null"
-                                                class="fas fa-flag fa-1x {{flagStatusVisual}}"></i>
+                                            <em *ngIf="(flagStatusVisual) != null"
+                                                class="fas fa-flag fa-1x {{flagStatusVisual}}"></em>
                                         </div>
                                     </div>
                                 </div>
@@ -121,17 +121,17 @@
                     <div>
                         <div class="dropdown">
 
-                            <i *ngIf="QcNote.qcStatus=='Undefined'"
+                            <em *ngIf="QcNote.qcStatus=='Undefined'"
                                 class="qcStatusIcon fa fa-question-circle fa-2x pick"
-                                style="margin: auto 30px; text-align: center;"></i>
-                            <i *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
-                                style="margin: auto 30px; text-align: center;"></i>
-                            <i *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
-                                style="margin: auto 30px;text-align: center;"></i>
-                            <i *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
-                                style="margin: auto 30px; text-align: center;"></i>
-                            <i *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
-                                style="margin: auto 30px; text-align: center;"></i>
+                                style="margin: auto 30px; text-align: center;"></em>
+                            <em *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></em>
+                            <em *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                                style="margin: auto 30px;text-align: center;"></em>
+                            <em *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></em>
+                            <em *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                                style="margin: auto 30px; text-align: center;"></em>
 
                             <div class="dropdown-content" style="margin: auto -95px">
                                 <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
@@ -161,13 +161,13 @@
                 </td>
                 <!-- Status icons -->
                 <div class="savingIconDiv" [attr.id]="'spinner' + i" style="display: none;">
-                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
+                    <em style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></em>
                 </div>
                 <div class="savingIconDiv" style="display: none;" [attr.id]="'checkMark' + i">
-                    <i class="fa fa-check fa-1x" aria-hidden="true"></i>
+                    <em class="fa fa-check fa-1x" aria-hidden="true"></em>
                 </div>
                 <div class="savingIconDiv" style="display: none;" [attr.id]="'errMark' + i">
-                    <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
+                    <em class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></em>
                 </div>
             </tr>
         </tbody>

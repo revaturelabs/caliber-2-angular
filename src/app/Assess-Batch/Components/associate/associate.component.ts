@@ -58,17 +58,20 @@ export class AssociateComponent implements OnInit {
     //noteEmitter just emits the array of notes that are coming from noteService
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = [];
-      for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
-        for (this.j = 0; this.j < noteArr.length; this.j++) {
-          if (noteArr[this.j].traineeId == this.traineeArr[this.i].traineeId) {
-            this.noteArr[this.i] = noteArr[this.j];
+      if(this.traineeArr.length != 0){
+        for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
+          for (this.j = 0; this.j < noteArr.length; this.j++) {
+            if (noteArr[this.j].traineeId == this.traineeArr[this.i].traineeId) {
+              this.noteArr[this.i] = noteArr[this.j];
+            }
           }
-        }
+          if(this.noteArr[this.i]==null){
+            this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId );
+            this.noteArr[this.i]= this.note;
+          }
+      }
         //checks if index in noteArr is null -- if so creates a new note
-        if(this.noteArr[this.i]==null){
-          this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId );
-          this.noteArr[this.i]= this.note;
-        }
+        
      }
     });
 
@@ -93,9 +96,6 @@ export class AssociateComponent implements OnInit {
 // The first call will recursivley call this function again to re-enable the input box after 1 second
       // this.noteArr[index].noteContent=this.content[index];
       this.noteService.putNote(this.noteArr[index]).subscribe(response => {
-        if (Object != null) {
-        } else {
-        }
       }
 
       );
@@ -106,9 +106,6 @@ export class AssociateComponent implements OnInit {
       this.note = this.noteArr[index]
       // create note
       this.noteService.postNote(this.note).subscribe(response => {
-        if (Object != null) {
-        } else {
-        }
       }
       );
   }
@@ -156,9 +153,11 @@ export class AssociateComponent implements OnInit {
     this.category = this.getCategoryName();
 
       this.result =0;
-      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
-        this.result = batchAvg;
-      });
+      if(this.traineeArr.length != 0 && this.assessmentArr.length != 0){
+          this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
+            this.result = batchAvg;
+          });
+      }
   }
 
   //This takes selected assessmentId to get the category to persist the assessment over to the modal.

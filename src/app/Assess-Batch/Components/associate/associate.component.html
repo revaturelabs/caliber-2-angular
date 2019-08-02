@@ -39,23 +39,23 @@
                   </td>
                   <td style="width:25px !important">
                     <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
-                      style="visibility: hidden;"></i>
+                    <em *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></em>
+                    <em *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></em>
+                    <em *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
+                      style="visibility: hidden;"></em>
                     <!-- Shows the flag notes popup if the user clicks the name column -->
                   </td>
-                  <i>
+                  <em>
                   <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
                     <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
                     <button (click)="commentOnTrainee(train,comment.value)"
                       class="btn btn-secondary flage-notes-save-btn">Save</button>
-                    <i (click)="deleteFromSwitch(train.traineeId)" type="button"
+                    <em (click)="deleteFromSwitch(train.traineeId)" type="button"
                       class="flage-notes-close-btn icon-button" aria-label="Close">
                       <span class="glyphicon glyphicon-remove-sign closing-button"></span>
-                  </i>
+                  </em>
                   </div>
-                </i>
+                </em>
                   
                 <!-- Displays the grades for each trainee by assessment -->
                   <ng-container *ngFor="let arr of superArr">
@@ -69,7 +69,8 @@
                     </ng-template>
                   </ng-container>
 
-                  <td>
+                  <td *ngIf="noteArr.length != 0">
+                    
                     <textarea (blur)="noteOnBlur(j, false)"
                       id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
                       placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
