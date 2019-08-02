@@ -16,27 +16,27 @@ const httpOptions = {
 /**
  * The root user service url
  */
-const userUrl = environment.serverRootURL + '/user';
+const userURL = environment.serverRootURL + '/user';
 
 /**
  * The url for getting all trainers
  */
-const getAllUrl = userUrl + '/trainers';
+const getAllURL = userURL + '/trainers';
 
 /**
  * The url to disable a trainer in the user service
  */
-const disableUrl =  userUrl + '/trainers/:';
+const disableURL =  userURL + '/trainers/:';
 
 /**
  * The url to add a trainer to the user service
  */
-const addURL = userUrl + '/trainers';
+const addURL = userURL + '/trainer';
 
 /**
  * The url to update a trainer in the user service
  */
-const editURL = userUrl + '/trainers/:';
+const editURL = userURL + '/trainer/:';
 
 
 
@@ -58,33 +58,33 @@ export class TrainersService {
    * Sends a get request to retrieve all of the trainers
    */
   getAllTrainers(): Observable<Trainer[]> {
-    console.log(getAllUrl);
-    return this.http.get<Trainer[]>(getAllUrl);
+    console.log(getAllURL);
+    return this.http.get<Trainer[]>(getAllURL);
   }
 
   /**
    * Sends a put request to set a trainer's state to inactive
    */
-  disableTrainer(t: Trainer): Observable<Trainer> {
-    const URL = disableUrl + t.trainerId;
-    return this.http.put<Trainer>(URL, t, httpOptions);
+  disableTrainer(trainer: Trainer): Observable<Trainer> {
+    const URL = disableURL + trainer.trainerId;
+    return this.http.put<Trainer>(URL, trainer, httpOptions);
   }
 
   /**
    * Sends a post request to add a trainer to the database
    */
-  addTrainer(tr: Trainer): Observable<Trainer> {
+  addTrainer(trainer: Trainer): Observable<Trainer> {
     // We are returning an Observable
     // Use generics to specify the return type of the post method.
-    return this.http.post<Trainer>(addURL, tr, httpOptions);
+    return this.http.post<Trainer>(addURL, trainer, httpOptions);
   }
 
   /**
    * Sends a put request to update a trainer
    */
-  editTrainer(tr: Trainer): Observable<Trainer> {
-    const URL = editURL + tr.trainerId;
-    return this.http.put<Trainer>(URL, tr, httpOptions);
+  editTrainer(trainer: Trainer): Observable<Trainer> {
+    const URL = editURL + trainer.trainerId;
+    return this.http.put<Trainer>(URL, trainer, httpOptions);
   }
 
 }
