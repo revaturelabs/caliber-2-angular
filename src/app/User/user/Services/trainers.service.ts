@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 const userUrl = environment.serverRootURL + '/user';
 
 //The url for getting all trainers
-const getAllUrl = userUrl + '/all/trainer/all';
+const getAllUrl = userUrl + '/trainers';
 
 @Injectable({
   providedIn: 'root'
