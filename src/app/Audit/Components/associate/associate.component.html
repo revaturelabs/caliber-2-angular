@@ -53,9 +53,9 @@
             <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
                 <td style="width: 11%;">
                     <div class="dropup">
-                        <div *ngIf="QcNote.trainee?.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
-                        <div *ngIf="QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
+                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
                             class="flag-note-area-empty dropbtn"></div>
                         &nbsp; {{ QcNote.trainee?.name }}
                         <br>
@@ -65,7 +65,7 @@
 
                         <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee?.flagStatus === 'RED' || QcNote.trainee?.flagStatus === 'GREEN'))"
                             class="dropup-content">
-                            <li>{{QcNote.trainee?.flagNotes}}</li>
+                            <li *ngIf="QcNote.trainee != null ">{{QcNote.trainee.flagNotes}}</li>
                         </div>
                     </div>
                     <!-- MODEL FOR FLAGGING STARTS -->
