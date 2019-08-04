@@ -50,20 +50,20 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
-                <td style="width: 11%;">
-                    <div class="dropup">
-                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
-                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee != null && QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
+            <tr  *ngFor="let QcNote of notes; let i = index" class="NoteRow">
+                <td *ngIf="QcNote.trainee != null" style="width: 11%;">
+                    <div *ngIf="QcNote.trainee != null" class="dropup">
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
                             class="flag-note-area-empty dropbtn"></div>
-                        &nbsp; {{ QcNote.trainee?.name }}
+                        &nbsp; {{ QcNote.trainee.name }}
                         <br>
                         <em (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
                             class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
                             data-toggle="modal" data-target="#flagTrainee"></em>
 
-                        <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee?.flagStatus === 'RED' || QcNote.trainee?.flagStatus === 'GREEN'))"
+                        <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
                             class="dropup-content">
                             <li *ngIf="QcNote.trainee != null ">{{QcNote.trainee.flagNotes}}</li>
                         </div>
@@ -117,7 +117,7 @@
                 <td style="width: 3%; position:absolute;">
                     <!--Buffer area-->
                 </td>
-                <td>
+                <td *ngIf="QcNote.trainee != null">
                     <div>
                         <div class="dropdown">
 
@@ -151,7 +151,7 @@
                 </td>
                 <!-- This is a small gap to add space in between columns -->
                 <td style="width: 3%;"></td>
-                <td style="width: 76%;">
+                <td *ngIf="QcNote.trainee != null" style="width: 76%;">
                     <textarea (blur)="noteOnBlur(QcNote.noteId, false, i)"
                         (keypress)="clearAllSavingIcon(i); isTyping = true"
                         (keydown.backspace)="clearAllSavingIcon(i); isTyping = true" [(ngModel)]="QcNote.content"
