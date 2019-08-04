@@ -85,8 +85,6 @@ export class AuditService {
     this.notes = notesToSet;
     const myset = new Set(this.notes);
     this.notes = Array.from(myset);
-    // this.notes = this.notes.filter((item,index)=>this.notes.indexOf(item)===index);
-    console.log(this.notes);
   }
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
@@ -114,7 +112,7 @@ export class AuditService {
   sortAlphabetically(notes: any) {
     if(notes.length != 0){
       notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-        if (a.trainee.name > b.trainee.name) {
+        if (a.trainee != null && a.trainee.name > b.trainee.name) {
           return 1;
         }
         else {
