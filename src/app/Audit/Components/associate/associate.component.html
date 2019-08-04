@@ -53,9 +53,9 @@
             <tr *ngFor="let QcNote of notes; let i = index" class="NoteRow">
                 <td style="width: 11%;">
                     <div class="dropup">
-                        <div *ngIf="QcNote.trainee.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
-                        <div *ngIf="QcNote.trainee.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                        <div *ngIf="QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
                             class="flag-note-area-empty dropbtn"></div>
                         &nbsp; {{ QcNote.trainee.name }}
                         <br>
