@@ -57,15 +57,15 @@
                         <div *ngIf="QcNote.trainee?.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
                         <div *ngIf="QcNote.trainee?.flagStatus == 'NONE' || QcNote.trainee.flagStatus == null"
                             class="flag-note-area-empty dropbtn"></div>
-                        &nbsp; {{ QcNote.trainee.name }}
+                        &nbsp; {{ QcNote.trainee?.name }}
                         <br>
                         <em (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
                             class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
                             data-toggle="modal" data-target="#flagTrainee"></em>
 
-                        <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
+                        <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee?.flagStatus === 'RED' || QcNote.trainee?.flagStatus === 'GREEN'))"
                             class="dropup-content">
-                            <li>{{QcNote.trainee.flagNotes}}</li>
+                            <li>{{QcNote.trainee?.flagNotes}}</li>
                         </div>
                     </div>
                     <!-- MODEL FOR FLAGGING STARTS -->
