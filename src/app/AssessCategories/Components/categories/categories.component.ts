@@ -56,3 +56,5 @@ loadIntoStorage(){
   let keyThing = "id";
   localStorage.setItem(keyThing, '1');
 }
+
+}
