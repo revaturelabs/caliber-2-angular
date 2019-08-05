@@ -6,6 +6,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { HomeModule } from './home-module/home-module.module';
 import { AuditModule } from './audit-module/audit-module.module';
 import { AssessBatchModule } from './assess-batch-module/assess-batch-module.module';
+import { CategoriesComponent } from '../app/AssessCategories/Components/categories/categories.component';
 
 
 const routes: Routes = [ 
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'vp/audit', loadChildren: './audit-module/audit-module.module#AuditModule'},
   { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
-  { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule'}
+  { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule'},
+  { path: 'vp/category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule'}
+  //{ path: 'vp/category', component: CategoriesComponent}
 ];
  
 @NgModule({

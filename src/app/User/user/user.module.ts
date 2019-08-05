@@ -10,7 +10,11 @@ import { DeleteTraineeComponent } from './Components/delete-trainee/delete-train
 import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
 import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.component';
 import { UserRoutingModule } from './user-routing.module';
+
 import { AddTrainerComponent } from './Components/add-trainer/add-trainer.component';
+import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
+import { DisableTrainerComponent } from './Components/disable-trainer/disable-trainer.component';
+
 
 @NgModule({
   imports: [
@@ -27,7 +31,10 @@ import { AddTrainerComponent } from './Components/add-trainer/add-trainer.compon
     DeleteTraineeComponent,
     UpdateTraineeComponent,
     ViewTrainersComponent,
-    AddTrainerComponent
+    AddTrainerComponent,
+    EditTrainerComponent,
+    DisableTrainerComponent
+
   ],
   exports: [
     AddTraineeComponent,
