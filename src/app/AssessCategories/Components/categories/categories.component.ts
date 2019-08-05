@@ -18,9 +18,12 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categoryService: CategoryService) { }
 
-  ngOnInit() {
+  
 
-   this.getAllCategories();
+
+  ngOnInit() {
+    this.loadIntoStorage();
+    this.getAllCategories();
   }
 
 getAllCategories(){
@@ -48,4 +51,8 @@ enableCategory(category){
 }, 500);
 }
 
+loadIntoStorage(){
+  //let id = 1;
+  let keyThing = "id";
+  localStorage.setItem(keyThing, '1');
 }
