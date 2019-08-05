@@ -23,9 +23,10 @@
         <!--Displaying the fields for editing-->
         <div class="row">
           <div class="form-group col-lg-12 col-md-12 col-sm-12">
-            <!--<input type="text" [ngValue] = "selectedCategory.skillCategory" name="skillCategory" value="selectedCategory.skillCategory"/>
-            <input type="text" [ngValue] = "selectedCategory.categoryOwner" name="categoryOwner" value="selectedCategory.categoryOwner"/>
-            --><button type="button" class="btn btn-default" (click)="save()">Save</button>
+            
+            Category Name: <input type="text" id="category.skillCategory" [(ngModel)]="category.skillCategory" >
+            Category Owner: <input type="text" id="category.categoryOwner" [(ngModel)]="category.categoryOwner" >
+            <button type="button" class="btn btn-default" (click)="save()">Save</button>
           </div>
         </div>
         <!--***********************************************************-->
@@ -33,7 +34,6 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-
     </div>
   </div>
 
