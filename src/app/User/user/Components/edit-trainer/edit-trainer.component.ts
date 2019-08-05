@@ -59,10 +59,10 @@ export class EditTrainerComponent implements OnInit{
           window.location.reload();
         },
         issue => {
+          console.log("Issue", issue);
           if (issue instanceof HttpErrorResponse) {
             const serviceName = 'User Service';
-            const errorMessage = 'Email must be unique.';
-            this.errorService.setError(serviceName, errorMessage);
+            this.errorService.setError(serviceName, issue.error.message);
           }
       });
   }
