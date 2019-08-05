@@ -37,7 +37,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     AppComponent,
   ],
   entryComponents: [
-    FormModalComponent,
+    FormModalComponent
   ]
 })
 export class AppModule { }

@@ -7,7 +7,7 @@
  */
 export const environment = {
   production: false,
-  serverRootURL: "http://localhost:10000" 
+  serverRootURL: 'http://localhost:10000'
 };
 
 /*
