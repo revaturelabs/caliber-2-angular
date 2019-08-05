@@ -9,8 +9,8 @@ import { Category } from 'src/app/User/user/types/trainee';
 })
 export class EditAssessCatModalComponent implements OnInit {
 
-  category:Category;
-  categories:any;
+  category:Category;  //The category that will be selected for presentation and editing 
+  categories:any;     //The list of categories to be loaded and displayed 
 
   constructor(private categoryService:CategoryService) { 
 
@@ -20,6 +20,7 @@ export class EditAssessCatModalComponent implements OnInit {
     this.getAll();
   }
 
+  //sets the selected category as the local category to be edited 
   selected(cat:Category){
     this.category = cat;
   }
@@ -38,10 +39,4 @@ export class EditAssessCatModalComponent implements OnInit {
       this.categories = res;
     });
   }
-  
-  // getCategory(id: number){
-  //   this.categoryService.getCategory(id).subscribe((res)=>{
-  //     this.categories = res;
-  //   });
-  // }
 }
