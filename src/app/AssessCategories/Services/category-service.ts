@@ -28,7 +28,7 @@ export class CategoryService {
                      "skillCategory":skillCategory,
                      "categoryOwner":categoryOwner,
                      "active": isActive};
-    return this.http.put(this.serverUrl + "update", params);
+    return this.http.put(this.serverUrl + "/assessment/categories/update", params);
   }
 
   disable(id:number, skillCategory:string, categoryOwner:string){
