@@ -20,9 +20,10 @@ const userUrl = environment.serverRootURL + '/user';
 //The url for getting all trainers
 const getAllUrl = userUrl + '/trainers';
 
-const addURL = userUrl + '/trainers/add';
+//Deprecated URLs for trainers.
+// const addURL = userUrl + '/trainers/add';
 
-const editURL = userUrl + '/trainers/edit';
+// const editURL = userUrl + '/trainers/edit';
 
 
 
@@ -47,10 +48,10 @@ export class TrainersService {
   addTrainer(tr: Trainer): Observable<Trainer> {
     //We are returning an Observable
     //Use generics to specify the return type of the post method.
-    return this.http.post<Trainer>(addURL, tr, httpOptions);
+    return this.http.post<Trainer>(getAllUrl, tr, httpOptions);
   }
   editTrainer(tr: Trainer): Observable<Trainer> {
-    return this.http.put<Trainer>(editURL, tr, httpOptions);
+    return this.http.put<Trainer>(getAllUrl, tr, httpOptions);
   }
 
 }
