@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
 /**
  * The root user service url
  */
@@ -10,6 +17,15 @@ const userUrl = environment.serverRootURL + '/user';
 
 //The url for getting all trainers
 const getAllUrl = userUrl + '/trainers';
+
+//The url for disable trainer
+const disableUrl = userUrl + '/trainers/';
+
+//The url for edit trainer
+const editUrl = userUrl + '/trainers/';
+
+//The url for add trainer
+const addUrl = userUrl + '/trainers/';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +44,15 @@ export class TrainersService {
    * Sends a get request to retrieve all of the trainers
    */
   getAllTrainers(): Observable<Trainer[]> {
-    console.log(getAllURL);
-    return this.http.get<Trainer[]>(getAllURL);
+    console.log(getAllUrl);
+    return this.http.get<Trainer[]>(getAllUrl);
   }
 
   /**
-   * Sends a put request to set a trainer's state to inactive
+   * Sends a patch request to set a trainer's state to inactive
    */
   disableTrainer(trainer: Trainer): Observable<Trainer> {
-    const URL = disableURL + trainer.trainerId;
+    const URL = disableUrl + trainer.trainerId;
     return this.http.patch<Trainer>(URL, trainer, httpOptions);
   }
 
@@ -46,14 +62,14 @@ export class TrainersService {
   addTrainer(trainer: Trainer): Observable<Trainer> {
     // We are returning an Observable
     // Use generics to specify the return type of the post method.
-    return this.http.post<Trainer>(addURL, trainer, httpOptions);
+    return this.http.post<Trainer>(addUrl, trainer, httpOptions);
   }
 
   /**
    * Sends a put request to update a trainer
    */
   editTrainer(trainer: Trainer): Observable<Trainer> {
-    const URL = editURL + trainer.trainerId;
+    const URL = editUrl + trainer.trainerId;
     return this.http.put<Trainer>(URL, trainer, httpOptions);
   }
 
