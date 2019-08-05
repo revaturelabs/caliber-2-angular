@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './edit-trainer.component.html',
   styleUrls: ['./edit-trainer.component.css']
 })
+
 export class EditTrainerComponent implements OnInit{
 
   //Trainer passed from View Trainers Component.
@@ -49,16 +50,19 @@ export class EditTrainerComponent implements OnInit{
  * and the page reloads to display the changes.
  * @author Carl Pacquing
  */
+
   updateTrainerToEdit(){
         //Update the trainer
        // this.trainerToEdit = this.originalTrainer;
         console.log("Updating trainer");
         console.log("Original trainer: ", this.originalTrainer);
         console.log("New Trainer: ", this.trainer);
+
         this.trService.editTrainer(this.trainer).subscribe(response => {
           window.location.reload();
         },
         issue => {
+
           console.log("Issue", issue);
           if (issue instanceof HttpErrorResponse) {
             const serviceName = 'User Service';
@@ -66,6 +70,7 @@ export class EditTrainerComponent implements OnInit{
           }
       });
   }
+
 
   closeTrainer(){
     //This function should close the modal, and omit any changes made in the modal.
@@ -77,3 +82,17 @@ export class EditTrainerComponent implements OnInit{
     console.log("After Revert:", this.trainer);
   }
 }
+
+  closeTrainer(form: NgForm) {
+    form.reset();
+    // This function should close the modal, and omit any changes made in the modal.
+    // I.e. The trainer information should remain unchanged.
+    console.log('Revert to original fields.');
+    console.log('Original Trainer:', this.originalTrainer);
+    // console.log("Before Cancellation:", this.trainer);
+    this.trainer = this.originalTrainer;
+    console.log('After Revert:', this.trainer);
+  }
+
+}
+

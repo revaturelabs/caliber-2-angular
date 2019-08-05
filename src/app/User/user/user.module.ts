@@ -11,6 +11,8 @@ import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.com
 import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.component';
 import { UserRoutingModule } from './user-routing.module';
 import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
+import { DisableTrainerComponent } from './Components/disable-trainer/disable-trainer.component';
+
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.com
     DeleteTraineeComponent,
     UpdateTraineeComponent,
     ViewTrainersComponent,
-    EditTrainerComponent
+    EditTrainerComponent,
+    DisableTrainerComponent
   ],
   exports: [
     AddTraineeComponent,

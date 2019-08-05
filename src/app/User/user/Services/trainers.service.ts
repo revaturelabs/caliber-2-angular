@@ -3,6 +3,13 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
 /**
  * sets the Http headers
  */
@@ -20,17 +27,20 @@ const userUrl = environment.serverRootURL + '/user';
 //The url for getting all trainers
 const getAllUrl = userUrl + '/trainers';
 
-//Deprecated URLs for trainers.
-// const addURL = userUrl + '/trainers/add';
-
-// const editURL = userUrl + '/trainers/edit';
-
-
+//The url for disable trainer
+const disableUrl = userUrl + '/trainers/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainersService {
+  private roles: String[] = ['ROLE_VP',
+                     'ROLE_PANEL',
+                    'ROLE_QC',
+                    'ROLE_TRAINER',
+                    'ROLE_STAGING',
+                    'ROLE_INACTIVE'];
+
 
   private roles:String[] = ["ROLE_VP",
                      "ROLE_PANEL",
@@ -41,7 +51,12 @@ export class TrainersService {
 
   constructor(private http:HttpClient) { }
 
+
+   /**
+   * Sends a get request to retrieve all of the trainers
+   */
   getAllTrainers(): Observable<Trainer[]> {
+    console.log(getAllUrl);
     return this.http.get<Trainer[]>(getAllUrl);
   }
 
@@ -53,5 +68,15 @@ export class TrainersService {
   editTrainer(tr: Trainer): Observable<Trainer> {
     return this.http.put<Trainer>(getAllUrl, tr, httpOptions);
   }
+
+  /**
+   * Sends a patch request to set a trainer's state to inactive
+   */
+  disableTrainer(trainer: Trainer): Observable<Trainer> {
+    const URL = disableUrl + trainer.trainerId;
+    return this.http.patch<Trainer>(URL, trainer, httpOptions);
+  }
+
+  
 
 }
