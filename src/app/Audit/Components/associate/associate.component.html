@@ -11,7 +11,7 @@
             style="padding: 4px; background-color: #F26925; float: left;" data-toggle="dropdown">
             <em class="fa fa-plus"></em>
             <ul class="dropdown-menu" style="overflow-y: scroll; height: 200px;">
-                <li *ngFor="let category of activeCategoryTags | keyvalue" (click)="addCategoryTag(category.value)">
+                <li *ngFor="let category of activeCategoryTags | keyvalue"  (click)="addCategoryTag(category.value)">
                     <a>{{ category.value.skillCategory }}</a>
                 </li>
             </ul>
@@ -65,7 +65,9 @@
 
                         <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
                             class="dropup-content">
-                            <li *ngIf="QcNote.trainee != null ">{{QcNote.trainee.flagNotes}}</li>
+                            <ul>
+                                <li *ngIf="QcNote.trainee != null ">{{QcNote.trainee.flagNotes}}</li>
+                            </ul>
                         </div>
                     </div>
                     <!-- MODEL FOR FLAGGING STARTS -->

@@ -33,7 +33,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 		this.auditService.invokeAssosciateFunction.subscribe(() => {
 			this.week = this.auditService.selectedWeek;
-			this.batchId = this.auditService.selectedBatch['batchId'];
+			this.batchId = this.auditService.selectedBatch? this.auditService.selectedBatch['batchId']:this.batchId;
 			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
 		});
 	}
