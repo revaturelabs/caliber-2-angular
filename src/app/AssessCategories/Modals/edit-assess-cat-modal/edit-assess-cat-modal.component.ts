@@ -20,15 +20,25 @@ export class EditAssessCatModalComponent implements OnInit {
   
   }
 
+  selected(cat:Category){
+    this.category = cat;
+  }
+
+  //gets the categories from the database and inserts them into the category list 
   getAll(){
     this.categoryService.listAll().subscribe((res)=>{
       this.categories = res;
     });
   }
 
-  getCategory(id: number){
-    this.categoryService.getCategory(id).subscribe((res)=>{
-      this.categories = res;
-    });
+
+  //saves the changes made to the category into the database 
+  save(){
+    this.categoryService.edit(this.category.categoryId,this.category.categoryOwner, this.category.skillCategory, this.category.active);
   }
+  // getCategory(id: number){
+  //   this.categoryService.getCategory(id).subscribe((res)=>{
+  //     this.categories = res;
+  //   });
+  // }
 }
