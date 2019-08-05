@@ -1,50 +1,20 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
-
-/**
- * sets the Http headers
- */
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
-
 /**
  * The root user service url
  */
-const userURL = environment.serverRootURL + '/user';
+const userUrl = environment.serverRootURL + '/user';
 
-/**
- * The url for getting all trainers
- */
-const getAllURL = userURL + '/trainers';
-
-/**
- * The url to disable a trainer in the user service
- */
-const disableURL =  userURL + '/trainers/';
-
-/**
- * The url to add a trainer to the user service
- */
-const addURL = userURL + '/trainers';
-
-/**
- * The url to update a trainer in the user service
- */
-const editURL = userURL + '/trainers/';
-
-
+//The url for getting all trainers
+const getAllUrl = userUrl + '/trainers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainersService {
-
   private roles: String[] = ['ROLE_VP',
                      'ROLE_PANEL',
                     'ROLE_QC',

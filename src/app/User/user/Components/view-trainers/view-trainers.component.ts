@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,6 @@ import { DisableTrainerComponent } from '../disable-trainer/disable-trainer.comp
   styleUrls: ['./view-trainers.component.css']
 })
 export class ViewTrainersComponent implements OnInit {
-
   constructor(private trainerservice: TrainersService,
     private errorService: ErrorService) { }
   trainersList: Trainer[] = [];
@@ -25,11 +25,14 @@ export class ViewTrainersComponent implements OnInit {
   @ViewChild('editTrainerModal') EditTrainer: EditTrainerComponent;
 
   @ViewChild('disableTrainerModal') DisableTrainer: DisableTrainerComponent;
+  constructor(private trainerservice : TrainersService,
+    private errorService: ErrorService) { }
+
+  trainersList : Trainer[] = [];
 
   ngOnInit() {
     this.getAllTrainers();
   }
-
   /**     This method redirects to the EditTrainerComponent
    * to display the trainer's information in the modal which is
    * specified in the *ngFor loop..
@@ -39,18 +42,16 @@ export class ViewTrainersComponent implements OnInit {
     this.EditTrainer.displayTrainer(trainer);
 
   }
-
-  getAllTrainers() {
-    this.trainerservice.getAllTrainers().subscribe(trainer => {
-        trainer.forEach(trainers => {
-          this.trainersList.push(trainers);
-        });
+  getAllTrainers() 
+  {
+    this.trainerservice.getAllTrainers().subscribe(trainers => 
+      {
+        this.trainersList = trainers;
       }, error => {
         const serviceName = 'User Service ';
         const errorMessage = 'Failed to make connection!';
         this.errorService.setError(serviceName, errorMessage);
       });
-  }
 
   /**
    * This method redirects takes a trainer to the backend to be updated to the inactive role.
