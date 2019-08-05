@@ -17,10 +17,8 @@ const httpOptions = {
 const userUrl = environment.serverRootURL + '/user';
 
 //The url for getting all trainers
-const getAllUrl = userUrl + '/all/trainer/all';
+const getAllUrl = userUrl + '/trainers';
 
-//url for add trainers controller
-const addTrainerUrl = userUrl + '/all/trainer/add';
 
 // /**
 //  * The url for getting all trainees by the batch id from the user service
@@ -41,7 +39,7 @@ export class TrainersService {
 
   addTrainer(trainer:Trainer)
   {
-    return this.http.post(addTrainerUrl, trainer, httpOptions);
+    return this.http.post(getAllUrl, trainer, httpOptions);
   }
 
 }
