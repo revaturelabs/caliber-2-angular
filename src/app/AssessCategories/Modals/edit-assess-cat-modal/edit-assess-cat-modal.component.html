@@ -12,11 +12,10 @@
         <div class="row">
           <div class="form-group col-lg-12 col-md-12 col-sm-12">
             <label for="category">Select Assessment Category</label> 
-            <select name = 'selectedCategory' [(ngModel)] = 'selectedCategory'
-              class="form-control" id="category"
-              required  value = 'default'>
+            <select name = 'selectedCategory' 
+              class="form-control" id="selectedCategory" required >
               <option value="default" disabled>Select Assessment Category</option>
-              <option *ngFor ="let cat of categories" [ngValue] = cat.categoryId (click)="selected(cat)">{{cat.skillCategory}}</option>
+              <option *ngFor="let cat of categories" (click)="selected(cat)">{{cat.skillCategory}}</option>
             </select>
           </div>
         </div>
@@ -24,14 +23,16 @@
         <div class="row">
           <div class="form-group col-lg-12 col-md-12 col-sm-12">
             
-            Category Name: <input type="text" id="category.skillCategory" [(ngModel)]="category.skillCategory" >
-            Category Owner: <input type="text" id="category.categoryOwner" [(ngModel)]="category.categoryOwner" >
+            Category Name: <input type="text" id="skillCategory" [(ngModel)]="category.skillCategory" >
+            Category Owner: <input type="text" id="categoryOwner" [(ngModel)]="category.categoryOwner" >
             <button type="button" class="btn btn-default" (click)="save()">Save</button>
           </div>
         </div>
         <!--***********************************************************-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <span  style="color: red; float:left" *ngIf="displayResultError">{{errorMessage}}</span>
+            <span style="color: green; float:left" *ngIf="displayResultSuccess">{{successMessage}} </span>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearModal()">Close</button>
         </div>
       </div>
     </div>

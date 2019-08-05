@@ -9,8 +9,12 @@ import { Category } from 'src/app/User/user/types/trainee';
 })
 export class EditAssessCatModalComponent implements OnInit {
 
-  category:Category;  //The category that will be selected for presentation and editing 
-  categories:any;     //The list of categories to be loaded and displayed 
+  category:Category = new Category();  //The category that will be selected for presentation and editing 
+  categories:Category [];     //The list of categories to be loaded and displayed 
+  errorMessage:string;
+  successMessage:string;
+  displayResultError:boolean;
+  displayResultSuccess:boolean;
 
   constructor(private categoryService:CategoryService) { 
 
@@ -28,7 +32,9 @@ export class EditAssessCatModalComponent implements OnInit {
   //gets the categories from the database and inserts them into the category list 
   getAll(){
     this.categoryService.listAll().subscribe((res)=>{
-      this.categories = res;
+      var c = JSON.parse(JSON.stringify(res));
+
+      this.categories = c;
     });
   }
 
@@ -36,7 +42,16 @@ export class EditAssessCatModalComponent implements OnInit {
   //saves the changes made to the category into the database 
   save(){
     this.categoryService.edit(this.category.categoryId,this.category.categoryOwner, this.category.skillCategory, this.category.active).subscribe((res)=>{
-      this.categories = res;
+      var c = JSON.parse(JSON.stringify(res));
+
+      this.categories = c;
     });
+  }
+
+  clearModal(){
+    this.displayResultSuccess = false;
+    this.displayResultError = false;
+    this.category.skillCategory = '';
+    this.category.categoryOwner = '';
   }
 }
