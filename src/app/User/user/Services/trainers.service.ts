@@ -18,11 +18,11 @@ const httpOptions = {
 const userUrl = environment.serverRootURL + '/user';
 
 //The url for getting all trainers
-const getAllUrl = userUrl + '/all/trainer/all';
+const getAllUrl = userUrl + '/trainers';
 
-const addURL = userUrl + '/all/trainer/add';
+const addURL = userUrl + '/trainers/add';
 
-const editURL = userUrl + '/all/trainer/edit';
+const editURL = userUrl + '/trainers/edit';
 
 
 
