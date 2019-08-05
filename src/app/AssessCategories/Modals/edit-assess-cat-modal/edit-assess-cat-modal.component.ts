@@ -17,7 +17,7 @@ export class EditAssessCatModalComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+    this.getAll();
   }
 
   selected(cat:Category){
