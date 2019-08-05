@@ -112,7 +112,7 @@ export class AuditService {
   sortAlphabetically(notes: any) {
     if(notes.length != 0){
       notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-        if (a.trainee != null && a.trainee.name > b.trainee.name) {
+        if (a.trainee != null && b.trainee != null && a.trainee.name > b.trainee.name) {
           return 1;
         }
         else {
