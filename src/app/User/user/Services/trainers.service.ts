@@ -63,7 +63,7 @@ export class TrainersService {
   }
 
   /**
-   * Sends a put request to set a trainer's state to inactive
+   * Sends a patch request to set a trainer's state to inactive
    */
   disableTrainer(trainer: Trainer): Observable<Trainer> {
     const URL = disableURL + trainer.trainerId;
