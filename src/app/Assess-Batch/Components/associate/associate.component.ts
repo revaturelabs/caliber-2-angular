@@ -47,7 +47,7 @@ export class AssociateComponent implements OnInit {
   scoreId: number;
   category: Category[] = [];
   
-  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
+  constructor(private AssessBatchService: AssessBatchService ,private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService, private assessmentService: AssessmentService) { }
   //Beginning of associate component lifecycle is populating the trainee array, assessment array, and getting all of the notes
   ngOnInit( ) {
     this.avgArr =[];
