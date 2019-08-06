@@ -1,11 +1,28 @@
+span{
+    font-size:1.3em;
+}
+
 .good{
- text-decoration: underline;
- text-decoration-color: #F26925;
- cursor: crosshair;
+    cursor: crosshair;
 }
 
 .stale{
-    text-decoration: line-through;
- text-decoration-color: rgb(141, 126, 118);
- cursor: cell;
+    color:rgb(187, 158, 142);
+    cursor: cell;
 }
+
+@keyframes fadeOutLeft {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  
+  .fadeOutLeft {
+    animation-name: fadeOutLeft;
+    animation-duration:.7s;
+  }

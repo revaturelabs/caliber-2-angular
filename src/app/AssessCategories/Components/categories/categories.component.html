@@ -24,14 +24,14 @@
       <h3>Active Categories</h3>
       <hr>
       <div *ngFor="let category of categoriesList1">
-        <span (click)="disableCategory(category)" class="good">{{category.categoryId}} - {{category.skillCategory}} - </span>
+        <span (click)="disableCategory(category)" id="category{{category.categoryId}}" class="good"> {{category.skillCategory}}  </span>
       </div>
 
       <h3>Stale Categories</h3>
       <hr>
 
       <div *ngFor="let category of categoriesList2">
-        <span (click)="enableCategory(category)" class="stale">{{category.categoryId}} - {{category.skillCategory}} - </span>
+        <span (click)="enableCategory(category)" class="stale">{{category.skillCategory}}  </span>
       </div>
     </div>
   </div>
