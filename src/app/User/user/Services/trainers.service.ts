@@ -61,7 +61,8 @@ export class TrainersService {
     return this.http.post<Trainer>(getAllUrl, tr, httpOptions);
   }
   editTrainer(tr: Trainer): Observable<Trainer> {
-    return this.http.put<Trainer>(getAllUrl, tr, httpOptions);
+    const editURL = getAllUrl + "/" + tr.trainerId;
+    return this.http.put<Trainer>(editURL, tr, httpOptions);
   }
 
   /**
