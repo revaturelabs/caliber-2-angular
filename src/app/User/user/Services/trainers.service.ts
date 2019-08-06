@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
+
 /**
  * sets the Http headers
  */
@@ -27,9 +28,18 @@ const getAllUrl = userUrl + '/trainers';
 
 
 
+//url for add trainers controller
+const addTrainerUrl = userUrl + '/all/trainer/add';
+
+// /**
+//  * The url for getting all trainees by the batch id from the user service
+//  */
+// const getUrl = userUrl + '/all/trainee?batch=';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class TrainersService {
 
   private roles:String[] = ["ROLE_VP",
