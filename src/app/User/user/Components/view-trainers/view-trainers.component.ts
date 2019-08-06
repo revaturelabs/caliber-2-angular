@@ -29,8 +29,6 @@ export class ViewTrainersComponent implements OnInit {
   
   @ViewChildren('addTrainerModal') AddTrainer: AddTrainerComponent;
 
- 
-
   ngOnInit() 
   {
     this.getAllTrainers();
