@@ -21,12 +21,8 @@ const userUrl = environment.serverRootURL + '/user';
 //The url for getting all trainers
 const getAllUrl = userUrl + '/trainers';
 
-//Deprecated URLs for trainers.
-// const addURL = userUrl + '/trainers/add';
-
-// const editURL = userUrl + '/trainers/edit';
-
-
+//The url for disable trainer
+const disableUrl = userUrl + '/trainers/';
 
 //url for add trainers controller
 const addTrainerUrl = userUrl + '/all/trainer/add';
@@ -41,17 +37,21 @@ const addTrainerUrl = userUrl + '/all/trainer/add';
 })
 
 export class TrainersService {
-
-  private roles:String[] = ["ROLE_VP",
-                     "ROLE_PANEL",
-                    "ROLE_QC",
-                    "ROLE_TRAINER",
-                    "ROLE_STAGING",
-                    "ROLE_INACTIVE"];
+  private roles: String[] = ['ROLE_VP',
+                     'ROLE_PANEL',
+                    'ROLE_QC',
+                    'ROLE_TRAINER',
+                    'ROLE_STAGING',
+                    'ROLE_INACTIVE'];
 
   constructor(private http:HttpClient) { }
 
+
+   /**
+   * Sends a get request to retrieve all of the trainers
+   */
   getAllTrainers(): Observable<Trainer[]> {
+    console.log(getAllUrl);
     return this.http.get<Trainer[]>(getAllUrl);
   }
 
@@ -63,5 +63,15 @@ export class TrainersService {
   editTrainer(tr: Trainer): Observable<Trainer> {
     return this.http.put<Trainer>(getAllUrl, tr, httpOptions);
   }
+
+  /**
+   * Sends a patch request to set a trainer's state to inactive
+   */
+  disableTrainer(trainer: Trainer): Observable<Trainer> {
+    const URL = disableUrl + trainer.trainerId;
+    return this.http.patch<Trainer>(URL, trainer, httpOptions);
+  }
+
+  
 
 }

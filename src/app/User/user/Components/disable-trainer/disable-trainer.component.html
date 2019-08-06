@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <div class="modal fade in" id="disableTrainerModal" tabindex="-1" role="dialog" aria-labelledby="trainerModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="trainerModalLabel">Disable Trainer</h4>
+        </div>
+        <div class="modal-body" *ngIf="trainer">
+          <!-- Confirm Disable -->
+            <h3 id="editTrainerHeader">Are you sure you want to set {{originalTrainer.name}} to inactive?</h3>
+            <div class="modal-footer">
+              <button id="yesButton1" type="submit" value="Update" class="btn btn-primary" (click)="disableTrainer()" data-dismiss="modal">Yes</button>
+              <button id="noButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()" >No</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>

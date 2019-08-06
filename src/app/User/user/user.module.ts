@@ -12,6 +12,8 @@ import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.
 import { UserRoutingModule } from './user-routing.module';
 import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
 import { AddTrainerComponent } from './Components/add-trainer/add-trainer.component';
+import { DisableTrainerComponent } from './Components/disable-trainer/disable-trainer.component';
+
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import { AddTrainerComponent } from './Components/add-trainer/add-trainer.compon
     UpdateTraineeComponent,
     ViewTrainersComponent,
     EditTrainerComponent,
-    AddTrainerComponent
+    AddTrainerComponent,
+    DisableTrainerComponent
   ],
   exports: [
     AddTraineeComponent,
