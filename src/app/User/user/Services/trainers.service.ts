@@ -4,6 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
 
+/**
+ * sets the Http headers
+ */
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -21,11 +24,13 @@ const getAllUrl = userUrl + '/trainers';
 //The url for disable trainer
 const disableUrl = userUrl + '/trainers/';
 
-//The url for edit trainer
-const editUrl = userUrl + '/trainers/';
+//url for add trainers controller
+const addTrainerUrl = userUrl + '/all/trainer/add';
 
-//The url for add trainer
-const addUrl = userUrl + '/trainers/';
+// /**
+//  * The url for getting all trainees by the batch id from the user service
+//  */
+// const getUrl = userUrl + '/all/trainee?batch=';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +44,8 @@ export class TrainersService {
                     'ROLE_STAGING',
                     'ROLE_INACTIVE'];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
+
 
    /**
    * Sends a get request to retrieve all of the trainers
@@ -47,6 +53,15 @@ export class TrainersService {
   getAllTrainers(): Observable<Trainer[]> {
     console.log(getAllUrl);
     return this.http.get<Trainer[]>(getAllUrl);
+  }
+
+  addTrainer(tr: Trainer): Observable<Trainer> {
+    //We are returning an Observable
+    //Use generics to specify the return type of the post method.
+    return this.http.post<Trainer>(getAllUrl, tr, httpOptions);
+  }
+  editTrainer(tr: Trainer): Observable<Trainer> {
+    return this.http.put<Trainer>(getAllUrl, tr, httpOptions);
   }
 
   /**
@@ -57,21 +72,6 @@ export class TrainersService {
     return this.http.patch<Trainer>(URL, trainer, httpOptions);
   }
 
-  /**
-   * Sends a post request to add a trainer to the database
-   */
-  addTrainer(trainer: Trainer): Observable<Trainer> {
-    // We are returning an Observable
-    // Use generics to specify the return type of the post method.
-    return this.http.post<Trainer>(addUrl, trainer, httpOptions);
-  }
-
-  /**
-   * Sends a put request to update a trainer
-   */
-  editTrainer(trainer: Trainer): Observable<Trainer> {
-    const URL = editUrl + trainer.trainerId;
-    return this.http.put<Trainer>(URL, trainer, httpOptions);
-  }
+  
 
 }

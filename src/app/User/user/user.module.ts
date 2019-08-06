@@ -13,6 +13,7 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { AddTrainerComponent } from './Components/add-trainer/add-trainer.component';
 import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
+import { AddTrainerComponent } from './Components/add-trainer/add-trainer.component';
 import { DisableTrainerComponent } from './Components/disable-trainer/disable-trainer.component';
 
 
@@ -33,6 +34,7 @@ import { DisableTrainerComponent } from './Components/disable-trainer/disable-tr
     ViewTrainersComponent,
     AddTrainerComponent,
     EditTrainerComponent,
+    AddTrainerComponent,
     DisableTrainerComponent
 
   ],
