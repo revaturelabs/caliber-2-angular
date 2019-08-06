@@ -1,19 +1,41 @@
 <!-- Modal -->
-<div id="EditCategoryModal" class="modal fade" role="dialog">
+<div id="EditCategoryModal" class="modal fade" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Edit Category Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+        <!--Listing the available categories-->
+        <div class="row">
+          <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="category">Select Assessment Category</label> 
+            <select name = 'selectedCategory' 
+              class="form-control" id="selectedCategory" required >
+              <option value="default" disabled>Select Assessment Category</option>
+              <option *ngFor="let cat of categories" (click)="selected(cat)" >{{cat.skillCategory}}</option>
+            </select>
+          </div>
         </div>
+        <!--Displaying the fields for editing-->
+        <div class="row">
+          <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            
+            Category Name: <input type="text" id="skillCategory" [(ngModel)]="temp">
+            Category Owner: <input type="text" id="categoryOwner" [(ngModel)]="tempOwner">
+            <button type="button" class="btn btn-default" (click)="save()">Save</button>
+          </div>
+        </div>
+        <!--***********************************************************-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <span style="color: red; float:left" *ngIf="displayResultError">{{errorMessage}}</span>
+            <span style="color: green; float:left" *ngIf="displayResultSuccess">{{successMessage}} </span>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearModal()" (click)="updateComponent()">Close</button>
         </div>
       </div>
-
     </div>
   </div>
+
+
+  
