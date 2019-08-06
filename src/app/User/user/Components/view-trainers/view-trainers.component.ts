@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
+import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
 import { DisableTrainerComponent } from '../disable-trainer/disable-trainer.component';
+
 
 @Component({
   selector: 'app-view-trainers',
@@ -24,19 +26,25 @@ export class ViewTrainersComponent implements OnInit {
   @ViewChild('disableTrainerModal') DisableTrainer: DisableTrainerComponent;
 
   trainersList : Trainer[] = [];
+  
+  @ViewChildren('addTrainerModal') AddTrainer: AddTrainerComponent;
 
-  ngOnInit() {
+ 
+
+  ngOnInit() 
+  {
     this.getAllTrainers();
   }
   /**     This method redirects to the EditTrainerComponent
    * to display the trainer's information in the modal which is
-   * specified in the *ngFor loop..
+   * specified in the *ngFor loop.
    * @author Carl Pacquing
    */
   displayTrainerUpdateModal(trainer: Trainer) {
     this.EditTrainer.displayTrainer(trainer);
 
   }
+
   getAllTrainers() 
   {
     this.trainerservice.getAllTrainers().subscribe(trainers => 
@@ -53,6 +61,11 @@ export class ViewTrainersComponent implements OnInit {
    */
   displayDisableTrainerModal(trainer: Trainer) {
     this.DisableTrainer.displayConfirmation(trainer);
+  }
+
+  resetAddTrainerForm()
+  {
+    this.AddTrainer.resetAddTrainerForm();
   }
 
 }
