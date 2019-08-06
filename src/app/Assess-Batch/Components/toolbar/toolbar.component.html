@@ -13,7 +13,8 @@
 							</ul>
 							
 						<!-- sort by quarter-->
-						<li role="button" class="dropdown"><a class="dropdown-toggle"
+						<li role="button" class="dropdown">
+							<a class="dropdown-toggle"
 							data-toggle="dropdown" (click)="showQs()"> {{selectedQuarter}} <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li *ngFor="let quarter of quarters">
@@ -27,7 +28,8 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li *ngFor="let batch of batches">
+							<li><input type="text" placeholder="Search.." id="myInput" (keyup)="filterBatch(searchText)" [(ngModel)]="searchText" name="searchText" ></li>
+							<li *ngFor="let batch of batches | filter : searchText">
 								<a role="button" (click)="selectBatch(batch)"> {{batch?.trainer }} - {{ batch?.startDate | date: 'shortDate' }} </a>
 							</li>
 						</ul>

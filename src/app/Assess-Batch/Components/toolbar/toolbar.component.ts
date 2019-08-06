@@ -9,6 +9,7 @@ import { AssessBatchGradeService } from '../../Services/assess-batch-grades.serv
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -24,6 +25,7 @@ export class ToolbarComponent implements OnInit {
   defaultYears: number[];
   selectedYear: string = "Select Year";
   selectedQuarter: String = "Select Quarter";
+  searchText: String = '';
 
   selectedBatch: Batch = {
     batchId: 0,
@@ -283,5 +285,10 @@ export class ToolbarComponent implements OnInit {
       this.assessBatchGradeService.storeGrades(this.gradesArr);
       this.assessBatchGradeService.grades.emit(this.gradesArr);
     })
+  }
+  filterBatch(){
+    console.log(this.searchText)
+    
+    
   }
 }
