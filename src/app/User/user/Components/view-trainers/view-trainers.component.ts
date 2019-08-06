@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
 import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
 import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
 import { DisableTrainerComponent } from '../disable-trainer/disable-trainer.component';
