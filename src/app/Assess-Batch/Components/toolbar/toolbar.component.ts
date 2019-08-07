@@ -8,6 +8,7 @@ import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -188,6 +189,7 @@ export class ToolbarComponent implements OnInit {
 
   selectWeek(event: number) {
     this.selectedWeek = event;
+    console.log(event);
     this.auditService.selectedWeek = event;
     this.getBatchNotesByWeek();
     this.getAssessmentsByBatchIdAndWeekNum();

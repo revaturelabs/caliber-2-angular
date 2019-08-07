@@ -15,6 +15,7 @@ import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

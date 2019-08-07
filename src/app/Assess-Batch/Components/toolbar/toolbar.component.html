@@ -53,7 +53,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 top5" *ngIf="selectedBatch">
 				<ul class="nav nav-tabs">
 					<li role="button" class="{{showActiveWeek(week)}}" 
-					(click)="selectWeek(week)" *ngFor="let week of weeks">
+					 (click)="selectWeek(week)" *ngFor="let week of weeks">
 						<a>Week {{week}}</a>
 					</li>
 					<li role="button" data-toggle="modal" data-target="#confirmingweeks">
