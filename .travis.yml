@@ -7,5 +7,3 @@ before_script:
 
 script:
     - ng build --prod
-    - npm install sonar-scanner
-    - sonar-scanner -Dsonar.projectKey=revaturelabs_caliber-2-angular -Dsonar.organization=revaturelabs-screenforce -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN

@@ -44,7 +44,9 @@
                     </div>
               </div>
           <div class="modal-footer">
-            <button id="updateButton1" type="submit" value="Submit" class="btn btn-primary" (click)="addTrainer()" data-dismiss="modal">Submit</button>
+            <span class = "fa-pull-left" style = " color: green;" *ngIf = "displaySuccess" [innerText] = "displaySuccessMsg"></span>
+            <span class = "fa-pull-left" style = " color: red;" *ngIf = "displayFailure" [innerText] = "displayFailureMsg"></span>
+            <button id="updateButton1" type="submit" value="Submit" class="btn btn-primary" (click)="addTrainer()">Submit</button>
             <button id="closeButton1" type="button" class="btn btn-default" data-dismiss="modal" (click)="closeAddTrainerModal()" >Close</button>
           </div>
         </form>
