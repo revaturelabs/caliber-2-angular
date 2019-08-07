@@ -16,26 +16,46 @@ export class AddTrainerComponent implements OnInit {
   }
 
   private newTrainer:Trainer = new Trainer();
+
+  displaySuccess:boolean;
+
+  displayFailure:boolean;
+
+  displaySuccessMsg:String;
+
+  displayFailureMsg:String;
   
   addTrainer()
   {
     this.trainerServ.addTrainer(this.newTrainer).subscribe(response => 
     {
-      alert("Trainer added successfully!");
-      window.location.reload();
+      this.toggleSuccessMsgDisplay();
+      this.displaySuccessMsg = "Trainer added successfully!";
+      //window.location.reload();
     }, error => {
-      const serviceName = 'User Service ';
-      const errorMessage = 'Failed to add trainer to database! Please fill out all fields correctly, and give a unique email.';
-      this.errorService.setError(serviceName, errorMessage);
-      this.closeAddTrainerModal();
+
+      this.toggleFailureMsgDisplay();
+      this.displayFailureMsg = "Failed to add trainer to database! Please fill out all fields correctly, and give a unique email.";
+      //this.closeAddTrainerModal();
     });
 
+  }
+
+  toggleSuccessMsgDisplay()
+  {
+    this.displayFailure = false;
+    this.displaySuccess = true;
+  }
+
+  toggleFailureMsgDisplay() 
+  {
+    this.displaySuccess = false;
+    this.displayFailure = true;
   }
 
   closeAddTrainerModal()
   {
     this.resetAddTrainerForm();
-
   }
 
   resetAddTrainerForm() 
@@ -52,6 +72,12 @@ export class AddTrainerComponent implements OnInit {
     this.newTrainer.email = "";
     this.newTrainer.tier = "";
     this.newTrainer.password = "";
+
+    this.displayFailure = false;
+    this.displaySuccess = false;
+
+    this.displayFailureMsg = "";
+    this.displaySuccessMsg = "";
 
   }
   
