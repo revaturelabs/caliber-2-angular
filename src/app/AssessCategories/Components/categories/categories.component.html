@@ -31,7 +31,7 @@
       <hr>
 
       <div *ngFor="let category of categoriesList2">
-        <span (click)="enableCategory(category)" class="stale"> {{category.skillCategory}}  </span>
+        <span (click)="enableCategory(category)" id="category{{category.categoryId}}"   class="stale"> {{category.skillCategory}}  </span>
       </div>
     </div>
   </div>
