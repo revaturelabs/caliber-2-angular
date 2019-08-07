@@ -20,7 +20,6 @@ export class AssessBatchGradeService {
   avgGrade = '/all/grade/average?assessment=';
   batchGrade = '/all/grade/average?batch=';
   batchAvgGrade = '&week='
-
   url2 = this.url + '/all/grade/average?batch=';
  
   allAssessments: traineeAssessment[] = [];
@@ -29,7 +28,7 @@ export class AssessBatchGradeService {
   grades = new EventEmitter<Grade[]>();
 
   constructor(private http: HttpClient) { }
-
+  
   getAvgGradeByAssessmentId(id: number): Observable<number> {
     return this.http.get<number>(this.url + this.avgGrade + id);
   }

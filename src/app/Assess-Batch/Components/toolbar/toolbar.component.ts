@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component,Directive, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.component';
@@ -16,6 +16,7 @@ import { Note } from 'src/app/Batch/type/note';
 })
 
 export class ToolbarComponent implements OnInit {
+  
   showBatch: boolean  = true;
   quarters: String[]=[];
   years: number[];
@@ -24,7 +25,7 @@ export class ToolbarComponent implements OnInit {
   defaultYears: number[];
   selectedYear: string = "Select Year";
   selectedQuarter: String = "Select Quarter";
-
+  oneCall:boolean=false;
   selectedBatch: Batch = {
     batchId: 0,
     trainingName: "",
@@ -78,7 +79,10 @@ export class ToolbarComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.getAllYears();
+    
   }
+
+  
      /**
    * resets createorUpdate variable for child component
    */
@@ -101,11 +105,13 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
       this.years = result;
       this.selectedYear = this.years[0].toString();
+
       for (var q = 4; q > 0; q--) { 
         this.checkBatchExistanceInaQuarter(this.years[0], q);
       }
       this.selectedYear = "Select Year";
     });
+   
   }
 
   getBatches() {
@@ -113,11 +119,13 @@ export class ToolbarComponent implements OnInit {
     .subscribe(result => {
         if(result.length > 0) {
           this.batchExists = true;
-      this.batches = result;
-      this.selectedBatch = this.batches[0];
-      this.getWeeks();
+          this.batches = result;
+          this.selectedBatch = this.batches[0];
+          
+          this.getWeeks();
         this.selectedWeek = this.weeks.length;
     } else {
+      console.log("batch not exist")
       this.batchExists = false;
     }
       });
@@ -137,29 +145,21 @@ export class ToolbarComponent implements OnInit {
         if(result.length > 0) {
           this.quarters.push("Q"+quarter);
           this.selectedQuarter = this.quarters[0];
-         
-          var temp: String[] = this.quarters.sort((n1, n2) => {
-            if (n1 > n2) {
-              return -1;
-            }
-
-            if (n1 < n2) {
-              return 1;
-            }
-
-            return 0;
-          });
+          
+          var temp: String[] = this.sortQuarters(this.quarters);
 
           this.quarters = temp;
           this.selectedYear = yearselect;
           this.selectedBatch = result[0];
           this.getBatches();
-        } else {
-
         }
       });
   }
-
+  sortQuarters(arr:String[]){
+    return this.quarters.sort((n1, n2) => {
+      return n1 === n2?0:n1>n2?-1:1;
+    });
+  }
   showQs(){
     this.selectedQuarter = "Select Quarter";
   }
@@ -183,8 +183,14 @@ export class ToolbarComponent implements OnInit {
       return "active";
     }
   }
-
+  checkTheLastWeek(week:number,weeks:any[]){
+    if(week === weeks.length){
+      console.log(weeks);
+      if(!this.oneCall) this.selectWeek(week);
+    }
+  }
   selectWeek(event: number) {
+    this.oneCall = true;
     this.selectedWeek = event;
     this.auditService.selectedWeek = event;
     this.getBatchNotesByWeek();
@@ -230,7 +236,6 @@ export class ToolbarComponent implements OnInit {
     this.weeklyAssessments=[];
 
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
-
       this.weeklyAssessments = assessments;
 
       this.assessBatchGradeService.storeAssessments(this.weeklyAssessments);
@@ -240,8 +245,8 @@ export class ToolbarComponent implements OnInit {
 
   getAssessmentsByBatchIdAndWeekNum(){
     this.weeklyAssessments=[];
-
     this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(assessments => {
+      console.log(assessments);
 
       this.weeklyAssessments = assessments;
 

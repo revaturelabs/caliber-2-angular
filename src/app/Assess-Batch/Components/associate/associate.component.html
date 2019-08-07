@@ -12,8 +12,7 @@
               <thead>
                 <tr sticky class="sticky-header">
 
-                  <th class="col-sm-1 col-md-1 col-lg-1">Trainee</th>
-                  <th class="col-sm-1 col-md-1 col-lg-1"></th>
+                  <th class="col-sm-1 col-md-1 col-lg-1 ">Trainee</th>
                   <th class="col-sm-1 col-md-1 col-lg-1"></th>
 
                   <!-- Displays the category as well as the assessment information-->
@@ -37,44 +36,45 @@
                     style="width: 11%;">
                     {{train.name}}
                   </td>
-                  <td style="width:25px !important">
+                  <td>
                     <!-- Only shows the current flag, none if no flag is assigned -->
                     <em *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></em>
                     <em *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></em>
                     <em *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
                       style="visibility: hidden;"></em>
                     <!-- Shows the flag notes popup if the user clicks the name column -->
+                    <em>
+                      <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
+                        <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
+                        <button (click)="commentOnTrainee(train,comment.value)"
+                          class="btn btn-secondary flage-notes-save-btn">Save</button>
+                        <em (click)="deleteFromSwitch(train.traineeId)" type="button"
+                          class="flage-notes-close-btn icon-button" aria-label="Close">
+                          <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                        </em>
+                      </div>
+                    </em>
                   </td>
-                  <em>
-                  <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
-                    <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
-                    <button (click)="commentOnTrainee(train,comment.value)"
-                      class="btn btn-secondary flage-notes-save-btn">Save</button>
-                    <em (click)="deleteFromSwitch(train.traineeId)" type="button"
-                      class="flage-notes-close-btn icon-button" aria-label="Close">
-                      <span class="glyphicon glyphicon-remove-sign closing-button"></span>
-                  </em>
-                  </div>
-                </em>
+                  
                   
                 <!-- Displays the grades for each trainee by assessment -->
-                  <ng-container *ngFor="let arr of superArr">
+                <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
-                      <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
+                      <td ><input [id]="scoreId"
                           type="number" min="0" max="100" [value]="score" (blur)="validateScore($event)" /></td>
                     </ng-container>
                     <ng-template #elseBlock>
-                      <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number"
+                      <td ><input  type="number" 
                           min="0" max="100" value="" (blur)="validateScore($event)" /></td>
                     </ng-template>
                   </ng-container>
-
                   <td *ngIf="noteArr.length != 0">
                     
                     <textarea (blur)="noteOnBlur(j, false)"
                       id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
                       placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
                   </td>
+                
                 </tr>
               </tbody>
               <tfoot>

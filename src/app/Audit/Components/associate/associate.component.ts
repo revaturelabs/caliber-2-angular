@@ -173,14 +173,9 @@ export class AssociateComponent implements OnInit {
 
 
   sortAlphabetically(notes: any) {
-    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-      if (a.trainee.name > b.trainee.name) {
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    });
+    notes.sort((e1, e2)=>{
+      return e1.name === e2.name?0:e1.name < e2.name?-1:1;  
+  })
   }
 
   getNotesByBatchByWeek() {

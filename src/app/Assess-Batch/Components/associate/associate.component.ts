@@ -127,7 +127,7 @@ export class AssociateComponent implements OnInit {
   //Within each inner array is the grades for each assignemnt
   myInit() {
     this.superArr = [];
-
+ 
     let tempArr = [];
     this.avgArr = [];
     for (let i = 0; i < this.assessmentArr.length; i++) {
@@ -233,8 +233,7 @@ export class AssociateComponent implements OnInit {
         //if http respond successses,delete trainee id from temporary "flagNoteSwitch" in order to close popup box
         // when the clicked on save button
         this.deleteFromSwitch(trainee.traineeId);
-      } else {
-      }
+      } 
     });
   }
   //Add this in blur event save function
@@ -258,6 +257,8 @@ export class AssociateComponent implements OnInit {
 
   //checking to see if a grade exists
   checkForGrade(arr: Grade[], train: Trainee) {
+    console.log(arr);
+    console.log(train)
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].traineeId == train.traineeId) {
         this.score = arr[i].score;
