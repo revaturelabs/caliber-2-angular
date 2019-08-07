@@ -72,13 +72,11 @@
                   </ng-container>
 
                   <td *ngIf="noteArr.length != 0">
-
-                    
-                    <textarea (blur)="noteOnBlur(j, false)"
-                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
-                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
-
-                  </td>
+                      <textarea (blur)="noteOnBlur(j, false)" (keypress)="clearAllSavingIcon(j); isTyping = true"
+                        (keydown.backspace)="clearAllSavingIcon(j); isTyping = true" id="note-textarea-{{j}}"
+                        class="form-control" maxlength="4000" rows="3" cols="75" placeholder="Note on {{train.name}}"
+                        [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+                    </td>
                   <!-- Status icons -->
                   <div class="savingIconDiv" [attr.id]="'spinner' + j" style="display: none;">
                     <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>

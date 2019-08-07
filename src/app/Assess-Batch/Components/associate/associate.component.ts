@@ -103,27 +103,6 @@ export class AssociateComponent implements OnInit {
     }
 
 
-// Disables the associated notes text area box for 1 second.
-  noteOnBlur(index: number, secondRound: boolean): void {
-    if (this.noteArr[index].noteId != -1) {
-     
-// The first call will recursivley call this function again to re-enable the input box after 1 second
-      // this.noteArr[index].noteContent=this.content[index];
-      this.noteService.putNote(this.noteArr[index]).subscribe(response => {
-      }
-
-      );
-
-    } else {
-
-      //  this.note=new Note(-1, this.content[index], "Trainee", this.selectedWeek, this.batchId, this.traineeArr[index].traineeId );
-      this.note = this.noteArr[index]
-      // create note
-      this.noteService.postNote(this.note).subscribe(response => {
-      }
-      );
-
-  }
 
 
 //Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
@@ -317,8 +296,10 @@ export class AssociateComponent implements OnInit {
       }*/
         data => {
           if (this.isTyping == true) {
+            
             this.showCheck(i);
           } else {
+            
             this.clearAllSavingIcon(i);
           }
 
