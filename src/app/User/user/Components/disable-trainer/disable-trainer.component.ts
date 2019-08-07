@@ -35,7 +35,6 @@ export class DisableTrainerComponent implements OnInit {
   disableTrainer() {
     this.trainerService.disableTrainer(this.originalTrainer).subscribe(trainer => {
       console.log('Disabling Trainer: ' + this.originalTrainer);
-      window.location.reload();
     }, error => {
       const serviceName = 'User Service';
       const errorMessage = 'Failed to make connection!';
