@@ -25,12 +25,11 @@ export class ViewTrainersComponent implements OnInit {
 
   @ViewChild('disableTrainerModal') DisableTrainer: DisableTrainerComponent;
 
-  trainersList : Trainer[] = [];
-  
+  trainersList: Trainer[] = [];
+
   @ViewChildren('addTrainerModal') AddTrainer: AddTrainerComponent;
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.getAllTrainers();
   }
   /**     This method redirects to the EditTrainerComponent
@@ -42,10 +41,8 @@ export class ViewTrainersComponent implements OnInit {
     this.EditTrainer.displayTrainer(trainer);
   }
 
-  getAllTrainers() 
-  {
-    this.trainerservice.getAllTrainers().subscribe(trainers => 
-      {
+  getAllTrainers() {
+    this.trainerservice.getAllTrainers().subscribe(trainers => {
         this.trainersList = trainers;
       }, error => {
         const serviceName = 'User Service ';
@@ -58,6 +55,14 @@ export class ViewTrainersComponent implements OnInit {
    */
   displayDisableTrainerModal(trainer: Trainer) {
     this.DisableTrainer.displayConfirmation(trainer);
+  }
+
+  disableUpdate(trainer: Trainer) {
+    this.trainersList.forEach((tr, num) => {
+      const newTr = this.DisableTrainer.getTrainer(trainer);
+      tr = newTr;
+      this.getAllTrainers();
+    });
   }
 
   resetAddTrainerForm() {
