@@ -56,6 +56,10 @@ export class ViewTrainersComponent implements OnInit {
         this.errorService.setError(serviceName, errorMessage);
       });
   }
+  updateTable($event)
+  {
+    this.getAllTrainers();
+  }
   /**
    * This method redirects takes a trainer to the backend to be updated to the inactive role.
    */
@@ -73,14 +77,14 @@ export class ViewTrainersComponent implements OnInit {
    * In this method, we update the current row to contain the 
    * @author Carl Pacquing
    */
-  updateNotification(){
-    console.log("Trainer is being updated.");
-    this.trainersList.forEach((tr,num) =>{
-      let newTr = this.EditTrainer.returnNewTrainer();
-      console.log(newTr);
-      tr = newTr;//Set current row equal to new Trainer's fields.
-      this.getAllTrainers();
-    });
-  }
+  // updateNotification(){
+  //   console.log("Trainer is being updated.");
+  //   this.trainersList.forEach((tr,num) =>{
+  //     let newTr = this.EditTrainer.returnNewTrainer();
+  //     console.log(newTr);
+  //     tr = newTr;//Set current row equal to new Trainer's fields.
+  //     this.updateTable();
+  //   });
+  //}
 
 }
