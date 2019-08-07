@@ -38,3 +38,9 @@
     background: transparent;
     font-size: 20px;
 }
+
+.savingIconDiv {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: -22px;
+  }

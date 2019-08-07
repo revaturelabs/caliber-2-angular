@@ -14,9 +14,11 @@ import { Tag } from '../types/Tag';
 export class AuditService {
   // http://localhost:9095/ environment.serverRootURL
   url = environment.serverRootURL;
+
   //added new instance to fix property not defined for note object
   //in overall html component
   overallBatchNote: QcNote= new QcNote(0,"",0,0,null,0,"","",0,null,0);
+
   overallBatchNoteChanged = new Subject<QcNote>();
   batchAllURL = '/qa/batch/batches';
   batchesYearURL = '/qa/batch/';
