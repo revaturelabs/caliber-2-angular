@@ -28,7 +28,7 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><input type="text" placeholder="Search.." id="myInput" (keyup)="filterBatch(searchText)" [(ngModel)]="searchText" name="searchText" ></li>
+							<li><input type="text" placeholder="Search.." id="myInput" [(ngModel)]="searchText" name="searchText" ></li>
 							<li *ngFor="let batch of batches | filter : searchText">
 								<a role="button" (click)="selectBatch(batch)"> {{batch?.trainer }} - {{ batch?.startDate | date: 'shortDate' }} </a>
 							</li>

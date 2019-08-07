@@ -286,9 +286,5 @@ export class ToolbarComponent implements OnInit {
       this.assessBatchGradeService.grades.emit(this.gradesArr);
     })
   }
-  filterBatch(){
-    console.log(this.searchText)
-    
-    
-  }
+
 }
