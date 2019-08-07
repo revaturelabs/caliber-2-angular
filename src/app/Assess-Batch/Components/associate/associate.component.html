@@ -17,9 +17,9 @@
                   <th class="col-sm-1 col-md-1 col-lg-1"></th>
 
                   <!-- Displays the category as well as the assessment information-->
-                  <th role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
+                  <th data-tooltip="Click to edit" role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
-                    data-target="#editAssessmentModal_" (click)='selectedId(assessment)'>
+                    data-target="#editAssessmentModal_" (click)='selectedId(assessment)' title="Click to edit">
                     {{ category[i]?.skillCategory }}
                     {{ assessment.assessmentType }}
                     ({{ ((assessment.rawScore/totalRaw)*100) | number : '1.0-0'}}%)
@@ -39,12 +39,13 @@
                   </td>
                   <td style="width:25px !important">
                     <!-- Only shows the current flag, none if no flag is assigned -->
-                    <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
-                    <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
-                    <i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
-                      style="visibility: hidden;"></i>
+                    <em *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></em>
+                    <em *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></em>
+                    <em *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
+                      style="visibility: hidden;"></em>
                     <!-- Shows the flag notes popup if the user clicks the name column -->
                   </td>
+
                   <i>
                     <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
                       <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
@@ -58,6 +59,7 @@
                   </i>
 
                   <!-- Displays the grades for each trainee by assessment -->
+
                   <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
                       <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
@@ -70,10 +72,12 @@
                   </ng-container>
 
                   <td *ngIf="noteArr.length != 0">
-                    <textarea (blur)="noteOnBlur(j, false)" (keypress)="clearAllSavingIcon(j); isTyping = true"
-                      (keydown.backspace)="clearAllSavingIcon(j); isTyping = true" id="note-textarea-{{j}}"
-                      class="form-control" maxlength="4000" rows="3" cols="75" placeholder="Note on {{train.name}}"
-                      [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+
+                    
+                    <textarea (blur)="noteOnBlur(j, false)"
+                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
+                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+
                   </td>
                   <!-- Status icons -->
                   <div class="savingIconDiv" [attr.id]="'spinner' + j" style="display: none;">

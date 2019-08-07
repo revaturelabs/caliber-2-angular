@@ -10,7 +10,7 @@ import { BatchModalComponent} from '../Assess-Batch/Components/toolbar/batch-mod
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-save.component";
 import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components/associate/update-delete-assessment-modal/update-delete-assessment-modal.component';
-
+import { FilterBatchPipeService } from '../Assess-Batch/Services/filter-batch-pipe.service'
 @NgModule({
   imports: [CommonModule, AssessBatchRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule],
   declarations: [
@@ -20,7 +20,8 @@ import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components
       ToolbarComponent,
       BatchModalComponent,
       MockSaveComponent,
-      UpdateDeleteAssessmentModalComponent
+      UpdateDeleteAssessmentModalComponent,
+      FilterBatchPipeService
     ],
     entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ],
   providers: [UpdateDeleteAssessmentModalComponent]

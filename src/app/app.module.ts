@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 import { UserModule } from './User/user/user.module';
 import { BatchModule } from '../app/Batch/batch/batch.module';
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import * as $ from 'jquery';
 import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-modal.component';
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+
 
 @NgModule({
   declarations: [
