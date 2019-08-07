@@ -64,9 +64,6 @@
     </div>
   </div>
 </div>
-
+<app-add-trainer #addTrainerModal (submittedTrainerEvent) = "updateTable($event)"></app-add-trainer>
 <app-edit-trainer #editTrainerModal (edited) = "updateTable($event)"></app-edit-trainer>
-<app-add-trainer #addTrainerModal></app-add-trainer>
 <app-disable-trainer #disableTrainerModal (edited) = "disableUpdate($event)"></app-disable-trainer>
-
-
