@@ -16,6 +16,8 @@ export class DisableTrainerComponent implements OnInit {
   // Trainer passed from View Trainers Component.
   @Input() trainerToEdit: Trainer;
 
+  @Output() edited: EventEmitter<String> = new EventEmitter;
+
   // Used to store the original trainer fields.
   originalTrainer = new Trainer();
   // Used to store the new trainer inputs.
@@ -35,7 +37,7 @@ export class DisableTrainerComponent implements OnInit {
   disableTrainer() {
     this.trainerService.disableTrainer(this.originalTrainer).subscribe(trainer => {
       console.log('Disabling Trainer: ' + this.originalTrainer);
-      window.location.reload();
+      this.edited.emit('Trainer Updated');
     }, error => {
       const serviceName = 'User Service';
       const errorMessage = 'Failed to make connection!';
@@ -45,6 +47,10 @@ export class DisableTrainerComponent implements OnInit {
 
   closeModal() {
     this.trainer = this.originalTrainer;
+  }
+
+  getTrainer(trainer: Trainer) {
+    return trainer;
   }
 
 }

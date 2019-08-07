@@ -42,20 +42,20 @@
                   data-target="#editTrainerModal"
                   (click)="displayTrainerUpdateModal(trainer)"
                   ><span class="glyphicon glyphicon-pencil" aria-hidden="true">
-                  </span
-                ></a>
+                  </span>
+                </a>
               </td>
               <!-- disable trainer button -->
               <td>
-                <a
-                  role="button"
-                  class="pull-right"
-                  data-toggle="modal"
-                  data-target="#disableTrainerModal"
-                  (click)="displayDisableTrainerModal(trainer)"
-                  ><span class="glyphicon glyphicon-remove" aria-hidden="true">
-                  </span
-                ></a>
+                <a 
+                  *ngIf= "trainer.tier != 'ROLE_INACTIVE'" 
+                  role="button" 
+                  class="pull-right" 
+                  data-toggle="modal" 
+                  data-target="#disableTrainerModal" 
+                  (click)="displayDisableTrainerModal(trainer)">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
               </td>
             </tr>
           </tbody>
@@ -66,5 +66,4 @@
 </div>
 <app-add-trainer #addTrainerModal (submittedTrainerEvent) = "updateTable($event)"></app-add-trainer>
 <app-edit-trainer #editTrainerModal (edited) = "updateTable($event)"></app-edit-trainer>
-<app-disable-trainer #disableTrainerModal></app-disable-trainer>
-
+<app-disable-trainer #disableTrainerModal (edited) = "disableUpdate($event)"></app-disable-trainer>

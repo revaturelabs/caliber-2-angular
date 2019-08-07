@@ -18,13 +18,13 @@ const httpOptions = {
  */
 const userUrl = environment.serverRootURL + '/user';
 
-//The url for getting all trainers
+// The url for getting all trainers
 const getAllUrl = userUrl + '/trainers';
 
-//The url for disable trainer
+// The url for disable trainer
 const disableUrl = userUrl + '/trainers/';
 
-//url for add trainers controller
+// url for add trainers controller
 const addTrainerUrl = userUrl + '/all/trainer/add';
 
 // /**
@@ -44,7 +44,7 @@ export class TrainersService {
                     'ROLE_STAGING',
                     'ROLE_INACTIVE'];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
    /**
@@ -56,12 +56,12 @@ export class TrainersService {
   }
 
   addTrainer(tr: Trainer): Observable<Trainer> {
-    //We are returning an Observable
-    //Use generics to specify the return type of the post method.
+    // We are returning an Observable
+    // Use generics to specify the return type of the post method.
     return this.http.post<Trainer>(getAllUrl, tr, httpOptions);
   }
   editTrainer(tr: Trainer): Observable<Trainer> {
-    const editURL = getAllUrl + "/" + tr.trainerId;
+    const editURL = getAllUrl + '/' + tr.trainerId;
     return this.http.put<Trainer>(editURL, tr, httpOptions);
   }
 
@@ -72,7 +72,5 @@ export class TrainersService {
     const URL = disableUrl + trainer.trainerId;
     return this.http.patch<Trainer>(URL, trainer, httpOptions);
   }
-
-  
 
 }
