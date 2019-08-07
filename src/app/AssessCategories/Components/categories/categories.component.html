@@ -16,9 +16,23 @@
             Assessment Category<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
           </a></li>
 
-          <app-edit-assess-cat-modal> </app-edit-assess-cat-modal>
+          <app-edit-assess-cat-modal [categories]="categoriesList"> </app-edit-assess-cat-modal>
+
+       
 
       </ul>
+      <h3>Active Categories</h3>
+      <hr>
+      <div *ngFor="let category of categoriesList1">
+        <span (click)="disableCategory(category)" id="category{{category.categoryId}}" class="good"> {{category.skillCategory}}  </span>
+      </div>
+
+      <h3>Stale Categories</h3>
+      <hr>
+
+      <div *ngFor="let category of categoriesList2">
+        <span (click)="enableCategory(category)" id="category{{category.categoryId}}"   class="stale"> {{category.skillCategory}}  </span>
+      </div>
     </div>
   </div>
 </div>

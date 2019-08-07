@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssessCategoryService } from '../../Services/assess-category.service';
 import {AssessCategory} from '../../Models/assess-category'
+import { CategoriesComponent } from '../../Components/categories/categories.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AddAssessCatModalComponent implements OnInit {
  successMessage:string;
  displayResultError:boolean;
  displayResultSuccess:boolean;
-  constructor(private categoryService: AssessCategoryService) { }
+  constructor(private categoryService: AssessCategoryService, private catComponent:CategoriesComponent) { }
 
   ngOnInit() {
   }
@@ -48,6 +49,8 @@ export class AddAssessCatModalComponent implements OnInit {
     this.category.skillCategory = ''
   }
 
-  
+  updateComponent(){
+    this.catComponent.getAllCategories();
+  }
  
 }

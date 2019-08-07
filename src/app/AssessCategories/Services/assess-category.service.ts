@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 
 import {AssessCategory} from '../Models/assess-category';
 
@@ -9,8 +9,7 @@ import {AssessCategory} from '../Models/assess-category';
 })
 export class AssessCategoryService {
 
-  
-  serverUrl = "http://localhost:10001/assessment/";
+  serverUrl= environment.serverRootURL + "/assessment/";
 
   constructor(private http: HttpClient) { }
 
