@@ -40,7 +40,6 @@ export class ViewTrainersComponent implements OnInit {
    */
   displayTrainerUpdateModal(trainer: Trainer) {
     this.EditTrainer.displayTrainer(trainer);
-
   }
 
   getAllTrainers() 
