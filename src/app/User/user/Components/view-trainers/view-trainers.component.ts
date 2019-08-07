@@ -65,4 +65,14 @@ export class ViewTrainersComponent implements OnInit {
     this.AddTrainer.resetAddTrainerForm();
   }
 
+  updateTable(event)
+  {
+    this.getAllTrainers();
+  }
+
+  clearView() 
+  {
+    this.trainersList = [];
+  }
+
 }

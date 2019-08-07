@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Host, Output, EventEmitter } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import { ViewTrainersComponent } from '../view-trainers/view-trainers.component';
 
 @Component({
   selector: 'app-add-trainer',
@@ -10,12 +11,14 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 })
 export class AddTrainerComponent implements OnInit {
 
-  constructor(private trainerServ:TrainersService, private errorService:ErrorService) { }
+  @Output() submittedTrainerEvent: EventEmitter<String> = new EventEmitter<String>();
+
+  constructor( private trainerServ:TrainersService, private errorService:ErrorService) { }
 
   ngOnInit() {
   }
 
-  private newTrainer:Trainer = new Trainer();
+  newTrainer:Trainer = new Trainer();
 
   displaySuccess:boolean;
 
@@ -31,14 +34,19 @@ export class AddTrainerComponent implements OnInit {
     {
       this.toggleSuccessMsgDisplay();
       this.displaySuccessMsg = "Trainer added successfully!";
+      this.submittedTrainerEvent.emit("Trainer added");
       //window.location.reload();
     }, error => {
-
       this.toggleFailureMsgDisplay();
       this.displayFailureMsg = "Failed to add trainer to database! Please fill out all fields correctly, and give a unique email.";
       //this.closeAddTrainerModal();
     });
 
+  }
+
+  getNewTrainer()
+  {
+    return this.newTrainer;
   }
 
   toggleSuccessMsgDisplay()
