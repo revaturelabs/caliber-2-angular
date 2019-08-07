@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 top10">
+      <ul class="nav nav-tabs">
+
+
+        <li role="button" class="pull-right" data-toggle="modal" data-target="#AddCategoryModal"><a>Add
+            Assessment
+            Category <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+          </a> </li>
+
+          
+          <app-add-assess-cat-modal> </app-add-assess-cat-modal>
+
+        <li role="button" class="pull-right" data-toggle="modal" data-target="#EditCategoryModal"><a> Edit
+            Assessment Category<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+          </a></li>
+
+          <app-edit-assess-cat-modal [categories]="categoriesList"> </app-edit-assess-cat-modal>
+
+       
+
+      </ul>
+      <h3>Active Categories</h3>
+      <hr>
+      <div *ngFor="let category of categoriesList1">
+        <span (click)="disableCategory(category)" id="category{{category.categoryId}}" class="good"> {{category.skillCategory}}  </span>
+      </div>
+
+      <h3>Stale Categories</h3>
+      <hr>
+
+      <div *ngFor="let category of categoriesList2">
+        <span (click)="enableCategory(category)" id="category{{category.categoryId}}"   class="stale"> {{category.skillCategory}}  </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,5 +20,7 @@ export class Category {
     this.active = active;
 
   }
+  
+
 
 }
