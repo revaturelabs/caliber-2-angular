@@ -114,9 +114,9 @@ export class AssociateComponent implements OnInit {
 
 //Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
   populateAssess(){
-    console.log("here")
+   
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-      console.log(assessmentArr)
+      
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe((gradesArr) => {
           this.gradesArr = gradesArr;
@@ -124,6 +124,7 @@ export class AssociateComponent implements OnInit {
           this.sumRawScores();
       });
     });
+  
   }
 
   
