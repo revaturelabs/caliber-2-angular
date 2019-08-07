@@ -89,6 +89,7 @@ export class AssociateComponent implements OnInit {
     this.populateAssess();
     }
 
+
 // Disables the associated notes text area box for 1 second.
   noteOnBlur(index: number, secondRound: boolean): void {
     if (this.noteArr[index].noteId != -1) {
@@ -113,7 +114,9 @@ export class AssociateComponent implements OnInit {
 
 //Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
   populateAssess(){
+    console.log("here")
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
+      console.log(assessmentArr)
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe((gradesArr) => {
           this.gradesArr = gradesArr;
@@ -123,6 +126,7 @@ export class AssociateComponent implements OnInit {
     });
   }
 
+  
   //Initializing the array of array (superArr) which is equal to the amount of assessments for that week.
   //Within each inner array is the grades for each assignemnt
   myInit() {
