@@ -46,18 +46,18 @@
                     <!-- Shows the flag notes popup if the user clicks the name column -->
                   </td>
                   <i>
-                  <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
-                    <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
-                    <button (click)="commentOnTrainee(train,comment.value)"
-                      class="btn btn-secondary flage-notes-save-btn">Save</button>
-                    <i (click)="deleteFromSwitch(train.traineeId)" type="button"
-                      class="flage-notes-close-btn icon-button" aria-label="Close">
-                      <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                    <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
+                      <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
+                      <button (click)="commentOnTrainee(train,comment.value)"
+                        class="btn btn-secondary flage-notes-save-btn">Save</button>
+                      <i (click)="deleteFromSwitch(train.traineeId)" type="button"
+                        class="flage-notes-close-btn icon-button" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                      </i>
+                    </div>
                   </i>
-                  </div>
-                </i>
-                  
-                <!-- Displays the grades for each trainee by assessment -->
+
+                  <!-- Displays the grades for each trainee by assessment -->
                   <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
                       <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
@@ -69,11 +69,22 @@
                     </ng-template>
                   </ng-container>
 
-                  <td>
-                    <textarea (blur)="noteOnBlur(j, false)"
-                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
-                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+                  <td *ngIf="noteArr.length != 0">
+                    <textarea (blur)="noteOnBlur(j, false)" (keypress)="clearAllSavingIcon(j); isTyping = true"
+                      (keydown.backspace)="clearAllSavingIcon(j); isTyping = true" id="note-textarea-{{j}}"
+                      class="form-control" maxlength="4000" rows="3" cols="75" placeholder="Note on {{train.name}}"
+                      [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
                   </td>
+                  <!-- Status icons -->
+                  <div class="savingIconDiv" [attr.id]="'spinner' + j" style="display: none;">
+                    <i style="color: #F26925;" class="fa fa-spinner fa-spin fa-1x" aria-hidden="true"></i>
+                  </div>
+                  <div class="savingIconDiv" style="display: none;" [attr.id]="'checkMark' + j">
+                    <i class="fa fa-check fa-1x" aria-hidden="true"></i>
+                  </div>
+                  <div class="savingIconDiv" style="display: none;" [attr.id]="'errMark' + j">
+                    <i class="fa fa-times fa-1x" aria-hidden="true" style="color:red;"></i>
+                  </div>
                 </tr>
               </tbody>
               <tfoot>

@@ -14,7 +14,7 @@ import { Tag } from '../types/Tag';
 export class AuditService {
   // http://localhost:9095/ environment.serverRootURL
   url = environment.serverRootURL;
-  overallBatchNote: QcNote;
+  overallBatchNote: QcNote = new QcNote(0,"",0,0,null,0,"","",0,null,0);;
   overallBatchNoteChanged = new Subject<QcNote>();
   batchAllURL = '/qa/batch/batches';
   batchesYearURL = '/qa/batch/';

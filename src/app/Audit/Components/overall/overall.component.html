@@ -21,13 +21,13 @@
           <td>
             <div class="dropdown" style="margin: 0 -25px;">
 
-              <i *ngIf="note.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-3x pick"
+              <i *ngIf="note?.qcStatus=='Undefined'" class="qcStatusIcon fa fa-question-circle fa-3x pick"
                 style="margin: auto 10px; text-align: center;"></i>
-              <i *ngIf="note.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-3x pick"
+              <i *ngIf="note?.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-3x pick"
                 style="margin: auto 10px; text-align: center;"></i>
-              <i *ngIf="note.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-3x pick"
+              <i *ngIf="note?.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-3x pick"
                 style="margin: auto 10px; text-align: center;"></i>
-              <i *ngIf="note.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-3x pick"
+              <i *ngIf="note?.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-3x pick"
                 style="margin: auto 10px; text-align: center;"></i>
 
               <div class="dropdown-content">
