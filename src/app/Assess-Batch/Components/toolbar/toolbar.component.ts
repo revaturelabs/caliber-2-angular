@@ -10,6 +10,7 @@ import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
 import { forEach } from '@angular/router/src/utils/collection';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -25,6 +26,7 @@ export class ToolbarComponent implements OnInit {
   defaultYears: number[];
   selectedYear: string = "Select Year";
   selectedQuarter: String = "Select Quarter";
+  searchText: String = '';
 
   selectedBatch: Batch = {
     batchId: 0,
@@ -286,4 +288,5 @@ export class ToolbarComponent implements OnInit {
       this.assessBatchGradeService.grades.emit(this.gradesArr);
     })
   }
+
 }
