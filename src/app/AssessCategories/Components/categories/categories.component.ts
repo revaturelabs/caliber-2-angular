@@ -39,10 +39,11 @@ getAllCategories(){
 disableCategory(category){
  
   this.categoryService.disable(category.categoryId,  category.skillCategory, category.categoryOwner).subscribe(res=>{});
-  document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
+ 
   setTimeout(() => {
     this.getAllCategories();
   }, 500);
+  document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
 enableCategory(category){
@@ -51,6 +52,7 @@ enableCategory(category){
  setTimeout(() => {
   this.getAllCategories();
 }, 500);
+document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
 loadIntoStorage(){
