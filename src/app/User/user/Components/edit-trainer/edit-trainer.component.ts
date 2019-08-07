@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, Inject } from '@angular/core';
 import { Trainer } from '../../types/trainer';
 import { TrainersService } from '../../Services/trainers.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-trainer',
@@ -15,13 +13,15 @@ import { NgForm } from '@angular/forms';
 export class EditTrainerComponent implements OnInit{
 
   //Trainer passed from View Trainers Component.
-  @Input() trainerToEdit : Trainer;
+  @Input() trainer : Trainer;
 
   //Used to store the original trainer fields.
   originalTrainer = new Trainer();
-  //Used to store the new trainer inputs.
-  trainer:Trainer;
 
+
+   isEdited:boolean = false;
+
+   @Output() edited: EventEmitter<string> = new EventEmitter<string>()
   constructor(private trService: TrainersService, private errorService: ErrorService) { }
 
   ngOnInit() 
@@ -59,16 +59,25 @@ export class EditTrainerComponent implements OnInit{
         console.log("New Trainer: ", this.trainer);
 
         this.trService.editTrainer(this.trainer).subscribe(response => {
-          window.location.reload();
+          //window.location.reload() will break the concept of a
+          //single-page application.
+          //FIND AN ALTERNATIVE!
+          //window.location.reload();
+
+          this.edited.emit('Trainer is Updated');
         },
         issue => {
-
           console.log("Issue", issue);
           if (issue instanceof HttpErrorResponse) {
             const serviceName = 'User Service';
             this.errorService.setError(serviceName, issue.error.message);
           }
       });
+  }
+
+  returnNewTrainer():Trainer{
+    console.log("Sending New Trainer Info.");
+    return this.trainer;
   }
 
 
