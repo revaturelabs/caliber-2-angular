@@ -42,7 +42,7 @@ disableCategory(category){
  
   setTimeout(() => {
     this.getAllCategories();
-  }, 500);
+  }, 700);
   document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
@@ -51,7 +51,7 @@ enableCategory(category){
  document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
  setTimeout(() => {
   this.getAllCategories();
-}, 500);
+}, 700);
 document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 

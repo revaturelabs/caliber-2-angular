@@ -24,5 +24,5 @@ span{
   
   .fadeOutLeft {
     animation-name: fadeOutLeft;
-    animation-duration:.7s;
+    animation-duration:1s;
   }
