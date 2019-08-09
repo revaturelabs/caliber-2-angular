@@ -6,7 +6,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { HomeModule } from './home-module/home-module.module';
 import { AuditModule } from './audit-module/audit-module.module';
 import { AssessBatchModule } from './assess-batch-module/assess-batch-module.module';
-import { CategoriesComponent } from '../app/AssessCategories/Components/categories/categories.component';
+import { CategoriesComponent } from './AssessmentCategories/Components/categories/categories.component';
 
 
 const routes: Routes = [ 
