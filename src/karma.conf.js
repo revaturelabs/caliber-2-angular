@@ -22,15 +22,55 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true
+      reports: ['html', 'lcovonly','text-summary'],
+      fixWebpackSourcePaths: true, 
+      combineBrowserReports: true,
+    
+      skipFilesWithNoCoverage: true,
+      'report-config': {
+        html: {
+          subdir: 'html'
+        }
+      },
+      thresholds: {
+        emitWarning: false, // set to `true` to not fail the test command when thresholds are not met
+        // thresholds for all files
+        global: {
+          statements: 100,
+          lines: 100,
+          branches: 100,
+          functions: 100
+        },
+        // thresholds per file
+        each: {
+          statements: 100,
+          lines: 100,
+          branches: 100,
+          functions: 100,
+          overrides: {
+            'baz/component/**/*.js': {
+              statements: 98
+            }
+          }
+        }
+      },
+ 
+      verbose: true, // output config used by istanbul for debugging
+ 
+      // `instrumentation` is used to configure Istanbul API package.
+      instrumentation: {
+        // To include `node_modules` code in the report.
+        'default-excludes': false
+      }
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml','coverage-istanbul'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false
+    singleRun: false,
+  
+
   });
 };
