@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MockSaveComponent implements OnInit {
 
   constructor() { }
-
+  
   showSaving = false;
   showCheck = false;
   showFloppy = true;

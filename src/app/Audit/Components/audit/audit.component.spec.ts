@@ -1,9 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'zone.js/dist/zone-testing'
 import { AuditComponent } from './audit.component';
 import { Component } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { 
+  BrowserDynamicTestingModule, 
+  platformBrowserDynamicTesting 
+} 
+from '@angular/platform-browser-dynamic/testing';
 
+TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 @Component({selector: 'app-toolbar', template: ''})
 class ToolbarStubComponent{}
 
