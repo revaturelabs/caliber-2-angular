@@ -14,7 +14,11 @@ import { Tag } from '../types/Tag';
 export class AuditService {
   // http://localhost:9095/ environment.serverRootURL
   url = environment.serverRootURL;
-  overallBatchNote: QcNote;
+
+  //added new instance to fix property not defined for note object
+  //in overall html component
+  overallBatchNote: QcNote= new QcNote(0,"",0,0,null,0,"","",0,null,0);
+
   overallBatchNoteChanged = new Subject<QcNote>();
   batchAllURL = '/qa/batch/batches';
   batchesYearURL = '/qa/batch/';
@@ -81,6 +85,8 @@ export class AuditService {
  
   setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
+    const myset = new Set(this.notes);
+    this.notes = Array.from(myset);
   }
   sendNote(noteToSend: QcNote): Observable<QcNote> {
     return this.http.put<QcNote>(this.url + this.updateNoteURL, noteToSend);
@@ -106,13 +112,16 @@ export class AuditService {
   }
 
   sortAlphabetically(notes: any) {
-    notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
-      if (a.trainee.name > b.trainee.name) {
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    });
+    if(notes.length != 0){
+      notes.sort((a: { trainee: { name: number; }; }, b: { trainee: { name: number; }; }): any => {
+        if (a.trainee != null && b.trainee != null && a.trainee.name > b.trainee.name) {
+          return 1;
+        }
+        else {
+          return -1;
+        }
+      });
+    }
+    
   }
 }

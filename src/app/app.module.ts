@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 import { UserModule } from './User/user/user.module';
 import { BatchModule } from '../app/Batch/batch/batch.module';

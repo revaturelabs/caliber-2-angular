@@ -11,7 +11,7 @@ const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/jso
 })
 export class AssessBatchGradeService {
   url = environment.serverRootURL + '/assessment';
-  catUrl = environment.serverRootURL + '/category/all/category/';
+  catUrl = environment.serverRootURL + '/category/';
   gradesByBatchIdURL = '/all/grade/batch/';
   gradesById = '/all/grade/';
   gradeAll = '/all/grade/all';

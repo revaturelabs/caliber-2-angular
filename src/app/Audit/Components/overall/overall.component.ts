@@ -13,6 +13,7 @@ import { ErrorService } from 'src/app/error-handling/services/error.service';
 export class OverallComponent implements OnInit, OnDestroy {
 	batchId: number;
 	week: number;
+	noteContent:string="";
 	note: QcNote = this.auditService.overallBatchNote;
 	noteSubscription: Subscription;
 
@@ -22,8 +23,9 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 	isTyping: boolean;
 
-	constructor(private auditService: AuditService, private errorService: ErrorService) { }
-
+	constructor(private auditService: AuditService, private errorService: ErrorService) {
+		
+	}
 	ngOnInit() {
 		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {	
 			this.note = data;
@@ -31,7 +33,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 
 		this.auditService.invokeAssosciateFunction.subscribe(() => {
 			this.week = this.auditService.selectedWeek;
-			this.batchId = this.auditService.selectedBatch['batchId'];
+			this.batchId = this.auditService.selectedBatch? this.auditService.selectedBatch['batchId']:this.batchId;
 			this.auditService.getOverallBatchNoteByWeek(this.batchId, this.week);
 		});
 	}

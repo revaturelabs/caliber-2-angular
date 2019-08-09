@@ -8,6 +8,8 @@ import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 import { NoteService } from '../../Services/note.service';
 import { Note } from 'src/app/Batch/type/note';
+import { forEach } from '@angular/router/src/utils/collection';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -16,14 +18,15 @@ import { Note } from 'src/app/Batch/type/note';
 })
 
 export class ToolbarComponent implements OnInit {
-  showBatch: boolean  = true;
-  quarters: String[]=[];
+  showBatch: boolean = true;
+  quarters: String[] = [];
   years: number[];
   batches: Batch[];
   selectedBatches: Batch[];
   defaultYears: number[];
   selectedYear: string = "Select Year";
   selectedQuarter: String = "Select Quarter";
+  searchText: String = '';
 
   selectedBatch: Batch = {
     batchId: 0,
@@ -52,7 +55,7 @@ export class ToolbarComponent implements OnInit {
     assessmentCategory: 0
   }
 
-   grades: Grade = {
+  grades: Grade = {
     gradeId: 0,
     dateReceived: 0,
     score: 0,
@@ -72,16 +75,18 @@ export class ToolbarComponent implements OnInit {
   weeklyAssessments: any[] = [];
   gradesArr: any[] = [];
   @ViewChild('batchModal') batchModal: BatchModalComponent;
+  oneCall: boolean = false;
 
   constructor(
     public auditService: AuditService, public traineeService: TraineeService, public assessBatchService: AssessBatchService, public assessBatchGradeService: AssessBatchGradeService, public noteService: NoteService
   ) { }
   ngOnInit() {
     this.getAllYears();
+
   }
-     /**
-   * resets createorUpdate variable for child component
-   */
+  /**
+* resets createorUpdate variable for child component
+*/
   // resetCreateForm(): void {
   //   this.createUpdate = null;
   //  this.batchModal.resetForm();
@@ -91,35 +96,37 @@ export class ToolbarComponent implements OnInit {
   resetImportModal(): void {
   }
 
-  displayYears(){
+
+
+  displayYears() {
     this.selectedYear = "Select Year";
 
   }
 
   getAllYears() {
     this.auditService.getAllYears()
-    .subscribe(result => {
-      this.years = result;
-      this.selectedYear = this.years[0].toString();
-      for (var q = 4; q > 0; q--) { 
-        this.checkBatchExistanceInaQuarter(this.years[0], q);
-      }
-      this.selectedYear = "Select Year";
-    });
+      .subscribe(result => {
+        this.years = result;
+        this.selectedYear = this.years[0].toString();
+        for (var q = 4; q > 0; q--) {
+          this.checkBatchExistanceInaQuarter(this.years[0], q);
+        }
+        this.selectedYear = "Select Year";
+      });
   }
 
   getBatches() {
-    this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1,2))
-    .subscribe(result => {
-        if(result.length > 0) {
+    this.assessBatchService.getBatchesByQuarter(Number.parseInt(this.selectedYear), this.selectedQuarter.slice(1, 2))
+      .subscribe(result => {
+        if (result.length > 0) {
           this.batchExists = true;
-      this.batches = result;
-      this.selectedBatch = this.batches[0];
-      this.getWeeks();
-        this.selectedWeek = this.weeks.length;
-    } else {
-      this.batchExists = false;
-    }
+          this.batches = result;
+          this.selectedBatch = this.batches[0];
+          this.getWeeks();
+          this.selectedWeek = this.weeks.length;
+        } else {
+          this.batchExists = false;
+        }
       });
   }
 
@@ -133,11 +140,11 @@ export class ToolbarComponent implements OnInit {
 
   checkBatchExistanceInaQuarter(yearselect, quarter) {
     this.assessBatchService.getBatchesByQuarter(Number.parseInt(yearselect), quarter)
-    .subscribe(result => {
-        if(result.length > 0) {
-          this.quarters.push("Q"+quarter);
+      .subscribe(result => {
+        if (result.length > 0) {
+          this.quarters.push("Q" + quarter);
           this.selectedQuarter = this.quarters[0];
-         
+
           var temp: String[] = this.quarters.sort((n1, n2) => {
             if (n1 > n2) {
               return -1;
@@ -160,7 +167,7 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
-  showQs(){
+  showQs() {
     this.selectedQuarter = "Select Quarter";
   }
 
@@ -179,55 +186,64 @@ export class ToolbarComponent implements OnInit {
   }
 
   showActiveWeek(week: number) {
-    if (week==this.selectedWeek) {
+    if (week == this.selectedWeek) {
       return "active";
     }
   }
 
   selectWeek(event: number) {
     this.selectedWeek = event;
+
     this.auditService.selectedWeek = event;
+    this.oneCall = true;
     this.getBatchNotesByWeek();
     this.getAssessmentsByBatchIdAndWeekNum();
     this.getGradesByBatchIdAndWeekNum();
   }
 
+  checkLastWeek(week: number, weeks: any[]) {
+    if (week === weeks.length) {
+ 
+      if (!this.oneCall) this.selectWeek(week);
+    }
+  }
+
   addWeek() {
-    var last = this.weeks[this.weeks.length-1];
-    this.weeks.push(last+1);
-    this.selectedWeek=last+1;
-    this.selectedBatch.weeks=last+1;
+    var last = this.weeks[this.weeks.length - 1];
+    this.weeks.push(last + 1);
+    this.selectedWeek = last + 1;
+    this.selectedBatch.weeks = last + 1;
     this.assessBatchService.addWeek(this.selectedBatch);
     this.getBatchNotesByWeek();
   }
 
   getWeeks() {
     this.weeks = [];
-    for(var i = 0; i<this.selectedBatch.weeks; i++){
-      this.weeks.push(i+1);
+    for (var i = 0; i < this.selectedBatch.weeks; i++) {
+      this.weeks.push(i + 1);
     }
     this.getTraineesByBatchId();
   }
 
-  getTraineesByBatchId(){
+  getTraineesByBatchId() {
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(trainees => {
-      this.ourTrainee=trainees;
+      this.ourTrainee = trainees;
       this.traineeService.storeTrainees(trainees);
       this.traineeService.trainees.emit(trainees);
       this.getBatchNotesByWeek();
-    })    
+    })
   }
-  getBatchNotesByWeek(){
+  getBatchNotesByWeek() {
     this.noteService.getBatchNotesByWeek(this.selectedBatch.batchId, this.selectedWeek).subscribe(notes => {
       this.noteService.weekEmitter.emit(this.selectedWeek);
       this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
       this.noteService.noteEmitter.emit(notes);
-    })   
+    })
 
   }
 
-  getAssessmentsByBatchId(){
-    this.weeklyAssessments=[];
+  getAssessmentsByBatchId() {
+    this.weeklyAssessments = [];
 
     this.assessBatchGradeService.getAssessmentsByBatchId(this.selectedBatch.batchId).subscribe(assessments => {
 
@@ -238,8 +254,8 @@ export class ToolbarComponent implements OnInit {
     })
   }
 
-  getAssessmentsByBatchIdAndWeekNum(){
-    this.weeklyAssessments=[];
+  getAssessmentsByBatchIdAndWeekNum() {
+    this.weeklyAssessments = [];
 
     this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(assessments => {
 
@@ -256,10 +272,10 @@ export class ToolbarComponent implements OnInit {
   //     this.noteService.noteEmitter.emit(notes);
   //   })  
   // }
-  
 
-  getGradesByBatchIdAndWeekNum(){
-    this.gradesArr=[];
+
+  getGradesByBatchIdAndWeekNum() {
+    this.gradesArr = [];
     this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.selectedBatch.batchId, this.selectedWeek).subscribe(grades => {
 
       this.gradesArr = grades;
@@ -269,19 +285,21 @@ export class ToolbarComponent implements OnInit {
     })
   }
 
-  getGradesByBatchId(){
-    this.gradesArr=[];
+  getGradesByBatchId() {
+    this.gradesArr = [];
     this.assessBatchGradeService.getGradesByBatchId(this.selectedBatch.batchId).subscribe(grades => {
-      for(let i = 0; i < grades.length; i++){
-        for(let y = 0; y < this.weeklyGrades.length; y++){
+      for (let i = 0; i < grades.length; i++) {
+        for (let y = 0; y < this.weeklyGrades.length; y++) {
 
-          if(grades[i].assessmentId == this.weeklyGrades[y].assessmentId){
+          if (grades[i].assessmentId == this.weeklyGrades[y].assessmentId) {
             this.gradesArr.push(grades[i]);
 
+          }
         }
-      }}
+      }
       this.assessBatchGradeService.storeGrades(this.gradesArr);
       this.assessBatchGradeService.grades.emit(this.gradesArr);
     })
   }
+
 }
