@@ -23,7 +23,8 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent
+    FormModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     AppComponent,
   ],
   entryComponents: [
-    FormModalComponent,
+    FormModalComponent
   ]
 })
 export class AppModule { }
