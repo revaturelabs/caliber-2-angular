@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from "@angular/router";
 
-import {CategoriesComponent} from "../AssessCategories/Components/categories/categories.component";
+import {CategoriesComponent} from "../AssessmentCategories/Components/categories/categories.component";
 
 const routes: Routes = [{path: "", component: CategoriesComponent}];
 
