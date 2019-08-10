@@ -27,6 +27,7 @@ describe('FormModalComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // closeModal
   it('should close modal', () => {
     spyOn(component.activeModal, 'close');
     component.closeModal();
