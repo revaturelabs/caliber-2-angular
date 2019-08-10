@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormModalComponent } from './form-modal.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('FormModalComponent', () => {
   let component: FormModalComponent;
@@ -8,7 +11,10 @@ describe('FormModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormModalComponent ]
+      declarations: [ FormModalComponent ],
+      imports: [
+        FormsModule, HttpClientTestingModule],
+        providers:[NgbActiveModal]
     })
     .compileComponents();
   }));
