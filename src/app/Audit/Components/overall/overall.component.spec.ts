@@ -18,6 +18,7 @@ describe('OverallComponent', () => {
   let subscribeBatchNoteSpy;
   let subscribeInvokeAssociateFunction;
   let sendNoteSpy;
+  let subscribeOverallNoteSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -61,6 +62,7 @@ describe('OverallComponent', () => {
     subscribeBatchNoteSpy = spyOn(auditService.overallBatchNoteChanged, 'subscribe').and.callThrough();
     subscribeInvokeAssociateFunction = spyOn(auditService.invokeAssosciateFunction, 'subscribe');
     sendNoteSpy = spyOn(auditService, "sendNote");
+    subscribeOverallNoteSpy = spyOn(auditService, "getOverallBatchNoteByWeek");
 
     fixture.detectChanges();
   });
@@ -116,6 +118,8 @@ describe('OverallComponent', () => {
     expect(sendNoteSpy).toHaveBeenCalledWith(component.note);
     expect(component.note.qcStatus).toBe("yellow");
     expect(subscribeBatchNoteSpy).toHaveBeenCalled();
+    expect(subscribeOverallNoteSpy).toHaveBeenCalled();
+    expect(subscribeOverallNoteSpy).toHaveBeenCalledWith(1, 7);
   });
 
   // ngOnDestroy
