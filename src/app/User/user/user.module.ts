@@ -8,11 +8,19 @@ import { AddTraineeComponent } from './Components/add-trainee/add-trainee.compon
 import { UpdateTraineeComponent } from './Components/update-trainee/update-trainee.component';
 import { DeleteTraineeComponent } from './Components/delete-trainee/delete-trainee.component';
 import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.component';
+import { ViewTrainersComponent } from './Components/view-trainers/view-trainers.component';
+import { UserRoutingModule } from './user-routing.module';
+
+import { EditTrainerComponent } from './Components/edit-trainer/edit-trainer.component';
+import { AddTrainerComponent } from './Components/add-trainer/add-trainer.component';
+import { DisableTrainerComponent } from './Components/disable-trainer/disable-trainer.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    UserRoutingModule,
     HttpClientModule
   ],
   declarations: [
@@ -21,7 +29,12 @@ import { SwitchBatchComponent } from './Components/switch-batch/switch-batch.com
     TraineeTogglePipe,
     AddTraineeComponent,
     DeleteTraineeComponent,
-    UpdateTraineeComponent
+    UpdateTraineeComponent,
+    ViewTrainersComponent,
+    EditTrainerComponent,
+    AddTrainerComponent,
+    DisableTrainerComponent
+
   ],
   exports: [
     AddTraineeComponent,

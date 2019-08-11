@@ -6,6 +6,8 @@ import { AuditComponent } from '../Audit/Components/audit/audit.component';
 import { ToolbarComponent } from '../Audit/Components/toolbar/toolbar.component';
 import { AssociateComponent } from '../Audit/Components/associate/associate.component';
 import { OverallComponent } from '../Audit/Components/overall/overall.component';
+import { FilterBatchPipeService } from '../Audit/Services/filter-batch-pipe.service';
+import { MockSaveComponent } from '../Audit/Components/mock-save/mock-save.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { OverallComponent } from '../Audit/Components/overall/overall.component'
     AuditComponent, 
     ToolbarComponent, 
     AssociateComponent, 
-    OverallComponent
+    OverallComponent,
+    FilterBatchPipeService,
+    MockSaveComponent,
   ]
 })
 export class AuditModule { }
