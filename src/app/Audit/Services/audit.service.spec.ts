@@ -350,7 +350,7 @@ describe('AuditService', () => {
       tag= new Tag (6000,"Yeet",96,5)
         
       service.deleteCategory(tag.categoryId).subscribe(n => {
-        this.tagm = n;
+        n = this.tagm;
       });
       const req = httpMock.expectOne(deleteCategoryURL);
       expect(req.request.method).toEqual('DELETE');

@@ -231,14 +231,7 @@ describe('AssociateComponent', () => {
     expect(component.totalRaw === 30).toBeTruthy();
   })
 
-  it('Should cycle flags', () =>{
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === "RED").toBeTruthy();
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === "GREEN").toBeTruthy();
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === null).toBeTruthy();
-  })
+
 
   it('Should comment on trainee', () =>{
     spyOn(component, "commentOnTrainee").and.callFake(function(arg1, arg2)
