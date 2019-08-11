@@ -31,33 +31,103 @@
               </thead>
               <tbody>
                 <!-- Displays the trainee names -->
-                <tr *ngFor="let train of traineeArr; let j = index">
-                  <td class="trainee-name"
-                    (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);"
-                    style="width: 11%;">
+                <tr *ngFor="let train of traineeArr; let j = index" class="NoteRow">
+                  <td style="width: 11%;" class="dropup">
+
+                    <!-- sets colored icon next above name representing trainee flagStatus -->
+                    <div *ngIf="train.flagStatus == 'RED'" class="flag-note-area-red dropbtn"></div>
+                    <div *ngIf="train.flagStatus == 'GREEN'" class="flag-note-area-green dropbtn"></div>
+                    <div *ngIf="train.flagStatus == null" class="flag-note-area-empty dropbtn"></div>
+                    
                     {{train.name}}
+
+                    <!-- pen button/cursor object, under name -->
+                    <br>
+                    
+                    <em (click)="onAddFlagClicked(train, j); isaddFlagClicked= true"
+                      class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
+                      data-toggle="modal" attr.data-target="#{{j}}"></em>
+
+                        <!-- dropup to display flagNotes -->
+                      <div *ngIf="((train.flagNotes != '') && (train.flagStatus === 'RED' || train.flagStatus === 'GREEN'))"
+                            class="dropup-content">
+                            <ul>
+                                <li *ngIf="train != null ">{{train.flagNotes}}</li>
+                            </ul>
+                        </div>
+
+
+                    <!-- MODEL FOR FLAGGING STARTS -->
+                    <div *ngIf="isaddFlagClicked==true" id="{{j}}" class="modal fade">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <label for="flagsStatus">Select a Flag:</label>
+                            <div>
+                              <ul class="nav nav-tabs">
+                              
+
+                                  <!-- clicking the colored flag buttons in the module -->
+                                <li><em title="Green Flag" role="button" id="greenFlag"
+                                    class="fas fa-flag fa-3x fa-green objectButton"
+                                    (click)="cycleFlag3(train, 'GREEN');"></em>
+                                </li>
+                                <li><em title="Red Flag" role="button" id="redFlag"
+                                    class="fas fa-flag fa-3x fa-red objectButton"
+                                    (click)="cycleFlag3(train, 'RED');"></em>
+                                </li>
+                                <br>
+                                <br>
+                                <br>
+                              </ul>
+                            </div>
+                            
+
+                              <!-- adding comments and setting 'selected flag' icon in the module -->
+                            <div class="form-group">
+                              <label for="comment">Comment:</label>
+                              <textarea class="form-control" rows="3" id="comment"
+                                [(ngModel)]="train.flagNotes">{{ train.flagNotes }}</textarea>
+                              <div style="margin-top: 10px;">Selected flag:
+                                <em *ngIf="(flagStatusVisual) != null"
+                                  class="fas fa-flag fa-1x {{flagStatusVisual}}"></em>
+                              </div>
+                            </div>
+                          </div>
+                          
+                            <!-- module buttons -->
+                          <div class="modal-footer">
+                            <button style="float: left;" class="btn btn-primary" data-dismiss="modal"
+                              *ngIf="train.flagStatus != null && train.flagStatus != 'NONE'"
+                              (click)="onFlagDelete(train)">Delete</button>
+                            <button class="btn btn-primary" data-dismiss="modal"
+                              *ngIf="train.flagStatus != null && train.flagStatus != 'NONE'"
+                              (click)="onFlagSubmit(train)">Submit</button>
+                            <button class="btn btn-primary" data-dismiss="modal"
+                              (click)="onFlagCancel2(train);">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- MODEL FOR FLAGGING ENDS -->
+
                   </td>
-                  <td style="width:25px !important">
-                    <!-- Only shows the current flag, none if no flag is assigned -->
-                    <em *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></em>
-                    <em *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></em>
-                    <em *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
-                      style="visibility: hidden;"></em>
-                    <!-- Shows the flag notes popup if the user clicks the name column -->
+
+                  <td style="width:25px !important">   
                   </td>
                   <em>
-                  <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
-                    <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
-                    <button (click)="commentOnTrainee(train,comment.value)"
-                      class="btn btn-secondary flage-notes-save-btn">Save</button>
-                    <em (click)="deleteFromSwitch(train.traineeId)" type="button"
-                      class="flage-notes-close-btn icon-button" aria-label="Close">
-                      <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                    <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
+                      <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
+                      <button (click)="commentOnTrainee(train,comment.value)"
+                        class="btn btn-secondary flage-notes-save-btn">Save</button>
+                      <em (click)="deleteFromSwitch(train.traineeId)" type="button"
+                        class="flage-notes-close-btn icon-button" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                      </em>
+                    </div>
                   </em>
-                  </div>
-                </em>
-                  
-                <!-- Displays the grades for each trainee by assessment -->
+
+                  <!-- Displays the grades for each trainee by assessment -->
                   <ng-container *ngFor="let arr of superArr">
                     <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
                       <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
@@ -70,10 +140,10 @@
                   </ng-container>
 
                   <td *ngIf="noteArr.length != 0">
-                    
-                    <textarea (blur)="noteOnBlur(j, false)"
-                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
-                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+
+                    <textarea (blur)="noteOnBlur(j, false)" id="note-textarea-{{j}}" class="form-control"
+                      maxlength="4000" rows="3" cols="75" placeholder="Note on {{train.name}}"
+                      [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
                   </td>
                 </tr>
               </tbody>
