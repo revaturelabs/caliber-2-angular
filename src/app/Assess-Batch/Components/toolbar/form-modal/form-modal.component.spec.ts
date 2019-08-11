@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormModalComponent } from './form-modal.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('FormModalComponent', () => {
@@ -11,21 +9,30 @@ describe('FormModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormModalComponent ],
-      imports: [
-        FormsModule, HttpClientTestingModule],
-        providers:[NgbActiveModal]
+      declarations: [FormModalComponent],
+      providers: [NgbActiveModal]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
+
     fixture = TestBed.createComponent(FormModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // closeModal
+  it('should close modal', () => {
+    spyOn(component.activeModal, 'close');
+    component.closeModal();
+    expect(component.activeModal.close).toHaveBeenCalled();
+    expect(component.activeModal.close).toHaveBeenCalledWith('madal Closed');
+  });
+
 });
