@@ -17,7 +17,7 @@
                   <th class="col-sm-1 col-md-1 col-lg-1"></th>
 
                   <!-- Displays the category as well as the assessment information-->
-                  <th data-tooltip="Click to edit" role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
+                  <th id="assignment" data-tooltip="Click to edit" role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
                     *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
                     data-target="#editAssessmentModal_" (click)='selectedId(assessment)' title="Click to edit">
                     {{ category[i]?.skillCategory }}
