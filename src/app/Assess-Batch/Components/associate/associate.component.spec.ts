@@ -11,6 +11,7 @@ import { Assessment } from '../../Models/Assesment';
 import { AssessmentService } from '../../Services/assessment.service';
 import { Grade } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
+import { NoteService } from '../../Services/note.service';
 
 describe('AssociateComponent', () => {
   let component: AssociateComponent;
@@ -31,7 +32,7 @@ describe('AssociateComponent', () => {
       imports: [
         FormsModule, HttpClientTestingModule],
       //providers: [AssessBatchService, UpdateDeleteAssessmentModalComponent]
-      providers:[AssessmentService, AssessBatchService, AssessBatchGradeService]
+      providers:[AssessmentService, AssessBatchService, AssessBatchGradeService, NoteService, UpdateDeleteAssessmentModalComponent]
     })
     .compileComponents();
   }));
@@ -230,14 +231,7 @@ describe('AssociateComponent', () => {
     expect(component.totalRaw === 30).toBeTruthy();
   })
 
-  it('Should cycle flags', () =>{
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === "RED").toBeTruthy();
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === "GREEN").toBeTruthy();
-      component.cycleFlag(1);
-      expect(component.traineeArr[0].flagStatus === null).toBeTruthy();
-  })
+
 
   it('Should comment on trainee', () =>{
     spyOn(component, "commentOnTrainee").and.callFake(function(arg1, arg2)

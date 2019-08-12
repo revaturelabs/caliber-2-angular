@@ -4,22 +4,23 @@
 			<div class="col-md-12 col-lg-12 top10">
 				<!-- top ui dropdown for available years -->
 				<ul class="nav nav-tabs">
-					<li role="button" class="dropdown" id="selectedYearDropdown"><a class="dropdown-toggle" data-toggle="dropdown">
+					<li role="button" class="dropdown" id="selectedYearDropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown">
 							{{ selectedYear }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" id="year dropdown">
 							<li *ngFor="let year of years">
 								<a role="button" (click)="selectYear(year)">{{year}}</a>
 							</li>
 						</ul>
-				<!-- sort by quarter-->
-				<li role="button" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown"> Q {{selectedQuarter}} <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li *ngFor="let quarter of quarters">
-							<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
-						</li>
-					</ul>
-				<!-- new feature ^ -->
+						<!-- sort by quarter-->
+					<li role="button" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"> Q
+							{{selectedQuarter}} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li *ngFor="let quarter of quarters">
+								<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
+							</li>
+						</ul>
+						<!-- new feature ^ -->
 
 						<!-- top ui for viewing all assessments -->
 					<li role="button" class="dropdown" *ngIf="selectedBatch">
@@ -29,7 +30,9 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li *ngFor="let batch of batches">
+							<li class="text-center"><input type="text" placeholder="Search.." id="myInput"
+									[(ngModel)]="searchText" name="searchText"></li>
+							<li *ngFor="let batch of batches | filter : searchText">
 								<a role="button" (click)="selectBatch(batch)"> {{batch.trainer }}
 									({{ batch.startDate | date: 'shortDate' }} -
 									{{ batch.endDate | date: 'shortDate' }})</a>

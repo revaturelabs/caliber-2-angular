@@ -1,0 +1,111 @@
+<div class="container">
+  <!-- The max width is manually set to the same width as the original AngularJss webpage -->
+  <div class="container" id="trainer-assess-table">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 top5">
+        <p class="bg-primary align center"></p>
+        <ul class="nav nav-tabs">
+          <p class="bg-primary align center"></p>
+          <ul class="nav nav-tabs">
+            <!-- Accordian table -->
+            <table class="table table-responsive" style="border-collapse: collapse;">
+              <thead>
+                <tr sticky class="sticky-header">
+
+                  <th class="col-sm-1 col-md-1 col-lg-1">Trainee</th>
+                  <th class="col-sm-1 col-md-1 col-lg-1"></th>
+                  <th class="col-sm-1 col-md-1 col-lg-1"></th>
+
+                  <!-- Displays the category as well as the assessment information-->
+                  <th role="button" class="col-sm-1 col-md-1 col-lg-1 text-center"
+                    *ngFor="let assessment of assessmentArr; let i=index" data-toggle="modal"
+                    data-target="#editAssessmentModal_" (click)='selectedId(assessment)'>
+                    {{ category[i]?.skillCategory }}
+                    {{ assessment.assessmentType }}
+                    ({{ ((assessment.rawScore/totalRaw)*100) | number : '1.0-0'}}%)
+                  </th>
+
+                  <th class="col-sm-9 col-md-9 col-lg-9">Notes</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- Displays the trainee names -->
+                <tr *ngFor="let train of traineeArr; let j = index">
+                  <td class="trainee-name"
+                  (click)="cycleFlagNotesInput(train.traineeId, true); cycleFlag(train.traineeId);"
+                    style="width: 11%;">
+                    {{train.name}}
+
+                    <!-- copied: pen button/cursor object, under name -->
+                    <br>
+                        <i (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
+                            class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
+                            data-toggle="modal" data-target="#flagTrainee"></i>
+
+                  </td>
+                  <td style="width:25px !important">
+                    <!-- Only shows the current flag, none if no flag is assigned -->
+                    <i *ngIf="train.flagStatus==='RED'" class="glyphicon glyphicon-flag color-red"></i>
+                    <i *ngIf="train.flagStatus==='GREEN'" class="glyphicon glyphicon-flag color-green"></i>
+                    <i *ngIf="train.flagStatus==='null'" class="glyphicon glyphicon-flag"
+                      style="visibility: hidden;"></i>
+                    <!-- Shows the flag notes popup if the user clicks the name column -->
+                  </td>
+                  <i>
+                  <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
+                    <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
+                    <button (click)="commentOnTrainee(train,comment.value)"
+                      class="btn btn-secondary flage-notes-save-btn">Save</button>
+                    <i (click)="deleteFromSwitch(train.traineeId)" type="button"
+                      class="flage-notes-close-btn icon-button" aria-label="Close">
+                      <span class="glyphicon glyphicon-remove-sign closing-button"></span>
+                  </i>
+                  </div>
+                </i>
+                  
+                <!-- Displays the grades for each trainee by assessment -->
+                  <ng-container *ngFor="let arr of superArr">
+                    <ng-container *ngIf="checkForGrade(arr, train); else elseBlock">
+                      <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" [id]="scoreId"
+                          type="number" min="0" max="100" [value]="score" (blur)="validateScore($event)" /></td>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                      <td class="text-center col-sm-1 col-md-1 col-lg-1"><input class="form-control" type="number"
+                          min="0" max="100" value="" (blur)="validateScore($event)" /></td>
+                    </ng-template>
+                  </ng-container>
+
+                  <td>
+                    <textarea (blur)="noteOnBlur(j, false)"
+                      id="note-textarea-{{j}}" class="form-control" maxlength="4000" rows="3" cols="75"
+                      placeholder="Note on {{train.name}}" [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <!-- shows the average scores for each assessment as well as weekly batch average -->
+                <tr>
+                  <td class="col-sm-2 col-md-2 col-lg-2">
+                    <strong>Average</strong>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let average of avgArr">
+                    {{average | number:'1.1-2' }}%
+                  </td>
+                  <td><strong> Weekly Batch Avg: </strong>{{ result | number:'1.1-2' }}%</td>
+                </tr>
+              </tfoot>
+            </table>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-update-delete-assessment-modal></app-update-delete-assessment-modal>
+

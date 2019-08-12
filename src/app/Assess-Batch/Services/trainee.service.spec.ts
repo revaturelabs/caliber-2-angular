@@ -1,14 +1,26 @@
 import { TestBed, inject } from '@angular/core/testing';
 import 'zone.js/dist/zone-testing'
 import { TraineeService } from './trainee.service';
+<<<<<<< HEAD
 
 
+=======
+// import { 
+//   BrowserDynamicTestingModule, 
+//   platformBrowserDynamicTesting 
+// } 
+// from '@angular/platform-browser-dynamic/testing';
+>>>>>>> 6cabde4440b00c923a2ac75b5e7ad75450dc4588
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Trainee } from 'src/app/Batch/type/trainee';
 
+<<<<<<< HEAD
 
+=======
+// TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+>>>>>>> 6cabde4440b00c923a2ac75b5e7ad75450dc4588
 
 describe('TraineeService', () => {
 

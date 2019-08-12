@@ -2,6 +2,7 @@
 <div *ngIf="this.auditService.notes != null; else noTrainees" id="noTrainees">
     <app-associate></app-associate>
     <app-overall></app-overall>
+    <app-mock-save></app-mock-save>
 </div>
 <ng-template #noTrainees>
     <br>
