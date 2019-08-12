@@ -12,6 +12,8 @@ import { Category } from 'src/app/User/user/types/trainee';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 
+//import { AuditService } from '../../Services/audit.service';  // ag
+
 @Component({
   selector: "app-associate",
   templateUrl: "./associate.component.html",
@@ -27,7 +29,7 @@ export class AssociateComponent implements OnInit {
   selectedAssessmentCategoryId: number;
   totalRaw: number = 0;
   calcArr: number[] = [];
-  //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
+  //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
   //multiple flag popup box in the same time.
   flagNoteSwitch: Array<number> = [];
   noteArr: Note[] = [];
@@ -54,7 +56,16 @@ export class AssociateComponent implements OnInit {
   errMark: HTMLElement;
   isTyping: boolean;
 
-  constructor(private AssessBatchService: AssessBatchService, private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent, private errorService: ErrorService) { }
+  // added for flag note change..
+  isaddFlagClicked: boolean = false;
+
+  // variable to hold previous flagStatus
+  selectedTraineeFlagStatusBeforeSelecting: string;
+
+  // variable for small flag in module; 'Selected Flag: '..
+  flagStatusVisual: string;
+
+  constructor(private AssessBatchService: AssessBatchService, private traineeService: TraineeService, private assessBatchGradeService: AssessBatchGradeService, private noteService: NoteService, private assessmentService: AssessmentService, private updateDelModal: UpdateDeleteAssessmentModalComponent) { }
   //Beginning of associate component lifecycle is populating the trainee array, assessment array, and getting all of the notes
   ngOnInit() {
     this.avgArr = [];
@@ -65,9 +76,7 @@ export class AssociateComponent implements OnInit {
     //noteEmitter just emits the array of notes that are coming from noteService
     this.noteService.noteEmitter.subscribe((noteArr) => {
       this.noteArr = [];
-
       if (this.traineeArr.length != 0) {
-
         for (this.i = 0; this.i < this.traineeArr.length; this.i++) {
           for (this.j = 0; this.j < noteArr.length; this.j++) {
             if (noteArr[this.j].traineeId == this.traineeArr[this.i].traineeId) {
@@ -75,15 +84,15 @@ export class AssociateComponent implements OnInit {
             }
 
           }
-          if(this.noteArr[this.i]==null){
-            this.note=new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId );
-            this.noteArr[this.i]= this.note;
+          if (this.noteArr[this.i] == null) {
+            this.note = new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId);
+            this.noteArr[this.i] = this.note;
           }
-      }
+        }
         //checks if index in noteArr is null -- if so creates a new note
 
-        
-     }
+
+      }
 
     });
 
@@ -91,25 +100,23 @@ export class AssociateComponent implements OnInit {
     this.noteService.weekEmitter.subscribe((selectedWeek) => {
       this.selectedWeek = selectedWeek;
 
-     });
- 
-     //Getting batchId to pass it along components (coming from Toolbar component)
-     this.noteService.batchIdEmitter.subscribe((batchId) => {
-       this.batchId = batchId;
-       });
+    });
+
+    //Getting batchId to pass it along components (coming from Toolbar component)
+    this.noteService.batchIdEmitter.subscribe((batchId) => {
+      this.batchId = batchId;
+    });
 
     //calling the method to populate all of the assessments 
     this.populateAssess();
-    }
+  }
 
-
-
-
-//Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
-  populateAssess(){
-   
+  // Disables the associated notes text area box for 1 second.
+ 
+  //Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
+  populateAssess() {
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
-      
+
       this.assessmentArr = assessmentArr;
       this.assessBatchGradeService.grades.subscribe((gradesArr) => {
         this.gradesArr = gradesArr;
@@ -117,10 +124,10 @@ export class AssociateComponent implements OnInit {
         this.sumRawScores();
       });
     });
-  
+
   }
 
-  
+
   //Initializing the array of array (superArr) which is equal to the amount of assessments for that week.
   //Within each inner array is the grades for each assignemnt
   myInit() {
@@ -150,14 +157,12 @@ export class AssociateComponent implements OnInit {
     }
     this.category = this.getCategoryName();
 
-
-      this.result =0;
-      if(this.traineeArr.length != 0 && this.assessmentArr.length != 0){
-          this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
-            this.result = batchAvg;
-          });
-      }
-
+    this.result = 0;
+    if (this.traineeArr.length != 0 && this.assessmentArr.length != 0) {
+      this.assessBatchGradeService.getBatchAvgGradeByBatchIdAndWeek(this.traineeArr[0].batchId, this.assessmentArr[0].weekNumber).subscribe((batchAvg) => {
+        this.result = batchAvg;
+      });
+    }
   }
 
   //This takes selected assessmentId to get the category to persist the assessment over to the modal.
@@ -180,50 +185,19 @@ export class AssociateComponent implements OnInit {
     }
   }
 
-  // Cycle the Individual Feedback Status
-  cycleFlag(selectedtraineeId: number): void {
-    // Loop through each note in notes until the target is found
-    for (let i = 0; i < this.traineeArr.length; i++) {
-      // Find the clicked note
-      if (this.traineeArr[i].traineeId === selectedtraineeId) {
-        // Create placeholder for new status string
-        let newStatus = "";
-        // Determine the new status string
-        switch (this.traineeArr[i].flagStatus) {
-          case null:
-            newStatus = "RED";
-            break;
-          case "RED":
-            newStatus = "GREEN";
-            break;
-          case "GREEN":
-            newStatus = null;
-            break;
-        }
-        // Update the status
-        this.traineeArr[i].flagStatus = newStatus;
-      }
-    }
+
+  // set the trainee flag status
+  cycleFlag3(trainee: Trainee, newStatus: string): void {
+    trainee.flagStatus = newStatus;
+    this.flagStatusVisual = "fa-" + trainee.flagStatus.toLowerCase();
   }
+
   //method to close the flag notes popup by removing id from temporory  "flagNoteSwitch" array.
   deleteFromSwitch(x: number) {
     delete this.flagNoteSwitch[this.flagNoteSwitch.indexOf(x)];
   }
-  // Cycle the flag notes popup
-  cycleFlagNotesInput(selectedtraineeId: number, value: boolean): void {
-    // Loop through each trainer in traineeArr until the target is found
-    for (let i = 0; i < this.traineeArr.length; i++) {
 
-      // Find the clicked note
-      if (this.traineeArr[i].traineeId === selectedtraineeId) {
-        // add Id of trainee to "flagNoteSwitch" array
-        if (this.flagNoteSwitch.indexOf(selectedtraineeId) == -1) {
-          this.flagNoteSwitch.push(selectedtraineeId);
-        }
-        this.noteFlagInputActive = value;
-      }
-    }
-  }
+
   //send the object of the trainee to the service in order to include the flag note
   commentOnTrainee(trainee, comment: string) {
     trainee.flagNotes = comment;
@@ -236,6 +210,7 @@ export class AssociateComponent implements OnInit {
       }
     });
   }
+
   //Add this in blur event save function
   validateScore(e) {
     if (e.target.value < 0) {
@@ -296,10 +271,10 @@ export class AssociateComponent implements OnInit {
       }*/
         data => {
           if (this.isTyping == true) {
-            
+
             this.showCheck(i);
           } else {
-            
+
             this.clearAllSavingIcon(i);
           }
 
@@ -375,12 +350,62 @@ export class AssociateComponent implements OnInit {
     errMark.style.display = "block";
     if (issue instanceof HttpErrorResponse) {
       const err = issue as HttpErrorResponse;
-      this.errorService.setError('AuditService',
-        `Issue updating note in Assess Batch. Please contact system administrator: \n
-      Status Code: ${err.status} \n
-      Status Text: ${err.statusText} \n
-      Error: ${err.message}`);
     }
   }
 
-}
+
+
+    // when pen icon clicked to open comment modal
+  onAddFlagClicked(trainee: Trainee, index: number)
+  {
+
+    this.selectedTraineeFlagStatusBeforeSelecting = trainee.flagStatus;
+
+    if (trainee.flagStatus == undefined)
+    {
+
+      trainee.flagStatus = "NONE";
+    }
+
+    this.flagStatusVisual = "fa-" + trainee.flagStatus.toLowerCase();
+  }
+
+  // when modal 'cancel' button clicked..
+  onFlagCancel2(trainee: Trainee)
+  {
+    trainee.flagStatus = this.selectedTraineeFlagStatusBeforeSelecting;
+    this.isaddFlagClicked = false;
+  }
+
+  // when modal 'delete' button is clicked.. delete flag and notes
+  onFlagDelete(trainee: Trainee)
+  {
+
+    trainee.flagNotes = "";
+    trainee.flagStatus = "NONE";
+    this.AssessBatchService.postComment(trainee).subscribe(response => {});
+    this.isaddFlagClicked = false;
+
+  }
+
+  // when modal 'submit' button is clicked.. trainee flag and comment status
+  onFlagSubmit(trainee: Trainee)
+  {
+
+    this.selectedTraineeFlagStatusBeforeSelecting = trainee.flagStatus;
+
+    this.AssessBatchService.postComment(trainee).subscribe(response => {});
+
+  }
+
+
+
+}  // end of class
+
+
+
+
+
+
+
+
