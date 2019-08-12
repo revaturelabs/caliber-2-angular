@@ -11,7 +11,6 @@ import { CategoryService } from '../../Services/category-service';
 export class CategoriesComponent implements OnInit {
 
 
- // categoriesList : Category[] =[];
  categoriesList: any;
  categoriesList1:any;
  categoriesList2:any;
@@ -33,7 +32,21 @@ getAllCategories(){
     this.categoriesList1 = this.categoriesList.filter(d => d.active == true);
     this.categoriesList2 = this.categoriesList.filter(d => d.active == false);
 
+    this.categoriesList1.sort(this.compare);
+    this.categoriesList2.sort(this.compare);
   });
+}
+
+  compare(a, b) {
+  const cat1 = a.skillCategory.toUpperCase();
+  const cat2 = b.skillCategory.toUpperCase();
+  let comparison = 0;
+  if (cat1 > cat2) {
+    comparison = 1;
+  } else if (cat1 < cat2) {
+    comparison = -1;
+  }
+  return comparison;
 }
 
 disableCategory(category){
