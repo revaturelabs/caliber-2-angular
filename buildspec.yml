@@ -27,7 +27,7 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$SERVICE_NAME:$BUILD_ID > imagedefinitions.json
 artifacts:
-   files: 
+  files: 
     - '**/*'
-    base-directory: dist/caliber-ui/
+  base-directory: dist/caliber-ui/
 
