@@ -169,7 +169,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
     }
   }
 
-  public chartHovered(event) 
+  chartHovered(event) 
   {
      this.chart = this.chartPointer;
   }
