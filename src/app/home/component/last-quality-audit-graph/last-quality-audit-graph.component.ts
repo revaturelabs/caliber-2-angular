@@ -27,6 +27,21 @@ export class LastQualityAuditGraphComponent implements OnInit {
   private displaying: boolean = false; // used for displaying directives
   private overallDisplayQANote: QANote;
 
+  private chart = 
+  {
+    'cursor':'default'
+  }
+
+  private chartPointer = 
+  {
+    'cursor':'pointer'
+  }
+
+  private chartDefault = 
+  {
+    'cursor':'default'
+  }
+
   public barChartOptions: ChartOptions = {
     tooltips: {
       mode: 'label',
@@ -152,6 +167,16 @@ export class LastQualityAuditGraphComponent implements OnInit {
         }
       );
     }
+  }
+
+  public chartHovered(event) 
+  {
+     this.chart = this.chartPointer;
+  }
+
+  chartMouseOut(event)
+  {
+    this.chart = this.chartDefault;
   }
 
   mapTrainerIdToTraineeName(id: string){
