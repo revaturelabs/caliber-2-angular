@@ -1,7 +1,9 @@
 <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
   <div style="display: block;" *ngIf="displaying">
 
-    <canvas baseChart
+    <canvas 
+    baseChart
+      [ngStyle]="chart"
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [options]="barChartOptions"
@@ -9,6 +11,8 @@
       [legend]="barChartLegend"
       [chartType]="barChartType"
       (chartClick)="chartClicked($event)"
+      (chartHover)="chartHovered($event)"
+      (mouseout)="chartMouseOut($event)"
       >
     </canvas>
   </div>
