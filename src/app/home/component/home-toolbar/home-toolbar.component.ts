@@ -63,10 +63,10 @@ export class HomeToolbarComponent implements OnInit {
     console.log(this.qaNotesByBatch);
     console.log('Current Date Time');
     console.log(this.currentDateTime);
-    
+    console.log('----------------------------------------------------------------------------------');
   }
 
-  calShowState(value) {
+  calShowState(value: string) {
     if (value) {
       this.showStates = true;
     } else {
@@ -80,7 +80,8 @@ export class HomeToolbarComponent implements OnInit {
     this.citiesInLocation = [];
     if (state === '') {
       this.citiesInLocation = this.locations.map((element) => element);
-      this.initializeCurrentBatches();
+      this.initializeAllLocations();
+      //this.initializeCurrentBatches();
     } else {
       this.locations.forEach((city) => {
         if (city.state === state && this.citiesInLocation.indexOf(city) === -1) {
@@ -92,7 +93,7 @@ export class HomeToolbarComponent implements OnInit {
       }
       this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
     }
-    this.showInfo();
+    //this.showInfo();
   }
 
   selectStateAndCity(state: string, cityLocation: Location) {
@@ -112,17 +113,18 @@ export class HomeToolbarComponent implements OnInit {
       }
     }
     this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
-    this.showInfo();
+    //this.showInfo();
   }
 
   selectCity(city: number) {
 
-    if (city !== -1) {
+    if (city != -1) {
       this.selectStateAndCity(this.selectedState, this.citiesInLocation[city]);
     } else {
+      //console.log('hit when clciking all cities');
       this.selectState(this.selectedState);
     }
-    this.showInfo();
+    //this.showInfo();
   }
 
   initializeAllLocations() {
