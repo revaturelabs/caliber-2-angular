@@ -45,7 +45,7 @@ export class BatchService {
   batchDeleteURL = '/all/batch/delete/';
   skillTypesAllURL = environment.serverRootURL + '/skill/types/skill/all';
   locationsAllURL = environment.serverRootURL + '/location/all/location/all';
-  trainersAllURL = environment.serverRootURL + '/user/all/trainer/all';
+  trainersAllURL = environment.serverRootURL + '/user/trainers';
   batchAllYearsURL = '/all/batch/valid_years';
   traineeCountURL = environment.serverRootURL + '/user/all/trainee/count/';
 

@@ -52,7 +52,8 @@ export class HomeToolbarComponent implements OnInit {
     this.selectedState = state;
     this.citiesInLocation = [];
     if (state === '') {
-      this.citiesInLocation = this.locations.map((element) => element);
+      this.citiesInLocation = []; //this.locations.map((element) => element);
+      this.initializeCurrentBatches();
     } else {
       this.locations.forEach((city) => {
         if (city.state === state && this.citiesInLocation.indexOf(city) === -1) {
@@ -63,8 +64,8 @@ export class HomeToolbarComponent implements OnInit {
       } else {
         this.selectedLocation = null;
       }
+      this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
     }
-    this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
   }
 
   selectStateAndCity(state: string, cityLocation: Location) {

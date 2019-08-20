@@ -208,6 +208,11 @@ export class LastQualityAuditGraphComponent implements OnInit {
     let week: number;
     let index = 0;
 
+    //for(i = 0; i>this.qaNoteDataStore.length; i++)
+    //{
+
+    //};
+
     this.qaNoteDataStore.forEach(
       (qaArray) => {
         if(qaArray.length > 0) {
