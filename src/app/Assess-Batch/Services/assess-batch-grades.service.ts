@@ -22,6 +22,7 @@ export class AssessBatchGradeService {
   avgGrade = '/all/grade/average?assessment=';
   batchGrade = '/all/grade/average?batch=';
   batchAvgGrade = '&week='
+  missingGrades = '/all/grade/missingGrades';
 
   url2 = this.url + '/all/grade/average?batch=';
  
@@ -85,7 +86,7 @@ export class AssessBatchGradeService {
   }
 
   addMissingGrade(currBatches : Array<any>) : Observable<Array<MissingGrade>> {
-    return this.http.post<Array<MissingGrade>>(this.postUrl, currBatches).pipe(catchError(this.handleError));
+    return this.http.post<Array<MissingGrade>>(this.url + this.missingGrades, currBatches).pipe(catchError(this.handleError));
   } 
 
   public handleError(error : HttpErrorResponse) {
