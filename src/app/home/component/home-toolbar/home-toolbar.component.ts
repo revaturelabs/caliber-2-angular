@@ -39,7 +39,34 @@ export class HomeToolbarComponent implements OnInit {
     this.initializeAllLocations();
   }
 
-  calShowState(value) {
+  public showInfo()
+  {
+    console.log('Locations');
+    console.log(this.locations);
+    console.log('States');
+    console.log(this.states);
+    console.log('Select State');
+    console.log(this.selectedState);
+    console.log('Batches');
+    console.log(this.batches);
+    console.log('Selectable Locations');
+    console.log(this.selectableLocations);
+    console.log('Cities in Location');
+    console.log(this.citiesInLocation);
+    console.log('Selected Location');
+    console.log(this.selectedLocation);
+    console.log('Show States');
+    console.log(this.showStates);
+    console.log('QA Notes All Notes');
+    console.log(this.qaNotesAllNotes);
+    console.log('QA Notes By Batch');
+    console.log(this.qaNotesByBatch);
+    console.log('Current Date Time');
+    console.log(this.currentDateTime);
+    console.log('----------------------------------------------------------------------------------');
+  }
+
+  calShowState(value: string) {
     if (value) {
       this.showStates = true;
     } else {
@@ -53,18 +80,20 @@ export class HomeToolbarComponent implements OnInit {
     this.citiesInLocation = [];
     if (state === '') {
       this.citiesInLocation = this.locations.map((element) => element);
+      this.initializeAllLocations();
+      //this.initializeCurrentBatches();
     } else {
       this.locations.forEach((city) => {
         if (city.state === state && this.citiesInLocation.indexOf(city) === -1) {
           this.citiesInLocation.push(city);
         }
       });
-      if (this.citiesInLocation.length > 0) {
-      } else {
+      if (this.citiesInLocation.length <= 0) {
         this.selectedLocation = null;
       }
+      this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
     }
-    this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
+    //this.showInfo();
   }
 
   selectStateAndCity(state: string, cityLocation: Location) {
@@ -84,15 +113,18 @@ export class HomeToolbarComponent implements OnInit {
       }
     }
     this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
+    //this.showInfo();
   }
 
   selectCity(city: number) {
 
-    if (city !== -1) {
+    if (city != -1) {
       this.selectStateAndCity(this.selectedState, this.citiesInLocation[city]);
     } else {
+      //console.log('hit when clciking all cities');
       this.selectState(this.selectedState);
     }
+    //this.showInfo();
   }
 
   initializeAllLocations() {
@@ -108,7 +140,7 @@ export class HomeToolbarComponent implements OnInit {
 
   initializeCurrentBatches() {
     this.batches = [];
-    this.batchService.getAllBatches().subscribe(
+    this.batchService.getCurrentBatches().subscribe(
       (batches) => {
         const locations = [];
         batches.forEach((batch) => {
