@@ -33,7 +33,7 @@ export class MissingGradesListComponent implements OnInit {
 
   postUrl : string = 'http://localhost:10000/assessment/all/grade/missingGrades';
   
-  currBatches : Array<any>;
+  currBatches : any;
   missingGrades : Array<MissingGrade>;
 
   constructor(private http: HttpClient, private batchService : BatchService, private assessmentService : AssessBatchGradeService){ }
