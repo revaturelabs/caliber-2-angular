@@ -140,7 +140,7 @@ export class HomeToolbarComponent implements OnInit {
 
   initializeCurrentBatches() {
     this.batches = [];
-    this.batchService.getAllBatches().subscribe(
+    this.batchService.getCurrentBatches().subscribe(
       (batches) => {
         const locations = [];
         batches.forEach((batch) => {
