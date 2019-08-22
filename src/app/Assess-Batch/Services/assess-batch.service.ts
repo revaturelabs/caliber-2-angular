@@ -12,6 +12,7 @@ export class AssessBatchService {
   url = environment.serverRootURL + '/batch';
   Url2= environment.serverRootURL + '/user/all/trainee/update';
   batchAllURL = '/vp/batch/all';
+  batchCurrent ='/vp/batch/all/current';
   batchesYearURL = '/vp/batch/';
   yearsURL = '/all/batch/valid_years';
   updateWeekURL = '/all/batch/update';
@@ -28,6 +29,10 @@ export class AssessBatchService {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
     })
+  }
+
+  getCurrentBatches(): Observable<Batch[]>{
+    return this.http.get<Batch[]>(this.url+this.batchCurrent);
   }
 
   getAllBatches(): Observable<Batch[]> {
