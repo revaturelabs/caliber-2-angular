@@ -7,9 +7,9 @@
         </tr>
         <tr *ngFor="let batch of batchDataStore; let i = index" >
           <th>
-            {{ batch['trainer']}} 
+            {{ batch.trainer}} 
             <br>
-            {{ batch['startDate'] | date}}
+            {{ batch.startDate | date}}
           </th>
           <td>
             {{ poorArray[i] }}
