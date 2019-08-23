@@ -123,7 +123,7 @@ export class LastQualityAuditTableComponent implements OnInit {
             averageArrayTemp = this.averageArray[i];
             goodArrayTemp = this.goodArray[i];
             starArrayTemp = this.starArray[i];
-            overallStatusArrayTemp=this.overallStatusArray[i];
+            overallStatusArrayTemp = this.overallStatusArray[i];
 
             batchIdFollow[i] = batchIdFollow[ctIndex];
             //this.chartWeekReference[i] = this.chartWeekReference[ctIndex];
