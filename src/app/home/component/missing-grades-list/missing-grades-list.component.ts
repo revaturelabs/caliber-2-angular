@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { MissingGrade } from '../../models/missingGrade';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { HomeService } from '../../service/home.service';
 
 /**
  * @author Jace, Zev
@@ -37,13 +38,14 @@ const httpOptions = {
 export class MissingGradesListComponent implements OnInit {
 
   postUrl : string = 'http://localhost:10000/assessment/all/grade/missingGrades';
-  
-  currBatches : any;
+
+  currBatches : Batch[];
+
   missingGrades : Array<MissingGrade>;
   arrayWeeks : any[];
   flag : boolean = false;
 
-  constructor(private http: HttpClient, private batchService : BatchService, private assessmentService : AssessBatchGradeService) { }
+  constructor(private http: HttpClient, private batchService : BatchService, private homeService: HomeService, private assessmentService : AssessBatchGradeService) { }
 
   ngOnInit() {
     this.batchService.getBatches().subscribe(data => {
@@ -51,7 +53,19 @@ export class MissingGradesListComponent implements OnInit {
     }, error => console.log('Error:' + error), () => this.getMissingGradesFromActiveBatches());
   }
 
+  update() {
+    if (this.flag) {
+      this.currBatches = this.homeService.getBatchesDataStore();
+      console.log("curr batches is updating, you can change the view here");
+    }
+  }
+
   getMissingGradesFromActiveBatches()  {
-    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.flag = true);
+    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.afterMissingGradeReturn());
+  }
+
+  afterMissingGradeReturn() {
+    console.log("Hello MG returned");
+    this.flag = true;
   }
 }
