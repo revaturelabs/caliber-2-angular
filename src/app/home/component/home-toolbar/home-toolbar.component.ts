@@ -180,7 +180,7 @@ export class HomeToolbarComponent implements OnInit {
   }
 
   initilaizeAllQANotes(batches: Batch[]) {
-    this.qaNotesByBatch = this.homeService.getQANotesDataStore();//[];
+    this.qaNotesByBatch = [];
     batches.forEach(
       (element) => {
         this.qaNoteService.getAllQANotes(element).subscribe(
