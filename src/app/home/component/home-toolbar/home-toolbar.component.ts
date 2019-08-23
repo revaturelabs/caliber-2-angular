@@ -39,32 +39,6 @@ export class HomeToolbarComponent implements OnInit {
     this.initializeAllLocations();
   }
 
-  public showInfo()
-  {
-    console.log('Locations');
-    console.log(this.locations);
-    console.log('States');
-    console.log(this.states);
-    console.log('Select State');
-    console.log(this.selectedState);
-    console.log('Batches');
-    console.log(this.batches);
-    console.log('Selectable Locations');
-    console.log(this.selectableLocations);
-    console.log('Cities in Location');
-    console.log(this.citiesInLocation);
-    console.log('Selected Location');
-    console.log(this.selectedLocation);
-    console.log('Show States');
-    console.log(this.showStates);
-    console.log('QA Notes All Notes');
-    console.log(this.qaNotesAllNotes);
-    console.log('QA Notes By Batch');
-    console.log(this.qaNotesByBatch);
-    console.log('Current Date Time');
-    console.log(this.currentDateTime);
-    console.log('----------------------------------------------------------------------------------');
-  }
 
   calShowState(value: string) {
     if (value) {
@@ -93,7 +67,6 @@ export class HomeToolbarComponent implements OnInit {
       }
       this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
     }
-    //this.showInfo();
   }
 
   selectStateAndCity(state: string, cityLocation: Location) {
@@ -113,7 +86,6 @@ export class HomeToolbarComponent implements OnInit {
       }
     }
     this.initializeCurrentBatchesFromLocations(this.citiesInLocation);
-    //this.showInfo();
   }
 
   selectCity(city: number) {
@@ -121,10 +93,8 @@ export class HomeToolbarComponent implements OnInit {
     if (city != -1) {
       this.selectStateAndCity(this.selectedState, this.citiesInLocation[city]);
     } else {
-      //console.log('hit when clciking all cities');
       this.selectState(this.selectedState);
     }
-    //this.showInfo();
   }
 
   initializeAllLocations() {
@@ -147,7 +117,13 @@ export class HomeToolbarComponent implements OnInit {
           // const currentDateTime = new Date().getTime();
           const currentDateTime = this.currentDateTime;
           const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
-          if ( batchDateTime > currentDateTime) {
+          const batchStartTime = Number.parseInt(batch.startDate.toString(),0);
+          console.log('Current date time: ' +currentDateTime);
+          console.log('Batch date time: ' + batchDateTime);
+          if( currentDateTime < batchStartTime+691200000 ){
+
+          }
+          if ( batchDateTime > currentDateTime ) {
             this.batches.push(batch);
             this.locations.forEach(
               (batchLocation) => {
@@ -167,7 +143,7 @@ export class HomeToolbarComponent implements OnInit {
 
   initializeCurrentBatchesFromLocations(locations: Location[]) {
     this.batches = [];
-    this.batchService.getAllBatches().subscribe(
+    this.batchService.getCurrentBatches().subscribe(
       (batches) => {
         batches.forEach((batch) => {
           const currentDateTime = this.currentDateTime;
