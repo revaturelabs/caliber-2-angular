@@ -9,6 +9,7 @@ import { BatchService } from 'src/app/Batch/batch.service'
 import { environment } from 'src/environments/environment';
 import { MissingGrade } from '../../models/missingGrade';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 /**
  * @author Jace, Zev
@@ -51,6 +52,6 @@ export class MissingGradesListComponent implements OnInit {
   }
 
   getMissingGradesFromActiveBatches()  {
-    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.flag = true);
+    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => { this.flag = true; console.log(this.missingGrades[0].trainer); console.log(this.missingGrades[0].batchId); console.log(this.missingGrades[0].skillType); });
   }
 }

@@ -19,8 +19,8 @@
         <tbody>
           <tr *ngFor="let missingGrade of missingGrades">
             <td class="col-sm-2">{{missingGrade.trainer}}</td>
-            <td class="col-sm-2">{{missingGrade.batchId}}</td>
-            <td class="col-sm-2">{{missingGrade.missingWeeks}}</td>
+            <!-- <td class="col-sm-2">{{missingGrade.skillType}}</td> -->
+            <td class="col-sm-2"><span *ngFor="let week of missingGrade.weeks">{{week}}</span></td>
             <td class="col-sm-2">{{missingGrade.location}}</td>
           </tr>
         </tbody>
