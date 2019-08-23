@@ -49,7 +49,8 @@ export class LastQualityAuditTableComponent implements OnInit {
 
     let week: number;
     let index = 0;
-
+    // debugger;
+    console.log(this.qaNoteDataStore);
     this.qaNoteDataStore.forEach(
       (qaArray) => {
         week = 0;

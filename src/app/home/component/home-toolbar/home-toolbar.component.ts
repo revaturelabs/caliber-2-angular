@@ -115,15 +115,28 @@ export class HomeToolbarComponent implements OnInit {
         const locations = [];
         batches.forEach((batch) => {
           // const currentDateTime = new Date().getTime();
+          //console.log(batch);
           const currentDateTime = this.currentDateTime;
           const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
           const batchStartTime = Number.parseInt(batch.startDate.toString(),0);
-          console.log('Current date time: ' +currentDateTime);
+          //console.log('Current date time: ' +currentDateTime);
           console.log('Batch date time: ' + batchDateTime);
-          if( currentDateTime < batchStartTime+691200000 ){
-
-          }
           if ( batchDateTime > currentDateTime ) {
+            if( currentDateTime < (batchStartTime+691200000) ){
+              // debugger;
+              console.log('time computation hit');
+              let wk0qaNote: QANote = new QANote();
+              wk0qaNote.batchId=batch.batchId;
+              wk0qaNote.traineeId=0;
+              wk0qaNote.week=0;
+              wk0qaNote.qcStatus='Undefined';
+              let tempArray:QANote[][] = [];
+              //console.log(tempArray);
+              let singleArr: QANote[] = new Array();
+              singleArr.push(wk0qaNote);
+              tempArray.push(singleArr);
+              this.homeService.setQANotesDataStore(tempArray);
+            }
             this.batches.push(batch);
             this.locations.forEach(
               (batchLocation) => {
