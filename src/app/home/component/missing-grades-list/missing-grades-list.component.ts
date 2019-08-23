@@ -40,18 +40,18 @@ export class MissingGradesListComponent implements OnInit {
   
   currBatches : any;
   missingGrades : Array<MissingGrade>;
+  arrayWeeks : any[];
   flag : boolean = false;
 
-  constructor(private http: HttpClient, private batchService : BatchService, private assessmentService : AssessBatchGradeService){ }
+  constructor(private http: HttpClient, private batchService : BatchService, private assessmentService : AssessBatchGradeService) { }
 
   ngOnInit() {
-    
     this.batchService.getBatches().subscribe(data => {
       this.currBatches = data;
     }, error => console.log('Error:' + error), () => this.getMissingGradesFromActiveBatches());
   }
 
   getMissingGradesFromActiveBatches()  {
-    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => { this.flag = true; console.log(this.missingGrades[0].trainer); console.log(this.missingGrades[0].batchId); console.log(this.missingGrades[0].skillType); });
+    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.flag = true);
   }
 }
