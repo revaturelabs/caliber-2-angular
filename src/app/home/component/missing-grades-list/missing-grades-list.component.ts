@@ -11,6 +11,10 @@ import { MissingGrade } from '../../models/missingGrade';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 
 /**
+ * @author Jace, Zev
+ */
+
+/**
  * sets headers for recieving JSON objects
  */
 const httpOptions = {
@@ -35,6 +39,7 @@ export class MissingGradesListComponent implements OnInit {
   
   currBatches : any;
   missingGrades : Array<MissingGrade>;
+  flag : boolean = false;
 
   constructor(private http: HttpClient, private batchService : BatchService, private assessmentService : AssessBatchGradeService){ }
 
@@ -46,6 +51,6 @@ export class MissingGradesListComponent implements OnInit {
   }
 
   getMissingGradesFromActiveBatches()  {
-    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => console.log(this.missingGrades[0].batchId));
+    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.flag = true);
   }
 }

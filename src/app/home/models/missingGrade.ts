@@ -1,6 +1,6 @@
 export class MissingGrade {
 trainer: string;
-batchId: number;
+skillType: string;
 weeks : number[];
 location : Location;
 }
