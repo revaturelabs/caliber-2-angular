@@ -31,42 +31,16 @@ export class HomeToolbarComponent implements OnInit {
   allLocations: Location;
 
   constructor(private locationService: LocationService, private batchService: AssessBatchService,
-              private qaNoteService: QanoteService, private homeService: HomeService) {
+              private qaNoteService: QanoteService, private homeService: HomeService) {}
+              
+  ngOnInit() 
+  {
     this.showStates = false;
-  }
-
-  ngOnInit() {
     this.initializeAllLocations();
   }
 
-  public showInfo()
+  calShowState(value: string) 
   {
-    console.log('Locations');
-    console.log(this.locations);
-    console.log('States');
-    console.log(this.states);
-    console.log('Select State');
-    console.log(this.selectedState);
-    console.log('Batches');
-    console.log(this.batches);
-    console.log('Selectable Locations');
-    console.log(this.selectableLocations);
-    console.log('Cities in Location');
-    console.log(this.citiesInLocation);
-    console.log('Selected Location');
-    console.log(this.selectedLocation);
-    console.log('Show States');
-    console.log(this.showStates);
-    console.log('QA Notes All Notes');
-    console.log(this.qaNotesAllNotes);
-    console.log('QA Notes By Batch');
-    console.log(this.qaNotesByBatch);
-    console.log('Current Date Time');
-    console.log(this.currentDateTime);
-    console.log('----------------------------------------------------------------------------------');
-  }
-
-  calShowState(value: string) {
     if (value) {
       this.showStates = true;
     } else {
@@ -75,7 +49,8 @@ export class HomeToolbarComponent implements OnInit {
     this.selectState(value);
   }
 
-  selectState(state: string) {
+  selectState(state: string) 
+  {
     this.selectedState = state;
     this.citiesInLocation = [];
     if (state === '') {
@@ -96,7 +71,8 @@ export class HomeToolbarComponent implements OnInit {
     //this.showInfo();
   }
 
-  selectStateAndCity(state: string, cityLocation: Location) {
+  selectStateAndCity(state: string, cityLocation: Location) 
+  {
     this.selectedState = state;
     this.citiesInLocation = [];
     if (state === '') {
@@ -116,7 +92,8 @@ export class HomeToolbarComponent implements OnInit {
     //this.showInfo();
   }
 
-  selectCity(city: number) {
+  selectCity(city: number) 
+  {
 
     if (city != -1) {
       this.selectStateAndCity(this.selectedState, this.citiesInLocation[city]);
@@ -127,7 +104,8 @@ export class HomeToolbarComponent implements OnInit {
     //this.showInfo();
   }
 
-  initializeAllLocations() {
+  initializeAllLocations() 
+  {
     this.locationService.getAllLocations().subscribe(
       (locations) => {
         this.locations = locations;
@@ -138,7 +116,8 @@ export class HomeToolbarComponent implements OnInit {
     });
   }
 
-  initializeCurrentBatches() {
+  initializeCurrentBatches() 
+  {
     this.batches = [];
     this.batchService.getAllBatches().subscribe(
       (batches) => {
@@ -165,7 +144,8 @@ export class HomeToolbarComponent implements OnInit {
     });
   }
 
-  initializeCurrentBatchesFromLocations(locations: Location[]) {
+  initializeCurrentBatchesFromLocations(locations: Location[]) 
+  {
     this.batches = [];
     this.batchService.getAllBatches().subscribe(
       (batches) => {
@@ -190,7 +170,8 @@ export class HomeToolbarComponent implements OnInit {
     });
   }
 
-  initilaizeAllQANotes(batches: Batch[]) {
+  initilaizeAllQANotes(batches: Batch[]) 
+  {
     this.qaNotesByBatch = [];
     batches.forEach(
       (element) => {
@@ -210,7 +191,8 @@ export class HomeToolbarComponent implements OnInit {
       });
   }
 
-  setStatesViaLocations() {
+  setStatesViaLocations() 
+  {
     this.states = [];
     this.locations.forEach((element) => {
       if (!this.states.includes(element.state)) {
