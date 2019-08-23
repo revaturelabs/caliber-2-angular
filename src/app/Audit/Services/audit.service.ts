@@ -31,7 +31,7 @@ export class AuditService {
   categoriesByBatchByWeekURL = '/qa/category/';
   updateCategoryURL = '/qa/category';
   deleteCategoryURL = '/qa/category/delete/';
-  allActiveCategoriesURL = '/category/all/active';
+  allActiveCategoriesURL = '/category/all';
   selectedQuarter: number = 1;
   selectedYear: number;
   selectedBatch: Batch;
@@ -82,7 +82,7 @@ export class AuditService {
   getNotesForTrainee(traineeId : number) : Observable<QcNote[]>{
     return this.http.get<QcNote[]>(this.url + this.notesByTrainee + this.selectedTrainee.traineeId);
   }
- 
+
   setNotes(notesToSet: QcNote[]){
     this.notes = notesToSet;
     const myset = new Set(this.notes);
@@ -122,6 +122,6 @@ export class AuditService {
         }
       });
     }
-    
+
   }
 }
