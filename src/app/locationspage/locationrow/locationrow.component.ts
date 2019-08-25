@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from 'src/app/home/models/location';
 
 @Component({
@@ -12,6 +12,8 @@ export class LocationrowComponent implements OnInit {
   
   @Input() location:Location;
 
+  @Output() locEmit: EventEmitter<Location> = new EventEmitter<Location>();
+
   constructor() { }
 
   ngOnInit() 
@@ -19,4 +21,7 @@ export class LocationrowComponent implements OnInit {
 
   }
 
+  displayLocationEditModal(){
+    this.locEmit.emit(this.location);
+  }
 }

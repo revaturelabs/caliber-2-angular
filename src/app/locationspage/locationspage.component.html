@@ -7,7 +7,7 @@
             <a 
               role="button" 
               data-toggle="modal" 
-              data-target="#createLocationModal" 
+              data-target="#addLocationModal" 
               type="button"
               >Create Location 
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -25,12 +25,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let location of locations' app-locationrow [location]='location'></tr>
+            <tr *ngFor='let location of locations' app-locationrow [location]='location' (locEmit)='displayLocationEditModal($event)'></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-<!-- <app-editlocationmodal #editLocationModal></app-editlocationmodal> -->
-<!-- <app-addlocationmodal #createLocationModal></app-addlocationmodal> -->
+<app-editlocationmodal #editLocationModal (putLocation)='updateTable($event)'></app-editlocationmodal>
+<!-- <app-addlocationmodal #addLocationModal></app-addlocationmodal> -->

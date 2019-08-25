@@ -6,6 +6,7 @@ import { LocationspageComponent } from '../locationspage/locationspage.component
 import { AddlocationmodalComponent } from '../locationspage/addlocationmodal/addlocationmodal.component';
 import { EditlocationmodalComponent } from '../locationspage/editlocationmodal/editlocationmodal.component';
 import { LocationrowComponent } from '../locationspage/locationrow/locationrow.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LocationrowComponent } from '../locationspage/locationrow/locationrow.c
   imports: [
     CommonModule,
     HttpClientModule,
-    LocationsRoutingService
+    LocationsRoutingService,
+    FormsModule
   ]
 })
 export class LocationsModule { }
