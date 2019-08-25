@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationsRoutingService } from './locations-routing.service';
 import { LocationspageComponent } from '../locationspage/locationspage.component';
+import { AddlocationmodalComponent } from '../locationspage/addlocationmodal/addlocationmodal.component';
+import { EditlocationmodalComponent } from '../locationspage/editlocationmodal/editlocationmodal.component';
+import { LocationrowComponent } from '../locationspage/locationrow/locationrow.component';
 
 @NgModule({
   declarations: [
-    LocationspageComponent
-
+    LocationspageComponent,
+    AddlocationmodalComponent,
+    EditlocationmodalComponent,
+    LocationrowComponent
   ],
   imports: [
     CommonModule,
