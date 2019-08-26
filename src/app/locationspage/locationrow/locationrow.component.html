@@ -14,7 +14,8 @@
   </a>
 </td>
 <td>
-  <a role="button" class="pull-right">
+  <a role="button" class="pull-right" (click)='displayDisableModal()' data-toggle="modal" 
+  data-target="#disableLocationModal">
     <span [className]="location.active ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' "
       aria-hidden="true"></span>
   </a>

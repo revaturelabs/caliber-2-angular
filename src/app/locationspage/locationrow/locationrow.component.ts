@@ -13,6 +13,7 @@ export class LocationrowComponent implements OnInit {
   @Input() location:Location;
 
   @Output() locEmit: EventEmitter<Location> = new EventEmitter<Location>();
+  @Output() disableEmit: EventEmitter<Location> = new EventEmitter<Location>();
 
   constructor() { }
 
@@ -23,5 +24,9 @@ export class LocationrowComponent implements OnInit {
 
   displayLocationEditModal(){
     this.locEmit.emit(this.location);
+  }
+
+  displayDisableModal(){
+    this.disableEmit.emit(this.location);
   }
 }

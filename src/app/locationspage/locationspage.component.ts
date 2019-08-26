@@ -12,13 +12,13 @@ import { DisableLocationModalComponent } from './disable-location-modal/disable-
 })
 export class LocationspageComponent implements OnInit {
 
-  @ViewChildren('addLocationModal') AddLocation: AddlocationmodalComponent;
+  @ViewChild('addLocationModal') AddLocation: AddlocationmodalComponent;
   @ViewChild('editLocationModal') EditLocation: EditlocationmodalComponent;
   @ViewChild('disableLocationModal') DisableLocation: DisableLocationModalComponent;
 
   locations:Location[];
 
-  constructor(private locationService:LocationService, ) { }
+  constructor(private locationService:LocationService ) { }
 
   ngOnInit() 
   {
@@ -34,11 +34,21 @@ export class LocationspageComponent implements OnInit {
   }
 
   displayLocationDisableModal(location: Location){
-    
+    this.DisableLocation.displayDisableModal(location);
+  }
+
+  displayAddLocationModal(){
+    this.AddLocation.displayAddModal();
   }
 
   updateTable(location: Location){
     this.locationService.updateLocation(location).subscribe(location => {
+      this.getAlLocations();
+    });
+  }
+
+  addToTable(location: Location){
+    this.locationService.addLocation(location).subscribe(location => {
       this.getAlLocations();
     });
   }

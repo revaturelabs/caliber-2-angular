@@ -24,8 +24,7 @@ import { DisableLocationModalComponent } from './locationspage/disable-location-
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent,
-    DisableLocationModalComponent
+    FormModalComponent
     
   ],
   imports: [
