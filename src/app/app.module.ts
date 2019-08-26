@@ -23,7 +23,11 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
+<<<<<<< HEAD
     FormModalComponent,
+=======
+    FormModalComponent
+>>>>>>> 315d0d6ba31587dc6df0e5d0661211a755b16d48
 
   ],
   imports: [
