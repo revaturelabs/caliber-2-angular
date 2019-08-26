@@ -212,7 +212,7 @@ export class ToolbarComponent implements OnInit {
     var last = this.weeks[this.weeks.length - 1];
     this.weeks.push(last + 1);
     this.selectedWeek = last + 1;
-    this.selectedBatch.weeks = last + 1;
+    this.selectedBatch.weeks = this.weeks.length;
     this.assessBatchService.addWeek(this.selectedBatch);
     this.getBatchNotesByWeek();
   }
