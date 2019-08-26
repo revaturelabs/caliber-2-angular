@@ -193,7 +193,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
     this.batchDataStore.forEach(
       (batch) => {
       this.barChartLabels.push(
-      batch.trainer + ' ' + new Date(Number.parseInt(batch.startDate.toString(), 0)).toISOString().substring(0, 9));
+      batch.trainer + ' ' + new Date(Number.parseInt(batch.startDate.toString(), 0)).toISOString().substring(0, 10));
       batchIdLead.push(batch.batchId);
     });
 
@@ -207,6 +207,11 @@ export class LastQualityAuditGraphComponent implements OnInit {
     const borderWidth: number[] = [];
     let week: number;
     let index = 0;
+
+    //for(i = 0; i>this.qaNoteDataStore.length; i++)
+    //{
+
+    //};
 
     this.qaNoteDataStore.forEach(
       (qaArray) => {
