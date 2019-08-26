@@ -15,6 +15,8 @@ import { HomeService } from '../home/service/home.service';
 // import { ChartsModule } from 'ng2-charts';
 import { TraineeService } from '../Assess-Batch/Services/trainee.service';
 import {ChartsModule} from 'ng2-charts';
+import { PillComponent } from '../home/component/pills/pill/pill.component';
+import { PillBoxComponent } from '../home/component/pills/pill-box/pill-box.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {ChartsModule} from 'ng2-charts';
     LastQualityAuditTableComponent,
     HomeToolbarComponent,
     LastQualityAuditComponent,
-    MissingGradesListComponent
+    MissingGradesListComponent,
+    PillBoxComponent,
+    PillComponent
   ],
   providers: [
     LocationService,
