@@ -21,6 +21,7 @@ export class AssessBatchService {
   selectedYear: number;
   selectedBatch: Batch;
   selectedWeek = 1;
+  pendingButton:boolean = true;
 
 
   constructor(private http: HttpClient) { }
@@ -57,7 +58,8 @@ export class AssessBatchService {
 
   //HTTPRequest for adding a week -- using a PUT request
   addWeek(updateBatch: Batch) {
-    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions).subscribe((ourBatch) => {
+    this.pendingButton = false;
+    this.http.put(this.url + this.updateWeekURL, updateBatch, this.httpOptions).subscribe((ourBatch) => {this.pendingButton = true;
     });
   }
 
