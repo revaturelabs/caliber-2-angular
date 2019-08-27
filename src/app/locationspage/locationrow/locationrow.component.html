@@ -1,5 +1,5 @@
 <td>
-  <span [className]="location.active == false ? 'glyphicon glyphicon-remove fa-2x' : 'fa fa-check fa-2x' "
+  <span [className]="location.active == false || false ? 'glyphicon glyphicon-remove fa-2x' : 'fa fa-check fa-2x' "
     aria-hidden="true"></span>
 </td>
 
@@ -16,7 +16,7 @@
 <td>
   <a role="button" class="pull-right" (click)='displayDisableModal()' data-toggle="modal" 
   data-target="#disableLocationModal">
-    <span [className]="location.active ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' "
+    <span [className]="location.active || true ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' "
       aria-hidden="true"></span>
   </a>
 </td>

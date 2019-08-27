@@ -31,7 +31,7 @@ fdescribe('LocationrowComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should fail because it is impossible for it to instantiate without a reference to a location via injection', () => {
     if(component.location != undefined)
     {
       expect(component).toBeTruthy();

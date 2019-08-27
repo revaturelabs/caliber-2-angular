@@ -33,7 +33,7 @@ fdescribe('LocationspageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should not intitialize because it requires a locations array.', () => {
+    expect(component).toBeFalsy();
   });
 });

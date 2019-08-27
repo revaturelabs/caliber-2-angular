@@ -22,12 +22,12 @@ export class LocationspageComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.locations = Array<Location>();
+    //this.locations = Array<Location>();
     this.getAlLocations();
   }
 
   getAlLocations(){
-    this.locationService.getAllLocations().subscribe(data => {this.locations = data; console.log(this.locations)});
+    this.locationService.getAllLocations().subscribe(data => {this.locations = data});
   }
 
   displayLocationEditModal(location: Location){
