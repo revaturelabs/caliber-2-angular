@@ -70,7 +70,7 @@ id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
 </div>
 
 <!--Data dismiss modal-->
-<div id="confirmingweeks" class="modal fade">
+<div *ngIf= "this.assessBatchService.requestPending" id="confirmingweeks" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
