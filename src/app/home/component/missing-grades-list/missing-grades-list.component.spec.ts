@@ -7,7 +7,7 @@ import { MissingGradesListComponent } from './missing-grades-list.component';
 import { PillBoxComponent } from '../pills/pill-box/pill-box.component';
 import { element } from '@angular/core/src/render3/instructions';
 
-fdescribe('MissingGradesListComponent', () => {
+describe('MissingGradesListComponent', () => {
   let component: MissingGradesListComponent;
   let fixture: ComponentFixture<MissingGradesListComponent>;
   let de : DebugElement;
