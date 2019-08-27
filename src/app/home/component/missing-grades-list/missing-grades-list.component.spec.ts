@@ -1,18 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { HomeModule } from 'src/app/home-module/home-module.module';
+import { DebugElement } from '@angular/core';
 
 import { MissingGradesListComponent } from './missing-grades-list.component';
+import { PillBoxComponent } from '../pills/pill-box/pill-box.component';
+import { element } from '@angular/core/src/render3/instructions';
 
 fdescribe('MissingGradesListComponent', () => {
   let component: MissingGradesListComponent;
   let fixture: ComponentFixture<MissingGradesListComponent>;
+  let de : DebugElement;
+  let pillBox : PillBoxComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MissingGradesListComponent],
+      declarations: [],
       providers : [MissingGradesListComponent],
-      imports: [HttpClientTestingModule, FormsModule]
+      imports: [HomeModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -29,6 +34,10 @@ fdescribe('MissingGradesListComponent', () => {
   
   it("number of current batches with missing grades", () => {
     component.getMissingGradesFromActiveBatches(); 
-    
+  });
+
+  it('should have an app-pill-box tag', () => {
+    const element : HTMLElement = fixture.nativeElement;
+    expect(element.querySelector("#pill-box"));
   });
 });

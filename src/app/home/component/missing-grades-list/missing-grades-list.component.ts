@@ -1,17 +1,13 @@
-import { Injectable, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-
-import { catchError } from 'rxjs/operators';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
-import { BatchService } from 'src/app/Batch/batch.service'
-import { environment } from 'src/environments/environment';
+import { BatchService } from 'src/app/Batch/batch.service';
 import { MissingGrade } from '../../models/missingGrade';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
-import { forEach } from '@angular/router/src/utils/collection';
 import { HomeService } from '../../service/home.service';
+
+
 
 /**
  * @author Jace, Zev
