@@ -49,7 +49,8 @@ export class LastQualityAuditTableComponent implements OnInit {
 
     let week: number;
     let index = 0;
-
+    // debugger;
+    console.log(this.qaNoteDataStore);
     this.qaNoteDataStore.forEach(
       (qaArray) => {
         week = 0;
@@ -83,14 +84,15 @@ export class LastQualityAuditTableComponent implements OnInit {
               } else {
                 this.overallStatusArray[index] = qaNote.qcStatus;
               }
-              // switch (qaNote.qcStatus) {
-              //   case 'Undefined': color = 'orange'; break;
-              //   case 'Poor': color = 'red'; break;
-              //   case 'Average': color = 'yellow'; break;
-              //   case 'Good': color = 'green'; break;
-              //   case 'Superstar': color = 'blue'; break;
-              // }
-              // this.statusColorArray[index] = color;
+              // this.statusColorArray.push('');
+              switch (qaNote.qcStatus) {
+                case 'Undefined': color = 'orange'; break;
+                case 'Poor': color = 'red'; break;
+                case 'Average': color = 'yellow'; break;
+                case 'Good': color = 'green'; break;
+                case 'Superstar': color = 'blue'; break;
+              }
+              this.statusColorArray[index] = color;
             }
           });
         index++;
@@ -114,6 +116,7 @@ export class LastQualityAuditTableComponent implements OnInit {
         let goodArrayTemp: number;
         let starArrayTemp: number;
         let overallStatusArrayTemp: String;
+        let colorArrayTemp: string;
         for (i = 0; i < batchIdFollow.length; i++) {
           if (batchIdFollow[i] == element) {
             temp = batchIdFollow[i];
@@ -122,7 +125,8 @@ export class LastQualityAuditTableComponent implements OnInit {
             averageArrayTemp = this.averageArray[i];
             goodArrayTemp = this.goodArray[i];
             starArrayTemp = this.starArray[i];
-            overallStatusArrayTemp=this.overallStatusArray[i];
+            overallStatusArrayTemp = this.overallStatusArray[i];
+            colorArrayTemp = this.statusColorArray[i];
 
             batchIdFollow[i] = batchIdFollow[ctIndex];
             //this.chartWeekReference[i] = this.chartWeekReference[ctIndex];
@@ -131,6 +135,7 @@ export class LastQualityAuditTableComponent implements OnInit {
             this.goodArray[i] = this.goodArray[ctIndex];
             this.starArray[i] = this.starArray[ctIndex];
             this.overallStatusArray[i] = this.overallStatusArray[ctIndex];
+            this.statusColorArray[i] = this.statusColorArray[ctIndex];
 
 
             batchIdFollow[ctIndex] = temp;
@@ -141,15 +146,15 @@ export class LastQualityAuditTableComponent implements OnInit {
             this.starArray[ctIndex] = starArrayTemp;
             this.overallStatusArray[ctIndex] = overallStatusArrayTemp;
 
-            let color;
-            switch (overallStatusArrayTemp) {
-              case 'Undefined': color = 'orange'; break;
-              case 'Poor': color = 'red'; break;
-              case 'Average': color = 'yellow'; break;
-              case 'Good': color = 'green'; break;
-              case 'Superstar': color = 'blue'; break;
-            }
-            this.statusColorArray[ctIndex] = color;
+            // let color: string;
+            // switch (overallStatusArrayTemp) {
+            //   case 'Undefined': color = 'orange'; break;
+            //   case 'Poor': color = 'red'; break;
+            //   case 'Average': color = 'yellow'; break;
+            //   case 'Good': color = 'green'; break;
+            //   case 'Superstar': color = 'blue'; break;
+            // }
+            this.statusColorArray[ctIndex] = colorArrayTemp;
           }
         }
       }

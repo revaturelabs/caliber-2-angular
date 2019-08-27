@@ -203,15 +203,9 @@ export class LastQualityAuditGraphComponent implements OnInit {
     const averageArray: number[] = [];
     const goodArray: number[] = [];
     const starArray: number[] = [];
-    // const undefinedArray: number[] = [];
     const borderWidth: number[] = [];
     let week: number;
     let index = 0;
-
-    //for(i = 0; i>this.qaNoteDataStore.length; i++)
-    //{
-
-    //};
 
     this.qaNoteDataStore.forEach(
       (qaArray) => {
@@ -230,7 +224,6 @@ export class LastQualityAuditGraphComponent implements OnInit {
         averageArray.push(0);
         goodArray.push(0);
         starArray.push(0);
-        // undefinedArray.push(0);
         borderWidth.push(2);
 
         qaArray.forEach(

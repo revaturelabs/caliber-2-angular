@@ -11,7 +11,7 @@ import { HomeService } from '../../service/home.service';
 @Component({
   selector: 'app-home-toolbar',
   templateUrl: './home-toolbar.component.html',
-  styleUrls: [ './home-toolbar.component.css' ]
+  styleUrls: ['./home-toolbar.component.css']
 })
 
 export class HomeToolbarComponent implements OnInit {
@@ -31,7 +31,7 @@ export class HomeToolbarComponent implements OnInit {
   allLocations: Location;
 
   constructor(private locationService: LocationService, private batchService: AssessBatchService,
-              private qaNoteService: QanoteService, private homeService: HomeService) {
+    private qaNoteService: QanoteService, private homeService: HomeService) {
     this.showStates = false;
   }
 
@@ -105,7 +105,7 @@ export class HomeToolbarComponent implements OnInit {
         if (this.locations.length > 0) {
           this.initializeCurrentBatches();
         }
-    });
+      });
   }
 
   initializeCurrentBatches() {
@@ -115,22 +115,35 @@ export class HomeToolbarComponent implements OnInit {
         const locations = [];
         batches.forEach((batch) => {
           // const currentDateTime = new Date().getTime();
+          //console.log(batch);
           const currentDateTime = this.currentDateTime;
           const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
-          const batchStartTime = Number.parseInt(batch.startDate.toString(),0);
-          console.log('Current date time: ' +currentDateTime);
+          const batchStartTime = Number.parseInt(batch.startDate.toString(), 0);
+          //console.log('Current date time: ' +currentDateTime);
           console.log('Batch date time: ' + batchDateTime);
-          if( currentDateTime < batchStartTime+691200000 ){
-
-          }
-          if ( batchDateTime > currentDateTime ) {
+          if (batchDateTime > currentDateTime) {
+            // if (currentDateTime < (batchStartTime + 691200000)) {
+            //   // debugger;
+            //   console.log('time computation hit');
+            //   let wk0qaNote: QANote = new QANote();
+            //   wk0qaNote.batchId = batch.batchId;
+            //   wk0qaNote.traineeId = 0;
+            //   wk0qaNote.week = 0;
+            //   wk0qaNote.qcStatus = 'Undefined';
+            //   let tempArray: QANote[][] = [];
+            //   //console.log(tempArray);
+            //   let singleArr: QANote[] = new Array();
+            //   singleArr.push(wk0qaNote);
+            //   tempArray.push(singleArr);
+            //   this.homeService.setQANotesDataStore(tempArray);
+            // }
             this.batches.push(batch);
             this.locations.forEach(
               (batchLocation) => {
                 if (batch.locationId === batchLocation.id) {
                   locations.push(batchLocation);
                 }
-            });
+              });
           }
         });
         this.locations = locations;
@@ -138,7 +151,7 @@ export class HomeToolbarComponent implements OnInit {
         this.homeService.setLocationsDataStore(locations);
         this.homeService.setBatchesDataStore(this.batches);
         this.initilaizeAllQANotes(this.batches);
-    });
+      });
   }
 
   initializeCurrentBatchesFromLocations(locations: Location[]) {
@@ -148,7 +161,7 @@ export class HomeToolbarComponent implements OnInit {
         batches.forEach((batch) => {
           const currentDateTime = this.currentDateTime;
           const batchDateTime = Number.parseInt(batch.endDate.toString(), 0);
-          if ( batchDateTime > currentDateTime) {
+          if (batchDateTime > currentDateTime) {
             let added = false;
             locations.forEach(
               (batchLocation) => {
@@ -156,14 +169,14 @@ export class HomeToolbarComponent implements OnInit {
                   this.batches.push(batch);
                   added = true;
                 }
-            });
+              });
           }
         });
         this.setStatesViaLocations();
         this.homeService.setLocationsDataStore(this.locations);
         this.homeService.setBatchesDataStore(this.batches);
         this.initilaizeAllQANotes(this.batches);
-    });
+      });
   }
 
   initilaizeAllQANotes(batches: Batch[]) {
@@ -173,14 +186,30 @@ export class HomeToolbarComponent implements OnInit {
         this.qaNoteService.getAllQANotes(element).subscribe(
           (qaNotesOfBatch) => {
             // let indexOfBatch = batches.indexOf(element);
-            const tempBatchArray: QANote[] = [];
-            qaNotesOfBatch.forEach(
-              (qaNote) => {
-              tempBatchArray.push(qaNote);
-            });
-            this.qaNotesByBatch.push(tempBatchArray);
-            this.homeService.setQANotesDataStore(this.qaNotesByBatch);
-            this.submitHomeOutput.emit(this.qaNotesByBatch.length);
+            if (!qaNotesOfBatch.length) {
+              const tempBatchArray: QANote[] = [];
+              let wk0qaNote: QANote = new QANote();
+              wk0qaNote.batchId = element.batchId;
+              wk0qaNote.traineeId = 0;
+              wk0qaNote.week = 0;
+              wk0qaNote.qcStatus = 'Undefined';
+              //console.log(tempArray);
+              tempBatchArray.push(wk0qaNote);
+              this.qaNotesByBatch.push(tempBatchArray);
+              this.homeService.setQANotesDataStore(this.qaNotesByBatch);
+              this.submitHomeOutput.emit(this.qaNotesByBatch.length);
+            }
+            else {
+              const tempBatchArray: QANote[] = [];
+              qaNotesOfBatch.forEach(
+                (qaNote) => {
+                  tempBatchArray.push(qaNote);
+                });
+              this.qaNotesByBatch.push(tempBatchArray);
+              this.homeService.setQANotesDataStore(this.qaNotesByBatch);
+              this.submitHomeOutput.emit(this.qaNotesByBatch.length);
+            }
+
           });
 
       });

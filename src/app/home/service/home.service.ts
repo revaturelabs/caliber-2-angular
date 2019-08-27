@@ -9,7 +9,7 @@ import { Location } from '../models/location';
 export class HomeService {
   private locationsDataStore: Location[];
   private batchesDataStore: Batch[] = [];
-  private qaNotesDataStore: QANote[][];
+  private qaNotesDataStore: QANote[][]=[];
 
   constructor() { }
 
