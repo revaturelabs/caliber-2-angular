@@ -1,14 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddlocationmodalComponent } from './addlocationmodal.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationsRoutingService } from 'src/app/locations-module/locations-routing.service';
+import { FormsModule } from '@angular/forms';
+import { LocationsModule } from 'src/app/locations-module/locations-module.module';
 
-describe('AddlocationmodalComponent', () => {
+fdescribe('AddlocationmodalComponent', () => {
   let component: AddlocationmodalComponent;
   let fixture: ComponentFixture<AddlocationmodalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddlocationmodalComponent ]
+      declarations: [ ],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    LocationsRoutingService,
+    FormsModule,
+    LocationsModule
+  ]
     })
     .compileComponents();
   }));

@@ -1,14 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationrowComponent } from './locationrow.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationsRoutingService } from 'src/app/locations-module/locations-routing.service';
+import { FormsModule } from '@angular/forms';
+import { LocationsModule } from 'src/app/locations-module/locations-module.module';
 
-describe('LocationrowComponent', () => {
+fdescribe('LocationrowComponent', () => {
   let component: LocationrowComponent;
   let fixture: ComponentFixture<LocationrowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationrowComponent ]
+      declarations: [],
+      imports: [
+        CommonModule,
+        HttpClientModule,
+        LocationsRoutingService,
+        FormsModule, 
+        LocationsModule
+      ]
     })
     .compileComponents();
   }));
@@ -20,6 +32,13 @@ describe('LocationrowComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    if(component.location != undefined)
+    {
+      expect(component).toBeTruthy();
+    }
+    else
+    {
+      expect(component).toBeFalsy();
+    }
   });
 });

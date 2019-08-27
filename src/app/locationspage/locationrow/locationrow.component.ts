@@ -19,7 +19,7 @@ export class LocationrowComponent implements OnInit {
 
   ngOnInit() 
   {
-
+    this.location = new Location();
   }
 
   displayLocationEditModal(){
