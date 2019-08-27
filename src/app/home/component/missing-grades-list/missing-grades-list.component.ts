@@ -2,6 +2,7 @@ import { Injectable, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
 import { catchError } from 'rxjs/operators';
 
 import { Batch } from 'src/app/Batch/type/batch';
@@ -45,6 +46,9 @@ export class MissingGradesListComponent implements OnInit {
   arrayWeeks : any[];
   flag : boolean = false;
 
+  location : string; // choose location
+  missingGradeByLocation : Array<MissingGrade>;
+
   constructor(private http: HttpClient, private batchService : BatchService, private homeService: HomeService, private assessmentService : AssessBatchGradeService) { }
 
   ngOnInit() {
@@ -67,5 +71,13 @@ export class MissingGradesListComponent implements OnInit {
   afterMissingGradeReturn() {
     console.log("Hello MG returned");
     this.flag = true;
+  }
+
+  filterByLocation(location : string) {
+    for(let missingGrade of this.missingGrades) {
+      if(missingGrade.location === this.location) {
+        this.missingGradeByLocation.push(missingGrade);
+      }
+    }
   }
 }
