@@ -28,7 +28,7 @@ export class ReportService {
   gradesByTraineeURL = '/assessment/all/grade/trainee/';
   qaNotesAllURL = '/qa/audit/notes/all/';
   qaNotesURL = '/qa/audit/notes/';
-  categoryAllURL = '/category/all/active';
+  categoryAllURL = '/category/all?active=true';
   assessmentsAllURL: string = '/assessment/all/assessment/batch/';
 
   batch: Batch;

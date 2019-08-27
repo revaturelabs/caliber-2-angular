@@ -36,4 +36,12 @@ export class LocationService {
   setSelectedLocation(location : Location){
     this.selectedLocation = location;
   }
+
+  updateLocation(location:Location): Observable<Location>{
+    return this.http.put<Location>(this.url+'/location/vp/location/update',location);
+  }
+
+  addLocation(location: Location): Observable<Location>{
+    return this.http.post<Location>(this.url+'/location/vp/location/create', location);
+  }
 }

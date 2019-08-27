@@ -11,13 +11,13 @@
           <a role="button" name ="toolbarYear{{year}}" (click)="selectYear(year)">{{year}}</a>
           </li>
               </ul>
-              
+
             <!-- sort by quarter-->
             <li role="button" class="dropdown"><a class="dropdown-toggle" id="toolbarBatchDropdown"
-              data-toggle="dropdown">{{selectedBatch.trainingName}} <span class="caret"></span></a>
+              data-toggle="dropdown">{{selectedBatch.trainer}} - {{selectedBatch.trainingName}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li *ngFor="let batch of batches">
-          <a role="button" name="toolbarBatch{{batch.batchId}}" (click)="selectBatch(batch)">{{batch.trainingName}}</a>
+          <a role="button" name="toolbarBatch{{batch.batchId}}" (click)="selectBatch(batch)">{{batch.trainer}} - {{batch.trainingName}}</a>
               </li>
             </ul>
           <!-- Now to find Week and Trainee -->
@@ -25,7 +25,7 @@
             data-toggle="dropdown">{{titledWeek}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li *ngFor="let week of weeks">
-        <a role="button" name="toolbarWeek{{week}}" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a> 
+        <a role="button" name="toolbarWeek{{week}}" (click)="selectWeek(week)">Week {{(week)?week:"(all)"}}</a>
             </li>
           </ul>
           <li role="button" class="dropdown"><a class="dropdown-toggle" id = "toolbarTraineeDropdown"

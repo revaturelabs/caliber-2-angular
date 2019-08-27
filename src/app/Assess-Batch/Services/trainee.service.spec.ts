@@ -13,7 +13,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Trainee } from 'src/app/Batch/type/trainee';
 
-
 // TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 describe('TraineeService', () => {
