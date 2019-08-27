@@ -1,0 +1,17 @@
+.pill{
+    background-color: #B9B9BA;
+    border: .5px #474C55 solid;
+    border-radius: 5px;
+    justify-content: space-between;
+    margin: 5px;
+}
+.pillContent{
+    color: #474C55;
+    font-family: Futura-Std-Heavy;
+}
+.pillX{
+    color: #474C55;
+    font-size: large;
+    margin-right: 10px;
+    font-weight:bold;
+}

@@ -16,7 +16,6 @@ import { CreateModalComponent } from './Assess-Batch/Modals/create-modal/create-
 import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import { DisableLocationModalComponent } from './locationspage/disable-location-modal/disable-location-modal.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +24,6 @@ import { DisableLocationModalComponent } from './locationspage/disable-location-
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent
-    
   ],
   imports: [
     BrowserModule,

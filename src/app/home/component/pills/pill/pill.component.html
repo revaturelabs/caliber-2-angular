@@ -1,0 +1,4 @@
+<div class='row btn pill'>
+  <span (click)="removeWeekPill()" (mouseover)="hover=true" (mouseleave)="hover=false" class='pillX' [ngStyle]="{color: hover==true ? '#F26925':''}">&times;</span>
+  <span [id]=pillContent class='pillContent'>Week {{weekNumber}}</span>
+</div>
