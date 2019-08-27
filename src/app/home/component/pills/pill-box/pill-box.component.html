@@ -1,3 +1,13 @@
-<p>
-  pill-box works!
-</p>
+<div style="display: inline-block">
+  <div style="display: inline-block">
+    <app-pill *ngFor='let number of displayedWeeks' [weekNumber]='number' (removeWeek)="removePill($event)" style='display: inline-block'></app-pill>
+  </div>
+  <div ngbDropdown>
+    
+
+    <button class='btn btn-primary' id='WeekSorter' ngbDropdownToggle>Include Weeks</button>
+    <div ngbDropdownMenu aria-labelledby="WeekSorter">
+      <app-dropdown-button *ngFor='let number of weeksList' [weekNumber]='number' (addWeek)="addPill($event)"></app-dropdown-button>
+    </div>
+  </div>
+</div>

@@ -23,8 +23,7 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent,
-
+    FormModalComponent
   ],
   imports: [
     BrowserModule,
