@@ -13,6 +13,8 @@ export class PillComponent implements OnInit {
   @Output()
   removeWeek = new EventEmitter<number>();
 
+  hover:boolean = false;
+
   constructor() { }
 
   ngOnInit() {
