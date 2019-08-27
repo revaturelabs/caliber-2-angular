@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.service';
 import { HomeComponent } from './../home/component/home/home.component';
@@ -18,13 +19,16 @@ import {ChartsModule} from 'ng2-charts';
 import { PillComponent } from '../home/component/pills/pill/pill.component';
 import { PillBoxComponent } from '../home/component/pills/pill-box/pill-box.component';
 
+import { DropdownButtonComponent } from '../home/component/pills/dropdown-button/dropdown-button.component';
+
 
 @NgModule({
   imports: [
     HomeRoutingModule,
     CommonModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    NgbModule
   ],
   declarations: [
     HomeComponent,
@@ -35,7 +39,8 @@ import { PillBoxComponent } from '../home/component/pills/pill-box/pill-box.comp
     LastQualityAuditComponent,
     MissingGradesListComponent,
     PillBoxComponent,
-    PillComponent
+    PillComponent,
+    DropdownButtonComponent
   ],
   providers: [
     LocationService,

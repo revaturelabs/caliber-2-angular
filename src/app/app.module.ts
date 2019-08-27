@@ -24,7 +24,6 @@ import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal
     ErrorComponent,
     CreateModalComponent,
     FormModalComponent
-
   ],
   imports: [
     BrowserModule,

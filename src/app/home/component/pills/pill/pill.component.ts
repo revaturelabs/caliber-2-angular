@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pill',
@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pill.component.css']
 })
 export class PillComponent implements OnInit {
+  
+  @Input()
+  weekNumber: number;
+
+  @Output()
+  removeWeek = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  removeWeekPill() {
+    this.removeWeek.emit(this.weekNumber);
+  }
 }
