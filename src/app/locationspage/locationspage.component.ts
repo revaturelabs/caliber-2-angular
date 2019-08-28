@@ -22,7 +22,6 @@ export class LocationspageComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.locations = Array<Location>();
     this.getAlLocations();
   }
 
