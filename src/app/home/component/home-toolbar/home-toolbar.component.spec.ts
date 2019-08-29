@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { componentNeedsResolution } from '@angular/core/src/metadata/resource_loading';
 
-describe('HomeToolbarComponent', () => {
+fdescribe('HomeToolbarComponent', () => {
   let component: HomeToolbarComponent;
   let fixture: ComponentFixture<HomeToolbarComponent>;
 
@@ -29,6 +29,7 @@ describe('HomeToolbarComponent', () => {
   });
 
   it('test showState()',()=>{
+    component.ngOnInit();
     expect(component.showStates).toBe(false);
     component.calShowState(component.states[0]);
     expect(component.showStates).toBe(true);
