@@ -102,7 +102,7 @@ export class HomeToolbarComponent implements OnInit {
       (locations) => {
         this.locations = locations;
         this.selectedLocation = null;
-        if (this.locations.length > 0) {
+        if (this.locations && this.locations.length > 0) {
           this.initializeCurrentBatches();
         }
       });

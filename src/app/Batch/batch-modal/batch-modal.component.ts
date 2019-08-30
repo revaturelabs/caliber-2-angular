@@ -154,10 +154,14 @@ export class BatchModalComponent implements OnInit, OnChanges {
     const d2 = new Date(this.endDate);
     this.endDate = new Date(d2.getTime() - (d2.getTimezoneOffset() * 60000));
 
+    // Generate number of weeks based on Start Date and End Date
+    let weeks = (this.endDate.getTime() - this.startDate.getTime()) / 1000;
+    weeks /= (60 * 60 * 24 * 7);
+
     // sends post request with batch to back-end
     this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
-      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, this.weeks)).subscribe(result => {
+      this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, weeks)).subscribe(result => {
         this.someEvent.next('created');
         this.resetForm();
       });
