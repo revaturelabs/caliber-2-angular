@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'vp/home', loadChildren: 'src/app/home-module/home-module.module#HomeModule' },
   { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
   { path: 'vp/audit', loadChildren: './audit-module/audit-module.module#AuditModule'},
-  { path: 'vp/assess', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'},
+  { path: 'vp/assess', loadChildren: './assess-batch-v2/assess-batch-v2.module#AssessBatchV2Module'},
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
   { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule'},
   { path: 'vp/locations', loadChildren: './locations-module/locations-module.module#LocationsModule'},

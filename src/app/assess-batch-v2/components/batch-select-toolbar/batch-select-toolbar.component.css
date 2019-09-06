@@ -1,0 +1,18 @@
+.toolbar-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-row-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.toolbar-row-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+}

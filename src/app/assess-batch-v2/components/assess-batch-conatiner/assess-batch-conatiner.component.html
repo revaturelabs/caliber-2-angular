@@ -1,0 +1,37 @@
+<!-- <div>
+  {{ quarters | json }}
+</div>
+
+<div *ngIf="years">
+  {{ years | json }}
+</div>
+
+<div *ngIf="selectedYear">
+  Selected Year: {{ selectedYear }}
+</div>
+
+<div *ngIf="selectedQuarter">
+  Selected Quarter: {{ selectedQuarter }}
+</div>
+
+<div *ngIf="batches | async as batches">
+  {{ batches | json }}
+</div>
+
+<div *ngIf="selectedBatch">
+  {{ selectedBatch | json }}
+</div> -->
+
+<div *ngIf="batches | async as batches">
+  <app-batch-select-toolbar 
+    [batches]="batches"
+    [quarters]="quarters" 
+    [years]="years" 
+    [quarter]="selectedQuarter"
+    [year]="selectedYear"
+    [batch]="selectedBatch"
+    (selectedQuarter)="setSelectedQuarter($event)" 
+    (selectedYear)="setSelectedYear($event)" 
+    (selectedBatch)="setSelectedBatch($event)"
+  ></app-batch-select-toolbar>
+</div>

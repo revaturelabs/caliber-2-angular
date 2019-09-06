@@ -47,6 +47,10 @@ export class AssessBatchService {
     return this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter);
   }
 
+  getBatchesByYearAndQuarter(year: number, quarter: number): Observable<Batch[]> {
+    return this.http.get<Batch[]>(this.url + this.yearParam + year + this.quarterParam + quarter);
+  }
+
   getAllYears(): Observable<number[]> {
     return this.http.get<number[]>(this.url + this.yearsURL);
   }
