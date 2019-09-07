@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,13 +22,24 @@ export class AssessBatchService {
   selectedBatch: Batch;
   selectedWeek = 1;
 
+  private readonly updateBatchAndReturnUrl: string = `${this.url}/all/batch/update`;
+
 
   constructor(private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-    })
+    }),
+  }
+
+
+  private readonly updateAndReturnOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    }),
+    params: new HttpParams({fromObject: {"return": "true"}}),
+    allowCredentials: true
   }
 
   getCurrentBatches(): Observable<Batch[]>{
@@ -52,7 +63,7 @@ export class AssessBatchService {
   }
 
   getAllYears(): Observable<number[]> {
-    return this.http.get<number[]>(this.url + this.yearsURL);
+    return this.http.get<number[]>(this.url + this.yearsURL, this.httpOptions);
   }
 
   getBatchById(id: number): Observable<Batch>{
@@ -65,7 +76,11 @@ export class AssessBatchService {
     });
   }
 
-  postComment (trainee): Observable<object> { 
+  addWeekAndReturn(batch: Batch): Observable<Batch> {
+    return this.http.put<Batch>(this.updateBatchAndReturnUrl, batch, this.updateAndReturnOptions);
+  }
+
+  postComment (trainee): Observable<object> {
     return this.http.put<object>(this.Url2, trainee );
   }
 }

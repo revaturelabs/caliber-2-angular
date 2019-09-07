@@ -6,14 +6,18 @@ import { BatchSelectToolbarComponent } from './components/batch-select-toolbar/b
 import { SharedDropdownMenuComponent } from './components/shared-dropdown-menu/shared-dropdown-menu.component';
 import { CreateAssessmentButtonComponent } from './components/create-assessment-button/create-assessment-button.component';
 import { ImportGradesButtonComponent } from './components/import-grades-button/import-grades-button.component';
-import { FormatDirective } from './directives/format.directive';
 import { AssessAssociateListComponent } from './components/assess-associate-list/assess-associate-list.component';
+import { AssociateDetailsComponent } from './components/associate-details/associate-details.component';
+import { AssociateNotesComponent } from './components/associate-notes/associate-notes.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { WeekSelectorComponent } from './components/week-selector/week-selector.component';
 
 @NgModule({
-  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, FormatDirective, AssessAssociateListComponent],
+  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, AssessAssociateListComponent, AssociateDetailsComponent, AssociateNotesComponent, WeekSelectorComponent],
   imports: [
     CommonModule,
-    AssessBatchV2RoutingModule
+    AssessBatchV2RoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AssessBatchV2Module { }

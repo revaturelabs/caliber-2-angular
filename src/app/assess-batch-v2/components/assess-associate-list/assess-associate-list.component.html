@@ -1,3 +1,22 @@
-<p>
-  assess-associate-list works!
-</p>
+<div *ngIf="trainees.length > 0">
+  <div class="table-responsive mt-1">
+    <app-week-selector [batch]="batch" (selectedWeek)="setSelectedWeek($event)" (updatedBatch)="setUpdatedBatch($event)" ></app-week-selector>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-2">Trainee</th>
+          <th class="col-5">Notes</th>
+        </tr>
+      </thead>
+      <tbody class="d-flex flex-column">
+        <tr class="d-inline-flex flex-row" *ngFor="let trainee of trainees">
+          <app-associate-details [trainee]="trainee"></app-associate-details>
+          <app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="trainees.length === 0">
+  No associates found
+</div>

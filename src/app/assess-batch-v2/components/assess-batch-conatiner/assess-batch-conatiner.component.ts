@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
-import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
@@ -31,12 +30,11 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
   constructor(
     private noteService: NoteService,
-    private traineeService: TraineeService,
     private assessBatchService: AssessBatchService,
-    private assessBatchGradeService: AssessBatchGradeService, 
+    private assessBatchGradeService: AssessBatchGradeService,
     private auditService: AuditService,
     private assessmentService: AssessmentService
-  ) { 
+  ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
     this.selectedQuarter = this.getQuarterFromDate(date);
@@ -60,9 +58,8 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
         this.allBatchesSubscription = this.batches.subscribe(
           batches => {
-            if (batches.length) {
-              this.selectedBatch = batches[0];
-            }
+            // Never select a batch on batch load
+            this.selectedBatch = undefined;
           }
         )
       }
