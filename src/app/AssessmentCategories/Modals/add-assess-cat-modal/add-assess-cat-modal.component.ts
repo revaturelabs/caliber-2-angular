@@ -27,21 +27,22 @@ export class AddAssessCatModalComponent implements OnInit {
     this.displayResultError = false;
     this.category.skillCategory = ''
   }
-  
+
   addCategory(){
     this.category.categoryOwner = localStorage.getItem("id");
     this.category.active = true;
+    this.category.categoryId = 0;
     this.categoryService.addCategory(this.category).subscribe ( (res)=>{
       if( res != null){
       let myJSON = JSON.stringify(res);
       let result = JSON.parse(myJSON);
       this.displayResultSuccess = true;
       this.successMessage = result.skillCategory + " has been successfully created";
-     
+
     }
   }, (err)=>{
     this.displayResultError = true;
-      
+
     this.errorMessage = err.error.message;
   });
     this.displayResultError = false;
@@ -52,5 +53,5 @@ export class AddAssessCatModalComponent implements OnInit {
   updateComponent(){
     this.catComponent.getAllCategories();
   }
- 
+
 }

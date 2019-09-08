@@ -9,12 +9,13 @@ import {AssessCategory} from '../Models/assess-category';
 })
 export class AssessCategoryService {
 
-  serverUrl= environment.serverRootURL + "/assessment/";
+  serverUrl= environment.serverRootURL + "/category";
 
   constructor(private http: HttpClient) { }
 
 
   addCategory(category: AssessCategory){
-    return this.http.post(this.serverUrl + 'categories', category)
+    console.log(category)
+    return this.http.post(`${this.serverUrl}/create`, category)
   }
 }
