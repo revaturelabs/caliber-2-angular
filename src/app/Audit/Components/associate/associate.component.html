@@ -18,21 +18,21 @@
         </span>
 
     </div>
-    
-        
+
+
     <table class="table table-responsive table-condensed" style="border-collapse: collapse; max-width: 1140px;">
         <thead>
-            
+
         </thead>
         <thead>
             <tr>
-                
+
             </tr>
 
             <tr>
                     <button class="btn btn-primary" (click)="toggleNotesArray()" id="toggleNoteSort">Sort
                             {{order}}</button>
-                        
+
             </tr>
             <tr>
                 <!-- Spans over flag column --->
@@ -124,15 +124,15 @@
                         <div class="dropdown">
 
                             <em *ngIf="QcNote.qcStatus=='Undefined'"
-                                class="qcStatusIcon fa fa-question-circle fa-2x pick"
+                                class="qcStatusIcon fa fa-question-circle fa-2x pick dropdown-toggle"
                                 style="margin: auto 30px; text-align: center;"></em>
-                            <em *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick"
+                            <em *ngIf="QcNote.qcStatus=='Superstar'" class="qcStatusIcon fa fa-star fa-2x pick dropdown-toggle"
                                 style="margin: auto 30px; text-align: center;"></em>
-                            <em *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick"
+                            <em *ngIf="QcNote.qcStatus=='Good'" class="qcStatusIcon fa fa-smile-o fa-2x pick dropdown-toggle"
                                 style="margin: auto 30px;text-align: center;"></em>
-                            <em *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick"
+                            <em *ngIf="QcNote.qcStatus=='Average'" class="qcStatusIcon fa fa-meh-o fa-2x pick dropdown-toggle"
                                 style="margin: auto 30px; text-align: center;"></em>
-                            <em *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick"
+                            <em *ngIf="QcNote.qcStatus=='Poor'" class="qcStatusIcon fa fa-frown-o fa-2x pick dropdown-toggle"
                                 style="margin: auto 30px; text-align: center;"></em>
 
                             <div class="dropdown-content" style="margin: auto -95px">
