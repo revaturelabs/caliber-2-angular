@@ -1,0 +1,9 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.column-item {
+  display: inherit;
+}

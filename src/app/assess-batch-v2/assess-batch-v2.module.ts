@@ -11,9 +11,11 @@ import { AssociateDetailsComponent } from './components/associate-details/associ
 import { AssociateNotesComponent } from './components/associate-notes/associate-notes.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { WeekSelectorComponent } from './components/week-selector/week-selector.component';
+import { AssessmentDetailsColumnComponent } from './components/assessment-details-column/assessment-details-column.component';
+import { AssessmentDetailsRowComponent } from './components/assessment-details-row/assessment-details-row.component';
 
 @NgModule({
-  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, AssessAssociateListComponent, AssociateDetailsComponent, AssociateNotesComponent, WeekSelectorComponent],
+  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, AssessAssociateListComponent, AssociateDetailsComponent, AssociateNotesComponent, WeekSelectorComponent, AssessmentDetailsColumnComponent, AssessmentDetailsRowComponent],
   imports: [
     CommonModule,
     AssessBatchV2RoutingModule,
