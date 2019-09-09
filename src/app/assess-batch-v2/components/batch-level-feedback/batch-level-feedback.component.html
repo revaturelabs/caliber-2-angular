@@ -1,0 +1,12 @@
+<div class="form-group centered" [formGroup]="batchNoteForm">
+  <textarea
+    formControlName="batchNote"
+    class="form-control"
+    placeholder="Start typing to record your overall feedback for week {{ week }}"
+    (blur)="handleNoteUpdate()"
+    maxlength="4000"
+    rows="3"
+  >
+    {{ note && note?.noteContent.length > 0 ? note.noteContent : '' }}
+  </textarea>
+</div>

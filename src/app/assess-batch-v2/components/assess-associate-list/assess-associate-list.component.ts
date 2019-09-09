@@ -70,6 +70,9 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     // React to a change in week or quarter based on dropdown
     combineLatest(this.selectedWeekSubject.asObservable(), this.selectedBatch.asObservable()).pipe(distinctUntilChanged()).subscribe(
       ([week, batch]) => {
+        this.assessments = [];
+        this.columns = [];
+        this.selectedWeek = week;
         this.thisWeeksGrades$ = [];
         if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
           this.notes$ = this.noteService.getNoteMapByBatchIdAndWeekNumber(batch.batchId, week);
@@ -201,8 +204,17 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     return 0;
   }
 
+  getBatchAverage(): number {
+    if (this.grades.size === this.assessments.length) {
+      const averages = [];
+      for (let assessmentId of Array.from(this.grades.keys())) {
+        averages.push(this.getAverageGradeForAssessment(assessmentId));
+      }
+      return averages.reduce((prev, curr) => prev + curr, 0) / averages.length;
+    }
+  }
+
   handleGradeUpdate(grade: Grade) {
-    console.log(grade);
     this.assessBatchGradeService.updateGrade(grade).subscribe(
       data => {
         this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));

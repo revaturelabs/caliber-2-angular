@@ -47,6 +47,10 @@ export class NoteService {
     return this.http.get<WeeklyAssociateNotes>(this.getNoteMapUrl(batchId, weekId));
   }
 
+  getBatchNoteByBatchIdAndWeekNumber(batchId: number, weekNumber: number): Observable<Note> {
+    return this.http.get<Note>(`${this.assessmentUrl}/batch/${batchId}/${weekNumber}/note`);
+  }
+
   putNote(note): Observable<object> {
     return this.http.put<object>(this.assessmentUrl + this.updateNote, note);
   }

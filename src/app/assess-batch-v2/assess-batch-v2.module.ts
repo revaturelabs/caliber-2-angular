@@ -13,9 +13,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { WeekSelectorComponent } from './components/week-selector/week-selector.component';
 import { AssessmentDetailsColumnComponent } from './components/assessment-details-column/assessment-details-column.component';
 import { AssessmentDetailsRowComponent } from './components/assessment-details-row/assessment-details-row.component';
+import { BatchLevelFeedbackComponent } from './components/batch-level-feedback/batch-level-feedback.component';
 
 @NgModule({
-  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, AssessAssociateListComponent, AssociateDetailsComponent, AssociateNotesComponent, WeekSelectorComponent, AssessmentDetailsColumnComponent, AssessmentDetailsRowComponent],
+  declarations: [AssessBatchConatinerComponent, BatchSelectToolbarComponent, SharedDropdownMenuComponent, CreateAssessmentButtonComponent, ImportGradesButtonComponent, AssessAssociateListComponent, AssociateDetailsComponent, AssociateNotesComponent, WeekSelectorComponent, AssessmentDetailsColumnComponent, AssessmentDetailsRowComponent, BatchLevelFeedbackComponent],
   imports: [
     CommonModule,
     AssessBatchV2RoutingModule,

@@ -23,14 +23,15 @@
           <td class="col-md-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
         </tr>
       </tbody>
-      <tfoot *ngIf="assessments.length > 0" valign="middle">
+      <tfoot *ngIf="assessments.length > 0">
         <tr>
-          <td><strong>Average</strong></td>
+          <td><strong>Average:</strong></td>
           <td *ngFor="let assessment of assessments">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
-
+          <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage() | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>
     </table>
+    <app-batch-level-feedback [batchId]="batch.batchId" [week]="selectedWeek"></app-batch-level-feedback>
   </div>
 </div>
 <!--<div *ngIf="trainees.length === 0">-->
