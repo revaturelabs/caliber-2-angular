@@ -17,40 +17,26 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   @Input("week") week: number;
   private batchIdSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.batchId);
   private weekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
-  batchNote$: Observable<Note>;
-  shouldCreate: boolean = false;
   note: Note;
-
-  private lastUpdatedBatchNote$: BehaviorSubject<Note> = new BehaviorSubject<Note>(this.note);
+  batchNote$: Observable<Note> = of(this.note);
   batchNoteForm: FormGroup;
+
+  showSaving = false;
+  showCheck = false;
+  showFloppy = true;
 
   constructor(
     private noteService: NoteService,
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.batchNoteForm = this.generateBatchNoteForm();
-    combineLatest(this.batchIdSubject.asObservable(), this.weekSubject.asObservable(), this.lastUpdatedBatchNote$.asObservable()).pipe(distinctUntilChanged()).subscribe(
-      ([batchId, week, note]) => {
-        console.log(`Latest batchId value: ${batchId}`);
-        console.log(`Latest week value: ${week}`);
-        if (Boolean(this.note) && this.note.noteContent) {
-          console.log(`Latest note value: ${this.note.noteContent}`);
-        } else {
-
-        }
+    this.batchNote$ = this.noteService.getBatchNoteByBatchIdAndWeekNumber(this.batchId, this.week);
+    combineLatest(this.batchIdSubject.asObservable(), this.weekSubject.asObservable()).subscribe(
+      ([batchId, week]) => {
         this.batchNote$ = this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week);
-        this.batchNote$.subscribe(
-          data => {
-            if (data === null) {
-              this.shouldCreate = true;
-            } else {
-              this.shouldCreate = false;
-              this.note = data;
-            }
-          }
-        )
       }
     );
   }
@@ -76,31 +62,48 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     });
   }
 
+  //doBurrito acts as the mock save
+  doBurrito() {
+    this.showFloppy = false;
+    this.showSaving = true;
+    setTimeout(() => {
+      this.showSaving = false;
+      this.showCheck = true
+    }, 1000);
+    setTimeout(() => {
+      this.showCheck = false;
+      this.showFloppy = true
+    }, 2000);
+  }
+
   handleNoteUpdate() {
-    if (this.shouldCreate) {
-      const note: Note = {
-        noteContent: this.batchNoteForm.get("batchNote").value,
-        batchId: this.batchId,
-        weekNumber: this.week,
-        noteType: "BATCH",
-        noteId: 0,
-        traineeId: 0
-      };
-      this.noteService.postNote(note).subscribe(
-        data => {
-          this.note = data;
-          this.lastUpdatedBatchNote$.next(data);
-        }
-      );
-      this.shouldCreate = false;
-    } else {
-      this.note.noteContent = this.batchNoteForm.get("batchNote").value;
-      this.noteService.putNote(this.note).subscribe(
-        (data: Note) => {
-          this.note = data;
-          this.lastUpdatedBatchNote$.next(data);
-        }
-      )
+    const noteContent = this.batchNoteForm.get("batchNote").value;
+    if (Boolean(noteContent)) {
+      if (Boolean(this.note)) {
+        // If note already exists, update
+        this.note.noteContent = noteContent;
+        this.noteService.putNote(this.note).subscribe(
+          (data: Note) => {
+            console.log(data);
+            this.note = data;
+          }
+        )
+      } else {
+        // If note does not already exist, create
+        this.note = {
+          batchId: this.batchId,
+          weekNumber: this.week,
+          noteContent: noteContent,
+          noteType: "BATCH",
+          traineeId: -1
+        };
+        this.noteService.postNote(this.note).subscribe(
+          (data: Note) => {
+            console.log(data);
+            this.note = data;
+          }
+        )
+      }
     }
   }
 

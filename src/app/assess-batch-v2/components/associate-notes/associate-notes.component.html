@@ -1,3 +1,11 @@
 <div [formGroup]="traineeNotesForm">
-  <textarea formControlName="notes" class="form-control" maxlength="4000" rows="3" cols="50" placeholder="Week {{ week }} notes for {{ trainee.name }}"></textarea>
+  <textarea
+    formControlName="notes"
+    class="form-control"
+    maxlength="4000"
+    rows="3"
+    cols="50"
+    (blur)="handleNote()"
+    placeholder="Week {{ week }} notes for {{ trainee.name }}"
+  ></textarea>
 </div>

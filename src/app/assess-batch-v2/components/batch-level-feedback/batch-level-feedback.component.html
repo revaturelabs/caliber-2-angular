@@ -1,12 +1,25 @@
-<div class="form-group centered" [formGroup]="batchNoteForm">
-  <textarea
-    formControlName="batchNote"
-    class="form-control"
-    placeholder="Start typing to record your overall feedback for week {{ week }}"
-    (blur)="handleNoteUpdate()"
-    maxlength="4000"
-    rows="3"
-  >
-    {{ note && note?.noteContent.length > 0 ? note.noteContent : '' }}
-  </textarea>
+<div [formGroup]="batchNoteForm">
+  <div>
+    <textarea
+      formControlName="batchNote"
+      class="form-control"
+      placeholder="Start typing to record your overall feedback for week {{ week }}"
+      (blur)="handleNoteUpdate()"
+      maxlength="4000"
+      rows="4"
+      [value]="(batchNote$ | async)?.noteContent"
+    >
+    </textarea>
+  </div>
+  <div class="save-button-wrapper">
+    <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
+    <!-- Events after clicking save button -->
+    <div class="spinner fa-style " *ngIf="showSaving">
+      <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+    </div>
+
+    <div id="checkMark" class="spinner fa-style fa-2x" *ngIf="showCheck">
+      <span class="fas fa-check" aria-hidden="true"></span>
+    </div>
+  </div>
 </div>

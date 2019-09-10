@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-assessment-button',
@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAssessmentButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit() {
   }
-
 }
