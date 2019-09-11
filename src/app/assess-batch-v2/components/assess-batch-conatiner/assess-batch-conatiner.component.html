@@ -1,27 +1,3 @@
-<!-- <div>
-  {{ quarters | json }}
-</div>
-
-<div *ngIf="years">
-  {{ years | json }}
-</div>
-
-<div *ngIf="selectedYear">
-  Selected Year: {{ selectedYear }}
-</div>
-
-<div *ngIf="selectedQuarter">
-  Selected Quarter: {{ selectedQuarter }}
-</div> -->
-
-<!--<div *ngIf="batches | async as batches">-->
-<!--  {{ batches | json }}-->
-<!--</div>-->
-
-<!--<div *ngIf="selectedBatch">-->
-<!--  {{ selectedBatch | json }}-->
-<!--</div>-->
-
 <div *ngIf="batches | async as batches" class="container">
   <app-batch-select-toolbar
     [batches]="batches"
@@ -30,12 +6,15 @@
     [quarter]="selectedQuarter"
     [year]="selectedYear"
     [batch]="selectedBatch"
+    [week]="selectedWeek"
     (selectedQuarter)="setSelectedQuarter($event)"
     (selectedYear)="setSelectedYear($event)"
     (selectedBatch)="setSelectedBatch($event)"
   ></app-batch-select-toolbar>
   <app-assess-associate-list
     [batch]="selectedBatch"
-    (onBatchUpdate)="setSelectedBatch($event)" 
+    [week]="selectedWeek"
+    (onBatchUpdate)="setSelectedBatch($event)"
+    (onWeekSelect)="setSelectedWeek($event)"
   ></app-assess-associate-list>
 </div>

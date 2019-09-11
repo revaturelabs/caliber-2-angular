@@ -7,8 +7,8 @@ import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ReportOutput } from '../../Models/report-output';
 import { ReportService } from '../../Service/report.service';
-import { Category } from 'src/app/User/user/types/trainee';
 import { QANote } from '../../Models/qanote';
+import {Category} from "../../../Assess-Batch/Models/Category";
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +18,7 @@ import { QANote } from '../../Models/qanote';
 export class ToolbarComponent implements OnInit {
   //Data needed to track state of toolbar
   years: number[];
-  batches: Batch[] =[];  
+  batches: Batch[] =[];
   weeks : number[];
   trainees : Trainee[];
   quarters: String[]=[];
@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit {
   selectedWeek: number;
   selectedTrainee: Trainee = new Trainee();
   selectedQuarter: String = "Select Quarter";
-  
+
   //Data stores for the ReportService
   averageGradeScore: number = 0;
   gradesDataStore:Grade[] = [];
@@ -62,8 +62,8 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
   noBatchDisplay:Batch = this.selectedBatch;
-  
-  constructor(private reportService: ReportService, private auditService : 
+
+  constructor(private reportService: ReportService, private auditService :
     AuditService, private assessBatchService : AssessBatchService,
     private traineeService: TraineeService) { }
 
@@ -95,7 +95,7 @@ export class ToolbarComponent implements OnInit {
       // only update the information if results differs from the current this.batches
       if(!this.arraysEqualPreventsReportOutput(results,this.batches)){
         this.batches = results;
-        //Only update to results if the array is greater than 0 
+        //Only update to results if the array is greater than 0
         if(results.length >0){
           //update Selected Batch in toolbar, save in report Service
           this.selectedBatch = this.batches[0];
@@ -129,9 +129,9 @@ export class ToolbarComponent implements OnInit {
     //Get all the trainees within a batch
     this.traineeService.getTraineesByBatchId(this.selectedBatch.batchId).subscribe(
       trainees => {
-      
-      if(!this.arraysEqualPreventsReportOutput(trainees,this.trainees) ){   
-        //if the trainees aray length is greater than one, set new data 
+
+      if(!this.arraysEqualPreventsReportOutput(trainees,this.trainees) ){
+        //if the trainees aray length is greater than one, set new data
         if(trainees.length>0){
           this.trainees = trainees;
           this.listedTrainees = trainees;
@@ -154,7 +154,7 @@ export class ToolbarComponent implements OnInit {
           this.reportService.setTraineeDataStore(trainees);
         }
       }
-    });    
+    });
   }
 
   selectYear(event: number) {
@@ -180,7 +180,7 @@ export class ToolbarComponent implements OnInit {
       this.reportService.setTrainee(event);
       // this.getAllGradesofTrainee();
       this.processAveragesAndOutput();//update Assessments, Notes, and Grades.
-    } 
+    }
   }
 
   selectWeek(event: number) {
@@ -335,12 +335,12 @@ export class ToolbarComponent implements OnInit {
         (grades)=>{
         grades.forEach((element) =>{
           this.averageGradeScore += element.score
-        });  
+        });
         this.averageGradeScore = this.averageGradeScore/grades.length;
         this.averageGradeScore = Math.round(this.averageGradeScore * 100) / 100;
         this.reportService.setAverageGradeScore(this.averageGradeScore);
       });
-    }  
+    }
   }
 
   initializeTotalGradeAndCreateDummyTraineeForSelectAll(){

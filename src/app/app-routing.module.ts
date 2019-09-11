@@ -12,7 +12,7 @@ import { CategoriesComponent } from './AssessmentCategories/Components/categorie
 
 
 
-const routes: Routes = [ 
+const routes: Routes = [
   { path: '', redirectTo: 'vp/home', pathMatch: 'full' },
   { path: 'vp/home', loadChildren: 'src/app/home-module/home-module.module#HomeModule' },
   { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
@@ -21,10 +21,11 @@ const routes: Routes = [
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
   { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule'},
   { path: 'vp/locations', loadChildren: './locations-module/locations-module.module#LocationsModule'},
-  { path: 'vp/category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule'}
+  { path: 'vp/category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule'},
+  { path: 'vp/panels', loadChildren: './assess-batch-module/assess-batch-module.module#AssessBatchModule'}
   //{ path: 'vp/category', component: CategoriesComponent}
 ];
- 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Trainee } from '../types/trainee';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { environment } from 'src/environments/environment';
+import {Trainee} from "../../../Batch/type/trainee";
 
 /**
  * sets the Http headers

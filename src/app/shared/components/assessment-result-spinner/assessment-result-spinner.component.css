@@ -1,0 +1,14 @@
+.spinner {
+  color: #F26925;
+  margin-top: 15%;
+}
+
+.failure {
+  color: red;
+  margin-top: 1%;
+}
+
+.success {
+  color: darkgreen;
+  margin-top: 1%;
+}

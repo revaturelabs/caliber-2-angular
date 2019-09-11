@@ -15,6 +15,7 @@ import {AssessmentDetailsColumnComponent} from './components/assessment-details-
 import {AssessmentDetailsRowComponent} from './components/assessment-details-row/assessment-details-row.component';
 import {BatchLevelFeedbackComponent} from './components/batch-level-feedback/batch-level-feedback.component';
 import {MockSaveComponent} from "../Assess-Batch/Components/mock-save/mock-save.component";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -36,8 +37,10 @@ import {MockSaveComponent} from "../Assess-Batch/Components/mock-save/mock-save.
     CommonModule,
     AssessBatchV2RoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ],
+  exports: [MockSaveComponent]
 })
 export class AssessBatchV2Module {
 }

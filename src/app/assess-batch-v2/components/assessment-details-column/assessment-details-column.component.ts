@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category, traineeAssessment} from "../../../User/user/types/trainee";
 import {AssessBatchColumn} from "../../../app.dto";
+import {Category} from "../../../Assess-Batch/Models/Category";
+import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 
 @Component({
   selector: 'app-assessment-details-column',
@@ -9,13 +10,21 @@ import {AssessBatchColumn} from "../../../app.dto";
 })
 export class AssessmentDetailsColumnComponent implements OnInit {
 
-  @Input("columnData") column: AssessBatchColumn;
+  @Input("batchId") batchId: number;
+  @Input("week") week: number;
+  @Input("column") column: AssessBatchColumn;
   @Input("totalPoints") totalPoints: number;
+  @Input("categories") categories: Category[];
 
-  constructor() { }
+
+  constructor(
+    private assessmentDialogService: AssessmentDialogService
+  ) {}
 
   ngOnInit() {
-
   }
 
+  showUpdateAssessmentDialog() {
+    this.assessmentDialogService.openAssessmentDialog(this.column.assessment, this.week, this.batchId, this.categories);
+  }
 }

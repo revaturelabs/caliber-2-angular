@@ -1,6 +1,5 @@
 import { Label, MultiDataSet } from 'ng2-charts';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
-import { Grade } from './../../../User/user/types/trainee';
 import { Assessment } from './../../../Assess-Batch/Models/Assesment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
@@ -41,7 +40,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
       ]
     }
   ]
-  
+
   public tableHeader = [
     "Superstar",
     "Good",
@@ -79,7 +78,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
   }
 
   public doughnutChartLabels: Label[] = ['Superstar', 'Good', 'Average', 'Poor'];
-  
+
   public doughnutChartData: MultiDataSet = [
     [4, 3, 1, 1],
   ];
@@ -94,7 +93,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
     // {
     //   this.reportService.getAllBatchAssessments().subscribe((assessments : Assessment[])=>{
     //     this.assessmentDataStore = assessments;
-        
+
     //     this.gradeDataStore = this.reportService.getGradeDataStore();
     //     this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
     //     this.createChart();
@@ -106,7 +105,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
     //   this.traineeGrades = this.gradeDataStore.filter((grade)=>{ return grade.traineeId === this.reportService.trainee.traineeId });
     //   this.createChart();
     // }
-    
+
   }
 
   createChart() {
@@ -119,7 +118,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
 
     let qcStatusCurrent : string;
     let qcStatusObject = {};
-    
+
     //Adding the default categories:
     qcStatusObject["SUPERSTAR"] = 0;
     qcStatusObject["GOOD"] = 0;

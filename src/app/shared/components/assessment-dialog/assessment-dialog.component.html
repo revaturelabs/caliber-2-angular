@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h4 *ngIf="assessment" class="modal-title pull-left">Update Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</h4>
+  <h4 *ngIf="!assessment" class="modal-title pull-left">Create New Assessment</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="assessment" class="modal-body">
+  <form [formGroup]="assessmentForm">
+    <div class="form-row">
+      <div class="form-group col-md-12 col-sm-12">
+        <label for="updatedCategory">Select Category</label>
+        <select formControlName="selectedCategory" id="updatedCategory" class="form-control">
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.skillCategory }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-sm-4 col-md-4">
+        <label for="updatedMaxPoints">Maximum Points</label>
+        <input type="number" formControlName="maxPoints" class="form-control" id="updatedMaxPoints" [value]="assessment?.rawScore">
+      </div>
+      <div class="form-group col-sm-8 col-md-8">
+        <label for="updateAssessmentType">Select Assessment Type</label>
+        <select formControlName="assessmentType" id="updateAssessmentType" class="form-control">
+          <option *ngFor="let assessmentType of assessmentTypes" value="{{ assessmentType.name }}" >{{ assessmentType.name }}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="!assessment" class="modal-body">
+  <form [formGroup]="assessmentForm">
+    <div class="form-row">
+      <div class="form-group col-md-12 col-sm-12">
+        <label for="selectCategory">Select Category</label>
+        <select formControlName="selectedCategory" id="selectCategory" class="form-control">
+          <option value="" [defaultSelected]="hasCategoryBeenSelected()">Select Category</option>
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.skillCategory }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-sm-4 col-md-4">
+        <label for="maxPoints">Maximum Points</label>
+        <input type="number" formControlName="maxPoints" class="form-control" id="maxPoints">
+      </div>
+      <div class="form-group col-sm-8 col-md-8">
+        <label for="selectAssessmentType">Select Assessment Type</label>
+        <select formControlName="assessmentType" id="selectAssessmentType" class="form-control">
+          <option value="" [defaultSelected]="hasAssessmentTypeBeenSelected()">Select Assessment Type</option>
+          <option *ngFor="let assessmentType of assessmentTypes" value="{{ assessmentType.name }}">{{ assessmentType.name }}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="col-sm-12 col-md-12">
+    <button *ngIf="assessment" type="button" class="btn btn-danger pull-left" (click)="handleDeleteAssessment()">Delete Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button *ngIf="assessment" type="button" class="btn btn-primary" (click)="handleUpdateAssessment()" [disabled]="assessmentForm.invalid">Update</button>
+    <button *ngIf="!assessment" type="button" class="btn btn-primary" (click)="handleCreateAssessment()" [disabled]="assessmentForm.invalid">Create Assessment</button>
+  </div>
+</div>

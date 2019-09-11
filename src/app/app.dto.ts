@@ -1,23 +1,13 @@
 import {Note} from "./Batch/type/note";
 import {Grade} from "./Batch/type/trainee";
+import {Assessment} from "./Assess-Batch/Models/Assesment";
 
 export interface WeeklyAssociateNotes {
   notesByAssociateId: Map<number, Note[]>
 }
 
 export interface AssessBatchColumn {
-  assessmentId: number;
-  categoryId: number;
   category: string;
-  rawScore: number;
-  assessmentType: string;
+  assessment: Assessment;
 }
 
-export interface AssessBatchCell {
-
-}
-
-export interface AssessBatchRow {
-  assessmentId: number;
-  grades: Grade[];
-}

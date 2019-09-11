@@ -1,9 +1,4 @@
-.column {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
-
-.column-item {
-  display: inherit;
+.assessment-column {
+  color: black;
+  cursor: pointer;
 }

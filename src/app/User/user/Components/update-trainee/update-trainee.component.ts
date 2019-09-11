@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from '@angular/core';
-import { Trainee } from '../../types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Trainee} from "../../../../Batch/type/trainee";
 
 /**
   * UpdateTrainee Component to update a trainee information using a modal.

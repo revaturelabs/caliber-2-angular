@@ -1,14 +1,19 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Batch} from "../../../Batch/type/batch";
-import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
+import {TraineeService} from 'src/app/Assess-Batch/Services/trainee.service';
 import {BehaviorSubject, combineLatest, from, Observable, of} from "rxjs";
-import { concatMap, distinctUntilChanged } from "rxjs/operators";
+import {concatMap, distinctUntilChanged} from "rxjs/operators";
 import {Grade, Trainee} from "../../../Batch/type/trainee";
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {AssessBatchColumn, WeeklyAssociateNotes} from "../../../app.dto";
 import {Note} from "../../../Batch/type/note";
 import {AssessBatchGradeService} from "../../../Assess-Batch/Services/assess-batch-grades.service";
-import {Category, traineeAssessment} from "../../../User/user/types/trainee";
+import {Assessment} from "../../../Assess-Batch/Models/Assesment";
+import {CategoryService} from "../../../Assess-Batch/Services/category.service";
+import {AssessmentChangeDto} from "../../../shared/dto/assessment-change.dto";
+import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
+import {CommentDialogService} from "../../../shared/services/comment-dialog.service";
+import {Category} from "../../../Assess-Batch/Models/Category";
 
 @Component({
   selector: 'app-assess-associate-list',
@@ -18,33 +23,48 @@ import {Category, traineeAssessment} from "../../../User/user/types/trainee";
 export class AssessAssociateListComponent implements OnInit, OnChanges {
 
   @Input("batch") batch: Batch;
+  @Input("week") week: number;
   private selectedBatch: BehaviorSubject<Batch> = new BehaviorSubject<Batch>(this.batch);
-  private trainees$: Observable<Trainee[]>;
+  trainees$: Observable<Trainee[]>;
   private notes$: Observable<WeeklyAssociateNotes>;
-  private assessments$: Observable<traineeAssessment[]>;
+  assessments$: Observable<Assessment[]>;
   private thisWeeksGrades$: Observable<Grade[]>[];
-  columns: AssessBatchColumn[];
+  columns: AssessBatchColumn[] = [];
+  totalPoints: number = 0;
   grades: Map<number, Grade[]>;
-  totalPoints: number;
-  categories: Category[] = [];
+  categories: Category[];
   trainees: Trainee[] = [];
   selectedWeek: number;
   notes: Map<number, Note[]>;
-  assessments: traineeAssessment[] = [];
-  private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  assessments: Assessment[] = [];
+  private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
 
   @Output("onBatchUpdate") onBatchUpdate: EventEmitter<Batch> = new EventEmitter<Batch>(true);
+  @Output("onWeekSelect") onWeekSelect: EventEmitter<number> = new EventEmitter<number>(true);
+
+  private lastAssessmentAction$: Observable<AssessmentChangeDto>;
+  private lastComment$: Observable<Trainee>;
 
   notesLoaded: boolean = false;
 
   constructor(
     private traineeService: TraineeService,
     private noteService: NoteService,
-    private assessBatchGradeService: AssessBatchGradeService
-  ) { }
+    private assessBatchGradeService: AssessBatchGradeService,
+    private categoryService: CategoryService,
+    private assessmentDialogService: AssessmentDialogService,
+    private commentDialogService: CommentDialogService,
+  ) {
+    this.categoryService.getCategories().subscribe(
+      data => {
+        this.categories = data;
+      }
+    );
+    this.lastAssessmentAction$ = this.assessmentDialogService.lastAlteredAssessment.asObservable();
+    this.lastComment$ = this.commentDialogService.lastAlteredComment$.asObservable();
+  }
 
   ngOnInit() {
-    this.totalPoints = 0;
     this.columns = [];
     this.grades = new Map<number, Grade[]>();
     // Populate observable when batch is selected from dropdown
@@ -61,94 +81,78 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       })
     );
 
-    this.trainees$.subscribe(
-      data => {
-        this.trainees = data
+    combineLatest(this.lastComment$).subscribe(
+      ([comment]) => {
+        this.trainees$.subscribe(
+          data => {
+            this.trainees = data
+          }
+        );
       }
     );
 
     // React to a change in week or quarter based on dropdown
-    combineLatest(this.selectedWeekSubject.asObservable(), this.selectedBatch.asObservable()).pipe(distinctUntilChanged()).subscribe(
+    combineLatest(this.selectedWeekSubject.asObservable(), this.selectedBatch.asObservable(), this.lastAssessmentAction$).pipe(distinctUntilChanged()).subscribe(
       ([week, batch]) => {
-        this.assessments = [];
-        this.columns = [];
-        this.selectedWeek = week;
-        this.thisWeeksGrades$ = [];
-        if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
-          this.notes$ = this.noteService.getNoteMapByBatchIdAndWeekNumber(batch.batchId, week);
+        if (week > 0 && Boolean(batch)) {
+          this.selectedWeek = week;
+          this.thisWeeksGrades$ = [];
           this.assessments$ = this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(batch.batchId, week);
-          this.notes$.subscribe(
-            data => {
-              this.notes = new Map();
-              // Iterate over map recieved from backend
-              for (let temp of Object.keys(data)) {
-                if (Boolean(temp)) {
-                  this.notes.set(Number.parseInt(temp), data[temp])
+          if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
+            this.notes$ = this.noteService.getNoteMapByBatchIdAndWeekNumber(batch.batchId, week);
+            this.notes$.subscribe(
+              data => {
+                this.notes = new Map();
+                // Iterate over map recieved from backend
+                for (let temp of Object.keys(data)) {
+                  if (Boolean(temp)) {
+                    this.notes.set(Number.parseInt(temp), data[temp])
+                  }
                 }
+                this.notesLoaded = true;
               }
-              this.notesLoaded = true;
-            }
-          );
+            );
 
-          this.assessments$.subscribe(
-            data => {
-              this.assessments = data;
-              // Array to hold which category id's to fetch
-              const categoryIdsArray: number[] = [];
-
-              // For every assessment, populate the categoryIdsArray and add an entry to the `columns` array, leaving category blank
-              for (let assessment of this.assessments) {
-                if (!categoryIdsArray.includes(assessment.assessmentCategory)) {
-                  categoryIdsArray.push(assessment.assessmentCategory);
-                  const found = this.columns.find(column => column.assessmentId === assessment.assessmentId);
+            this.assessments = [];
+            this.columns = [];
+            this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(batch.batchId, week).subscribe(
+              data => {
+                this.assessments = data;
+                this.totalPoints = 0;
+                // For every assessment, populate the categoryIdsArray and add an entry to the `columns` array, leaving category blank
+                for (let assessment of data) {
+                  const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
                   if (found === undefined) {
                     // Create an AssessBatchColumn entry, leaving category to populate later
                     this.columns.push({
-                      assessmentId: assessment.assessmentId,
-                      rawScore: assessment.rawScore,
-                      assessmentType: assessment.assessmentType,
-                      categoryId: assessment.assessmentCategory,
-                      category: ""
+                      assessment: assessment,
+                      category: "",
                     });
-
-                    // Add a grades observable to the array for each assessment
-                    this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(assessment.assessmentId));
+                    this.assessBatchGradeService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
+                      data => {
+                        this.addToColumn(data);
+                      }
+                    );
                   }
+                  // Add a grades observable to the array for each assessment
+                  this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(assessment.assessmentId));
+                  this.totalPoints += assessment.rawScore;
                 }
-              }
 
-              // After the category array has been populated, fetch each category and set category for `columns` array
-              from(categoryIdsArray).pipe(
-                distinctUntilChanged(),
-                concatMap(categoryId => this.assessBatchGradeService.getCategoryByCategoryId(categoryId))
-              ).subscribe(
-                data => {
-                  if (this.categories.length === 0) {
-                    this.categories.push(data);
-                    this.addCategoryToColumn(data);
-                  } else {
-                    const found = this.categories.find(category => category.categoryId === data.categoryId);
-                    if (found === undefined) {
-                      this.categories.push(data);
-                      this.addCategoryToColumn(data);
+                // Once we have all the grades to fetch, get them individually and add to `rows`
+                from(this.thisWeeksGrades$).pipe(
+                  concatMap(data => data)
+                ).subscribe(
+                  data => {
+                    if (data.length > 0) {
+                      const assessmentId: number = data[0].assessmentId;
+                      this.grades.set(assessmentId, data);
                     }
                   }
-                }
-              );
-
-              // Once we have all the grades to fetch, get them individually and add to `rows`
-              from(this.thisWeeksGrades$).pipe(
-                concatMap(data => data)
-              ).subscribe(
-                data => {
-                  if (data.length > 0) {
-                    const assessmentId: number = data[0].assessmentId;
-                    this.grades.set(assessmentId, data);
-                  }
-                }
-              );
-            }
-          );
+                );
+              }
+            );
+          }
         }
       }
     );
@@ -156,10 +160,17 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     for (let prop in changes) {
-      const change = changes[prop];
-      if (change.currentValue !== undefined) {
-        this.setSelectedWeek(this.batch.weeks);
-        this.selectedBatch.next(change.currentValue);
+      if (prop === "week") {
+        const change = changes[prop];
+        if (!change.isFirstChange() && change.currentValue !== undefined) {
+          this.setSelectedWeek(change.currentValue);
+        }
+      } else if (prop === "batch") {
+        const change = changes[prop];
+        if (!change.isFirstChange() && change.currentValue !== undefined) {
+          this.setSelectedWeek(this.batch.weeks);
+          this.selectedBatch.next(change.currentValue);
+        }
       }
     }
   }
@@ -167,7 +178,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   setSelectedWeek(week: number) {
     this.notesLoaded = false;
     this.selectedWeek = week;
-    this.selectedWeekSubject.next(this.selectedWeek);
+    this.selectedWeekSubject.next(week);
+    this.onWeekSelect.next(week);
   }
 
   getNotesForTrainee(traineeId: number): Note {
@@ -222,11 +234,12 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     )
   }
 
-  private addCategoryToColumn(category: Category) {
-    for (let column of this.columns) {
-      if (column.categoryId === category.categoryId && column.category === "") {
-        column.category = category.skillCategory;
-        this.totalPoints += column.rawScore;
+  private addToColumn(category: Category) {
+    if (this.columns.length > 0) {
+      for (let column of this.columns) {
+        if (column.assessment.assessmentCategory === category.categoryId) {
+          column.category = category.skillCategory;
+        }
       }
     }
   }

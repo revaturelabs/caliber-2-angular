@@ -1,11 +1,9 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { AssessmentService } from '../../../Services/assessment.service';
-import { ToolbarComponent } from '../../toolbar/toolbar.component';
 import { Assessment } from '../../../Models/Assesment';
 import { CategoryService } from '../../../Services/category.service';
 import { Category } from 'src/app/Assess-Batch/Models/Category';
 
-import { traineeAssessment } from 'src/app/User/user/types/trainee';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
 
 @Component({
@@ -14,7 +12,7 @@ import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-ba
   styleUrls: ['./update-delete-assessment-modal.component.css']
 })
 export class UpdateDeleteAssessmentModalComponent implements OnInit{
-  
+
   @Output() emitAssess = new EventEmitter();
   categories: Category[];
   currentCategory: Category;
@@ -46,14 +44,14 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     {
     name : 'Other'
     }
-  ] 
+  ]
 
   resetForm(){
     this.selectedType = "default";
     this.selectedCategory = "default";
     this.score = this.currentAssessment.rawScore;
   }
-  
+
   constructor(public assessmentSerivce: AssessmentService,  public assessBatchGradeService: AssessBatchGradeService,public categoryService: CategoryService) { }
 
   editAssessment(score,type,category) :void{
@@ -66,8 +64,8 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     if(category !== "default"){
       this.currentAssessment.assessmentCategory = category
     }
-    this.assessmentSerivce.updateAssessment(new Assessment(this.currentAssessment.assessmentId, this.currentAssessment.rawScore, 
-      this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber, 
+    this.assessmentSerivce.updateAssessment(new Assessment(this.currentAssessment.assessmentId, this.currentAssessment.rawScore,
+      this.currentAssessment.assessmentTitle, this.currentAssessment.assessmentType, this.currentAssessment.weekNumber,
       this.currentAssessment.batchId, this.currentAssessment.assessmentCategory)).subscribe(result=>{
         this.currentAssessment = result;
         this.refreshPage();
@@ -82,7 +80,7 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
 
   refreshPage(){
     this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(this.assessmentSerivce.assessment.batchId, this.assessmentSerivce.assessment.weekNumber).subscribe(assessments => {
-    
+
       this.assessBatchGradeService.storeAssessments(assessments);
       this.assessBatchGradeService.assessments.emit(assessments);
       this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(this.assessmentSerivce.assessment.batchId, this.assessmentSerivce.assessment.weekNumber).subscribe(grades => {
@@ -130,6 +128,6 @@ export class UpdateDeleteAssessmentModalComponent implements OnInit{
     this.getCategories();
     this.getCategory(this.currentCatId);
   }
- 
+
 
 }

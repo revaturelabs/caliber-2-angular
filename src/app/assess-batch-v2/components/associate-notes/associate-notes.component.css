@@ -1,1 +1,12 @@
+.notes-container {
+  white-space: nowrap;
+  position: relative;
+}
 
+.note-spinner {
+  position: absolute;
+  top: 0;
+  left: 97.5%;
+  z-index: 1;
+  background: none;
+}

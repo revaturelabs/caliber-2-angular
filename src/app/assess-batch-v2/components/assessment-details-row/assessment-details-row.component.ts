@@ -9,8 +9,6 @@ import {Grade, Trainee} from "../../../Batch/type/trainee";
 })
 export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
-  @Input("assessment") assessmentId: number;
-  @Input("trainee") trainee: Trainee;
   @Input("grades") grade: Grade;
   @Output("onGradeUpdate") onGradeUpdate: EventEmitter<Grade> = new EventEmitter<Grade>();
   gradeForm: FormGroup;

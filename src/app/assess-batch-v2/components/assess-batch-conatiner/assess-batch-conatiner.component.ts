@@ -2,11 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
-import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
-import { AuditService } from 'src/app/Audit/Services/audit.service';
-import { AssessmentService } from 'src/app/Assess-Batch/Services/assessment.service';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import {Assessment} from "../../../Assess-Batch/Models/Assesment";
 
 @Component({
   selector: 'app-assess-batch-conatiner',
@@ -21,19 +19,16 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   selectedYear: number;
   selectedQuarter: number;
   selectedBatch: Batch;
+  selectedWeek: number;
 
   private yearSubject: BehaviorSubject<number>;
   private quarterSubject: BehaviorSubject<number>;
-  private batchSubject: BehaviorSubject<Batch>
 
   private allBatchesSubscription: Subscription;
 
   constructor(
     private noteService: NoteService,
     private assessBatchService: AssessBatchService,
-    private assessBatchGradeService: AssessBatchGradeService,
-    private auditService: AuditService,
-    private assessmentService: AssessmentService
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
@@ -82,6 +77,10 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
   setSelectedBatch(batch: Batch) {
     this.selectedBatch = batch;
+  }
+
+  setSelectedWeek(week: number) {
+    this.selectedWeek = week;
   }
 
   private getQuarterFromDate(date: Date): number {

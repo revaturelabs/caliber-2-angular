@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Import Grades for week {{ week }}</h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="gradeForm">
+    <div class="form-row col-md-12 col-sm-12">
+      <div class="form-group">
+        <label for="gradeJsonObj"></label>
+        <textarea class="form-control" id="gradeJsonObj" rows="3"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="import()">Import Grades</button>
+</div>

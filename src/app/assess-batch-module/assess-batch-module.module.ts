@@ -11,21 +11,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MockSaveComponent } from "../Assess-Batch/Components/mock-save/mock-save.component";
 import { UpdateDeleteAssessmentModalComponent }from  '../Assess-Batch/Components/associate/update-delete-assessment-modal/update-delete-assessment-modal.component';
 import { FilterBatchPipeService } from '../Assess-Batch/Services/filter-batch-pipe.service'
+import {AssessBatchV2Module} from "../assess-batch-v2/assess-batch-v2.module";
 @NgModule({
-  imports: [CommonModule, AssessBatchRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule],
+  imports: [CommonModule, AssessBatchRoutingModule, FormsModule, NgbModule.forRoot(), ReactiveFormsModule, AssessBatchV2Module],
   declarations: [
       AssessBatchComponent,
       AssociateComponent,
       FeedbackComponent,
       ToolbarComponent,
       BatchModalComponent,
-      MockSaveComponent,
+      // MockSaveComponent,
       UpdateDeleteAssessmentModalComponent,
       FilterBatchPipeService
     ],
     entryComponents :[ BatchModalComponent, UpdateDeleteAssessmentModalComponent ],
   providers: [UpdateDeleteAssessmentModalComponent]
-    
-   
+
+
 })
 export class AssessBatchModule {}

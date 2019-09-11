@@ -6,7 +6,7 @@
         <tr>
           <th class="col-md-2">Trainee</th>
           <th *ngFor="let column of columns" class="col-md-1">
-            <app-assessment-details-column [columnData]="column" [totalPoints]="totalPoints" ></app-assessment-details-column>
+            <app-assessment-details-column [column]="column" [categories]="categories" [week]="week" [batchId]="batch.batchId" [totalPoints]="totalPoints"></app-assessment-details-column>
           </th>
           <th class="col-md-6">Notes</th>
         </tr>
@@ -23,10 +23,10 @@
           <td class="col-md-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
         </tr>
       </tbody>
-      <tfoot *ngIf="assessments.length > 0">
+      <tfoot *ngIf="assessments$ | async as assessments2">
         <tr>
           <td><strong>Average:</strong></td>
-          <td *ngFor="let assessment of assessments">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
+          <td *ngFor="let assessment of assessments2">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
           <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage() | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>
@@ -34,19 +34,3 @@
     <app-batch-level-feedback [batchId]="batch.batchId" [week]="selectedWeek"></app-batch-level-feedback>
   </div>
 </div>
-<!--<div *ngIf="trainees.length === 0">-->
-<!--  No associates found-->
-<!--</div>-->
-
-
-<!--<div *ngIf="trainees.length > 0">-->
-<!--  {{ trainees | json }}-->
-<!--</div>-->
-
-<!--<div *ngIf="assessments.length > 0">-->
-<!--  {{ assessments | json }}-->
-<!--</div>-->
-
-<!--<div *ngIf="categories.length > 0">-->
-<!--  {{ categories | json }}-->
-<!--</div>-->

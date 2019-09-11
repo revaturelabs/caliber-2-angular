@@ -9,7 +9,7 @@ import {NoteService} from "../../../Assess-Batch/Services/note.service";
   templateUrl: './associate-notes.component.html',
   styleUrls: ['./associate-notes.component.css']
 })
-export class AssociateNotesComponent implements OnInit, OnChanges {
+export class AssociateNotesComponent implements OnInit {
 
   @Input("trainee") trainee: Trainee;
   @Input("week") week: number;
@@ -17,6 +17,12 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
   @Input("note") note: Note;
   @Output("onNoteUpdate") onNoteUpdate: EventEmitter<Note> = new EventEmitter<Note>(true);
   traineeNotesForm: FormGroup;
+
+  isSaving: boolean = false;
+  success: boolean = false;
+  failure: boolean = false;
+
+  private readonly timeout: number = 250;
 
   constructor(
     private fb: FormBuilder,
@@ -27,21 +33,12 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
     this.traineeNotesForm = this.generateForm();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    for (let prop in changes) {
-      const change = changes[prop];
-      // Only call for notes once we change the current week
-      if (typeof change.previousValue === 'number' && typeof change.currentValue === 'number') {
-        console.log(`Found associate ${this.trainee.traineeId} for week ${this.week}`);
-      }
-    }
-  }
-
   private generateForm(): FormGroup {
     if (Boolean(this.note) && Boolean(this.note.noteContent)) {
+      this.success = true;
       return this.fb.group({
         "notes": [this.note.noteContent]
-      })
+      });
     }
     return this.fb.group({
       "notes": ['']
@@ -49,6 +46,9 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
   }
 
   handleNote() {
+    this.isSaving = true;
+    this.success = false;
+    this.failure = false;
     const noteContent: string = this.traineeNotesForm.get("notes").value;
     if (Boolean(noteContent)) {
       if (this.note === undefined) {
@@ -63,6 +63,11 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
           (data: Note) => {
             this.note = data;
             this.onNoteUpdate.emit(data);
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.success = true;
+          }, err => {
+            this.isSaving = false;
+            this.failure = true;
           }
         )
       } else {
@@ -70,6 +75,11 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
         this.noteService.putNote(this.note).subscribe(
           (data: Note) => {
             this.onNoteUpdate.emit(data);
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.success = true;
+          }, err => {
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.failure = true;
           }
         )
       }
@@ -78,7 +88,12 @@ export class AssociateNotesComponent implements OnInit, OnChanges {
         this.note.noteContent = noteContent;
         this.noteService.putNote(this.note).subscribe(
           (data: Note) => {
+            setTimeout(() => this.isSaving = false, this.timeout);
             this.onNoteUpdate.emit(data);
+            this.success = true;
+          }, err => {
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.failure = true;
           }
         )
       }

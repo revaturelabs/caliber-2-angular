@@ -8,9 +8,10 @@ import { Note } from 'src/app/Batch/type/note';
 import { AssessmentService } from '../../Services/assessment.service';
 import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
 import { Assessment } from '../../Models/Assesment';
-import { Category } from 'src/app/User/user/types/trainee';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {TraineeFlag} from "../../../User/user/types/trainee-flag";
+import {Category} from "../../Models/Category";
 
 //import { AuditService } from '../../Services/audit.service';  // ag
 
@@ -29,7 +30,7 @@ export class AssociateComponent implements OnInit {
   selectedAssessmentCategoryId: number;
   totalRaw: number = 0;
   calcArr: number[] = [];
-  //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening 
+  //Temporaray Array to hold ids for traineed when the flag clicked, acts as place holder, and also allow for opening
   //multiple flag popup box in the same time.
   flagNoteSwitch: Array<number> = [];
   noteArr: Note[] = [];
@@ -107,12 +108,12 @@ export class AssociateComponent implements OnInit {
       this.batchId = batchId;
     });
 
-    //calling the method to populate all of the assessments 
+    //calling the method to populate all of the assessments
     this.populateAssess();
   }
 
   // Disables the associated notes text area box for 1 second.
- 
+
   //Emitting the array of assessments being populated by ToolbarComponent and is also getting all of the grades by assessmentId.
   populateAssess() {
     this.assessBatchGradeService.assessments.subscribe((assessmentArr) => {
@@ -188,7 +189,7 @@ export class AssociateComponent implements OnInit {
 
   // set the trainee flag status
   cycleFlag3(trainee: Trainee, newStatus: string): void {
-    trainee.flagStatus = newStatus;
+    trainee.flagStatus = TraineeFlag[newStatus];
     this.flagStatusVisual = "fa-" + trainee.flagStatus.toLowerCase();
   }
 
@@ -364,7 +365,7 @@ export class AssociateComponent implements OnInit {
     if (trainee.flagStatus == undefined)
     {
 
-      trainee.flagStatus = "NONE";
+      trainee.flagStatus = TraineeFlag["NONE"];
     }
 
     this.flagStatusVisual = "fa-" + trainee.flagStatus.toLowerCase();
@@ -373,7 +374,7 @@ export class AssociateComponent implements OnInit {
   // when modal 'cancel' button clicked..
   onFlagCancel2(trainee: Trainee)
   {
-    trainee.flagStatus = this.selectedTraineeFlagStatusBeforeSelecting;
+    trainee.flagStatus = TraineeFlag[this.selectedTraineeFlagStatusBeforeSelecting];
     this.isaddFlagClicked = false;
   }
 
@@ -382,7 +383,7 @@ export class AssociateComponent implements OnInit {
   {
 
     trainee.flagNotes = "";
-    trainee.flagStatus = "NONE";
+    trainee.flagStatus = TraineeFlag["NONE"];
     this.AssessBatchService.postComment(trainee).subscribe(response => {});
     this.isaddFlagClicked = false;
 

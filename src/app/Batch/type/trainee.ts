@@ -1,3 +1,5 @@
+import {TraineeFlag} from "../../User/user/types/trainee-flag";
+
 export class Trainee {
     traineeId: number;
     resourceId: string;
@@ -5,8 +7,8 @@ export class Trainee {
     email: string;
     trainingStatus: string;
     batchId: number;
-   phoneNumber: string;
-   skypeId: string;
+    phoneNumber: string;
+    skypeId: string;
     profileUrl: string;
     recruiterName: string;
     college: string;
@@ -15,15 +17,15 @@ export class Trainee {
     techScreenerName: string;
     techScreenScore: number;
     projectCompletion: string;
-    flagStatus: string;
+    flagStatus: TraineeFlag;
     flagNotes: string;
     flagAuthor: string;
     flagTimeStamp: string;
     constructor( ) {}
 }
-    
+
 export class traineeAssessment {
-        assessmentId: number;
+        assessmentId?: number;
         rawScore: number;
         assessmentTitle: string;
         assessmentType: string;
@@ -31,7 +33,7 @@ export class traineeAssessment {
         batchId: number;
         assessmentCategory: number;
 }
-    
+
 export class Grade {
         gradeId: number;
         dateReceived: number;
