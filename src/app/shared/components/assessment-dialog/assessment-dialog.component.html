@@ -56,10 +56,14 @@
   </form>
 </div>
 <div class="modal-footer">
-  <div class="col-sm-12 col-md-12">
-    <button *ngIf="assessment" type="button" class="btn btn-danger pull-left" (click)="handleDeleteAssessment()">Delete Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</button>
+  <div *ngIf="!confirmDelete" class="col-md-12 col-sm-12">
+    <button *ngIf="assessment" type="button" class="btn btn-danger pull-left" (click)="haveUserConfirmDelete()">Delete Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</button>
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
     <button *ngIf="assessment" type="button" class="btn btn-primary" (click)="handleUpdateAssessment()" [disabled]="assessmentForm.invalid">Update</button>
     <button *ngIf="!assessment" type="button" class="btn btn-primary" (click)="handleCreateAssessment()" [disabled]="assessmentForm.invalid">Create Assessment</button>
+  </div>
+  <div *ngIf="confirmDelete" class="col-md-12 col-sm-12">
+    <button type="button" class="btn btn-danger w-auto pull-left" *ngIf="assessmentForm.valid && (hasValues() || confirmDelete)" (click)="handleDeleteAssessment()">Are you sure you want to delete the week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}?</button>
+    <button type="button" class="btn btn-primary pull-right" (click)="cancelDelete()">Go Back</button>
   </div>
 </div>

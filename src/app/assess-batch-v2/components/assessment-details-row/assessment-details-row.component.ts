@@ -10,7 +10,10 @@ import {Grade, Trainee} from "../../../Batch/type/trainee";
 export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
   @Input("grades") grade: Grade;
-  @Output("onGradeUpdate") onGradeUpdate: EventEmitter<Grade> = new EventEmitter<Grade>();
+  @Input("assessmentId") assessmentId: number;
+  @Input("traineeId") traineeId: number;
+  @Output("onGradeUpdate") onGradeUpdate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
+  @Output("onGradeCreate") onGradeCreate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
   gradeForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }
@@ -34,9 +37,17 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
   handleGradeUpdate() {
     const score = this.gradeForm.get("grade").value;
     // Only make request when we have to
-    if (score !== this.grade.score) {
+    if (this.grade && score !== this.grade.score) {
       this.grade.score = score;
       this.onGradeUpdate.emit(this.grade);
+    } else {
+      this.grade = {
+        score: score,
+        assessmentId: this.assessmentId,
+        traineeId: this.traineeId,
+        dateReceived: new Date().getTime()
+      }
+      this.onGradeCreate.emit(this.grade);
     }
   }
 

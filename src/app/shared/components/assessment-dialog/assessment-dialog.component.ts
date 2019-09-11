@@ -16,6 +16,8 @@ export class AssessmentDialogComponent implements OnInit {
   batchId: number;
   categories: Category[];
   assessment: Assessment;
+
+  confirmDelete: boolean = false;
   assessmentTypes = [
     {name : 'Verbal',},
     {name: 'Exam',},
@@ -43,6 +45,14 @@ export class AssessmentDialogComponent implements OnInit {
         assessmentType: this.assessment.assessmentType
       })
     }
+  }
+
+  haveUserConfirmDelete() {
+    this.confirmDelete = true;
+  }
+
+  cancelDelete() {
+    this.confirmDelete = false;
   }
 
   getCategoryForAssessment(assessment: Assessment): string {
@@ -98,6 +108,10 @@ export class AssessmentDialogComponent implements OnInit {
   handleDeleteAssessment() {
     this.deleteAssessmentSubject.next(this.assessment);
     this.bsModalRef.hide();
+  }
+
+  hasValues(): boolean {
+    return Boolean(this.assessmentForm.get("selectedCategory").value) && Boolean(this.assessmentForm.get("maxPoints").value) && Boolean(this.assessmentForm.get("assessmentType").value);
   }
 
   private generateAssessmentForm(): FormGroup {

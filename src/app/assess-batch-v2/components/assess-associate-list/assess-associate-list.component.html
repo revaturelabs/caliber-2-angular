@@ -16,8 +16,11 @@
           <td class="col-md-2"><app-associate-details [trainee]="trainee"></app-associate-details></td>
           <td *ngFor="let assessment of assessments" class="col-md-1">
             <app-assessment-details-row
+              [assessmentId]="assessment?.assessmentId"
+              [traineeId]="trainee?.traineeId"
               [grades]="getGradesForAssessmentAndTrainee(assessment?.assessmentId, trainee?.traineeId)"
               (onGradeUpdate)="handleGradeUpdate($event)"
+              (onGradeCreate)="handleGradeCreate($event)"
             ></app-assessment-details-row>
           </td>
           <td class="col-md-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>

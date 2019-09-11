@@ -35,7 +35,7 @@ export class traineeAssessment {
 }
 
 export class Grade {
-        gradeId: number;
+        gradeId?: number;
         dateReceived: number;
         score: number;
         assessmentId: number;

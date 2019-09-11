@@ -234,6 +234,14 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     )
   }
 
+  handleGradeCreate(grade: Grade) {
+    this.assessBatchGradeService.postGrade(grade).subscribe(
+      data => {
+        this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));
+      }
+    )
+  }
+
   private addToColumn(category: Category) {
     if (this.columns.length > 0) {
       for (let column of this.columns) {
