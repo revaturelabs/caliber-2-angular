@@ -11,9 +11,10 @@ import {GradeExport} from "../../dto/grade-export.dto";
 export class ImportGradesDialogComponent implements OnInit {
 
   week: number;
+  batchId: number;
 
   gradeForm: FormGroup;
-  jsonValid: boolean = false;
+  jsonValid: boolean = true;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -26,8 +27,9 @@ export class ImportGradesDialogComponent implements OnInit {
 
   import() {
     try {
-      const gradeJson: GradeExport = JSON.parse(this.gradeForm.get("gradesJson").value);
-      console.log(gradeJson);
+      const gradeExport: GradeExport = <GradeExport>JSON.parse(this.gradeForm.get("gradesJson").value);;
+
+      // Do something on the backend with this grade export
     } catch (e) {
       this.jsonValid = false;
     }
@@ -38,4 +40,5 @@ export class ImportGradesDialogComponent implements OnInit {
       "gradesJson": ["", Validators.required]
     });
   }
+
 }

@@ -28,7 +28,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   trainees$: Observable<Trainee[]>;
   private notes$: Observable<WeeklyAssociateNotes>;
   assessments$: Observable<Assessment[]>;
-  private thisWeeksGrades$: Observable<Grade[]>[];
+  grades$: Observable<Grade[]>;
   columns: AssessBatchColumn[] = [];
   totalPoints: number = 0;
   grades: Map<number, Grade[]>;
@@ -96,9 +96,24 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       ([week, batch]) => {
         if (week > 0 && Boolean(batch)) {
           this.selectedWeek = week;
-          this.thisWeeksGrades$ = [];
+          // this.thisWeeksGrades$ = [];
           this.assessments$ = this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(batch.batchId, week);
           if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
+            this.grades$ = this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(batch.batchId, week);
+            this.grades$.subscribe(
+              data => {
+                if (data.length > 0) {
+                  this.grades = new Map<number, Grade[]>();
+                  for (let grade of data) {
+                    if (this.grades.has(grade.assessmentId)) {
+                      this.grades.get(grade.assessmentId).push(grade);
+                    } else {
+                      this.grades.set(grade.assessmentId, [grade]);
+                    }
+                  }
+                }
+              }
+            );
             this.notes$ = this.noteService.getNoteMapByBatchIdAndWeekNumber(batch.batchId, week);
             this.notes$.subscribe(
               data => {
@@ -134,22 +149,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                       }
                     );
                   }
-                  // Add a grades observable to the array for each assessment
-                  this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(assessment.assessmentId));
                   this.totalPoints += assessment.rawScore;
                 }
-
-                // Once we have all the grades to fetch, get them individually and add to `rows`
-                from(this.thisWeeksGrades$).pipe(
-                  concatMap(data => data)
-                ).subscribe(
-                  data => {
-                    if (data.length > 0) {
-                      const assessmentId: number = data[0].assessmentId;
-                      this.grades.set(assessmentId, data);
-                    }
-                  }
-                );
               }
             );
           }
@@ -229,7 +230,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   handleGradeUpdate(grade: Grade) {
     this.assessBatchGradeService.updateGrade(grade).subscribe(
       data => {
-        this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));
+        // this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));
+        this.setUpdatedGrade(data);
       }
     )
   }
@@ -237,7 +239,11 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   handleGradeCreate(grade: Grade) {
     this.assessBatchGradeService.postGrade(grade).subscribe(
       data => {
-        this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));
+        if (this.grades.has(data.assessmentId)) {
+          this.grades.get(data.assessmentId).push(data);
+        } else {
+          this.grades.set(data.assessmentId, [data]);
+        }
       }
     )
   }
@@ -247,6 +253,19 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       for (let column of this.columns) {
         if (column.assessment.assessmentCategory === category.categoryId) {
           column.category = category.skillCategory;
+        }
+      }
+    }
+  }
+
+  private setUpdatedGrade(grade: Grade) {
+    if (this.grades.has(grade.assessmentId)) {
+      for (let g of this.grades.get(grade.assessmentId)) {
+        if (g.assessmentId === grade.assessmentId && g.traineeId === grade.traineeId) {
+          const index = this.grades.get(grade.assessmentId).findIndex(gr => gr.assessmentId === grade.assessmentId && gr.traineeId === grade.traineeId);
+          if (index > 0) {
+            this.grades.get(grade.assessmentId)[index] = grade;
+          }
         }
       }
     }

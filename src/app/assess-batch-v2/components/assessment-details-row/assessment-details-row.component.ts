@@ -9,7 +9,7 @@ import {Grade, Trainee} from "../../../Batch/type/trainee";
 })
 export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
-  @Input("grades") grade: Grade;
+  @Input("grade") grade: Grade;
   @Input("assessmentId") assessmentId: number;
   @Input("traineeId") traineeId: number;
   @Output("onGradeUpdate") onGradeUpdate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
@@ -46,7 +46,7 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
         assessmentId: this.assessmentId,
         traineeId: this.traineeId,
         dateReceived: new Date().getTime()
-      }
+      };
       this.onGradeCreate.emit(this.grade);
     }
   }

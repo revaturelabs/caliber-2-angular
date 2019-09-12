@@ -18,7 +18,7 @@
             <app-assessment-details-row
               [assessmentId]="assessment?.assessmentId"
               [traineeId]="trainee?.traineeId"
-              [grades]="getGradesForAssessmentAndTrainee(assessment?.assessmentId, trainee?.traineeId)"
+              [grade]="getGradesForAssessmentAndTrainee(assessment?.assessmentId, trainee?.traineeId)"
               (onGradeUpdate)="handleGradeUpdate($event)"
               (onGradeCreate)="handleGradeCreate($event)"
             ></app-assessment-details-row>
@@ -26,10 +26,10 @@
           <td class="col-md-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
         </tr>
       </tbody>
-      <tfoot *ngIf="assessments$ | async as assessments2">
+      <tfoot>
         <tr>
           <td><strong>Average:</strong></td>
-          <td *ngFor="let assessment of assessments2">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
+          <td *ngFor="let assessment of assessments">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
           <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage() | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>

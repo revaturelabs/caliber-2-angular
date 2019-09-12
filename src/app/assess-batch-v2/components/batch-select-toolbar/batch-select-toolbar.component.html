@@ -23,6 +23,6 @@
   </div>
   <div class="toolbar-row-buttons">
     <app-create-assessment-button [week]="week" [batchId]="batch?.batchId" (onAssessmentCreate)="handleAssessmentCreate($event)" class="left-button"></app-create-assessment-button>
-    <app-import-grades-button class="right-button" [week]="week"></app-import-grades-button>
+    <app-import-grades-button class="right-button" [week]="week" [batchId]="batch?.batchId"></app-import-grades-button>
   </div>
 </div>

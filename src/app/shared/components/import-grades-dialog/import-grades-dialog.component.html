@@ -5,8 +5,15 @@
   <form [formGroup]="gradeForm">
     <div class="form-row col-md-12 col-sm-12">
       <div class="form-group">
-        <label for="gradeJsonObj"></label>
-        <textarea class="form-control" id="gradeJsonObj" rows="3"></textarea>
+        <label for="gradeJsonObj">Paste JSON:</label>
+        <textarea
+          class="form-control"
+          id="gradeJsonObj"
+          rows="6"
+          placeholder="Paste the week {{ week }} Grade Export JSON from Revature PRO"
+          formControlName="gradesJson"
+        ></textarea>
+        <small *ngIf="!jsonValid" class="text-danger">Invalid JSON format</small>
       </div>
     </div>
   </form>
