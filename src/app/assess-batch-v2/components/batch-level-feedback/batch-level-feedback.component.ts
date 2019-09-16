@@ -2,7 +2,6 @@ import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {combineLatest} from "rxjs";
-import {distinctUntilChanged} from "rxjs/operators";
 import {Note} from "../../../Batch/type/note";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -18,12 +17,16 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   private batchIdSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.batchId);
   private weekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
   note: Note;
-  batchNote$: Observable<Note> = of(this.note);
   batchNoteForm: FormGroup;
 
   showSaving = false;
   showCheck = false;
   showFloppy = true;
+
+  // Used to track state of spinner - spinner if saving, check if success, red x if failure
+  isSaving: boolean = false;
+  success: boolean = false;
+  failure: boolean = false;
 
   constructor(
     private noteService: NoteService,
@@ -33,10 +36,25 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.batchNoteForm = this.generateBatchNoteForm();
-    this.batchNote$ = this.noteService.getBatchNoteByBatchIdAndWeekNumber(this.batchId, this.week);
     combineLatest(this.batchIdSubject.asObservable(), this.weekSubject.asObservable()).subscribe(
       ([batchId, week]) => {
-        this.batchNote$ = this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week);
+        if (batchId && week) {
+          this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week).subscribe(
+            data => {
+              this.note = data;
+              if (data && data.noteContent) {
+                this.batchNoteForm.patchValue({
+                  batchNote: data.noteContent
+                });
+                this.success = true;
+              } else {
+                this.isSaving = false;
+                this.failure = false;
+                this.success = false;
+              }
+            }
+          )
+        }
       }
     );
   }
@@ -77,6 +95,9 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   }
 
   handleNoteUpdate() {
+    this.isSaving = true;
+    this.success = false;
+    this.failure = false;
     const noteContent = this.batchNoteForm.get("batchNote").value;
     if (Boolean(noteContent)) {
       if (Boolean(this.note)) {
@@ -84,8 +105,12 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
         this.note.noteContent = noteContent;
         this.noteService.putNote(this.note).subscribe(
           (data: Note) => {
-            console.log(data);
             this.note = data;
+            this.isSaving = false;
+            this.success = true;
+          }, err => {
+            this.isSaving = false;
+            this.failure = true;
           }
         )
       } else {
@@ -99,8 +124,12 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
         };
         this.noteService.postNote(this.note).subscribe(
           (data: Note) => {
-            console.log(data);
             this.note = data;
+            this.isSaving = false;
+            this.success = true;
+          }, err => {
+            this.isSaving = false;
+            this.failure = true;
           }
         )
       }

@@ -32,7 +32,7 @@ export class AssessmentDialogService {
       batchId: batchId,
       categories: categories
     };
-    this.modalRef = this.modalService.show(AssessmentDialogComponent, {initialState});
+    this.modalRef = this.modalService.show(AssessmentDialogComponent, {initialState, ignoreBackdropClick: true});
     this.createAssessment$ = this.modalRef.content.createAssessmentSubject.asObservable();
     this.updateAssessment$ = this.modalRef.content.updateAssessmentSubject.asObservable();
     this.deleteAssessment$ = this.modalRef.content.deleteAssessmentSubject.asObservable();

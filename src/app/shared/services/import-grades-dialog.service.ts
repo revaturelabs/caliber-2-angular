@@ -18,7 +18,7 @@ export class ImportGradesDialogService {
     const initialState = {
       week: week
     };
-    this.modalRef = this.modalService.show(ImportGradesDialogComponent, {initialState});
+    this.modalRef = this.modalService.show(ImportGradesDialogComponent, {initialState, ignoreBackdropClick: true});
 
   }
 }

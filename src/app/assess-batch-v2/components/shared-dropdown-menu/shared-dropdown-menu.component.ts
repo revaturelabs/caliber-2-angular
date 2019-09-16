@@ -18,7 +18,7 @@ export class SharedDropdownMenuComponent implements OnInit {
 
   currentDropdownValue: string;
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {
@@ -35,17 +35,6 @@ export class SharedDropdownMenuComponent implements OnInit {
       this.currentDropdownValue = this.selectedValue;
     }
   }
-
-  // getDropdownValue(): string {
-  //   if (Boolean(this.selectedValue)) {
-  //     if (this.for === 'Batch' && !this.changed) {
-  //       return `Select ${this.for}`;
-  //     }
-  //     return "" + this.selectedValue;
-  //   } else {
-  //     return `Select ${this.for}`;
-  //   }
-  // }
 
   setDropdownValue(value: any, index: number) {
     this.selectedValue = value;

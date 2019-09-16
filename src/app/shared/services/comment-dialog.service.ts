@@ -24,7 +24,7 @@ export class CommentDialogService {
 
   openCommentDialog(trainee: Trainee) {
     const initialState = {trainee: trainee};
-    this.modalRef = this.modalService.show(AssociateFlagDialogComponent, {initialState});
+    this.modalRef = this.modalService.show(AssociateFlagDialogComponent, {initialState, ignoreBackdropClick: true});
     this.comment$ = this.modalRef.content.createComment$.asObservable();
 
     combineLatest(this.comment$).subscribe(([created]) => {
