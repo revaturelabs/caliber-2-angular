@@ -17,7 +17,7 @@
 
 					<div class="row">
 						<div class="form-group col-lg-12 col-md-12 col-sm-12">
-							<label for="category">Assessment Category:</label> 
+							<label for="category">Assessment Category:</label>
 							<select name = 'selectedCategory' [(ngModel)] = 'selectedCategory'
 								class="form-control" id="category"
 								required  value = 'default'>
@@ -35,7 +35,7 @@
 
 
 						<div class="form-group col-md-6 col-sm-6">
-							<label for="assessmentType">Assessment Type:</label> 
+							<label for="assessmentType">Assessment Type:</label>
 							<select name = 'selectedType' [(ngModel)] = 'selectedType' [ngModelOptions]="{standalone: true}" class="form-control" id='selectedType' required>
 								<option value="default" disabled>Select Assessment Type</option>
 								<option *ngFor ="let type of assessmentTypeDisplay" [ngValue] = type.name>{{type.name}}</option>

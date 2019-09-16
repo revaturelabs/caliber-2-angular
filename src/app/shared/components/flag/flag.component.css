@@ -1,0 +1,35 @@
+.green-flag {
+  color: darkgreen;
+}
+
+.green-flag:hover {
+  text-shadow: 0 0 5px darkgreen;
+}
+
+.green-flag-hover {
+  text-shadow: 0 0 5px darkgreen;
+}
+
+.red-flag {
+  color: red;
+}
+
+.red-flag:hover {
+  text-shadow: 0 0 5px red;
+}
+
+.red-flag-hover {
+  text-shadow: 0 0 5px red;
+}
+
+.blue-star {
+  color: mediumblue;
+}
+
+.blue-star:hover {
+  text-shadow: 0 0 5px mediumblue;
+}
+
+.blue-star-hover {
+  text-shadow: 0 0 5px mediumblue;
+}

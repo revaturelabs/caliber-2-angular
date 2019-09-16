@@ -1,0 +1,13 @@
+ul.flags > input[type = "radio"] {
+  display: none;
+  list-style: none;
+}
+
+.flags {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  padding: 0 0;
+}

@@ -1,0 +1,14 @@
+.associate-details-container {
+
+}
+
+.flag-pen {
+  margin-top: 5%;
+  color:#00000080;
+  cursor: pointer;
+}
+
+.flag {
+  float: right;
+  margin-left: -15%;
+}

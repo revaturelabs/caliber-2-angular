@@ -1,10 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { traineeAssessment, Grade, Category } from '../../User/user/types/trainee';
 import { environment } from 'src/environments/environment';
 import { MissingGrade } from 'src/app/home/models/missingGrade';
 import { catchError } from 'rxjs/operators'
+import {Assessment} from "../Models/Assesment";
+import {Grade} from "../../Batch/type/trainee";
+import {Category} from "../Models/Category";
 
 const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/json'})};
 
@@ -25,13 +27,17 @@ export class AssessBatchGradeService {
   missingGrades = '/all/grade/missingGrades';
 
   url2 = this.url + '/all/grade/average?batch=';
- 
-  allAssessments: traineeAssessment[] = [];
+
+  allAssessments: Assessment[] = [];
   allGrades: Grade[] = [];
-  assessments = new EventEmitter<traineeAssessment[]>();
+  assessments = new EventEmitter<Assessment[]>();
   grades = new EventEmitter<Grade[]>();
 
   constructor(private http: HttpClient) { }
+
+  getAllGradesByAssessmentId(assessmentId: number): Observable<Grade[]> {
+    return this.http.get<Grade[]>(`${this.url}/all/grade/assessment/${assessmentId}`);
+  }
 
   getAvgGradeByAssessmentId(id: number): Observable<number> {
     return this.http.get<number>(this.url + this.avgGrade + id);
@@ -41,11 +47,11 @@ export class AssessBatchGradeService {
     return this.http.get<number>(this.url2 + batchId + '&week=' + weekId);
   }
 
-  getAssessmentsByBatchId(id: number): Observable<traineeAssessment[]> {
-    return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id);
+  getAssessmentsByBatchId(id: number): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(this.url + this.assessmentsByIdURL + id);
   }
-  getAssessmentsByBatchIdAndWeekNum(id: number, week: number): Observable<traineeAssessment[]> {
-    return this.http.get<traineeAssessment[]>(this.url + this.assessmentsByIdURL + id + '?week=' + week);
+  getAssessmentsByBatchIdAndWeekNum(id: number, week: number): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(this.url + this.assessmentsByIdURL + id + '?week=' + week);
   }
 
   getCategoryByCategoryId(id: number):  Observable<Category> {
@@ -71,11 +77,11 @@ export class AssessBatchGradeService {
   postGrade(grade: Grade): Observable<Grade> {
     return this.http.post<Grade>(this.url+this.postUrl, grade, httpOptions);
   }
-  
-  storeAssessments(entry: traineeAssessment[]) {
+
+  storeAssessments(entry: Assessment[]) {
     this.allAssessments = entry;
   }
-  returnAssessments(): traineeAssessment[] {
+  returnAssessments(): Assessment[] {
     return this.allAssessments;
   }
   storeGrades(entry: Grade[]) {
@@ -87,7 +93,7 @@ export class AssessBatchGradeService {
 
   addMissingGrade(currBatches : Array<any>) : Observable<Array<MissingGrade>> {
     return this.http.post<Array<MissingGrade>>(this.url + this.missingGrades, currBatches).pipe(catchError(this.handleError));
-  } 
+  }
 
   public handleError(error : HttpErrorResponse) {
     return Observable.throw(error.statusText);

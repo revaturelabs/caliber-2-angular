@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Trainee } from '../../types/trainee';
 import { TraineesService } from '../../Services/trainees.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import {Trainee} from "../../../../Batch/type/trainee";
 
 /**
  * @ignore

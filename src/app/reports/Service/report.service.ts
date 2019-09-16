@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Batch } from 'src/app/Batch/type/batch';
 import { traineeAssessment, Grade, Trainee } from 'src/app/Batch/type/trainee';
 import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
-import { Category } from 'src/app/User/user/types/trainee';
 import { QANote } from '../Models/qanote';
+import {Category} from "../../Assess-Batch/Models/Category";
 
 const httpOptions = {
   headers: new HttpHeaders({

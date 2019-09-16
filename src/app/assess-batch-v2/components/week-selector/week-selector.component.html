@@ -1,0 +1,29 @@
+<ul class="nav nav-tabs">
+  <li *ngFor="let week of weeks" [ngClass]="{'active': week === selectedWeek}" (click)="selectWeek(week)" >
+    <a role="button">Week {{ week }}</a>
+  </li>
+  <li role="button" data-toggle="modal" data-target="#addWeeks">
+    <a>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </li>
+</ul>
+
+<!-- Modal to add a new week -->
+<div id="addWeeks" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button id = "addNewWeek" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="text-center">
+          <h4>Add a new week?</h4>
+          <h4>This process cannot be undone.</h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id = "assessAcceptWeek" type="button" class="btn btn-primary" (click)="addWeek()" data-dismiss="modal">Yes</button>
+        <button id = "assessDeclineWeek" type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

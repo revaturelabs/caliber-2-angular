@@ -1,0 +1,20 @@
+<div *ngIf="batches | async as batches" class="container">
+  <app-batch-select-toolbar
+    [batches]="batches"
+    [quarters]="quarters"
+    [years]="years"
+    [quarter]="selectedQuarter"
+    [year]="selectedYear"
+    [batch]="selectedBatch"
+    [week]="selectedWeek"
+    (selectedQuarter)="setSelectedQuarter($event)"
+    (selectedYear)="setSelectedYear($event)"
+    (selectedBatch)="setSelectedBatch($event)"
+  ></app-batch-select-toolbar>
+  <app-assess-associate-list
+    [batch]="selectedBatch"
+    [week]="selectedWeek"
+    (onBatchUpdate)="setSelectedBatch($event)"
+    (onWeekSelect)="setSelectedWeek($event)"
+  ></app-assess-associate-list>
+</div>

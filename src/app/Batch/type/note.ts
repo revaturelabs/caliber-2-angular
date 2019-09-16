@@ -1,11 +1,11 @@
 export class Note {
-    noteId: number;
+    noteId?: number;
     noteContent: string;
     noteType: string;
     weekNumber: number;
     batchId: number;
-    traineeId: number;
-    
+    traineeId?: number;
+
     constructor(noteId: number, noteContent: string, noteType: string, weekNumber: number, batchId: number, traineeId: number) {
          this.noteId=noteId;
         this.noteContent=noteContent;

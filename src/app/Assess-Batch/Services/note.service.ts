@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Note } from 'src/app/Batch/type/note';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {WeeklyAssociateNotes} from "../../app.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -42,6 +43,14 @@ export class NoteService {
     return this.http.get<Note[]>(this.assessmentUrl + this.batchNotesByTraineeId + traineeId);
   }
 
+  getNoteMapByBatchIdAndWeekNumber(batchId: number, weekId: number): Observable<WeeklyAssociateNotes> {
+    return this.http.get<WeeklyAssociateNotes>(this.getNoteMapUrl(batchId, weekId));
+  }
+
+  getBatchNoteByBatchIdAndWeekNumber(batchId: number, weekNumber: number): Observable<Note> {
+    return this.http.get<Note>(`${this.assessmentUrl}/batch/${batchId}/${weekNumber}/note`);
+  }
+
   putNote(note): Observable<object> {
     return this.http.put<object>(this.assessmentUrl + this.updateNote, note);
   }
@@ -51,4 +60,7 @@ export class NoteService {
     return this.http.post<Note>(this.assessmentUrl + this.notePost, note);
   }
 
+  private getNoteMapUrl(batchId: number, weekNumber: number): string {
+    return `${this.assessmentUrl}/all/note/batch/${batchId}/${weekNumber}`;
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from 'src/app/AssessmentCategories/Services/category-service';
-import { Category } from 'src/app/User/user/types/trainee';
 import { CategoriesComponent } from '../../Components/categories/categories.component';
+import {Category} from "../../../Assess-Batch/Models/Category";
 
 @Component({
   selector: 'app-edit-assess-cat-modal',
@@ -10,8 +10,8 @@ import { CategoriesComponent } from '../../Components/categories/categories.comp
 })
 export class EditAssessCatModalComponent implements OnInit {
 
-  category:Category = new Category();  //The category that will be selected for presentation and editing 
-  @Input() categories:any []; //The list of categories to be loaded and displayed 
+  category:Category;  //The category that will be selected for presentation and editing
+  @Input() categories:any []; //The list of categories to be loaded and displayed
   errorMessage:string;
   successMessage:string;
   displayResultError:boolean;
@@ -19,7 +19,7 @@ export class EditAssessCatModalComponent implements OnInit {
   temp:string;
   tempOwner:any;
 
-  constructor(private categoryService:CategoryService, private catComponent:CategoriesComponent) { 
+  constructor(private categoryService:CategoryService, private catComponent:CategoriesComponent) {
 
   }
 
@@ -27,14 +27,14 @@ export class EditAssessCatModalComponent implements OnInit {
     this.getAll();
   }
 
-  //sets the selected category as the local category to be edited 
+  //sets the selected category as the local category to be edited
   selected(cat:Category){
     this.category = cat;
     this.temp = cat.skillCategory;
     this.tempOwner = cat.categoryOwner;
   }
 
-  //gets the categories from the database and inserts them into the category list 
+  //gets the categories from the database and inserts them into the category list
   getAll(){
     this.categoryService.listAll().subscribe((res)=>{
       var c = JSON.parse(JSON.stringify(res));
@@ -44,7 +44,7 @@ export class EditAssessCatModalComponent implements OnInit {
   }
 
 
-  //saves the changes made to the category into the database 
+  //saves the changes made to the category into the database
   save(){
     this.category.skillCategory = this.temp;
     this.category.categoryOwner = this.tempOwner;

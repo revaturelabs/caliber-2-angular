@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trainee } from '../types/trainee';
 import { TrainingStatus } from '../types/training-status';
+import {Trainee} from "../../../Batch/type/trainee";
 
  /**
    * Checks to see if 'show' is true or false

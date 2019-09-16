@@ -1,12 +1,12 @@
 import { Category } from "./Category";
 
 export class Assessment{
-    assessmentId : number; 
+    assessmentId ?: number;
     rawScore: number;
     assessmentTitle: string;
     assessmentType: string;
-    weekNumber: number;
-    batchId: number;
+    weekNumber?: number;
+    batchId?: number;
     assessmentCategory: number;
 
     /**
@@ -20,7 +20,7 @@ export class Assessment{
      * @param assessmentCategory
      */
 
-    constructor(assessmentId: number, rawScore: number, assessmentTitle: string, assessmentType: string, 
+    constructor(assessmentId: number, rawScore: number, assessmentTitle: string, assessmentType: string,
                 weekNumber: number, batchId: number, assessmentCategory:number){
                     this.assessmentId = assessmentId;
                     this.rawScore = rawScore;

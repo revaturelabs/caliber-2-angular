@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/User/user/types/trainee';
 import { CategoryService } from '../../Services/category-service';
 
 
@@ -17,7 +16,7 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categoryService: CategoryService) { }
 
-  
+
 
 
   ngOnInit() {
@@ -50,9 +49,9 @@ getAllCategories(){
 }
 
 disableCategory(category){
- 
+
   this.categoryService.disable(category.categoryId,  category.skillCategory, category.categoryOwner).subscribe(res=>{});
- 
+
   setTimeout(() => {
     this.getAllCategories();
   }, 700);

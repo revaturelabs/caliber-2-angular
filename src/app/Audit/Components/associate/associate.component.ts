@@ -10,6 +10,7 @@ import { element } from '@angular/core/src/render3/instructions';
 import { timeout } from 'q';
 import { Trainee } from 'src/app/Batch/type/trainee';
 import { Tag } from '../../types/Tag';
+import {TraineeFlag} from "../../../User/user/types/trainee-flag";
 @Component({
   selector: 'app-associate',
   templateUrl: './associate.component.html',
@@ -31,7 +32,7 @@ export class AssociateComponent implements OnInit {
   spinner: HTMLElement;
   checkMark: HTMLElement;
   errMark: HTMLElement;
-  
+
   flagStatusVisual: string;
   hoverComment: string;
   isaddFlagClicked: boolean = false;
@@ -122,7 +123,7 @@ export class AssociateComponent implements OnInit {
     }
     this.sortRandom = !this.sortRandom;
   }
-  
+
   getNote(NoteId: number) {
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId == NoteId) {
@@ -131,7 +132,7 @@ export class AssociateComponent implements OnInit {
     }
   }
   onFlagSelected(selectedFlag: string) {
-    this.selectedTrainee.flagStatus = selectedFlag;
+    this.selectedTrainee.flagStatus = TraineeFlag[selectedFlag];
     this.flagStatusVisual = "fa-" + this.selectedTrainee.flagStatus.toLowerCase();
   }
 
@@ -147,18 +148,18 @@ export class AssociateComponent implements OnInit {
 
   onFlagDelete(){
     this.selectedTrainee.flagNotes = "";
-    this.selectedTrainee.flagStatus = "NONE";
+    this.selectedTrainee.flagStatus = TraineeFlag["NONE"];
     this.auditService.saveFlag(this.selectedTrainee).subscribe(data => {
     });
     this.isaddFlagClicked = false;
   }
 
   onFlagCancel() {
-    this.selectedTrainee.flagStatus = this.selectedTraineeFlagStatusBeforeSelecting;
+    this.selectedTrainee.flagStatus = TraineeFlag[this.selectedTraineeFlagStatusBeforeSelecting];
     this.selectedTrainee.flagNotes = this.selectedTraineeFlagNotesBeforeSelecting;
     this.isaddFlagClicked = false;
   }
-  
+
   onAddFlagClicked(trainee: Trainee, index: number) {
     this.selectedTrainee = trainee;
     this.selectedTraineeFlagNotesBeforeSelecting = trainee.flagNotes;
@@ -217,7 +218,7 @@ export class AssociateComponent implements OnInit {
   }
   //noteOnBlur will save a note to the backend when an onBlur event happens.
   //if the function returns successfully, the check mark div will be displayed
-  //if the function returns an error, the X mark div will be displayed.. 
+  //if the function returns an error, the X mark div will be displayed..
   //these are displayed by setting the value of their ngIf variable to true
   noteOnBlur(selectedNoteId: number, secondRound: boolean, i: number): void {
     for (let note of this.notes) {
