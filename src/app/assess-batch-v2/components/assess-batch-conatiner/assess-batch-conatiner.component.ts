@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
-import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
-import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Batch} from 'src/app/Batch/type/batch';
+import {AssessBatchService} from 'src/app/Assess-Batch/Services/assess-batch.service';
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'app-assess-batch-conatiner',
@@ -26,7 +25,6 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   private allBatchesThisYearAndQuarterSubscription: Subscription;
 
   constructor(
-    private noteService: NoteService,
     private assessBatchService: AssessBatchService,
   ) {
     const date = new Date();

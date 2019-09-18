@@ -11,8 +11,23 @@ export const environment = {
   production: false,
   serverRootURL: serverRoot,
   api: {
-    category: {
+    assessments: {
+      create: `${serverRoot}/assessment/all/assessment/create`,
+      update: `${serverRoot}/assessment/all/assessment/update`,
+      delete(assessmentId: number): string {
+        return `${serverRoot}/assessment/all/assessment/delete/${assessmentId}`;
+      }
+    },
+    batches: {
+      allByYearAndQuarter(year: number, quarter: number): string {
+        return `${serverRoot}/batch/vp/all/?year=${year}&quarter=${quarter}`;
+      }
+    },
+    validYears: `${serverRoot}/batch/all/batch/valid_years`,
+    categories: {
       active: `${serverRoot}/category/?active=true`,
+      inactive: `${serverRoot}/category/?inactive=true`,
+      all: `${serverRoot}/category`,
       byBatchAndWeek(batchId: number, week: number): string {
         return `${serverRoot}/qa/category/${batchId}/${week}/all`
       }
