@@ -96,7 +96,7 @@
   <div ui-view="trainee-extra-modals"></div>
 
 </div>
-<app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createOrUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal>
+<app-batch-modal #batchModal (someEvent)="refreshPage()" (closeEvent)="createUpdate=null" [createOrUpdate]="createUpdate"></app-batch-modal>
 <app-view-trainees #viewTraineeModal [batchId]="selectedBatchId" (closeTraineeModal)="traineeClose()"></app-view-trainees>
 <form>
   <div class="modal fade" id="deleteBatchModal" tabindex="-1" role="dialog" aria-labelledby="batchModalLabel">

@@ -9,7 +9,7 @@
 const serverRoot: string = 'http://localhost:10000';
 export const environment = {
   production: false,
-  serverRootURL: 'http://localhost:10000',
+  serverRootURL: serverRoot,
   api: {
     category: {
       active: `${serverRoot}/category/?active=true`,
@@ -26,7 +26,10 @@ export const environment = {
       },
       batchNotes: `${serverRoot}/qa/audit/batch/notes`,
       traineeNotes: `${serverRoot}/qa/audit/trainee/notes`,
-
+      createCategory: `${serverRoot}/qa/category`,
+      deleteCategory(categoryId: number): string {
+        return `${serverRoot}/qa/category/delete/${categoryId}`;
+      }
     },
     user: {
       trainees: {

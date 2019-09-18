@@ -24,20 +24,20 @@ export class LastQualityAuditGraphComponent implements OnInit {
   private traineeNames: string[];
   private index: number;
   private qaNoteCategory: string;
-  private displaying: boolean = false; // used for displaying directives
+  displaying: boolean = false; // used for displaying directives
   private overallDisplayQANote: QANote;
 
-  private chart = 
+  private chart =
   {
     'cursor':'default'
   }
 
-  private chartPointer = 
+  private chartPointer =
   {
     'cursor':'pointer'
   }
 
-  private chartDefault = 
+  private chartDefault =
   {
     'cursor':'default'
   }
@@ -49,7 +49,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       // individual data points will display their own label independently.
       itemSort: function(a, b) { return b.datasetIndex - a.datasetIndex; },
       callbacks: {
-        
+
       }
     },
     responsive: true,
@@ -109,7 +109,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
       });
       this.traineeNames = [];
       this.traineeService.getTraineesByBatchId(this.qaNotesForModal[0].batchId).subscribe(
-        (trainees) => { 
+        (trainees) => {
           this.traineeDataStore = trainees;
 
           this.qaNotesForModal = this.qaNotesForModal.filter((element) => {
@@ -121,13 +121,13 @@ export class LastQualityAuditGraphComponent implements OnInit {
           // this.assessmentService
           let overallIndex: number = 0;
           this.qaNotesForModal.forEach((qaNote, index) => {
-            
+
             if(qaNote.traineeId > 0) {
               let trainee: Trainee = trainees.find(
                 (element) => {
                   if(element !== undefined && element !== null && element.name != "") {
                     return element.traineeId === qaNote.traineeId
-                  } 
+                  }
                   return false;
                 });
               if(trainee !== undefined && trainee !== null){
@@ -144,8 +144,8 @@ export class LastQualityAuditGraphComponent implements OnInit {
 
           if(overallIndex >= 0 && overallIndex < this.qaNotesForModal.length) {
             this.overallDisplayQANote = this.qaNotesForModal.splice(overallIndex)[0];
-          } 
-          
+          }
+
           this.assessmentService.getAssessmentByBatch(this.chartIdReference[this.index],
              this.chartWeekReference[this.index]).subscribe(
                (assessment) => {
@@ -156,20 +156,20 @@ export class LastQualityAuditGraphComponent implements OnInit {
                       this.qaNoteCategory = categoryObject.skillCategory;
                       console.log(this.qaNoteCategory);
                       document.getElementById("openModalButton").click();
-                      
+
                     }
                   );
                  } else {
                   document.getElementById("openModalButton").click();
                  }
              });
-          
+
         }
       );
     }
   }
 
-  chartHovered(event) 
+  chartHovered(event)
   {
      this.chart = this.chartPointer;
   }
@@ -239,7 +239,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
           });
         index++;
         }
-      });  
+      });
 
     let batchIdLeader: number[] = [];
 

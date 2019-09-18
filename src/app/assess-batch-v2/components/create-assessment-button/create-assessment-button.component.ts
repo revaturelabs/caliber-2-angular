@@ -12,8 +12,8 @@ import {Category} from "../../../Assess-Batch/Models/Category";
 })
 export class CreateAssessmentButtonComponent implements OnInit {
 
-  @Input("week") private week: number;
-  @Input("batchId") private batchId: number;
+  @Input("week") week: number;
+  @Input("batchId") batchId: number;
 
   categories$: Observable<Category[]>;
   modal: BsModalRef;

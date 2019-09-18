@@ -1,3 +1,14 @@
-<div *ngIf="categories && categories.length > 0">
-  {{ categories?.length }}
+<div class="categories-this-week-container">
+  <strong>Categories this week:</strong>
+  <span *ngFor="let category of categoriesThisWeek$ | async" class="label label-default category-chip">
+    {{ category?.skillCategory }} <span class="remove-category" (click)="removeCategory(category)">&times;</span>
+  </span>
+  <span class="label btn dropdown-toggle add-categories-button " data-toggle="dropdown">
+    <em class="fa fa-plus"></em>
+    <ul class="dropdown-menu categories-dropdown">
+      <li *ngFor="let category of categories">
+        <a role="button" (click)="selectCategory(category)">{{ category?.skillCategory }}</a>
+      </li>
+    </ul>
+  </span>
 </div>

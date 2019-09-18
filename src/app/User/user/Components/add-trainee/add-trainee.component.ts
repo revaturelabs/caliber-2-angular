@@ -98,4 +98,18 @@ export class AddTraineeComponent implements OnInit {
     });
   }
 
+  resetAddTraineeForm() {
+    this.fullName = "";
+    this.email = "";
+    this.skypeId = "";
+    this.phoneNumber = "";
+    this.college = "";
+    this.degree = "";
+    this.major = "";
+    this.recruiterName = "";
+    this.techScreenerName = "";
+    this.projectCompletion = "";
+    this.profileUrl = "";
+    this.trainingStatus = "";
+  }
 }

@@ -32,12 +32,12 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+    this.categories$ = this.qaService.getActiveCategories();
     combineLatest(this.lastBatchId$.asObservable(), this.lastWeek$.asObservable()).pipe(distinctUntilChanged()).subscribe(
       ([batchId, week]) => {
         if (batchId > 0 && week > 0) {
           this.noteMap = new Map<number, QcNote>();
           this.notesLoaded = false;
-          this.categories$ = this.qaService.getCategoriesByBatchAndWeek(batchId, week);
           this.trainees$ = this.qaService.getTraineesByBatch(batchId);
           this.qaService.getQcTraineeNotesByBatchAndWeek(batchId, week).subscribe(
             data => {

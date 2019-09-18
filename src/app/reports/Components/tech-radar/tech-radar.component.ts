@@ -75,7 +75,7 @@ export class TechRadarComponent implements OnInit {
   ];
   public radarChartType: ChartType = 'radar';
 
-  constructor(private reportService: ReportService) {
+  constructor(public reportService: ReportService) {
    }
 
   ngOnInit() {

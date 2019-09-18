@@ -61,7 +61,7 @@ export class ReportsComponent implements OnInit {
 
   public isTraineeSelected = false;
   public isWeekSelected = false;
-  private reportOutput: ReportOutput = null;
+  reportOutput: ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;
