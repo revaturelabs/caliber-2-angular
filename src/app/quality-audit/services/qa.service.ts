@@ -24,7 +24,7 @@ export class QaService {
   }
 
   getCategoriesByBatchAndWeek(batchId: number, week: number): Observable<Category[]> {
-    return this.http.get<Category[]>(environment.api.category.byBatchAndWeek(batchId, week));
+    return this.http.get<Category[]>(environment.api.categories.byBatchAndWeek(batchId, week));
   }
 
   getTraineesByBatch(batchId: number): Observable<Trainee[]> {

@@ -35,6 +35,6 @@ export class CategoryService {
   }
 
   getActiveCatgories(): Observable<Category[]> {
-    return this.http.get<Category[]>(environment.api.category.active, httpOptions);
+    return this.http.get<Category[]>(environment.api.categories.active, httpOptions);
   }
 }

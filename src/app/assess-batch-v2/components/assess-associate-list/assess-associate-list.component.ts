@@ -141,7 +141,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                     // Create an AssessBatchColumn entry, leaving category to populate later
                     this.columns.push({
                       assessment: assessment,
-                      category: "",
+                      category: ""
                     });
                     this.assessBatchGradeService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
                       data => {
