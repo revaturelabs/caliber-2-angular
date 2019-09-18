@@ -23,14 +23,25 @@
               (onGradeCreate)="handleGradeCreate($event)"
             ></app-assessment-details-row>
           </td>
-          <td class="col-sm-6 col-md-6 col-lg-6 col-xl-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
+          <td class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <app-associate-notes
+              *ngIf="notesLoaded"
+              [trainee]="trainee"
+              [week]="selectedWeek"
+              [batchId]="batch.batchId"
+              [note]="getNotesForTrainee(trainee.traineeId)"
+              [qcNote]="undefined"
+              [isQcNote]="false"
+            >
+            </app-associate-notes>
+          </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td><strong>Average:</strong></td>
           <td *ngFor="let assessment of assessments">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
-          <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage() | percent: "1.2-2" }}</td>
+          <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage(assessments) | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>
     </table>

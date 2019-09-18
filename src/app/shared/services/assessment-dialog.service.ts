@@ -5,7 +5,7 @@ import {AssessmentDialogComponent} from "../components/assessment-dialog/assessm
 import {Category} from "../../Assess-Batch/Models/Category";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {AssessmentService} from "../../Assess-Batch/Services/assessment.service";
-import {AssessmentAction, AssessmentChangeDto} from "../dto/assessment-change.dto";
+import {AssessmentAction, AssessmentChangeDto} from "../../domain/dto/assessment-change.dto";
 
 @Injectable()
 export class AssessmentDialogService {

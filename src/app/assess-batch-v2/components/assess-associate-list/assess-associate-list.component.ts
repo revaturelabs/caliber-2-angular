@@ -10,7 +10,7 @@ import {Note} from "../../../Batch/type/note";
 import {AssessBatchGradeService} from "../../../Assess-Batch/Services/assess-batch-grades.service";
 import {Assessment} from "../../../Assess-Batch/Models/Assesment";
 import {CategoryService} from "../../../Assess-Batch/Services/category.service";
-import {AssessmentChangeDto} from "../../../shared/dto/assessment-change.dto";
+import {AssessmentChangeDto} from "../../../domain/dto/assessment-change.dto";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 import {CommentDialogService} from "../../../shared/services/comment-dialog.service";
 import {Category} from "../../../Assess-Batch/Models/Category";
@@ -186,6 +186,14 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   getNotesForTrainee(traineeId: number): Note {
     if (this.notes.has(traineeId)) {
       return this.notes.get(traineeId)[0];
+    } else {
+      return {
+        noteContent: '',
+        noteType: "TRAINEE",
+        weekNumber: this.week,
+        batchId: this.batch.batchId,
+        traineeId: traineeId
+      }
     }
   }
 
@@ -212,25 +220,25 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
         sum += grade.score;
         count++;
       }
-      return (sum / 100) / count;
+      return (sum / count) / 100;
     }
     return 0;
   }
 
-  getBatchAverage(): number {
-    if (this.grades.size === this.assessments.length) {
+  getBatchAverage(assessments: Assessment[]): number {
+    if (assessments && assessments.length > 0) {
       const averages = [];
-      for (let assessmentId of Array.from(this.grades.keys())) {
-        averages.push(this.getAverageGradeForAssessment(assessmentId));
-      }
-      return averages.reduce((prev, curr) => prev + curr, 0) / averages.length;
+      assessments.forEach(assessment => {
+        averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
+      });
+      return averages.reduce((prev, curr) => prev + curr, 0) / assessments.length;
     }
+    return 0;
   }
 
   handleGradeUpdate(grade: Grade) {
     this.assessBatchGradeService.updateGrade(grade).subscribe(
       data => {
-        // this.thisWeeksGrades$.push(this.assessBatchGradeService.getAllGradesByAssessmentId(grade.assessmentId));
         this.setUpdatedGrade(data);
       }
     )

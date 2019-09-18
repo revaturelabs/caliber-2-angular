@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {GradeExport} from "../../dto/grade-export.dto";
+import {GradeExport} from "../../../domain/dto/grade-export.dto";
 
 @Component({
   selector: 'app-import-grades-dialog',

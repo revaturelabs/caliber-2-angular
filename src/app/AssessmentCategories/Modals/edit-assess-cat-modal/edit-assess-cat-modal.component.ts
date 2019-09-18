@@ -46,9 +46,9 @@ export class EditAssessCatModalComponent implements OnInit {
 
   //saves the changes made to the category into the database
   save(){
-    this.categories.skillCategory = this.temp;
-    this.categories.categoryOwner = this.tempOwner;
-    this.categoryService.edit(this.categories.categoryId,this.categories.categoryOwner, this.categories.skillCategory, this.categories.active).subscribe((res)=>{
+    this.category.skillCategory = this.temp;
+    this.category.categoryOwner = this.tempOwner;
+    this.categoryService.edit(this.category.categoryId,this.category.categoryOwner, this.category.skillCategory, this.category.active).subscribe((res)=>{
       if(res != null){
         let myJSON = JSON.stringify(res);
         let result = JSON.parse(myJSON);

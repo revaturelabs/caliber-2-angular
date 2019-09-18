@@ -34,12 +34,12 @@ export class AssociateNotesComponent implements OnInit {
 
   ngOnInit() {
     this.traineeNotesForm = this.generateForm();
-    if (this.note && this.note.noteContent) {
+    if (this.note && this.note.noteContent && this.qcNote === undefined) {
       this.traineeNotesForm.patchValue({
         "notes": this.note.noteContent
       });
       this.success = true;
-    } else if (this.qcNote && this.qcNote.content) {
+    } else if (this.qcNote && this.qcNote.content && this.note === undefined) {
       this.traineeNotesForm.patchValue({
         "notes": this.qcNote.content
       });
@@ -48,12 +48,6 @@ export class AssociateNotesComponent implements OnInit {
   }
 
   private generateForm(): FormGroup {
-    // if (Boolean(this.note) && Boolean(this.note.noteContent)) {
-    //   this.success = true;
-    //   return this.fb.group({
-    //     "notes": [this.note.noteContent]
-    //   });
-    // }
     return this.fb.group({
       "notes": ['']
     })
@@ -69,19 +63,11 @@ export class AssociateNotesComponent implements OnInit {
       // Only send network request if there is note content
       if (Boolean(noteContent)) {
         this.isSaving = true;
-        // If the note supplied to this component is undefined, we need to create
-        if (this.note === undefined) {
-          this.note = {
-            noteContent: noteContent,
-            traineeId: this.trainee.traineeId,
-            batchId: this.batchId,
-            weekNumber: this.week,
-            noteType: "TRAINEE",
-          };
+        // If the note supplied to this component is undefined, it has yet to be created
+        if (this.note.noteId === undefined) {
           this.noteService.postNote(this.note).subscribe(
             (data: Note) => {
               this.note = data;
-              this.onNoteUpdate.emit(data);
               setTimeout(() => this.isSaving = false, this.timeout);
               this.success = true;
             }, err => {
@@ -90,11 +76,11 @@ export class AssociateNotesComponent implements OnInit {
             }
           )
         } else {
-          // If the note supplied to the component is not defined, we update
+          // If the note supplied to the component has a note id, we update
           this.note.noteContent = noteContent;
           this.noteService.putNote(this.note).subscribe(
             (data: Note) => {
-              this.onNoteUpdate.emit(data);
+              this.note = data;
               setTimeout(() => this.isSaving = false, this.timeout);
               this.success = true;
             }, err => {

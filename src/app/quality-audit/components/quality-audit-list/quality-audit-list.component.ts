@@ -91,19 +91,20 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
     if (this.qcBatchNote) {
       return this.qcBatchNote;
     } else {
-      return {
+      this.qcBatchNote = {
         week: this.week,
         batchId: this.batchId,
         type: "QC_BATCH",
         qcStatus: "Undefined",
         content: "",
-      }
+      };
+      return this.qcBatchNote;
     }
   }
 
   handleQcBatchNoteChange(qcNote: QcNote) {
     this.qcBatchNote.qcStatus = qcNote.qcStatus;
-    this.lastQcStatus = qcNote.qcStatus
+    this.lastQcStatus = qcNote.qcStatus;
     this.qaService.upsertQcBatchNote(this.qcBatchNote).toPromise().then(
       data => {
         this.qcBatchNote = data;
