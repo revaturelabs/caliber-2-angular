@@ -1,0 +1,50 @@
+<app-categories-this-week [categories]="categories$ | async" ></app-categories-this-week>
+<div class="table-responsive" *ngIf="trainees$ | async as trainees">
+  <table class="table">
+    <thead>
+    <tr>
+      <th class="col-md-2 col-sm-2 col-lg-2 col-xl-2"><strong>Trainee</strong></th>
+      <th><strong>Individual Feedback</strong></th>
+      <th class="col-md-8 col-sm-8 col-lg-2 col-xl-2"><strong>Notes</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let trainee of trainees">
+      <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+        <app-associate-details
+          [trainee]="trainee"
+        >
+        </app-associate-details>
+      </td>
+      <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+        <app-qc-feedback
+          [qcNote]="getQcTraineeNote(trainee?.traineeId)"
+          (onQcStatusSelect)="handleQcStatusChange($event)"
+        >
+        </app-qc-feedback>
+      </td>
+      <td class="col-md-8 col-sm-8 col-lg-8 col-xl-8">
+        <app-associate-notes
+          [trainee]="trainee"
+          [week]="week"
+          [batchId]="batchId"
+          [note]="undefined"
+          [qcNote]="getQcTraineeNote(trainee?.traineeId)"
+        >
+        </app-associate-notes>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid">
+    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+        <div>
+          <h4 class="text-center"><strong class="note-header">Overall QC Status</strong></h4>
+          <app-qc-feedback [isOverallFeedback]="true" [qcNote]="getQcBatchNote()" (onQcStatusSelect)="handleQcBatchNoteChange($event)"></app-qc-feedback>
+        </div>
+    </div>
+    <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+      <app-batch-level-feedback [batchId]="batchId" [week]="week" [isQcFeedback]="true" ></app-batch-level-feedback>
+    </div>
+  </div>
+</div>

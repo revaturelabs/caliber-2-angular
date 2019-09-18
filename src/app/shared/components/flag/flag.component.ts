@@ -45,21 +45,9 @@ export class FlagComponent implements OnInit, OnChanges {
         return "fas fa-flag green-flag fa-3x";
       case "RED":
         return "fas fa-flag red-flag fa-3x";
-      case "TRAINER":
-        return "fas fa-star blue-star fa-3x";
     }
   }
 
-  getSelectedClass(type: string) {
-    switch (type) {
-      case "GREEN":
-        return "fas fa-flag green-flag green-flag-hover fa-3x ";
-      case "RED":
-        return "fas fa-flag red-flag red-flag-hover fa-3x ";
-      case "TRAINER":
-        return "fas fa-star blue-star blue-star-hover fa-3x ";
-    }
-  }
 
   getTinyClass(type: string) {
     switch (type) {
@@ -67,8 +55,6 @@ export class FlagComponent implements OnInit, OnChanges {
         return "fas fa-flag green-flag fa-sm";
       case "RED":
         return "fas fa-flag red-flag fa-sm";
-      case "TRAINER":
-        return "fas fa-star blue-star fa-sm";
     }
   }
 

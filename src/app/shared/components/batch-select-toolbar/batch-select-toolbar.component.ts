@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Batch } from 'src/app/Batch/type/batch';
-import {Assessment} from "../../../Assess-Batch/Models/Assesment";
 
 @Component({
   selector: 'app-batch-select-toolbar',
@@ -20,7 +19,6 @@ export class BatchSelectToolbarComponent implements OnInit {
   @Output("selectedQuarter") selectedQuarter: EventEmitter<number> = new EventEmitter(true);
   @Output("selectedYear") selectedYear: EventEmitter<number> = new EventEmitter(true);
   @Output("selectedBatch") selectedBatch: EventEmitter<Batch> = new EventEmitter(true);
-  @Output("onAssessmentCreate") onAssessmentCreate: EventEmitter<Assessment> = new EventEmitter<Assessment>(true);
 
   constructor() {
   }
@@ -38,10 +36,6 @@ export class BatchSelectToolbarComponent implements OnInit {
 
   selectBatch(batch: Batch) {
     this.selectedBatch.emit(batch);
-  }
-
-  handleAssessmentCreate(assessment: Assessment) {
-    this.onAssessmentCreate.next(assessment);
   }
 
   formatQuarters(quarter: number): string {

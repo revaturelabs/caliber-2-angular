@@ -2,20 +2,20 @@ import { Trainer } from "src/app/Batch/type/trainer";
 import { Trainee } from "src/app/Batch/type/trainee";
 
 export class QcNote {
-    noteId: number;
+    noteId?: number;
     content: string;
     week: number;
     batchId: number;
-    trainee: Trainee
-    traineeId: number;
+    trainee?: Trainee;
+    traineeId?: number;
     type: string;
-    qcStatus: string;
-    updateTime: number; // updateTime is a timestamp as long milliseconds
+    qcStatus?: string;
+    updateTime?: number; // updateTime is a timestamp as long milliseconds
                         // use getDate(updateTime | date format) to display the date
-    lastSavedBy: Trainer;
-    lastSavedById: number;
-    
-    constructor(noteId: number, content: string, week: number, batchId: number, trainee: Trainee, 
+    lastSavedBy?: Trainer;
+    lastSavedById?: number;
+
+    constructor(noteId: number, content: string, week: number, batchId: number, trainee: Trainee,
         traineeId: number, type: string, qcStatus: string, updateTime: number, lastSavedBy: Trainer, lastSavedById: number) {
         this.noteId=noteId;
         this.content=content;

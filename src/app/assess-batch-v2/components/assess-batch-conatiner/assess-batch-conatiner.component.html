@@ -1,16 +1,22 @@
 <div *ngIf="batches | async as batches" class="container">
-  <app-batch-select-toolbar
-    [batches]="batches"
-    [quarters]="quarters"
-    [years]="years"
-    [quarter]="selectedQuarter"
-    [year]="selectedYear"
-    [batch]="selectedBatch"
-    [week]="selectedWeek"
-    (selectedQuarter)="setSelectedQuarter($event)"
-    (selectedYear)="setSelectedYear($event)"
-    (selectedBatch)="setSelectedBatch($event)"
-  ></app-batch-select-toolbar>
+  <div class="toolbar-row">
+    <app-batch-select-toolbar
+      [batches]="batches"
+      [quarters]="quarters"
+      [years]="years"
+      [quarter]="selectedQuarter"
+      [year]="selectedYear"
+      [batch]="selectedBatch"
+      [week]="selectedWeek"
+      (selectedQuarter)="setSelectedQuarter($event)"
+      (selectedYear)="setSelectedYear($event)"
+      (selectedBatch)="setSelectedBatch($event)"
+    ></app-batch-select-toolbar>
+    <div class="toolbar-row-buttons">
+      <app-create-assessment-button [week]="selectedWeek" [batchId]="selectedBatch?.batchId" class="left-button"></app-create-assessment-button>
+      <app-import-grades-button class="right-button" [week]="selectedWeek" [batchId]="selectedBatch?.batchId"></app-import-grades-button>
+    </div>
+  </div>
   <app-assess-associate-list
     [batch]="selectedBatch"
     [week]="selectedWeek"

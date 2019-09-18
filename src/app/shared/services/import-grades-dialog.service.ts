@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {ImportGradesDialogComponent} from "../components/import-grades-dialog/import-grades-dialog.component";
-import {SharedModule} from "../shared.module";
 
-@Injectable({
-  providedIn: SharedModule
-})
+@Injectable()
 export class ImportGradesDialogService {
 
   private modalRef: BsModalRef;

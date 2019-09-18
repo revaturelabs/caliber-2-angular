@@ -31,7 +31,7 @@ export class AuditService {
   categoriesByBatchByWeekURL = '/qa/category/';
   updateCategoryURL = '/qa/category';
   deleteCategoryURL = '/qa/category/delete/';
-  allActiveCategoriesURL = '/category/all';
+  allActiveCategoriesURL = '/category/?active=true';
   selectedQuarter: number = 1;
   selectedYear: number;
   selectedBatch: Batch;

@@ -24,7 +24,7 @@ export class WeekSelectorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.batch.weeks > 0) {
+    if (this.batch && this.batch.weeks > 0) {
       this.selectedWeek = this.batch.weeks;
       this.selectedWeekEmitter.emit(this.batch.weeks);
     }

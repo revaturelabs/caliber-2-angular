@@ -1,4 +1,5 @@
 <div [formGroup]="batchNoteForm">
+  <h4 class="note-header"><strong>Overall{{ isQcFeedback ? ' QC ' : ' '}}Feedback for Week {{ week }}</strong></h4>
   <div class="notes-container">
     <span class="note-spinner d-flex flex-row justify-content-end">
       <app-assessment-result-spinner
@@ -8,10 +9,22 @@
       ></app-assessment-result-spinner>
     </span>
     <textarea
+      *ngIf="!isQcFeedback"
       formControlName="batchNote"
       class="form-control"
       placeholder="Start typing to record your overall feedback for week {{ week }}"
       (blur)="handleNoteUpdate()"
+      maxlength="4000"
+      rows="4"
+      [value]="note?.noteContent"
+    >
+    </textarea>
+    <textarea
+      *ngIf="isQcFeedback"
+      formControlName="batchNote"
+      class="form-control"
+      placeholder="Start typing to record your overall QC feedback for week {{ week }}"
+      (blur)="handleQcNoteUpdate()"
       maxlength="4000"
       rows="4"
       [value]="note?.noteContent"

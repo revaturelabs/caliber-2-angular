@@ -1,20 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
-import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
-import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, combineLatest, Observable} from "rxjs";
+import {Batch} from "../../../Batch/type/batch";
+import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.service";
+import {distinctUntilChanged} from "rxjs/operators";
 
 @Component({
-  selector: 'app-assess-batch-conatiner',
-  templateUrl: './assess-batch-conatiner.component.html',
-  styleUrls: ['./assess-batch-conatiner.component.css']
+  selector: 'app-quality-audit-container',
+  templateUrl: './quality-audit-container.component.html',
+  styleUrls: ['./quality-audit-container.component.css']
 })
-export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
+export class QualityAuditContainerComponent implements OnInit {
 
   years: number[];
   readonly quarters: number[] = [1, 2, 3, 4];
-  batches: Observable<Batch[]>;
+  batches$: Observable<Batch[]>;
   selectedYear: number;
   selectedQuarter: number;
   selectedBatch: Batch;
@@ -23,11 +22,8 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   private yearSubject: BehaviorSubject<number>;
   private quarterSubject: BehaviorSubject<number>;
 
-  private allBatchesThisYearAndQuarterSubscription: Subscription;
-
   constructor(
-    private noteService: NoteService,
-    private assessBatchService: AssessBatchService,
+    private assessBatchService: AssessBatchService
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
@@ -37,31 +33,18 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.assessBatchService.getAllYears().subscribe(
-      data => {
-        this.years = data;
-      }, err => {
-        alert("Ya done goofed. Check the logs");
-        console.log(err);
-      }
-    );
+    this.assessBatchService.getAllYears().toPromise().then(data => {
+      this.years = data;
+    });
 
     combineLatest(this.yearSubject.asObservable(), this.quarterSubject.asObservable()).pipe(distinctUntilChanged()).subscribe(
       ([year, quarter]) => {
-        this.batches = this.assessBatchService.getBatchesByYearAndQuarter(year, quarter);
-
-        this.allBatchesThisYearAndQuarterSubscription = this.batches.subscribe(
-          batches => {
-            // Never select a batch on batch load
-            this.selectedBatch = undefined;
-          }
-        )
+        if (year && quarter) {
+          this.batches$ = this.assessBatchService.getBatchesByYearAndQuarter(year, quarter);
+          this.selectedBatch = undefined;
+        }
       }
     )
-  }
-
-  ngOnDestroy() {
-    this.allBatchesThisYearAndQuarterSubscription.unsubscribe();
   }
 
   setSelectedQuarter(quarter: number) {

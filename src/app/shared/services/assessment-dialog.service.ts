@@ -3,14 +3,11 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Assessment} from "../../Assess-Batch/Models/Assesment";
 import {AssessmentDialogComponent} from "../components/assessment-dialog/assessment-dialog.component";
 import {Category} from "../../Assess-Batch/Models/Category";
-import {SharedModule} from "../shared.module";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {AssessmentService} from "../../Assess-Batch/Services/assessment.service";
 import {AssessmentAction, AssessmentChangeDto} from "../dto/assessment-change.dto";
 
-@Injectable({
-  providedIn: SharedModule
-})
+@Injectable()
 export class AssessmentDialogService {
 
   private modalRef: BsModalRef;

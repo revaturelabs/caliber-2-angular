@@ -5,9 +5,37 @@
 /**
  * @ignore
  */
+
+const serverRoot: string = 'http://localhost:10000';
 export const environment = {
   production: false,
-  serverRootURL: 'http://localhost:10000'
+  serverRootURL: 'http://localhost:10000',
+  api: {
+    category: {
+      active: `${serverRoot}/category/?active=true`,
+      byBatchAndWeek(batchId: number, week: number): string {
+        return `${serverRoot}/qa/category/${batchId}/${week}/all`
+      }
+    },
+    qa: {
+      qcTraineeNotesByBatchAndWeek(batchId: number, week: number): string {
+        return `${serverRoot}/qa/audit/trainee/notes/${batchId}/${week}`;
+      },
+      qcBatchNotesByBatchAndWeek(batchId: number, week: number): string {
+        return `${serverRoot}/qa/audit/notes/overall/${batchId}/${week}`;
+      },
+      batchNotes: `${serverRoot}/qa/audit/batch/notes`,
+      traineeNotes: `${serverRoot}/qa/audit/trainee/notes`,
+
+    },
+    user: {
+      trainees: {
+        inBatch(batchId: number): string {
+          return `${serverRoot}/user/all/trainee/?batch=${batchId}`;
+        }
+      }
+    }
+  }
 };
 
 /*

@@ -1,0 +1,27 @@
+<div class="container">
+  <app-batch-select-toolbar
+    [week]="selectedWeek"
+    [batch]="selectedBatch"
+    [quarter]="selectedQuarter"
+    [quarters]="quarters"
+    [years]="years"
+    [year]="selectedYear"
+    [batches]="batches$ | async"
+    (selectedBatch)="setSelectedBatch($event)"
+    (selectedQuarter)="setSelectedQuarter($event)"
+    (selectedYear)="setSelectedYear($event)"
+  >
+  </app-batch-select-toolbar>
+  <div *ngIf="selectedBatch">
+    <app-week-selector
+      [batch]="selectedBatch"
+      (selectedWeek)="setSelectedWeek($event)"
+    >
+    </app-week-selector>
+    <app-quality-audit-list
+      [week]="selectedWeek"
+      [batchId]="selectedBatch?.batchId"
+    >
+    </app-quality-audit-list>
+  </div>
+</div>

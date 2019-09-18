@@ -55,7 +55,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     private assessmentDialogService: AssessmentDialogService,
     private commentDialogService: CommentDialogService,
   ) {
-    this.categoryService.getCategories().subscribe(
+    this.categoryService.getActiveCatgories().subscribe(
       data => {
         this.categories = data;
       }

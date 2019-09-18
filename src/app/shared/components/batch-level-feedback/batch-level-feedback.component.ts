@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {combineLatest} from "rxjs";
+import {BehaviorSubject, combineLatest} from "rxjs";
 import {Note} from "../../../Batch/type/note";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {QcNote} from "../../../Audit/types/note";
 
 @Component({
   selector: 'app-batch-level-feedback',
@@ -14,10 +14,21 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
 
   @Input("batchId") batchId: number;
   @Input("week") week: number;
+  @Input("isQcFeedback") isQcFeedback: boolean;
   private batchIdSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.batchId);
   private weekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
-  note: Note;
   batchNoteForm: FormGroup;
+
+  note: Note;
+  qcNote: QcNote = {
+    content: "",
+    type: "QC_BATCH",
+    batchId: this.batchId,
+    week: this.week,
+    qcStatus: "Undefined"
+  };
+
+  private readonly timeout: number = 250;
 
   showSaving = false;
   showCheck = false;
@@ -39,21 +50,42 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     combineLatest(this.batchIdSubject.asObservable(), this.weekSubject.asObservable()).subscribe(
       ([batchId, week]) => {
         if (batchId && week) {
-          this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week).subscribe(
-            data => {
-              this.note = data;
-              if (data && data.noteContent) {
-                this.batchNoteForm.patchValue({
-                  batchNote: data.noteContent
-                });
-                this.success = true;
-              } else {
-                this.isSaving = false;
-                this.failure = false;
-                this.success = false;
+          if (!this.isQcFeedback) {
+            this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week).subscribe(
+              data => {
+                this.note = data;
+                if (data && data.noteContent) {
+                  this.batchNoteForm.patchValue({
+                    batchNote: data.noteContent
+                  });
+                  this.success = true;
+                } else {
+                  this.isSaving = false;
+                  this.failure = false;
+                  this.success = false;
+                }
               }
-            }
-          )
+            )
+          } else {
+            this.noteService.getOverallQcNoteByBatchAndWeek(batchId, week).toPromise().then(
+              data => {
+                this.qcNote = data;
+                if (data && data.content) {
+                  this.batchNoteForm.patchValue({
+                    batchNote: data.content
+                  });
+                  this.success = true;
+                } else {
+                  this.isSaving = false;
+                  this.failure = false;
+                  this.success = false;
+                }
+              }
+            ).catch(() => {
+              this.isSaving = false;
+              this.failure = true;
+            })
+          }
         }
       }
     );
@@ -106,10 +138,10 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
         this.noteService.putNote(this.note).subscribe(
           (data: Note) => {
             this.note = data;
-            this.isSaving = false;
+            setTimeout(() => this.isSaving = false, this.timeout);
             this.success = true;
           }, err => {
-            this.isSaving = false;
+            setTimeout(() => this.isSaving = false, this.timeout);
             this.failure = true;
           }
         )
@@ -119,16 +151,16 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
           batchId: this.batchId,
           weekNumber: this.week,
           noteContent: noteContent,
-          noteType: "BATCH",
+          noteType: "QC_BATCH",
           traineeId: -1
         };
         this.noteService.postNote(this.note).subscribe(
           (data: Note) => {
             this.note = data;
-            this.isSaving = false;
+            setTimeout(() => this.isSaving = false, this.timeout);
             this.success = true;
           }, err => {
-            this.isSaving = false;
+            setTimeout(() => this.isSaving = false, this.timeout);
             this.failure = true;
           }
         )
@@ -136,6 +168,35 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     }
   }
 
+  handleQcNoteUpdate() {
+    const noteContent = this.batchNoteForm.get("batchNote").value;
+    if (!this.qcNote) {
+      this.qcNote = {
+        content: "",
+        type: "QC_BATCH",
+        batchId: this.batchId,
+        week: this.week,
+        qcStatus: "Undefined"
+      }
+    }
+    if (Boolean(noteContent)) {
+      // Only begin network request if there is note content
+      this.qcNote.content = noteContent;
+      this.isSaving = true;
+      this.success = false;
+      this.failure = false;
+      this.noteService.createQcBatchNote(this.qcNote).toPromise().then(
+        data => {
+          this.qcNote = data;
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.success = true;
+        }, () => {
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.failure = true;
+        }
+      )
+    }
+  }
 
   private isValidFirstChange(change: SimpleChange): boolean {
     return change.isFirstChange() && change.previousValue === undefined && change.currentValue !== undefined

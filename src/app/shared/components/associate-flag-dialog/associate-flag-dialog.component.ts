@@ -18,7 +18,7 @@ export class AssociateFlagDialogComponent implements OnInit {
   commentComplete: boolean = false;
   confirm: boolean = false;
 
-  readonly flags: string[] = ["RED", "GREEN", "TRAINER"];
+  readonly flags: string[] = ["RED", "GREEN"];
 
   protected createComment$: BehaviorSubject<Trainee> = new BehaviorSubject<Trainee>(undefined);
 

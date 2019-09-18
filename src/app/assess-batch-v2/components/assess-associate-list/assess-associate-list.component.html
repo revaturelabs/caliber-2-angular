@@ -4,17 +4,17 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="col-md-2">Trainee</th>
-          <th *ngFor="let column of columns" class="col-md-1">
+          <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Trainee</th>
+          <th *ngFor="let column of columns" class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
             <app-assessment-details-column [column]="column" [categories]="categories" [week]="week" [batchId]="batch.batchId" [totalPoints]="totalPoints"></app-assessment-details-column>
           </th>
-          <th class="col-md-6">Notes</th>
+          <th class="col-sm-6 col-md-6 col-lg-6 col-xl-6">Notes</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let trainee of trainees">
-          <td class="col-md-2"><app-associate-details [trainee]="trainee"></app-associate-details></td>
-          <td *ngFor="let assessment of assessments" class="col-md-1">
+          <td class="col-sm-2 col-md-2 col-lg-2 col-xl-2"><app-associate-details [trainee]="trainee"></app-associate-details></td>
+          <td *ngFor="let assessment of assessments" class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
             <app-assessment-details-row
               [assessmentId]="assessment?.assessmentId"
               [traineeId]="trainee?.traineeId"
@@ -23,7 +23,7 @@
               (onGradeCreate)="handleGradeCreate($event)"
             ></app-assessment-details-row>
           </td>
-          <td class="col-md-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
+          <td class="col-sm-6 col-md-6 col-lg-6 col-xl-6"><app-associate-notes *ngIf="notesLoaded" [trainee]="trainee" [week]="selectedWeek" [batchId]="batch.batchId" [note]="getNotesForTrainee(trainee.traineeId)"></app-associate-notes></td>
         </tr>
       </tbody>
       <tfoot>

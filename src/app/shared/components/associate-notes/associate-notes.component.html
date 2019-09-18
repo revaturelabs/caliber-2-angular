@@ -15,9 +15,9 @@
         rows="3"
         cols="50"
         (blur)="handleNote()"
-        placeholder="Week {{ week }} notes for {{ trainee.name }}"
+        placeholder="Week {{ week }}{{ isQcNote ? ' QC ' : ' ' }}notes for {{ trainee.name }}"
       >
-    </textarea>
+      </textarea>
     </div>
   </div>
 </div>

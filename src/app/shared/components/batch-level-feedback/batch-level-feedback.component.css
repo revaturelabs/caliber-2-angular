@@ -1,0 +1,24 @@
+.notes-container {
+  white-space: nowrap;
+  position: relative;
+}
+
+.note-spinner {
+  position: absolute;
+  top: 0;
+  left: 98.5%;
+  z-index: 1;
+  background: none;
+}
+
+.note-header {
+  max-width: available;
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.note-header > strong {
+  color: #F26925
+}
