@@ -1,6 +1,6 @@
 <div class="nav nav-tabs">
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">Select Batch <span class="caret"></span></a>
+    <a class="dropdown-toggle" data-toggle="dropdown">{{ selectedBatch ? formatBatch(selectedBatch) : 'Select Batch' }} <span class="caret"></span></a>
     <ul class="dropdown-menu">
         <a role="button">
           <form [formGroup]="searchForm" class="batch-search form-group">

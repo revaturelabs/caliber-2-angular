@@ -6,7 +6,7 @@ export class Category {
   categoryId: number;
   skillCategory: string;
   active: boolean;
-
+  categoryOwner?: string;
 
   /**
    *
@@ -15,11 +15,11 @@ export class Category {
    * @param active
    *
    */
-  constructor(categoryId: number, skillCategory: string, active: boolean){
+  constructor(categoryId: number, skillCategory: string, categoryOwner: string, active: boolean){
     this.categoryId = categoryId;
     this.skillCategory = skillCategory;
+    this.categoryOwner = categoryOwner;
     this.active = active;
-
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Location } from "../../home/models/location";
+import { Location } from "../../domain/model/location.dto";
 
 @Component({
   selector: 'app-disable-location-modal',
@@ -18,7 +18,14 @@ export class DisableLocationModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.location=new Location();
+    this.location = {
+      address: "",
+      city: "",
+      name: "",
+      state: "",
+      zipcode: "",
+      active: false
+    }
   }
 
   /*@ngdoc The initial call parameter for the modal, the location object is passed in from the locationpage parent component and the modal is given a member variable reference of that object for use in the functions. Changes the button test dynamically based the current active status of the location being edited.*/

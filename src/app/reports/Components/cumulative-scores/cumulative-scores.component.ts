@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ChartOptions, ChartDataSets, ChartType, ChartLegendLabelItem, NestedTickOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { Trainee, Grade } from 'src/app/Batch/type/trainee';
+import {Grade} from "../../../domain/model/grade.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
 @Component({
   selector: 'app-cumulative-scores',
@@ -48,7 +48,7 @@ export class CumulativeScoresComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartColors: Array<any> = [
-    { 
+    {
       backgroundColor: 'rgba(114, 164, 194, .5)',
       borderColor: 'rgba(114, 164, 194, 1)',
       pointBackgroundColor: 'rgba(252, 180, 20, .6)',
@@ -61,7 +61,7 @@ export class CumulativeScoresComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     { data: [], label: 'Series A'}
   ];
-  
+
   constructor(private reportService : ReportService) { }
 
   ngOnInit() {
@@ -101,7 +101,7 @@ export class CumulativeScoresComponent implements OnInit {
     let borderWidth=[];
     let benchMark=[];
 
-    this.constructGradeStudentBorderAndBenchmarkArray(gradeArray, gradeCt, 
+    this.constructGradeStudentBorderAndBenchmarkArray(gradeArray, gradeCt,
       students, borderWidth, benchMark,this.traineeDataStore, this.gradeDataStore);
 
     this.arrayDivideAnd2Decimal(gradeArray, gradeCt);
@@ -136,7 +136,7 @@ export class CumulativeScoresComponent implements OnInit {
       if(divisor[i] ==0)
         divisor[i] = 1;
       array[i] = array[i]/divisor[i];
-      array[i] = Math.round(array[i] * 100) / 100; 
+      array[i] = Math.round(array[i] * 100) / 100;
     }
   }
 

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Batch} from 'src/app/Batch/type/batch';
 import {AssessBatchService} from 'src/app/Assess-Batch/Services/assess-batch.service';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-assess-batch-conatiner',

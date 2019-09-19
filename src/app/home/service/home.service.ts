@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
-import { QANote } from 'src/app/reports/Models/qanote';
-import { Location } from '../models/location';
+import { Location } from '../../domain/model/location.dto';
+import {Batch} from "../../domain/model/batch.dto";
+import {QcNote} from "../../domain/model/qc-note.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Location } from '../models/location';
 export class HomeService {
   private locationsDataStore: Location[];
   private batchesDataStore: Batch[] = [];
-  private qaNotesDataStore: QANote[][]=[];
+  private qaNotesDataStore: QcNote[][]=[];
 
   constructor() { }
 
@@ -21,7 +21,7 @@ export class HomeService {
     return this.batchesDataStore;
   }
 
-  getQANotesDataStore():QANote[][]{
+  getQANotesDataStore():QcNote[][]{
     return this.qaNotesDataStore;
   }
 
@@ -33,7 +33,7 @@ export class HomeService {
     this.batchesDataStore = batches;
   }
 
-  setQANotesDataStore(qaNotes: QANote[][]){
+  setQANotesDataStore(qaNotes: QcNote[][]){
     this.qaNotesDataStore = qaNotes;
   }
 }

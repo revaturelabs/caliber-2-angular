@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Note } from 'src/app/Batch/type/note';
 import { NoteService } from '../../Services/note.service';
+import {Note} from "../../../domain/model/assessment-note.dto";
 
 @Component({
  selector: 'app-feedback',
@@ -26,7 +26,14 @@ getFeedbackNote(){
   //get all batch notes for the week
   this.noteService.noteEmitter
   .subscribe(result => {
-    this.feedbackNote = new Note(-2, "", "BATCH", this.selectedWeek, this.batchId, -1);
+    this.feedbackNote = {
+      traineeId: -1,
+      noteType: "BATCH",
+      weekNumber: this.selectedWeek,
+      batchId: this.batchId,
+      noteContent: "",
+      noteId: -2
+    }
     this.batchNoteArr = [];
     //narrow down to the singla1r feedback note
     for(let n of result){
@@ -67,7 +74,7 @@ ngOnInit() {
 
    this.noteService.batchIdEmitter.subscribe((batchId) => {
      this.batchId = batchId;
-    }); 
+    });
   this.getFeedbackNote();
  }
 }

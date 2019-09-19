@@ -1,10 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {QaService} from "../../services/qa.service";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
-import {Category} from "../../../Assess-Batch/Models/Category";
 import {distinctUntilChanged} from "rxjs/operators";
-import {Trainee} from "../../../Batch/type/trainee";
-import {QcNote} from "../../../Audit/types/note";
+import {Category} from "../../../domain/model/category.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-quality-audit-list',
@@ -38,6 +38,7 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
         if (batchId > 0 && week > 0) {
           this.noteMap = new Map<number, QcNote>();
           this.notesLoaded = false;
+          this.qcBatchNote = undefined;
           this.trainees$ = this.qaService.getTraineesByBatch(batchId);
           this.qaService.getQcTraineeNotesByBatchAndWeek(batchId, week).subscribe(
             data => {
@@ -105,11 +106,11 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   handleQcBatchNoteChange(qcNote: QcNote) {
     this.qcBatchNote.qcStatus = qcNote.qcStatus;
     this.lastQcStatus = qcNote.qcStatus;
-    this.qaService.upsertQcBatchNote(this.qcBatchNote).toPromise().then(
-      data => {
-        this.qcBatchNote = data;
-      }
-    )
+    // this.qaService.upsertQcBatchNote(this.qcBatchNote).toPromise().then(
+    //   data => {
+    //     this.qcBatchNote = data;
+    //   }
+    // )
   }
 
   handleQcStatusChange(qcNote: QcNote) {

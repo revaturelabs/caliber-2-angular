@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssessCategoryService } from '../../Services/assess-category.service';
-import {AssessCategory} from '../../Models/assess-category'
 import { CategoriesComponent } from '../../Components/categories/categories.component';
+import {Category} from "../../../domain/model/category.dto";
 
 
 @Component({
@@ -12,7 +12,7 @@ import { CategoriesComponent } from '../../Components/categories/categories.comp
 export class AddAssessCatModalComponent implements OnInit {
 
 
- category: AssessCategory = new AssessCategory();
+ category: Category = new Category(0, "", "", false);
  errorMessage:string;
  successMessage:string;
  displayResultError:boolean;

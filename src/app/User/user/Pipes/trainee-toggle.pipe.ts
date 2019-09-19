@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TrainingStatus } from '../types/training-status';
-import {Trainee} from "../../../Batch/type/trainee";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
  /**
    * Checks to see if 'show' is true or false

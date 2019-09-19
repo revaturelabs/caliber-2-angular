@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Category} from "../../../Assess-Batch/Models/Category";
 import {QaService} from "../../services/qa.service";
-import {Tag} from "../../../Audit/types/Tag";
 import {Observable, of} from "rxjs";
+import {QcCategory} from "../../../domain/model/qc-category.dto";
+import {Category} from "../../../domain/model/category.dto";
 
 @Component({
   selector: 'app-categories-this-week',
@@ -14,7 +14,7 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
   @Input('categories') categories: Category[];
   @Input("week") week: number;
   @Input("batchId") batchId: number;
-  categoriesThisWeek$: Observable<Tag[]> = of([]);
+  categoriesThisWeek$: Observable<QcCategory[]> = of([]);
 
   constructor(
     private qaService: QaService
@@ -38,7 +38,7 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
     }
   }
 
-  removeCategory(tag: Tag) {
+  removeCategory(tag: QcCategory) {
     if (tag) {
       this.qaService.removeWeeklyQcCategory(tag).toPromise().then(
         () => {
@@ -49,7 +49,12 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
   }
 
   selectCategory(category: Category) {
-    const tag: Tag = new Tag(category.categoryId, category.skillCategory, this.batchId, this.week);
+    const tag: QcCategory = {
+      categoryId: category.categoryId,
+      batchId: this.batchId,
+      week: this.week,
+      skillCategory: category.skillCategory,
+    };
     this.qaService.saveWeeklyQcCategory(tag).toPromise().then(
       data => {
         const found = this.categories.find(cat => cat.categoryId === data.categoryId);

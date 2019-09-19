@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-batch-select-toolbar',

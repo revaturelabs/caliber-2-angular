@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Assessment } from '../Models/Assesment';
 import { environment } from 'src/environments/environment';
+import {Assessment} from "../../domain/model/assessment.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -42,16 +42,16 @@ export class AssessmentService {
   // }
 
   /**
-   * 
-   * @param assessment 
+   *
+   * @param assessment
    */
   createCategories(assessment: Assessment): Observable<Assessment> {
     return this.http.post<Assessment>(this.url, assessment);
   }
   /**
-   * 
+   *
    * @param assessment
-   * 
+   *
    */
 
   createAssessment(assessment: Assessment): Observable<Assessment> {

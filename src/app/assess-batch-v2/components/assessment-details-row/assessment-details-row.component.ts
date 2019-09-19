@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup } from "@angular/forms";
-import {Grade, Trainee} from "../../../Batch/type/trainee";
+import {Grade} from "../../../domain/model/grade.dto";
 
 @Component({
   selector: 'app-assessment-details-row',

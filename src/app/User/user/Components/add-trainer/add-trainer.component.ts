@@ -1,8 +1,8 @@
 import { Component, OnInit, Host, Output, EventEmitter } from '@angular/core';
-import { Trainer } from '../../types/trainer';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { ViewTrainersComponent } from '../view-trainers/view-trainers.component';
+import {Trainer} from "../../../../domain/model/trainer.dto";
 
 @Component({
   selector: 'app-add-trainer',
@@ -27,10 +27,10 @@ export class AddTrainerComponent implements OnInit {
   displaySuccessMsg:String;
 
   displayFailureMsg:String;
-  
+
   addTrainer()
   {
-    this.trainerServ.addTrainer(this.newTrainer).subscribe(response => 
+    this.trainerServ.addTrainer(this.newTrainer).subscribe(response =>
     {
       this.toggleSuccessMsgDisplay();
       this.displaySuccessMsg = "Trainer added successfully!";
@@ -55,7 +55,7 @@ export class AddTrainerComponent implements OnInit {
     this.displaySuccess = true;
   }
 
-  toggleFailureMsgDisplay() 
+  toggleFailureMsgDisplay()
   {
     this.displaySuccess = false;
     this.displayFailure = true;
@@ -66,14 +66,14 @@ export class AddTrainerComponent implements OnInit {
     this.resetAddTrainerForm();
   }
 
-  resetAddTrainerForm() 
+  resetAddTrainerForm()
   {
     console.log(this.newTrainer);
     if (this.newTrainer === undefined)
     {
       return;
     }
-      
+
     this.newTrainer.trainerId = undefined;
     this.newTrainer.name = "";
     this.newTrainer.title = "";
@@ -88,5 +88,5 @@ export class AddTrainerComponent implements OnInit {
     this.displaySuccessMsg = "";
 
   }
-  
+
 }

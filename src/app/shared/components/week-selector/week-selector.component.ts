@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Batch} from "../../../Batch/type/batch";
 import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.service";
 import {Subscription} from "rxjs";
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-week-selector',

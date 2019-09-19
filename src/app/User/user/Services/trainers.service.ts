@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Trainer } from '../types/trainer';
 import { Observable } from 'rxjs';
+import {Trainer} from "../../../domain/model/trainer.dto";
 
 /**
  * sets the Http headers

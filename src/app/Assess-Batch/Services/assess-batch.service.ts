@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
 import { Observable, Subject } from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {Batch} from "../../domain/model/batch.dto";
 
 @Injectable({
   providedIn: 'root'

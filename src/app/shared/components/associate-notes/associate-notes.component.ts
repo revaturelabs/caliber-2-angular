@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Trainee} from "../../../Batch/type/trainee";
-import {Note} from "../../../Batch/type/note";
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
-import {QcNote} from "../../../Audit/types/note";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {Note} from "../../../domain/model/assessment-note.dto";
+import {AssessBatchService} from "../../../services/assess-batch.service";
+import {QaService} from "../../../quality-audit/services/qa.service";
 
 @Component({
   selector: 'app-associate-notes',
@@ -29,7 +31,8 @@ export class AssociateNotesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private noteService: NoteService
+    private assessBatchService: AssessBatchService,
+    private qaService: QaService
   ) { }
 
   ngOnInit() {
@@ -59,86 +62,41 @@ export class AssociateNotesComponent implements OnInit {
     this.failure = false;
     const noteContent: string = this.traineeNotesForm.get("notes").value;
     // When assessment note is supplied
-    if (this.note && !this.qcNote) {
-      // Only send network request if there is note content
-      if (Boolean(noteContent)) {
-        this.isSaving = true;
-        // If the note supplied to this component is undefined, it has yet to be created
-        if (this.note.noteId === undefined) {
-          this.noteService.postNote(this.note).subscribe(
-            (data: Note) => {
-              this.note = data;
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.success = true;
-            }, err => {
-              this.isSaving = false;
-              this.failure = true;
-            }
-          )
-        } else {
-          // If the note supplied to the component has a note id, we update
-          this.note.noteContent = noteContent;
-          this.noteService.putNote(this.note).subscribe(
-            (data: Note) => {
-              this.note = data;
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.success = true;
-            }, err => {
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.failure = true;
-            }
-          )
+    if (Boolean(noteContent)) {
+      this.isSaving = true;
+      this.note.noteContent = noteContent;
+      this.qaService.upsertNote(this.note).toPromise().then(
+        data => {
+          this.note = data;
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.success = true;
+        }, () => {
+          this.isSaving = false;
+          this.failure = true;
         }
-      } else {
-        if (this.note !== undefined) {
-          this.isSaving = true;
-          this.note.noteContent = noteContent;
-          this.noteService.putNote(this.note).subscribe(
-            (data: Note) => {
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.onNoteUpdate.emit(data);
-              this.success = true;
-            }, err => {
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.failure = true;
-            }
-          )
-        }
-      }
+      );
+      this.isSaving = false;
     }
-    // I know, formatting, right?
-    // This branch is for when QC Note is supplied, but not assessment note
-    else if (!this.note && this.qcNote) {
-      if (Boolean(noteContent)) {
-        this.isSaving = true;
-        // Set current QC note to have last note content
-        this.qcNote.content = noteContent;
-        // QC Note does not have a note id, so we create it
-        if (this.qcNote.noteId <= 0) {
-          this.noteService.createQcTraineeNote(this.qcNote).toPromise().then(
-            data => {
-              this.qcNote = data;
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.success = true;
-            }, () => {
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.failure = true;
-            }
-          )
-        } else {
-          // QC Note does have an id => it has already been persisted => need to update
-          this.noteService.updateQcTraineeNote(this.qcNote).toPromise().then(
-            data => {
-              this.qcNote = data;
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.success = true;
-            }, () => {
-              setTimeout(() => this.isSaving = false, this.timeout);
-              this.failure = false;
-            }
-          )
-        }
+  }
+
+  handleQcNote(qcNote: QcNote) {
+    const noteContent: string = this.traineeNotesForm.get("notes").value;
+    if (Boolean(noteContent)) {
+      this.isSaving = true;
+      if (this.isQcNote) {
+        qcNote.content = noteContent;
+        this.qaService.upsertQcTraineeNote(qcNote).toPromise().then(
+          data => {
+            this.qcNote = data;
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.success = true;
+          }, () => {
+            this.isSaving = false;
+            this.failure = true;
+          }
+        );
       }
+      this.isSaving = false;
     }
   }
 

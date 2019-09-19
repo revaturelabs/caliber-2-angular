@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { Location } from '../home/models/location';
 import { LocationService } from '../home/service/location.service';
 import { AddlocationmodalComponent } from './addlocationmodal/addlocationmodal.component';
 import { EditlocationmodalComponent } from './editlocationmodal/editlocationmodal.component';
 import { DisableLocationModalComponent } from './disable-location-modal/disable-location-modal.component';
+import {Location} from "../domain/model/location.dto";
 
 @Component({
   selector: 'app-locationspage',
@@ -16,11 +16,11 @@ export class LocationspageComponent implements OnInit {
   @ViewChild('editLocationModal') EditLocation: EditlocationmodalComponent;
   @ViewChild('disableLocationModal') DisableLocation: DisableLocationModalComponent;
 
-  locations:Location[];
+  locations: Location[]
 
   constructor(private locationService:LocationService ) { }
 
-  ngOnInit() 
+  ngOnInit()
   {
     this.getAlLocations();
   }

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { HomeService } from '../../service/home.service';
-import { Location } from '../../models/location';
-import { Batch } from 'src/app/Batch/type/batch';
-import { QANote } from 'src/app/reports/Models/qanote';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
-import { Trainee } from 'src/app/Batch/type/trainee';
 import { AssessmentService } from 'src/app/Assess-Batch/Services/assessment.service';
 import { CategoryService } from 'src/app/Assess-Batch/Services/category.service';
+import {Batch} from "../../../domain/model/batch.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import { Location } from '../../../domain/model/location.dto';
 
 @Component({
   selector: 'app-last-quality-audit-graph',
@@ -18,14 +18,14 @@ import { CategoryService } from 'src/app/Assess-Batch/Services/category.service'
 export class LastQualityAuditGraphComponent implements OnInit {
   private locationDataStore: Location[];
   private batchDataStore: Batch[];
-  private qaNoteDataStore: QANote[][];
-  private qaNotesForModal: QANote[];
+  private qaNoteDataStore: QcNote[][];
+  private qaNotesForModal: QcNote[];
   private traineeDataStore: Trainee[];
   private traineeNames: string[];
   private index: number;
   private qaNoteCategory: string;
   displaying: boolean = false; // used for displaying directives
-  private overallDisplayQANote: QANote;
+  private overallDisplayQANote: QcNote;
 
   private chart =
   {

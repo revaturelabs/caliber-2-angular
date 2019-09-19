@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Category} from '../Models/Category';
 import {environment} from 'src/environments/environment';
-// import { Category } from "../Models/Category";
+import {Category} from "../../domain/model/category.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({

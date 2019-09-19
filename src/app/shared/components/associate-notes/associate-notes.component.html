@@ -9,13 +9,25 @@
         ></app-assessment-result-spinner>
       </span>
       <textarea
+        *ngIf="!isQcNote"
         formControlName="notes"
         class="form-control"
         maxlength="4000"
         rows="3"
         cols="50"
         (blur)="handleNote()"
-        placeholder="Week {{ week }}{{ isQcNote ? ' QC ' : ' ' }}notes for {{ trainee.name }}"
+        placeholder="Week {{ week }} notes for {{ trainee.name }}"
+      >
+      </textarea>
+      <textarea
+        *ngIf="isQcNote"
+        formControlName="notes"
+        class="form-control"
+        maxlength="4000"
+        rows="3"
+        cols="50"
+        (blur)="handleQcNote(qcNote)"
+        placeholder="Week {{ week }} notes for {{ trainee.name }}"
       >
       </textarea>
     </div>

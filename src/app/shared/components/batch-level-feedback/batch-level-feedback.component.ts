@@ -1,9 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {BehaviorSubject, combineLatest} from "rxjs";
-import {Note} from "../../../Batch/type/note";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {QcNote} from "../../../Audit/types/note";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Note} from "../../../domain/model/assessment-note.dto";
+import {QaService} from "../../../quality-audit/services/qa.service";
 
 @Component({
   selector: 'app-batch-level-feedback',
@@ -15,11 +16,18 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   @Input("batchId") batchId: number;
   @Input("week") week: number;
   @Input("isQcFeedback") isQcFeedback: boolean;
+  @Input('lastQcStatus') lastQcStatus: string;
   private batchIdSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.batchId);
   private weekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
   batchNoteForm: FormGroup;
 
-  note: Note;
+  note: Note = {
+    noteContent: "",
+    traineeId: -1,
+    weekNumber: this.week,
+    batchId: this.batchId,
+    noteType: "BATCH"
+  };
   qcNote: QcNote = {
     content: "",
     type: "QC_BATCH",
@@ -41,7 +49,8 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
 
   constructor(
     private noteService: NoteService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private qaService: QaService,
   ) {
   }
 
@@ -76,6 +85,13 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
                   });
                   this.success = true;
                 } else {
+                  this.qcNote = {
+                    content: "",
+                    type: "QC_BATCH",
+                    batchId: this.batchId,
+                    week: this.week,
+                    qcStatus: "Undefined"
+                  };
                   this.isSaving = false;
                   this.failure = false;
                   this.success = false;
@@ -101,6 +117,13 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
       } else if (prop === "week") {
         if (this.isValidFirstChange(change) || this.isValidSubsequentChange(change)) {
           this.weekSubject.next(change.currentValue);
+        }
+      } else if (prop === 'lastQcStatus') {
+        if (this.qcNote && !change.isFirstChange()) {
+          this.qcNote.qcStatus = change.currentValue;
+          this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+            data => this.qcNote = data
+          )
         }
       }
     }
@@ -132,69 +155,68 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     this.failure = false;
     const noteContent = this.batchNoteForm.get("batchNote").value;
     if (Boolean(noteContent)) {
-      if (Boolean(this.note)) {
-        // If note already exists, update
-        this.note.noteContent = noteContent;
-        this.noteService.putNote(this.note).subscribe(
-          (data: Note) => {
-            this.note = data;
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.success = true;
-          }, err => {
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.failure = true;
-          }
-        )
-      } else {
-        // If note does not already exist, create
+      if (!Boolean(this.note)) {
         this.note = {
-          batchId: this.batchId,
-          weekNumber: this.week,
           noteContent: noteContent,
-          noteType: "QC_BATCH",
-          traineeId: -1
-        };
-        this.noteService.postNote(this.note).subscribe(
-          (data: Note) => {
-            this.note = data;
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.success = true;
-          }, err => {
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.failure = true;
-          }
-        )
+          traineeId: -1,
+          weekNumber: this.week,
+          batchId: this.batchId,
+          noteType: "BATCH"
+        }
+      } else {
+        this.note.noteContent = noteContent;
       }
+      this.qaService.upsertNote(this.note).subscribe(
+        (data: Note) => {
+          this.note = data;
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.success = true;
+        }, err => {
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.failure = true;
+        }
+      )
     }
   }
 
   handleQcNoteUpdate() {
     const noteContent = this.batchNoteForm.get("batchNote").value;
-    if (!this.qcNote) {
-      this.qcNote = {
-        content: "",
-        type: "QC_BATCH",
-        batchId: this.batchId,
-        week: this.week,
-        qcStatus: "Undefined"
-      }
-    }
+    // Only begin network request if there is note content
     if (Boolean(noteContent)) {
-      // Only begin network request if there is note content
-      this.qcNote.content = noteContent;
-      this.isSaving = true;
-      this.success = false;
-      this.failure = false;
-      this.noteService.createQcBatchNote(this.qcNote).toPromise().then(
-        data => {
-          this.qcNote = data;
-          setTimeout(() => this.isSaving = false, this.timeout);
-          this.success = true;
-        }, () => {
-          setTimeout(() => this.isSaving = false, this.timeout);
-          this.failure = true;
-        }
-      )
+      // If the qcNote was already set from qaService.getOverallQcNoteByBatchAndWeek
+      if (this.qcNote) {
+        this.qcNote.content = noteContent;
+        this.isSaving = true;
+        this.success = false;
+        this.failure = false;
+        this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+          data => {
+            this.qcNote = data;
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.success = true;
+          }, () => {
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.failure = true;
+          }
+        )
+      } else {
+        this.qcNote = {
+          content: noteContent,
+          type: "QC_BATCH",
+          week: this.week,
+          batchId: this.batchId,
+        };
+        this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+          data => {
+            this.qcNote = data;
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.success = true;
+          }, () => {
+            setTimeout(() => this.isSaving = false, this.timeout);
+            this.failure = true;
+          }
+        )
+      }
     }
   }
 

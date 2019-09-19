@@ -1,19 +1,21 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Batch} from "../../../Batch/type/batch";
 import {TraineeService} from 'src/app/Assess-Batch/Services/trainee.service';
 import {BehaviorSubject, combineLatest, from, Observable, of} from "rxjs";
 import {concatMap, distinctUntilChanged} from "rxjs/operators";
-import {Grade, Trainee} from "../../../Batch/type/trainee";
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
-import {AssessBatchColumn, WeeklyAssociateNotes} from "../../../app.dto";
-import {Note} from "../../../Batch/type/note";
 import {AssessBatchGradeService} from "../../../Assess-Batch/Services/assess-batch-grades.service";
-import {Assessment} from "../../../Assess-Batch/Models/Assesment";
 import {CategoryService} from "../../../Assess-Batch/Services/category.service";
 import {AssessmentChangeDto} from "../../../domain/dto/assessment-change.dto";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 import {CommentDialogService} from "../../../shared/services/comment-dialog.service";
-import {Category} from "../../../Assess-Batch/Models/Category";
+import {Batch} from "../../../domain/model/batch.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {WeeklyAssociateNotes} from "../../../domain/dto/weekly-associate-notes.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Grade} from "../../../domain/model/grade.dto";
+import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
+import {Category} from "../../../domain/model/category.dto";
+import {Note} from "../../../domain/model/assessment-note.dto";
 
 @Component({
   selector: 'app-assess-associate-list',
@@ -192,7 +194,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
         noteType: "TRAINEE",
         weekNumber: this.week,
         batchId: this.batch.batchId,
-        traineeId: traineeId
+        traineeId: traineeId,
       }
     }
   }

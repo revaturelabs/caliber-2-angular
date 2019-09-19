@@ -1,9 +1,8 @@
 import { Label, MultiDataSet } from 'ng2-charts';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
-import { Assessment } from './../../../Assess-Batch/Models/Assesment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
-import { QANote } from '../../Models/qanote';
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-weekly-quality-audit',
@@ -66,7 +65,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
   }
   }
 
-  private qaNotes : QANote[];
+  private qaNotes : QcNote[];
 
   constructor(private reportService : ReportService, private cd: ChangeDetectorRef) { }
 

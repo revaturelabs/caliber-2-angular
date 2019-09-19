@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category} from "../../Assess-Batch/Models/Category";
 import {environment} from "../../../environments/environment";
-import {QcNote} from "../../Audit/types/note";
-import {Trainee} from "../../Batch/type/trainee";
-import {Tag} from "../../Audit/types/Tag";
+import {QcNote} from "../../domain/model/qc-note.dto";
+import {QcCategory} from "../../domain/model/qc-category.dto";
+import {Category} from "../../domain/model/category.dto";
+import {Trainee} from "../../domain/model/trainee.dto";
+import {Note} from "../../domain/model/assessment-note.dto";
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class QaService {
 
   constructor(
@@ -24,19 +24,19 @@ export class QaService {
     return this.http.get<QcNote>(environment.api.qa.qcBatchNotesByBatchAndWeek(batchId, week));
   }
 
-  getCategoriesByBatchAndWeek(batchId: number, week: number): Observable<Tag[]> {
-    return this.http.get<Tag[]>(environment.api.categories.byBatchAndWeek(batchId, week));
+  getCategoriesByBatchAndWeek(batchId: number, week: number): Observable<QcCategory[]> {
+    return this.http.get<QcCategory[]>(environment.api.categories.byBatchAndWeek(batchId, week));
   }
 
   getActiveCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(environment.api.categories.active);
   }
 
-  saveWeeklyQcCategory(tag: Tag): Observable<Tag> {
-    return this.http.post<Tag>(environment.api.qa.createCategory, tag);
+  saveWeeklyQcCategory(tag: QcCategory): Observable<QcCategory> {
+    return this.http.post<QcCategory>(environment.api.qa.createCategory, tag);
   }
 
-  removeWeeklyQcCategory(tag: Tag): Observable<void> {
+  removeWeeklyQcCategory(tag: QcCategory): Observable<void> {
     return this.http.delete<void>(environment.api.qa.deleteCategory(tag.id));
   }
 
@@ -50,6 +50,10 @@ export class QaService {
 
   upsertQcBatchNote(qcNote: QcNote): Observable<QcNote> {
     return this.http.post<QcNote>(environment.api.qa.batchNotes, qcNote);
+  }
+
+  upsertNote(note: Note): Observable<Note> {
+    return this.http.put<Note>(environment.api.assessments.upsert, note);
   }
 
 }

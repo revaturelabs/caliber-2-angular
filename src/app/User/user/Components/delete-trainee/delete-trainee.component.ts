@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import {Trainee} from "../../../../Batch/type/trainee";
+import {Trainee} from "../../../../domain/model/trainee.dto";
+
 
 @Component({
   selector: 'app-delete-trainee',

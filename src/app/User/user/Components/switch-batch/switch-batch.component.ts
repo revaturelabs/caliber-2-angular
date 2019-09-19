@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
 import { BatchService } from 'src/app/Batch/batch.service';
 import { TraineesService } from '../../Services/trainees.service';
 import { EventEmitter } from '@angular/core';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {Trainee} from "../../../../Batch/type/trainee";
+import {Batch} from "../../../../domain/model/batch.dto";
+import {Trainee} from "../../../../domain/model/trainee.dto";
 
 
 @Component({

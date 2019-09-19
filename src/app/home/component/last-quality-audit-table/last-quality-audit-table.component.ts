@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Batch } from '../../models/batch';
-import { QANote } from 'src/app/reports/Models/qanote';
 import { HomeService } from '../../service/home.service';
+import {Batch} from "../../../domain/model/batch.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-last-quality-audit-table',
@@ -18,7 +18,7 @@ export class LastQualityAuditTableComponent implements OnInit {
   starArray: number[];
   statusColorArray: string[];
   overallStatusArray: String[];
-  private qaNoteDataStore: QANote[][];
+  private qaNoteDataStore: QcNote[][];
   constructor(private homeService: HomeService) {
     this.statuses = ['Poor', 'Average', 'Good', 'Superstar', 'Overall Batch Status'];
   }

@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Batch } from 'src/app/Batch/type/batch';
-import { traineeAssessment, Grade, Trainee } from 'src/app/Batch/type/trainee';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
-import { QANote } from '../Models/qanote';
-import {Category} from "../../Assess-Batch/Models/Category";
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Trainee} from "../../domain/model/trainee.dto";
+import {Category} from "../../domain/model/category.dto";
+import {Assessment} from "../../domain/model/assessment.dto";
+import {QcNote} from "../../domain/model/qc-note.dto";
+import {Batch} from "../../domain/model/batch.dto";
+import {Grade} from "../../domain/model/grade.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -36,7 +37,7 @@ export class ReportService {
   trainee: Trainee;
   averageGradeScore: number;
   gradesDataStore: Grade[];
-  qaNoteDataStore: QANote[];
+  qaNoteDataStore: QcNote[];
   traineeDataStore: Trainee[];
   categoryDataStore: Category[];
   assessmentsDataStore: Assessment[];
@@ -93,14 +94,14 @@ export class ReportService {
     }
   }
 
-  getAllQANotes(): Observable<QANote[]> {
+  getAllQANotes(): Observable<QcNote[]> {
     let url;
     if (this.week === 0) {
       url = this.url + this.qaNotesAllURL + this.batch.batchId;
-      return this.http.get<QANote[]>(url, httpOptions);
+      return this.http.get<QcNote[]>(url, httpOptions);
     } else {
       url = this.url + this.qaNotesURL + this.batch.batchId + '/' + this.week;
-      return this.http.get<QANote[]>(url, httpOptions);
+      return this.http.get<QcNote[]>(url, httpOptions);
     }
   }
 
@@ -123,7 +124,7 @@ export class ReportService {
     this.gradesDataStore = gradesDataStore;
   }
 
-  setQANoteDataStore(qaNoteDataStore: QANote[]) {
+  setQANoteDataStore(qaNoteDataStore: QcNote[]) {
     this.qaNoteDataStore = qaNoteDataStore;
   }
 
@@ -218,7 +219,7 @@ export class ReportService {
     return this.gradesDataStore;
   }
 
-  getQANoteDataStore(): QANote[] {
+  getQANoteDataStore(): QcNote[] {
     return this.qaNoteDataStore;
   }
 

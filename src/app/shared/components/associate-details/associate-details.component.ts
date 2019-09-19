@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Trainee} from "../../../Batch/type/trainee";
 import {CommentDialogService} from "../../services/comment-dialog.service";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
 @Component({
   selector: 'app-associate-details',

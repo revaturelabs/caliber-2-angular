@@ -14,6 +14,7 @@ export const environment = {
     assessments: {
       create: `${serverRoot}/assessment/all/assessment/create`,
       update: `${serverRoot}/assessment/all/assessment/update`,
+      upsert: `${serverRoot}/assessment/note`,
       delete(assessmentId: number): string {
         return `${serverRoot}/assessment/all/assessment/delete/${assessmentId}`;
       }

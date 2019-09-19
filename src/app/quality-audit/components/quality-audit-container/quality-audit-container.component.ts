@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
-import {Batch} from "../../../Batch/type/batch";
 import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.service";
 import {distinctUntilChanged} from "rxjs/operators";
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-quality-audit-container',

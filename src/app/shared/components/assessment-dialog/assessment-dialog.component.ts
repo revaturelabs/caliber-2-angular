@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Category} from "../../../Assess-Batch/Models/Category";
-import {Assessment} from "../../../Assess-Batch/Models/Assesment";
 import {BehaviorSubject} from "rxjs";
+import {Category} from "../../../domain/model/category.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
 
 @Component({
   selector: 'app-assessment-dialog',

@@ -1,9 +1,9 @@
-import { Trainer } from "src/app/Batch/type/trainer";
-import { Trainee } from "src/app/Batch/type/trainee";
-
 /**
  * This class is used to represent the Note JSON object returned from the Quality Audit Service (com.revature.caliber.beans.Note)
  */
+import {Trainee} from "./trainee.dto";
+import {Trainer} from "./trainer.dto";
+
 
 export class QcNote {
   noteId?: number;

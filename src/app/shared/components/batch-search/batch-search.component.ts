@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Batch} from "../../../Batch/type/batch";
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-batch-search',

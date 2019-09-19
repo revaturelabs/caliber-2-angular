@@ -1,11 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Note } from 'src/app/Batch/type/note';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import {WeeklyAssociateNotes} from "../../app.dto";
-import {QcNote} from "../../Audit/types/note";
+import {Note} from "../../domain/model/assessment-note.dto";
+import {WeeklyAssociateNotes} from "../../domain/dto/weekly-associate-notes.dto";
+import {QcNote} from "../../domain/model/qc-note.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

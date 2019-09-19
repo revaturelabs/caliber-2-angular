@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Batch} from "../../../Batch/type/batch";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-batch-select-dropdown',
@@ -11,6 +11,7 @@ export class BatchSelectDropdownComponent implements OnInit, OnChanges {
 
   @Input('batches') batches: Batch[];
   @Output('onBatchSelect') onBatchSelect: EventEmitter<Batch> = new EventEmitter<Batch>(true);
+  selectedBatch: Batch = undefined;
 
   searchForm: FormGroup = this.generateSearchForm();
   results: SearchResult[] = [];
@@ -76,7 +77,8 @@ export class BatchSelectDropdownComponent implements OnInit, OnChanges {
   }
 
   selectBatch(batchId: number) {
-    this.onBatchSelect.emit(this.batches.find(batch => batch.batchId === batchId));
+    this.selectedBatch = this.batches.find(batch => batch.batchId === batchId);
+    this.onBatchSelect.emit(this.selectedBatch);
   }
 
 }

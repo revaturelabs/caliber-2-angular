@@ -12,6 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CreateModalComponent} from './Assess-Batch/Modals/create-modal/create-modal.component';
 import {FormModalComponent} from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import {AssessBatchService} from "./services/assess-batch.service";
+import {QaService} from "./quality-audit/services/qa.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {AssessBatchService} from "./services/assess-batch.service";
     AppRoutingModule
   ],
   providers: [
-    AssessBatchService
+    AssessBatchService,
+    QaService
   ],
   bootstrap: [
     AppComponent,

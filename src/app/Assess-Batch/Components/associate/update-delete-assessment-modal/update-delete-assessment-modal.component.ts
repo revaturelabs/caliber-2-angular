@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { AssessmentService } from '../../../Services/assessment.service';
-import { Assessment } from '../../../Models/Assesment';
 import { CategoryService } from '../../../Services/category.service';
-import { Category } from 'src/app/Assess-Batch/Models/Category';
 
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
+import {Category} from "../../../../domain/model/category.dto";
+import {Assessment} from "../../../../domain/model/assessment.dto";
 
 @Component({
   selector: 'app-update-delete-assessment-modal',

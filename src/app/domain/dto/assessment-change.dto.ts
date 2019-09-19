@@ -1,4 +1,5 @@
-import {Assessment} from "../../Assess-Batch/Models/Assesment";
+import {Assessment} from "../model/assessment.dto";
+
 
 export interface AssessmentChangeDto {
   assessment: Assessment;

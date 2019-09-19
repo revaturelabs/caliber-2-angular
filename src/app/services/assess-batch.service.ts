@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {Batch} from "../Batch/type/batch";
-import {Assessment} from "../Assess-Batch/Models/Assesment";
-import {Trainee} from "../Batch/type/trainee";
+import {Assessment} from "../domain/model/assessment.dto";
+import {Batch} from "../domain/model/batch.dto";
+import {Trainee} from "../domain/model/trainee.dto";
+import {Note} from "../domain/model/assessment-note.dto";
 
 @Injectable()
 export class AssessBatchService {
@@ -36,5 +37,9 @@ export class AssessBatchService {
   deleteAssessment(assessment: Assessment): Observable<Assessment> {
     // HttpClient does not expose a body argument via delete
     return this.http.request<Assessment>('delete', environment.api.assessments.delete(assessment.assessmentId), {body: assessment});
+  }
+
+  upsertNote(note: Note): Observable<Note> {
+    return this.http.put<Note>(environment.api.assessments.upsert, note);
   }
 }

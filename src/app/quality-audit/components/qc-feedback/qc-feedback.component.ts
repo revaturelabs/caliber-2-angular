@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {QcNote} from "../../../Audit/types/note";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+
 
 @Component({
   selector: 'app-qc-feedback',

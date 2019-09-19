@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { QANote } from 'src/app/reports/Models/qanote';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {QcNote} from "../../domain/model/qc-note.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,9 +20,9 @@ export class QanoteService {
 
   constructor(private http: HttpClient) { }
 
-  getAllQANotes(batch):Observable<QANote[]> {
+  getAllQANotes(batch):Observable<QcNote[]> {
     let url = this.url + this.qaNotesAllURL + batch.batchId;
-    return this.http.get<QANote[]>(url, httpOptions);//
+    return this.http.get<QcNote[]>(url, httpOptions);//
   }
 }
 

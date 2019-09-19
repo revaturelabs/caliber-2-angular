@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AssessBatchColumn} from "../../../app.dto";
-import {Category} from "../../../Assess-Batch/Models/Category";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
+import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
+import {Category} from "../../../domain/model/category.dto";
 
 @Component({
   selector: 'app-assessment-details-column',

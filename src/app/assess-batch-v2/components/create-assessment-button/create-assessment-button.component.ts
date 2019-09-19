@@ -3,7 +3,7 @@ import {CategoryService} from "../../../Assess-Batch/Services/category.service";
 import {Observable} from "rxjs";
 import {BsModalRef} from "ngx-bootstrap";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
-import {Category} from "../../../Assess-Batch/Models/Category";
+import {Category} from "../../../domain/model/category.dto";
 
 @Component({
   selector: 'app-create-assessment-button',

@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ReportService } from 'src/app/reports/Service/report.service';
-import { AuditService } from 'src/app/Audit/Services/audit.service';
-import { QcNote } from 'src/app/Audit/types/note';
+import {QcNote} from "../../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-individual-qcresults-row',

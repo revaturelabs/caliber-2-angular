@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from 'src/app/AssessmentCategories/Services/category-service';
 import { CategoriesComponent } from '../../Components/categories/categories.component';
-import {Category} from "../../../Assess-Batch/Models/Category";
+import {Category} from "../../../domain/model/category.dto";
 
 @Component({
   selector: 'app-edit-assess-cat-modal',
