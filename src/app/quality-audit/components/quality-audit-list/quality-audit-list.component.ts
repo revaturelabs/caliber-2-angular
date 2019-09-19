@@ -1,10 +1,11 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {QaService} from "../../services/qa.service";
+import {QaService} from "../../../services/qa.service";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {Category} from "../../../domain/model/category.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
+import {current} from "codelyzer/util/syntaxKind";
 
 @Component({
   selector: 'app-quality-audit-list',
@@ -114,8 +115,14 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   }
 
   handleQcStatusChange(qcNote: QcNote) {
-    this.qaService.upsertQcTraineeNote(qcNote).toPromise().then(
+    let currentNote: QcNote = qcNote;
+    if (currentNote.traineeId && this.noteMap.has(currentNote.traineeId)) {
+      currentNote = this.noteMap.get(qcNote.traineeId);
+      currentNote.content = qcNote.content;
+      currentNote.qcStatus = qcNote.qcStatus;
+    }
+    this.qaService.upsertQcTraineeNote(currentNote).subscribe(
       data => this.noteMap.set(data.traineeId, data)
-    );
+    )
   }
 }

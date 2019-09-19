@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {QaService} from "../../services/qa.service";
+import {QaService} from "../../../services/qa.service";
 import {Observable, of} from "rxjs";
 import {QcCategory} from "../../../domain/model/qc-category.dto";
 import {Category} from "../../../domain/model/category.dto";

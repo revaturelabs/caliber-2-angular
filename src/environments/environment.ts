@@ -17,11 +17,25 @@ export const environment = {
       upsert: `${serverRoot}/assessment/note`,
       delete(assessmentId: number): string {
         return `${serverRoot}/assessment/all/assessment/delete/${assessmentId}`;
+      },
+      allByBatchIdAndWeek(batchId: number, week: number): string {
+        return `${serverRoot}/assessment/all/assessment/batch/${batchId}/?week=${week}`;
+      },
+      grades: {
+        byBatchAndWeek(batchId: number, week: number): string {
+          return `${serverRoot}/assessment/all/grade/batch/${batchId}?week=${week}`;
+        },
+        upsert: `${serverRoot}/assessment/grade`
+      },
+      notes: {
+        byBatchAndWeek(batchId: number, week: number): string {
+          return `${serverRoot}/assessment/all/note/batch/${batchId}/${week}`;
+        }
       }
     },
     batches: {
       allByYearAndQuarter(year: number, quarter: number): string {
-        return `${serverRoot}/batch/vp/all/?year=${year}&quarter=${quarter}`;
+        return `${serverRoot}/batch/vp/batch/all/?year=${year}&quarter=${quarter}`;
       }
     },
     validYears: `${serverRoot}/batch/all/batch/valid_years`,
@@ -31,6 +45,9 @@ export const environment = {
       all: `${serverRoot}/category`,
       byBatchAndWeek(batchId: number, week: number): string {
         return `${serverRoot}/qa/category/${batchId}/${week}/all`
+      },
+      byId(categoryId: number): string {
+        return `${serverRoot}/category/${categoryId}`;
       }
     },
     qa: {

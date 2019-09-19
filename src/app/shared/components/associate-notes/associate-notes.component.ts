@@ -5,7 +5,7 @@ import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
-import {QaService} from "../../../quality-audit/services/qa.service";
+import {QaService} from "../../../services/qa.service";
 
 @Component({
   selector: 'app-associate-notes',
@@ -21,6 +21,7 @@ export class AssociateNotesComponent implements OnInit {
   @Input("isQcNote") isQcNote: boolean;
   @Input("qcNote") qcNote: QcNote;
   @Output("onNoteUpdate") onNoteUpdate: EventEmitter<Note> = new EventEmitter<Note>(true);
+  @Output("onQcNoteUpdate") onQcNoteUpdate: EventEmitter<QcNote> = new EventEmitter<QcNote>(true);
   traineeNotesForm: FormGroup;
 
   isSaving: boolean = false;
@@ -50,6 +51,8 @@ export class AssociateNotesComponent implements OnInit {
     }
   }
 
+
+
   private generateForm(): FormGroup {
     return this.fb.group({
       "notes": ['']
@@ -57,7 +60,6 @@ export class AssociateNotesComponent implements OnInit {
   }
 
   handleNote() {
-    this.isSaving = false;
     this.success = false;
     this.failure = false;
     const noteContent: string = this.traineeNotesForm.get("notes").value;
@@ -75,7 +77,6 @@ export class AssociateNotesComponent implements OnInit {
           this.failure = true;
         }
       );
-      this.isSaving = false;
     }
   }
 
@@ -88,6 +89,7 @@ export class AssociateNotesComponent implements OnInit {
         this.qaService.upsertQcTraineeNote(qcNote).toPromise().then(
           data => {
             this.qcNote = data;
+            this.onQcNoteUpdate.emit(data);
             setTimeout(() => this.isSaving = false, this.timeout);
             this.success = true;
           }, () => {
@@ -96,7 +98,6 @@ export class AssociateNotesComponent implements OnInit {
           }
         );
       }
-      this.isSaving = false;
     }
   }
 

@@ -20,7 +20,6 @@
               [traineeId]="trainee?.traineeId"
               [grade]="getGradesForAssessmentAndTrainee(assessment?.assessmentId, trainee?.traineeId)"
               (onGradeUpdate)="handleGradeUpdate($event)"
-              (onGradeCreate)="handleGradeCreate($event)"
             ></app-assessment-details-row>
           </td>
           <td class="col-sm-6 col-md-6 col-lg-6 col-xl-6">

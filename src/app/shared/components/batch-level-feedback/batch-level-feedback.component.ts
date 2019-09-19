@@ -4,7 +4,7 @@ import {BehaviorSubject, combineLatest} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
-import {QaService} from "../../../quality-audit/services/qa.service";
+import {QaService} from "../../../services/qa.service";
 
 @Component({
   selector: 'app-batch-level-feedback',
@@ -150,11 +150,11 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   }
 
   handleNoteUpdate() {
-    this.isSaving = true;
-    this.success = false;
-    this.failure = false;
     const noteContent = this.batchNoteForm.get("batchNote").value;
     if (Boolean(noteContent)) {
+      this.isSaving = true;
+      this.success = false;
+      this.failure = false;
       if (!Boolean(this.note)) {
         this.note = {
           noteContent: noteContent,
@@ -183,22 +183,12 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     const noteContent = this.batchNoteForm.get("batchNote").value;
     // Only begin network request if there is note content
     if (Boolean(noteContent)) {
+      this.isSaving = true;
+      this.success = false;
+      this.failure = false;
       // If the qcNote was already set from qaService.getOverallQcNoteByBatchAndWeek
       if (this.qcNote) {
         this.qcNote.content = noteContent;
-        this.isSaving = true;
-        this.success = false;
-        this.failure = false;
-        this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
-          data => {
-            this.qcNote = data;
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.success = true;
-          }, () => {
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.failure = true;
-          }
-        )
       } else {
         this.qcNote = {
           content: noteContent,
@@ -206,17 +196,17 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
           week: this.week,
           batchId: this.batchId,
         };
-        this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
-          data => {
-            this.qcNote = data;
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.success = true;
-          }, () => {
-            setTimeout(() => this.isSaving = false, this.timeout);
-            this.failure = true;
-          }
-        )
       }
+      this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+        data => {
+          this.qcNote = data;
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.success = true;
+        }, () => {
+          setTimeout(() => this.isSaving = false, this.timeout);
+          this.failure = true;
+        }
+      )
     }
   }
 

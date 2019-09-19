@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
-import {QcNote} from "../../domain/model/qc-note.dto";
-import {QcCategory} from "../../domain/model/qc-category.dto";
-import {Category} from "../../domain/model/category.dto";
-import {Trainee} from "../../domain/model/trainee.dto";
-import {Note} from "../../domain/model/assessment-note.dto";
+import {environment} from "../../environments/environment";
+import {QcNote} from "../domain/model/qc-note.dto";
+import {QcCategory} from "../domain/model/qc-category.dto";
+import {Category} from "../domain/model/category.dto";
+import {Trainee} from "../domain/model/trainee.dto";
+import {Note} from "../domain/model/assessment-note.dto";
 
 
 @Injectable()

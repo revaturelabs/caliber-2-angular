@@ -32,6 +32,7 @@
             [note]="undefined"
             [qcNote]="getQcTraineeNote(trainee?.traineeId)"
             [isQcNote]="true"
+            (onQcNoteUpdate)="handleQcStatusChange($event)"
           >
           </app-associate-notes>
         </td>

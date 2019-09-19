@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TraineeService} from 'src/app/Assess-Batch/Services/trainee.service';
-import {BehaviorSubject, combineLatest, from, Observable, of} from "rxjs";
+import {BehaviorSubject, combineLatest, Observable, of} from "rxjs";
 import {concatMap, distinctUntilChanged} from "rxjs/operators";
 import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {AssessBatchGradeService} from "../../../Assess-Batch/Services/assess-batch-grades.service";
@@ -16,6 +16,7 @@ import {Grade} from "../../../domain/model/grade.dto";
 import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
+import {AssessBatchService} from "../../../services/assess-batch.service";
 
 @Component({
   selector: 'app-assess-associate-list',
@@ -54,10 +55,11 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     private noteService: NoteService,
     private assessBatchGradeService: AssessBatchGradeService,
     private categoryService: CategoryService,
+    private assessBatchService: AssessBatchService,
     private assessmentDialogService: AssessmentDialogService,
     private commentDialogService: CommentDialogService,
   ) {
-    this.categoryService.getActiveCatgories().subscribe(
+    this.assessBatchService.getActiveCategories().subscribe(
       data => {
         this.categories = data;
       }
@@ -75,7 +77,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
         // batch === undefined until we select one from the dropdown
         if (batch !== undefined) {
           this.setUpdatedBatch(batch);
-          return this.traineeService.getTraineesByBatchId(batch.batchId);
+          return this.assessBatchService.getTraineesByBatchId(batch.batchId);
         } else {
           // Return an empty observable if batch === undefined
           return of([]);
@@ -98,10 +100,9 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       ([week, batch]) => {
         if (week > 0 && Boolean(batch)) {
           this.selectedWeek = week;
-          // this.thisWeeksGrades$ = [];
-          this.assessments$ = this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(batch.batchId, week);
+          this.assessments$ = this.assessBatchService.getAssessmentsByBatchIdAndWeek(batch.batchId, week);
           if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
-            this.grades$ = this.assessBatchGradeService.getGradesByBatchIdAndWeekNum(batch.batchId, week);
+            this.grades$ = this.assessBatchService.getGradesByBatchIdAndWeek(batch.batchId, week);
             this.grades$.subscribe(
               data => {
                 if (data.length > 0) {
@@ -116,7 +117,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                 }
               }
             );
-            this.notes$ = this.noteService.getNoteMapByBatchIdAndWeekNumber(batch.batchId, week);
+            this.notes$ = this.assessBatchService.getNoteMapByBatchIdAndWeek(batch.batchId, week);
             this.notes$.subscribe(
               data => {
                 this.notes = new Map();
@@ -132,7 +133,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
             this.assessments = [];
             this.columns = [];
-            this.assessBatchGradeService.getAssessmentsByBatchIdAndWeekNum(batch.batchId, week).subscribe(
+            this.assessBatchService.getAssessmentsByBatchIdAndWeek(batch.batchId, week).subscribe(
               data => {
                 this.assessments = data;
                 this.totalPoints = 0;
@@ -145,7 +146,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                       assessment: assessment,
                       category: ""
                     });
-                    this.assessBatchGradeService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
+                    this.assessBatchService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
                       data => {
                         this.addToColumn(data);
                       }
@@ -239,15 +240,11 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   }
 
   handleGradeUpdate(grade: Grade) {
-    this.assessBatchGradeService.updateGrade(grade).subscribe(
-      data => {
-        this.setUpdatedGrade(data);
-      }
-    )
+    this.setUpdatedGrade(grade);
   }
 
   handleGradeCreate(grade: Grade) {
-    this.assessBatchGradeService.postGrade(grade).subscribe(
+    this.assessBatchService.upsertGrade(grade).subscribe(
       data => {
         if (this.grades.has(data.assessmentId)) {
           this.grades.get(data.assessmentId).push(data);
@@ -278,6 +275,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
           }
         }
       }
+    } else {
+      this.grades.set(grade.assessmentId, [grade]);
     }
   }
 }
