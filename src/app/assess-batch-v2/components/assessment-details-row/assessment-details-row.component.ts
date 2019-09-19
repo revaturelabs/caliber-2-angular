@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup } from "@angular/forms";
-import {Grade, Trainee} from "../../../Batch/type/trainee";
+import {Grade} from "../../../domain/model/grade.dto";
+import {AssessBatchService} from "../../../services/assess-batch.service";
 
 @Component({
   selector: 'app-assessment-details-row',
@@ -16,7 +17,10 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
   @Output("onGradeCreate") onGradeCreate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
   gradeForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private assessBatchService: AssessBatchService
+  ) { }
 
   ngOnInit() {
 
@@ -36,19 +40,24 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
   handleGradeUpdate() {
     const score = this.gradeForm.get("grade").value;
-    // Only make request when we have to
-    if (this.grade && score !== this.grade.score) {
-      this.grade.score = score;
-      this.onGradeUpdate.emit(this.grade);
+    if (this.grade) {
+      if (this.grade.score !== score) {
+        this.grade.score = score;
+      }
     } else {
-      this.grade = {
-        score: score,
-        assessmentId: this.assessmentId,
-        traineeId: this.traineeId,
-        dateReceived: new Date().getTime()
-      };
-      this.onGradeCreate.emit(this.grade);
+        this.grade = {
+          score: score,
+          assessmentId: this.assessmentId,
+          traineeId: this.traineeId,
+          dateReceived: new Date().getTime()
+        };
     }
+    this.assessBatchService.upsertGrade(this.grade).subscribe(
+      data => {
+        this.grade = data;
+        this.onGradeUpdate.emit(data);
+      }
+    )
   }
 
 

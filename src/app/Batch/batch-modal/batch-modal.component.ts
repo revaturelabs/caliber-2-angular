@@ -1,12 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { FormGroup } from '@angular/forms';
-import { Batch } from '../type/batch';
-import { Trainer } from '../type/trainer';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { BLocation } from '../type/location';
-import { ServiceError } from 'src/app/error-handling/types/service-error';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Batch} from "../../domain/model/batch.dto";
+import {Trainer} from "../../domain/model/trainer.dto";
+import { Location } from '../../domain/model/location.dto';
 
 
   /**
@@ -42,7 +40,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
   skillTypes: string[];
   location: string = null;
   locationId: number;
-  locationOptions: BLocation[];
+  locationOptions: Location[];
   trainer: string = null;
   trainers: Trainer[];
   coTrainer: string = null;

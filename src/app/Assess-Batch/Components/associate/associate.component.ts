@@ -1,17 +1,18 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { TraineeService } from '../../Services/trainee.service';
-import { Trainee, traineeAssessment, Grade } from 'src/app/Batch/type/trainee';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service'
 import { NoteService } from '../../Services/note.service';
-import { Note } from 'src/app/Batch/type/note';
 import { AssessmentService } from '../../Services/assessment.service';
 import { UpdateDeleteAssessmentModalComponent } from './update-delete-assessment-modal/update-delete-assessment-modal.component';
-import { Assessment } from '../../Models/Assesment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import {TraineeFlag} from "../../../User/user/types/trainee-flag";
-import {Category} from "../../Models/Category";
+import {Category} from "../../../domain/model/category.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {Note} from "../../../domain/model/assessment-note.dto";
+import {Grade} from "../../../domain/model/grade.dto";
+import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 
 //import { AuditService } from '../../Services/audit.service';  // ag
 
@@ -25,7 +26,7 @@ export class AssociateComponent implements OnInit {
   noteFlagInputActive: boolean;
   //Array to hold all trainnee
   traineeArr: Trainee[] = [];
-  assessmentArr: traineeAssessment[] = [];
+  assessmentArr: Assessment[] = [];
   selectedAssessmentId: number;
   selectedAssessmentCategoryId: number;
   totalRaw: number = 0;
@@ -86,7 +87,14 @@ export class AssociateComponent implements OnInit {
 
           }
           if (this.noteArr[this.i] == null) {
-            this.note = new Note(-1, "", "Trainee", this.selectedWeek, this.batchId, this.traineeArr[this.i].traineeId);
+            this.note = {
+              noteId: -1,
+              noteContent: "",
+              noteType: "Trainee",
+              weekNumber: this.selectedWeek,
+              batchId: this.batchId,
+              traineeId: this.traineeArr[this.i].traineeId
+            }
             this.noteArr[this.i] = this.note;
           }
         }

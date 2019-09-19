@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BatchModalComponent } from '../batch-modal/batch-modal.component';
 import { BatchService } from '../batch.service';
-import { FormsModule } from '@angular/forms';
 import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/view-trainees.component';
-import { Batch } from '../type/batch';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Batch} from "../../domain/model/batch.dto";
 
  /**
   *  The batch-view component is the parent component for the manage batch feature.
@@ -68,7 +66,7 @@ export class BatchViewComponent implements OnInit {
   refreshPage() {
     this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
-      
+
     }, error => {
       const serviceName = 'Batch Service ';
       const errorMessage = 'Failed to make connection!';

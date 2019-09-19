@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { AuditService } from '../../Services/audit.service';
-import { QcNote } from '../../types/note';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
 	selector: 'app-overall',
@@ -24,10 +24,10 @@ export class OverallComponent implements OnInit, OnDestroy {
 	isTyping: boolean;
 
 	constructor(private auditService: AuditService, private errorService: ErrorService) {
-		
+
 	}
 	ngOnInit() {
-		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {	
+		this.noteSubscription = this.auditService.overallBatchNoteChanged.subscribe(data => {
 			this.note = data;
 		});
 

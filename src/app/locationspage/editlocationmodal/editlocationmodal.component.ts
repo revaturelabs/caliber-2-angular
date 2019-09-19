@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Location } from '../../home/models/location';
+import { Location } from '../../domain/model/location.dto'
+
 @Component({
   selector: 'app-editlocationmodal',
   templateUrl: './editlocationmodal.component.html',
@@ -14,7 +15,14 @@ export class EditlocationmodalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.location=new Location();
+    this.location = {
+      address: "",
+      city: "",
+      name: "",
+      state: "",
+      zipcode: "",
+      active: false
+    }
   }
 
   displayEditModal(location: Location){

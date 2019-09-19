@@ -1,14 +1,15 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Trainee, Grade} from 'src/app/Batch/type/trainee';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
-import { Batch } from 'src/app/Batch/type/batch';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
-import { ReportOutput } from '../../Models/report-output';
 import { ReportService } from '../../Service/report.service';
-import { QANote } from '../../Models/qanote';
-import {Category} from "../../../Assess-Batch/Models/Category";
+import {Batch} from "../../../domain/model/batch.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Category} from "../../../domain/model/category.dto";
+import {ReportOutput} from "../../../domain/dto/report-output.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Grade} from "../../../domain/model/grade.dto";
 
 @Component({
   selector: 'app-toolbar',
@@ -36,7 +37,7 @@ export class ToolbarComponent implements OnInit {
   //Data stores for the ReportService
   averageGradeScore: number = 0;
   gradesDataStore:Grade[] = [];
-  qaNoteDataStore:QANote[] = [];
+  qaNoteDataStore:QcNote[] = [];
   categoryDataStore: Category[] = [];
   assessmentsDataStore:Assessment[] = [];
   batchAssessmentsDataStore:Assessment[] = [];

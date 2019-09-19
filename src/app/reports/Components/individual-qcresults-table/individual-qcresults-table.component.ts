@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
-import { Batch } from 'src/app/Batch/type/batch';
-import { QANote } from '../../Models/qanote';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
-import { Category } from 'src/app/Assess-Batch/Models/Category';
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Category} from "../../../domain/model/category.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Batch} from "../../../domain/model/batch.dto";
+
 
 @Component({
   selector: 'app-individual-qcresults-table',
@@ -11,7 +12,7 @@ import { Category } from 'src/app/Assess-Batch/Models/Category';
   styleUrls: ['./individual-qcresults-table.component.css']
 })
 export class IndividualQCResultsTableComponent implements OnInit {
-  qcData: QANote[];
+  qcData: QcNote[];
   categoryDataStore: Category[] = [];
   assessmentDataStore: Assessment[] = [];
   categoryForWeek: Category[] = [];
@@ -46,7 +47,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
     this.trainee = this.reportService.getTrainee();
 
     if (this.qcData === undefined || this.qcData.length === 0) {
-      this.reportService.getAllQANotes().subscribe((qcNotes: QANote[]) => {
+      this.reportService.getAllQANotes().subscribe((qcNotes: QcNote[]) => {
         this.qcData = qcNotes;
         this.categoryDataStore = this.reportService.getCategoryDataStore();
         this.assessmentDataStore = this.reportService.getAssessmentDataStore();

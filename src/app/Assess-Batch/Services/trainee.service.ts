@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Trainee } from "src/app/Batch/type/trainee";
 import { environment } from 'src/environments/environment';
+import {Trainee} from "../../domain/model/trainee.dto";
 
 @Injectable({
   providedIn: "root"

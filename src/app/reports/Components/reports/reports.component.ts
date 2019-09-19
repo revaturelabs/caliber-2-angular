@@ -1,15 +1,14 @@
 
 import { WeeklyQualityAuditComponent } from './../weekly-quality-audit/weekly-quality-audit.component';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ReportOutput } from '../../Models/report-output';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
-import { Trainee } from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
 import { AssessmentBreakdownComponent } from '../assessment-breakdown/assessment-breakdown.component';
 import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
 import { IndividualQCResultsTableComponent } from '../individual-qcresults-table/individual-qcresults-table.component';
 import { WeeklyReportComponent } from '../weekly-report/weekly-report.component';
 import { TechRadarComponent } from '../tech-radar/tech-radar.component';
+import {ReportOutput} from "../../../domain/dto/report-output.dto";
 
 
 @Component({
@@ -61,7 +60,7 @@ export class ReportsComponent implements OnInit {
 
   public isTraineeSelected = false;
   public isWeekSelected = false;
-  private reportOutput: ReportOutput = null;
+  reportOutput: ReportOutput = null;
 
   constructor(private reportService: ReportService, private cd: ChangeDetectorRef) { }
   @ViewChild(OverallQCScoresComponent) overAllQCReport: OverallQCScoresComponent;

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
-import {Grade, Trainee} from 'src/app/Batch/type/trainee';
 import { ReportService } from '../../Service/report.service';
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Grade} from "../../../domain/model/grade.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
 @Component({
   selector: 'app-weekly-report',

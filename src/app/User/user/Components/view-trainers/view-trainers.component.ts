@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { Trainer } from '../../types/trainer';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { TrainersService } from '../../Services/trainers.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
 import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
 import { DisableTrainerComponent } from '../disable-trainer/disable-trainer.component';
+import {Trainer} from "../../../../domain/model/trainer.dto";
 
 
 @Component({
@@ -74,7 +72,7 @@ export class ViewTrainersComponent implements OnInit {
     this.getAllTrainers();
   }
 
-  clearView() 
+  clearView()
   {
     this.trainersList = [];
   }

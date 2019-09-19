@@ -12,9 +12,9 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="form-group col-lg-12 col-md-12 col-sm-12" style="text-align: left">
-							<label for="category">Assessment Category:</label> 
-							<select name = 'selectedCategory' [(ngModel)] = 'selectedCategory' class="form-control" id="category" 
-								required [value] = 'default'> 
+							<label for="category">Assessment Category:</label>
+							<select name = 'selectedCategory' [(ngModel)] = 'selectedCategory' class="form-control" id="category"
+								required [value] = '"default"'>
 							<option value='default' disabled>{{currentCategory?.skillCategory}}</option>
 							<option *ngFor = "let cat of categories" [ngValue] = cat.categoryId>{{cat?.skillCategory}}</option>
 							</select>
@@ -24,12 +24,12 @@
 							<input [(ngModel)] = 'score' name= 'score' style="text-align: left" type="number" class="form-control" value= currentAssessement.rawScore  placeholder={{currentAssessment.rawScore}}/>
 						</div>
 							<div class="form-group col-md-6 col-sm-6" style="text-align: left">
-							<label for="assessmentType">Assessment Type:</label> 
+							<label for="assessmentType">Assessment Type:</label>
 							<select name = 'selectedType' [(ngModel)] = 'selectedType' class="form-control" id='selectedType' required>
 								<option value='default' disabled>{{currentAssessment?.assessmentType}}</option>
 								<option *ngFor ="let type of assessmentTypeDisplay" [ngValue] = type.name>{{type.name}}</option>
 							</select>
-						</div>						
+						</div>
 					</div>
 				</div>
 				<!-- Edit/Delete Modal -->

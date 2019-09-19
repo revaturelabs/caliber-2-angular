@@ -4,13 +4,11 @@ import { Services } from '@angular/core/src/view';
 import { AuditService } from '../../Services/audit.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
-import { QcNote } from '../../types/note';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { element } from '@angular/core/src/render3/instructions';
-import { timeout } from 'q';
-import { Trainee } from 'src/app/Batch/type/trainee';
-import { Tag } from '../../types/Tag';
-import {TraineeFlag} from "../../../User/user/types/trainee-flag";
+import {QcCategory} from "../../../domain/model/qc-category.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 @Component({
   selector: 'app-associate',
   templateUrl: './associate.component.html',
@@ -20,11 +18,11 @@ export class AssociateComponent implements OnInit {
   sortRandom: boolean = false;
 
   // Category Tags that have been added to a week by user
-  categoryTags: Map<string, Tag> = this.auditService.categoryTags;
+  categoryTags: Map<string, QcCategory> = this.auditService.categoryQcCategorys;
 
 
   // Active Category Tags retrieved from Category Service
-  activeCategoryTags: Map<string, Tag> = new Map<string, Tag>();
+  activeCategoryTags: Map<string, QcCategory> = new Map<string, QcCategory>();
 
   notes: QcNote[] = this.auditService.notes;
   order: string = "Randomly";
@@ -71,9 +69,14 @@ export class AssociateComponent implements OnInit {
   // Grab the active categories from the Category Service
   getAllActiveCategories(): void {
     this.auditService.getAllActiveCategories().subscribe(
-      (activeTags: Tag[]) => {
+      (activeTags: QcCategory[]) => {
         for (let i = 0; i < activeTags.length; i++) {
-          let t: Tag = new Tag(activeTags[i].categoryId, activeTags[i].skillCategory, -1, -1);
+          let t: QcCategory = {
+            skillCategory: activeTags[i].skillCategory,
+            categoryId: activeTags[i].categoryId,
+            week: -1,
+            batchId: -1
+          };
 
           this.activeCategoryTags.set(t.skillCategory, t);
         }
@@ -81,21 +84,22 @@ export class AssociateComponent implements OnInit {
     );
   }
 
-  addCategoryTag(tag: Tag) {
+  addCategoryTag(tag: QcCategory) {
     if (!this.categoryTags.has(tag.skillCategory) && this.auditService.selectedBatch != undefined) {
-
-      let t = new Tag(tag.categoryId,
-        tag.skillCategory,
-        this.auditService.selectedBatch.batchId,
-        this.auditService.selectedWeek);
+      let t: QcCategory = {
+        skillCategory: tag.skillCategory,
+        categoryId: tag.categoryId,
+        week: this.auditService.selectedBatch.batchId,
+        batchId: this.auditService.selectedWeek
+      };
 
       if (tag.id === undefined) {
         this.auditService.sendCategory(t).subscribe(resultTag => {
-          t.setId(resultTag.id);
+          t.id = resultTag.id;
         });
       }
       else{
-        t.setId(tag.id);
+        t.id = tag.id
       }
       this.categoryTags.set(tag.skillCategory, t);
     }
@@ -210,7 +214,7 @@ export class AssociateComponent implements OnInit {
   }
 
   getCategoriesByBatchByWeek() {
-    let categories: Tag[] = this.auditService.categoriesByBatchByWeek;
+    let categories: QcCategory[] = this.auditService.categoriesByBatchByWeek;
     this.categoryTags.clear();
     for (let i = 0; i < categories.length; i++) {
       this.addCategoryTag(categories[i]);

@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
-import {SharedModule} from "../shared.module";
+import {Injectable} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {AssociateFlagDialogComponent} from "../components/associate-flag-dialog/associate-flag-dialog.component";
 import {AssessBatchService} from "../../Assess-Batch/Services/assess-batch.service";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
-import {Trainee} from "../../Batch/type/trainee";
+import {Trainee} from "../../domain/model/trainee.dto";
 
 
-@Injectable({
-  providedIn: SharedModule
-})
+@Injectable()
 export class CommentDialogService {
 
   private modalRef: BsModalRef;

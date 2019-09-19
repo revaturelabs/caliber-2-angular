@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Batch } from './type/batch';
-import { BLocation } from './type/location';
-import { Trainer } from './type/trainer';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {Batch} from "../domain/model/batch.dto";
+import {Trainer} from "../domain/model/trainer.dto";
+import { Location } from '../domain/model/location.dto';
 
 /**
  * sets headers for recieving JSON objects
@@ -120,8 +120,8 @@ export class BatchService {
   /**
    * get all locations from location service
    */
-  getAllLocations(): Observable<BLocation[]> {
-    return this.http.get<BLocation[]>(this.locationsAllURL);
+  getAllLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.locationsAllURL);
   }
 
   /**

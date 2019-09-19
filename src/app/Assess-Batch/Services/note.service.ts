@@ -1,10 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Note } from 'src/app/Batch/type/note';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import {WeeklyAssociateNotes} from "../../app.dto";
+import {Note} from "../../domain/model/assessment-note.dto";
+import {WeeklyAssociateNotes} from "../../domain/dto/weekly-associate-notes.dto";
+import {QcNote} from "../../domain/model/qc-note.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -62,5 +63,25 @@ export class NoteService {
 
   private getNoteMapUrl(batchId: number, weekNumber: number): string {
     return `${this.assessmentUrl}/all/note/batch/${batchId}/${weekNumber}`;
+  }
+
+  createQcTraineeNote(qcNote: QcNote): Observable<QcNote> {
+    return this.http.post<QcNote>(environment.api.qa.traineeNotes, qcNote);
+  }
+
+  updateQcTraineeNote(qcNote: QcNote): Observable<QcNote> {
+    return this.http.put<QcNote>(environment.api.qa.traineeNotes, qcNote);
+  }
+
+  getOverallQcNoteByBatchAndWeek(batchId: number, week: number): Observable<QcNote> {
+    return this.http.get<QcNote>(environment.api.qa.qcBatchNotesByBatchAndWeek(batchId, week));
+  }
+
+  createQcBatchNote(qcNote: QcNote): Observable<QcNote> {
+    return this.http.post<QcNote>(environment.api.qa.batchNotes, qcNote);
+  }
+
+  updateQcBatchNote(qcNote: QcNote): Observable<QcNote> {
+    return this.http.put<QcNote>(environment.api.qa.batchNotes, qcNote);
   }
 }

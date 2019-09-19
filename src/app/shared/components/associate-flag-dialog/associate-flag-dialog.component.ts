@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Trainee} from "../../../Batch/type/trainee";
 import {BsModalRef} from "ngx-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
-import {TraineeFlag} from "../../../User/user/types/trainee-flag";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 
 @Component({
   selector: 'app-associate-flag-dialog',
@@ -18,7 +18,7 @@ export class AssociateFlagDialogComponent implements OnInit {
   commentComplete: boolean = false;
   confirm: boolean = false;
 
-  readonly flags: string[] = ["RED", "GREEN", "TRAINER"];
+  readonly flags: string[] = ["RED", "GREEN"];
 
   protected createComment$: BehaviorSubject<Trainee> = new BehaviorSubject<Trainee>(undefined);
 

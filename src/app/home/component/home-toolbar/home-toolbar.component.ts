@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocationService } from '../../service/location.service';
-import { Location } from '../../models/location';
 import { AssessBatchService } from '../../../Assess-Batch/Services/assess-batch.service';
-import { Batch } from 'src/app/Batch/type/batch';
-import { QANote } from 'src/app/reports/Models/qanote';
 import { QanoteService } from '../../service/qanote.service';
 import { HomeService } from '../../service/home.service';
-
+import {Batch} from "../../../domain/model/batch.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
+import { Location } from '../../../domain/model/location.dto';
 
 @Component({
   selector: 'app-home-toolbar',
@@ -24,8 +23,8 @@ export class HomeToolbarComponent implements OnInit {
   citiesInLocation: Location[] = [];
   selectedLocation: Location;
   showStates: boolean;
-  qaNotesAllNotes: QANote[];
-  qaNotesByBatch: QANote[][];
+  qaNotesAllNotes: QcNote[];
+  qaNotesByBatch: QcNote[][];
   currentDateTime: number = new Date().getTime();
 
   allLocations: Location;
@@ -187,8 +186,8 @@ export class HomeToolbarComponent implements OnInit {
           (qaNotesOfBatch) => {
             // let indexOfBatch = batches.indexOf(element);
             if (!qaNotesOfBatch.length) {
-              const tempBatchArray: QANote[] = [];
-              let wk0qaNote: QANote = new QANote();
+              const tempBatchArray: QcNote[] = [];
+              let wk0qaNote: QcNote = new QcNote(0, "", 0, 0, undefined, 0, "QC_BATCH", "Undefined", 0, undefined, 0);
               wk0qaNote.batchId = element.batchId;
               wk0qaNote.traineeId = 0;
               wk0qaNote.week = 0;
@@ -200,7 +199,7 @@ export class HomeToolbarComponent implements OnInit {
               this.submitHomeOutput.emit(this.qaNotesByBatch.length);
             }
             else {
-              const tempBatchArray: QANote[] = [];
+              const tempBatchArray: QcNote[] = [];
               qaNotesOfBatch.forEach(
                 (qaNote) => {
                   tempBatchArray.push(qaNote);

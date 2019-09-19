@@ -1,12 +1,13 @@
-import { Batch } from 'src/app/Batch/type/batch';
-import { Category } from './../../../Assess-Batch/Models/Category';
-import { Assessment } from './../../../Assess-Batch/Models/Assesment';
-import { Trainee } from './../../../Batch/type/trainee';
-import { Grade } from 'src/app/Batch/type/trainee';
+
 import { Component, OnInit } from '@angular/core';
 import { RadialChartOptions, ChartDataSets, ChartType } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { ReportService } from '../../Service/report.service';
+import {Grade} from "../../../domain/model/grade.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Category} from "../../../domain/model/category.dto";
+import {Batch} from "../../../domain/model/batch.dto";
 
 // This radar chart is made with ng2-charts, which provides directives to use chart.js more easily.
 @Component({
@@ -75,7 +76,7 @@ export class TechRadarComponent implements OnInit {
   ];
   public radarChartType: ChartType = 'radar';
 
-  constructor(private reportService: ReportService) {
+  constructor(public reportService: ReportService) {
    }
 
   ngOnInit() {

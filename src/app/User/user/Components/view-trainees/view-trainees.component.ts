@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
-import { TraineeFlag } from '../../types/trainee-flag';
 import { TraineesService } from '../../Services/trainees.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
-import {Trainee} from "../../../../Batch/type/trainee";
+import {Trainee} from "../../../../domain/model/trainee.dto";
+import {TraineeFlag} from "../../../../domain/model/trainee-flag.dto";
 
 @Component({
   selector: 'app-view-trainees',

@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CategoryService} from "../../../Assess-Batch/Services/category.service";
 import {Observable} from "rxjs";
-import {Assessment} from "../../../Assess-Batch/Models/Assesment";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {BsModalRef} from "ngx-bootstrap";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
-import {Category} from "../../../Assess-Batch/Models/Category";
+import {Category} from "../../../domain/model/category.dto";
 
 @Component({
   selector: 'app-create-assessment-button',
@@ -13,10 +12,8 @@ import {Category} from "../../../Assess-Batch/Models/Category";
 })
 export class CreateAssessmentButtonComponent implements OnInit {
 
-  @Input("week") private week: number;
-  @Input("batchId") private batchId: number;
-
-  @Output("onAssessmentCreate") onAssessmentCreate: EventEmitter<Assessment> = new EventEmitter<Assessment>(true);
+  @Input("week") week: number;
+  @Input("batchId") batchId: number;
 
   categories$: Observable<Category[]>;
   modal: BsModalRef;
@@ -27,7 +24,7 @@ export class CreateAssessmentButtonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getActiveCatgories();
   }
 
   showCreateAssessmentDialog() {
@@ -36,9 +33,5 @@ export class CreateAssessmentButtonComponent implements OnInit {
         this.assessmentDialogService.openAssessmentDialog(undefined, this.week, this.batchId, data);
       }
     )
-  }
-
-  handleCreateAssessment(assessment: Assessment) {
-    this.onAssessmentCreate.emit(assessment);
   }
 }

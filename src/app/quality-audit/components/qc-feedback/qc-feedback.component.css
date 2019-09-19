@@ -1,0 +1,66 @@
+.feedback {
+  max-width: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.feedback-dropdown {
+  background: #f1f1f1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: available;
+  width: 100%;
+  box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+.feedback-dropdown-overall {
+  background: #f1f1f1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: available;
+  width: 100%;
+  box-shadow: 0px 8px 16px 6px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+.fa-question-circle {
+  color: orangered;
+}
+
+.fa-frown {
+  color: red;
+}
+
+.fa-frown:hover {
+  text-shadow: 0 0 5px red;
+}
+
+.fa-meh {
+  color: #f9e900;
+}
+
+.fa-meh:hover {
+  text-shadow: 0 0 5px #f9e900;
+}
+
+.fa-smile {
+  color: darkgreen;
+}
+
+.fa-smile:hover {
+  text-shadow: 0 0 5px darkgreen;
+}
+
+.fa-star {
+  color: mediumblue;
+}
+
+.fa-star:hover {
+  text-shadow: 0 0 5px mediumblue;
+}

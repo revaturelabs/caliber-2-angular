@@ -1,0 +1,15 @@
+<div class="feedback" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+  <div><em [ngClass]="getDisplayClassForStatus(qcNote?.qcStatus)"></em></div>
+  <div
+    *ngIf="shouldShowDropdown"
+    (mouseenter)="showDropdown()"
+    (mouseleave)="hideDropdown()"
+    [ngClass]="{'feedback-dropdown': !isOverallFeedback, 'feedback-dropdown-overall': isOverallFeedback}"
+  >
+    <em
+      *ngFor="let status of getStatuses()"
+      [ngClass]="getClassForStatus(status)"
+      (click)="setQcStatus(status)"
+    ></em>
+  </div>
+</div>

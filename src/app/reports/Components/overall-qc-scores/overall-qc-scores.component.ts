@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
-import { QANote } from '../../Models/qanote';
-import { bloomAdd } from '@angular/core/src/render3/di';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-overall-qc-scores',
@@ -10,7 +8,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   // styleUrls: ['./overall-qc-scores.component.css']
 })
 export class OverallQCScoresComponent implements OnInit {
-  qcData: QANote[][];
+  qcData: QcNote[][];
 
   // Modal atributes set by the displayNote method
   name: String;

@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Batch } from 'src/app/Batch/type/batch';
-import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
-import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
-import {Assessment} from "../../../Assess-Batch/Models/Assesment";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
+import {Batch} from "../../../domain/model/batch.dto";
+import {AssessBatchService} from "../../../services/assess-batch.service";
 
 @Component({
   selector: 'app-assess-batch-conatiner',
@@ -24,11 +23,11 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   private yearSubject: BehaviorSubject<number>;
   private quarterSubject: BehaviorSubject<number>;
 
-  private allBatchesSubscription: Subscription;
+  private allBatchesThisYearAndQuarterSubscription: Subscription;
 
   constructor(
-    private noteService: NoteService,
     private assessBatchService: AssessBatchService,
+
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
@@ -38,7 +37,7 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.assessBatchService.getAllYears().subscribe(
+    this.assessBatchService.getValidYears().subscribe(
       data => {
         this.years = data;
       }, err => {
@@ -51,7 +50,7 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
       ([year, quarter]) => {
         this.batches = this.assessBatchService.getBatchesByYearAndQuarter(year, quarter);
 
-        this.allBatchesSubscription = this.batches.subscribe(
+        this.allBatchesThisYearAndQuarterSubscription = this.batches.subscribe(
           batches => {
             // Never select a batch on batch load
             this.selectedBatch = undefined;
@@ -62,7 +61,7 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.allBatchesSubscription.unsubscribe();
+    this.allBatchesThisYearAndQuarterSubscription.unsubscribe();
   }
 
   setSelectedQuarter(quarter: number) {

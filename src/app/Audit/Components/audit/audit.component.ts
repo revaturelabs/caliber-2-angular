@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuditService} from '../../Services/audit.service';
-import { QcNote } from '../../types/note';
-import { NoteService } from 'src/app/Assess-Batch/Services/note.service';
+import {QcNote} from "../../../domain/model/qc-note.dto";
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
@@ -12,11 +11,11 @@ export class AuditComponent implements OnInit {
   constructor(public auditService:AuditService) { }
 
   ngOnInit() {
-    this.auditService.invokeAssosciateFunction.subscribe(()=> {    
-      this.notes = this.auditService.notes;    
+    this.auditService.invokeAssosciateFunction.subscribe(()=> {
+      this.notes = this.auditService.notes;
     });
   }
-  
-  
+
+
 
 }

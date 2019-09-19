@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
-import { Batch } from 'src/app/Batch/type/batch';
 import { BatchModalComponent } from 'src/app/Batch/batch-modal/batch-modal.component';
-import { Trainee, traineeAssessment, Grade } from '../../../Batch/type/trainee';
 import { TraineeService } from '../../Services/trainee.service';
 import { AssessBatchService } from '../../Services/assess-batch.service';
 import { AssessBatchGradeService } from '../../Services/assess-batch-grades.service';
 import { NoteService } from '../../Services/note.service';
-import { Note } from 'src/app/Batch/type/note';
-import { forEach } from '@angular/router/src/utils/collection';
+import {Batch} from "../../../domain/model/batch.dto";
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Grade} from "../../../domain/model/grade.dto";
+import {Trainee} from "../../../domain/model/trainee.dto";
+import {Note} from "../../../domain/model/assessment-note.dto";
 
 
 @Component({
@@ -45,7 +46,7 @@ export class ToolbarComponent implements OnInit {
     weeks: 0
   };
 
-  assessments: traineeAssessment = {
+  assessments: Assessment = {
     assessmentId: 0,
     rawScore: 0,
     assessmentTitle: '',
@@ -203,7 +204,7 @@ export class ToolbarComponent implements OnInit {
 
   checkLastWeek(week: number, weeks: any[]) {
     if (week === weeks.length) {
- 
+
       if (!this.oneCall) this.selectWeek(week);
     }
   }
@@ -270,7 +271,7 @@ export class ToolbarComponent implements OnInit {
   //     this.noteService.weekEmitter.emit(this.selectedWeek);
   //     this.noteService.batchIdEmitter.emit(this.selectedBatch.batchId);
   //     this.noteService.noteEmitter.emit(notes);
-  //   })  
+  //   })
   // }
 
 

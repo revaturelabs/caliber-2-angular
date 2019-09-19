@@ -8,8 +8,8 @@ import {ImportGradesDialogService} from "../../../shared/services/import-grades-
 })
 export class ImportGradesButtonComponent implements OnInit {
 
-  @Input("week") private week: number;
-  @Input("batchId") private batchId: number;
+  @Input("week") week: number;
+  @Input("batchId") batchId: number;
 
   constructor(
     private importGradesDialogService: ImportGradesDialogService

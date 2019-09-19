@@ -1,0 +1,25 @@
+<div class="toolbar-row">
+  <div class="toolbar-row-item">
+    <app-shared-dropdown-menu *ngIf="years"
+      [data]="years"
+      [dropdownFor]="'Year'"
+      [selectedValue]="year"
+      (onValueSelect)="selectYear($event)"
+    ></app-shared-dropdown-menu>
+    <app-shared-dropdown-menu  *ngIf="quarters"
+      [data]="quarters"
+      [format]="formatQuarters"
+      [dropdownFor]="'Quarter'"
+      [selectedValue]="quarter"
+      (onValueSelect)="selectQuarter($event)"
+    ></app-shared-dropdown-menu>
+<!--    <app-shared-dropdown-menu *ngIf="batches"-->
+<!--      [data]="batches"-->
+<!--      [dropdownFor]="'Batch'"-->
+<!--      [selectedValue]="batch"-->
+<!--      [format]="formatBatches"-->
+<!--      (onValueSelect)="selectBatch($event)"-->
+<!--    ></app-shared-dropdown-menu>-->
+    <app-batch-select-dropdown *ngIf="batches" [batches]="batches" (onBatchSelect)="selectBatch($event)"></app-batch-select-dropdown>
+  </div>
+</div>

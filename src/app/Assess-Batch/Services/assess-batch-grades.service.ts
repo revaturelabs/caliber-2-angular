@@ -2,11 +2,11 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { MissingGrade } from 'src/app/home/models/missingGrade';
 import { catchError } from 'rxjs/operators'
-import {Assessment} from "../Models/Assesment";
-import {Grade} from "../../Batch/type/trainee";
-import {Category} from "../Models/Category";
+import {Assessment} from "../../domain/model/assessment.dto";
+import {Grade} from "../../domain/model/grade.dto";
+import {Category} from "../../domain/model/category.dto";
+import {MissingGrade} from "../../domain/dto/missing-grades.dto";
 
 const httpOptions = {headers: new HttpHeaders ({'Content-Type': 'application/json'})};
 

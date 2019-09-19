@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from 'src/app/home/models/location';
+import {Location} from "../../domain/model/location.dto";
 
 @Component({
   selector: '[app-locationrow]',
@@ -9,15 +9,15 @@ import { Location } from 'src/app/home/models/location';
 
 
 export class LocationrowComponent implements OnInit {
-  
-  @Input() location:Location;
+
+  @Input() location: Location
 
   @Output() locEmit: EventEmitter<Location> = new EventEmitter<Location>();
   @Output() disableEmit: EventEmitter<Location> = new EventEmitter<Location>();
 
   constructor() { }
 
-  ngOnInit() 
+  ngOnInit()
   {
   }
 

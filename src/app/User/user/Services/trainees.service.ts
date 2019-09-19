@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { environment } from 'src/environments/environment';
-import {Trainee} from "../../../Batch/type/trainee";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
 /**
  * sets the Http headers

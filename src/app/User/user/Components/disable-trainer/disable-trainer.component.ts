@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
-import { Trainer } from '../../types/trainer';
-import { TrainersService } from '../../Services/trainers.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TrainersService} from '../../Services/trainers.service';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
+import {Trainer} from "../../../../domain/model/trainer.dto";
 
 @Component({
   selector: 'app-disable-trainer',

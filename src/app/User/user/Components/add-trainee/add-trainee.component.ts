@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TraineesService } from '../../Services/trainees.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {Trainee} from "../../../../Batch/type/trainee";
+import {Trainee} from "../../../../domain/model/trainee.dto";
 
 /**
  * @ignore
@@ -98,4 +98,18 @@ export class AddTraineeComponent implements OnInit {
     });
   }
 
+  resetAddTraineeForm() {
+    this.fullName = "";
+    this.email = "";
+    this.skypeId = "";
+    this.phoneNumber = "";
+    this.college = "";
+    this.degree = "";
+    this.major = "";
+    this.recruiterName = "";
+    this.techScreenerName = "";
+    this.projectCompletion = "";
+    this.profileUrl = "";
+    this.trainingStatus = "";
+  }
 }

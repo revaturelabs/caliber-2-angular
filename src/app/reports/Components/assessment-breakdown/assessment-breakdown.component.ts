@@ -1,10 +1,10 @@
-import { AssessmentScore } from './../../Models/assessment-score';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ReportService } from '../../Service/report.service';
-import { Assessment } from 'src/app/Assess-Batch/Models/Assesment';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { Grade } from 'src/app/Batch/type/trainee';
+import {Assessment} from "../../../domain/model/assessment.dto";
+import {Grade} from "../../../domain/model/grade.dto";
+import {AssessmentScore} from "../../../domain/dto/assessment-score.dto";
 
 @Component({
   selector: 'app-assessment-breakdown',
@@ -15,7 +15,7 @@ export class AssessmentBreakdownComponent implements OnInit {
   public validHeader = [
     true,
     true,
-    true, 
+    true,
     true
   ]
 
@@ -73,7 +73,7 @@ export class AssessmentBreakdownComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    
+
     tooltips: {
       mode: 'label'
     },
@@ -90,7 +90,7 @@ export class AssessmentBreakdownComponent implements OnInit {
             padding: 0,
             backdropPaddingX: 0,
             display: true,
-            
+
           }
         }]
     },
@@ -107,13 +107,13 @@ export class AssessmentBreakdownComponent implements OnInit {
 
   updateDataPull(){
     this.traineeSelected = this.reportService.trainee.batchId > 0;
-    
+
     this.assessmentDataStore = this.reportService.getBatchAssessmentDataStore();
     if (this.assessmentDataStore == undefined || this.assessmentDataStore.length === 0)
     {
       this.reportService.getAllBatchAssessments().subscribe((assessments : Assessment[])=>{
         this.assessmentDataStore = assessments;
-        
+
         this.gradeDataStore = this.reportService.getGradeDataStore();
         this.traineeGrades = this.reportService.getGradesOfTraineeDataStore();
         this.createChart();
@@ -125,13 +125,13 @@ export class AssessmentBreakdownComponent implements OnInit {
       this.traineeGrades = this.gradeDataStore.filter((grade)=>{ return grade.traineeId === this.reportService.trainee.traineeId });
       this.createChart();
     }
-    
+
   }
 
   createChart() : void {
-    
+
     let gradeArray=[];
-    let traineeAverageArray=[]; 
+    let traineeAverageArray=[];
     let traineeDisplayData=[];
     let batchAverageArray=[];
     let batchDisplayData=[];
@@ -143,7 +143,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.assessmentDataStore.forEach((assessment) => {
       assessmentMap.set(assessment.assessmentId, assessment);
     });
-    
+
     this.gradeAverages = gradeArray;
     this.barChartLabels = [];
     this.tableHeader = [];
@@ -157,7 +157,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     if (assessmentMap.size <= 0) {
       return;
     }
-    
+
     traineeAverageArray = this.getAverageGradeObject(assessmentMap, this.traineeGrades);
     batchAverageArray = this.getAverageGradeObject(assessmentMap, this.gradeDataStore);
 
@@ -175,7 +175,7 @@ export class AssessmentBreakdownComponent implements OnInit {
       this.batchRow.push(scoreString);
       borderWidth.push(this.barBorderWidth);
     });
-    
+
     if (this.traineeSelected === true) {
       traineeAverageArray.forEach((assessmentScore: AssessmentScore) => {
         //This rounds the assessment score to the first two decimals.
@@ -183,14 +183,14 @@ export class AssessmentBreakdownComponent implements OnInit {
           scoreString = "";
         else
           scoreString = ""+Math.round(assessmentScore.score*100)/100;
-        
+
           this.validHeader.push(scoreString ? true : false);
-      
+
         //This turns the assessment type to title case.
         assessmentTypeString = assessmentScore.assessmentType.replace(/\w\S*/g, function(txt){
           return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
         });
-        
+
         traineeDisplayData.push(scoreString);
         this.traineeRow.push(scoreString);
 
@@ -199,13 +199,13 @@ export class AssessmentBreakdownComponent implements OnInit {
     }
 
     let traineeData = {
-      data: traineeDisplayData, 
-      label: 'Trainee', 
+      data: traineeDisplayData,
+      label: 'Trainee',
       borderWidth: borderWidth
     };
     let batchData = {
-      data: batchDisplayData, 
-      label: 'Batch', 
+      data: batchDisplayData,
+      label: 'Batch',
       borderWidth: borderWidth
     };
 
@@ -221,7 +221,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     {
       this.applyTraineeColor(batchData);
     }
-    
+
     this.barChartData.push(batchData);
   }
 
@@ -264,12 +264,12 @@ export class AssessmentBreakdownComponent implements OnInit {
       });
       averageObject[type] /= i;
     });
-    
+
     let assessmentAverage = [];
     Object.keys(averageObject).forEach((type) => {
       assessmentAverage.push(new AssessmentScore(type, averageObject[type]));
     });
-    
+
     // This sorts the elements by alphabetically order and forces other to be at the end.
     assessmentAverage.sort((assessment1 : AssessmentScore, assessment2 : AssessmentScore) => {
       if (assessment1.assessmentType === 'OTHER') {

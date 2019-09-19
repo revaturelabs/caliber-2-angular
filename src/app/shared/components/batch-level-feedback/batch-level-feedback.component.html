@@ -1,0 +1,45 @@
+<div [formGroup]="batchNoteForm">
+  <h4 class="note-header"><strong>Overall{{ isQcFeedback ? ' QC ' : ' '}}Feedback for Week {{ week }}</strong></h4>
+  <div class="notes-container">
+    <span class="note-spinner d-flex flex-row justify-content-end">
+      <app-assessment-result-spinner
+        [isSaving]="isSaving"
+        [success]="success"
+        [failure]="failure"
+      ></app-assessment-result-spinner>
+    </span>
+    <textarea
+      *ngIf="!isQcFeedback"
+      formControlName="batchNote"
+      class="form-control"
+      placeholder="Start typing to record your overall feedback for week {{ week }}"
+      (blur)="handleNoteUpdate()"
+      maxlength="4000"
+      rows="4"
+      [value]="note?.noteContent"
+    >
+    </textarea>
+    <textarea
+      *ngIf="isQcFeedback"
+      formControlName="batchNote"
+      class="form-control"
+      placeholder="Start typing to record your overall QC feedback for week {{ week }}"
+      (blur)="handleQcNoteUpdate()"
+      maxlength="4000"
+      rows="4"
+      [value]="qcNote?.content"
+    >
+    </textarea>
+  </div>
+  <div class="save-button-wrapper">
+    <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
+    <!-- Events after clicking save button -->
+    <div class="spinner fa-style " *ngIf="showSaving">
+      <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+    </div>
+
+    <div id="checkMark" class="spinner fa-style fa-2x" *ngIf="showCheck">
+      <span class="fas fa-check" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>

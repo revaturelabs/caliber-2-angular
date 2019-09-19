@@ -1,0 +1,15 @@
+<div class="nav nav-tabs">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown">{{ selectedBatch ? formatBatch(selectedBatch) : 'Select Batch' }} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <a role="button">
+          <form [formGroup]="searchForm" class="batch-search form-group">
+            <input type="text" class="form-control" placeholder="Search by Trainer Name" formControlName="query" >
+          </form>
+        </a>
+      <li *ngIf="results.length > 0">
+        <a role="button" *ngFor="let result of results" (click)="selectBatch(result.batchId)">{{ result.output }}</a>
+      </li>
+    </ul>
+  </li>
+</div>

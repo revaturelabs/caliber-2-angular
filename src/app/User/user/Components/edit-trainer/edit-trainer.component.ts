@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, Inject } from '@angular/core';
-import { Trainer } from '../../types/trainer';
 import { TrainersService } from '../../Services/trainers.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Trainer} from "../../../../domain/model/trainer.dto";
 
 @Component({
   selector: 'app-edit-trainer',
@@ -24,23 +24,23 @@ export class EditTrainerComponent implements OnInit{
    @Output() edited: EventEmitter<string> = new EventEmitter<string>()
   constructor(private trService: TrainersService, private errorService: ErrorService) { }
 
-  ngOnInit() 
+  ngOnInit()
   {
-    
+
   }
-  /** 
-   *      This method displays the trainer information in the modal to be edited. 
-   * We store the trainerObj parameter into an originalTrainer variable, and set the "trainer" variable, 
+  /**
+   *      This method displays the trainer information in the modal to be edited.
+   * We store the trainerObj parameter into an originalTrainer variable, and set the "trainer" variable,
    * which is two-way bound in the edit-trainer view, to the trainerObj parameter.
    * In order to remove two-way data-binding referencing, we converted "trainer" into a JSON.
-   * Thus, we are able to distinguish between the original trainer, and the new trainer object. 
+   * Thus, we are able to distinguish between the original trainer, and the new trainer object.
    * @author Carl Pacquing
   */
   displayTrainer(trainerObj:Trainer)
   { //A setter method to set our initial Trainer information.
     //Display the information in the modal.
     console.log(trainerObj);
-    this.originalTrainer = trainerObj;//Store original trainer to the trainerObj parameter.    
+    this.originalTrainer = trainerObj;//Store original trainer to the trainerObj parameter.
     this.trainer = JSON.parse(JSON.stringify(trainerObj)); // actual trainer data;
     console.log(this.originalTrainer);
   }

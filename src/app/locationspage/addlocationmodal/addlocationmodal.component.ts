@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Location } from "../../home/models/location"
+import { Location } from "../../domain/model/location.dto";
 
 @Component({
   selector: 'app-addlocationmodal',
@@ -13,11 +13,25 @@ export class AddlocationmodalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.location=new Location();
+    this.location = {
+      address: "",
+      city: "",
+      name: "",
+      state: "",
+      zipcode: "",
+      active: false
+    }
   }
 
   displayAddModal(){
-    this.location=new Location();
+    this.location = {
+      address: "",
+      city: "",
+      name: "",
+      state: "",
+      zipcode: "",
+      active: false
+    }
   }
 
   addLocation(){

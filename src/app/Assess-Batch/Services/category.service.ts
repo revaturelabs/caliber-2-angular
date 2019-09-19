@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Category} from '../Models/Category';
 import {environment} from 'src/environments/environment';
-// import { Category } from "../Models/Category";
+import {Category} from "../../domain/model/category.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,10 +26,14 @@ export class CategoryService {
   url = environment.serverRootURL + '/category';
 
   getCategories(): Observable<[Category]> {
-    return this.http.get<[Category]>(`${this.url}/all`, httpOptions);
+    return this.http.get<[Category]>(`${this.url}`, httpOptions);
   }
 
   getCategoryById(id: number): Observable<Category> {
     return this.http.get<Category>(`${this.url}/${id}`, httpOptions);
+  }
+
+  getActiveCatgories(): Observable<Category[]> {
+    return this.http.get<Category[]>(environment.api.categories.active, httpOptions);
   }
 }

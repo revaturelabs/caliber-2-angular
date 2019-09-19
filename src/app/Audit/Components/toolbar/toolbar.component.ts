@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
-import { Batch } from 'src/app/Batch/type/batch';
-import { QcNote } from '../../types/note';
+import {Batch} from "../../../domain/model/batch.dto";
+import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({
   selector: 'app-toolbar',
@@ -106,7 +106,7 @@ export class ToolbarComponent implements OnInit {
     }
 
   }
-  
+
   addWeek() {
     var last = this.weeks[this.weeks.length-1];
     this.selectedBatch.weeks=last+1;
