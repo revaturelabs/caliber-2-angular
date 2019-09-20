@@ -9,6 +9,7 @@ import {QcNote} from "../../../domain/model/qc-note.dto";
 })
 export class QcFeedbackComponent implements OnInit {
 
+  @Input("column") column: string;
   @Input('qcNote') qcNote: QcNote;
   @Input('isOverallFeedback') isOverallFeedback: boolean;
   @Output('onQcStatusSelect') qcStatusSelector: EventEmitter<QcNote> = new EventEmitter<QcNote>(true);
@@ -64,7 +65,23 @@ export class QcFeedbackComponent implements OnInit {
   }
 
   setQcStatus(status: string) {
-    this.qcNote.qcStatus = status;
+    switch(this.column) {
+      case "technical":
+        this.setTechnicalStatus(status);
+        break;
+      case "soft":
+        this.setSoftSkillStatus(status);
+        break;
+    }
+  }
+
+  setTechnicalStatus(status: string) {
+    this.qcNote.technicalStatus = status;
+    this.qcStatusSelector.emit(this.qcNote);
+  }
+
+  setSoftSkillStatus(status: string) {
+    this.qcNote.softSkillStatus = status;
     this.qcStatusSelector.emit(this.qcNote);
   }
 }

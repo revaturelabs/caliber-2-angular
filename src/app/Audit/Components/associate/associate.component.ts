@@ -276,7 +276,7 @@ export class AssociateComponent implements OnInit {
 
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].noteId === selectedNoteId) {
-        this.notes[i].qcStatus = selection;
+        this.notes[i].technicalStatus = selection;
         this.auditService.sendNote(this.notes[i]).subscribe(
           data => {
             this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);

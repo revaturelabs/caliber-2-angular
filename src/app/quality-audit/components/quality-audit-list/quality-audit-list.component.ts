@@ -75,11 +75,12 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   }
 
   getQcTraineeNote(traineeId: number): QcNote {
-    if (this.noteMap.has(traineeId) && this.noteMap.get(traineeId).qcStatus !== undefined) {
+    if (this.noteMap.has(traineeId) && this.noteMap.get(traineeId).technicalStatus !== undefined) {
       return this.noteMap.get(traineeId);
     } else {
       return {
-        qcStatus: "Undefined",
+        technicalStatus: "Undefined",
+        softSkillStatus: "Undefined",
         traineeId: traineeId,
         batchId: this.batchId,
         week: this.week,
@@ -97,7 +98,8 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
         week: this.week,
         batchId: this.batchId,
         type: "QC_BATCH",
-        qcStatus: "Undefined",
+        technicalStatus: "Undefined",
+        softSkillStatus: "Undefined",
         content: "",
       };
       return this.qcBatchNote;
@@ -105,8 +107,9 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   }
 
   handleQcBatchNoteChange(qcNote: QcNote) {
-    this.qcBatchNote.qcStatus = qcNote.qcStatus;
-    this.lastQcStatus = qcNote.qcStatus;
+    this.qcBatchNote.technicalStatus = qcNote.technicalStatus;
+    this.qcBatchNote.softSkillStatus = qcNote.softSkillStatus;
+    this.lastQcStatus = qcNote.technicalStatus;
     // this.qaService.upsertQcBatchNote(this.qcBatchNote).toPromise().then(
     //   data => {
     //     this.qcBatchNote = data;
@@ -119,7 +122,8 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
     if (currentNote.traineeId && this.noteMap.has(currentNote.traineeId)) {
       currentNote = this.noteMap.get(qcNote.traineeId);
       currentNote.content = qcNote.content;
-      currentNote.qcStatus = qcNote.qcStatus;
+      currentNote.technicalStatus = qcNote.technicalStatus;
+      currentNote.softSkillStatus = qcNote.softSkillStatus;
     }
     this.qaService.upsertQcTraineeNote(currentNote).subscribe(
       data => this.noteMap.set(data.traineeId, data)

@@ -5,7 +5,8 @@
       <thead>
       <tr>
         <th class="col-md-2 col-sm-2 col-lg-2 col-xl-2"><strong>Trainee</strong></th>
-        <th><strong>Individual Feedback</strong></th>
+        <th><strong>Technical Skills</strong></th>
+        <th><strong>Soft Skills</strong></th>
         <th class="col-md-8 col-sm-8 col-lg-2 col-xl-2"><strong>Notes</strong></th>
       </tr>
       </thead>
@@ -19,6 +20,15 @@
         </td>
         <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
           <app-qc-feedback
+            [column]="technical"
+            [qcNote]="getQcTraineeNote(trainee?.traineeId)"
+            (onQcStatusSelect)="handleQcStatusChange($event)"
+          >
+          </app-qc-feedback>
+        </td>
+        <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+          <app-qc-feedback
+            [column]="soft"
             [qcNote]="getQcTraineeNote(trainee?.traineeId)"
             (onQcStatusSelect)="handleQcStatusChange($event)"
           >

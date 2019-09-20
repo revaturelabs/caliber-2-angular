@@ -125,7 +125,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
     qcStatusObject["POOR"] = 0;
 
     this.qaNotes.forEach((qaNote)=>{
-      qcStatusCurrent = qaNote.qcStatus.toUpperCase();
+      qcStatusCurrent = qaNote.technicalStatus.toUpperCase();
       //qaNote.qcStatus
       if (qcStatusObject[qcStatusCurrent] == undefined) {
         qcStatusObject[qcStatusCurrent] = 1;

@@ -100,7 +100,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
     let numberOfPeople = 0;
     this.overallFeedback = 0;
     for (let i = 0; i < this.qcData.length; i++) {
-      switch (this.qcData[i].qcStatus) {
+      switch (this.qcData[i].technicalStatus) {
         case 'Superstar':
           this.overallFeedback = this.overallFeedback + 4;
           numberOfPeople += 1;
@@ -152,8 +152,8 @@ export class IndividualQCResultsTableComponent implements OnInit {
 
   removeUndefineStatus() {
     for (let i = 0; i < this.qcData.length; i++) {
-      if (this.qcData[i].qcStatus === 'Undefined') {
-        this.qcData[i].qcStatus = '-';
+      if (this.qcData[i].technicalStatus === 'Undefined') {
+        this.qcData[i].technicalStatus = '-';
       }
     }
   }

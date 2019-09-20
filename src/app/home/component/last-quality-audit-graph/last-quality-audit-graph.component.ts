@@ -229,7 +229,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
         qaArray.forEach(
           (qaNote) => {
             if (qaNote.week === week && qaNote.traineeId > 0) {
-              switch (qaNote.qcStatus) {
+              switch (qaNote.technicalStatus) {
                 case 'Poor': poorArray[index] += 1; break;
                 case 'Average': averageArray[index] += 1; break;
                 case 'Good': goodArray[index] += 1; break;
