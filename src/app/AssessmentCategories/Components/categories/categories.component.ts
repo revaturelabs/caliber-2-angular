@@ -49,21 +49,17 @@ getAllCategories(){
 }
 
 disableCategory(category: Category){
-  this.categoryService.disable(category).subscribe(res=>{});
-
-  setTimeout(() => {
-    this.getAllCategories();
-  }, 700);
+  this.categoryService.disable(category).toPromise().then(
+    () => this.getAllCategories()
+  );
   document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
 enableCategory(category: Category){
- this.categoryService.enable(category).subscribe(res => {});
+ this.categoryService.enable(category).toPromise().then(
+   () => this.getAllCategories()
+ );
  document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
- setTimeout(() => {
-  this.getAllCategories();
-}, 700);
-document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
 loadIntoStorage(){
