@@ -6,6 +6,7 @@ import {AssessmentService} from "../../Assess-Batch/Services/assessment.service"
 import {AssessmentAction, AssessmentChangeDto} from "../../domain/dto/assessment-change.dto";
 import {Assessment} from "../../domain/model/assessment.dto";
 import {Category} from "../../domain/model/category.dto";
+import {AssessBatchService} from "../../services/assess-batch.service";
 
 @Injectable()
 export class AssessmentDialogService {

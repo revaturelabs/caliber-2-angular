@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CategoryService } from 'src/app/AssessmentCategories/Services/category-service';
 import { CategoriesComponent } from '../../Components/categories/categories.component';
 import {Category} from "../../../domain/model/category.dto";
+import {CategoryService} from "../../../services/subvertical/category/category.service";
 
 @Component({
   selector: 'app-edit-assess-cat-modal',
@@ -11,7 +11,7 @@ import {Category} from "../../../domain/model/category.dto";
 export class EditAssessCatModalComponent implements OnInit {
 
   category:Category;  //The category that will be selected for presentation and editing
-  @Input() categories:any []; //The list of categories to be loaded and displayed
+  @Input() categories:Category []; //The list of categories to be loaded and displayed
   errorMessage:string;
   successMessage:string;
   displayResultError:boolean;
@@ -28,15 +28,19 @@ export class EditAssessCatModalComponent implements OnInit {
   }
 
   //sets the selected category as the local category to be edited
-  selected(cat:Category){
-    this.category = cat;
-    this.temp = cat.skillCategory;
-    this.tempOwner = cat.categoryOwner;
+  selected(cat){
+    const found = this.categories.find(x => x.skillCategory === cat)
+    if (found) {
+      this.category = found;
+      // this.temp = cat.skillCategory;
+      // this.tempOwner = cat.categoryOwner;
+      console.log(this.category, this.temp, this.tempOwner);
+    }
   }
 
   //gets the categories from the database and inserts them into the category list
   getAll(){
-    this.categoryService.listAll().subscribe((res)=>{
+    this.categoryService.getAllCategories().subscribe((res)=>{
       var c = JSON.parse(JSON.stringify(res));
 
       this.categories = c;
@@ -48,7 +52,7 @@ export class EditAssessCatModalComponent implements OnInit {
   save(){
     this.category.skillCategory = this.temp;
     this.category.categoryOwner = this.tempOwner;
-    this.categoryService.edit(this.category.categoryId,this.category.categoryOwner, this.category.skillCategory, this.category.active).subscribe((res)=>{
+    this.categoryService.update(this.category).subscribe((res)=>{
       if(res != null){
         let myJSON = JSON.stringify(res);
         let result = JSON.parse(myJSON);

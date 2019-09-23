@@ -2,7 +2,7 @@
 import { WeeklyQualityAuditComponent } from './../weekly-quality-audit/weekly-quality-audit.component';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { OverallQCScoresComponent } from '../overall-qc-scores/overall-qc-scores.component';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import { AssessmentBreakdownComponent } from '../assessment-breakdown/assessment-breakdown.component';
 import { ReportTopChartController } from '../report-top-chart-controller/report-top-chart-controller.component';
 import { IndividualQCResultsTableComponent } from '../individual-qcresults-table/individual-qcresults-table.component';
@@ -89,7 +89,7 @@ export class ReportsComponent implements OnInit {
   }
 
   updateReportOutput(reportOutput: ReportOutput) {
-    this.isTraineeSelected = this.reportService.trainee.traineeId > 0;
+    this.isTraineeSelected = this.reportService.trainee && this.reportService.trainee.traineeId > 0;
     this.isWeekSelected = this.reportService.week > 0;
     this.reportOutput = reportOutput;
 

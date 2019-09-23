@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuditService } from 'src/app/Audit/Services/audit.service';
 import { AssessBatchService } from 'src/app/Assess-Batch/Services/assess-batch.service';
 import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import {Batch} from "../../../domain/model/batch.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Assessment} from "../../../domain/model/assessment.dto";
@@ -229,7 +229,7 @@ export class ToolbarComponent implements OnInit {
 
   getAllAssessments(){
     //update assessment datastore
-    this.reportService.getAllAssessments().subscribe(
+    this.reportService.getAllAssessmentsByBatchAndWeek(this.reportService.getBatch().batchId, this.reportService.getWeek()).subscribe(
       (assessments)=>{
         this.assessmentsDataStore = assessments;
     });
@@ -237,7 +237,7 @@ export class ToolbarComponent implements OnInit {
 
   getAllBatchAssessments(){
     //update assessment datastore
-    this.reportService.getAllBatchAssessments().subscribe(
+    this.reportService.getAllAssessmentsByBatch(this.reportService.getBatch().batchId).subscribe(
       (assessments)=>{
         this.batchAssessmentsDataStore = assessments;
         this.reportService.setBatchAssessmentDataStore(assessments);
@@ -247,7 +247,7 @@ export class ToolbarComponent implements OnInit {
   getAllGrades(){
     //update grades datastore
     this.reportService.setGradesOfTraineeDataStore([]);
-    this.reportService.getAllGrades().subscribe(
+    this.reportService.getGradesByBatchAndWeek(this.reportService.getBatch().batchId, this.reportService.getWeek()).subscribe(
       (grades)=>{
         this.gradesDataStore = grades;
         this.getAllGradesofTrainee();
@@ -257,7 +257,7 @@ export class ToolbarComponent implements OnInit {
   getAllGradesOfBatch(){
     //update grades datastore
     this.reportService.setGradesOfBatchDataStore([]);
-    this.reportService.getAllBatchGrades().subscribe(
+    this.reportService.getGradesByBatchId(this.reportService.getBatch().batchId).subscribe(
       (grades)=>{
         this.reportService.setGradesOfBatchDataStore(grades);
     });
@@ -291,7 +291,7 @@ export class ToolbarComponent implements OnInit {
 
   getQANotes(){
     //update reportService datastore
-    this.reportService.getAllQANotes().subscribe((qaNotes)=>{
+    this.reportService.getAllQaNotes().subscribe((qaNotes)=>{
       this.qaNoteDataStore = qaNotes;
       this.reportService.setQANoteDataStore(qaNotes);
       this.getAllGrades();

@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { HomeService } from '../../service/home.service';
-import { TraineeService } from 'src/app/Assess-Batch/Services/trainee.service';
-import { AssessmentService } from 'src/app/Assess-Batch/Services/assessment.service';
-import { CategoryService } from 'src/app/Assess-Batch/Services/category.service';
 import {Batch} from "../../../domain/model/batch.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import { Location } from '../../../domain/model/location.dto';
+import {HomeService} from "../../../services/home.service";
 
 @Component({
   selector: 'app-last-quality-audit-graph',
@@ -91,8 +88,9 @@ export class LastQualityAuditGraphComponent implements OnInit {
     { data: [], label: 'Series A'}
   ];
 
-  constructor(private homeService: HomeService, private traineeService: TraineeService,
-  private assessmentService: AssessmentService, private categoryService: CategoryService) { }
+  constructor(
+    private homeService: HomeService,
+  ) { }
 
   ngOnInit() {
   }
@@ -108,7 +106,7 @@ export class LastQualityAuditGraphComponent implements OnInit {
         return false;
       });
       this.traineeNames = [];
-      this.traineeService.getTraineesByBatchId(this.qaNotesForModal[0].batchId).subscribe(
+      this.homeService.getTraineesByBatchId(this.qaNotesForModal[0].batchId).subscribe(
         (trainees) => {
           this.traineeDataStore = trainees;
 
@@ -146,12 +144,12 @@ export class LastQualityAuditGraphComponent implements OnInit {
             this.overallDisplayQANote = this.qaNotesForModal.splice(overallIndex)[0];
           }
 
-          this.assessmentService.getAssessmentByBatch(this.chartIdReference[this.index],
+          this.homeService.getAssessmentsByBatchIdAndWeek(this.chartIdReference[this.index],
              this.chartWeekReference[this.index]).subscribe(
                (assessment) => {
                  if(assessment.length >0){
                    let categoryId: number = assessment[0].assessmentCategory;
-                  this.categoryService.getCategoryById(categoryId).subscribe(
+                  this.homeService.getCategoryById(categoryId).subscribe(
                     (categoryObject) => {
                       this.qaNoteCategory = categoryObject.skillCategory;
                       console.log(this.qaNoteCategory);

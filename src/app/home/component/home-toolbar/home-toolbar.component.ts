@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LocationService } from '../../service/location.service';
-import { AssessBatchService } from '../../../Assess-Batch/Services/assess-batch.service';
-import { QanoteService } from '../../service/qanote.service';
-import { HomeService } from '../../service/home.service';
 import {Batch} from "../../../domain/model/batch.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import { Location } from '../../../domain/model/location.dto';
+import {HomeService} from "../../../services/home.service";
 
 @Component({
   selector: 'app-home-toolbar',
@@ -29,8 +26,9 @@ export class HomeToolbarComponent implements OnInit {
 
   allLocations: Location;
 
-  constructor(private locationService: LocationService, private batchService: AssessBatchService,
-    private qaNoteService: QanoteService, private homeService: HomeService) {
+  constructor(
+    private homeService: HomeService
+  ) {
     this.showStates = false;
   }
 
@@ -97,7 +95,7 @@ export class HomeToolbarComponent implements OnInit {
   }
 
   initializeAllLocations() {
-    this.locationService.getAllLocations().subscribe(
+    this.homeService.getAllLocations().subscribe(
       (locations) => {
         this.locations = locations;
         this.selectedLocation = null;
@@ -109,7 +107,7 @@ export class HomeToolbarComponent implements OnInit {
 
   initializeCurrentBatches() {
     this.batches = [];
-    this.batchService.getCurrentBatches().subscribe(
+    this.homeService.getCurrentBatches().subscribe(
       (batches) => {
         const locations = [];
         batches.forEach((batch) => {
@@ -155,7 +153,7 @@ export class HomeToolbarComponent implements OnInit {
 
   initializeCurrentBatchesFromLocations(locations: Location[]) {
     this.batches = [];
-    this.batchService.getCurrentBatches().subscribe(
+    this.homeService.getCurrentBatches().subscribe(
       (batches) => {
         batches.forEach((batch) => {
           const currentDateTime = this.currentDateTime;
@@ -182,7 +180,7 @@ export class HomeToolbarComponent implements OnInit {
     this.qaNotesByBatch = [];
     batches.forEach(
       (element) => {
-        this.qaNoteService.getAllQANotes(element).subscribe(
+        this.homeService.getQcBatchNoteByBatchId(element.batchId).subscribe(
           (qaNotesOfBatch) => {
             // let indexOfBatch = batches.indexOf(element);
             if (!qaNotesOfBatch.length) {

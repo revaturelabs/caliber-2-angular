@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TrainersService} from '../../Services/trainers.service';
 import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Trainer} from "../../../../domain/model/trainer.dto";
+import {TrainerService} from "../../../../services/subvertical/user/trainer.service";
 
 @Component({
   selector: 'app-disable-trainer',
@@ -20,7 +20,7 @@ export class DisableTrainerComponent implements OnInit {
   // Used to store the new trainer inputs.
   trainer: Trainer;
 
-  constructor(private trainerService: TrainersService, private errorService: ErrorService) { }
+  constructor(private trainerService: TrainerService, private errorService: ErrorService) { }
 
   ngOnInit() {
   }

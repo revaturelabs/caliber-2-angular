@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RadialChartOptions, ChartDataSets, ChartType } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import {Grade} from "../../../domain/model/grade.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Assessment} from "../../../domain/model/assessment.dto";

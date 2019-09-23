@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, Inject } from '@angular/core';
-import { TrainersService } from '../../Services/trainers.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import {Trainer} from "../../../../domain/model/trainer.dto";
+import {TrainerService} from "../../../../services/subvertical/user/trainer.service";
 
 @Component({
   selector: 'app-edit-trainer',
@@ -22,7 +22,7 @@ export class EditTrainerComponent implements OnInit{
    isEdited:boolean = false;
 
    @Output() edited: EventEmitter<string> = new EventEmitter<string>()
-  constructor(private trService: TrainersService, private errorService: ErrorService) { }
+  constructor(private trService: TrainerService, private errorService: ErrorService) { }
 
   ngOnInit()
   {
