@@ -7,15 +7,25 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ToastService {
 
-  private configOptions: Object = 
-    {timeOut: 2000,
-     positionClass: 'toast-bottom-right',
-     progressBar: true
-     };
+  private configOptions: Object = {
+    
+    };
 
   constructor(private toastr: ToastrService) { }
 
-  public message(message: string, title:string): void {
+  public success(message: string, title:string): void {
     this.toastr.success(message, title, this.configOptions);
+  }
+
+  public warning(message: string, title:string): void {
+    this.toastr.warning(message, title, this.configOptions);
+  }
+
+  public error(message: string, title:string): void {
+    this.toastr.error(message, title, this.configOptions);
+  }
+
+  public info(message: string, title:string): void {
+    this.toastr.info(message, title, this.configOptions);
   }
 }

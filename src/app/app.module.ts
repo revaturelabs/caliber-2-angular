@@ -34,7 +34,12 @@ import {ToastService} from "./services/toast.service";
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({ // Global Toast Config Options
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+      maxOpened: 5
+    })
   ],
   providers: [
     AssessBatchService,
