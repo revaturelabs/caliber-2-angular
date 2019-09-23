@@ -6,6 +6,8 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
 import {ErrorComponent} from './error-handling/error/error.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -28,6 +30,7 @@ import {LocationService} from "./services/subvertical/location/location.service"
 import {SkilltypeService} from "./services/subvertical/skilltype/skilltype.service";
 import {TrainerService} from "./services/subvertical/user/trainer.service";
 import {HomeService} from "./services/home.service";
+import { ToastService } from './services/toast.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,14 @@ import {HomeService} from "./services/home.service";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ // Global Toast Config Options
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+      maxOpened: 5
+    })
   ],
   providers: [
     AssessBatchService,
@@ -63,7 +73,8 @@ import {HomeService} from "./services/home.service";
     ReportService,
     ManageBatchService,
     LocationService,
-    HomeService
+    HomeService,
+    ToastService
   ],
   bootstrap: [
     AppComponent,
