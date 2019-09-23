@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter, HostListener } from '@angular/core';
-import { TraineesService } from '../../Services/trainees.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {TraineesService} from '../../Services/trainees.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Trainee} from "../../../../domain/model/trainee.dto";
+import {TraineeService} from "../../../../services/subvertical/user/trainee.service";
+import {TraineeFlag} from "../../../../domain/model/trainee-flag.dto";
 
 /**
   * UpdateTrainee Component to update a trainee information using a modal.
@@ -42,7 +44,7 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
   * Inject our TraineeService to call our UpdateTrainee (put) method
   * @author Jacques Myette
   */
-  constructor(private ts: TraineesService, private errorService: ErrorService) { }
+  constructor(private ts: TraineeService, private errorService: ErrorService) { }
 
   /**
    * Called when @input changes
@@ -109,11 +111,12 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
     this.trainee.name = this.traineeTemp.name;
     this.trainee.phoneNumber = this.traineeTemp.phoneNumber;
     this.trainee.profileUrl = this.traineeTemp.profileUrl;
-    this.trainee.projectCompletion = this.traineeTemp.projectCompletion;
+    this.trainee.projectCompletion = this.traineeTemp.projectCompletion ? this.traineeTemp.projectCompletion : "";
     this.trainee.recruiterName = this.traineeTemp.recruiterName;
-    this.trainee.techScreenerName = this.traineeTemp.techScreenerName;
-    this.trainee.skypeId = this.traineeTemp.skypeId;
+    this.trainee.techScreenerName = this.traineeTemp.techScreenerName ? this.traineeTemp.techScreenerName : "";
+    this.trainee.skypeId = this.traineeTemp.skypeId ? this.traineeTemp.skypeId : "";
     this.trainee.trainingStatus = this.traineeTemp.trainingStatus;
+    this.trainee.flagStatus = this.traineeTemp.flagStatus ? this.traineeTemp.flagStatus : TraineeFlag.NONE
   }
 
   /**
@@ -124,6 +127,9 @@ export class UpdateTraineeComponent implements OnInit, OnChanges {
    */
   updateTrainee() {
     this.mergeTrainee();
+    if (!this.trainee.flagStatus) {
+      this.trainee.flagStatus = TraineeFlag.NONE
+    }
     this.ts.updateTrainee(this.trainee).subscribe(data => {
       if (data) {
         const elem = document.getElementById('closeButtonUpdate');

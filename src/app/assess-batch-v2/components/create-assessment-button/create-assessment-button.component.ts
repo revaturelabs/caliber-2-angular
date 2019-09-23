@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {BsModalRef} from "ngx-bootstrap";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 import {Category} from "../../../domain/model/category.dto";
+import {AssessBatchService} from "../../../services/assess-batch.service";
 
 @Component({
   selector: 'app-create-assessment-button',
@@ -19,12 +20,12 @@ export class CreateAssessmentButtonComponent implements OnInit {
   modal: BsModalRef;
 
   constructor(
-    private categoryService: CategoryService,
+    private assessBatchService: AssessBatchService,
     private assessmentDialogService: AssessmentDialogService
   ) { }
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getActiveCatgories();
+    this.categories$ = this.assessBatchService.getActiveCategories();
   }
 
   showCreateAssessmentDialog() {

@@ -1,8 +1,8 @@
 import { Label, MultiDataSet } from 'ng2-charts';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
 import {QcNote} from "../../../domain/model/qc-note.dto";
+import {ReportService} from "../../../services/report.service";
 
 @Component({
   selector: 'app-weekly-quality-audit',

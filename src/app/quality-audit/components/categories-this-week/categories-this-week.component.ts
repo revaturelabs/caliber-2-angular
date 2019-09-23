@@ -3,6 +3,7 @@ import {QaService} from "../../../services/qa.service";
 import {Observable, of} from "rxjs";
 import {QcCategory} from "../../../domain/model/qc-category.dto";
 import {Category} from "../../../domain/model/category.dto";
+import {QaCategoryService} from "../../../services/subvertical/quality-audit/qa-category.service";
 
 @Component({
   selector: 'app-categories-this-week',
@@ -17,7 +18,7 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
   categoriesThisWeek$: Observable<QcCategory[]> = of([]);
 
   constructor(
-    private qaService: QaService
+    private qcCategoryService: QaCategoryService
   ) { }
 
   ngOnInit() {
@@ -28,11 +29,11 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
       const change = changes[prop];
       if (prop === 'week') {
         if (this.week && this.batchId) {
-          this.categoriesThisWeek$ = this.qaService.getCategoriesByBatchAndWeek(this.batchId, change.currentValue);
+          this.categoriesThisWeek$ = this.qcCategoryService.getCategoriesByBatchAndWeek(this.batchId, change.currentValue);
         }
       } else if (prop === 'batchId') {
         if (this.week && this.batchId) {
-          this.categoriesThisWeek$ = this.qaService.getCategoriesByBatchAndWeek(change.currentValue, this.week);
+          this.categoriesThisWeek$ = this.qcCategoryService.getCategoriesByBatchAndWeek(change.currentValue, this.week);
         }
       }
     }
@@ -40,9 +41,9 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
 
   removeCategory(tag: QcCategory) {
     if (tag) {
-      this.qaService.removeWeeklyQcCategory(tag).toPromise().then(
+      this.qcCategoryService.removeWeeklyQcCategory(tag).toPromise().then(
         () => {
-          this.categoriesThisWeek$ = this.qaService.getCategoriesByBatchAndWeek(this.batchId, this.week);
+          this.categoriesThisWeek$ = this.qcCategoryService.getCategoriesByBatchAndWeek(this.batchId, this.week);
         }
       )
     }
@@ -55,11 +56,11 @@ export class CategoriesThisWeekComponent implements OnInit, OnChanges {
       week: this.week,
       skillCategory: category.skillCategory,
     };
-    this.qaService.saveWeeklyQcCategory(tag).toPromise().then(
+    this.qcCategoryService.saveWeeklyQcCategory(tag).toPromise().then(
       data => {
         const found = this.categories.find(cat => cat.categoryId === data.categoryId);
         if (found) {
-          this.categoriesThisWeek$ = this.qaService.getCategoriesByBatchAndWeek(this.batchId, this.week);
+          this.categoriesThisWeek$ = this.qcCategoryService.getCategoriesByBatchAndWeek(this.batchId, this.week);
         }
       }
     )

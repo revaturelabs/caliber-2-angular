@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { BatchService } from '../batch.service';
-import { FormGroup } from '@angular/forms';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Batch} from "../../domain/model/batch.dto";
 import {Trainer} from "../../domain/model/trainer.dto";
-import { Location } from '../../domain/model/location.dto';
+import {Location} from '../../domain/model/location.dto';
+import {ManageBatchService} from "../../services/manage-batch.service";
 
 
-  /**
+/**
   * The batch modal component is the child component of the batch view component.
   *It handles the modal used to create and update batches.
   *This component also handles form validation from the user.
@@ -56,8 +56,9 @@ export class BatchModalComponent implements OnInit, OnChanges {
   weeks: number;
 
   constructor(
-    private batchservice: BatchService,
-    private errorService: ErrorService) {
+    private manageBatchService: ManageBatchService,
+    private errorService: ErrorService
+  ) {
   }
 
   /**
@@ -86,7 +87,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // generate all the skilltypes
-    this.batchservice.getAllSkillTypes().subscribe(results => {
+    this.manageBatchService.getAllSkillTypes().subscribe(results => {
       this.skillTypes = results;
     }, error => {
       const serviceName = 'Skill Type Service ';
@@ -95,7 +96,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     }
     );
     // generate all the locations
-    this.batchservice.getAllLocations().subscribe(locs => {
+    this.manageBatchService.getAllLocations().subscribe(locs => {
       this.locationOptions = locs;
     }, error => {
       const serviceName = 'Location Service ';
@@ -103,7 +104,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
       this.errorService.setError(serviceName, errorMessage);
     });
     // generate all the trainers
-    this.batchservice.getAllTrainers().subscribe(t => {
+    this.manageBatchService.getAllTrainers().subscribe(t => {
       this.trainers = t;
     }, error => {
       const serviceName = 'Trainer Service ';
@@ -157,7 +158,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     weeks /= (60 * 60 * 24 * 7);
 
     // sends post request with batch to back-end
-    this.batchservice.postBatch(new Batch(this.trainingName, this.trainingType,
+    this.manageBatchService.createBatch(new Batch(this.trainingName, this.trainingType,
       this.skillType, this.trainer, this.coTrainer, this.locationId, this.startDate,
       this.endDate, this.goodGradeThreshold, this.borderlineGradeThreshold, weeks)).subscribe(result => {
         this.someEvent.next('created');
@@ -182,7 +183,7 @@ export class BatchModalComponent implements OnInit, OnChanges {
     batch.batchId = this.createOrUpdate.batchId;
 
     // update batch in backend
-    this.batchservice.putBatch(batch).subscribe(result => {
+    this.manageBatchService.updateBatch(batch).subscribe(result => {
       this.someEvent.next('created');
       this.resetForm();
     });

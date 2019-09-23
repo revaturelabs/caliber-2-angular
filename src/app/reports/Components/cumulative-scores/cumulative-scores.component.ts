@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import { ChartOptions, ChartDataSets, ChartType, ChartLegendLabelItem, NestedTickOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import {Grade} from "../../../domain/model/grade.dto";
@@ -72,7 +72,7 @@ export class CumulativeScoresComponent implements OnInit {
     this.gradeDataStore = this.reportService.getGradeDataStore();
     if (this.gradeDataStore == undefined || this.gradeDataStore.length)
     {
-      this.reportService.getAllGrades().subscribe((allGrades : Grade[])=>{
+      this.reportService.getGradesByBatchAndWeek(this.reportService.getBatch().batchId, this.reportService.getWeek()).subscribe((allGrades : Grade[])=>{
         this.gradeDataStore = allGrades;
         this.gradeTotalAverage = this.reportService.getAverageGradeScore();
         this.traineeDataStore = this.reportService.getTraineeDataStore();

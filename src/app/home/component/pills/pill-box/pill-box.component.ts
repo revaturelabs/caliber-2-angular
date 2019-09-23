@@ -20,10 +20,9 @@ export class PillBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('lastWeek is ' + this.lastWeek);
     this.weeksList = new Array<number>();
     this.displayedWeeks = new Array<number>();
-    
+
     for(let i: number = 1; i <= this.lastWeek; i++)
     {
       this.displayedWeeks.push(i);

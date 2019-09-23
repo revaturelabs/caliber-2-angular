@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
-import {AssessBatchService} from "../../../services/assess-batch.service";
 import {QaService} from "../../../services/qa.service";
+import {AssessmentNotesService} from "../../../services/subvertical/assessment/assessment-notes.service";
+import {QaNotesService} from "../../../services/subvertical/quality-audit/qa-notes.service";
 
 @Component({
   selector: 'app-associate-notes',
@@ -32,8 +32,8 @@ export class AssociateNotesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private assessBatchService: AssessBatchService,
-    private qaService: QaService
+    private assessmentNotesService: AssessmentNotesService,
+    private qcNotesService: QaNotesService
   ) { }
 
   ngOnInit() {
@@ -67,7 +67,7 @@ export class AssociateNotesComponent implements OnInit {
     if (Boolean(noteContent)) {
       this.isSaving = true;
       this.note.noteContent = noteContent;
-      this.qaService.upsertNote(this.note).toPromise().then(
+      this.assessmentNotesService.upsertNote(this.note).toPromise().then(
         data => {
           this.note = data;
           setTimeout(() => this.isSaving = false, this.timeout);
@@ -86,7 +86,7 @@ export class AssociateNotesComponent implements OnInit {
       this.isSaving = true;
       if (this.isQcNote) {
         qcNote.content = noteContent;
-        this.qaService.upsertQcTraineeNote(qcNote).toPromise().then(
+        this.qcNotesService.upsertQcTraineeNote(qcNote).toPromise().then(
           data => {
             this.qcNote = data;
             this.onQcNoteUpdate.emit(data);
