@@ -6,6 +6,8 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
 import {ErrorComponent} from './error-handling/error/error.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -13,6 +15,7 @@ import {CreateModalComponent} from './Assess-Batch/Modals/create-modal/create-mo
 import {FormModalComponent} from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import {AssessBatchService} from "./services/assess-batch.service";
 import {QaService} from "./services/qa.service";
+import {ToastService} from "./services/toast.service";
 
 @NgModule({
   declarations: [
@@ -29,11 +32,14 @@ import {QaService} from "./services/qa.service";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AssessBatchService,
-    QaService
+    QaService,
+    ToastService
   ],
   bootstrap: [
     AppComponent,
