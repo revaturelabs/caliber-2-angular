@@ -38,7 +38,8 @@ export const environment = {
           return `${serverRoot}/assessment/all/grade/trainee/${traineeId}`;
         },
         upsert: `${serverRoot}/assessment/grade`,
-        all: `${serverRoot}/assessment/all/grade/all`
+        all: `${serverRoot}/assessment/all/grade/all`,
+        missing: `${serverRoot}/assessment/all/grade/missingGrades`
       },
       notes: {
         byBatchAndWeek(batchId: number, week: number): string {
@@ -64,7 +65,8 @@ export const environment = {
       },
       all: `${serverRoot}/batch/vp/batch/all/`,
       create: `${serverRoot}/batch/all/batch/create`,
-      updateAndReturn: `${serverRoot}/batch/all/batch/update/?return=true`
+      updateAndReturn: `${serverRoot}/batch/all/batch/update/?return=true`,
+      current: `${serverRoot}/batch/vp/batch/all/current`
     },
     validYears: `${serverRoot}/batch/all/batch/valid_years`,
     categories: {
@@ -101,7 +103,9 @@ export const environment = {
       },
     },
     location: {
-      all: `${serverRoot}/location/all/location/all`
+      all: `${serverRoot}/location/all/location/all`,
+      update: `${serverRoot}/location/vp/location/update`,
+      create: `${serverRoot}/location/vp/location/create`
     },
     user: {
       trainees: {
