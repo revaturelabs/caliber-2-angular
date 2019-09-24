@@ -3,7 +3,7 @@
  */
 
 export class Category {
-  categoryId: number;
+  categoryId?: number;
   skillCategory: string;
   active: boolean;
   categoryOwner?: string;

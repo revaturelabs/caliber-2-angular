@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TraineesService } from '../../Services/trainees.service';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Trainee} from "../../../../domain/model/trainee.dto";
+import {TraineeService} from "../../../../services/subvertical/user/trainee.service";
 
 /**
  * @ignore
@@ -35,7 +35,7 @@ export class AddTraineeComponent implements OnInit {
    * @param errorService The error service from the error handling folder,
    *   used to communicate with the error modal to display errors on failed http requests
    */
-  constructor(private ts: TraineesService, private errorService: ErrorService) {}
+  constructor(private ts: TraineeService, private errorService: ErrorService) {}
 
   /**
    * @ignore

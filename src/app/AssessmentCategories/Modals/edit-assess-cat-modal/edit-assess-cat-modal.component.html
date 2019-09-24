@@ -10,21 +10,20 @@
         <!--Listing the available categories-->
         <div class="row">
           <div class="form-group col-lg-12 col-md-12 col-sm-12">
-            <label for="category">Select Assessment Category</label> 
-            <select name = 'selectedCategory' 
-              class="form-control" id="selectedCategory" required >
+            <label for="selectedCategory">Select Assessment Category</label>
+            <select name = 'selectedCategory' class="form-control" id="selectedCategory" required (change)="selected($event.target.value)" >
               <option value="default" disabled>Select Assessment Category</option>
-              <option *ngFor="let cat of categories" (click)="selected(cat)" >{{cat.skillCategory}}</option>
+              <option *ngFor="let cat of categories">{{cat.skillCategory}}</option>
             </select>
           </div>
         </div>
         <!--Displaying the fields for editing-->
         <div class="row">
           <div class="form-group col-lg-12 col-md-12 col-sm-12">
-            
+
             Category Name: <input type="text" id="skillCategory" [(ngModel)]="temp">
             Category Owner: <input type="text" id="categoryOwner" [(ngModel)]="tempOwner">
-            
+
           </div>
         </div>
         <!--***********************************************************-->
@@ -39,4 +38,4 @@
   </div>
 
 
-  
+

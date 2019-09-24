@@ -5,7 +5,6 @@ import {distinctUntilChanged} from "rxjs/operators";
 import {Category} from "../../../domain/model/category.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
-import {current} from "codelyzer/util/syntaxKind";
 
 @Component({
   selector: 'app-quality-audit-list',
@@ -110,23 +109,17 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
     this.qcBatchNote.technicalStatus = qcNote.technicalStatus;
     this.qcBatchNote.softSkillStatus = qcNote.softSkillStatus;
     this.lastQcStatus = qcNote.technicalStatus;
-    // this.qaService.upsertQcBatchNote(this.qcBatchNote).toPromise().then(
-    //   data => {
-    //     this.qcBatchNote = data;
-    //   }
-    // )
   }
 
   handleQcStatusChange(qcNote: QcNote) {
     let currentNote: QcNote = qcNote;
-    if (currentNote.traineeId && this.noteMap.has(currentNote.traineeId)) {
-      currentNote = this.noteMap.get(qcNote.traineeId);
-      currentNote.content = qcNote.content;
-      currentNote.technicalStatus = qcNote.technicalStatus;
-      currentNote.softSkillStatus = qcNote.softSkillStatus;
-    }
+    currentNote.technicalStatus = qcNote.technicalStatus;
+    currentNote.softSkillStatus = qcNote.softSkillStatus;
+    currentNote.content = qcNote.content;
     this.qaService.upsertQcTraineeNote(currentNote).subscribe(
-      data => this.noteMap.set(data.traineeId, data)
+      data => {
+        this.noteMap.set(data.traineeId, data);
+      }
     )
   }
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BatchModalComponent } from '../batch-modal/batch-modal.component';
-import { BatchService } from '../batch.service';
-import {ViewTraineesComponent } from '../../User/user/Components/view-trainees/view-trainees.component';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {BatchModalComponent} from '../batch-modal/batch-modal.component';
+import {ViewTraineesComponent} from '../../User/user/Components/view-trainees/view-trainees.component';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Batch} from "../../domain/model/batch.dto";
+import {ManageBatchService} from "../../services/manage-batch.service";
 
- /**
+/**
   *  The batch-view component is the parent component for the manage batch feature.
   *This component allows the user to view all of the batches by the selected year.
   *This component also displays the buttons to create and edit batches and displays the number of trainees per batch.
@@ -30,8 +30,10 @@ export class BatchViewComponent implements OnInit {
   selectedBatch: Batch;
   selectedBatchId = 0;
 
-  constructor(private batchservice: BatchService,
-    private errorService: ErrorService) { }
+  constructor(
+    private manageBatchService: ManageBatchService,
+    private errorService: ErrorService
+  ) { }
 
   ngOnInit() {
     // gets all years for dropdown button
@@ -64,7 +66,7 @@ export class BatchViewComponent implements OnInit {
    * re-renders contents in batch view component
    */
   refreshPage() {
-    this.batchservice.getBatchesByYear(this.selectedYear).subscribe(result => {
+    this.manageBatchService.getBatchesByYear(this.selectedYear).subscribe(result => {
       this.selectedBatches = result;
 
     }, error => {
@@ -81,7 +83,7 @@ export class BatchViewComponent implements OnInit {
    */
   pickYear(event: number) {
     this.selectedYear =  event;
-    this.batchservice.getBatchesByYear(event).subscribe(result => {
+    this.manageBatchService.getBatchesByYear(event).subscribe(result => {
       this.selectedBatches = result;
       this.getTraineeCount();
     }, error => {
@@ -101,7 +103,7 @@ export class BatchViewComponent implements OnInit {
         allids.push(batch.batchId);
       }
     }
-    this.batchservice.getTraineeCount(allids).subscribe( count => {
+    this.manageBatchService.getTraineeCount(allids).subscribe( count => {
       this.populateTraineeCount(count);
     }, error => {
       const serviceName = 'Batch Service ';
@@ -137,7 +139,7 @@ export class BatchViewComponent implements OnInit {
    * @param batchId batchid of the batch to be deleted
    */
   deleteBatch(batchId: number) {
-    this.batchservice.deleteBatch(batchId).subscribe( data => this.refreshPage(), error => {
+    this.manageBatchService.deleteBatch(batchId).subscribe( data => this.refreshPage(), error => {
       const serviceName = 'Batch Service ';
       const errorMessage = 'Failed to make connection!';
       this.errorService.setError(serviceName, errorMessage);
@@ -148,7 +150,7 @@ export class BatchViewComponent implements OnInit {
    * gets all start years from database for dropdown button
    */
   getAllYears() {
-    this.batchservice.getAllYears().subscribe(years => {
+    this.manageBatchService.getAllYears().subscribe(years => {
       if (years.length === 0 ) {
         this.getAllYears();
       } else {

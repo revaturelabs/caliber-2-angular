@@ -1,8 +1,7 @@
-import { Component, OnInit, Host, Output, EventEmitter } from '@angular/core';
-import { TrainersService } from '../../Services/trainers.service';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
-import { ViewTrainersComponent } from '../view-trainers/view-trainers.component';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Trainer} from "../../../../domain/model/trainer.dto";
+import {TrainerService} from "../../../../services/subvertical/user/trainer.service";
 
 @Component({
   selector: 'app-add-trainer',
@@ -13,7 +12,7 @@ export class AddTrainerComponent implements OnInit {
 
   @Output() submittedTrainerEvent: EventEmitter<String> = new EventEmitter<String>();
 
-  constructor( private trainerServ:TrainersService, private errorService:ErrorService) { }
+  constructor( private trainerServ:TrainerService, private errorService:ErrorService) { }
 
   ngOnInit() {
   }

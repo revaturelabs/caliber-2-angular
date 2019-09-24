@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../service/home.service';
 import {Batch} from "../../../domain/model/batch.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
+import {HomeService} from "../../../services/home.service";
 
 @Component({
   selector: 'app-last-quality-audit-table',

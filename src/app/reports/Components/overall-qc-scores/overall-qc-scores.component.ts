@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import {QcNote} from "../../../domain/model/qc-note.dto";
 
 @Component({

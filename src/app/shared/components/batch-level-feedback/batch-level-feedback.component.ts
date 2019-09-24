@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
 import {QaService} from "../../../services/qa.service";
+import {AssessmentNotesService} from "../../../services/subvertical/assessment/assessment-notes.service";
+import {QaNotesService} from "../../../services/subvertical/quality-audit/qa-notes.service";
 
 @Component({
   selector: 'app-batch-level-feedback',
@@ -49,9 +51,9 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
   failure: boolean = false;
 
   constructor(
-    private noteService: NoteService,
     private fb: FormBuilder,
-    private qaService: QaService,
+    private assessmentNoteService: AssessmentNotesService,
+    private qcNoteService: QaNotesService
   ) {
   }
 
@@ -61,7 +63,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
       ([batchId, week]) => {
         if (batchId && week) {
           if (!this.isQcFeedback) {
-            this.noteService.getBatchNoteByBatchIdAndWeekNumber(batchId, week).subscribe(
+            this.assessmentNoteService.getBatchNoteByBatchAndWeek(batchId, week).subscribe(
               data => {
                 this.note = data;
                 if (data && data.noteContent) {
@@ -77,7 +79,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
               }
             )
           } else {
-            this.noteService.getOverallQcNoteByBatchAndWeek(batchId, week).toPromise().then(
+            this.qcNoteService.getOverallQcNoteByBatchAndWeek(batchId, week).toPromise().then(
               data => {
                 this.qcNote = data;
                 if (data && data.content) {
@@ -123,7 +125,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
       } else if (prop === 'lastQcStatus') {
         if (this.qcNote && !change.isFirstChange()) {
           this.qcNote.technicalStatus = change.currentValue;
-          this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+          this.qcNoteService.upsertQcBatchNote(this.qcNote).toPromise().then(
             data => this.qcNote = data
           )
         }
@@ -168,7 +170,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
       } else {
         this.note.noteContent = noteContent;
       }
-      this.qaService.upsertNote(this.note).subscribe(
+      this.assessmentNoteService.upsertNote(this.note).subscribe(
         (data: Note) => {
           this.note = data;
           setTimeout(() => this.isSaving = false, this.timeout);
@@ -199,7 +201,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
           batchId: this.batchId,
         };
       }
-      this.qaService.upsertQcBatchNote(this.qcNote).toPromise().then(
+      this.qcNoteService.upsertQcBatchNote(this.qcNote).toPromise().then(
         data => {
           this.qcNote = data;
           setTimeout(() => this.isSaving = false, this.timeout);

@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, Output, EventEmitter } from '@angular/core';
-import { TraineesService } from '../../Services/trainees.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { UpdateTraineeComponent } from '../update-trainee/update-trainee.component';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
+import {TraineesService} from '../../Services/trainees.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {UpdateTraineeComponent} from '../update-trainee/update-trainee.component';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Trainee} from "../../../../domain/model/trainee.dto";
 import {TraineeFlag} from "../../../../domain/model/trainee-flag.dto";
+import {TraineeService} from "../../../../services/subvertical/user/trainee.service";
 
 @Component({
   selector: 'app-view-trainees',
@@ -87,7 +88,7 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
    *   used to communicate with the error modal to display errors on failed http requests
    */
   constructor(
-    private ts: TraineesService,
+    private ts: TraineeService,
     private errorService: ErrorService) { }
 
   /**
@@ -151,7 +152,7 @@ export class ViewTraineesComponent implements OnInit, OnChanges {
   * Used to repopulate the trainee list after an update, delete, swap
   */
   refreshList() {
-    this.ts.getTrainees(this.batchId).subscribe(data => {
+    this.ts.getTraineesByBatchId(this.batchId).subscribe(data => {
       if (data) {
         this.trainees = data;
         this.showCommentForm = new Array<boolean>(this.trainees.length);

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Assessment} from "../../../domain/model/assessment.dto";
 import {Batch} from "../../../domain/model/batch.dto";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -23,6 +24,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
   message: String;
   overallFeedback: number;
   overallFeedbackString: String;
+  batchLevelFeedback$: Observable<QcNote>;
   trainee;
   public weekSelected: boolean;
   loadable: boolean;
@@ -40,6 +42,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
   update() {
     this.loadable = false;
     this.weekSelected = this.reportService.week > 0;
+    this.batchLevelFeedback$ = this.reportService.getQcBatchNoteByBatchAndWeek(this.reportService.getBatch().batchId, this.reportService.getWeek());
 
     this.qcData = this.reportService.getQANoteDataStore();
     this.categoryDataStore = this.reportService.getCategoryDataStore();
@@ -47,7 +50,7 @@ export class IndividualQCResultsTableComponent implements OnInit {
     this.trainee = this.reportService.getTrainee();
 
     if (this.qcData === undefined || this.qcData.length === 0) {
-      this.reportService.getAllQANotes().subscribe((qcNotes: QcNote[]) => {
+      this.reportService.getAllQaNotes().subscribe((qcNotes: QcNote[]) => {
         this.qcData = qcNotes;
         this.categoryDataStore = this.reportService.getCategoryDataStore();
         this.assessmentDataStore = this.reportService.getAssessmentDataStore();

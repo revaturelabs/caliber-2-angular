@@ -1,10 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {TraineeService} from 'src/app/Assess-Batch/Services/trainee.service';
 import {BehaviorSubject, combineLatest, Observable, of} from "rxjs";
 import {concatMap, distinctUntilChanged} from "rxjs/operators";
-import {NoteService} from "../../../Assess-Batch/Services/note.service";
-import {AssessBatchGradeService} from "../../../Assess-Batch/Services/assess-batch-grades.service";
-import {CategoryService} from "../../../Assess-Batch/Services/category.service";
 import {AssessmentChangeDto} from "../../../domain/dto/assessment-change.dto";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 import {CommentDialogService} from "../../../shared/services/comment-dialog.service";
@@ -51,10 +47,6 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   notesLoaded: boolean = false;
 
   constructor(
-    private traineeService: TraineeService,
-    private noteService: NoteService,
-    private assessBatchGradeService: AssessBatchGradeService,
-    private categoryService: CategoryService,
     private assessBatchService: AssessBatchService,
     private assessmentDialogService: AssessmentDialogService,
     private commentDialogService: CommentDialogService,

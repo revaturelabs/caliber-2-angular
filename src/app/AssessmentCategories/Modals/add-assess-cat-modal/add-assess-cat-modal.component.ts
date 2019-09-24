@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AssessCategoryService } from '../../Services/assess-category.service';
 import { CategoriesComponent } from '../../Components/categories/categories.component';
 import {Category} from "../../../domain/model/category.dto";
+import {CategoryService} from "../../../services/subvertical/category/category.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AddAssessCatModalComponent implements OnInit {
  successMessage:string;
  displayResultError:boolean;
  displayResultSuccess:boolean;
-  constructor(private categoryService: AssessCategoryService, private catComponent:CategoriesComponent) { }
+  constructor(private categoryService: CategoryService, private catComponent:CategoriesComponent) { }
 
   ngOnInit() {
   }
@@ -32,10 +33,8 @@ export class AddAssessCatModalComponent implements OnInit {
     this.category.categoryOwner = localStorage.getItem("id");
     this.category.active = true;
     this.category.categoryId = 0;
-    this.categoryService.addCategory(this.category).subscribe ( (res)=>{
-      if( res != null){
-      let myJSON = JSON.stringify(res);
-      let result = JSON.parse(myJSON);
+    this.categoryService.addCategory(this.category).subscribe ( (result: Category)=>{
+      if(result){
       this.displayResultSuccess = true;
       this.successMessage = result.skillCategory + " has been successfully created";
 
