@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.service";
 import {Subscription} from "rxjs";
 import {Batch} from "../../../domain/model/batch.dto";
+import {ChronoService} from "../../../services/subvertical/util/chrono.service";
 
 @Component({
   selector: 'app-week-selector',
@@ -14,13 +15,11 @@ export class WeekSelectorComponent implements OnInit {
   @Output("updatedBatch") updatedBatch: EventEmitter<Batch> = new EventEmitter<Batch>(true);
   @Input("batch") batch: Batch;
 
-  private updateBatchSubscription: Subscription;
-
   selectedWeek: number;
   weeks: number[] = [];
 
   constructor(
-    private assessBatchService: AssessBatchService
+    private chronoService: ChronoService
   ) { }
 
   ngOnInit() {
@@ -50,16 +49,15 @@ export class WeekSelectorComponent implements OnInit {
 
   addWeek() {
     this.batch.weeks = this.batch.weeks + 1;
-    this.updateBatchSubscription = this.assessBatchService.addWeekAndReturn(this.batch).subscribe(
+    this.chronoService.addWeekAndReturn(this.batch).toPromise().then(
       updated => {
         this.updatedBatch.emit(updated);
         this.selectWeek(updated.weeks);
       }
-    )
+    );
   }
 
   selectWeek(week: number) {
-
     this.selectedWeekEmitter.emit(week);
   }
 }

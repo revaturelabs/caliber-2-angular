@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import {Assessment} from "../../../domain/model/assessment.dto";
@@ -111,7 +111,7 @@ export class AssessmentBreakdownComponent implements OnInit {
     this.assessmentDataStore = this.reportService.getBatchAssessmentDataStore();
     if (this.assessmentDataStore == undefined || this.assessmentDataStore.length === 0)
     {
-      this.reportService.getAllBatchAssessments().subscribe((assessments : Assessment[])=>{
+      this.reportService.getAllAssessmentsByBatch(this.reportService.getBatch().batchId).subscribe((assessments : Assessment[])=>{
         this.assessmentDataStore = assessments;
 
         this.gradeDataStore = this.reportService.getGradeDataStore();

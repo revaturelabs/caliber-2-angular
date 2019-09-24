@@ -27,11 +27,10 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
   constructor(
     private assessBatchService: AssessBatchService,
-
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
-    this.selectedQuarter = this.getQuarterFromDate(date);
+    this.selectedQuarter = this.assessBatchService.getQuarterFromDate(date);
     this.yearSubject = new BehaviorSubject(this.selectedYear);
     this.quarterSubject = new BehaviorSubject(this.selectedQuarter);
   }
@@ -80,19 +79,6 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
   setSelectedWeek(week: number) {
     this.selectedWeek = week;
-  }
-
-  private getQuarterFromDate(date: Date): number {
-    const month = date.getMonth();
-    if (month >= 0 && month < 3) {
-      return 1;
-    } else if (month >=3 && month < 6) {
-      return 2;
-    } else if (month >= 6 && month < 9) {
-      return 3;
-    } else if (month >= 9 && month < 12) {
-      return 4;
-    }
   }
 
 }

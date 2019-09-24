@@ -8,7 +8,7 @@
 
 					<table class="table table-responsive col-sm-12 col-md-12 col-lg-12" style="border-collapse: collapse;" ng-show="currentView">
 						<thead>
-							<tr>	
+							<tr>
 							</tr>
 							<tr>
 								<th class="col-sm-2 col-md-2 col-lg-2">Trainee</th>
@@ -35,7 +35,7 @@
 							</tr>
 							<tr>
 								<td class="col-lg-2 col-md-2 col-sm-2 col-sm-offset-2 text-weight-bold"><strong>Notes:</strong></td>
-								<td class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-10 ng-binding">-</td>
+								<td class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-10 ng-binding" *ngIf="batchLevelFeedback$ | async as qcNote">{{ qcNote?.content }}</td>
 							</tr>
 						</tbody>
 					</table>

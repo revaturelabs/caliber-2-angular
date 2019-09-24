@@ -9,28 +9,33 @@ import {Note} from "../domain/model/assessment-note.dto";
 import {Grade} from "../domain/model/grade.dto";
 import {Category} from "../domain/model/category.dto";
 import {WeeklyAssociateNotes} from "../domain/dto/weekly-associate-notes.dto";
+import {CategoryService} from "./subvertical/category/category.service";
+import {AssessmentNotesService} from "./subvertical/assessment/assessment-notes.service";
+import {AssessmentService} from "./subvertical/assessment/assessment.service";
+import {AssessmentGradeService} from "./subvertical/assessment/assessment-grade.service";
+import {TraineeService} from "./subvertical/user/trainee.service";
+import {ChronoService} from "./subvertical/util/chrono.service";
+import {BatchService} from "./subvertical/batch/batch.service";
 
 @Injectable()
 export class AssessBatchService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private categoryService: CategoryService,
+    private assessmentNotesService: AssessmentNotesService,
+    private assessmentService: AssessmentService,
+    private assessmentGradeService: AssessmentGradeService,
+    private traineeService: TraineeService,
+    private chronoService: ChronoService,
+    private batchService: BatchService
   ) { }
 
   /**
-   *  Used freduently
+   *  Used frequently
    */
   public getQuarterFromDate(date: Date): number {
-    const month = date.getMonth();
-    if (month >= 0 && month < 3) {
-      return 1;
-    } else if (month >=3 && month < 6) {
-      return 2;
-    } else if (month >= 6 && month < 9) {
-      return 3;
-    } else if (month >= 9 && month < 12) {
-      return 4;
-    }
+    return this.chronoService.getQuarterFromDate(date);
   }
 
   /**
@@ -38,11 +43,11 @@ export class AssessBatchService {
    */
 
   getActiveCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(environment.api.categories.active);
+    return this.categoryService.getActiveCategories();
   }
 
   getCategoryByCategoryId(categoryId: number): Observable<Category> {
-    return this.http.get<Category>(environment.api.categories.byId(categoryId));
+    return this.categoryService.getCategoriesById(categoryId);
   }
 
   /**
@@ -50,56 +55,55 @@ export class AssessBatchService {
    */
 
   getValidYears(): Observable<number[]> {
-    return this.http.get<number[]>(environment.api.validYears);
+    return this.chronoService.getValidYears();
   }
 
   getBatchesByYearAndQuarter(year: number, quarter: number): Observable<Batch[]> {
-    return this.http.get<Batch[]>(environment.api.batches.allByYearAndQuarter(year, quarter));
+    return this.batchService.getBatchesByYearAndQuarter(year, quarter);
   }
 
   getTraineesByBatchId(batchId: number): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(environment.api.user.trainees.inBatch(batchId));
+    return this.traineeService.getTraineesByBatchId(batchId);
   }
 
   /**
    * Assessments
    */
   getAssessmentsByBatchIdAndWeek(batchId: number, week: number): Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(environment.api.assessments.allByBatchIdAndWeek(batchId, week));
+    return this.assessmentService.getAssessmentsByBatchIdAndWeek(batchId, week);
   }
 
   createAssessment(assessment: Assessment): Observable<Assessment> {
-    return this.http.post<Assessment>(environment.api.assessments.create, assessment);
+    return this.assessmentService.createAssessment(assessment);
   }
 
   updateAssessment(assessment: Assessment): Observable<Assessment> {
-    return this.http.put<Assessment>(environment.api.assessments.update, assessment);
+    return this.assessmentService.updateAssessment(assessment);
   }
 
   deleteAssessment(assessment: Assessment): Observable<Assessment> {
-    // HttpClient does not expose a body argument via delete
-    return this.http.request<Assessment>('delete', environment.api.assessments.delete(assessment.assessmentId), {body: assessment});
+    return this.assessmentService.deleteAssessment(assessment);
   }
 
   /**
    * Assessment Notes
    */
   upsertNote(note: Note): Observable<Note> {
-    return this.http.put<Note>(environment.api.assessments.upsert, note);
+    return this.assessmentNotesService.upsertNote(note);
   }
 
   getNoteMapByBatchIdAndWeek(batchId: number, week: number): Observable<WeeklyAssociateNotes> {
-    return this.http.get<WeeklyAssociateNotes>(environment.api.assessments.notes.byBatchAndWeek(batchId, week));
+    return this.assessmentNotesService.getNoteMapByBatchIdAndWeek(batchId, week);
   }
 
   /**
    * Assessment Grades
    */
   getGradesByBatchIdAndWeek(batchId: number, week: number): Observable<Grade[]> {
-    return this.http.get<Grade[]>(environment.api.assessments.grades.byBatchAndWeek(batchId, week));
+    return this.assessmentGradeService.getGradesByBatchIdAndWeek(batchId, week);
   }
 
   upsertGrade(grade: Grade): Observable<Grade> {
-    return this.http.put<Grade>(environment.api.assessments.grades.upsert, grade);
+    return this.assessmentGradeService.upsertGrade(grade);
   }
 }

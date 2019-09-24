@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../Services/category-service';
+import {CategoryService} from "../../../services/subvertical/category/category.service";
+import {Category} from "../../../domain/model/category.dto";
 
 
 @Component({
@@ -25,9 +26,8 @@ export class CategoriesComponent implements OnInit {
   }
 
 getAllCategories(){
-  this.categoryService.listAll().subscribe(res => {
+  this.categoryService.getAllCategories().subscribe(res => {
     this.categoriesList = res;
-    console.log(res);
     this.categoriesList1 = this.categoriesList.filter(d => d.active == true);
     this.categoriesList2 = this.categoriesList.filter(d => d.active == false);
 
@@ -48,23 +48,18 @@ getAllCategories(){
   return comparison;
 }
 
-disableCategory(category){
-
-  this.categoryService.disable(category.categoryId,  category.skillCategory, category.categoryOwner).subscribe(res=>{});
-
-  setTimeout(() => {
-    this.getAllCategories();
-  }, 700);
+disableCategory(category: Category){
+  this.categoryService.disable(category).toPromise().then(
+    () => this.getAllCategories()
+  );
   document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
-enableCategory(category){
- this.categoryService.enable(category.categoryId, category.skillCategory, category.categoryOwner).subscribe(res => {});
+enableCategory(category: Category){
+ this.categoryService.enable(category).toPromise().then(
+   () => this.getAllCategories()
+ );
  document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
- setTimeout(() => {
-  this.getAllCategories();
-}, 700);
-document.getElementById("category"+category.categoryId).classList.add("fadeOutLeft");
 }
 
 loadIntoStorage(){

@@ -7,53 +7,63 @@ import {QcCategory} from "../domain/model/qc-category.dto";
 import {Category} from "../domain/model/category.dto";
 import {Trainee} from "../domain/model/trainee.dto";
 import {Note} from "../domain/model/assessment-note.dto";
+import {CategoryService} from "./subvertical/category/category.service";
+import {QaCategoryService} from "./subvertical/quality-audit/qa-category.service";
+import {AssessmentNotesService} from "./subvertical/assessment/assessment-notes.service";
+import {QaNotesService} from "./subvertical/quality-audit/qa-notes.service";
+import {TraineeService} from "./subvertical/user/trainee.service";
 
 
 @Injectable()
 export class QaService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private categoryService: CategoryService,
+    private qcCategoryService: QaCategoryService,
+    private assessmentNotesService: AssessmentNotesService,
+    private qcNotesService: QaNotesService,
+    private traineeService: TraineeService
   ) { }
 
   getQcTraineeNotesByBatchAndWeek(batchId: number, week: number): Observable<QcNote[]> {
-    return this.http.get<QcNote[]>(environment.api.qa.qcTraineeNotesByBatchAndWeek(batchId, week));
+    return this.qcNotesService.getQcTraineeNotesByBatchAndWeek(batchId, week);
   }
 
   getQcBatchNotesByBatchAndWeek(batchId: number, week: number): Observable<QcNote> {
-    return this.http.get<QcNote>(environment.api.qa.qcBatchNotesByBatchAndWeek(batchId, week));
+    return this.qcNotesService.getQcBatchNotesByBatchAndWeek(batchId, week);
   }
 
   getCategoriesByBatchAndWeek(batchId: number, week: number): Observable<QcCategory[]> {
-    return this.http.get<QcCategory[]>(environment.api.categories.byBatchAndWeek(batchId, week));
+    return this.qcCategoryService.getCategoriesByBatchAndWeek(batchId, week);
   }
 
   getActiveCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(environment.api.categories.active);
+    return this.categoryService.getActiveCategories();
   }
 
   saveWeeklyQcCategory(tag: QcCategory): Observable<QcCategory> {
-    return this.http.post<QcCategory>(environment.api.qa.createCategory, tag);
+    return this.qcCategoryService.saveWeeklyQcCategory(tag);
   }
 
   removeWeeklyQcCategory(tag: QcCategory): Observable<void> {
-    return this.http.delete<void>(environment.api.qa.deleteCategory(tag.id));
+    return this.qcCategoryService.removeWeeklyQcCategory(tag);
   }
 
   getTraineesByBatch(batchId: number): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(environment.api.user.trainees.inBatch(batchId));
+    return this.traineeService.getTraineesByBatchId(batchId);
   }
 
   upsertQcTraineeNote(qcNote: QcNote): Observable<QcNote> {
-    return this.http.post<QcNote>(environment.api.qa.traineeNotes, qcNote);
+    return this.qcNotesService.upsertQcTraineeNote(qcNote);
   }
 
   upsertQcBatchNote(qcNote: QcNote): Observable<QcNote> {
-    return this.http.post<QcNote>(environment.api.qa.batchNotes, qcNote);
+    return this.qcNotesService.upsertQcBatchNote(qcNote);
   }
 
   upsertNote(note: Note): Observable<Note> {
-    return this.http.put<Note>(environment.api.assessments.upsert, note);
+    return this.assessmentNotesService.upsertNote(note);
   }
 
 }

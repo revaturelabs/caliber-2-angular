@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BatchService } from 'src/app/Batch/batch.service';
-import { AssessBatchGradeService } from 'src/app/Assess-Batch/Services/assess-batch-grades.service';
-import { HomeService } from '../../service/home.service';
+import {Component, Injectable, OnInit} from '@angular/core';
+import {HttpHeaders} from '@angular/common/http';
 import {Batch} from "../../../domain/model/batch.dto";
 import {MissingGrade} from "../../../domain/dto/missing-grades.dto";
-
+import {HomeService} from "../../../services/home.service";
 
 
 /**
@@ -48,11 +44,13 @@ export class MissingGradesListComponent implements OnInit {
   location : string; // choose location
   missingGradeByLocation : Array<MissingGrade>;
 
-  constructor(private http: HttpClient, private batchService : BatchService, private homeService: HomeService, private assessmentService : AssessBatchGradeService) { }
+  constructor(
+    private homeService: HomeService,
+  ) { }
 
   ngOnInit() {
     this.weeksForDisplay = new Array<number>();
-    this.batchService.getBatches().subscribe(data => {
+    this.homeService.getCurrentBatches().subscribe(data => {
       this.currBatches = data;
     }, error => console.log('Error:' + error), () => this.getMissingGradesFromActiveBatches());
   }
@@ -66,7 +64,7 @@ export class MissingGradesListComponent implements OnInit {
   }
 
   getMissingGradesFromActiveBatches()  {
-    this.assessmentService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.afterMissingGradeReturn());
+    this.homeService.addMissingGrade(this.currBatches).subscribe(MissingGrade => this.missingGrades = MissingGrade, error => console.log('Error:' + error), () => this.afterMissingGradeReturn());
   }
 
   afterMissingGradeReturn() {
@@ -81,7 +79,7 @@ export class MissingGradesListComponent implements OnInit {
       if(batch.weeks - 3 > highest) {
         highest = batch.weeks - 3;
       }
-    })
+    });
     console.log('Highest is ' + highest);
     this.highestGradeWeek = highest;
   }
@@ -92,7 +90,6 @@ export class MissingGradesListComponent implements OnInit {
   }
 
   filterByWeekAndLocation() {
-    console.log("Checking filter");
     let tmpDisplayMiss: Array<MissingGrade> = new Array<MissingGrade>();
     this.missingGrades.forEach(miss => {
       //Location filter

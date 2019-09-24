@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TraineesService } from '../../Services/trainees.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorService } from 'src/app/error-handling/services/error.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TraineesService} from '../../Services/trainees.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorService} from 'src/app/error-handling/services/error.service';
 import {Trainee} from "../../../../domain/model/trainee.dto";
+import {TraineeService} from "../../../../services/subvertical/user/trainee.service";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class DeleteTraineeComponent implements OnInit {
    * @param trainee the trainee that is to be deleted
    */
   deleteTrainee(trainee: Trainee) {
-    this.ts.deleteTrainee(trainee.traineeId).subscribe(data => {
+    this.ts.deleteTrainee(trainee).subscribe(data => {
       this.refreshList.emit(true);
     },
     issue => {
@@ -49,7 +50,7 @@ export class DeleteTraineeComponent implements OnInit {
    * @param errorService The error service from the error handling folder,
    *   used to communicate with the error modal to display errors on failed http requests
    */
-  constructor(private ts: TraineesService, private errorService: ErrorService) { }
+  constructor(private ts: TraineeService, private errorService: ErrorService) { }
 
   /**
    * Initializes the trainee and their name on init to prevent binding errors

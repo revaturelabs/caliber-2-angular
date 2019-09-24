@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ReportService } from '../../Service/report.service';
 import {Assessment} from "../../../domain/model/assessment.dto";
 import {Grade} from "../../../domain/model/grade.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
+import {ReportService} from "../../../services/report.service";
 
 @Component({
   selector: 'app-weekly-report',
@@ -26,7 +26,9 @@ export class WeeklyReportComponent implements OnInit {
   public chartData;
   public chartLabels;
 
-  constructor(private reportService: ReportService) {
+  constructor(
+    private reportService: ReportService,
+  ) {
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { AssessmentBreakdownComponent } from './../assessment-breakdown/assessment-breakdown.component';
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CumulativeScoresComponent } from '../cumulative-scores/cumulative-scores.component';
-import { ReportService } from '../../Service/report.service';
+import { ReportService } from '../../../services/report.service';
 
 @Component({
   selector: 'app-report-top-chart-controller',
@@ -20,7 +20,7 @@ export class ReportTopChartController implements OnInit {
       this.cd.detectChanges();
   }
 
-  
+
   private cumulativeScoresComponent: CumulativeScoresComponent;
 
   @ViewChild(CumulativeScoresComponent) set setCumulativeScores(content: CumulativeScoresComponent) {
@@ -44,7 +44,7 @@ export class ReportTopChartController implements OnInit {
     if (this.cumulativeScoresComponent != undefined) {
       this.cumulativeScoresComponent.updateDataPull();
     }
-    
+
     if (this.assessmentBreakdownComponent != undefined){
       this.assessmentBreakdownComponent.updateDataPull();
     }

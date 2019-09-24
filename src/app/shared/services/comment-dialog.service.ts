@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {AssociateFlagDialogComponent} from "../components/associate-flag-dialog/associate-flag-dialog.component";
-import {AssessBatchService} from "../../Assess-Batch/Services/assess-batch.service";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {Trainee} from "../../domain/model/trainee.dto";
+import {AssessmentService} from "../../services/subvertical/assessment/assessment.service";
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class CommentDialogService {
 
   constructor(
     private modalService: BsModalService,
-    private assessBatchService: AssessBatchService
+    private assessmentService: AssessmentService
   ) { }
 
   openCommentDialog(trainee: Trainee) {
@@ -26,7 +26,7 @@ export class CommentDialogService {
 
     combineLatest(this.comment$).subscribe(([created]) => {
       if (created) {
-        this.assessBatchService.postComment(created).subscribe(
+        this.assessmentService.upsertComment(created).subscribe(
           (data: Trainee) => {
             this.lastAlteredComment$.next(data);
           }

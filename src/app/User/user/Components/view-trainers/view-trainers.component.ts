@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { TrainersService } from '../../Services/trainers.service';
+import { TrainerService } from '../../../../services/subvertical/user/trainer.service';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
 import { EditTrainerComponent } from '../edit-trainer/edit-trainer.component';
 import { AddTrainerComponent } from '../add-trainer/add-trainer.component';
@@ -13,8 +13,10 @@ import {Trainer} from "../../../../domain/model/trainer.dto";
   styleUrls: ['./view-trainers.component.css']
 })
 export class ViewTrainersComponent implements OnInit {
-  constructor(private trainerservice: TrainersService,
-    private errorService: ErrorService) { }
+  constructor(
+    private trainerService: TrainerService,
+    private errorService: ErrorService
+  ) { }
   /**
    * The trainer bound to the disable component
    */
@@ -40,7 +42,7 @@ export class ViewTrainersComponent implements OnInit {
   }
 
   getAllTrainers() {
-    this.trainerservice.getAllTrainers().subscribe(trainers => {
+    this.trainerService.getAllTrainers().subscribe(trainers => {
         this.trainersList = trainers;
       }, error => {
         const serviceName = 'User Service ';
