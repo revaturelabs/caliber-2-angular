@@ -35,7 +35,8 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
     type: "QC_BATCH",
     batchId: this.batchId,
     week: this.week,
-    qcStatus: "Undefined"
+    technicalStatus: "Undefined",
+    softSkillStatus: "Undefined"
   };
 
   private readonly timeout: number = 250;
@@ -92,7 +93,8 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
                     type: "QC_BATCH",
                     batchId: this.batchId,
                     week: this.week,
-                    qcStatus: "Undefined"
+                    technicalStatus: "Undefined",
+                    softSkillStatus: "Undefined"
                   };
                   this.isSaving = false;
                   this.failure = false;
@@ -122,7 +124,7 @@ export class BatchLevelFeedbackComponent implements OnInit, OnChanges {
         }
       } else if (prop === 'lastQcStatus') {
         if (this.qcNote && !change.isFirstChange()) {
-          this.qcNote.qcStatus = change.currentValue;
+          this.qcNote.technicalStatus = change.currentValue;
           this.qcNoteService.upsertQcBatchNote(this.qcNote).toPromise().then(
             data => this.qcNote = data
           )

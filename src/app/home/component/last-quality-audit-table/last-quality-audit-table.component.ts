@@ -69,7 +69,7 @@ export class LastQualityAuditTableComponent implements OnInit {
         qaArray.forEach(
           (qaNote) => {
             if (qaNote.week === week && qaNote.traineeId > 0) {
-              switch (qaNote.qcStatus) {
+              switch (qaNote.technicalStatus) {
                 case 'Poor': this.poorArray[index] += 1; break;
                 case 'Average': this.averageArray[index] += 1; break;
                 case 'Good': this.goodArray[index] += 1; break;
@@ -79,13 +79,13 @@ export class LastQualityAuditTableComponent implements OnInit {
             }
             if (qaNote.week === week && qaNote.traineeId === 0) {
               let color;
-              if (qaNote.qcStatus === 'Undefined') {
+              if (qaNote.technicalStatus === 'Undefined') {
                 this.overallStatusArray[index] = 'N/A';
               } else {
-                this.overallStatusArray[index] = qaNote.qcStatus;
+                this.overallStatusArray[index] = qaNote.technicalStatus;
               }
               // this.statusColorArray.push('');
-              switch (qaNote.qcStatus) {
+              switch (qaNote.technicalStatus) {
                 case 'Undefined': color = 'orange'; break;
                 case 'Poor': color = 'red'; break;
                 case 'Average': color = 'yellow'; break;

@@ -17,7 +17,7 @@ export class AuditService {
 
   //added new instance to fix property not defined for note object
   //in overall html component
-  overallBatchNote: QcNote= new QcNote(0,"",0,0,null,0,"","",0,null,0);
+  overallBatchNote: QcNote= new QcNote(0,"",0,0,null,0,"","","",0,null,0);
 
   overallBatchNoteChanged = new Subject<QcNote>();
   batchAllURL = '/qa/batch/batches';
