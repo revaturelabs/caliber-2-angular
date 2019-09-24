@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <div class="edit-batch-modal-header">
+    <h4>Edit {{ batch?.trainer }}'s {{ batch?.trainingName }} Batch</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <form [formGroup]="batchForm" novalidate>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="trainingName"><strong>Training Name</strong></label>
+          <input type="text" id="trainingName" formControlName="trainingName" class="form-control form-control-sm">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="trainingType"><strong>Training Type</strong></label>
+          <select name="trainingType" id="trainingType" formControlName="trainingType" class="form-control form-control-sm">
+            <option *ngFor="let type of trainingTypes; let i = index" [selected]="type === batch?.trainingType">{{ type }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="skillType"><strong>Skill Type</strong></label>
+          <select id="skillType" formControlName="skillType" class="form-control form-control-sm">
+            <option *ngFor="let type of skillTypes | async" [value]="type" [selected]="type === batch?.skillType">{{ type }}</option>
+          </select>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="location"><strong>Location</strong></label>
+          <select id="location" formControlName="location" class="form-control form-control-sm">
+            <option *ngFor="let location of locations | async" [value]="location?.id" [selected]="batch?.locationId === location?.id">{{ formatLocation(location) }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="trainer"><strong>Trainer</strong></label>
+          <select id="trainer" formControlName="trainer" class="form-control form-control-sm">
+            <option *ngFor="let trainer of trainers | async" [value]="trainer?.name" [selected]="trainer?.name === batch?.trainer">{{ trainer?.name }}</option>
+          </select>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="coTrainer"><strong>Co Trainer</strong></label>
+          <select id="coTrainer" formControlName="coTrainer" class="form-control form-control-sm">
+            <option *ngFor="let trainer of trainers | async" [value]="trainer?.name" [selected]="trainer?.name === batch?.coTrainer">{{ trainer?.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="startDate"><strong>Start Date</strong></label>
+          <input type="date" id="startDate" formControlName="startDate" class="form-control form-control-sm" >
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="endDate"><strong>End Date</strong></label>
+          <input type="date" id="endDate" formControlName="endDate" class="form-control form-control-sm" >
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="goodGrade"><strong>Good Grade</strong></label>
+          <input type="number" id="goodGrade" formControlName="goodGrade" class="form-control form-control-sm" >
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="passingGrade"><strong>Passing Grade</strong></label>
+          <input type="number" id="passingGrade" formControlName="passingGrade" class="form-control form-control-sm" >
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+    <button type="button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="batchForm.pristine || batchForm.invalid" (click)="handleBatchUpdate()">Update</button>
+  </div>
+</div>

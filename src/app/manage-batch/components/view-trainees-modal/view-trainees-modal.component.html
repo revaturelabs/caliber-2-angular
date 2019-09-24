@@ -1,0 +1,9 @@
+<div class="modal-header">
+  <h4>Associates in {{ trainer }}'s {{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="trainees$ | async as trainees">
+  {{ trainees | json }}
+</div>

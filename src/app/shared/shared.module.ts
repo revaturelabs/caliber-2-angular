@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from "ngx-bootstrap/modal";
+import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { AssessmentDialogComponent } from './components/assessment-dialog/assessment-dialog.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AssessmentResultSpinnerComponent } from './components/assessment-result-spinner/assessment-result-spinner.component';
@@ -38,10 +39,12 @@ import { BatchSelectDropdownComponent } from './components/batch-select-dropdown
   imports: [
     CommonModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    TooltipModule.forRoot(),
+    ReactiveFormsModule,
   ],
   exports: [
     ModalModule,
+    TooltipModule,
     AssessmentResultSpinnerComponent,
     FlagComponent,
     BatchSelectToolbarComponent,
@@ -49,7 +52,7 @@ import { BatchSelectDropdownComponent } from './components/batch-select-dropdown
     WeekSelectorComponent,
     AssociateDetailsComponent,
     AssociateNotesComponent,
-    BatchLevelFeedbackComponent
+    BatchLevelFeedbackComponent,
   ],
   entryComponents: [
     AssessmentDialogComponent,

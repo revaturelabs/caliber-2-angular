@@ -115,6 +115,9 @@ export const environment = {
     },
     user: {
       trainees: {
+        countByBatchId(batchId: number): string {
+          return `${serverRoot}/user/trainee/${batchId}/count`
+        },
         countInBatches(batchIds: number[]): string {
           return `${serverRoot}/user/all/trainee/count/`
         },

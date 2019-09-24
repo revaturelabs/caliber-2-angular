@@ -25,6 +25,10 @@ export class ManageBatchService {
     return this.chronoService.getValidYears();
   }
 
+  getQuarters(): number[] {
+    return this.chronoService.quarters;
+  }
+
   getAllBatches(): Observable<Batch[]> {
     return this.batchService.getAllBatches();
   }
@@ -39,6 +43,10 @@ export class ManageBatchService {
 
   getTraineeCount(batchIds: number[]): Observable<number[][]> {
     return this.batchService.getTraineeCountByBatchIds(batchIds);
+  }
+
+  getTraineeCountByBatchId(batchId: number): Observable<number> {
+    return this.batchService.getTraineeCountByBatchId(batchId);
   }
 
   deleteBatch(batchId: number): Observable<Batch> {

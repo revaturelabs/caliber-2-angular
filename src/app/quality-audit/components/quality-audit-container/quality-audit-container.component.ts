@@ -30,7 +30,7 @@ export class QualityAuditContainerComponent implements OnInit {
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
-    this.selectedQuarter = this.chronoService.getQuarterFromDate(date);
+    this.selectedQuarter = this.chronoService.getQuarterFromDate();
     this.yearSubject = new BehaviorSubject(this.selectedYear);
     this.quarterSubject = new BehaviorSubject(this.selectedQuarter);
   }

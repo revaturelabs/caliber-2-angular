@@ -15,14 +15,14 @@ import { CategoriesComponent } from './AssessmentCategories/Components/categorie
 const routes: Routes = [
   { path: '', redirectTo: 'vp/home', pathMatch: 'full' },
   { path: 'vp/home', loadChildren: 'src/app/home-module/home-module.module#HomeModule' },
-  { path: 'vp/manage', loadChildren: './batch-module/batch.module#BatchRouteModule' },
+  { path: 'vp/manage', loadChildren: './manage-batch/manage-batch.module#ManageBatchModule' },
   { path: 'vp/audit', loadChildren: './quality-audit/quality-audit.module#QualityAuditModule'},
   { path: 'vp/assess', loadChildren: './assess-batch-v2/assess-batch-v2.module#AssessBatchV2Module'},
   { path: 'vp/reports', loadChildren: './reports-module/reports-module.module#ReportsModule'},
   { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule'},
   { path: 'vp/locations', loadChildren: './locations-module/locations-module.module#LocationsModule'},
   { path: 'vp/category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule'},
-  { path: 'vp/panels', loadChildren: './audit-module/audit-module.module#AuditModule'}
+  { path: 'vp/panels', loadChildren: './batch-module/batch.module#BatchRouteModule'}
   //{ path: 'vp/category', component: CategoriesComponent}
 ];
 

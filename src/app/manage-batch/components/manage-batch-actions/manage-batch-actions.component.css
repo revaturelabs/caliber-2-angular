@@ -1,0 +1,20 @@
+.manage-batch-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 15%;
+}
+
+.batch-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.main-rev-brand {
+  color: #F26925;
+}

@@ -1,0 +1,14 @@
+<div class="manage-batch-toolbar">
+  <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 pull-left select-year-dropdown">
+    <app-shared-dropdown-menu
+      [data]="years"
+      [dropdownFor]="'manageBatchYear'"
+      [selectedValue]="year"
+      (onValueSelect)="selectYear($event)"
+    ></app-shared-dropdown-menu>
+  </div>
+  <div class="manage-batch-toolbar-row-buttons">
+    <app-create-batch-button></app-create-batch-button>
+    <app-import-batch-button></app-import-batch-button>
+  </div>
+</div>

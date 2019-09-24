@@ -35,6 +35,10 @@ export class BatchService {
     return this.http.post<number[][]>(environment.api.user.trainees.countInBatches(batchIds), batchIds);
   }
 
+  getTraineeCountByBatchId(batchId: number): Observable<number> {
+    return this.http.get<number>(environment.api.user.trainees.countByBatchId(batchId));
+  }
+
   deleteBatch(batchId: number): Observable<Batch> {
     return this.http.delete<Batch>(environment.api.batches.deleteById(batchId));
   }
