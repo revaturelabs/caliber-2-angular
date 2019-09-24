@@ -20,7 +20,7 @@
         </td>
         <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
           <app-qc-feedback
-            [column]="technical"
+            [column]="'technical'"
             [qcNote]="getQcTraineeNote(trainee?.traineeId)"
             (onQcStatusSelect)="handleQcStatusChange($event)"
           >
@@ -28,7 +28,7 @@
         </td>
         <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
           <app-qc-feedback
-            [column]="soft"
+            [column]="'soft'"
             [qcNote]="getQcTraineeNote(trainee?.traineeId)"
             (onQcStatusSelect)="handleQcStatusChange($event)"
           >

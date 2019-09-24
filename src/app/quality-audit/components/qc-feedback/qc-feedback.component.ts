@@ -73,15 +73,23 @@ export class QcFeedbackComponent implements OnInit {
         this.setSoftSkillStatus(status);
         break;
     }
+    this.qcStatusSelector.emit(this.qcNote);
   }
 
   setTechnicalStatus(status: string) {
     this.qcNote.technicalStatus = status;
-    this.qcStatusSelector.emit(this.qcNote);
   }
 
   setSoftSkillStatus(status: string) {
     this.qcNote.softSkillStatus = status;
-    this.qcStatusSelector.emit(this.qcNote);
+  }
+
+  getQcStatus() {
+    switch(this.column) {
+      case "technical":
+        return this.qcNote.technicalStatus;
+      case "soft":
+          return this.qcNote.softSkillStatus;
+    }
   }
 }

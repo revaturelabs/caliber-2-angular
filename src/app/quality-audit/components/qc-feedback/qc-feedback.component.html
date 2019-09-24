@@ -1,5 +1,5 @@
 <div class="feedback" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
-  <div><em [ngClass]="getDisplayClassForStatus(qcNote?.qcStatus)"></em></div>
+  <div><em [ngClass]="getDisplayClassForStatus(getQcStatus())"></em></div>
   <div
     *ngIf="shouldShowDropdown"
     (mouseenter)="showDropdown()"
