@@ -31,7 +31,7 @@ export class OverallQCScoresComponent implements OnInit {
 
   getStatus(week, traineeId) {
     const note = this.getNote(week, traineeId);
-    switch (note['qcStatus']) {
+    switch (note['technicalStatus']) {
       case 'Superstar':
         return 'fa fa-star fa-2x pick mouse-over';
       case 'Good':

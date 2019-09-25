@@ -116,7 +116,7 @@ describe('OverallComponent', () => {
     sendNoteSpy.and.returnValue(of(1));
     component.setScore("yellow", 1);
     expect(sendNoteSpy).toHaveBeenCalledWith(component.note);
-    expect(component.note.qcStatus).toBe("yellow");
+    expect(component.note.technicalStatus).toBe("yellow");
     expect(subscribeBatchNoteSpy).toHaveBeenCalled();
     expect(subscribeOverallNoteSpy).toHaveBeenCalled();
     expect(subscribeOverallNoteSpy).toHaveBeenCalledWith(1, 7);

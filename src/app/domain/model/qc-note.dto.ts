@@ -13,14 +13,15 @@ export class QcNote {
   trainee?: Trainee;
   traineeId?: number;
   type: string;
-  qcStatus?: string;
+  technicalStatus?: string;
+  softSkillStatus?: string;
   updateTime?: number; // updateTime is a timestamp as long milliseconds
                        // use getDate(updateTime | date format) to display the date
   lastSavedBy?: Trainer;
   lastSavedById?: number;
 
   constructor(noteId: number, content: string, week: number, batchId: number, trainee: Trainee,
-              traineeId: number, type: string, qcStatus: string, updateTime: number, lastSavedBy: Trainer, lastSavedById: number) {
+              traineeId: number, type: string, technicalStatus: string, softSkilStatus: string, updateTime: number, lastSavedBy: Trainer, lastSavedById: number) {
     this.noteId=noteId;
     this.content=content;
     this.week=week;
@@ -28,7 +29,8 @@ export class QcNote {
     this.trainee=trainee;
     this.traineeId=traineeId;
     this.type=type;
-    this.qcStatus = qcStatus;
+    this.technicalStatus = technicalStatus;
+    this.softSkillStatus = softSkilStatus;
     this.updateTime=updateTime;
     this.lastSavedBy=lastSavedBy;
     this.lastSavedById=lastSavedById;

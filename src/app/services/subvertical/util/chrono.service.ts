@@ -25,7 +25,7 @@ export class ChronoService {
   }
 
   addWeekAndReturn(batch: Batch): Observable<Batch> {
-    return this.http.put<Batch>(environment.api.batches.addWeek(batch), batch);
+    return this.http.put<Batch>(environment.api.batches.updateAndReturn, batch);
   }
 
   getValidYears(): Observable<number[]> {

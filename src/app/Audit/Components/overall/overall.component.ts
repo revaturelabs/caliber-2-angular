@@ -85,7 +85,7 @@ export class OverallComponent implements OnInit, OnDestroy {
 	}
 
 	setScore(qcStatus: string, noteId: number) {
-		this.note.qcStatus = qcStatus;
+		this.note.technicalStatus = qcStatus;
 		this.auditService.sendNote(this.note).subscribe(
 			data => {
 				this.auditService.getOverallBatchNoteByWeek(this.auditService.selectedBatch['batchId'], this.auditService.selectedWeek);

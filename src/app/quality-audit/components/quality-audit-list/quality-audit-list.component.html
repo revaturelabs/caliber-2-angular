@@ -1,24 +1,34 @@
 <div class="container-fluid">
   <div class="table-responsive" *ngIf="trainees$ | async as trainees">
-    <app-categories-this-week [categories]="categories$ | async" [week]="week" [batchId]="batchId" ></app-categories-this-week>
+    <app-categories-this-week *ngIf="categories$ | async as categories" [categories]="categories" [week]="week" [batchId]="batchId" ></app-categories-this-week>
     <table class="table">
       <thead>
       <tr>
-        <th class="col-md-2 col-sm-2 col-lg-2 col-xl-2"><strong>Trainee</strong></th>
-        <th><strong>Individual Feedback</strong></th>
-        <th class="col-md-8 col-sm-8 col-lg-2 col-xl-2"><strong>Notes</strong></th>
+        <th class="col-md-1 col-sm-1 col-lg-1 col-xl-1"><strong>Trainee</strong></th>
+        <th class="col-md-2 col-sm-2 col-lg-2 col-xl-2 text-center"><strong>Technical Skills</strong></th>
+        <th class="col-md-2 col-sm-2 col-lg-2 col-xl-2 text-center"><strong>Soft Skills</strong></th>
+        <th class="col-md-7 col-sm-7 col-lg-7 col-xl-7"><strong>Notes</strong></th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let trainee of trainees">
+      <tr *ngFor="let trainee of trainees" class="quality-audit-list-row">
         <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
           <app-associate-details
             [trainee]="trainee"
           >
           </app-associate-details>
         </td>
-        <td class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+        <td class="col-md-1 col-sm-1 col-lg-1 col-xl-1">
           <app-qc-feedback
+            [column]="'technical'"
+            [qcNote]="getQcTraineeNote(trainee?.traineeId)"
+            (onQcStatusSelect)="handleQcStatusChange($event)"
+          >
+          </app-qc-feedback>
+        </td>
+        <td class="col-md-1 col-sm-1 col-lg-1 col-xl-1">
+          <app-qc-feedback
+            [column]="'soft'"
             [qcNote]="getQcTraineeNote(trainee?.traineeId)"
             (onQcStatusSelect)="handleQcStatusChange($event)"
           >
@@ -43,11 +53,11 @@
       <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
         <div>
           <h4 class="text-center"><strong class="note-header">Overall QC Status</strong></h4>
-          <app-qc-feedback [isOverallFeedback]="true" [qcNote]="getQcBatchNote()" (onQcStatusSelect)="handleQcBatchNoteChange($event)"></app-qc-feedback>
+          <app-qc-feedback [column]="'technical'" [isOverallFeedback]="true" [qcNote]="getQcBatchNote()" (onQcStatusSelect)="handleQcBatchNoteChange($event)"></app-qc-feedback>
         </div>
       </div>
       <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
-        <app-batch-level-feedback [batchId]="batchId" [week]="week" [isQcFeedback]="true" [lastQcStatus]="lastQcStatus" ></app-batch-level-feedback>
+        <app-batch-level-feedback [batchId]="batchId" [week]="week" [isQcFeedback]="true" [lastQcStatus]="lastQcStatus" [lastBatchNoteChange]="lastBatchNoteChange" (onBatchNoteChange)="handleQcBatchNoteChange($event)" ></app-batch-level-feedback>
       </div>
     </div>
   </div>
