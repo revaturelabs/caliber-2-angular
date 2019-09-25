@@ -13,6 +13,7 @@ import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
+import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 
 @Component({
   selector: 'app-assess-associate-list',
@@ -43,6 +44,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
   private lastAssessmentAction$: Observable<AssessmentChangeDto>;
   private lastComment$: Observable<Trainee>;
+  lastFlag: Trainee;
 
   notesLoaded: boolean = false;
 
@@ -81,7 +83,14 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       ([comment]) => {
         this.trainees$.subscribe(
           data => {
-            this.trainees = data
+            if (data) {
+              this.trainees = data;
+              if (comment) {
+                this.lastFlag.flagNotes = comment.flagNotes;
+                this.lastFlag.flagTimeStamp = comment.flagTimeStamp;
+                this.lastFlag.flagStatus = TraineeFlag[comment.flagNotes];
+              }
+            }
           }
         );
       }
@@ -233,18 +242,6 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
   handleGradeUpdate(grade: Grade) {
     this.setUpdatedGrade(grade);
-  }
-
-  handleGradeCreate(grade: Grade) {
-    this.assessBatchService.upsertGrade(grade).subscribe(
-      data => {
-        if (this.grades.has(data.assessmentId)) {
-          this.grades.get(data.assessmentId).push(data);
-        } else {
-          this.grades.set(data.assessmentId, [data]);
-        }
-      }
-    )
   }
 
   private addToColumn(category: Category) {

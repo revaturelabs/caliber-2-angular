@@ -12,6 +12,7 @@ export class AssociateDetailsComponent implements OnInit {
   @Input("trainee") trainee: Trainee;
 
   show: boolean = false;
+  shouldShow: boolean = false;
 
   constructor(
     private commentDialogService: CommentDialogService
@@ -30,5 +31,20 @@ export class AssociateDetailsComponent implements OnInit {
 
   showAssociateFlagModal() {
     this.commentDialogService.openCommentDialog(this.trainee);
+  }
+
+  associateNote(): string {
+    if (this.trainee && this.trainee.flagNotes) {
+      return this.trainee.flagNotes;
+    }
+    return ""
+  }
+
+  shouldShowAssociateNote() {
+    this.shouldShow = true;
+  }
+
+  showAssociateNoteDetail(): boolean {
+    return this.shouldShow;
   }
 }

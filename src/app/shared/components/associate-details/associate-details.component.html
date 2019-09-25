@@ -1,7 +1,7 @@
-<div class="associate-details-container" (mouseleave)="hidePen()" (mouseenter)="showPen()">
+<div class="associate-details-container" (mouseleave)="hidePen()" (mouseenter)="showPen(); shouldShowAssociateNote()">
   <div class="centered">
-    <strong>{{ trainee?.name }}</strong>
-    <span *ngIf="trainee?.flagStatus && trainee?.flagNotes" class="flag"><app-flag [tiny]="true" [type]="trainee?.flagStatus" [selected]="trainee?.flagStatus"></app-flag></span>
+    <strong [tooltip]="associateNote()" placement="bottom">{{ trainee?.name }}</strong>
+    <span><em class="fas fa-pen flag-pen" [style.display]="show ? 'inherit' : 'none'" (click)="showAssociateFlagModal()"></em></span>
+    <span *ngIf="trainee?.flagStatus && trainee?.flagNotes" (click)="showAssociateFlagModal()" class="flag"><app-flag [tiny]="true" [type]="trainee?.flagStatus" [selected]="trainee?.flagStatus"></app-flag></span>
   </div>
-  <div><em class="fas fa-pen flag-pen" [style.display]="show ? 'inherit' : 'none'" (click)="showAssociateFlagModal()"></em></div>
 </div>

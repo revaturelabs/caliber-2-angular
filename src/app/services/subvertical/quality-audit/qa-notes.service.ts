@@ -12,11 +12,11 @@ export class QaNotesService {
   ) {}
 
   upsertQcTraineeNote(qcNote: QcNote): Observable<QcNote> {
-    return this.http.post<QcNote>(environment.api.qa.traineeNotes, qcNote);
+    return this.http.put<QcNote>(environment.api.qa.traineeNotes, qcNote);
   }
 
   upsertQcBatchNote(qcNote: QcNote): Observable<QcNote> {
-    return this.http.post<QcNote>(environment.api.qa.batchNotes, qcNote);
+    return this.http.put<QcNote>(environment.api.qa.batchNotes, qcNote);
   }
 
   getQcTraineeNotesByBatchAndWeek(batchId: number, week: number): Observable<QcNote[]> {

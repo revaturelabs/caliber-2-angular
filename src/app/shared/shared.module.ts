@@ -18,6 +18,7 @@ import {AssociateNotesComponent} from "./components/associate-notes/associate-no
 import {BatchLevelFeedbackComponent} from "./components/batch-level-feedback/batch-level-feedback.component";
 import { BatchSearchComponent } from './components/batch-search/batch-search.component';
 import { BatchSelectDropdownComponent } from './components/batch-select-dropdown/batch-select-dropdown.component';
+import {TooltipModule} from "ngx-bootstrap";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BatchSelectDropdownComponent } from './components/batch-select-dropdown
   imports: [
     CommonModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TooltipModule.forRoot()
   ],
   exports: [
     ModalModule,

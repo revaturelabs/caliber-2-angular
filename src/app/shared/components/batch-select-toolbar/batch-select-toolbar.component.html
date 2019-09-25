@@ -13,13 +13,6 @@
       [selectedValue]="quarter"
       (onValueSelect)="selectQuarter($event)"
     ></app-shared-dropdown-menu>
-<!--    <app-shared-dropdown-menu *ngIf="batches"-->
-<!--      [data]="batches"-->
-<!--      [dropdownFor]="'Batch'"-->
-<!--      [selectedValue]="batch"-->
-<!--      [format]="formatBatches"-->
-<!--      (onValueSelect)="selectBatch($event)"-->
-<!--    ></app-shared-dropdown-menu>-->
     <app-batch-select-dropdown *ngIf="batches" [batches]="batches" (onBatchSelect)="selectBatch($event)"></app-batch-select-dropdown>
   </div>
 </div>
