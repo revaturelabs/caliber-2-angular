@@ -20,7 +20,7 @@ export class CommentDialogService {
   ) { }
 
   openCommentDialog(trainee: Trainee) {
-    const initialState = {trainee: trainee};
+    const initialState = {trainee};
     this.modalRef = this.modalService.show(AssociateFlagDialogComponent, {initialState, ignoreBackdropClick: true});
     this.comment$ = this.modalRef.content.createComment$.asObservable();
 

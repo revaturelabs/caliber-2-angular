@@ -1,0 +1,4 @@
+tr.quality-audit-list-row > td {
+  min-height: available !important;
+  height: 100% !important;
+}
