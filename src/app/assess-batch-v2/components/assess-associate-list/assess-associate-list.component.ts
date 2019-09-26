@@ -38,9 +38,12 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   notes: Map<number, Note[]>;
   assessments: Assessment[] = [];
   private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
+  assessmentAverages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+  overallAverage$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Output("onBatchUpdate") onBatchUpdate: EventEmitter<Batch> = new EventEmitter<Batch>(true);
   @Output("onWeekSelect") onWeekSelect: EventEmitter<number> = new EventEmitter<number>(true);
+  private gradeRecalculator: EventEmitter<any> = new EventEmitter<any>(true);
 
   private lastAssessmentAction$: Observable<AssessmentChangeDto>;
   private lastComment$: Observable<Trainee>;
@@ -86,9 +89,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
             if (data) {
               this.trainees = data;
               if (comment) {
-                this.lastFlag.flagNotes = comment.flagNotes;
-                this.lastFlag.flagTimeStamp = comment.flagTimeStamp;
-                this.lastFlag.flagStatus = TraineeFlag[comment.flagNotes];
+                this.lastFlag = comment;
               }
             }
           }
@@ -138,6 +139,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
               data => {
                 this.assessments = data;
                 this.totalPoints = 0;
+                const averages = [];
                 // For every assessment, populate the categoryIdsArray and add an entry to the `columns` array, leaving category blank
                 for (let assessment of data) {
                   const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
@@ -153,14 +155,42 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                       }
                     );
                   }
+                  averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
                   this.totalPoints += assessment.rawScore;
                 }
+                this.assessmentAverages$.next(averages);
+                this.overallAverage$.next(this.getBatchAverage(data));
               }
             );
           }
         }
       }
     );
+
+    combineLatest(this.gradeRecalculator.asObservable()).subscribe(
+      data => {
+        const averages = [];
+        for (let assessment of this.assessments) {
+          const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
+          if (found === undefined) {
+            // Create an AssessBatchColumn entry, leaving category to populate later
+            this.columns.push({
+              assessment: assessment,
+              category: ""
+            });
+            this.assessBatchService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
+              data => {
+                this.addToColumn(data);
+              }
+            );
+          }
+          averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
+          this.totalPoints += assessment.rawScore;
+        }
+        this.assessmentAverages$.next(averages);
+        this.overallAverage$.next(this.getBatchAverage(this.assessments));
+      }
+    )
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -224,7 +254,10 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
         sum += grade.score;
         count++;
       }
-      return (sum / count) / 100;
+      const found = this.assessments.find(assessment => assessment.assessmentId === assessmentId);
+      if (found) {
+        return (sum / count) / found.rawScore;
+      }
     }
     return 0;
   }
@@ -241,8 +274,18 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   }
 
   handleGradeUpdate(grade: Grade) {
-    this.setUpdatedGrade(grade);
+    if (grade) {
+      this.setUpdatedGrade(grade);
+      const averages = [];
+      for (let assessment of this.assessments) {
+        averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
+      }
+      this.assessmentAverages$.next(averages);
+      this.overallAverage$.next(this.getBatchAverage(this.assessments));
+      this.gradeRecalculator.emit(grade.assessmentId);
+    }
   }
+
 
   private addToColumn(category: Category) {
     if (this.columns.length > 0) {
@@ -257,9 +300,9 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   private setUpdatedGrade(grade: Grade) {
     if (this.grades.has(grade.assessmentId)) {
       for (let g of this.grades.get(grade.assessmentId)) {
-        if (g.assessmentId === grade.assessmentId && g.traineeId === grade.traineeId) {
+        if (g.assessmentId === grade.assessmentId) {
           const index = this.grades.get(grade.assessmentId).findIndex(gr => gr.assessmentId === grade.assessmentId && gr.traineeId === grade.traineeId);
-          if (index > 0) {
+          if (index >= 0) {
             this.grades.get(grade.assessmentId)[index] = grade;
           }
         }

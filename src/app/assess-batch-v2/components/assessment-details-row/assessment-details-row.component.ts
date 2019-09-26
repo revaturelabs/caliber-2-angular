@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Grade} from "../../../domain/model/grade.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
+import {Assessment} from "../../../domain/model/assessment.dto";
 
 @Component({
   selector: 'app-assessment-details-row',
@@ -11,11 +12,13 @@ import {AssessBatchService} from "../../../services/assess-batch.service";
 export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
   @Input("grade") grade: Grade;
-  @Input("assessmentId") assessmentId: number;
+  @Input("assessment") assessment: Assessment;
   @Input("traineeId") traineeId: number;
   @Output("onGradeUpdate") onGradeUpdate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
   @Output("onGradeCreate") onGradeCreate: EventEmitter<Grade> = new EventEmitter<Grade>(true);
   gradeForm: FormGroup;
+  isGradeInputValid: boolean = true;
+  gradeValidationMessage: string;
 
   constructor(
     private fb: FormBuilder,
@@ -28,34 +31,54 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     for (let prop in changes) {
-      const change = changes[prop];
-      if (change.previousValue === undefined && change.currentValue !== undefined) {
-        this.gradeForm = this.generateGradeForm();
-      } else if (change.previousValue === undefined && change.currentValue === undefined) {
-        // Handle case for when there is no grade
+      // Set value of form to be updated grade score
+      if (prop === 'grade') {
         this.gradeForm = this.generateGradeForm();
       }
     }
   }
 
+  triggerRecalculations() {
+    console.log('Should recalculate averages');
+  }
+
   handleGradeUpdate() {
-    const score = this.gradeForm.get("grade").value;
-    if (this.grade) {
-      if (this.grade.score !== score) {
-        this.grade.score = score;
-      }
-    } else {
-        this.grade = {
-          score: score,
-          assessmentId: this.assessmentId,
-          traineeId: this.traineeId,
-          dateReceived: new Date().getTime()
-        };
+    const score: number = this.gradeForm.get("grade").value;
+    // Handle lower bound
+    if (score < 0) {
+      this.isGradeInputValid = false;
+      this.gradeValidationMessage = "Must be positive";
+      this.onGradeUpdate.emit(this.grade);
+      return;
     }
-    this.assessBatchService.upsertGrade(this.grade).subscribe(
+    // Handle upper bound
+    else if (score > this.assessment.rawScore) {
+      this.isGradeInputValid = false;
+      this.gradeValidationMessage = `Must be less than ${this.assessment.rawScore}`;
+      this.onGradeUpdate.emit(this.grade);
+      return;
+    }
+
+    this.isGradeInputValid = true;
+    this.gradeValidationMessage = undefined;
+    let grade: Grade;
+
+    if (this.grade) {
+      grade = this.grade;
+      grade.score = score;
+    } else {
+      grade = { score: score, assessmentId: this.assessment.assessmentId, traineeId: this.traineeId, dateReceived: new Date().getTime()}
+    }
+
+    this.assessBatchService.upsertGrade(grade).subscribe(
       data => {
-        this.grade = data;
-        this.onGradeUpdate.emit(data);
+        if (data) {
+          this.grade = data;
+          this.onGradeUpdate.emit(data);
+          this.isGradeInputValid = true;
+          this.gradeValidationMessage = undefined;
+          this.gradeForm = this.generateGradeForm();
+        }
       }
     )
   }
@@ -68,7 +91,7 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
       })
     } else {
       return this.fb.group({
-        "grade": 0
+        "grade": [0, [Validators.required, Validators.min(0)]]
       });
     }
   }
