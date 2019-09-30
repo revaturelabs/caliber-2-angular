@@ -1,6 +1,6 @@
 <div *ngIf="trainees.length > 0">
   <div class="table-responsive mt-1">
-    <app-week-selector [batch]="batch" (selectedWeek)="setSelectedWeek($event)" (updatedBatch)="setUpdatedBatch($event)" ></app-week-selector>
+    <app-week-selector [batch]="batch" (selectedWeek)="setSelectedWeek($event)" (updatedBatch)="setUpdatedBatch($event)" [names]="names"></app-week-selector>
     <table class="table">
       <thead>
         <tr>

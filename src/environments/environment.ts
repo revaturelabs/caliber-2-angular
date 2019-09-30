@@ -52,6 +52,15 @@ export const environment = {
           return `${serverRoot}/assessment/all/note/batch/${batchId}/${week}`;
         }
       },
+      weekNames: {
+        byId(weekNameId: number): string {
+          return `${serverRoot}/assessment/weekName/${weekNameId}`;
+        },
+        byBatchId(batchId: number): string {
+          return `${serverRoot}/assessment/weekName/batch/${batchId}`;
+        },
+        upsert: `${serverRoot}/assessment/weekName/update`
+      }
     },
     batches: {
       allByYearAndQuarter(year: number, quarter: number): string {
@@ -107,6 +116,15 @@ export const environment = {
           return `${serverRoot}/qa/category/delete/${categoryId}`;
         }
       },
+      weekNames: {
+        byId(weekNameId: number): string {
+          return `${serverRoot}/qa/weekName/${weekNameId}`;
+        },
+        byBatchId(batchId: number): string {
+          return `${serverRoot}/qa/weekName/batch/${batchId}`;
+        },
+        upsert: `${serverRoot}/qa/weekName/update`
+      }
     },
     location: {
       all: `${serverRoot}/location/all/location/all`,

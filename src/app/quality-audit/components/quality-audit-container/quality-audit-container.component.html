@@ -15,6 +15,7 @@
   <div *ngIf="selectedBatch">
     <app-week-selector
       [batch]="selectedBatch"
+      [names]="names"
       (selectedWeek)="setSelectedWeek($event)"
     >
     </app-week-selector>

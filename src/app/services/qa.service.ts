@@ -7,8 +7,10 @@ import {QcCategory} from "../domain/model/qc-category.dto";
 import {Category} from "../domain/model/category.dto";
 import {Trainee} from "../domain/model/trainee.dto";
 import {Note} from "../domain/model/assessment-note.dto";
+import {WeekName} from "../domain/model/week-name.dto";
 import {CategoryService} from "./subvertical/category/category.service";
 import {QaCategoryService} from "./subvertical/quality-audit/qa-category.service";
+import {QaWeekNameService} from "./subvertical/quality-audit/qa-week-name.service";
 import {AssessmentNotesService} from "./subvertical/assessment/assessment-notes.service";
 import {QaNotesService} from "./subvertical/quality-audit/qa-notes.service";
 import {TraineeService} from "./subvertical/user/trainee.service";
@@ -23,6 +25,7 @@ export class QaService {
     private qcCategoryService: QaCategoryService,
     private assessmentNotesService: AssessmentNotesService,
     private qcNotesService: QaNotesService,
+    private qcWeekNameService: QaWeekNameService,
     private traineeService: TraineeService
   ) { }
 
@@ -66,4 +69,11 @@ export class QaService {
     return this.assessmentNotesService.upsertNote(note);
   }
 
+  upsertWeekName(weekName: WeekName): Observable<WeekName> {
+    return this.qcWeekNameService.upsertWeekName(weekName);
+  }
+
+  getWeekNamesByBatchId(batchId: number): Observable<WeekName[]> {
+    return this.qcWeekNameService.getByBatchId(batchId);
+  }
 }

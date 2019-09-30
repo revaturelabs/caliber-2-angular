@@ -1,7 +1,7 @@
 <div *ngIf="batch">
   <ul class="nav nav-tabs">
     <li *ngFor="let week of weeks" [ngClass]="{'active': week === selectedWeek}" (click)="selectWeek(week)" >
-      <a role="button">Week {{ week }}</a>
+      <a role="button">{{names[week - 1]}}</a>
     </li>
     <li role="button" data-toggle="modal" data-target="#addWeeks">
       <a>

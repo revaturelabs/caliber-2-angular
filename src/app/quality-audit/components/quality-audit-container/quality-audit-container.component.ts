@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {Batch} from "../../../domain/model/batch.dto";
+import {WeekName} from "../../../domain/model/week-name.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
 import {ChronoService} from "../../../services/subvertical/util/chrono.service";
 import {BatchService} from "../../../services/subvertical/batch/batch.service";
+import {QaService} from "../../../services/qa.service";
 
 @Component({
   selector: 'app-quality-audit-container',
@@ -20,13 +22,15 @@ export class QualityAuditContainerComponent implements OnInit {
   selectedQuarter: number;
   selectedBatch: Batch;
   selectedWeek: number;
+  names: WeekName[] = [];
 
   private yearSubject: BehaviorSubject<number>;
   private quarterSubject: BehaviorSubject<number>;
 
   constructor(
     private chronoService: ChronoService,
-    private batchService: BatchService
+    private batchService: BatchService,
+    private qaService: QaService
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
@@ -62,6 +66,9 @@ export class QualityAuditContainerComponent implements OnInit {
 
   setSelectedBatch(batch: Batch) {
     this.selectedBatch = batch;
+    this.qaService.getWeekNamesByBatchId(batch.batchId).subscribe((weekNames: WeekName[]) => {
+      this.names = weekNames;
+    });
   }
 
   setSelectedWeek(week: number) {

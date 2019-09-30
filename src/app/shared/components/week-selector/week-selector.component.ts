@@ -3,6 +3,7 @@ import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.se
 import {Subscription} from "rxjs";
 import {Batch} from "../../../domain/model/batch.dto";
 import {ChronoService} from "../../../services/subvertical/util/chrono.service";
+import {WeekName} from "../../../domain/model/week-name.dto";
 
 @Component({
   selector: 'app-week-selector',
@@ -13,10 +14,12 @@ export class WeekSelectorComponent implements OnInit {
 
   @Output("selectedWeek") selectedWeekEmitter: EventEmitter<number> = new EventEmitter<number>(true);
   @Output("updatedBatch") updatedBatch: EventEmitter<Batch> = new EventEmitter<Batch>(true);
+  @Input("names") weekNames: WeekName[];
   @Input("batch") batch: Batch;
 
   selectedWeek: number;
   weeks: number[] = [];
+  names: string[] = [];
 
   constructor(
     private chronoService: ChronoService
@@ -31,6 +34,12 @@ export class WeekSelectorComponent implements OnInit {
     // Populate initial weeks
     for (let i = 1; i <= this.batch.weeks; i++) {
       this.weeks[i-1] = i;
+      this.names[i - 1] = "Week " + i;
+    }
+
+    // Replace default names with persisted week names
+    for(let week of this.weekNames) {
+      this.names[week.weekNumber] = week.name;
     }
 
     // Set default week
@@ -42,6 +51,12 @@ export class WeekSelectorComponent implements OnInit {
         // Repopulate weeks with new week
         for (let i = 1; i <= this.batch.weeks; i++) {
           this.weeks[i-1] = i;
+          this.names[i - 1] = "Week " + i;
+        }
+
+        // Repersist default names with week names
+        for(let week of this.weekNames) {
+          this.names[week.weekNumber] = week.name;
         }
       }
     )
