@@ -60,11 +60,11 @@ export class AssociateNotesComponent implements OnInit {
   }
 
   handleNote() {
-    this.success = false;
-    this.failure = false;
     const noteContent: string = this.traineeNotesForm.get("notes").value;
     // When assessment note is supplied
     if (Boolean(noteContent) && this.note.noteContent !== noteContent) {
+      this.success = false;
+      this.failure = false;
       this.isSaving = true;
       this.note.noteContent = noteContent;
       this.assessmentNotesService.upsertNote(this.note).toPromise().then(

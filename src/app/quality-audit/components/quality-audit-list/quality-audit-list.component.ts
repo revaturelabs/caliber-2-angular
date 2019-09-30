@@ -212,7 +212,10 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
       data => {
         this.noteMap.set(data.traineeId, data);
         // Whenever an Individual Qc Note Changes, recalculate the overall score
-        this.handleQcBatchNoteChange(this.determineOverallBatchScore());
+        const overall = this.determineOverallBatchScore();
+        if (overall !== undefined) {
+          this.handleQcBatchNoteChange(this.determineOverallBatchScore());
+        }
       }
     )
   }
