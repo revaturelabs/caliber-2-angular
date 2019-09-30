@@ -16,7 +16,7 @@
           <td class="col-sm-2 col-md-2 col-lg-2 col-xl-2"><app-associate-details [trainee]="trainee"></app-associate-details></td>
           <td *ngFor="let assessment of assessments" class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
             <app-assessment-details-row
-              [assessmentId]="assessment?.assessmentId"
+              [assessment]="assessment"
               [traineeId]="trainee?.traineeId"
               [grade]="getGradesForAssessmentAndTrainee(assessment?.assessmentId, trainee?.traineeId)"
               (onGradeUpdate)="handleGradeUpdate($event)"
@@ -39,8 +39,8 @@
       <tfoot>
         <tr>
           <td><strong>Average:</strong></td>
-          <td *ngFor="let assessment of assessments">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
-          <td><strong>Weekly Batch Average: </strong>{{ getBatchAverage(assessments) | percent: "1.2-2" }}</td>
+          <td *ngFor="let assessment of assessments; let i = index">{{ (assessmentAverages$ | async)[i] | percent: "1.2-2" }}</td>
+          <td><strong>Weekly Batch Average: </strong>{{ overallAverage$ | async | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>
     </table>

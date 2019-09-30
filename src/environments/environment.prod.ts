@@ -5,7 +5,7 @@ import {Batch} from "../app/domain/model/batch.dto";
  */
 const serverRoot: string = 'http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com';
 export const environment = {
-  production: false,
+  production: true,
   serverRootURL: serverRoot,
   api: {
     assessments: {

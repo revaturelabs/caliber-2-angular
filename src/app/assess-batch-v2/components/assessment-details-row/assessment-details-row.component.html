@@ -1,3 +1,4 @@
-<div [formGroup]="gradeForm" >
+<div [formGroup]="gradeForm" (blur)="triggerRecalculations()" >
   <input type="number" class="form-control mx-auto" (blur)="handleGradeUpdate()" formControlName="grade">
+  <small *ngIf="!isGradeInputValid" class="text-danger">{{gradeValidationMessage}}</small>
 </div>
