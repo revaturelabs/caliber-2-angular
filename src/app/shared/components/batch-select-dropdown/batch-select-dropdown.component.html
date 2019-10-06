@@ -1,6 +1,7 @@
 <div class="nav nav-tabs">
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">{{ selectedBatch ? formatBatch(selectedBatch) : 'Select Batch' }} <span class="caret"></span></a>
+    <a *ngIf="batches.length !== 0" class="dropdown-toggle" data-toggle="dropdown">{{ selectedBatch ? formatBatch(selectedBatch) : 'Select Batch' }} <span class="caret"></span></a>
+    <a *ngIf="batches.length === 0">No Batches Found</a>
     <ul class="dropdown-menu">
         <a role="button">
           <form [formGroup]="searchForm" class="batch-search form-group">

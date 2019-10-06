@@ -185,11 +185,11 @@ export class HomeToolbarComponent implements OnInit {
             // let indexOfBatch = batches.indexOf(element);
             if (!qaNotesOfBatch.length) {
               const tempBatchArray: QcNote[] = [];
-              let wk0qaNote: QcNote = new QcNote(0, "", 0, 0, undefined, 0, "QC_BATCH", "Undefined", 0, undefined, 0);
+              let wk0qaNote: QcNote = new QcNote(0, "", 0, 0, undefined, 0, "QC_BATCH", "Undefined", "Undefined", 0, undefined, 0);
               wk0qaNote.batchId = element.batchId;
               wk0qaNote.traineeId = 0;
               wk0qaNote.week = 0;
-              wk0qaNote.qcStatus = 'Undefined';
+              wk0qaNote.technicalStatus = 'Undefined';
               //console.log(tempArray);
               tempBatchArray.push(wk0qaNote);
               this.qaNotesByBatch.push(tempBatchArray);

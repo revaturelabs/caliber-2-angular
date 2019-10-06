@@ -16,6 +16,7 @@ a {
 
 #logo-id {
 	padding-bottom: 14px;
+	padding-top: 14px;
 }
 
 .sticky-header {
@@ -29,4 +30,14 @@ a {
 
 #logo-id {
 	padding-bottom: 14px;
+	min-width: 175px;
+}
+
+.brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
 }

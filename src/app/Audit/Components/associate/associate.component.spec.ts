@@ -284,7 +284,7 @@ it('should get Categories by batch week', ()=>
 it('should set score of the trainee', ()=>
 {
   component.setScore("Fail", 45)
-  expect(component.notes[0].qcStatus).toEqual("Fail")
+  expect(component.notes[0].technicalStatus).toEqual("Fail")
 
 })
 

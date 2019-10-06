@@ -1,19 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QcNote} from "../../../domain/model/qc-note.dto";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {st} from "@angular/core/src/render3";
 
 
 @Component({
   selector: 'app-qc-feedback',
   templateUrl: './qc-feedback.component.html',
-  styleUrls: ['./qc-feedback.component.css']
+  styleUrls: ['./qc-feedback.component.css'],
 })
 export class QcFeedbackComponent implements OnInit {
 
+  @Input("column") column: string;
   @Input('qcNote') qcNote: QcNote;
   @Input('isOverallFeedback') isOverallFeedback: boolean;
   @Output('onQcStatusSelect') qcStatusSelector: EventEmitter<QcNote> = new EventEmitter<QcNote>(true);
   shouldShowDropdown: boolean = false;
-  private readonly baseClass: string = "fa fa-2x";
+  private readonly baseClass: string = "fa fa-2x qc-feedback ";
 
   constructor() {
   }
@@ -23,9 +26,9 @@ export class QcFeedbackComponent implements OnInit {
 
   getDisplayClassForStatus(qcStatus: string): string {
     if (this.isOverallFeedback) {
-      return `fa fa-3x ${this.getClassForStatus(qcStatus)}`;
+      return `fa fa-3x qc-feedback ${this.getClassForStatus(qcStatus)}`;
     } else {
-      return `fa fa-2x ${this.getClassForStatus(qcStatus)}`;
+      return `fa fa-2x qc-feedback ${this.getClassForStatus(qcStatus)}`;
     }
   }
 
@@ -55,16 +58,43 @@ export class QcFeedbackComponent implements OnInit {
     }
   }
 
-  showDropdown() {
-    this.shouldShowDropdown = true;
-  }
-
-  hideDropdown() {
+  hideDropdown(event: any) {
+    event.preventDefault();
+    event.cancelBubble = true;
     this.shouldShowDropdown = false;
   }
 
+  toggleDropdown() {
+    this.shouldShowDropdown = !this.shouldShowDropdown;
+  }
+
   setQcStatus(status: string) {
-    this.qcNote.qcStatus = status;
+    this.toggleDropdown();
+    switch(this.column) {
+      case "technical":
+        this.setTechnicalStatus(status);
+        break;
+      case "soft":
+        this.setSoftSkillStatus(status);
+        break;
+    }
     this.qcStatusSelector.emit(this.qcNote);
+  }
+
+  setTechnicalStatus(status: string) {
+    this.qcNote.technicalStatus = status;
+  }
+
+  setSoftSkillStatus(status: string) {
+    this.qcNote.softSkillStatus = status;
+  }
+
+  getQcStatus() {
+    switch(this.column) {
+      case "technical":
+        return this.qcNote.technicalStatus;
+      case "soft":
+          return this.qcNote.softSkillStatus;
+    }
   }
 }

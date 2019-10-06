@@ -60,11 +60,11 @@ export class AssociateNotesComponent implements OnInit {
   }
 
   handleNote() {
-    this.success = false;
-    this.failure = false;
     const noteContent: string = this.traineeNotesForm.get("notes").value;
     // When assessment note is supplied
-    if (Boolean(noteContent)) {
+    if (Boolean(noteContent) && this.note.noteContent !== noteContent) {
+      this.success = false;
+      this.failure = false;
       this.isSaving = true;
       this.note.noteContent = noteContent;
       this.assessmentNotesService.upsertNote(this.note).toPromise().then(
@@ -82,14 +82,13 @@ export class AssociateNotesComponent implements OnInit {
 
   handleQcNote(qcNote: QcNote) {
     const noteContent: string = this.traineeNotesForm.get("notes").value;
-    if (Boolean(noteContent)) {
+    if (Boolean(noteContent) && this.qcNote.content !== noteContent) {
       this.isSaving = true;
       if (this.isQcNote) {
         qcNote.content = noteContent;
         this.qcNotesService.upsertQcTraineeNote(qcNote).toPromise().then(
           data => {
             this.qcNote = data;
-            this.onQcNoteUpdate.emit(data);
             setTimeout(() => this.isSaving = false, this.timeout);
             this.success = true;
           }, () => {
