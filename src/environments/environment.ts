@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 import {Batch} from "../app/domain/model/batch.dto";
-import {Observable} from "rxjs";
 
 /**
  * @ignore
