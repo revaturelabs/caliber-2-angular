@@ -32,6 +32,10 @@ export class ChronoService {
     return this.http.put<Batch>(environment.api.batches.addWeek(batch), batch);
   }
 
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
   getValidYears(): Observable<number[]> {
     return this.http.get<number[]>(environment.api.validYears);
   }

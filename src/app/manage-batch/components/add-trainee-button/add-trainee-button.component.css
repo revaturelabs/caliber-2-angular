@@ -1,0 +1,10 @@
+.create-trainee-button {
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.create-trainee-button-text {
+  color: rgb(242, 105, 37);
+  margin-right: 0.5%;
+}
+

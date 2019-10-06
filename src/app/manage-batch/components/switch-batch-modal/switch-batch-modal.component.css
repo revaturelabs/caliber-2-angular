@@ -1,0 +1,11 @@
+.switch-batch-modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: stretch;
+  justify-content: space-between;
+}
+
+.switch-batch-actions {
+  padding-top: 5%;
+}

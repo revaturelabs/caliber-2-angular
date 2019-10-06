@@ -1,0 +1,31 @@
+.view-trainees-modal-header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-trainees-modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: available;
+  width: 100%;
+}
+
+.show-active-toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-end;
+}
+
+.active-toggle {
+  margin-left: 1%;
+}
+
+
+.switch-batch-form {
+  padding-bottom: 25%;
+  margin-bottom: 25%;
+}

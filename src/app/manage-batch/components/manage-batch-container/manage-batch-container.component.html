@@ -1,5 +1,6 @@
 <div class="container" *ngIf="years">
   <app-manage-batch-toolbar
+    [year]="selectedYear"
     [years]="years"
     (onYearSelect)="selectYear($event)"
   >

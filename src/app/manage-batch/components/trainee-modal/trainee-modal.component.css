@@ -1,0 +1,11 @@
+.edit-trainee-modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-trainee-form-row {
+  margin: 2% 0;
+  padding: 3% 0;
+}

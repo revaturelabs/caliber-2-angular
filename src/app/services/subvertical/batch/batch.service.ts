@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Batch} from "../../../domain/model/batch.dto";
 import {environment} from "../../../../environments/environment";
+import {Trainee} from "../../../domain/model/trainee.dto";
 
 @Injectable()
 export class BatchService {
@@ -37,6 +38,10 @@ export class BatchService {
 
   getTraineeCountByBatchId(batchId: number): Observable<number> {
     return this.http.get<number>(environment.api.user.trainees.countByBatchId(batchId));
+  }
+
+  getTraineesByBatchId(batchId: number): Observable<Trainee[]> {
+    return this.http.get<Trainee[]>(environment.api.user.trainees.inBatch(batchId));
   }
 
   deleteBatch(batchId: number): Observable<Batch> {

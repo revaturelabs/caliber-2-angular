@@ -1,26 +1,39 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {TraineeService} from "../../services/subvertical/user/trainee.service";
-import {ViewTraineesModalComponent} from "../components/view-trainees-modal/view-trainees-modal.component";
 import {Batch} from "../../domain/model/batch.dto";
+import {Observable} from "rxjs";
+import {Trainee} from "../../domain/model/trainee.dto";
+import {ViewTraineesModalComponent} from "../components/view-trainees-modal/view-trainees-modal.component";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ViewTraineesModalService {
 
   private modalRef: BsModalRef;
 
   constructor(
     private bsModalService: BsModalService,
-    private traineeService: TraineeService
   ) { }
 
-  openViewTraineesModal(batch: Batch) {
+  openViewTraineesModal(batch: Batch, batches: Batch[], trainees$: Observable<Trainee[]>) {
     const initialState = {
-      trainees$: this.traineeService.getTraineesByBatchId(batch.batchId),
-      title: batch.trainingName,
-      trainer: batch.trainer
+      batch,
+      batches,
     };
-
-    this.modalRef = this.bsModalService.show(ViewTraineesModalComponent, {initialState, ignoreBackdropClick: true})
+    this.modalRef = this.bsModalService.show(ViewTraineesModalComponent, {initialState, ignoreBackdropClick: true, class: 'modal-lg modal-widest'});
+    this.updateViewTraineesModal(trainees$);
+    this.modalRef.content.onTraineeModalClose$.asObservable().subscribe(
+      data => {
+        if (data) {
+          this.modalRef.hide();
+        }
+      }
+    )
   }
+
+  updateViewTraineesModal(trainees$: Observable<Trainee[]>) {
+    this.modalRef.content.setTrainees(trainees$);
+  }
+
 }

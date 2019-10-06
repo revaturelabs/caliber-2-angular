@@ -1,0 +1,106 @@
+<div class="modal-header">
+  <div class="edit-trainee-modal-header">
+    <h4 *ngIf="!shouldCreate">Edit Trainee</h4>
+    <h4 *ngIf="shouldCreate">Add Trainee to {{ batch?.trainingName }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <form [formGroup]="traineeForm" novalidate>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" formControlName="email">
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="trainingStatus">Training Status</label>
+          <select id="trainingStatus" class="form-control" formControlName="trainingStatus">
+            <option *ngFor="let status of statuses" [value]="status" [selected]="status === trainee?.trainingStatus" >{{ status }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="skypeId">Skype ID</label>
+          <input type="text" id="skypeId" class="form-control" formControlName="skypeId">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="college">College</label>
+          <input type="text" id="college" class="form-control" formControlName="college">
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="degree">Degree</label>
+          <input type="text" id="degree" class="form-control" formControlName="degree">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="major">Major</label>
+          <input type="text" id="major" class="form-control" formControlName="major">
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="recruiterName">Recruiter</label>
+          <input type="text" id="recruiterName" class="form-control" formControlName="recruiterName">
+          <small><em>Optional*</em></small>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="profileUrl">Profile URL</label>
+          <input type="text" id="profileUrl" class="form-control" formControlName="profileUrl">
+          <small><em>Optional*</em></small>
+        </div>
+      </div>
+    </div>
+    <div class="form-row edit-trainee-form-row">
+      <div class="form-group ">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="techScreener">Tech Screener</label>
+          <input type="text" id="techScreener" class="form-control" formControlName="techScreenerName">
+          <small><em>Optional*</em></small>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <label for="projectCompletion">Project Completion</label>
+          <input type="text" id="projectCompletion" class="form-control" formControlName="projectCompletion">
+          <small><em>Optional*</em></small>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+    <button type="button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
+    <button *ngIf="!shouldCreate" type="button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeUpdate()">Update</button>
+    <button *ngIf="shouldCreate" type="button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeCreate()">Create</button>
+  </div>
+</div>

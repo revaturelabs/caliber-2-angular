@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ManageBatchService} from "../../../services/manage-batch.service";
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {Batch} from "../../../domain/model/batch.dto";
-import {EditBatchModalService} from "../../services/edit-batch-modal.service";
+import {BatchModalService} from "../../services/batch-modal.service";
+import {DeleteModalService} from "../../services/delete-modal.service";
 
 @Component({
   selector: 'app-manage-batch-container',
@@ -13,7 +14,7 @@ import {EditBatchModalService} from "../../services/edit-batch-modal.service";
 export class ManageBatchContainerComponent implements OnInit {
 
   years: number[];
-  selectedYear: number;
+  selectedYear: number = this.manageBatchService.getCurrentYear();
   batchesThisYear$: Observable<Batch[]>;
 
   private selectedYear$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -21,11 +22,12 @@ export class ManageBatchContainerComponent implements OnInit {
 
   constructor(
     private manageBatchService: ManageBatchService,
-    private editBatchModalService: EditBatchModalService
+    private batchModalService: BatchModalService,
+    private deleteModalService: DeleteModalService
   ) { }
 
   ngOnInit() {
-    this.lastUpdatedBatch$ = this.editBatchModalService.updatedBatchSubject.asObservable();
+    this.lastUpdatedBatch$ = this.batchModalService.updatedBatchSubject.asObservable();
     this.manageBatchService.getAllYears().toPromise().then(
       data => this.years = data
     );
@@ -34,6 +36,14 @@ export class ManageBatchContainerComponent implements OnInit {
       ([year, batch]) => {
         if (year > 0 || batch) {
           this.batchesThisYear$ = this.manageBatchService.getBatchesByYear(year);
+        }
+      }
+    );
+
+    this.deleteModalService.lastDeletedBatch$.asObservable().subscribe(
+      data => {
+        if (data) {
+          this.batchesThisYear$ = this.manageBatchService.getBatchesByYear(this.selectedYear);
         }
       }
     )

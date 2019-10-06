@@ -1,9 +1,79 @@
-<div class="modal-header">
-  <h4>Associates in {{ trainer }}'s {{ title }}</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body" *ngIf="trainees$ | async as trainees">
-  {{ trainees | json }}
+<div *ngIf="_trainees$ | async as trainees">
+  <div class="modal-header" *ngIf="trainees.length > 0">
+    <div class="view-trainees-modal-header-container">
+      <div class="view-trainees-modal-header">
+        <h4 class="modal-title">Trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="show-active-toggle">
+        <h5>Show Active Trainees Only</h5> <span class="active-toggle"><a role="button" class="fa fa-2x" [ngClass]="{ 'fa-toggle-on': !showInactive, 'fa-toggle-off': showInactive}" (click)="toggleInactiveTrainees()"></a></span>
+      </div>
+      <div>
+        <app-add-trainee-button [batch]="batch"></app-add-trainee-button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-header" *ngIf="trainees.length === 0">
+    <div class="view-trainees-modal-header">
+      <h4 class="modal-title">No trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body" *ngIf="trainees.length > 0">
+    <div class="view-trainees-modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Name</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Email</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Training Status</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Phone Number</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Skype ID</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Profile URL</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Recruiter Name</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>College</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Degree/Major</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Tech Screener</strong></th>
+            <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"><strong>Project Completion</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trainee of trainees | traineeToggle: !showInactive">
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">
+              <app-trainee-actions
+                [batchName]="batch?.trainingName"
+                [trainee]="trainee"
+                (onTraineeDelete)="handleTraineeDelete($event)"
+                (onTraineeCreate)="handleTraineeCreate($event)"
+                (onShowSwitchBatch)="handleTraineeBatchSwitch($event)"
+              >
+
+              </app-trainee-actions>
+            </td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.name) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.email) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.trainingStatus) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.phoneNumber) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.skypeId) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.profileUrl) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.recruiterName) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.college) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee.degree)}}/{{ format(trainee?.major)}}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.techScreenerName) }}</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1">{{ format(trainee?.projectCompletion) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-body" *ngIf="trainees.length === 0">
+    <div class="view-trainees-modal-body">
+      <app-add-trainee-button [batch]="batch"></app-add-trainee-button>
+    </div>
+  </div>
 </div>

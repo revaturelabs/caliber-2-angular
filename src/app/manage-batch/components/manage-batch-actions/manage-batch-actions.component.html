@@ -1,6 +1,6 @@
 <div class="manage-batch-actions">
-  <div class="batch-count" (click)="showTrainees()" tooltip="Show Associates" placement="bottom">
-    <div role="button" class="glyphicon glyphicon-user main-rev-brand">
+  <div class="batch-count" tooltip="Show Trainees" placement="bottom">
+    <div role="button" class="glyphicon glyphicon-user main-rev-brand" (click)="showTrainees()">
       <p>{{ count$ | async }}</p>
     </div>
   </div>
@@ -14,6 +14,12 @@
     </span>
   </div>
   <div>
-    <span class="glyphicon glyphicon-remove"></span>
+    <span
+      class="glyphicon glyphicon-remove"
+      (click)="showRemoveBatch()"
+      tooltip="Remove Batch"
+      placement="bottom"
+    >
+    </span>
   </div>
 </div>

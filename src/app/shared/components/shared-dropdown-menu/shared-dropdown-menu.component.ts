@@ -32,7 +32,12 @@ export class SharedDropdownMenuComponent implements OnInit, OnChanges {
     if (this.for === 'Batch' && !this.changed) {
       this.currentDropdownValue = `Select ${this.for}`;
     } else if (this.for === 'manageBatchYear') {
-      this.setDropdownValue(this.data[0], 0);
+      const index = this.data.indexOf(this.selectedValue);
+      if (index > 0) {
+        this.setDropdownValue(this.data[index], index);
+      } else {
+        this.setDropdownValue(this.data[0], 0);
+      }
     } else {
       this.currentDropdownValue = this.selectedValue;
     }

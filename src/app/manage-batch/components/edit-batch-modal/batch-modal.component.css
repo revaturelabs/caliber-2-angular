@@ -4,3 +4,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.edit-batch-modal-row {
+  margin: 2% 0;
+  padding: 3% 0;
+}
+
+.edit-batch-date-range-button {
+  margin-top: 4%;
+}

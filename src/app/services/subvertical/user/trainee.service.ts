@@ -26,4 +26,8 @@ export class TraineeService {
   deleteTrainee(trainee: Trainee): Observable<Trainee> {
     return this.http.delete<Trainee>(environment.api.user.trainees.delete(trainee.traineeId));
   }
+
+  switchBatch(trainee: Trainee): Observable<Trainee> {
+    return this.http.post<Trainee>(environment.api.user.trainees.switchBatch, trainee);
+  }
 }

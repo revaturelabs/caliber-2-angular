@@ -9,6 +9,8 @@ import {SkillType} from "../domain/skilltype.dto";
 import {SkilltypeService} from "./subvertical/skilltype/skilltype.service";
 import {Trainer} from "../domain/model/trainer.dto";
 import {TrainerService} from "./subvertical/user/trainer.service";
+import {Trainee} from "../domain/model/trainee.dto";
+import {TraineeService} from "./subvertical/user/trainee.service";
 
 @Injectable()
 export class ManageBatchService {
@@ -18,19 +20,24 @@ export class ManageBatchService {
     private chronoService: ChronoService,
     private locationService: LocationService,
     private skillTypeService: SkilltypeService,
-    private trainerService: TrainerService
+    private trainerService: TrainerService,
+    private traineeService: TraineeService
   ) {}
 
   getAllYears(): Observable<number[]> {
     return this.chronoService.getValidYears();
   }
 
-  getQuarters(): number[] {
-    return this.chronoService.quarters;
+  getCurrentYear(): number {
+    return this.chronoService.getCurrentYear();
   }
 
-  getAllBatches(): Observable<Batch[]> {
-    return this.batchService.getAllBatches();
+  getTraineesByBatchId(batchId: number): Observable<Trainee[]> {
+    return this.batchService.getTraineesByBatchId(batchId);
+  }
+
+  getBatchByBatchId(batchId: number): Observable<Batch> {
+    return this.batchService.getBatchById(batchId);
   }
 
   getBatchesByYear(year: number): Observable<Batch[]> {
@@ -45,8 +52,24 @@ export class ManageBatchService {
     return this.batchService.getTraineeCountByBatchIds(batchIds);
   }
 
+  switchBatchForTrainee(trainee: Trainee): Observable<Trainee> {
+    return this.traineeService.switchBatch(trainee);
+  }
+
   getTraineeCountByBatchId(batchId: number): Observable<number> {
     return this.batchService.getTraineeCountByBatchId(batchId);
+  }
+
+  createTrainee(trainee: Trainee): Observable<Trainee> {
+    return this.traineeService.createTrainee(trainee);
+  }
+
+  updateTrainee(trainee: Trainee): Observable<Trainee> {
+    return this.traineeService.updateTrainee(trainee);
+  }
+
+  deleteTrainee(trainee: Trainee): Observable<Trainee> {
+    return this.traineeService.deleteTrainee(trainee);
   }
 
   deleteBatch(batchId: number): Observable<Batch> {

@@ -1,9 +1,9 @@
 .manage-batch-actions {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-  margin-right: 15%;
+  margin-left: -15%;
 }
 
 .batch-count {
