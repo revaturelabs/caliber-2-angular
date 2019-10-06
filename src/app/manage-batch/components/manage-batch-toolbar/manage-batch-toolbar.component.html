@@ -8,7 +8,7 @@
     ></app-shared-dropdown-menu>
   </div>
   <div class="manage-batch-toolbar-row-buttons">
-    <app-create-batch-button></app-create-batch-button>
-    <app-import-batch-button></app-import-batch-button>
+    <app-create-batch-button (onBatchCreate)="handleCreatedBatch($event)" ></app-create-batch-button>
+    <app-import-batch-button (onShowImportBatchDialog)="showBatchImportDialog()"></app-import-batch-button>
   </div>
 </div>

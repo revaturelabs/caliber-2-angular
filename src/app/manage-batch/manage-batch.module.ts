@@ -8,7 +8,7 @@ import {CreateBatchButtonComponent} from './components/create-batch-button/creat
 import {ImportBatchButtonComponent} from './components/import-batch-button/import-batch-button.component';
 import {BatchListComponent} from './components/batch-list/batch-list.component';
 import {ManageBatchActionsComponent} from './components/manage-batch-actions/manage-batch-actions.component';
-import {BatchModalComponent} from './components/edit-batch-modal/batch-modal.component';
+import {BatchModalComponent} from './components/batch-modal/batch-modal.component';
 import {BatchModalService} from "./services/batch-modal.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoTrainerPipe} from "./pipes/cotrainer.pipe";
@@ -21,7 +21,7 @@ import {DeleteModalComponent} from './components/delete-trainee-modal/delete-mod
 import {SwitchBatchModalComponent} from './components/switch-batch-modal/switch-batch-modal.component';
 import {DeleteModalService} from "./services/delete-modal.service";
 import {UserModule} from "../User/user/user.module";
-import { AddTraineeButtonComponent } from './components/add-trainee-button/add-trainee-button.component';
+import {AddTraineeButtonComponent} from './components/add-trainee-button/add-trainee-button.component';
 import {SwitchBatchesModalService} from "./services/switch-batches-modal.service";
 import {SwitchBatchPipe} from "./pipes/switch-batch.pipe";
 

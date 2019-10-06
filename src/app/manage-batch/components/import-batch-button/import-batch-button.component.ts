@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-import-batch-button',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImportBatchButtonComponent implements OnInit {
 
+  @Output('onShowImportBatchDialog') onShowImportBatchDialog: EventEmitter<boolean> = new EventEmitter<boolean>(true);
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showImportBatchDialog() {
+    this.onShowImportBatchDialog.emit(true);
   }
 
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BatchModalService} from "../../services/batch-modal.service";
 import {ManageBatchService} from "../../../services/manage-batch.service";
 import {Observable} from "rxjs";
 import {Location} from "../../../domain/model/location.dto";
 import {Trainer} from "../../../domain/model/trainer.dto";
+import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-create-batch-button',
@@ -15,6 +16,7 @@ export class CreateBatchButtonComponent implements OnInit {
   private readonly skillTypes$: Observable<string[]>;
   private readonly locations$: Observable<Location[]>;
   private readonly trainers$: Observable<Trainer[]>;
+  @Output('onBatchCreate') onBatchCreate$: EventEmitter<Batch> = new EventEmitter<Batch>(true);
 
   constructor(
     private batchModalService: BatchModalService,
@@ -34,7 +36,7 @@ export class CreateBatchButtonComponent implements OnInit {
     this.batchModalService.createdBatchSubject.asObservable().subscribe(
       data => {
         if (data) {
-          console.log(data);
+          this.onBatchCreate$.emit(data);
         }
       }
     )

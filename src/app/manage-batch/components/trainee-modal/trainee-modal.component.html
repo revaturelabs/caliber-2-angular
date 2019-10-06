@@ -9,65 +9,74 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="traineeForm" novalidate>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          <small *ngIf="hasErrors('firstName')" class="text-danger">{{ getErrorMessages('firstName') }}</small>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          <small *ngIf="hasErrors('lastName')" class="text-danger">{{ getErrorMessages('lastName') }}</small>
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <label for="email">Email</label>
           <input type="text" id="email" class="form-control" formControlName="email">
+          <small *ngIf="hasErrors('email')" class="text-danger">{{ getErrorMessages('email') }}</small>
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
-      <div class="form-group ">
+    <div class="form-row ">
+      <div class="form-group">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="phoneNumber">Phone Number</label>
           <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber">
+          <small *ngIf="hasErrors('phoneNumber')" class="text-danger">{{ getErrorMessages('phoneNumber') }}</small>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="trainingStatus">Training Status</label>
           <select id="trainingStatus" class="form-control" formControlName="trainingStatus">
             <option *ngFor="let status of statuses" [value]="status" [selected]="status === trainee?.trainingStatus" >{{ status }}</option>
           </select>
+          <small *ngIf="hasErrors('trainingStatus')" class="text-danger">{{ getErrorMessages('trainingStatus') }}</small>
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group ">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="skypeId">Skype ID</label>
           <input type="text" id="skypeId" class="form-control" formControlName="skypeId">
+          <small *ngIf="hasErrors('skypeId')" class="text-danger">{{ getErrorMessages('skypeId') }}</small>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="college">College</label>
           <input type="text" id="college" class="form-control" formControlName="college">
+          <small *ngIf="hasErrors('college')" class="text-danger">{{ getErrorMessages('college') }}</small>
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group ">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="degree">Degree</label>
           <input type="text" id="degree" class="form-control" formControlName="degree">
+          <small *ngIf="hasErrors('degree')" class="text-danger">{{ getErrorMessages('degree') }}</small>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="major">Major</label>
           <input type="text" id="major" class="form-control" formControlName="major">
+          <small *ngIf="hasErrors('major')" class="text-danger">{{ getErrorMessages('major') }}</small>
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group ">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="recruiterName">Recruiter</label>
@@ -81,7 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="form-row edit-trainee-form-row">
+    <div class="form-row ">
       <div class="form-group ">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="techScreener">Tech Screener</label>

@@ -14,11 +14,12 @@ import {WeekSelectorComponent} from "./components/week-selector/week-selector.co
 import {AssociateDetailsComponent} from "./components/associate-details/associate-details.component";
 import {CommentDialogService} from "./services/comment-dialog.service";
 import {AssessmentDialogService} from "./services/assessment-dialog.service";
-import {ImportGradesDialogService} from "./services/import-grades-dialog.service";
+import {ImportDialogService} from "./services/import-dialog.service";
 import {AssociateNotesComponent} from "./components/associate-notes/associate-notes.component";
 import {BatchLevelFeedbackComponent} from "./components/batch-level-feedback/batch-level-feedback.component";
 import { BatchSearchComponent } from './components/batch-search/batch-search.component';
 import { BatchSelectDropdownComponent } from './components/batch-select-dropdown/batch-select-dropdown.component';
+import { ImportBatchDialogComponent } from './components/import-batch-dialog/import-batch-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BatchSelectDropdownComponent } from './components/batch-select-dropdown
     AssociateNotesComponent,
     BatchLevelFeedbackComponent,
     BatchSearchComponent,
-    BatchSelectDropdownComponent
+    BatchSelectDropdownComponent,
+    ImportBatchDialogComponent
   ],
   imports: [
     CommonModule,
@@ -58,11 +60,12 @@ import { BatchSelectDropdownComponent } from './components/batch-select-dropdown
     AssessmentDialogComponent,
     AssociateFlagDialogComponent,
     ImportGradesDialogComponent,
+    ImportBatchDialogComponent
   ],
   providers: [
     CommentDialogService,
     AssessmentDialogService,
-    ImportGradesDialogService
+    ImportDialogService
   ]
 })
 export class SharedModule { }

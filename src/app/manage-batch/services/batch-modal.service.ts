@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Batch} from "../../domain/model/batch.dto";
-import {BatchModalComponent} from "../components/edit-batch-modal/batch-modal.component";
+import {BatchModalComponent} from "../components/batch-modal/batch-modal.component";
 import {Location} from "../../domain/model/location.dto";
 import {Trainer} from "../../domain/model/trainer.dto";
-import {BehaviorSubject, combineLatest, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import {DeleteModalService} from "./delete-modal.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class BatchModalService {
   public createdBatchSubject: BehaviorSubject<Batch> = new BehaviorSubject<Batch>(undefined);
 
   constructor(
-    private bsModalService: BsModalService
+    private bsModalService: BsModalService,
+    private deleteModalService: DeleteModalService
   ) { }
 
   showEditBatchModal(batch: Batch, skillTypes$: Observable<string[]>, locations$: Observable<Location[]>, trainers$: Observable<Trainer[]>) {
@@ -32,8 +34,8 @@ export class BatchModalService {
     this.modalRef = this.bsModalService.show(BatchModalComponent, {initialState, ignoreBackdropClick: true});
     this.lastUpdatedBatch$ = this.modalRef.content.updatedBatchSubject$.asObservable();
 
-    combineLatest(this.lastUpdatedBatch$).subscribe(
-      ([batch]) => {
+    this.lastUpdatedBatch$.subscribe(
+      (batch) => {
         if (batch) {
           this.updatedBatchSubject.next(batch);
         }
@@ -53,12 +55,16 @@ export class BatchModalService {
 
     this.lastCreatedBatch$ = this.modalRef.content.createdBatchSubject$.asObservable();
 
-    combineLatest(this.lastCreatedBatch$).subscribe(
-      ([batch]) => {
+    this.lastCreatedBatch$.subscribe(
+      (batch) => {
         if (batch) {
           this.createdBatchSubject.next(batch);
         }
       }
     )
+  }
+
+  getLastDeletedBatch(): Observable<Batch> {
+    return this.deleteModalService.lastDeletedBatch$.asObservable();
   }
 }

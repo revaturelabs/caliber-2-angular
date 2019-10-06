@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {BsModalRef} from "ngx-bootstrap";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 import {Batch} from "../../../domain/model/batch.dto";
 
@@ -52,7 +52,7 @@ export class TraineeModalComponent implements OnInit {
       "lastName": ["", Validators.required],
       "email": ["", [Validators.required, Validators.email]],
       "trainingStatus": ["", Validators.required],
-      "phoneNumber": ["", Validators.required],
+      "phoneNumber": ["", [Validators.required, Validators.pattern("[\\d]{3}-[\\d]{3}-[\\d]{4}")]],
       "skypeId": ["", Validators.required],
       "profileUrl": ["", ],
       "recruiterName": ["", ],
@@ -75,5 +75,34 @@ export class TraineeModalComponent implements OnInit {
     const name: string = `${this.traineeForm.get("lastName").value}, ${this.traineeForm.get("firstName").value}`;
     const trainee: Trainee = { ...this.traineeForm.getRawValue(), name, batchId: this.batch.batchId };
     this.onTraineeCreate.emit(trainee);
+  }
+
+  hasErrors(formControlName: string): boolean {
+    return this.traineeForm.get(formControlName).dirty && this.traineeForm.get(formControlName).invalid;
+  }
+
+  getErrorMessages(formControlName: string): string {
+    const errorKeys: string[] = Object.keys(this.traineeForm.get(formControlName).errors);
+    let message: string = '';
+    if (this.traineeForm.get(formControlName).invalid) {
+      for (let i = 0; i < errorKeys.length; i++) {
+        if (errorKeys[i] === 'required') {
+          message += "Required"
+        }
+
+        if (errorKeys[i] === 'email') {
+          message += "Invalid Email Format"
+        }
+
+        if (errorKeys[i] === 'pattern') {
+          message += 'Expected pattern: 123-456-7890'
+        }
+
+        if (i + 1 !== errorKeys.length) {
+          message += ', ';
+        }
+      }
+    }
+    return message;
   }
 }

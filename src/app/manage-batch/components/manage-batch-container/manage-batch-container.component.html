@@ -3,6 +3,7 @@
     [year]="selectedYear"
     [years]="years"
     (onYearSelect)="selectYear($event)"
+    (onBatchCreate)="handleBatchCreate($event)"
   >
   </app-manage-batch-toolbar>
   <app-batch-list

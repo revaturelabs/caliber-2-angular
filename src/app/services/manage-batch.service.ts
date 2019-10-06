@@ -5,7 +5,7 @@ import {Batch} from "../domain/model/batch.dto";
 import {ChronoService} from "./subvertical/util/chrono.service";
 import {Location} from "../domain/model/location.dto";
 import {LocationService} from "./subvertical/location/location.service";
-import {SkillType} from "../domain/skilltype.dto";
+import {SkillType} from "../domain/model/skilltype.dto";
 import {SkilltypeService} from "./subvertical/skilltype/skilltype.service";
 import {Trainer} from "../domain/model/trainer.dto";
 import {TrainerService} from "./subvertical/user/trainer.service";

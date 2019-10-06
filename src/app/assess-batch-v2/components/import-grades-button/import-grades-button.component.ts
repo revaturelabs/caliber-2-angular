@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ImportGradesDialogService} from "../../../shared/services/import-grades-dialog.service";
+import {ImportDialogService} from "../../../shared/services/import-dialog.service";
 
 @Component({
   selector: 'app-import-grades-button',
@@ -12,14 +12,14 @@ export class ImportGradesButtonComponent implements OnInit {
   @Input("batchId") batchId: number;
 
   constructor(
-    private importGradesDialogService: ImportGradesDialogService
+    private importGradesDialogService: ImportDialogService
   ) { }
 
   ngOnInit() {
   }
 
   openImportGradesDialog() {
-    this.importGradesDialogService.openModal(this.week);
+    this.importGradesDialogService.openImportGradesModal(this.week);
   }
 
 }

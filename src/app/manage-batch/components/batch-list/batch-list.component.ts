@@ -24,7 +24,6 @@ export class BatchListComponent implements OnInit {
   selectedBatch: Batch = this.batches ? this.batches[0] : undefined;
 
   constructor(
-    private editBatchModalService: BatchModalService,
     private manageBatchService: ManageBatchService,
     private toastService: ToastService,
     private viewTraineesModalService: ViewTraineesModalService,
@@ -35,7 +34,7 @@ export class BatchListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.lastUpdatedBatch$ = this.editBatchModalService.updatedBatchSubject.asObservable();
+    this.lastUpdatedBatch$ = this.batchModalService.updatedBatchSubject.asObservable();
 
     this.lastUpdatedBatch$.pipe(distinctUntilChanged()).subscribe(
       (batch) => {
@@ -55,7 +54,6 @@ export class BatchListComponent implements OnInit {
     this.deleteModalService.lastDeletedBatch$.subscribe(
       data => {
         if (this.batches) {
-          // this.batches = this.batches.filter(batch => batch.batchId === data.batchId);
           for (let i = 0; i < this.batches.length; i++) {
             if (this.batches[i].batchId === data.batchId) {
               this.batches = this.batches.splice(i, 1);
@@ -71,7 +69,7 @@ export class BatchListComponent implements OnInit {
         if (data) {
           this.manageBatchService.updateBatch(data).subscribe(
             batch => {
-              this.batches.unshift(batch);
+              // this.batches.unshift(batch);
               this.toastService.success(`${batch.trainingName} created successfully!`, "");
             },
             err => this.toastService.error(`Failed to create ${data.trainingName}`, "")

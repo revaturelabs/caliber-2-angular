@@ -29,14 +29,14 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="skillType"><strong>Skill Type</strong></label>
           <select id="skillType" formControlName="skillType" class="form-control form-control-sm">
-            <option [value]="null" [defaultSelected]="shouldCreate">Select Skill Type</option>
+            <option [value]="undefined" [defaultSelected]="shouldCreate">Select Skill Type</option>
             <option *ngFor="let type of skillTypes$ | async" [value]="type" [selected]="type === batch?.skillType && batch !== undefined">{{ type }}</option>
           </select>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <label for="location"><strong>Location</strong></label>
           <select id="location" formControlName="locationId" class="form-control form-control-sm">
-            <option [value]="null" [defaultSelected]="shouldCreate">Select Location</option>
+            <option [value]="-1" [defaultSelected]="shouldCreate">Select Location</option>
             <option *ngFor="let location of locations$ | async" [value]="location?.id" [selected]="batch?.locationId === location?.id">{{ formatLocation(location) }}</option>
           </select>
         </div>
@@ -56,7 +56,7 @@
           <select id="coTrainer" formControlName="coTrainer" class="form-control form-control-sm">
             <option [value]="null" [defaultSelected]="shouldCreate">Select Co-Trainer</option>
             <option [value]="null">None</option>
-            <option *ngFor="let trainer of trainerList | coTrainer: batch?.trainer" [value]="trainer?.name" [selected]="trainer?.name === batch?.coTrainer">{{ trainer?.name }}</option>
+            <option *ngFor="let trainer of trainerList | coTrainer: getSelectedLeadTrainer()" [value]="trainer?.name" [selected]="trainer?.name === batch?.coTrainer">{{ trainer?.name }}</option>
           </select>
         </div>
       </div>

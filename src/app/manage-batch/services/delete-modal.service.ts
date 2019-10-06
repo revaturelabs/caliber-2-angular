@@ -28,6 +28,7 @@ export class DeleteModalService {
 
     this.bsModalRef.content.onTraineeDelete$.asObservable().subscribe(
       data => {
+        console.table([trainee, data]);
         this.manageBatchService.deleteTrainee(data).subscribe(
           deleted => {
             this.lastDeletedTrainee$.next(trainee);

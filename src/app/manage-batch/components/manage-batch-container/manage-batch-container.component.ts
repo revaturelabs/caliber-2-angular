@@ -23,7 +23,6 @@ export class ManageBatchContainerComponent implements OnInit {
   constructor(
     private manageBatchService: ManageBatchService,
     private batchModalService: BatchModalService,
-    private deleteModalService: DeleteModalService
   ) { }
 
   ngOnInit() {
@@ -40,7 +39,7 @@ export class ManageBatchContainerComponent implements OnInit {
       }
     );
 
-    this.deleteModalService.lastDeletedBatch$.asObservable().subscribe(
+    this.batchModalService.getLastDeletedBatch().subscribe(
       data => {
         if (data) {
           this.batchesThisYear$ = this.manageBatchService.getBatchesByYear(this.selectedYear);
@@ -52,6 +51,10 @@ export class ManageBatchContainerComponent implements OnInit {
   selectYear(year: number) {
     this.selectedYear = year;
     this.selectedYear$.next(year);
+  }
+
+  handleBatchCreate(batch: Batch) {
+    this.batchesThisYear$ = this.manageBatchService.getBatchesByYear(batch.startDate.getFullYear());
   }
 
 }

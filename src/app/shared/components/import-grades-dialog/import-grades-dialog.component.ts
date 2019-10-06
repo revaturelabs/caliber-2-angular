@@ -38,6 +38,10 @@ export class ImportGradesDialogComponent implements OnInit {
     }
   }
 
+  close() {
+    this.bsModalRef.hide();
+  }
+
   private generateGradeForm(): FormGroup {
     return this.fb.group({
       "gradesJson": ["", Validators.required]

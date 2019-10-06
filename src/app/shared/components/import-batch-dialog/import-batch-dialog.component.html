@@ -1,13 +1,13 @@
 <div class="modal-header">
-  <div class="import-grades-modal-header">
-    <h4 class="modal-title pull-left">Import Grades for week {{ week }}</h4>
+  <div class="import-batch-modal-header">
+    <h4 class="modal-title pull-left">Import Batch</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 </div>
 <div class="modal-body">
-  <form [formGroup]="gradeForm">
+  <form [formGroup]="importBatchForm">
     <div class="form-row col-md-12 col-sm-12">
       <div class="form-group">
         <label for="gradeJsonObj">Paste JSON:</label>
@@ -15,8 +15,8 @@
           class="form-control"
           id="gradeJsonObj"
           rows="6"
-          placeholder="Paste the week {{ week }} Grade Export JSON from Revature PRO"
-          formControlName="gradesJson"
+          placeholder="Paste the Batch Export JSON from Revature PRO"
+          formControlName="batchImportJSON"
         ></textarea>
         <small *ngIf="!jsonValid" class="text-danger">Invalid JSON format</small>
       </div>

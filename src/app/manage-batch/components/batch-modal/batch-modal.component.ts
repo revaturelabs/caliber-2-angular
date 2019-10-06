@@ -53,7 +53,9 @@ export class BatchModalComponent implements OnInit {
         "goodGrade": 70,
         "passingGrade": 65,
         "startDate": this.formatDate(today.valueOf()),
-        "endDate": this.formatDate(inTenWeeks.valueOf())
+        "endDate": this.formatDate(inTenWeeks.valueOf()),
+        "locationId": -1,
+        "skillType": undefined
       })
     }
   }
@@ -95,7 +97,12 @@ export class BatchModalComponent implements OnInit {
   }
 
   handleBatchCreate() {
-    const created: Batch = { ...this.batchForm.getRawValue(), location: this.formatLocation(this.locationMap.get(Number.parseInt(this.batchForm.get("locationId").value))) }
+    const created: Batch = {
+      ...this.batchForm.getRawValue(),
+      location: this.formatLocation(this.locationMap.get(Number.parseInt(this.batchForm.get("locationId").value))),
+      startDate: this.parseDate(this.batchForm.get("startDate").value),
+      endDate: this.parseDate(this.batchForm.get("endDate").value)
+    };
     this.createdBatchSubject$.next(created);
     this.bsModalRef.hide();
   }
@@ -108,6 +115,11 @@ export class BatchModalComponent implements OnInit {
       const date: Date = new Date();
       return `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}`;
     }
+  }
+
+  getSelectedLeadTrainer(): string {
+    const trainerName: string = this.batchForm.get("trainer").value;
+    return Boolean(trainerName) ? trainerName: undefined;
   }
 
   private pad(value: number): string {
