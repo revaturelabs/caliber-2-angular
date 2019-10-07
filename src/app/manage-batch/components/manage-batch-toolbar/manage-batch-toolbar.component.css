@@ -1,0 +1,24 @@
+.manage-batch-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.manage-batch-toolbar-row-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.select-year-dropdown {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.manage-batch-toolbar-row-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 20%;
+}

@@ -12,19 +12,10 @@ import {Trainee} from "../../../domain/model/trainee.dto";
 export class TraineeTogglePipe implements PipeTransform {
   transform(trainees: Trainee[], show: boolean): Array<Trainee> {
     if (!trainees) {return []; }
-    if (show === true) {
-      return trainees.filter(trainee => {
-          if (trainee.trainingStatus !== ('Dropped')) {
-            return true;
-          }
-      });
-    } else {
-      return trainees.filter(trainee => {
-        if (trainee.trainingStatus === 'Dropped') {
-          return true;
-        }
-      });
+    if (show) {
+      return trainees.filter(trainee => trainee.trainingStatus !== 'Dropped');
     }
+    return trainees;
   }
 }
 

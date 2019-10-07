@@ -34,8 +34,8 @@ export class AssessBatchService {
   /**
    *  Used frequently
    */
-  public getQuarterFromDate(date: Date): number {
-    return this.chronoService.getQuarterFromDate(date);
+  public getQuarterFromDate(): number {
+    return this.chronoService.getQuarterFromDate();
   }
 
   /**

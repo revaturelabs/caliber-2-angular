@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-shared-dropdown-menu',
   templateUrl: './shared-dropdown-menu.component.html',
   styleUrls: ['./shared-dropdown-menu.component.css']
 })
-export class SharedDropdownMenuComponent implements OnInit {
+export class SharedDropdownMenuComponent implements OnInit, OnChanges {
 
   @Input("data") data: any[];
   @Input("format") format: any;
@@ -31,10 +31,27 @@ export class SharedDropdownMenuComponent implements OnInit {
 
     if (this.for === 'Batch' && !this.changed) {
       this.currentDropdownValue = `Select ${this.for}`;
+    } else if (this.for === 'manageBatchYear') {
+      const index = this.data.indexOf(this.selectedValue);
+      if (index > 0) {
+        this.setDropdownValue(this.data[index], index);
+      } else {
+        this.setDropdownValue(this.data[0], 0);
+      }
     } else {
       this.currentDropdownValue = this.selectedValue;
     }
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    for (let prop in changes) {
+      const change = changes[prop];
+      if (prop === 'selectedValue' && !change.isFirstChange()) {
+        this.selectedValue = change.currentValue;
+      }
+    }
+  }
+
 
   setDropdownValue(value: any, index: number) {
     this.selectedValue = value;

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from "ngx-bootstrap/modal";
+import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { AssessmentDialogComponent } from './components/assessment-dialog/assessment-dialog.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AssessmentResultSpinnerComponent } from './components/assessment-result-spinner/assessment-result-spinner.component';
@@ -13,12 +14,12 @@ import {WeekSelectorComponent} from "./components/week-selector/week-selector.co
 import {AssociateDetailsComponent} from "./components/associate-details/associate-details.component";
 import {CommentDialogService} from "./services/comment-dialog.service";
 import {AssessmentDialogService} from "./services/assessment-dialog.service";
-import {ImportGradesDialogService} from "./services/import-grades-dialog.service";
+import {ImportDialogService} from "./services/import-dialog.service";
 import {AssociateNotesComponent} from "./components/associate-notes/associate-notes.component";
 import {BatchLevelFeedbackComponent} from "./components/batch-level-feedback/batch-level-feedback.component";
 import { BatchSearchComponent } from './components/batch-search/batch-search.component';
 import { BatchSelectDropdownComponent } from './components/batch-select-dropdown/batch-select-dropdown.component';
-import {TooltipModule} from "ngx-bootstrap";
+import { ImportBatchDialogComponent } from './components/import-batch-dialog/import-batch-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,16 +35,18 @@ import {TooltipModule} from "ngx-bootstrap";
     AssociateNotesComponent,
     BatchLevelFeedbackComponent,
     BatchSearchComponent,
-    BatchSelectDropdownComponent
+    BatchSelectDropdownComponent,
+    ImportBatchDialogComponent
   ],
   imports: [
     CommonModule,
     ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     ReactiveFormsModule,
-    TooltipModule.forRoot()
   ],
   exports: [
     ModalModule,
+    TooltipModule,
     AssessmentResultSpinnerComponent,
     FlagComponent,
     BatchSelectToolbarComponent,
@@ -51,17 +54,18 @@ import {TooltipModule} from "ngx-bootstrap";
     WeekSelectorComponent,
     AssociateDetailsComponent,
     AssociateNotesComponent,
-    BatchLevelFeedbackComponent
+    BatchLevelFeedbackComponent,
   ],
   entryComponents: [
     AssessmentDialogComponent,
     AssociateFlagDialogComponent,
     ImportGradesDialogComponent,
+    ImportBatchDialogComponent
   ],
   providers: [
     CommentDialogService,
     AssessmentDialogService,
-    ImportGradesDialogService
+    ImportDialogService
   ]
 })
 export class SharedModule { }

@@ -65,7 +65,7 @@ export const environment = {
       },
       all: `${serverRoot}/batch/vp/batch/all/`,
       create: `${serverRoot}/batch/all/batch/create`,
-      updateAndReturn: `${serverRoot}/batch/all/batch/update/?return=true`,
+      updateAndReturn: `${serverRoot}/batch/all/batch/update`,
       current: `${serverRoot}/batch/vp/batch/all/current`
     },
     validYears: `${serverRoot}/batch/all/batch/valid_years`,
@@ -109,6 +109,9 @@ export const environment = {
     },
     user: {
       trainees: {
+        countByBatchId(batchId: number): string {
+          return `${serverRoot}/user/trainee/${batchId}/count`
+        },
         countInBatches(batchIds: number[]): string {
           return `${serverRoot}/user/all/trainee/count/`
         },
@@ -118,6 +121,7 @@ export const environment = {
         upsertComment: `${serverRoot}/user/all/trainee/update`,
         create: `${serverRoot}/user/all/trainee/create`,
         update: `${serverRoot}/user/all/trainee/update`,
+        switchBatch: `${serverRoot}/user/trainee/switch`,
         delete(traineeId: number): string {
           return `${serverRoot}/user/all/trainee/delete/${traineeId}`;
         }
