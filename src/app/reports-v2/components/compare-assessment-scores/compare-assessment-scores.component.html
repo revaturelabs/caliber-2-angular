@@ -1,0 +1,39 @@
+<div class="row" *ngIf="trainees$ | async as trainees">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{ batch?.trainer }}{{ batch.coTrainer ? '/' + batch.coTrainer : '' }} - {{ batch?.skillType }} Cumulative Scores
+      </div>
+      <div class="panel-body" *ngIf="!(traineeGradeComparison$ | async) && batchGradeComparison$ | async as batchGradeDtos">
+        <canvas
+          *ngIf="benchmark && batchGradeDtos?.length > 0"
+          baseChart
+          [chartType]="chartType"
+          [labels]="getChartLabels(batchGradeDtos)"
+          [datasets]="getChartData(batchGradeDtos, benchmark)"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+        >
+        </canvas>
+        <div class="container" *ngIf="trainees?.length === 0">
+          <div class="img-container">
+            <img src="assets/brand/presenter_individual.svg" class="brand-icon">
+            <p class="brand-text">No Trainees Found.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body" *ngIf="!(batchGradeComparison$ | async) && traineeGradeComparison$ | async as gradeComparison">
+        <canvas
+          *ngIf="benchmark && gradeComparison"
+          baseChart
+          [chartType]="chartType"
+          [labels]="getTraineeChartLabel(gradeComparison)"
+          [datasets]="getTraineeChartData(gradeComparison, benchmark)"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

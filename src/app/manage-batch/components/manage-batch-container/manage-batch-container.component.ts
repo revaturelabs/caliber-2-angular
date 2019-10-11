@@ -4,7 +4,6 @@ import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {Batch} from "../../../domain/model/batch.dto";
 import {BatchModalService} from "../../services/batch-modal.service";
-import {DeleteModalService} from "../../services/delete-modal.service";
 
 @Component({
   selector: 'app-manage-batch-container',

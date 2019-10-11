@@ -38,4 +38,8 @@ export class QaNotesService {
   getAllQcNotesByBatchAndWeek(batchId: number, week: number): Observable<QcNote[]> {
     return this.http.get<QcNote[]>(environment.api.qa.allQcNotesByBatchAndWeek(batchId, week));
   }
+
+  getAllQcBatchNotesForBatch(batchId: number): Observable<QcNote[]> {
+    return this.http.get<QcNote[]>(environment.api.qa.allQcBatchNotes(batchId));
+  }
 }

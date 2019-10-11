@@ -1,0 +1,12 @@
+.reports-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.reports-toolbar-button {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}

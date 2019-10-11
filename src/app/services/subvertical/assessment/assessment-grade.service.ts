@@ -6,6 +6,10 @@ import {environment} from "../../../../environments/environment";
 import {GradeExport} from "../../../domain/dto/grade-export.dto";
 import {Batch} from "../../../domain/model/batch.dto";
 import {MissingGrade} from "../../../domain/dto/missing-grades.dto";
+import {BatchGradeDto} from "../../../domain/dto/batch-grade.dto";
+import {GradeComparisonDto} from "../../../domain/dto/grade-comparison.dto";
+import {Benchmark} from "../../../domain/dto/benchmark.dto";
+import {SpiderGraphDto} from "../../../domain/dto/spider-graph.dto";
 
 @Injectable()
 export class AssessmentGradeService {
@@ -42,4 +46,35 @@ export class AssessmentGradeService {
     return this.http.post<MissingGrade[]>(environment.api.assessments.grades.missing, batches);
   }
 
+  getBenchmarksForBatch(batchId: number): Observable<Benchmark> {
+    return this.http.get<Benchmark>(environment.api.batches.benchmark(batchId));
+  }
+
+  getGradeReportForBatch(batchId: number): Observable<BatchGradeDto[]> {
+    return this.http.get<BatchGradeDto[]>(environment.api.reports.overallBatchGradeComparison(batchId));
+  }
+
+  getGradeReportForBatchByWeek(batchId: number, week: number): Observable<BatchGradeDto[]> {
+    return this.http.get<BatchGradeDto[]>(environment.api.reports.overallBatchGradeComparisonByWeek(batchId, week));
+  }
+
+  getIndividualGradeComparison(traineeId: number): Observable<GradeComparisonDto> {
+    return this.http.get<GradeComparisonDto>(environment.api.reports.individualGradesComparedToRestOfBatch(traineeId));
+  }
+
+  getIndividualGradeComparisonForWeek(traineeId: number, week: number): Observable<GradeComparisonDto> {
+    return this.http.get<GradeComparisonDto>(environment.api.reports.individualGradesComparedToRestOfBatchOnWeek(traineeId, week));
+  }
+
+  getSpiderGraphData(batchId: number): Observable<SpiderGraphDto[]> {
+    return this.http.get<SpiderGraphDto[]>(environment.api.reports.spiderGraphData(batchId));
+  }
+
+  getSpiderGraphDataForTrainee(batchId: number, week: number): Observable<SpiderGraphDto[]> {
+    return this.http.get<SpiderGraphDto[]>(environment.api.reports.spiderGraphDataForTrainee(batchId, week));
+  }
+
+  getBatchScoresWeeklyAssessmentBreakdown(batchId: number, week: number): Observable<GradeComparisonDto> {
+    return this.http.get<GradeComparisonDto>(environment.api.reports.weeklyAssessmentBreakdown(batchId, week));
+  }
 }

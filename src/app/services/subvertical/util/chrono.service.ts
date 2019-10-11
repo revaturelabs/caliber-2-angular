@@ -7,8 +7,6 @@ import {environment} from "../../../../environments/environment";
 @Injectable()
 export class ChronoService {
 
-  public readonly TODAY: Date = new Date();
-
   constructor(
     private http: HttpClient
   ) {}
@@ -16,7 +14,7 @@ export class ChronoService {
   public readonly quarters: number[] = [1, 2, 3, 4];
 
   public getQuarterFromDate(): number {
-    const month = this.TODAY.getMonth();
+    const month = new Date().getMonth();
     if (month >= 0 && month < 3) {
       return 1;
     } else if (month >=3 && month < 6) {

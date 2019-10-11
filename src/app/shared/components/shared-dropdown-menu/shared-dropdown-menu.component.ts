@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-shared-dropdown-menu',
@@ -38,6 +38,25 @@ export class SharedDropdownMenuComponent implements OnInit, OnChanges {
       } else {
         this.setDropdownValue(this.data[0], 0);
       }
+    } else if (this.for === 'trainee') {
+      this.data.unshift(null);
+      this.formattedData = this.data.map(trainee => {
+        if (trainee === null) {
+          return `Trainees (Overall)`
+        } else {
+          return trainee.name
+        }
+      });
+      this.setDropdownValue(`Trainees (Overall)`, 0);
+    } else if (this.for === 'week') {
+      this.formattedData = this.data.map(week => {
+        if (week === 0) {
+          return `All Weeks`
+        } else {
+          return `Week ${week}`;
+        }
+      });
+      this.setDropdownValue(`All Weeks`, 0);
     } else {
       this.currentDropdownValue = this.selectedValue;
     }
@@ -47,7 +66,15 @@ export class SharedDropdownMenuComponent implements OnInit, OnChanges {
     for (let prop in changes) {
       const change = changes[prop];
       if (prop === 'selectedValue' && !change.isFirstChange()) {
-        this.selectedValue = change.currentValue;
+        if (this.for === 'week') {
+          if (change.previousValue === 0 && change.currentValue > 0) {
+            this.selectedValue = change.currentValue;
+          } else if (change.previousValue > 0 && change.currentValue === 0) {
+            this.setDropdownValue(`All Weeks`, 0);
+          }
+        } else {
+          this.selectedValue = change.currentValue;
+        }
       }
     }
   }
