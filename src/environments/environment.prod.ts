@@ -5,7 +5,7 @@ import {Batch} from "../app/domain/model/batch.dto";
  */
 const serverRoot: string = 'http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com';
 export const environment = {
-  production: true,
+  production: false,
   serverRootURL: serverRoot,
   api: {
     assessments: {
@@ -66,7 +66,10 @@ export const environment = {
       all: `${serverRoot}/batch/vp/batch/all/`,
       create: `${serverRoot}/batch/all/batch/create`,
       updateAndReturn: `${serverRoot}/batch/all/batch/update`,
-      current: `${serverRoot}/batch/vp/batch/all/current`
+      current: `${serverRoot}/batch/vp/batch/all/current`,
+      benchmark(batchId: number): string {
+        return `${serverRoot}/batch/${batchId}/benchmark`
+      }
     },
     validYears: `${serverRoot}/batch/all/batch/valid_years`,
     categories: {
@@ -89,6 +92,9 @@ export const environment = {
       },
       allQcNotesByBatchAndWeek(batchId: number, week: number): string {
         return `${serverRoot}/qa/audit/notes/${batchId}/${week}`;
+      },
+      allQcBatchNotes(batchId: number): string {
+        return `${serverRoot}/qa/audit/batch/${batchId}`;
       },
       batchNotes: `${serverRoot}/qa/audit/batch/notes`,
       traineeNotes: `${serverRoot}/qa/audit/trainee/notes`,
@@ -141,6 +147,29 @@ export const environment = {
       create: `${serverRoot}/skill/types/skill`,
       delete(skilltypeId: number): string {
         return `${serverRoot}/skill/types/skill/${skilltypeId}`
+      }
+    },
+    reports: {
+      overallBatchGradeComparison(batchId: number): string {
+        return `${serverRoot}/assessment/grade/reports/${batchId}/overall`
+      },
+      overallBatchGradeComparisonByWeek(batchId: number, week: number): string {
+        return `${serverRoot}/assessment/grade/reports/${batchId}/overall/${week}`
+      },
+      individualGradesComparedToRestOfBatch(traineeId: number): string {
+        return `${serverRoot}/assessment/grade/reports/individual/${traineeId}`;
+      },
+      individualGradesComparedToRestOfBatchOnWeek(traineeId: number, week: number): string {
+        return `${serverRoot}/assessment/grade/reports/individual/${traineeId}/${week}`;
+      },
+      spiderGraphData(batchId: number): string {
+        return `${serverRoot}/assessment/grade/reports/${batchId}/spider`
+      },
+      spiderGraphDataForTrainee(batchId: number, traineeId: number): string {
+        return `${serverRoot}/assessment/grade/reports/${batchId}/spider/${traineeId}`
+      },
+      weeklyAssessmentBreakdown(batchId: number, week: number): string {
+        return `${serverRoot}/assessment/grade/reports/batch/${batchId}/${week}`
       }
     }
   }
