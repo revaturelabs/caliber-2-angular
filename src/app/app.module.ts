@@ -31,6 +31,7 @@ import {SkilltypeService} from "./services/subvertical/skilltype/skilltype.servi
 import {TrainerService} from "./services/subvertical/user/trainer.service";
 import {HomeService} from "./services/home.service";
 import { ToastService } from './services/toast.service';
+import {ReportsService} from "./services/reports.service";
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { ToastService } from './services/toast.service';
     ManageBatchService,
     LocationService,
     HomeService,
+    ReportsService,
     ToastService
   ],
   bootstrap: [

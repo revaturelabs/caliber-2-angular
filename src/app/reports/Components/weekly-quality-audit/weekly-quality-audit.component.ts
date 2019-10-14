@@ -38,7 +38,7 @@ export class WeeklyQualityAuditComponent implements OnInit {
         this.poorBackgroundColor
       ]
     }
-  ]
+  ];
 
   public tableHeader = [
     "Superstar",

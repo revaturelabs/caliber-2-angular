@@ -1,0 +1,100 @@
+<div class="row" *ngIf="trainees$ | async as trainees">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="panel panel-default" *ngIf="qcBatchNotes$">
+      <div class="panel-heading">
+        {{ batch?.trainer }}{{ batch.coTrainer ? '/' + batch.coTrainer : '' }} - {{ batch?.skillType }} QC Scores
+      </div>
+
+      <!-- Main Table which is displayed by default -->
+      <div class="panel-body" *ngIf="!trainee">
+        <div class="table-responsive" *ngIf="!showWeeklyAnalysis && week === 0">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th><strong>Trainee</strong></th>
+                <th class="text-center" *ngFor="let week of getBatchWeeks()"><strong>{{ 'Week ' + week }}</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let trainee of trainees">
+                <td>{{ trainee?.name }}</td>
+                <td class="text-center" *ngFor="let week of getBatchWeeks()"><em [ngClass]="getQcResult(trainee?.traineeId, week)"></em></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr *ngIf="qcBatchNotes$ | async as qcBatchNotes">
+                <td><strong>Overall</strong></td>
+                <td class="text-center" *ngFor="let qcNote of qcBatchNotes"><em [ngClass]="getIconClassForQcResult(qcNote?.technicalStatus)"></em></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Shows Donut Chart by QC Status and Bar Chart of what types of assessments were taken this week -->
+        <div *ngIf="showWeeklyAnalysis && week > 0">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <canvas
+              baseChart
+              height="100%"
+              width="100%"
+              [chartType]="chartType"
+              [datasets]="getWeeklyQcChartData()"
+              [labels]="getWeeklyQcChartLabels()"
+              [colors]="doughnutColors"
+              [options]="chartOptions"
+            >
+            </canvas>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center" *ngFor="let status of getWeeklyQcChartLabels()"><strong>{{ status }}</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center" *ngFor="let count of getQcStatusCountByType()">{{ count }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8" *ngIf="batchGradesForWeek$ | async as batchGrades">
+            <canvas
+              baseChart
+              width="100%"
+              [datasets]="getBarChartData(batchGrades)"
+              [labels]="getBarChartLabels(batchGrades)"
+              [chartType]="barChartType"
+              [options]="barChartOptions"
+              [colors]="barChartColors"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main table which is displays trainee QC results -->
+      <div class="panel-body" *ngIf="trainee">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"></th>
+              <th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><strong>Result</strong></th>
+              <th class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8"><strong>Notes</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let traineeQcNote of getQcNotes() | async">
+              <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><strong>Week {{ traineeQcNote?.week }}</strong></td>
+              <td class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><em [ngClass]="getIconClassForQcResult(traineeQcNote?.technicalStatus)"></em></td>
+              <td class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">{{ traineeQcNote?.content }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

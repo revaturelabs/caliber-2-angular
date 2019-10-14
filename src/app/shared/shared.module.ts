@@ -55,6 +55,7 @@ import { ImportBatchDialogComponent } from './components/import-batch-dialog/imp
     AssociateDetailsComponent,
     AssociateNotesComponent,
     BatchLevelFeedbackComponent,
+    BatchSelectDropdownComponent
   ],
   entryComponents: [
     AssessmentDialogComponent,

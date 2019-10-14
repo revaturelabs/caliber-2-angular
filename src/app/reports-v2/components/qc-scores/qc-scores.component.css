@@ -1,0 +1,35 @@
+.fa-question-circle {
+  color: orangered;
+}
+
+.fa-frown {
+  color: red;
+}
+
+.fa-frown:hover {
+  text-shadow: 0 0 5px red;
+}
+
+.fa-meh {
+  color: #f9e900;
+}
+
+.fa-meh:hover {
+  text-shadow: 0 0 5px #f9e900;
+}
+
+.fa-smile {
+  color: darkgreen;
+}
+
+.fa-smile:hover {
+  text-shadow: 0 0 5px darkgreen;
+}
+
+.fa-star {
+  color: mediumblue;
+}
+
+.fa-star:hover {
+  text-shadow: 0 0 5px mediumblue;
+}
