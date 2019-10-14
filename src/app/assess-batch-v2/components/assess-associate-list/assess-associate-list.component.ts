@@ -169,6 +169,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
     combineLatest(this.gradeRecalculator.asObservable()).subscribe(
       data => {
+        console.log('Recalculating grades');
         const averages = [];
         for (let assessment of this.assessments) {
           const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
@@ -235,6 +236,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     this.onBatchUpdate.emit(batch);
   }
 
+
+
   getGradesForAssessmentAndTrainee(assessmentId: number, traineeId: number): Grade {
     if (this.grades.size > 0) {
       if (this.grades.has(assessmentId) && this.grades.get(assessmentId).length > 0) {
@@ -271,6 +274,10 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
       return averages.reduce((prev, curr) => prev + curr, 0) / assessments.length;
     }
     return 0;
+  }
+
+  getTotalPoints(assessments: Assessment[]): number {
+    return assessments && assessments.length > 0 && assessments.reduce((accumulator, assessment) => accumulator + assessment.rawScore, 0);
   }
 
   handleGradeUpdate(grade: Grade) {

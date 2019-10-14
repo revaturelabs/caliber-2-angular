@@ -20,11 +20,11 @@ export class QcScoresComponent implements OnInit, OnChanges {
   @Input('trainees') trainees$: Observable<Trainee[]>;
   @Input('selectedWeek') week: number;
   @Input('trainee') trainee: Trainee;
-  private qcNotes$: BehaviorSubject<QcNote[]> = new BehaviorSubject<QcNote[]>(undefined);
   private readonly baseClass: string = "fa fa-2x qc-feedback ";
   batchGradesForWeek$: Observable<GradeComparisonDto> = this.reportsService.getBatchGradesToCompareForWeeklyAssessmentBreakdownComponent();
   showWeeklyAnalysis: boolean = false;
   qcBatchNotes$: Observable<QcNote[]>;
+  qcTraineeNotes$: Observable<QcNote[]>;
 
   readonly chartType: string = 'doughnut';
   readonly barChartType: string = 'bar';
@@ -109,9 +109,7 @@ export class QcScoresComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.batch && this.batch.batchId > 0) {
-      this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId).subscribe(
-        data => this.qcNotes$.next(data)
-      );
+      this.qcTraineeNotes$ = this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId);
       this.qcBatchNotes$ = this.reportsService.getAllBatchQcNotes(this.batch.batchId);
     }
   }
@@ -126,28 +124,23 @@ export class QcScoresComponent implements OnInit, OnChanges {
           this.showWeeklyAnalysis = false;
         }
       } else if (prop === 'trainee' && !change.isFirstChange()) {
-        if (change.currentValue) {
-          this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId).subscribe(
-            data => this.qcNotes$.next(data.filter(note => note.traineeId === change.currentValue.traineeId))
-          )
-        } else {
-          this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId).subscribe(
-            data => this.qcNotes$.next(data)
-          )
-        }
+        // if (change.currentValue) {
+        //   this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId).subscribe(
+        //     data => this.qcNotes$.next(data.filter(note => note.traineeId === change.currentValue.traineeId))
+        //   )
+        // } else {
+        //   this.reportsService.getIndividualQcNotesByBatchId(this.batch.batchId).subscribe(
+        //     data => this.qcNotes$.next(data)
+        //   )
+        // }
       }
     }
   }
 
 
-
-  getQcNotes(): Observable<QcNote[]> {
-    return this.qcNotes$.asObservable();
-  }
-
-  getQcResult(traineeId: number, week: number): string {
-    if (traineeId > 0 && week > 0 && this.qcNotes$.getValue().length > 0) {
-      const found = this.qcNotes$.getValue().find(note => note.traineeId === traineeId && note.week === week);
+  getQcResult(qcNotes: QcNote[], traineeId: number, week: number): string {
+    if (traineeId > 0 && week > 0 && qcNotes && qcNotes.length > 0) {
+      const found = qcNotes.find(note => note.traineeId === traineeId && note.week === week);
       if (found) {
         return this.getIconClassForQcResult(found.technicalStatus);
       }
@@ -155,8 +148,7 @@ export class QcScoresComponent implements OnInit, OnChanges {
     return 'N/A';
   }
 
-  getWeeklyQcChartData(): ChartDataSets[] {
-    const qcNotes = this.qcNotes$.getValue();
+  getWeeklyQcChartData(qcNotes: QcNote[]): ChartDataSets[] {
     const scores = this.initScoresObject();
     if (this.week > 0 && qcNotes && qcNotes.length > 0) {
       const thisWeeksNotes = qcNotes.filter(note => note.week === this.week && note.technicalStatus !== 'Undefined');
@@ -190,8 +182,7 @@ export class QcScoresComponent implements OnInit, OnChanges {
     }
   }
 
-  getQcStatusCountByType(): number[] {
-    const qcNotes = this.qcNotes$.getValue();
+  getQcStatusCountByType(qcNotes: QcNote[]): number[] {
     const scores = this.initScoresObject();
     if (this.week > 0 && qcNotes && qcNotes.length > 0) {
       const thisWeeksNotes = qcNotes.filter(note => note.week === this.week && note.technicalStatus !== 'Undefined');

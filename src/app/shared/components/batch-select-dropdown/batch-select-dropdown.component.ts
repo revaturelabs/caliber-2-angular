@@ -26,9 +26,32 @@ export class BatchSelectDropdownComponent implements OnInit, OnChanges {
     this.results = this.formatBatchList();
     this.searchForm.get("query").valueChanges.subscribe(
       (data: string) => {
+        const normalized = data.toLowerCase();
+
         // Handle truthy string (filtered)
-        if (data) {
-          this.results = this.formattedBatchList.filter(batch => batch.output.startsWith(data));
+        if (normalized && this.batches && this.batches.length > 0) {
+          this.results = this.batches.filter(batch => {
+            if (batch) {
+              const trainerNames: string[] = batch.trainer && batch.trainer.split(' ');
+              const coTrainerNames: string[] = batch.trainer && batch.trainer.split(' ');
+
+              return (
+                (batch.skillType && batch.skillType.toLowerCase().includes(normalized)) ||
+                (trainerNames && trainerNames.length === 2 && trainerNames[0].toLowerCase().startsWith(normalized)) ||
+                (trainerNames && trainerNames.length === 2 && trainerNames[1].toLowerCase().startsWith(normalized)) ||
+                (coTrainerNames && coTrainerNames.length === 2 && coTrainerNames[0].toLowerCase().startsWith(normalized)) ||
+                (coTrainerNames && coTrainerNames.length === 2 && coTrainerNames[0].toLowerCase().startsWith(normalized)) ||
+                (batch.trainingType && batch.trainingType.toLowerCase().startsWith(normalized)) ||
+                (batch.location && batch.location.toLowerCase().startsWith(normalized)) ||
+                (batch.trainingName && batch.trainingName.toLowerCase().startsWith(normalized))
+              )
+            }
+          }).map(batch => {
+            return {
+              output: this.formatBatch(batch),
+              batchId: batch.batchId
+            }
+          });
           // Handle no results
           if (this.results.length === 0) {
             this.results.push({batchId: -1, output: "No results found"});
