@@ -6,7 +6,7 @@ import {Category} from "../../../domain/model/category.dto";
 @Component({
   selector: 'app-assessment-details-column',
   templateUrl: './assessment-details-column.component.html',
-  styleUrls: ['./assessment-details-column.component.css']
+  styleUrls: ['./assessment-details-column.component.css'],
 })
 export class AssessmentDetailsColumnComponent implements OnInit {
 

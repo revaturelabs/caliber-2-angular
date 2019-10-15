@@ -13,12 +13,11 @@ import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
-import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 
 @Component({
   selector: 'app-assess-associate-list',
   templateUrl: './assess-associate-list.component.html',
-  styleUrls: ['./assess-associate-list.component.css']
+  styleUrls: ['./assess-associate-list.component.css'],
 })
 export class AssessAssociateListComponent implements OnInit, OnChanges {
 
@@ -38,8 +37,8 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   notes: Map<number, Note[]>;
   assessments: Assessment[] = [];
   private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
-  assessmentAverages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
-  overallAverage$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // assessmentAverages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+  // overallAverage$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Output("onBatchUpdate") onBatchUpdate: EventEmitter<Batch> = new EventEmitter<Batch>(true);
   @Output("onWeekSelect") onWeekSelect: EventEmitter<number> = new EventEmitter<number>(true);
@@ -139,7 +138,6 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
               data => {
                 this.assessments = data;
                 this.totalPoints = 0;
-                const averages = [];
                 // For every assessment, populate the categoryIdsArray and add an entry to the `columns` array, leaving category blank
                 for (let assessment of data) {
                   const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
@@ -155,11 +153,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
                       }
                     );
                   }
-                  averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
-                  this.totalPoints += assessment.rawScore;
                 }
-                this.assessmentAverages$.next(averages);
-                this.overallAverage$.next(this.getBatchAverage(data));
               }
             );
           }
@@ -169,27 +163,28 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
     combineLatest(this.gradeRecalculator.asObservable()).subscribe(
       data => {
-        console.log('Recalculating grades');
-        const averages = [];
-        for (let assessment of this.assessments) {
-          const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
-          if (found === undefined) {
-            // Create an AssessBatchColumn entry, leaving category to populate later
-            this.columns.push({
-              assessment: assessment,
-              category: ""
-            });
-            this.assessBatchService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
-              data => {
-                this.addToColumn(data);
+        this.assessBatchService.getAssessmentsByBatchIdAndWeek(this.batch.batchId, this.week).subscribe(
+          data => {
+            this.assessments = data;
+            this.totalPoints = 0;
+            // For every assessment, populate the categoryIdsArray and add an entry to the `columns` array, leaving category blank
+            for (let assessment of data) {
+              const found = this.columns.find(column => column.assessment.assessmentId === assessment.assessmentId);
+              if (found === undefined) {
+                // Create an AssessBatchColumn entry, leaving category to populate later
+                this.columns.push({
+                  assessment: assessment,
+                  category: ""
+                });
+                this.assessBatchService.getCategoryByCategoryId(assessment.assessmentCategory).subscribe(
+                  data => {
+                    this.addToColumn(data);
+                  }
+                );
               }
-            );
+            }
           }
-          averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
-          this.totalPoints += assessment.rawScore;
-        }
-        this.assessmentAverages$.next(averages);
-        this.overallAverage$.next(this.getBatchAverage(this.assessments));
+        );
       }
     )
   }
@@ -281,14 +276,14 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   }
 
   handleGradeUpdate(grade: Grade) {
-    if (grade) {
+    if (grade && this.assessments && this.assessments.length > 0) {
       this.setUpdatedGrade(grade);
       const averages = [];
       for (let assessment of this.assessments) {
         averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
       }
-      this.assessmentAverages$.next(averages);
-      this.overallAverage$.next(this.getBatchAverage(this.assessments));
+      // this.assessmentAverages$.next(averages);
+      // this.overallAverage$.next(this.getBatchAverage(this.assessments));
       this.gradeRecalculator.emit(grade.assessmentId);
     }
   }

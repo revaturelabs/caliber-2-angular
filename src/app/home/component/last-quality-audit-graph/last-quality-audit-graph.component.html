@@ -1,7 +1,7 @@
 <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1"></iframe>
   <div style="display: block;" *ngIf="displaying">
 
-    <canvas 
+    <canvas
     baseChart
       [ngStyle]="chart"
       [datasets]="barChartData"
@@ -36,17 +36,17 @@
             <p *ngIf="(qaNoteCategory)">Categories covered this week: {{qaNoteCategory}}</p>
           </strong>
           <table class="table table-responsive" >
-            <tr>  
+            <tr>
               <th class="col-sm-2 col-md-2 col-lg-2" >Trainee:</th> <th class="col-sm-2 col-md-2 col-lg-2" >Feedback:</th> <th class="col-sm-8 col-md-8 col-lg-8" >Notes:</th>
             </tr>
             <tr *ngFor="let qaNote of qaNotesForModal; let i = index;" >
-                <td *ngIf="i < traineeNames.length">{{traineeNames[i]}}</td> 
-                <td *ngIf="i < traineeNames.length">{{(qaNote.qcStatus !== 'Undefined')? qaNote.qcStatus : '-'}}</td> 
+                <td *ngIf="i < traineeNames.length">{{traineeNames[i]}}</td>
+                <td *ngIf="i < traineeNames.length">{{(qaNote?.technicalStatus !== 'Undefined')? qaNote?.technicalStatus : '-'}}</td>
                 <td *ngIf="i < traineeNames.length">{{(qaNote.content !== '')? qaNote.content : '-'}}</td>
             </tr>
             <tr *ngIf="overallDisplayQANote != null">
-                <td><strong>Overall:</strong></td> 
-                <td>{{(overallDisplayQANote.qcStatus !== 'Undefined')? overallDisplayQANote.qcStatus : '-'}}</td>
+                <td><strong>Overall:</strong></td>
+                <td>{{(overallDisplayQANote?.technicalStatus !== 'Undefined')? overallDisplayQANote?.technicalStatus : '-'}}</td>
                 <td></td>
             </tr>
           </table>
