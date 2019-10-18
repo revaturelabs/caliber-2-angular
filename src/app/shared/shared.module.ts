@@ -20,6 +20,7 @@ import {BatchLevelFeedbackComponent} from "./components/batch-level-feedback/bat
 import { BatchSearchComponent } from './components/batch-search/batch-search.component';
 import { BatchSelectDropdownComponent } from './components/batch-select-dropdown/batch-select-dropdown.component';
 import { ImportBatchDialogComponent } from './components/import-batch-dialog/import-batch-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ImportBatchDialogComponent } from './components/import-batch-dialog/imp
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     ModalModule,

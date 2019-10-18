@@ -20,6 +20,9 @@ export class WeekSelectorComponent implements OnInit {
   selectedWeek: number;
   weeks: number[] = [];
   names: string[] = [];
+  activeEdit: number = 0;
+
+  clicks: number = 0;
 
   constructor(
     private chronoService: ChronoService
@@ -74,5 +77,32 @@ export class WeekSelectorComponent implements OnInit {
 
   selectWeek(week: number) {
     this.selectedWeekEmitter.emit(week);
+  }
+
+  displayWeekName(week: number): string {
+    if(this.activeEdit == week) {
+      return "";
+    }
+
+    return this.names[week - 1];
+  }
+
+  singleClick(week: number) {
+    this.clicks++;
+
+    if(this.clicks == 2) {
+      this.activeEdit = week;
+      this.clicks = 0;
+    }
+
+    if(this.activeEdit != week) {
+      setTimeout(() => {
+        if(this.clicks == 1) {
+          this.clicks = 0;
+          this.activeEdit = 0;
+          this.selectWeek(week);
+        }
+      }, 150);
+    }
   }
 }
