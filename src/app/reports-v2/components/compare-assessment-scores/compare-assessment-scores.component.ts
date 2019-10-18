@@ -8,12 +8,14 @@ import {GradeComparisonDto} from "../../../domain/dto/grade-comparison.dto";
 import {Label} from "ng2-charts";
 import {ChartDataSets, ChartOptions} from "chart.js";
 import {Benchmark} from "../../../domain/dto/benchmark.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-compare-assessment-scores',
   templateUrl: './compare-assessment-scores.component.html',
   styleUrls: ['./compare-assessment-scores.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInOut]
 })
 export class CompareAssessmentScoresComponent implements OnInit, OnChanges, OnDestroy {
 

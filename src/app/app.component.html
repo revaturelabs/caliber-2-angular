@@ -1,9 +1,6 @@
 <app-header></app-header>
-<div class="wrapper">
-    <router-outlet></router-outlet>
+<div class="wrapper" [@routeAnimations]="getRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
     <app-error *ngIf="errorService.error" [currentError]="errorService.error"></app-error>
-
-
-    
 </div>
 <app-footer></app-footer>

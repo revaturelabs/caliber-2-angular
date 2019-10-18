@@ -30,8 +30,9 @@ import {LocationService} from "./services/subvertical/location/location.service"
 import {SkilltypeService} from "./services/subvertical/skilltype/skilltype.service";
 import {TrainerService} from "./services/subvertical/user/trainer.service";
 import {HomeService} from "./services/home.service";
-import { ToastService } from './services/toast.service';
+import {ToastService} from './services/toast.service';
 import {ReportsService} from "./services/reports.service";
+import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {ReportsService} from "./services/reports.service";
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent
+    FormModalComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import {ReportsService} from "./services/reports.service";
       positionClass: 'toast-bottom-right',
       progressBar: true,
       maxOpened: 5
-    })
+    }),
   ],
   providers: [
     AssessBatchService,

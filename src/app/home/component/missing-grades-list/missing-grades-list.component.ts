@@ -80,7 +80,6 @@ export class MissingGradesListComponent implements OnInit {
         highest = batch.weeks - 3;
       }
     });
-    console.log('Highest is ' + highest);
     this.highestGradeWeek = highest;
   }
 

@@ -5,7 +5,8 @@ import {ManageBatchContainerComponent} from "./components/manage-batch-container
 const routes: Routes = [
   {
     path: '',
-    component: ManageBatchContainerComponent
+    component: ManageBatchContainerComponent,
+    data: { animation: "ManageBatchPage" }
   }
 ];
 

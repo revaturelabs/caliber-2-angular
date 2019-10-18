@@ -10,6 +10,7 @@ import {AssessmentDetailsColumnComponent} from './components/assessment-details-
 import {AssessmentDetailsRowComponent} from './components/assessment-details-row/assessment-details-row.component';
 import {MockSaveComponent} from "../Assess-Batch/Components/mock-save/mock-save.component";
 import {SharedModule} from "../shared/shared.module";
+import {BrandedIconModule} from "../branded-icon/branded-icon.module";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {SharedModule} from "../shared/shared.module";
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    BrandedIconModule
   ],
   exports: [MockSaveComponent]
 })

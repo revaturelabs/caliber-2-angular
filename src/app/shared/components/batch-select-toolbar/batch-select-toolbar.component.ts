@@ -1,10 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Batch} from "../../../domain/model/batch.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-batch-select-toolbar',
   templateUrl: './batch-select-toolbar.component.html',
-  styleUrls: ['./batch-select-toolbar.component.css']
+  styleUrls: ['./batch-select-toolbar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInOut]
 })
 export class BatchSelectToolbarComponent implements OnInit {
 

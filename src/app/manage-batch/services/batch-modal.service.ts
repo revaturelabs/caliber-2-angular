@@ -25,7 +25,7 @@ export class BatchModalService {
 
   showEditBatchModal(batch: Batch, skillTypes$: Observable<string[]>, locations$: Observable<Location[]>, trainers$: Observable<Trainer[]>) {
     const initialState = {
-      batch: batch,
+      batch,
       skillTypes$,
       locations$,
       trainers$,
@@ -38,6 +38,9 @@ export class BatchModalService {
       (batch) => {
         if (batch) {
           this.updatedBatchSubject.next(batch);
+
+          // To ensure toaster only displays once
+          this.updatedBatchSubject.next(undefined);
         }
       }
     )

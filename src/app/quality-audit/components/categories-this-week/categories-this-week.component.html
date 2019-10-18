@@ -1,14 +1,16 @@
-<div class="categories-this-week-container">
+<ng-container>
   <strong>Categories this week:</strong>
-  <span *ngFor="let category of categoriesThisWeek$ | async" class="label label-default category-chip">
+  <span *ngFor="let category of categoriesThisWeek" class="label label-default category-chip">
+  <ng-container @longFadeInOut>
     {{ category?.skillCategory }} <span class="remove-category" (click)="removeCategory(category)">&times;</span>
+  </ng-container>
   </span>
   <span class="label btn dropdown-toggle add-categories-button " data-toggle="dropdown">
-    <em class="fa fa-plus"></em>
-    <ul class="dropdown-menu categories-dropdown">
-      <li *ngFor="let category of categories">
-        <a role="button" (click)="selectCategory(category)">{{ category?.skillCategory }}</a>
-      </li>
-    </ul>
-  </span>
-</div>
+      <em class="fa fa-plus"></em>
+      <ul class="dropdown-menu categories-dropdown">
+        <li *ngFor="let category of qcCategories | categorySelector: categoriesThisWeek">
+          <a role="button" (click)="selectCategory(category)">{{ category?.skillCategory }}</a>
+        </li>
+      </ul>
+    </span>
+</ng-container>

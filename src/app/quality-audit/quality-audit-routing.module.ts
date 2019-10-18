@@ -5,7 +5,8 @@ import {QualityAuditContainerComponent} from "./components/quality-audit-contain
 const routes: Routes = [
   {
     path: '',
-    component: QualityAuditContainerComponent
+    component: QualityAuditContainerComponent,
+    data: { animation: "QualityAuditPage" }
   }
 ];
 

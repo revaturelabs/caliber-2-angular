@@ -13,11 +13,13 @@ import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-assess-associate-list',
   templateUrl: './assess-associate-list.component.html',
   styleUrls: ['./assess-associate-list.component.css'],
+  animations: [fadeInOut]
 })
 export class AssessAssociateListComponent implements OnInit, OnChanges {
 
@@ -37,8 +39,6 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   notes: Map<number, Note[]>;
   assessments: Assessment[] = [];
   private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
-  // assessmentAverages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
-  // overallAverage$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Output("onBatchUpdate") onBatchUpdate: EventEmitter<Batch> = new EventEmitter<Batch>(true);
   @Output("onWeekSelect") onWeekSelect: EventEmitter<number> = new EventEmitter<number>(true);
@@ -100,9 +100,13 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     combineLatest(this.selectedWeekSubject.asObservable(), this.selectedBatch.asObservable(), this.lastAssessmentAction$).pipe(distinctUntilChanged()).subscribe(
       ([week, batch]) => {
         if (week > 0 && Boolean(batch)) {
-          this.selectedWeek = week;
+          if (week !== batch.weeks) {
+            this.selectedWeek = batch.weeks;
+          } else {
+            this.selectedWeek = week;
+          }
           this.assessments$ = this.assessBatchService.getAssessmentsByBatchIdAndWeek(batch.batchId, week);
-          if (Boolean(batch) && Boolean(batch.batchId) && Boolean(week)) {
+          if (batch === this.batch) {
             this.grades$ = this.assessBatchService.getGradesByBatchIdAndWeek(batch.batchId, week);
             this.grades$.subscribe(
               data => {
@@ -163,6 +167,21 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
     combineLatest(this.gradeRecalculator.asObservable()).subscribe(
       data => {
+        this.grades$ = this.assessBatchService.getGradesByBatchIdAndWeek(this.batch.batchId, this.week);
+        this.grades$.subscribe(
+          data => {
+            if (data.length > 0) {
+              this.grades = new Map<number, Grade[]>();
+              for (let grade of data) {
+                if (this.grades.has(grade.assessmentId)) {
+                  this.grades.get(grade.assessmentId).push(grade);
+                } else {
+                  this.grades.set(grade.assessmentId, [grade]);
+                }
+              }
+            }
+          }
+        );
         this.assessBatchService.getAssessmentsByBatchIdAndWeek(this.batch.batchId, this.week).subscribe(
           data => {
             this.assessments = data;
@@ -191,15 +210,14 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     for (let prop in changes) {
+      const change = changes[prop];
       if (prop === "week") {
-        const change = changes[prop];
         if (!change.isFirstChange() && change.currentValue !== undefined) {
           this.setSelectedWeek(change.currentValue);
         }
       } else if (prop === "batch") {
-        const change = changes[prop];
         if (!change.isFirstChange() && change.currentValue !== undefined) {
-          this.setSelectedWeek(this.batch.weeks);
+          this.setSelectedWeek(change.currentValue.weeks);
           this.selectedBatch.next(change.currentValue);
         }
       }
@@ -234,12 +252,10 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
 
 
   getGradesForAssessmentAndTrainee(assessmentId: number, traineeId: number): Grade {
-    if (this.grades.size > 0) {
-      if (this.grades.has(assessmentId) && this.grades.get(assessmentId).length > 0) {
-        return this.grades.get(assessmentId).filter(grade => {
-          return grade.traineeId === traineeId && grade.assessmentId === assessmentId;
-        })[0];
-      }
+    if (this.grades.has(assessmentId) && this.grades.get(assessmentId).length > 0) {
+      return this.grades.get(assessmentId).filter(grade => {
+        return grade.traineeId === traineeId && grade.assessmentId === assessmentId;
+      })[0];
     }
     return undefined;
   }
@@ -276,16 +292,17 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   }
 
   handleGradeUpdate(grade: Grade) {
-    if (grade && this.assessments && this.assessments.length > 0) {
+    if (grade) {
       this.setUpdatedGrade(grade);
-      const averages = [];
-      for (let assessment of this.assessments) {
-        averages.push(this.getAverageGradeForAssessment(assessment.assessmentId));
-      }
-      // this.assessmentAverages$.next(averages);
-      // this.overallAverage$.next(this.getBatchAverage(this.assessments));
-      this.gradeRecalculator.emit(grade.assessmentId);
     }
+  }
+
+  getSelectedBatch(): Observable<Batch> {
+    return this.selectedBatch.asObservable();
+  }
+
+  getSelectedWeek(): Observable<number> {
+    return this.selectedWeekSubject.asObservable();
   }
 
 
@@ -300,6 +317,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   }
 
   private setUpdatedGrade(grade: Grade) {
+    this.gradeRecalculator.emit(grade.assessmentId);
     if (this.grades.has(grade.assessmentId)) {
       for (let g of this.grades.get(grade.assessmentId)) {
         if (g.assessmentId === grade.assessmentId) {

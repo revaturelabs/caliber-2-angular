@@ -8,7 +8,7 @@ import {BatchModalService} from "../../services/batch-modal.service";
 @Component({
   selector: 'app-manage-batch-container',
   templateUrl: './manage-batch-container.component.html',
-  styleUrls: ['./manage-batch-container.component.css']
+  styleUrls: ['./manage-batch-container.component.css'],
 })
 export class ManageBatchContainerComponent implements OnInit {
 

@@ -13,13 +13,13 @@
 	padding-bottom: 1em;
 }
 
-footer {
+div#footer-id {
 	min-height: 103px;
 	background-color: #474C55;
 	font-size: .75em;
-	position: absolute;
+	position: static;
 	width: 100%;
-    left: 0;
+  left: 0;
 }
 
 .center {

@@ -1,11 +1,21 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Batch} from "../../../domain/model/batch.dto";
 
 @Component({
   selector: 'app-batch-select-dropdown',
   templateUrl: './batch-select-dropdown.component.html',
-  styleUrls: ['./batch-select-dropdown.component.css']
+  styleUrls: ['./batch-select-dropdown.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BatchSelectDropdownComponent implements OnInit, OnChanges {
 

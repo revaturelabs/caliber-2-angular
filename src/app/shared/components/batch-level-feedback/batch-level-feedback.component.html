@@ -1,4 +1,4 @@
-<div [formGroup]="batchNoteForm">
+<div [formGroup]="batchNoteForm" *ngIf="week > 0">
   <h4 class="note-header"><strong>Overall{{ isQcFeedback ? ' QC ' : ' '}}Feedback for Week {{ week }}</strong></h4>
   <div class="notes-container">
     <span class="note-spinner d-flex flex-row justify-content-end">

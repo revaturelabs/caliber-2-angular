@@ -10,12 +10,14 @@ import {TraineeModalService} from "../../services/trainee-modal.service";
 import {DeleteModalService} from "../../services/delete-modal.service";
 import {SwitchBatchesModalService} from "../../services/switch-batches-modal.service";
 import {BatchSwitchDto} from "../../../domain/dto/batch-switch.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-batch-list',
   templateUrl: './batch-list.component.html',
   styleUrls: ['./batch-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInOut]
 })
 export class BatchListComponent implements OnInit {
 
@@ -41,7 +43,7 @@ export class BatchListComponent implements OnInit {
         if (batch) {
           this.manageBatchService.updateBatch(batch).subscribe(
             data => {
-              this.toastService.success(`${data.trainingName} updated successfully!`, "");
+              this.toastService.success(`${data.skillType} updated successfully!`, "");
               this.replaceBatchInCachedList(data);
             }, err => {
               this.toastService.error(`Failed to update ${batch.trainingName}`, "")
