@@ -42,6 +42,8 @@ export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
     console.log('Should recalculate averages');
   }
 
+
+
   handleGradeUpdate() {
     const score: number = this.gradeForm.get("grade").value;
     // Handle lower bound

@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{ batch?.skillType }} - Technical Status</div>
+  <div class="panel-body" *ngIf="!trainee && allBatchGrades$ | async as allBatchGrades">
+    <canvas
+      baseChart
+      width="100%"
+      height="100%"
+      [chartType]="chartType"
+      [options]="radarChartOptions"
+      [labels]="getChartLabels(allBatchGrades)"
+      [datasets]="getChartDatasets(allBatchGrades)"
+    >
+    </canvas>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><strong>Subject</strong></th>
+            <th><strong>Score</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let batchGrade of allBatchGrades">
+            <td *ngIf="batchGrade?.traineeId === -1">{{ batchGrade?.assessmentType }}</td>
+            <td *ngIf="batchGrade?.traineeId === -1">{{ batchGrade?.score / 100 | percent: '1.2-2' }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel-body" *ngIf="trainee && allBatchGrades$ | async as allBatchGrades">
+    <canvas
+      baseChart
+      width="100%"
+      height="100%"
+      [chartType]="chartType"
+      [options]="radarChartOptions"
+      [datasets]="getChartDatasetsWithTrainee(allBatchGrades, trainee?.traineeId)"
+      [labels]="getTraineeLabels(allBatchGrades, trainee?.traineeId)"
+    >
+    </canvas>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th><strong>Subject</strong></th>
+          <th><strong>Score</strong></th>
+          <th *ngIf="trainee?.name "><strong>{{ trainee?.name }}</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let batchGrade of allBatchGrades">
+            <td *ngIf="batchGrade?.traineeId === trainee?.traineeId" class="text-center">{{ batchGrade?.assessmentType }}</td>
+            <td *ngIf="batchGrade?.traineeId === trainee?.traineeId" class="text-center">{{ getBatchAverageTableData(allBatchGrades, trainee?.traineeId, batchGrade?.assessmentType) / 100 | percent: '1.2-2' }}</td>
+            <td *ngIf="batchGrade?.traineeId === trainee?.traineeId" class="text-center">{{ getTraineeTableData(allBatchGrades, trainee?.traineeId, batchGrade?.assessmentType) / 100 | percent: '1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

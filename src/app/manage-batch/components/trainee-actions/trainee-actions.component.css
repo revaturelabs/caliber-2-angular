@@ -1,0 +1,8 @@
+.trainee-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+}

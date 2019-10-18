@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-shared-dropdown-menu',
   templateUrl: './shared-dropdown-menu.component.html',
   styleUrls: ['./shared-dropdown-menu.component.css']
 })
-export class SharedDropdownMenuComponent implements OnInit {
+export class SharedDropdownMenuComponent implements OnInit, OnChanges {
 
   @Input("data") data: any[];
   @Input("format") format: any;
@@ -31,10 +31,54 @@ export class SharedDropdownMenuComponent implements OnInit {
 
     if (this.for === 'Batch' && !this.changed) {
       this.currentDropdownValue = `Select ${this.for}`;
+    } else if (this.for === 'manageBatchYear') {
+      const index = this.data.indexOf(this.selectedValue);
+      if (index > 0) {
+        this.setDropdownValue(this.data[index], index);
+      } else {
+        this.setDropdownValue(this.data[0], 0);
+      }
+    } else if (this.for === 'trainee') {
+      this.data.unshift(null);
+      this.formattedData = this.data.map(trainee => {
+        if (trainee === null) {
+          return `Trainees (Overall)`
+        } else {
+          return trainee.name
+        }
+      });
+      this.setDropdownValue(`Trainees (Overall)`, 0);
+    } else if (this.for === 'week') {
+      this.formattedData = this.data.map(week => {
+        if (week === 0) {
+          return `All Weeks`
+        } else {
+          return `Week ${week}`;
+        }
+      });
+      this.setDropdownValue(`All Weeks`, 0);
     } else {
       this.currentDropdownValue = this.selectedValue;
     }
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    for (let prop in changes) {
+      const change = changes[prop];
+      if (prop === 'selectedValue' && !change.isFirstChange()) {
+        if (this.for === 'week') {
+          if (change.previousValue === 0 && change.currentValue > 0) {
+            this.selectedValue = change.currentValue;
+          } else if (change.previousValue > 0 && change.currentValue === 0) {
+            this.setDropdownValue(`All Weeks`, 0);
+          }
+        } else {
+          this.selectedValue = change.currentValue;
+        }
+      }
+    }
+  }
+
 
   setDropdownValue(value: any, index: number) {
     this.selectedValue = value;

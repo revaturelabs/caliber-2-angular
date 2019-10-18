@@ -90,30 +90,32 @@ export class MissingGradesListComponent implements OnInit {
   }
 
   filterByWeekAndLocation() {
-    let tmpDisplayMiss: Array<MissingGrade> = new Array<MissingGrade>();
-    this.missingGrades.forEach(miss => {
-      //Location filter
-      let inCurrLocations: boolean = false;
-      for(let j:number = 0; j < this.currBatches.length; j++) {
-        if(miss.location === this.currBatches[j].location) {
-          inCurrLocations = true;
-          break;
-        }
-      }
-
-      //Filter by week if it passed location filter
-      if(inCurrLocations)
-      {
-        for(let i:number = 0; i < miss.missingWeeks.length; i++)
-        {
-          if(this.weeksForDisplay.includes(miss.missingWeeks[i]))
-          {
-            tmpDisplayMiss.push(miss);
+    if (this.missingGrades) {
+      let tmpDisplayMiss: Array<MissingGrade> = new Array<MissingGrade>();
+      this.missingGrades.forEach(miss => {
+        //Location filter
+        let inCurrLocations: boolean = false;
+        for(let j:number = 0; j < this.currBatches.length; j++) {
+          if(miss.location === this.currBatches[j].location) {
+            inCurrLocations = true;
             break;
           }
         }
-      }
-    })
-    this.displayGrades = tmpDisplayMiss;
+
+        //Filter by week if it passed location filter
+        if(inCurrLocations)
+        {
+          for(let i:number = 0; i < miss.missingWeeks.length; i++)
+          {
+            if(this.weeksForDisplay.includes(miss.missingWeeks[i]))
+            {
+              tmpDisplayMiss.push(miss);
+              break;
+            }
+          }
+        }
+      });
+      this.displayGrades = tmpDisplayMiss;
+    }
   }
 }

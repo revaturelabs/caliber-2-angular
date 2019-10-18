@@ -1,4 +1,29 @@
 /************************
+  Brand Styles
+************************/
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 7.5%;
+  margin-bottom: 7.5%;
+}
+
+.brand-icon {
+  height: 15%;
+  width: 15%;
+}
+
+.brand-text {
+  margin-top: 1.5%;
+  z-index: 100;
+  font-size: large;
+}
+
+
+/************************
 	Revature Fonts
 ************************/
 @font-face {
@@ -356,11 +381,11 @@ textarea {
 	top: 2.5px;
 }
 .glyphicon-ok{
-	color: #81f575; 
+	color: #81f575;
 	width: 100%;
 }
 .glyphicon-remove{
-	color: #ff7575; 
+	color: #ff7575;
 	width: 100%;
 }
 .pBody{
@@ -381,7 +406,7 @@ textarea {
 }
 
 #overallRow{
-    border-top-width: thick; 
+    border-top-width: thick;
 }
 /********************************************************
 	Panels table
@@ -533,7 +558,7 @@ INTENDED FOR CHART DOWNLOAD ICON IF HOVER OVER CHANGE CURSOR TO POINTING
   width: 300px;
   vertical-align: middle;
   white-space: nowrap;
-  position: relative;  
+  position: relative;
 }
 
 .container-1 .icon{

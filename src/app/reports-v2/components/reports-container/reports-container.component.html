@@ -1,0 +1,55 @@
+<div class="container" *ngIf="years$ | async as years">
+  <app-reports-toolbar
+    [years]="years"
+    [year]="selectedYear"
+    [batches]="batchesThisYear$ | async"
+    [batch]="selectedBatch$ | async"
+    [trainees]="traineesForSelectedBatch$ | async"
+    [week]="selectedWeek$ | async"
+    [weeks]="weeks$ | async"
+    [selectedTrainee]="selectedTrainee$ | async"
+    (onYearSelect)="selectYear($event)"
+    (onBatchSelect)="selectBatch($event)"
+    (onWeekSelect)="selectWeek($event)"
+    (onTraineeSelect)="selectTrainee($event)"
+  >
+  </app-reports-toolbar>
+</div>
+<div class="container" *ngIf="selectedBatch$ | async as selectedBatch">
+  <app-compare-assessment-scores
+    [batch]="selectedBatch"
+    [trainees]="traineesForSelectedBatch$"
+    [week]="selectedWeek$ | async"
+    [trainee]="selectedTrainee$ | async"
+    [benchmark]="benchmark$ | async"
+  >
+  </app-compare-assessment-scores>
+  <app-qc-scores
+    [batch]="selectedBatch"
+    [trainees]="traineesForSelectedBatch$"
+    [selectedWeek]="selectedWeek$ | async"
+    [trainee]="selectedTrainee$ | async"
+  >
+  </app-qc-scores>
+  <div class="row" *ngIf="!(selectedWeek$ | async)">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+      <app-technical-status
+        [batch]="selectedBatch"
+        [trainee]="selectedTrainee$ | async"
+      >
+      </app-technical-status>
+    </div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+      <app-weekly-progress
+        [batch]="selectedBatch"
+        [trainee]="selectedTrainee$ | async"
+      >
+      </app-weekly-progress>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!(selectedBatch$ | async)">
+  <div class="img-container">
+    <img src="assets/brand/pie_chart.svg" class="brand-icon">
+  </div>
+</div>

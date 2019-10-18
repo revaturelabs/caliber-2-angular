@@ -1,0 +1,30 @@
+<div class="reports-toolbar">
+  <app-shared-dropdown-menu
+    [data]="years"
+    [dropdownFor]="'manageBatchYear'"
+    [selectedValue]="year"
+    (onValueSelect)="selectYear($event)"
+  >
+  </app-shared-dropdown-menu>
+  <app-batch-select-dropdown
+    *ngIf="batches"
+    [batches]="batches"
+    (onBatchSelect)="selectBatch($event)"
+  >
+  </app-batch-select-dropdown>
+  <app-shared-dropdown-menu
+    *ngIf="selectedBatch && trainees?.length > 0"
+    [data]="trainees"
+    [dropdownFor]="'trainee'"
+    (onValueSelect)="selectTrainee($event)"
+  >
+  </app-shared-dropdown-menu>
+  <app-shared-dropdown-menu
+    *ngIf="weeks?.length === getWeeksForBatch(selectedBatch)?.length"
+    [data]="getWeeksForBatch(selectedBatch)"
+    [dropdownFor]="'week'"
+    [selectedValue]="selectedWeek"
+    (onValueSelect)="selectWeek($event)"
+  >
+  </app-shared-dropdown-menu>
+</div>

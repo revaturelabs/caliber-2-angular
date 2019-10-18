@@ -1,0 +1,13 @@
+<div class="container" *ngIf="years">
+  <app-manage-batch-toolbar
+    [year]="selectedYear"
+    [years]="years"
+    (onYearSelect)="selectYear($event)"
+    (onBatchCreate)="handleBatchCreate($event)"
+  >
+  </app-manage-batch-toolbar>
+  <app-batch-list
+    [batches]="batchesThisYear$ | async"
+  >
+  </app-batch-list>
+</div>

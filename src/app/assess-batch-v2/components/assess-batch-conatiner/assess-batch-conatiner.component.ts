@@ -30,7 +30,7 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
   ) {
     const date = new Date();
     this.selectedYear = date.getFullYear();
-    this.selectedQuarter = this.assessBatchService.getQuarterFromDate(date);
+    this.selectedQuarter = this.assessBatchService.getQuarterFromDate();
     this.yearSubject = new BehaviorSubject(this.selectedYear);
     this.quarterSubject = new BehaviorSubject(this.selectedQuarter);
   }

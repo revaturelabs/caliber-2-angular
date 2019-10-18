@@ -11,8 +11,10 @@ export class ChronoService {
     private http: HttpClient
   ) {}
 
-  public getQuarterFromDate(date: Date): number {
-    const month = date.getMonth();
+  public readonly quarters: number[] = [1, 2, 3, 4];
+
+  public getQuarterFromDate(): number {
+    const month = new Date().getMonth();
     if (month >= 0 && month < 3) {
       return 1;
     } else if (month >=3 && month < 6) {
@@ -26,6 +28,10 @@ export class ChronoService {
 
   addWeekAndReturn(batch: Batch): Observable<Batch> {
     return this.http.put<Batch>(environment.api.batches.updateAndReturn, batch);
+  }
+
+  getCurrentYear(): number {
+    return new Date().getFullYear();
   }
 
   getValidYears(): Observable<number[]> {

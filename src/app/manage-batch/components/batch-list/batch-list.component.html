@@ -1,0 +1,44 @@
+<div *ngIf="batches">
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Training Name</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Training Type</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Skill Type</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Trainer</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Co-Trainer</strong></th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><strong>Location</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Start Date</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>End Date</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Good Grade</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Passing Grade</strong></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></th>
+        </tr>
+      </thead>
+    </table>
+    <div class="batch-table">
+      <div class="row" *ngFor="let batch of batches">
+        <div class="batch-row">
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.trainingName || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.trainingType || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.skillType || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.trainer || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.coTrainer === null || batch?.coTrainer === 'null' ? 'N/A' : batch?.coTrainer }}</span>
+          <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">{{ batch?.location || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.startDate | date  }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.endDate | date }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.goodGrade || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.passingGrade || '' }}</span>
+          <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+            <app-manage-batch-actions
+              [batch]="batch"
+              (onShowTrainees)="showTrainees($event)"
+            >
+            </app-manage-batch-actions>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

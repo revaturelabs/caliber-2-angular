@@ -1,0 +1,16 @@
+.delete-modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-modal-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  align-content: stretch;
+  min-width: content-box;
+  width: 100%;
+}

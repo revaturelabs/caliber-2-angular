@@ -7,7 +7,7 @@
         </tr>
         <tr *ngFor="let batch of batchDataStore; let i = index" >
           <th>
-            {{ batch.trainer}} 
+            {{ batch.trainer}}
             <br>
             {{ batch.startDate | date}}
           </th>
@@ -23,8 +23,8 @@
           <td>
             {{ starArray[i] }}
           </td>
-          <td [ngStyle]="{'color': (statusColorArray[i])? statusColorArray[i] : 'orange'}">
-            {{ overallStatusArray[i] ?  overallStatusArray[i] : "N/A"}}
+          <td [ngStyle]="{'color': getColorForStatus(getOverallBatchStatus(poorArray[1], averageArray[i], goodArray[i], starArray[i]))}">
+            {{ getOverallBatchStatus(poorArray[1], averageArray[i], goodArray[i], starArray[i]) }}
           </td>
         </tr>
       </tbody>

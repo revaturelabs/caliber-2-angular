@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <div class="import-batch-modal-header">
+    <h4 class="modal-title pull-left">Import Batch</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <form [formGroup]="importBatchForm">
+    <div class="form-row col-md-12 col-sm-12">
+      <div class="form-group">
+        <label for="gradeJsonObj">Paste JSON:</label>
+        <textarea
+          class="form-control"
+          id="gradeJsonObj"
+          rows="6"
+          placeholder="Paste the Batch Export JSON from Revature PRO"
+          formControlName="batchImportJSON"
+        ></textarea>
+        <small *ngIf="!jsonValid" class="text-danger">Invalid JSON format</small>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="close()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="import()">Import Grades</button>
+</div>
