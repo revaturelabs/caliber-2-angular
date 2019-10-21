@@ -13,7 +13,7 @@ export class QaWeekNameService {
   ) {}
 
   upsertWeekName(weekName: WeekName): Observable<WeekName> {
-    return this.http.put<WeekName>(environment.api.qa.weekNames.upsert, {body: weekName});
+    return this.http.put<WeekName>(environment.api.qa.weekNames.upsert, weekName);
   }
 
   getByBatchId(batchId: number): Observable<WeekName[]> {

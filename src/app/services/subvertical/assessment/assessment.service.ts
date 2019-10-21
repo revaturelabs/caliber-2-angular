@@ -44,10 +44,10 @@ export class AssessmentService {
   }
 
   upsertWeekName(weekName: WeekName): Observable<WeekName> {
-    return this.http.put<WeekName>(environment.api.qa.weekNames.upsert, {body: weekName});
+    return this.http.put<WeekName>(environment.api.assessments.weekNames.upsert, weekName);
   }
 
   getWeekNamesByBatchId(batchId: number): Observable<WeekName[]> {
-    return this.http.get<WeekName[]>(environment.api.qa.weekNames.byBatchId(batchId));
+    return this.http.get<WeekName[]>(environment.api.assessments.weekNames.byBatchId(batchId));
   }
 }

@@ -242,7 +242,23 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     this.onBatchUpdate.emit(batch);
   }
 
+  setUpdatedName(name: WeekName) {
+    this.assessmentService.upsertWeekName(name).subscribe( (result: WeekName) => {
+      let found: boolean = false;
 
+      for(let weekName of this.names) {
+        if(weekName.id === result.id) {
+          weekName = result;
+          found = true;
+          break;
+        }
+      }
+  
+      if(!found) {
+        this.names.push(result);
+      }
+    });
+  }
 
   getGradesForAssessmentAndTrainee(assessmentId: number, traineeId: number): Grade {
     if (this.grades.size > 0) {

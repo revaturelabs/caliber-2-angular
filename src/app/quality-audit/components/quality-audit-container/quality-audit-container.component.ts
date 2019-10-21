@@ -75,4 +75,21 @@ export class QualityAuditContainerComponent implements OnInit {
     this.selectedWeek = week;
   }
 
+  setUpdatedName(name: WeekName) {
+    this.qaService.upsertWeekName(name).subscribe( (result: WeekName) => {
+      let found: boolean = false;
+
+      for(let weekName of this.names) {
+        if(weekName.id === result.id) {
+          weekName = result;
+          found = true;
+          break;
+        }
+      }
+  
+      if(!found) {
+        this.names.push(result);
+      }
+    });
+  }
 }

@@ -14,12 +14,15 @@ export class WeekSelectorComponent implements OnInit {
 
   @Output("selectedWeek") selectedWeekEmitter: EventEmitter<number> = new EventEmitter<number>(true);
   @Output("updatedBatch") updatedBatch: EventEmitter<Batch> = new EventEmitter<Batch>(true);
+  @Output("updatedName") nameEmitter: EventEmitter<WeekName> = new EventEmitter<WeekName>(true);
   @Input("names") weekNames: WeekName[];
   @Input("batch") batch: Batch;
+
 
   selectedWeek: number;
   weeks: number[] = [];
   names: string[] = [];
+  nameInput: string = "";
   activeEdit: number = 0;
 
   clicks: number = 0;
@@ -42,7 +45,7 @@ export class WeekSelectorComponent implements OnInit {
 
     // Replace default names with persisted week names
     for(let week of this.weekNames) {
-      this.names[week.weekNumber] = week.name;
+      this.names[week.weekNumber - 1] = week.name;
     }
 
     // Set default week
@@ -59,7 +62,7 @@ export class WeekSelectorComponent implements OnInit {
 
         // Repersist default names with week names
         for(let week of this.weekNames) {
-          this.names[week.weekNumber] = week.name;
+          this.names[week.weekNumber - 1] = week.name;
         }
       }
     )
@@ -91,6 +94,7 @@ export class WeekSelectorComponent implements OnInit {
     this.clicks++;
 
     if(this.clicks == 2) {
+      this.nameInput = this.names[week - 1];
       this.activeEdit = week;
       this.clicks = 0;
     }
@@ -98,11 +102,38 @@ export class WeekSelectorComponent implements OnInit {
     if(this.activeEdit != week) {
       setTimeout(() => {
         if(this.clicks == 1) {
-          this.clicks = 0;
-          this.activeEdit = 0;
+          this.forget();
           this.selectWeek(week);
         }
       }, 150);
     }
+  }
+
+  forget(): void {
+    this.clicks = 0;
+    this.activeEdit = 0;
+  }
+
+  remember(week: number): void {
+    this.names[week - 1] = this.nameInput;
+
+    let weekName: WeekName = this.findName(week);
+    if(weekName === null) {
+      this.nameEmitter.emit({ id: 0, batchId: this.batch.batchId, weekNumber: week, name: this.nameInput } as WeekName);
+    } else {
+      weekName.name = this.nameInput;
+      this.nameEmitter.emit(weekName);
+    }
+    this.forget();
+  }
+
+  findName(week: number): WeekName {
+    for(let weekName of this.weekNames) {
+      if(weekName.weekNumber === week) {
+        return weekName;
+      }
+    }
+
+    return null;
   }
 }

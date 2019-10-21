@@ -1,7 +1,8 @@
 <div *ngIf="batch">
   <ul class="nav nav-tabs">
-    <li *ngFor="let week of weeks" [ngClass]="{'active': week === selectedWeek}"  (click)="singleClick(week)">
-      <a role="button"><input *ngIf="activeEdit == week" [(ngModel)]="names[week - 1]">{{displayWeekName(week)}}</a>
+    <li *ngFor="let week of weeks" [ngClass]="{'active': week === selectedWeek}"  (click)="singleClick(week)"
+        (focusout)="forget()" (keydown.enter)="remember(week)" (keydown.esc)="forget()">
+      <a role="button"><input *ngIf="activeEdit == week" [(ngModel)]="nameInput">{{displayWeekName(week)}}</a>
     </li>
     <li role="button" data-toggle="modal" data-target="#addWeeks">
       <a>
