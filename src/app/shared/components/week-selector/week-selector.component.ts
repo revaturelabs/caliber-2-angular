@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChildren, ElementRef, QueryList, AfterViewChecked } from '@angular/core';
 import {AssessBatchService} from "../../../Assess-Batch/Services/assess-batch.service";
 import {Subscription} from "rxjs";
 import {Batch} from "../../../domain/model/batch.dto";
@@ -10,7 +10,7 @@ import {WeekName} from "../../../domain/model/week-name.dto";
   templateUrl: './week-selector.component.html',
   styleUrls: ['./week-selector.component.css']
 })
-export class WeekSelectorComponent implements OnInit {
+export class WeekSelectorComponent implements OnInit, AfterViewChecked {
 
   @Output("selectedWeek") selectedWeekEmitter: EventEmitter<number> = new EventEmitter<number>(true);
   @Output("updatedBatch") updatedBatch: EventEmitter<Batch> = new EventEmitter<Batch>(true);
@@ -18,13 +18,13 @@ export class WeekSelectorComponent implements OnInit {
   @Input("names") weekNames: WeekName[];
   @Input("batch") batch: Batch;
 
-
   selectedWeek: number;
   weeks: number[] = [];
   names: string[] = [];
   nameInput: string = "";
   activeEdit: number = 0;
 
+  @ViewChildren("updateName") inputs: QueryList<ElementRef<HTMLInputElement> >;
   clicks: number = 0;
 
   constructor(
@@ -90,11 +90,11 @@ export class WeekSelectorComponent implements OnInit {
     return this.names[week - 1];
   }
 
-  singleClick(week: number) {
+  onClick(week: number) {
     this.clicks++;
 
     if(this.clicks == 2) {
-      this.nameInput = this.names[week - 1];
+      this.nameInput = "Week Name";
       this.activeEdit = week;
       this.clicks = 0;
     }
@@ -135,5 +135,22 @@ export class WeekSelectorComponent implements OnInit {
     }
 
     return null;
+  }
+
+  getKeyName(week: number): string {
+    for(let weekName of this.weekNames) {
+      if(weekName.weekNumber === week) {
+        return "" + weekName.id;
+      }
+    }
+
+    return "newWeek";
+  }
+
+  ngAfterViewChecked(): void {
+    let shown: ElementRef<HTMLInputElement> = this.inputs.find(input => !!input);
+    if(shown) {
+      shown.nativeElement.focus();
+    }
   }
 }
