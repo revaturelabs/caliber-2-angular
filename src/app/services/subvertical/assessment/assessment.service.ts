@@ -5,6 +5,7 @@ import {Assessment} from "../../../domain/model/assessment.dto";
 import {environment} from "../../../../environments/environment";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Batch} from "../../../domain/model/batch.dto";
+import {WeekName} from "../../../domain/model/week-name.dto";
 
 @Injectable()
 export class AssessmentService {
@@ -40,5 +41,13 @@ export class AssessmentService {
 
   upsertComment(trainee: Trainee): Observable<Trainee> {
     return this.http.put<Trainee>(environment.api.user.trainees.upsertComment, trainee);
+  }
+
+  upsertWeekName(weekName: WeekName): Observable<WeekName> {
+    return this.http.put<WeekName>(environment.api.assessments.weekNames.upsert, weekName);
+  }
+
+  getWeekNamesByBatchId(batchId: number): Observable<WeekName[]> {
+    return this.http.get<WeekName[]>(environment.api.assessments.weekNames.byBatchId(batchId));
   }
 }

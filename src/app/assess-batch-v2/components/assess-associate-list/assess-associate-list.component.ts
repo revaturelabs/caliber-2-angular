@@ -12,7 +12,10 @@ import {Grade} from "../../../domain/model/grade.dto";
 import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
+import {WeekName} from "../../../domain/model/week-name.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
+import {AssessmentService} from "../../../services/subvertical/assessment/assessment.service";
+import {TraineeFlag} from "../../../domain/model/trainee-flag.dto";
 
 @Component({
   selector: 'app-assess-associate-list',
@@ -36,6 +39,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   selectedWeek: number;
   notes: Map<number, Note[]>;
   assessments: Assessment[] = [];
+  names: WeekName[] = [];
   private selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.week);
   // assessmentAverages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
   // overallAverage$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -54,6 +58,7 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     private assessBatchService: AssessBatchService,
     private assessmentDialogService: AssessmentDialogService,
     private commentDialogService: CommentDialogService,
+    private assessmentService: AssessmentService
   ) {
     this.assessBatchService.getActiveCategories().subscribe(
       data => {
@@ -67,12 +72,18 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.columns = [];
     this.grades = new Map<number, Grade[]>();
+    
     // Populate observable when batch is selected from dropdown
     this.trainees$ = this.selectedBatch.asObservable().pipe(
       concatMap(batch => {
         // batch === undefined until we select one from the dropdown
         if (batch !== undefined) {
           this.setUpdatedBatch(batch);
+
+          this.assessmentService.getWeekNamesByBatchId(this.batch.batchId).subscribe((weekNames: WeekName[]) => {
+            this.names = weekNames;
+          });
+
           return this.assessBatchService.getTraineesByBatchId(batch.batchId);
         } else {
           // Return an empty observable if batch === undefined
@@ -231,7 +242,23 @@ export class AssessAssociateListComponent implements OnInit, OnChanges {
     this.onBatchUpdate.emit(batch);
   }
 
+  setUpdatedName(name: WeekName) {
+    this.assessmentService.upsertWeekName(name).subscribe( (result: WeekName) => {
+      let found: boolean = false;
 
+      for(let weekName of this.names) {
+        if(weekName.id === result.id) {
+          weekName = result;
+          found = true;
+          break;
+        }
+      }
+  
+      if(!found) {
+        this.names.push(result);
+      }
+    });
+  }
 
   getGradesForAssessmentAndTrainee(assessmentId: number, traineeId: number): Grade {
     if (this.grades.size > 0) {
