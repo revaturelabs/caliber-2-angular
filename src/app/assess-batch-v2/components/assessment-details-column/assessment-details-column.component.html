@@ -1,5 +1,5 @@
-<a class="assessment-column" (click)="showUpdateAssessmentDialog()">
-  <div>{{ this.column.category }}</div>
-  <div>{{ this.column.assessment.assessmentType }}</div>
-  <div>{{ this.column.assessment.rawScore / this.totalPoints | percent }}</div>
+<a class="assessment-column" (click)="showUpdateAssessmentDialog()" @fadeInOut>
+  <div>{{ this.column?.category }}</div>
+  <div>{{ this.column?.assessment?.assessmentType }}</div>
+  <div>{{ this.column?.assessment?.rawScore / this.totalPoints | percent }}</div>
 </a>

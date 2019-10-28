@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
-import { ErrorService } from './error-handling/services/error.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {BatchModalComponent } from '../app/Assess-Batch/Components/toolbar/batch-modal/batch-modal.component';
-import { FormModalComponent } from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
+import {Component} from '@angular/core';
+import {ErrorService} from './error-handling/services/error.service';
+import {RouterOutlet} from "@angular/router";
+import {routeAnimations} from "./app.animations";
+
 /**
  * @ignore
  */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    routeAnimations
+  ]
 })
 export class AppComponent {
   title = 'Caliber | Performance Management';
 
-  constructor(public errorService: ErrorService, private modalService: NgbModal) {}
+  constructor(public errorService: ErrorService) {}
+
+  getRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData["animation"];
+  }
 
 }

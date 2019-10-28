@@ -15,7 +15,7 @@
   >
   </app-reports-toolbar>
 </div>
-<div class="container" *ngIf="selectedBatch$ | async as selectedBatch">
+<div class="container" *ngIf="selectedBatch$ | async as selectedBatch" [@onReportTransition]="(selectedTrainee$ | async) ? 'individual' : 'batch'">
   <app-compare-assessment-scores
     [batch]="selectedBatch"
     [trainees]="traineesForSelectedBatch$"

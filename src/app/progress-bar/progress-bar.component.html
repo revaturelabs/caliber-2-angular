@@ -1,0 +1,15 @@
+<div class="container" *ngIf="isLoadingRoute" >
+  <div class="progress">
+    <div
+      @onRouteLoad
+      class="progress-bar active progress-bar-animated progress-bar-striped"
+      [style.color]="'#F26925'"
+      [style.background-color]="'#F26925'"
+      [style.height.px]="8"
+      [style.width.%]="getWidth() | async"
+      [attr.aria-valuenow]="100"
+      [attr.aria-valuemax]="100"
+    >
+    </div>
+  </div>
+</div>

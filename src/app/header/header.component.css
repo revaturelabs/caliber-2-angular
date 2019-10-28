@@ -36,3 +36,13 @@ a {
 .brand {
 
 }
+
+.active-route {
+  border-bottom: 3px solid #F26925;
+  color: #F26925;
+  padding-bottom: 1px;
+}
+
+.progress-bar-container {
+  margin-bottom: .5%;
+}

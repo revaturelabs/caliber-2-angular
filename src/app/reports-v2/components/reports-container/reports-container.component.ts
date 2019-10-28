@@ -4,11 +4,13 @@ import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {Batch} from "../../../domain/model/batch.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {Benchmark} from "../../../domain/dto/benchmark.dto";
+import {onReportTransition} from "../../../app.animations";
 
 @Component({
   selector: 'app-reports-container',
   templateUrl: './reports-container.component.html',
-  styleUrls: ['./reports-container.component.css']
+  styleUrls: ['./reports-container.component.css'],
+  animations: [onReportTransition]
 })
 export class ReportsContainerComponent implements OnInit {
 

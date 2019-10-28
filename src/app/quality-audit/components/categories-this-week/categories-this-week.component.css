@@ -1,6 +1,5 @@
 .categories-this-week-container {
-  margin-top: 1.5%;
-  margin-bottom: 1.5%;
+  padding: 1%;
 }
 
 .add-categories-button {
@@ -17,9 +16,7 @@
 }
 
 .category-chip {
-  height: 150px;
-  margin-right: 0.5%;
-  margin-left: 0.5%;
+  margin: 4px 2px;
 }
 
 .remove-category {

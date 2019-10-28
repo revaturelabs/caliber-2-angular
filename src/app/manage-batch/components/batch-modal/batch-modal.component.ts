@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Batch} from "../../../domain/model/batch.dto";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {BsDaterangepickerConfig, BsModalRef} from "ngx-bootstrap";
+import {BsModalRef} from "ngx-bootstrap";
 import {Location} from "../../../domain/model/location.dto";
 import {Trainer} from "../../../domain/model/trainer.dto";
 import {BehaviorSubject, Observable} from "rxjs";
-import {DatepickerDateCustomClasses} from "ngx-bootstrap/datepicker";
 
 @Component({
   selector: 'app-batch-modal',
   templateUrl: './batch-modal.component.html',
-  styleUrls: ['./batch-modal.component.css']
+  styleUrls: ['./batch-modal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BatchModalComponent implements OnInit {
 
@@ -38,7 +38,7 @@ export class BatchModalComponent implements OnInit {
         "trainingType": this.batch.trainingType,
         "skillType": this.batch.skillType,
         "trainer": this.batch.trainer,
-        "coTrainer": this.batch.coTrainer ? this.batch.coTrainer : '',
+        "coTrainer": this.batch.coTrainer ? this.batch.coTrainer : undefined,
         "locationId": this.batch.locationId,
         "goodGrade": this.batch.goodGrade,
         "passingGrade": this.batch.passingGrade,

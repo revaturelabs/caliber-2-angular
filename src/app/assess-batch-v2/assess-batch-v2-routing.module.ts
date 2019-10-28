@@ -4,8 +4,9 @@ import { AssessBatchConatinerComponent } from "./components/assess-batch-conatin
 
 const routes: Routes = [
   {
-    path: '', 
-    component: AssessBatchConatinerComponent
+    path: '',
+    component: AssessBatchConatinerComponent,
+    data: { animation: "AssessBatchPage" }
   }
 ]
 

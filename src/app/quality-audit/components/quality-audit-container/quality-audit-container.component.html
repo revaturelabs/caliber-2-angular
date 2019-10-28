@@ -12,7 +12,7 @@
     (selectedYear)="setSelectedYear($event)"
   >
   </app-batch-select-toolbar>
-  <div *ngIf="selectedBatch">
+  <div *ngIf="selectedBatch else brand">
     <app-week-selector
       [batch]="selectedBatch"
       (selectedWeek)="setSelectedWeek($event)"
@@ -24,4 +24,11 @@
     >
     </app-quality-audit-list>
   </div>
+  <ng-template #brand>
+    <div class="container" @fadeInOut>
+      <div class="img-container">
+        <img src="assets/brand/screen_viewing.svg" class="brand-icon">
+      </div>
+    </div>
+  </ng-template>
 </div>

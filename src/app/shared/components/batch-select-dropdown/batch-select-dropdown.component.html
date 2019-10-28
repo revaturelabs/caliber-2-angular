@@ -5,7 +5,7 @@
     <ul class="dropdown-menu">
         <a role="button">
           <form [formGroup]="searchForm" class="batch-search form-group">
-            <input type="text" class="form-control" placeholder="Search by Trainer Name" formControlName="query" >
+            <input type="text" class="form-control" placeholder="Search by First Name, Last Name, or Curriculum" formControlName="query" >
           </form>
         </a>
       <li *ngIf="results.length > 0">
