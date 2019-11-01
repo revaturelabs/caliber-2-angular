@@ -36,3 +36,7 @@ a {
 .brand {
 
 }
+
+.sign-out {
+  cursor: pointer;
+}

@@ -8,10 +8,21 @@ import {Batch} from "../app/domain/model/batch.dto";
  * @ignore
  */
 
+const clientRoot: string = 'http://localhost:4200';
 const serverRoot: string = 'http://localhost:10000';
 export const environment = {
   production: false,
   serverRootURL: serverRoot,
+  oauth: {
+    redirectUri: `${clientRoot}/home`,
+    clientId: '',
+    clientSecret: '',
+    scope: 'openid profile email',
+    jwkSetUri: 'https://www.googleapis.com/oauth2/v1/certs',
+    issuer: 'https://accounts.google.com',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    logoutUrl: `${clientRoot}/sign-in-required`
+  },
   api: {
     assessments: {
       create: `${serverRoot}/assessment/all/assessment/create`,
