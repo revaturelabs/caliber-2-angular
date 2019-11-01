@@ -32,6 +32,7 @@ import {TrainerService} from "./services/subvertical/user/trainer.service";
 import {HomeService} from "./services/home.service";
 import {ToastService} from './services/toast.service';
 import {ReportsService} from "./services/reports.service";
+import {AuthModule} from "./auth/auth.module";
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 
 @NgModule({
@@ -58,6 +59,7 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
       progressBar: true,
       maxOpened: 5
     }),
+    AuthModule,
   ],
   providers: [
     AssessBatchService,
@@ -78,7 +80,7 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
     LocationService,
     HomeService,
     ReportsService,
-    ToastService
+    ToastService,
   ],
   bootstrap: [
     AppComponent,

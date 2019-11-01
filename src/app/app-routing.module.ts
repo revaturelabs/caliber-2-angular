@@ -1,20 +1,26 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {RequiresAuthenticationGuard} from "./auth/guards/requires-authentication.guard";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'vp/home', pathMatch: 'full' },
-  { path: 'vp/home', loadChildren: 'src/app/home-module/home-module.module#HomeModule', data: { animation: 'HomePage' } },
-  { path: 'vp/manage', loadChildren: './manage-batch/manage-batch.module#ManageBatchModule', data: { animation: "ManageBatchPage" } },
-  { path: 'vp/audit', loadChildren: './quality-audit/quality-audit.module#QualityAuditModule', data: { animation: "QualityAuditPage" }},
-  { path: 'vp/assess', loadChildren: './assess-batch-v2/assess-batch-v2.module#AssessBatchV2Module', data: { animation: "AssessBatchPage" }},
-  { path: 'vp/reports', loadChildren: './reports-v2/reports-v2.module#ReportsV2Module', data: { animation: "ReportsPage" }},
-  { path: 'vp/trainers', loadChildren: './User/user/user.module#UserModule', data: { animation: "ManageTrainersPage" }},
-  { path: 'vp/locations', loadChildren: './locations-module/locations-module.module#LocationsModule', data: { animation: "LocationsPage" }},
-  { path: 'vp/category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule', data: { animation: "CategoriesPage" }},
-
-  // Used to compare module currently working on
-  // { path: 'vp/panels', loadChildren: './reports-module/reports-module.module#ReportsModule'}
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  { path: 'home', loadChildren: 'src/app/home-module/home-module.module#HomeModule', canActivate: [RequiresAuthenticationGuard], data: { animation: 'HomePage' }},
+  { path: 'manage', loadChildren: './manage-batch/manage-batch.module#ManageBatchModule', canActivate: [RequiresAuthenticationGuard], data: { animation: "ManageBatchPage" } },
+  { path: 'audit', loadChildren: './quality-audit/quality-audit.module#QualityAuditModule', canActivate: [RequiresAuthenticationGuard], data: { animation: "QualityAuditPage" }},
+  { path: 'assess', loadChildren: './assess-batch-v2/assess-batch-v2.module#AssessBatchV2Module', canActivate: [RequiresAuthenticationGuard], data: { animation: "AssessBatchPage" }},
+  { path: 'reports', loadChildren: './reports-v2/reports-v2.module#ReportsV2Module', canActivate: [RequiresAuthenticationGuard],  data: { animation: "ReportsPage" } },
+  { path: 'trainers', loadChildren: './User/user/user.module#UserModule', canActivate: [RequiresAuthenticationGuard], data: { animation: "ManageTrainersPage" } },
+  { path: 'locations', loadChildren: './locations-module/locations-module.module#LocationsModule', canActivate: [RequiresAuthenticationGuard], data: { animation: "LocationsPage" }},
+  { path: 'category', loadChildren: './assess-categories-module/assess-categories-module.module#AssessCategoriesModule', canActivate: [RequiresAuthenticationGuard], data: { animation: "CategoriesPage" }},
+  {
+    path: 'error',
+    loadChildren: './auth/auth.module#AuthModule'
+  }
 ];
 
 @NgModule({

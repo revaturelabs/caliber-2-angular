@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../auth/services/auth.service";
 
 /**
- * 
+ *
  * This is the header component.
  * @author Ted Sanjeevi, Bree Hall
  */
@@ -15,7 +16,9 @@ export class HeaderComponent implements OnInit {
   /**
    * @ignore
    */
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   /**
    * @ignore
@@ -23,4 +26,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  isSignedIn(): boolean {
+    return this.authService.hasValidAccessToken() && this.authService.hasValidIdToken();
+  }
+
+  signOut() {
+    this.authService.signOut();
+  }
 }

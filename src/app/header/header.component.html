@@ -8,22 +8,21 @@
 					<span class="icon-bar"></span>
 			</button>
 		</div>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<div class="collapse navbar-collapse" id="collapsibleNavbar" *ngIf="isSignedIn()">
 			<ul class="nav navbar-nav navbar-right">
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="home-link" routerLink="vp/home" routerLinkActive="active-route">Home</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="manage-link" routerLink="vp/manage" routerLinkActive="active-route">Manage Batch</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="assess-link" routerLink="vp/assess" routerLinkActive="active-route">Assess Batch</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="quality-link" routerLink="vp/audit" routerLinkActive="active-route">Quality Audit</a></li>
-<!--				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="panel-link" routerLink="vp/panels" routerLinkActive="active-route">Panel</a></li>-->
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="reports-link" routerLink="vp/reports" routerLinkActive="active-route">Reports</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="home-link" routerLink="home" routerLinkActive="active-route">Home</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="manage-link" routerLink="manage" routerLinkActive="active-route">Manage Batch</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="assess-link" routerLink="assess" routerLinkActive="active-route">Assess Batch</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="quality-link" routerLink="audit" routerLinkActive="active-route">Quality Audit</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="reports-link" routerLink="reports" routerLinkActive="active-route">Reports</a></li>
 				<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="trainers-link" routerLink="vp/trainers/viewTrainers">Trainers</a></li>
-						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="location-link" routerLink="vp/locations">Locations</a></li>
-						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="category-link" routerLink="vp/category">Category</a></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="trainers-link" routerLink="trainers/viewTrainers">Trainers</a></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="location-link" routerLink="locations">Locations</a></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="category-link" routerLink="category">Category</a></li>
 					</ul>
         </li>
-        <li><a href="https://caliber.auth.us-east-2.amazoncognito.com/login?client_id=1ibves608nfbv2frrq2qu9q7l9&redirect_uri=https://caliber.dev.revaturelabs.com&response_type=code" target="_self">Login</a></li>
+        <li *ngIf="isSignedIn()" class="sign-out"><a (click)="signOut()">Sign Out</a></li>
 			</ul>
 		</div>
 	</div>
