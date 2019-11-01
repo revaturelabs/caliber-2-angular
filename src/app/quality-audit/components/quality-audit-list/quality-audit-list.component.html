@@ -1,6 +1,13 @@
-<div class="container-fluid">
-  <div class="table-responsive" *ngIf="trainees$ | async as trainees">
-    <app-categories-this-week *ngIf="categories$ | async as categories" [categories]="categories" [week]="week" [batchId]="batchId" ></app-categories-this-week>
+<div class="container" *ngIf="getWeek() | async as week">
+  <ng-container *ngIf="categories$ | async as categories">
+    <app-categories-this-week
+      [categories]="categories"
+      [week]="week"
+      [batchId]="batchId"
+    >
+    </app-categories-this-week>
+  </ng-container>
+  <div class="table-responsive" *ngIf="trainees$ | async as trainees" @fadeInOut>
     <table class="table">
       <thead>
       <tr>

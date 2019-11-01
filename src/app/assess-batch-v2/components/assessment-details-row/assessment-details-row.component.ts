@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Grade} from "../../../domain/model/grade.dto";
 import {AssessBatchService} from "../../../services/assess-batch.service";
@@ -7,7 +16,7 @@ import {Assessment} from "../../../domain/model/assessment.dto";
 @Component({
   selector: 'app-assessment-details-row',
   templateUrl: './assessment-details-row.component.html',
-  styleUrls: ['./assessment-details-row.component.css']
+  styleUrls: ['./assessment-details-row.component.css'],
 })
 export class AssessmentDetailsRowComponent implements OnInit, OnChanges {
 

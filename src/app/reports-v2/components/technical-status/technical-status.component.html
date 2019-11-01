@@ -15,14 +15,14 @@
       <table class="table">
         <thead>
           <tr>
-            <th><strong>Subject</strong></th>
-            <th><strong>Score</strong></th>
+            <th class="text-center"><strong>Subject</strong></th>
+            <th class="text-center"><strong>Score</strong></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let batchGrade of allBatchGrades">
-            <td *ngIf="batchGrade?.traineeId === -1">{{ batchGrade?.assessmentType }}</td>
-            <td *ngIf="batchGrade?.traineeId === -1">{{ batchGrade?.score / 100 | percent: '1.2-2' }}</td>
+            <td *ngIf="batchGrade?.traineeId === -1" class="text-center">{{ batchGrade?.assessmentType }}</td>
+            <td *ngIf="batchGrade?.traineeId === -1" class="text-center">{{ batchGrade?.score / 100 | percent: '1.2-2' }}</td>
             <td></td>
           </tr>
         </tbody>
@@ -44,9 +44,9 @@
       <table class="table">
         <thead>
         <tr>
-          <th><strong>Subject</strong></th>
-          <th><strong>Score</strong></th>
-          <th *ngIf="trainee?.name "><strong>{{ trainee?.name }}</strong></th>
+          <th class="text-center"><strong>Subject</strong></th>
+          <th class="text-center"><strong>Score</strong></th>
+          <th *ngIf="trainee?.name " class="text-center"><strong>{{ trainee?.name }}</strong></th>
         </tr>
         </thead>
         <tbody>

@@ -5,11 +5,13 @@ import {distinctUntilChanged} from "rxjs/operators";
 import {Category} from "../../../domain/model/category.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {QcNote} from "../../../domain/model/qc-note.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-quality-audit-list',
   templateUrl: './quality-audit-list.component.html',
   styleUrls: ['./quality-audit-list.component.css'],
+  animations: [fadeInOut]
 })
 export class QualityAuditListComponent implements OnInit, OnChanges {
 
@@ -25,6 +27,7 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   private lastWeek$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private noteMap: Map<number, QcNote> = new Map<number, QcNote>();
   private lastBatchAudit$: EventEmitter<QcNote> = new EventEmitter<QcNote>(true);
+  qcNotes: QcNote[];
   qcBatchNote: QcNote;
   showCalculatedFeedback: boolean = false;
   lastQcStatus: string;
@@ -46,10 +49,7 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
           this.qaService.getQcTraineeNotesByBatchAndWeek(batchId, week).subscribe(
             data => {
               if (data && data.length > 0) {
-                for (let note of data) {
-                  this.noteMap.set(note.traineeId, note);
-                  this.notesLoaded = true;
-                }
+                this.qcNotes = data;
               }
             }
           );
@@ -78,26 +78,38 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
       const change = changes[prop];
       if (prop === 'week') {
         this.lastWeek$.next(change.currentValue);
+        if (change.currentValue && this.batchId) {
+          this.qaService.getQcTraineeNotesByBatchAndWeek(this.batchId, change.currentValue).subscribe(
+            data => this.qcNotes = data
+          );
+        }
       } else if (prop === 'batchId') {
         this.lastBatchId$.next(change.currentValue);
+        if (change.currentValue && this.week) {
+          this.qaService.getQcTraineeNotesByBatchAndWeek(change.currentValue, this.week).subscribe(
+            data => this.qcNotes = data
+          );
+        }
       }
     }
   }
 
   getQcTraineeNote(traineeId: number): QcNote {
-    if (this.noteMap.has(traineeId) && this.noteMap.get(traineeId).technicalStatus !== undefined) {
-      return this.noteMap.get(traineeId);
-    } else {
-      return {
-        technicalStatus: "Undefined",
-        softSkillStatus: "Undefined",
-        traineeId: traineeId,
-        batchId: this.batchId,
-        week: this.week,
-        content: "",
-        type: "QC_TRAINEE",
-      };
+    if (this.qcNotes && this.qcNotes.length > 0 && traineeId) {
+      const found = this.qcNotes.find(note => note.traineeId === traineeId && note.technicalStatus !== undefined);
+      if (found) {
+        return found;
+      }
     }
+    return {
+      technicalStatus: "Undefined",
+      softSkillStatus: "Undefined",
+      traineeId: traineeId,
+      batchId: this.batchId,
+      week: this.week,
+      content: "",
+      type: "QC_TRAINEE",
+    };
   }
 
   getQcBatchNote(): QcNote {
@@ -117,7 +129,7 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
   }
 
   determineOverallBatchScore(): QcNote | undefined {
-    if (this.noteMap && this.noteMap.size) {
+    if (this.qcNotes && this.qcNotes.length > 0) {
       // Helper object
       const results = {
         missing: {
@@ -155,7 +167,7 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
       };
 
       // Calculate values
-      this.noteMap.forEach((value, key) => {
+      this.qcNotes.forEach((value, key) => {
         if (value.technicalStatus === "Poor") {
           results.red.increment();
         } else if (value.technicalStatus === "Average") {
@@ -210,14 +222,22 @@ export class QualityAuditListComponent implements OnInit, OnChanges {
     currentNote.content = qcNote.content;
     this.qaService.upsertQcTraineeNote(currentNote).subscribe(
       data => {
-        this.noteMap.set(data.traineeId, data);
+        this.qaService.getQcTraineeNotesByBatchAndWeek(data.batchId, data.week).subscribe(
+          data => this.qcNotes = data
+        );
+        // this.noteMap.set(data.traineeId, data);
+
         // Whenever an Individual Qc Note Changes, recalculate the overall score
         const overall = this.determineOverallBatchScore();
         if (overall !== undefined) {
-          this.handleQcBatchNoteChange(this.determineOverallBatchScore());
+          this.handleQcBatchNoteChange(overall);
         }
       }
     )
+  }
+
+  getWeek(): Observable<number> {
+    return this.lastWeek$.asObservable();
   }
 
   show() {

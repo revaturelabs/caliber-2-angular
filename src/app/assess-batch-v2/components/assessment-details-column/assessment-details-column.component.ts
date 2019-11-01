@@ -2,11 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
 import {AssessBatchColumn} from "../../../domain/dto/assess-batch-column.dto";
 import {Category} from "../../../domain/model/category.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-assessment-details-column',
   templateUrl: './assessment-details-column.component.html',
   styleUrls: ['./assessment-details-column.component.css'],
+  animations: [fadeInOut]
 })
 export class AssessmentDetailsColumnComponent implements OnInit {
 

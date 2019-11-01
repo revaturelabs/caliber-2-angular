@@ -1,13 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QcNote} from "../../../domain/model/qc-note.dto";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {st} from "@angular/core/src/render3";
 
 
 @Component({
   selector: 'app-qc-feedback',
   templateUrl: './qc-feedback.component.html',
   styleUrls: ['./qc-feedback.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QcFeedbackComponent implements OnInit {
 

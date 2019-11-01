@@ -1,18 +1,19 @@
-import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Batch} from "../../../domain/model/batch.dto";
 import {ReportsService} from "../../../services/reports.service";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Trainee} from "../../../domain/model/trainee.dto";
 import {ChartDataSets, ChartOptions} from "chart.js";
 import {Label} from "ng2-charts";
 import {GradeComparisonDto} from "../../../domain/dto/grade-comparison.dto";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-qc-scores',
   templateUrl: './qc-scores.component.html',
   styleUrls: ['./qc-scores.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  animations: [fadeInOut]
 })
 export class QcScoresComponent implements OnInit, OnChanges {
 

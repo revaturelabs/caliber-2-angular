@@ -4,7 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import {CategoriesComponent} from "../AssessmentCategories/Components/categories/categories.component";
 
-const routes: Routes = [{path: "", component: CategoriesComponent}];
+const routes: Routes = [{path: "", component: CategoriesComponent, data: { animation: "CategoriesPage" }}];
 
 @NgModule({
   imports: [

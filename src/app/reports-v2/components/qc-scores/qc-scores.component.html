@@ -1,6 +1,6 @@
 <div class="row" *ngIf="trainees$ | async as trainees">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="panel panel-default" *ngIf="qcBatchNotes$ | async as qcBatchNotes">
+    <div class="panel panel-default" *ngIf="qcBatchNotes$ | async as qcBatchNotes else noQcBatchNotes" @fadeInOut>
       <div class="panel-heading">
         {{ batch?.trainer }}{{ batch.coTrainer ? '/' + batch.coTrainer : '' }} - {{ batch?.skillType }} QC Scores
       </div>
@@ -96,5 +96,29 @@
         </div>
       </div>
     </div>
+    <ng-template #noQcBatchNotes>
+      <div class="panel panel-default" *ngIf="!trainee" @fadeInOut>
+        <div class="panel-heading">{{ batch?.trainer }}{{ batch.coTrainer ? '/' + batch.coTrainer : '' }} - {{ batch?.skillType }} QC Scores</div>
+        <div class="panel-body">
+          <div>
+            <div class="img-container">
+              <img src="assets/brand/screen_viewing.svg" class="brand-icon">
+              <p class="brand-text">No QC Notes found for {{ batch?.trainer }}{{ batch.coTrainer ? '/' + batch.coTrainer : '' }} - {{ batch?.skillType }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default" *ngIf="trainee" @fadeInOut>
+        <div class="panel-heading">{{ trainee?.name }} - {{ week ? "Week " + week : 'Overall' }} QC Notes</div>
+        <div class="panel-body">
+          <div>
+            <div class="img-container">
+              <img src="assets/brand/screen_viewing.svg" class="brand-icon">
+              <p class="brand-text">No QC Notes found for {{ trainee?.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

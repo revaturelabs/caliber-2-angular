@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {Batch} from "../../../domain/model/batch.dto";
-import {AssessBatchService} from "../../../services/assess-batch.service";
 import {ChronoService} from "../../../services/subvertical/util/chrono.service";
 import {BatchService} from "../../../services/subvertical/batch/batch.service";
+import {fadeInOut} from "../../../app.animations";
 
 @Component({
   selector: 'app-quality-audit-container',
   templateUrl: './quality-audit-container.component.html',
-  styleUrls: ['./quality-audit-container.component.css']
+  styleUrls: ['./quality-audit-container.component.css'],
+  animations: [fadeInOut]
 })
 export class QualityAuditContainerComponent implements OnInit {
 

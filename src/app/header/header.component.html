@@ -10,12 +10,11 @@
 		</div>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar" *ngIf="isSignedIn()">
 			<ul class="nav navbar-nav navbar-right">
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="home-link" routerLink="home">Home</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="manage-link" routerLink="manage">Manage Batch</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="assess-link" routerLink="assess">Assess Batch</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="quality-link" routerLink="audit">Quality Audit</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="panel-link" routerLink="panels">Panel</a></li>
-				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="reports-link" routerLink="reports">Reports</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="home-link" routerLink="home" routerLinkActive="active-route">Home</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="manage-link" routerLink="manage" routerLinkActive="active-route">Manage Batch</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="assess-link" routerLink="assess" routerLinkActive="active-route">Assess Batch</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="quality-link" routerLink="audit" routerLinkActive="active-route">Quality Audit</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="reports-link" routerLink="reports" routerLinkActive="active-route">Reports</a></li>
 				<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="trainers-link" routerLink="trainers/viewTrainers">Trainers</a></li>
@@ -27,4 +26,7 @@
 			</ul>
 		</div>
 	</div>
+  <div class="progress-bar-container">
+    <app-progress-bar></app-progress-bar>
+  </div>
 </nav>

@@ -8,7 +8,7 @@ import {AssessBatchService} from "../../../services/assess-batch.service";
 @Component({
   selector: 'app-assess-batch-conatiner',
   templateUrl: './assess-batch-conatiner.component.html',
-  styleUrls: ['./assess-batch-conatiner.component.css']
+  styleUrls: ['./assess-batch-conatiner.component.css'],
 })
 export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
@@ -75,6 +75,9 @@ export class AssessBatchConatinerComponent implements OnInit, OnDestroy {
 
   setSelectedBatch(batch: Batch) {
     this.selectedBatch = batch;
+    if (batch) {
+      this.setSelectedWeek(batch.weeks);
+    }
   }
 
   setSelectedWeek(week: number) {

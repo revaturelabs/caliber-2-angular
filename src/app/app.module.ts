@@ -33,6 +33,7 @@ import {HomeService} from "./services/home.service";
 import {ToastService} from './services/toast.service';
 import {ReportsService} from "./services/reports.service";
 import {AuthModule} from "./auth/auth.module";
+import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {AuthModule} from "./auth/auth.module";
     FooterComponent,
     ErrorComponent,
     CreateModalComponent,
-    FormModalComponent
+    FormModalComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

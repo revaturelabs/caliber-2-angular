@@ -3,7 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { LocationspageComponent } from '../locationspage/locationspage.component';
 
 const routes: Routes = [
-  {path:'', component: LocationspageComponent}
+  {path:'', component: LocationspageComponent, data: { animation: "LocationsPage" }}
 ];
 
 @NgModule( {

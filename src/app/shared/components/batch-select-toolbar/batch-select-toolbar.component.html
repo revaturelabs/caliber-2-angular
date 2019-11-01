@@ -1,18 +1,25 @@
-<div class="toolbar-row">
+<div class="toolbar-row" @fadeInOut>
   <div class="toolbar-row-item">
-    <app-shared-dropdown-menu *ngIf="years"
+    <app-shared-dropdown-menu
+      *ngIf="years"
       [data]="years"
       [dropdownFor]="'Year'"
       [selectedValue]="year"
       (onValueSelect)="selectYear($event)"
     ></app-shared-dropdown-menu>
-    <app-shared-dropdown-menu  *ngIf="quarters"
+    <app-shared-dropdown-menu
+      *ngIf="quarters"
       [data]="quarters"
       [format]="formatQuarters"
       [dropdownFor]="'Quarter'"
       [selectedValue]="quarter"
       (onValueSelect)="selectQuarter($event)"
     ></app-shared-dropdown-menu>
-    <app-batch-select-dropdown *ngIf="batches" [batches]="batches" (onBatchSelect)="selectBatch($event)"></app-batch-select-dropdown>
+    <app-batch-select-dropdown
+      *ngIf="batches"
+      [batches]="batches"
+      (onBatchSelect)="selectBatch($event)"
+    >
+    </app-batch-select-dropdown>
   </div>
 </div>
