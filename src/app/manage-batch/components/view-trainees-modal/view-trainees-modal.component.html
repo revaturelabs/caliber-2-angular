@@ -2,13 +2,13 @@
   <div class="modal-header" *ngIf="trainees.length > 0">
     <div class="view-trainees-modal-header-container">
       <div class="view-trainees-modal-header">
-        <h4 class="modal-title">Trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+        <h4 id="view-trainees-modal-header-text" class="modal-title">Trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
+        <button type="button" id="view-trainees-modal-close-button" class="close pull-right" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="show-active-toggle">
-        <h5>Show Active Trainees Only</h5> <span class="active-toggle"><a role="button" class="fa fa-2x" [ngClass]="{ 'fa-toggle-on': !showInactive, 'fa-toggle-off': showInactive}" (click)="toggleInactiveTrainees()"></a></span>
+        <h5>Show Active Trainees Only</h5> <span class="active-toggle"><a role="button" id="view-trainees-modal-show-trainees-toggle-button" class="fa fa-2x" [ngClass]="{ 'fa-toggle-on': !showInactive, 'fa-toggle-off': showInactive}" (click)="toggleInactiveTrainees()"></a></span>
       </div>
       <div>
         <app-add-trainee-button [batch]="batch"></app-add-trainee-button>
@@ -17,15 +17,15 @@
   </div>
   <div class="modal-header" *ngIf="trainees.length === 0">
     <div class="view-trainees-modal-header">
-      <h4 class="modal-title">No trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+      <h4 id="view-trainees-modal-header-text" class="modal-title">No trainees in {{ batch?.trainer }}'s {{ batch?.trainingName }}</h4>
+      <button type="button" id="view-trainees-modal-close-button" class="close pull-right" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   </div>
   <div class="modal-body" *ngIf="trainees.length > 0">
     <div class="view-trainees-modal-body">
-      <table class="table">
+      <table id="view-trainees-modal-trainees-list-table" class="table">
         <thead>
           <tr>
             <th class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-xl-1"></th>
