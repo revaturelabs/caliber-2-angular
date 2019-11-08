@@ -5,7 +5,7 @@
     <form id="formId" ngNativeValidate (submit)="checkDates()" data-toggle="modal" data-target="#dateError">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id = "batch-modal-closecreatebatchmodal" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 *ngIf="createOrUpdate === null" class="modal-title" id="batchModalLabel">Create New Batch</h4>
@@ -24,12 +24,12 @@
               <select *ngIf="createOrUpdate" [(ngModel)]="trainingType" [ngModelOptions]="{standalone: true}" class="form-control" id="trainingType" required name="trainingType">
                 <option id="defaultTrainingType" value="null" disabled>Select
                   Training Type</option>
-                <option *ngFor="let option of trainingTypes" [selected]="option === createOrUpdate.trainingType" [ngValue]="option">{{option}}</option>
+                <option *ngFor="let option of trainingTypes" [selected]="option === createOrUpdate.trainingType" [ngValue]="option" id="{{'batch-modal-optiontrainingtype-'+option}}">{{option}}</option>
               </select>
               <select *ngIf="!createOrUpdate" #trainingType (change)="setTrainingType(trainingType.value)" class="form-control" id="trainingType" required name="trainingType">
                   <option id="defaultTrainingType" selected="selected" value="" disabled>Select
                     Training Type</option>
-                  <option *ngFor="let option of trainingTypes" [ngValue]="option">{{option}}</option>
+                  <option *ngFor="let option of trainingTypes" [ngValue]="option" id="{{'batch-modal-optiontrainingtype-'+option}}">{{option}}</option>
                 </select>
             </div>
           </div>
@@ -39,12 +39,12 @@
               <select *ngIf="!createOrUpdate" #skillType (change)="setSkillType(skillType.value)" name="skillType" class="form-control" id="skillType"
                 required>
                 <option selected="selected" value="" disabled>Select Skill Type</option>
-                <option *ngFor="let option of skillTypes" [ngValue]="option">{{option}}</option>
+                <option *ngFor="let option of skillTypes" [ngValue]="option" id="{{batch-modal-optionskilltype-'+option}}">{{option}}</option>
               </select>
               <select *ngIf="createOrUpdate" [(ngModel)]="skillType" [ngModelOptions]="{standalone: true}" name="skillType" class="form-control" id="skillType"
                 required>
                 <option value="" disabled>Select Skill Type</option>
-                <option *ngFor="let option of skillTypes" [ngValue]="option" [selected]="createOrUpdate && option === createOrUpdate.skillType">{{option}}</option>
+                <option *ngFor="let option of skillTypes" [ngValue]="option" [selected]="createOrUpdate && option === createOrUpdate.skillType" id="{{'batch-modal-optionskilltype-'+ option}}">{{option}}</option>
               </select>
             </div>
             <!-- Dropdown for location -->
@@ -54,13 +54,13 @@
               <select *ngIf="!createOrUpdate" #location (change)="setLocation(location.value)" id="location" required class="form-control"
                 required name="location">
                 <option value="" selected="selected" disabled>Select Location</option>
-                <option *ngFor="let option of locationOptions" value="{{option.id}}">
+                <option *ngFor="let option of locationOptions" value="{{option.id}}" id="{{'batch-modal-optionlocation-'+option.id}}">
                   {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
               </select>
               <select *ngIf="createOrUpdate" [(ngModel)]="locationId" [ngModelOptions]="{standalone: true}"  id="location" required class="form-control"
                 required name="location">
                 <option value="" disabled>Select Location</option>
-                <option *ngFor="let option of locationOptions" [selected]="option.id===createOrUpdate.locationId" [ngValue]="option.id">
+                <option *ngFor="let option of locationOptions" [selected]="option.id===createOrUpdate.locationId" [ngValue]="option.id" id="{{'batch-modal-optionlocation-'+option.id}}">
                   {{ option.name }}, {{ option.address }}, {{ option.city }} {{ option.state }} {{ option.zipcode }}</option>
               </select>
             </div>
@@ -72,11 +72,11 @@
               <label for="trainer">Trainer:</label>
               <select *ngIf="!createOrUpdate" #trainer (change)="setTrainer(trainer.value)" class="form-control" id="trainer" required name="trainer">
                 <option value="" selected="selected" disabled>Select Trainer</option>
-                <option *ngFor="let option of trainers" [ngValue]="option.name">{{option.name}}</option>
+                <option *ngFor="let option of trainers" [ngValue]="option.name" id="{{'batch-modal-optiontrainers-'+option.id}}">{{option.name}}</option>
               </select>
               <select *ngIf="createOrUpdate" [(ngModel)]="trainer" [ngModelOptions]="{standalone: true}" class="form-control" id="trainer" required name="trainer">
                   <option value=""  disabled>Select Trainer</option>
-                  <option *ngFor="let option of trainers" [ngValue]="option.name" [selected]="option.name === createOrUpdate.trainer">{{option.name}}</option>
+                  <option *ngFor="let option of trainers" [ngValue]="option.name" [selected]="option.name === createOrUpdate.trainer" id="{{'batch-modal-optiontrainers-'+option.id}}">{{option.name}}</option>
                 </select>
             </div>
             <div class="form-group col-md-6 col-sm-6">
@@ -85,7 +85,7 @@
                 name="coTrainer">
                 <option [ngValue]="null" disabled>Select Co-Trainer</option>
                 <option [ngValue]="'none'">None</option>
-                <option *ngFor="let option of trainers" [ngValue]="option.name">{{option.name}}</option>
+                <option *ngFor="let option of trainers" [ngValue]="option.name" id="{{'batch-modal-optiontrainers-'+option.id}}">{{option.name}}</option>
               </select>
             </div>
           </div>
@@ -128,7 +128,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input *ngIf="createOrUpdate === null" value="Save" type="submit" class="btn btn-primary" />
+          <input *ngIf="createOrUpdate === null" id = "batch-modal-savebutton" value="Save" type="submit" class="btn btn-primary" />
           <input type="button" *ngIf="createOrUpdate != null" id="updateBtn" value="Update" (click)="checkDates2()" class="btn btn-primary"/>
           <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -145,7 +145,7 @@
           <h4 class="modal-title" id="batchModalLabel">
             Invalid Batch Info&nbsp;<i class="fa fa-frown-o fa-2x pick " style="font-weight:100" aria-hidden="true" ></i>
           </h4>
-          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" id = "batch-modal-closeerrormodal" (click)="closeModal()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
 
@@ -161,7 +161,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">Ok</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="batch-modal-okbutton" (click)="closeModal()">Ok</button>
       </div>
     </div>
   </div>
