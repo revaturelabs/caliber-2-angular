@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="location-addlocationmodal-exitmodal">
           <span aria-hidden="true">×</span>
         </button>
         <h4 class="modal-title" id="locationModalLabel">Create Location</h4>
@@ -34,57 +34,57 @@
               <label for="locationState">State:</label> <select [(ngModel)]="location.state" class="form-control"
                 id="locationState" required>
                 <option value="" disabled="">Select State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
+                <option value="AL" id = "locationspage-addlocationmodal-ALoption">Alabama</option>
+                <option value="AK" id = "locationspage-addlocationmodal-AKoption">Alaska</option>
+                <option value="AZ" id = "locationspage-addlocationmodal-AZoption">Arizona</option>
+                <option value="AR" id = "locationspage-addlocationmodal-ARoption">Arkansas</option>
+                <option value="CA" id = "locationspage-addlocationmodal-CAoption">California</option>
+                <option value="CO" id = "locationspage-addlocationmodal-COoption">Colorado</option>
+                <option value="CT" id = "locationspage-addlocationmodal-CToption">Connecticut</option>
+                <option value="DE" id = "locationspage-addlocationmodal-DEoption">Delaware</option>
+                <option value="DC" id = "locationspage-addlocationmodal-DCoption">District Of Columbia</option>
+                <option value="FL" id = "locationspage-addlocationmodal-FLoption">Florida</option>
+                <option value="GA" id = "locationspage-addlocationmodal-GAoption">Georgia</option>
+                <option value="HI" id = "locationspage-addlocationmodal-HIoption">Hawaii</option>
+                <option value="ID" id = "locationspage-addlocationmodal-IDoption">Idaho</option>
+                <option value="IL" id = "locationspage-addlocationmodal-ILoption">Illinois</option>
+                <option value="IN" id = "locationspage-addlocationmodal-INoption">Indiana</option>
+                <option value="IA" id = "locationspage-addlocationmodal-IAoption">Iowa</option>
+                <option value="KS" id = "locationspage-addlocationmodal-KSoption">Kansas</option>
+                <option value="KY" id = "locationspage-addlocationmodal-KYoption">Kentucky</option>
+                <option value="LA" id = "locationspage-addlocationmodal-LAoption">Louisiana</option>
+                <option value="ME" id = "locationspage-addlocationmodal-MEoption">Maine</option>
+                <option value="MD" id = "locationspage-addlocationmodal-MDoption">Maryland</option>
+                <option value="MA" id = "locationspage-addlocationmodal-MAoption">Massachusetts</option>
+                <option value="MI" id = "locationspage-addlocationmodal-MIoption">Michigan</option>
+                <option value="MN" id = "locationspage-addlocationmodal-MNoption">Minnesota</option>
+                <option value="MS" id = "locationspage-addlocationmodal-MSoption">Mississippi</option>
+                <option value="MO" id = "locationspage-addlocationmodal-MOoption">Missouri</option>
+                <option value="MT" id = "locationspage-addlocationmodal-MToption">Montana</option>
+                <option value="NE" id = "locationspage-addlocationmodal-NEoption">Nebraska</option>
+                <option value="NV" id = "locationspage-addlocationmodal-NVoption">Nevada</option>
+                <option value="NH" id = "locationspage-addlocationmodal-NHoption">New Hampshire</option>
+                <option value="NJ" id = "locationspage-addlocationmodal-NJoption">New Jersey</option>
+                <option value="NM" id = "locationspage-addlocationmodal-NMoption">New Mexico</option>
+                <option value="NY" id = "locationspage-addlocationmodal-NYoption">New York</option>
+                <option value="NC" id = "locationspage-addlocationmodal-NCoption">North Carolina</option>
+                <option value="ND" id = "locationspage-addlocationmodal-NDoption">North Dakota</option>
+                <option value="OH" id = "locationspage-addlocationmodal-OHoption">Ohio</option>
+                <option value="OK" id = "locationspage-addlocationmodal-OKoption">Oklahoma</option>
+                <option value="OR" id = "locationspage-addlocationmodal-ORoption">Oregon</option>
+                <option value="PA" id = "locationspage-addlocationmodal-PAoption">Pennsylvania</option>
+                <option value="RI" id = "locationspage-addlocationmodal-RIoption">Rhode Island</option>
+                <option value="SC" id = "locationspage-addlocationmodal-SCoption">South Carolina</option>
+                <option value="SD" id = "locationspage-addlocationmodal-SDoption">South Dakota</option>
+                <option value="TN" id = "locationspage-addlocationmodal-TNoption">Tennessee</option>
+                <option value="TX" id = "locationspage-addlocationmodal-TXoption">Texas</option>
+                <option value="UT" id = "locationspage-addlocationmodal-UToption">Utah</option>
+                <option value="VT" id = "locationspage-addlocationmodal-VToption">Vermont</option>
+                <option value="VA" id = "locationspage-addlocationmodal-VAoption">Virginia</option>
+                <option value="WA" id = "locationspage-addlocationmodal-WAoption">Washington</option>
+                <option value="WV" id = "locationspage-addlocationmodal-WVoption">West Virginia</option>
+                <option value="WI" id = "locationspage-addlocationmodal-WIoption">Wisconsin</option>
+                <option value="WY" id = "locationspage-addlocationmodal-WYoption">Wyoming</option>
               </select>
             </div>
           </div>
@@ -99,8 +99,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='addLocation()'>Save</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='addLocation()' id="location-addlocationmodal-savelocation">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="location-addlocationmodal-closelocation">Close</button>
 
       </div>
 
