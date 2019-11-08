@@ -9,7 +9,8 @@
           <div class="panel-body">
             <div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
               <div style="display: block;">
-                <canvas baseChart 
+                <canvas id="cumulative-scores-canvas" 
+                  baseChart 
                   [datasets]="barChartData"
                   [labels]="barChartLabels"
                   [options]="barChartOptions"
@@ -22,7 +23,7 @@
             </div>
 
             <div class="table-responsive">
-              <table ng-if="batchOverAllLabels" class="table ng-scope" style="border-collapse: collapse;">
+              <table ng-if="batchOverAllLabels" id="cumulative-scores-table" class="table ng-scope" style="border-collapse: collapse;">
               <tbody>
                 <tr ng-repeat="label in batchOverAllLabels track by $index" *ngFor="let grade of gradeAverages; index as i;" class="col-md-4 col-lg-4 col-sm-6 col-xs-6 ng-scope">
                   <th class="pull-left ng-binding">{{barChartLabels[i]}}</th>
