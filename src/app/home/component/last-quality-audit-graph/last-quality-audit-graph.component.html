@@ -1,4 +1,4 @@
-<div class="chart-container top5"><iframe class="chartjs-hidden-iframe" tabindex="-1"></iframe>
+<div class="chart-container top5" id="last-quality-audit-graph-chart-container"><iframe class="chartjs-hidden-iframe" tabindex="-1"></iframe>
   <div style="display: block;" *ngIf="displaying">
 
     <canvas
@@ -13,7 +13,7 @@
       (chartClick)="chartClicked($event)"
       (chartHover)="chartHovered($event)"
       (mouseout)="chartMouseOut($event)"
-      >
+      id="last-quality-audit-graph-base-chart-canvas">
     </canvas>
   </div>
 </div>
@@ -23,37 +23,37 @@
   <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
   <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="last-quality-audit-graph-modal-dialog">
 
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Quality Audit Report - Week {{chartWeekReference[index]}}</h4>
+      <div class="modal-content" id="last-quality-audit-graph-modal-content">
+        <div class="modal-header" id="last-quality-audit-graph-modal-header">
+          <button type="button" class="close" data-dismiss="modal" id="last-quality-audit-graph-close-button">&times;</button>
+          <h4 class="modal-title" id="last-quality-audit-graph-modal-title">Quality Audit Report - Week {{chartWeekReference[index]}}</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="last-quality-audit-graph-modal-body">
           <strong>
-            <p *ngIf="(qaNoteCategory)">Categories covered this week: {{qaNoteCategory}}</p>
+            <p *ngIf="(qaNoteCategory)" id="last-quality-audit-graph-categories">Categories covered this week: {{qaNoteCategory}}</p>
           </strong>
-          <table class="table table-responsive" >
+          <table class="table table-responsive" id="last-quality-audit-graph-categories-table">
             <tr>
-              <th class="col-sm-2 col-md-2 col-lg-2" >Trainee:</th> <th class="col-sm-2 col-md-2 col-lg-2" >Feedback:</th> <th class="col-sm-8 col-md-8 col-lg-8" >Notes:</th>
+              <th class="col-sm-2 col-md-2 col-lg-2" id="last-quality-audit-graph-categories-table-header">Trainee:</th> <th class="col-sm-2 col-md-2 col-lg-2" >Feedback:</th> <th class="col-sm-8 col-md-8 col-lg-8" >Notes:</th>
             </tr>
-            <tr *ngFor="let qaNote of qaNotesForModal; let i = index;" >
-                <td *ngIf="i < traineeNames.length">{{traineeNames[i]}}</td>
-                <td *ngIf="i < traineeNames.length">{{(qaNote?.technicalStatus !== 'Undefined')? qaNote?.technicalStatus : '-'}}</td>
-                <td *ngIf="i < traineeNames.length">{{(qaNote.content !== '')? qaNote.content : '-'}}</td>
+            <tr *ngFor="let qaNote of qaNotesForModal; let i = index;" id="last-quality-audit-graph-qa-notes">
+                <td *ngIf="i < traineeNames.length" id="last-quality-audit-graph-qa-notes{{qaNote.noteId}}-trainee">{{traineeNames[i]}}</td>
+                <td *ngIf="i < traineeNames.length" id="last-quality-audit-graph-qa-notes{{qaNote.noteId}}-status">{{(qaNote?.technicalStatus !== 'Undefined')? qaNote?.technicalStatus : '-'}}</td>
+                <td *ngIf="i < traineeNames.length" id="last-quality-audit-graph-qa-notes{{qaNote.noteId}}-content">{{(qaNote.content !== '')? qaNote.content : '-'}}</td>
             </tr>
             <tr *ngIf="overallDisplayQANote != null">
                 <td><strong>Overall:</strong></td>
-                <td>{{(overallDisplayQANote?.technicalStatus !== 'Undefined')? overallDisplayQANote?.technicalStatus : '-'}}</td>
+                <td id="last-quality-audit-graph-overall-display">{{(overallDisplayQANote?.technicalStatus !== 'Undefined')? overallDisplayQANote?.technicalStatus : '-'}}</td>
                 <td></td>
             </tr>
           </table>
           <table class="table " *ngIf="overallDisplayQANote != null">
               <tr>
-                  <td class="col-sm-1 col-md-1 col-lg-1"><strong>Notes:</strong></td>
-                  <td class="col-sm-9 col-md-9 col-lg-9">{{overallDisplayQANote.content}}</td>
+                  <td class="col-sm-1 col-md-1 col-lg-1" id="last-quality-audit-graph-overall-notes"><strong>Notes:</strong></td>
+                  <td class="col-sm-9 col-md-9 col-lg-9" id="last-quality-audit-graph-overall-notes-content">{{overallDisplayQANote.content}}</td>
               </tr>
             </table>
 

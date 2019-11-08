@@ -1,11 +1,11 @@
 <div id="caliber-container" class="container">
-    <div class="top10 data-container">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">Last Quality Audit
+    <div class="top10 data-container" id="last-quality-audit-data-container">
+      <div class="col-sm-12 col-md-12 col-lg-12" id="last-quality-audit-col">
+        <div class="panel panel-default" id="last-quality-audit-panel">
+          <div class="panel-heading" id="last-quality-audit-panel-heading">Last Quality Audit
             <app-home-toolbar (submitHomeOutput)="updateHomeOutput($event)"></app-home-toolbar>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" id="last-quality-audit-panel-body">
             <app-last-quality-audit-graph></app-last-quality-audit-graph>
             <app-last-quality-audit-table></app-last-quality-audit-table>
             <app-missing-grades-list></app-missing-grades-list>
