@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="user-add-trainee-closemodal">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="traineeModalLabel">Add Trainees</h4>
@@ -75,15 +75,15 @@
                 <label for="traineeStatus">Training Status</label> <select class="form-control" id="traineeStatus"
                   required [(ngModel)]="trainingStatus" name="trainingStatus">
                   <option value="" disabled="">Select Status</option>
-                  <option value="Signed">Signed</option>
-                  <option value="Selected">Selected</option>
-                  <option value="Training">Training</option>
-                  <option value="Marketing">Marketing</option>
-                  <option value="Confirmed">Confirmed</option>
-                  <option value="Employed">Employed</option>
-                  <option value="Dropped">Dropped</option>
-                  <option value="Project">Project</option>
-                  <option value="Staging">Staging</option>
+                  <option value="Signed" id="user-add-trainee-signed">Signed</option>
+                  <option value="Selected" id="user-add-trainee-selected">Selected</option>
+                  <option value="Training" id="user-add-trainee-training">Training</option>
+                  <option value="Marketing" id="user-add-trainee-marketing">Marketing</option>
+                  <option value="Confirmed" id="user-add-trainee-confirmed">Confirmed</option>
+                  <option value="Employed" id="user-add-trainee-employed">Employed</option>
+                  <option value="Dropped" id="user-add-trainee-dropped">Dropped</option>
+                  <option value="Project" id="user-add-trainee-project">Project</option>
+                  <option value="Staging" id="user-add-trainee-staging">Staging</option>
                 </select>
               </div>
             </div>

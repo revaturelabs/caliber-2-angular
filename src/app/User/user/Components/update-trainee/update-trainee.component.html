@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close" id ="user-update-trainee-closemodal">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="traineeModalLabel">Add Trainee</h4>
@@ -77,15 +77,15 @@
                 <label for="traineeStatus">Training Status</label> <select class="form-control" id="traineeStatus"
                   required [(ngModel)]="traineeTemp.trainingStatus" name="trainingStatus">
                   <option value="" disabled="">Select Status</option>
-                  <option value="Signed">Signed</option>
-                  <option value="Selected">Selected</option>
-                  <option value="Training">Training</option>
-                  <option value="Marketing">Marketing</option>
-                  <option value="Confirmed">Confirmed</option>
-                  <option value="Employed">Employed</option>
-                  <option value="Dropped">Dropped</option>
-                  <option value="Project">Project</option>
-                  <option value="Staging">Staging</option>
+                  <option value="Signed" id = "user-update-trainee-signedoption">Signed</option>
+                  <option value="Selected" id = "user-update-trainee-selectedoption">Selected</option>
+                  <option value="Training" id = "user-update-trainee-trainingoption">Training</option>
+                  <option value="Marketing" id = "user-update-trainee-marketingoption">Marketing</option>
+                  <option value="Confirmed" id = "user-update-trainee-confirmedoption">Confirmed</option>
+                  <option value="Employed" id = "user-update-trainee-employedoption">Employed</option>
+                  <option value="Dropped" id = "user-update-trainee-droppedoption">Dropped</option>
+                  <option value="Project" id = "user-update-trainee-projectoption">Project</option>
+                  <option value="Staging" id = "user-update-trainee-stagingoption">Staging</option>
                 </select>
               </div>
             </div>
