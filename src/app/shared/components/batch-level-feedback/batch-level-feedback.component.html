@@ -1,5 +1,5 @@
 <div [formGroup]="batchNoteForm" *ngIf="week > 0">
-  <h4 class="note-header"><strong>Overall{{ isQcFeedback ? ' QC ' : ' '}}Feedback for Week {{ week }}</strong></h4>
+  <h4 id="batch-level-feedback-header-text" class="note-header"><strong>Overall{{ isQcFeedback ? ' QC ' : ' '}}Feedback for Week {{ week }}</strong></h4>
   <div class="notes-container">
     <span class="note-spinner d-flex flex-row justify-content-end">
       <app-assessment-result-spinner
@@ -32,7 +32,7 @@
     </textarea>
   </div>
   <div class="save-button-wrapper">
-    <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
+    <a id="batch-level-feedback-save-button" (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
     <!-- Events after clicking save button -->
     <div class="spinner fa-style " *ngIf="showSaving">
       <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>

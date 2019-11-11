@@ -10,6 +10,7 @@
               data-target="#addLocationModal" 
               type="button"
               (click)="displayAddLocationModal()"
+              id = "locationspage-component-displayaddlocationmodal"
               >Create Location 
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
@@ -26,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let location of locations' app-locationrow [location]='location' (locEmit)='displayLocationEditModal($event)' (disableEmit)='displayLocationDisableModal($event)'></tr>
+            <tr *ngFor='let location of locations' app-locationrow [location]='location' (locEmit)='displayLocationEditModal($event)' (disableEmit)='displayLocationDisableModal($event)' id="{{'locationspage-component-displayedlocation-' + location.name}}"></tr>
           </tbody>
         </table>
       </div>

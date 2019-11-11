@@ -1,7 +1,7 @@
 <div class="modal-header">
   <div class="import-grades-modal-header">
     <h4 class="modal-title pull-left">Import Grades for week {{ week }}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()" id="shared-import-grades-dialogue-closemodal">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -24,6 +24,6 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="close()">Cancel</button>
-  <button type="button" class="btn btn-primary" (click)="import()">Import Grades</button>
+  <button type="button" class="btn btn-default" (click)="close()" id="shared-import-grades-dialogue-cancel">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="import()" id="shared-import-grades-dialogue-import">Import Grades</button>
 </div>

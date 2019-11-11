@@ -1,21 +1,21 @@
 <div class="modal-header">
   <div class="delete-modal-header">
-    <h4>Are you sure you want to delete {{ isForBatch ? batch?.trainingName : name }}?</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <h4 id="delete-trainee-modal-header-text">Are you sure you want to delete {{ isForBatch ? batch?.trainingName : name }}?</h4>
+    <button type="button" id="delete-trainee-modal-close-button"class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 </div>
 <div class="modal-footer">
   <div class="pull-right" *ngIf="hideConfirmation">
-    <button type="button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="beginDelete()">Delete</button>
+    <button type="button" id="delete-trainee-modal-cancel-button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" id="delete-trainee-modal-delete-button" class="btn btn-primary" (click)="beginDelete()">Delete</button>
   </div>
   <div *ngIf="!hideConfirmation">
     <div class="delete-modal-actions">
-      <button *ngIf="!isForBatch" type="button" class="btn btn-danger btn-block" (click)="handleTraineeDelete()">Confirm removal of {{ name }} from {{ batchName }}</button>
+      <button *ngIf="!isForBatch" type="button" id="delete-trainee-modal-confirm-delete-button" class="btn btn-danger btn-block" (click)="handleTraineeDelete()">Confirm removal of {{ name }} from {{ batchName }}</button>
       <button *ngIf="isForBatch" type="button" class="btn btn-danger btn-block" (click)="handleBatchDelete()">Confirm removal of {{ batch?.skillType }} Training</button>
-      <button type="button" class="btn" (click)="cancel()">Cancel</button>
+      <button type="button" id="delete-trainee-modal-cancel-button" class="btn" (click)="cancel()">Cancel</button>
     </div>
   </div>
 </div>

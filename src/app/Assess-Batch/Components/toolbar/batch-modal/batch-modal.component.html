@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
+					aria-label="Close" id="assess-batch-toolbar-batch-modal-closebutton">
 					<span aria-hidden="true">&times;</span>
 				</button>
 
@@ -22,7 +22,7 @@
 								class="form-control" id="category"
 								required  value = 'default'>
 								<option value="default" disabled>Select Assessment Category</option>
-								<option *ngFor ="let cat of categories" [ngValue] = cat.categoryId>{{cat.skillCategory}}</option>
+								<option *ngFor ="let cat of categories" [ngValue] = cat.categoryId id="{{'assess-batch-toolbar-batch-modal-categoryoption-'+cat.categoryId}}'">{{cat.skillCategory}}</option>
 							</select>
 						</div>
 					</div>
@@ -38,15 +38,15 @@
 							<label for="assessmentType">Assessment Type:</label>
 							<select name = 'selectedType' [(ngModel)] = 'selectedType' [ngModelOptions]="{standalone: true}" class="form-control" id='selectedType' required>
 								<option value="default" disabled>Select Assessment Type</option>
-								<option *ngFor ="let type of assessmentTypeDisplay" [ngValue] = type.name>{{type.name}}</option>
+								<option *ngFor ="let type of assessmentTypeDisplay" [ngValue] = type.name id="{{'assess-batch-toolbar-batch-modal-type-'+type.name}}">{{type.name}}</option>
 							</select>
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<input (click) = 'addAssessment(score, selectedType, selectedCategory)' type="submit" value="Save" class="btn btn-primary" data-dismiss="modal">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input (click) = 'addAssessment(score, selectedType, selectedCategory)' type="submit" value="Save" class="btn btn-primary" data-dismiss="modal" id="assess-batch-toolbar-batch-modal-submitbutton">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="assess-batch-toolbar-batch-modal-closebutton-bottom">Close</button>
 				</div>
 			</form>
 		</div>
