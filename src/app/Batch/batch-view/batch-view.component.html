@@ -107,7 +107,7 @@
             Confirm Batch Delete
             <!-- Confirm Batch Delete<i class="fa fa-frown-o fa-2x pick" aria-hidden="true"></i> -->
           </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="batch-view-modaldelete">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="batch-view-modal-close-button">
             <span aria-hidden="true">&times;</span>
           </button>
 
@@ -119,8 +119,8 @@
           </p>
         </div>
         <div class="modal-footer">
-          <input type="submit" value="Delete" id="batch-view-confirmmodaldelete" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="batch-view-canceldelete">Cancel</button>
+          <input type="submit" value="Delete" id="batch-view-confirm-delete-button" (click)="deleteBatch(selectedBatch.batchId)" data-dismiss="modal" class="btn btn-lg btn-danger">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="batch-view-cancel-delete-button">Cancel</button>
         </div>
       </div>
     </div>
