@@ -1,15 +1,15 @@
-<nav class="navbar navbar-default">
-	<div class="container header-styles">
-		<div class="navbar-header">
+<nav class="navbar navbar-default" id="header-navbar">
+	<div class="container header-styles" id="header-header-styles">
+		<div class="navbar-header" id="header-navbar-header">
       <a id="img-link" routerLink="vp/home" class="brand"> <img id="logo-id" class="img-responsive" src="assets/img/rev-logo.jpg" alt="revature" height="175" width="175"></a>
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" id="header-navbar-toggle-button">
+					<span class="icon-bar" id="header-icon-bar1"></span>
+					<span class="icon-bar" id="header-icon-bar2"></span>
+					<span class="icon-bar" id="header-icon-bar3"></span>
 			</button>
 		</div>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" id="header-ul">
 				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="home-link" routerLink="vp/home" routerLinkActive="active-route">Home</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="manage-link" routerLink="vp/manage" routerLinkActive="active-route">Manage Batch</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="assess-link" routerLink="vp/assess" routerLinkActive="active-route">Assess Batch</a></li>
@@ -23,7 +23,7 @@
 						<li data-toggle="collapse" data-target=".navbar-collapse.show"><a id="category-link" routerLink="vp/category">Category</a></li>
 					</ul>
         </li>
-        <li><a href="https://caliber.auth.us-east-2.amazoncognito.com/login?client_id=1ibves608nfbv2frrq2qu9q7l9&redirect_uri=https://caliber.dev.revaturelabs.com&response_type=code" target="_self">Login</a></li>
+        <li id="header-login-link"><a href="https://caliber.auth.us-east-2.amazoncognito.com/login?client_id=1ibves608nfbv2frrq2qu9q7l9&redirect_uri=https://caliber.dev.revaturelabs.com&response_type=code" target="_self">Login</a></li>
 			</ul>
 		</div>
 	</div>

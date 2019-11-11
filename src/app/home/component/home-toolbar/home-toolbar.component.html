@@ -1,11 +1,11 @@
 <select #city class="pull-right ng-pristine ng-untouched ng-valid ng-empty width100" 
-(change)="selectCity(city.value)" *ngIf="showStates">
-    <option value="-1">All Cities</option>
+(change)="selectCity(city.value)" *ngIf="showStates" id="home-toolbar-city-select">
+    <option value="-1" id="home-toolbar-all-cities-option">All Cities</option>
     <option *ngFor="let city of citiesInLocation; let i = index" value="{{i}}">{{city.city}}</option>
   </select>
 <select #state (change)="calShowState(state.value)"
-  class="pull-right ng-pristine ng-untouched ng-valid ng-empty">
-  <option value="">All States</option>
+  class="pull-right ng-pristine ng-untouched ng-valid ng-empty" id="home-toolbar-state-select">
+  <option value="" id="home-toolbar-all-states-option">All States</option>
   <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
 </select>
 

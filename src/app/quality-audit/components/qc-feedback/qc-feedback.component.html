@@ -1,6 +1,7 @@
-<div class="feedback" (click)="toggleDropdown()">
+<div id="qc-feedback-dropdown-toggle" class="feedback" (click)="toggleDropdown()">
   <div><em class="qc-feedback" [ngClass]="getDisplayClassForStatus(getQcStatus())"></em></div>
   <div
+    id="qc-feedback-dropdown-container"
     *ngIf="shouldShowDropdown"
     [ngClass]="{'feedback-dropdown': !isOverallFeedback, 'feedback-dropdown-overall': isOverallFeedback}"
   >

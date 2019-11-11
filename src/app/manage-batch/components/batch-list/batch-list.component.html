@@ -1,6 +1,6 @@
 <div *ngIf="batches && batches?.length > 0" @fadeInOut>
   <div class="container">
-    <table class="table">
+    <table id="manage-batch-batch-list-table" class="table">
       <thead>
         <tr>
           <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><strong>Training Name</strong></th>
@@ -34,6 +34,7 @@
             <app-manage-batch-actions
               [batch]="batch"
               (onShowTrainees)="showTrainees($event)"
+              
             >
             </app-manage-batch-actions>
           </span>

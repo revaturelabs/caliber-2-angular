@@ -1,10 +1,10 @@
 <div *ngIf="batch">
   <ul class="nav nav-tabs">
     <li *ngFor="let week of getWeeksForBatch(batch)" [ngClass]="{'active': week === selectedWeek }" (click)="selectWeek(week)" >
-      <a role="button">Week {{ week }}</a>
+      <a role="button" id="{{'shared-week-selector-selectweek-' + week}}">Week {{ week }}</a>
     </li>
     <li role="button" data-toggle="modal" data-target="#addWeeks">
-      <a>
+      <a id="shared-week-selector-addweek">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </a>
     </li>

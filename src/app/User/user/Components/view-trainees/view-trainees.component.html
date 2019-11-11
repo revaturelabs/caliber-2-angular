@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-widest" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()" id="user-view-trainees-closemodal">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 class="modal-title" id="viewTraineeModal">View/Add
@@ -13,8 +13,8 @@
           <!-- switch trainees type -->
           <div class="container modal-widest">
             <div class="pull-right">
-              <span>Active </span> <a role="button" (click)="switchTraineeView()" [hidden]="!showActive"><span class="fa fa-toggle-on fa-2x"
-                  aria-hidden="true"> </span></a> <a role="button" (click)="switchTraineeView()" [hidden]="showActive"><span
+              <span>Active </span> <a role="button" (click)="switchTraineeView()" [hidden]="!showActive" id="user-view-trainees-showtraineeview"><span class="fa fa-toggle-on fa-2x"
+                  aria-hidden="true"> </span></a> <a role="button" (click)="switchTraineeView()" [hidden]="showActive" id="user-view-trainees-hidetraineeview"><span
                   class="fa fa-toggle-off fa-2x" aria-hidden="true"> </span></a>
             </div>
             <!-- View Trainees in Batch -->
@@ -52,15 +52,17 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let trainee of trainees | traineeToggle: showActive; index as i;" [attr.data-index]="i">
-                    <td role="button" (click)="toggleColor(trainee)" (click)="showCommentForm[i] = true">{{trainee.name}}</td>
+                    <td role="button" (click)="toggleColor(trainee)" (click)="showCommentForm[i] = true" id="{{'user-view-trainees-togglecolor-' + trainee.name}}">{{trainee.name}}</td>
                     <td><span (mouseover)="showNotes[i] = true" (mouseleave)="showNotes[i] = false" class='glyphicon glyphicon-flag'
-                        [ngClass]="{'color-red': (trainee.flagStatus === red), 'color-green': (trainee.flagStatus === green), 'color-white': trainee.flagStatus === none || trainee.flagStatus === null}"></span>
+                        [ngClass]="{'color-red': (trainee.flagStatus === red), 'color-green': (trainee.flagStatus === green), 'color-white': trainee.flagStatus === none || trainee.flagStatus === null}" 
+                        id = "{{'user-view-trainees-shownotesonhover-' + trainee.name}}"></span>
                       <form (submit)="showCommentForm[i] = false" (submit)="updateTraineeFlagNotes(trainee, flagNote)"
-                        *ngIf="showCommentForm[i]" class="commentForm" style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1">
+                        *ngIf="showCommentForm[i]" class="commentForm" style="display: inline-block; position: absolute; padding: 5px; border-radius: 5px; margin-left: 5px; background-color: white; border: solid #ccc 1px; z-index: 1"
+                        id = "{{'user-view-trainees-showcommentform-' + trainee.name}}">
                         <input type="text" placeholder="comment" [value]="trainee.flagNotes ? trainee.flagNotes : ''"
-                          name="statusComment" #flagNote>
-                        <input type="submit" value="Save">
-                        <span (click)="showCommentForm[i] = false" class="glyphicon glyphicon-remove-sign"></span>
+                          name="statusComment" #flagNote id = "{{'user-view-trainees-inputcomment-' + trainee.name}}">
+                        <input type="submit" value="Save" id = "{{'user-view-trainees-submitcomment-'+trainee.name}}">
+                        <span (click)="showCommentForm[i] = false" class="glyphicon glyphicon-remove-sign" id="{{'user-view-trainees-showcommentform-'+trainee.name}}"></span>
                       </form>
                       <div *ngIf="showNotes[i]" style="z-index: 1; display: inline-block; position: absolute; padding: 5px; border: 1px solid #CCC; border-radius: 5px; background-color: white"
                         class="notes">
@@ -82,14 +84,15 @@
                     <td>{{trainee.projectCompletion}}</td>
                     <td>
                       <!-- Change Batches Modal -->
-                      <a role="button" data-toggle="modal" (click)="getSwitchableBatches(trainee)" data-target="#switchBatchModal"><span
+                      <a role="button" data-toggle="modal" (click)="getSwitchableBatches(trainee)" data-target="#switchBatchModal"
+                      id="{{'user-view-trainees-getswitchablebatches-' + trainee.name}}"><span
                           class="glyphicon glyphicon-refresh"></span> </a>
                     </td>
                     <td><a role="button" (click)="populateTrainee(trainee)" data-toggle="modal" data-target="#updateTraineeModal"
-                        type="button"> <span class="glyphicon glyphicon-pencil"></span>
+                        type="button" id="{{'user-view-trainees-populatetrainee-' + trainee.name}}"> <span class="glyphicon glyphicon-pencil"></span>
                       </a></td>
                     <td><a role="button" class="pull-right" (click)="setDeleteTrainee(trainee)" data-toggle="modal"
-                        data-target="#deleteTraineeModal"><span class="glyphicon glyphicon-remove">
+                        data-target="#deleteTraineeModal" id = "{{'user-view-trainees-setdeletetrainee-' + trainee.name}}"><span class="glyphicon glyphicon-remove">
                         </span></a></td>
                   </tr>
                 </tbody>

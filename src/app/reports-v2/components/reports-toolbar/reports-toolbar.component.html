@@ -1,5 +1,6 @@
 <div class="reports-toolbar">
   <app-shared-dropdown-menu
+    id="reports-toolbar-year-dropdown"
     [data]="years"
     [dropdownFor]="'manageBatchYear'"
     [selectedValue]="year"
@@ -7,12 +8,14 @@
   >
   </app-shared-dropdown-menu>
   <app-batch-select-dropdown
+    id="reports-toolbar-batch-dropdown"
     *ngIf="batches"
     [batches]="batches"
     (onBatchSelect)="selectBatch($event)"
   >
   </app-batch-select-dropdown>
   <app-shared-dropdown-menu
+    id="reports-toolbar-trainees-dropdown"
     *ngIf="selectedBatch && trainees?.length > 0"
     [data]="trainees"
     [dropdownFor]="'trainee'"
@@ -20,6 +23,7 @@
   >
   </app-shared-dropdown-menu>
   <app-shared-dropdown-menu
+    id="reports-toolbar-week-dropdown"
     *ngIf="weeks?.length === getWeeksForBatch(selectedBatch)?.length"
     [data]="getWeeksForBatch(selectedBatch)"
     [dropdownFor]="'week'"

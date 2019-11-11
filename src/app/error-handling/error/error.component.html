@@ -1,22 +1,22 @@
 <!------------------------------------------------- Error Modal for Date -------------------------------------->
 <div #errrorModal class="modal hidden" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" data-backdrop="false">
   <div id="overlay" class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content" id="error-modal-content">
+      <div class="modal-header" id="error-modal-header">
         <h4 class="modal-title" id="errorModalLabel">
           {{currentError.serviceName}} not found
-          &nbsp;<i class="fa fa-frown-o fa-2x pick " style="font-weight:100" aria-hidden="true" ></i>
+          &nbsp;<i class="fa fa-frown-o fa-2x pick " style="font-weight:100" aria-hidden="true" id="error-i"></i>
         </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()" id="error-close-button">
+          <span aria-hidden="true" id="error-span">&times;</span>
         </button>
 
     </div>
-    <div class="modal-body">
+    <div class="modal-body" id="error-modal-body">
       {{currentError.errorMessage}}
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">Ok</button>
+    <div class="modal-footer" id="error-modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()" id="error-ok-button">Ok</button>
     </div>
   </div>
 </div>

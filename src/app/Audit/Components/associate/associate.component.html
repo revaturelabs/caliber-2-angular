@@ -4,7 +4,7 @@
 
         <span *ngFor="let tag of categoryTags | keyvalue" class="label label-default" style="cursor: default;">
             {{ tag.value.skillCategory }}
-            <span class="closeChip" (click)="removeCategoryTag($event)">&times;</span>
+            <span class="closeChip" (click)="removeCategoryTag($event)" id = "{{'audit-components-associate-removecategorytag-' + tag.value.categoryId}}">&times;</span>
         </span>
 
         <span class="label label-default btn dropdown-toggle"
@@ -12,7 +12,7 @@
             <em class="fa fa-plus"></em>
             <ul class="dropdown-menu" style="overflow-y: scroll; height: 200px;">
                 <li *ngFor="let category of activeCategoryTags | keyvalue"  (click)="addCategoryTag(category.value)">
-                    <a>{{ category.value.skillCategory }}</a>
+                    <a id="{{'audit-components-associate-addcategorytag-' + category.value.skillCategory}}">{{ category.value.skillCategory }}</a>
                 </li>
             </ul>
         </span>
@@ -61,7 +61,7 @@
                         <br>
                         <em (click)="onAddFlagClicked(QcNote.trainee, i); isaddFlagClicked= true"
                             class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
-                            data-toggle="modal" data-target="#flagTrainee"></em>
+                            data-toggle="modal" data-target="#flagTrainee" id="{{'audit-components-associate-addflag-' + Qcnote.trainee.traineeId}}"></em>
 
                         <div *ngIf="((QcNote.trainee.flagNotes != '') && (QcNote.trainee.flagStatus === 'RED' || QcNote.trainee.flagStatus === 'GREEN'))"
                             class="dropup-content">
@@ -78,11 +78,11 @@
                                     <label for="flagsStatus">Select a Flag:</label>
                                     <div>
                                         <ul class="nav nav-tabs">
-                                            <li><em title="Green Flag" role="button" id="greenFlag"
+                                            <li id="{{'audit-components-associate-greenflag-' + QcNote.noteId}}"><em title="Green Flag" role="button" id="greenFlag"
                                                     class="fas fa-flag fa-3x fa-green objectButton"
                                                     (click)="onFlagSelected('GREEN');"></em>
                                             </li>
-                                            <li><em title="Red Flag" role="button" id="redFlag"
+                                            <li id="{{'audit-components-associate-redflag-' + QcNote.noteId}}"><em title="Red Flag" role="button" id="redFlag"
                                                     class="fas fa-flag fa-3x fa-red objectButton"
                                                     (click)="onFlagSelected('RED');"></em>
                                             </li>
@@ -91,7 +91,7 @@
                                             <br>
                                         </ul>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="{{'audit-components-associate-flagnotes-'+QcNote.noteId}}">
                                         <label for="comment">Comment:</label>
                                         <textarea class="form-control" rows="3" id="comment"
                                             [(ngModel)]="selectedTrainee.flagNotes">{{ selectedTrainee.flagNotes }}</textarea>
@@ -104,12 +104,12 @@
                                 <div class="modal-footer">
                                     <button style="float: left;" class="btn btn-primary" data-dismiss="modal"
                                         *ngIf="selectedTrainee.flagStatus != null && selectedTrainee.flagStatus != 'NONE'"
-                                        (click)="onFlagDelete()">Delete</button>
+                                        (click)="onFlagDelete()" id="{{'audit-components-associate-deleteflag'+QcNote.noteId}}">Delete</button>
                                     <button class="btn btn-primary" data-dismiss="modal"
                                         *ngIf="selectedTrainee.flagStatus != null && selectedTrainee.flagStatus != 'NONE'"
-                                        (click)="onFlagSubmit()">Submit</button>
+                                        (click)="onFlagSubmit()" id="{{'audit-components-associate-submitflag-' + QcNote.noteId}}">Submit</button>
                                     <button class="btn btn-primary" data-dismiss="modal"
-                                        (click)="onFlagCancel();">Cancel</button>
+                                        (click)="onFlagCancel();" id="{{'audit-components-associate-cancelflag-'+QcNote.noteId}}">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -137,15 +137,15 @@
 
                             <div class="dropdown-content" style="margin: auto -95px">
                                 <a data-toggle="collapse" (click)="setScore('Undefined',QcNote.noteId);"
-                                    class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding"></a>
+                                    class="qcStatusIcon fa fa-question-circle fa-2x pick no-padding" id="{{'audit-components-associate-setscoreundefined-'+QcNote.noteId}}"></a>
                                 <a data-toggle="collapse" (click)="setScore('Superstar',QcNote.noteId);"
-                                    class="qcStatusIcon fa fa-star fa-2x pick no-padding"></a>
+                                    class="qcStatusIcon fa fa-star fa-2x pick no-padding" id="{{'audit-components-associate-setscoresuperstar-'+QcNote.noteId}}"></a>
                                 <a data-toggle="collapse" (click)="setScore('Good',QcNote.noteId);"
-                                    class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding"></a>
+                                    class="qcStatusIcon fa fa-smile-o fa-2x pick no-padding" id="{{'audit-components-associate-setscoregood-' + QcNote.noteId}}"></a>
                                 <a data-toggle="collapse" (click)="setScore('Average',QcNote.noteId); "
-                                    class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding"></a>
+                                    class="qcStatusIcon fa fa-meh-o fa-2x pick no-padding" id="{{'audit-components-associate-setscoreaverage-' + QcNote.noteId}}"></a>
                                 <a data-toggle="collapse" (click)="setScore('Poor', QcNote.noteId); "
-                                    class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding"></a>
+                                    class="qcStatusIcon fa fa-frown-o fa-2x pick no-padding" id="{{'audit-components-associate-setscorepoor-' + QcNote.noteId}}"></a>
                             </div>
 
                         </div>
@@ -158,7 +158,7 @@
                         (keypress)="clearAllSavingIcon(i); isTyping = true"
                         (keydown.backspace)="clearAllSavingIcon(i); isTyping = true" [(ngModel)]="QcNote.content"
                         class="form-control" placeholder="Note on {{ QcNote.trainee.name }}" rows="3" cols="75"
-                        maxlength="4000">{{ QcNote.content }}
+                        maxlength="4000" id="{{'audit-components-associate-qcnoteinfo-' + QcNote.noteId}}">{{ QcNote.content }}
                     </textarea>
                 </td>
                 <!-- Status icons -->

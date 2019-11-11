@@ -1,8 +1,8 @@
 <div class="modal-header">
-  <div class="edit-batch-modal-header">
+  <div id="batch-modal-header-text" class="edit-batch-modal-header">
     <h4 *ngIf="!shouldCreate">Edit {{ batch?.trainer }}'s {{ batch?.trainingName }} Batch</h4>
     <h4 *ngIf="shouldCreate">Create Batch</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <button type="button" id="batch-modal-close-button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -90,8 +90,8 @@
 </div>
 <div class="modal-footer">
   <div class="pull-right">
-    <button type="button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
-    <button *ngIf="!shouldCreate" type="button" class="btn btn-primary" [disabled]="batchForm.pristine || batchForm.invalid" (click)="handleBatchUpdate()">Update</button>
-    <button *ngIf="shouldCreate" type="button" class="btn btn-primary" [disabled]="batchForm.pristine || batchForm.invalid" (click)="handleBatchCreate()">Create</button>
+    <button type="button" id="batch-modal-cancel-button"class="btn" (click)="bsModalRef.hide()">Cancel</button>
+    <button *ngIf="!shouldCreate" type="button" id="batch-modal-update-button" class="btn btn-primary" [disabled]="batchForm.pristine || batchForm.invalid" (click)="handleBatchUpdate()">Update</button>
+    <button *ngIf="shouldCreate" type="button" id="batch-modal-create-button" class="btn btn-primary" [disabled]="batchForm.pristine || batchForm.invalid" (click)="handleBatchCreate()">Create</button>
   </div>
 </div>

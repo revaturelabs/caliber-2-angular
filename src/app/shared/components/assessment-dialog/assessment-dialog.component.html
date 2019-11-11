@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 *ngIf="assessment" class="modal-title pull-left">Update Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</h4>
   <h4 *ngIf="!assessment" class="modal-title pull-left">Create New Assessment</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+  <button type="button" id="assessment-dialog-close-button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -57,13 +57,13 @@
 </div>
 <div class="modal-footer">
   <div *ngIf="!confirmDelete" class="col-md-12 col-sm-12">
-    <button *ngIf="assessment" type="button" class="btn btn-danger pull-left" (click)="haveUserConfirmDelete()">Delete Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</button>
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-    <button *ngIf="assessment" type="button" class="btn btn-primary" (click)="handleUpdateAssessment()" [disabled]="assessmentForm.invalid">Update</button>
-    <button *ngIf="!assessment" type="button" class="btn btn-primary" (click)="handleCreateAssessment()" [disabled]="assessmentForm.invalid">Create Assessment</button>
+    <button *ngIf="assessment" type="button" id="assessment-dialog-delete-button" class="btn btn-danger pull-left" (click)="haveUserConfirmDelete()">Delete Week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}</button>
+    <button type="button" id="assessment-dialog-cancel-button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button *ngIf="assessment" type="button" id="assessment-dialog-update-button" class="btn btn-primary" (click)="handleUpdateAssessment()" [disabled]="assessmentForm.invalid">Update</button>
+    <button *ngIf="!assessment" type="button" id="assessment-dialog-create-button" class="btn btn-primary" (click)="handleCreateAssessment()" [disabled]="assessmentForm.invalid">Create Assessment</button>
   </div>
   <div *ngIf="confirmDelete" class="col-md-12 col-sm-12">
-    <button type="button" class="btn btn-danger w-auto pull-left" *ngIf="assessmentForm.valid && (hasValues() || confirmDelete)" (click)="handleDeleteAssessment()">Are you sure you want to delete the week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}?</button>
-    <button type="button" class="btn btn-primary pull-right" (click)="cancelDelete()">Go Back</button>
+    <button type="button" id="assessment-dialog-confirm-delete-button" class="btn btn-danger w-auto pull-left" *ngIf="assessmentForm.valid && (hasValues() || confirmDelete)" (click)="handleDeleteAssessment()">Are you sure you want to delete the week {{ week }} {{ getCategoryForAssessment(assessment) }} {{ assessment.assessmentType }}?</button>
+    <button type="button" id="assessment-dialog-cancel-delete-button" class="btn btn-primary pull-right" (click)="cancelDelete()">Go Back</button>
   </div>
 </div>

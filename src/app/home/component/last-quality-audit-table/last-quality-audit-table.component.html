@@ -3,27 +3,27 @@
       <tbody>
         <tr>
           <th id="QABatch"class="col-sm-2 col-md-2 col-lg-2">Batch</th>
-          <th class="col-sm-2 col-md-2 col-lg-2" *ngFor="let status of statuses"> {{ status }} </th>
+          <th class="col-sm-2 col-md-2 col-lg-2" *ngFor="let status of statuses; let i = index" id="last-quality-audit-table-{{status}}"> {{ status }} </th>
         </tr>
-        <tr *ngFor="let batch of batchDataStore; let i = index" >
-          <th>
+        <tr *ngFor="let batch of batchDataStore; let i = index">
+          <th id="last-quality-audit-table-statuses{{batch.batchId}}-start-date">
             {{ batch.trainer}}
             <br>
             {{ batch.startDate | date}}
           </th>
-          <td>
+          <td id="last-quality-audit-table-statuses{{batch.batchId}}-poor">
             {{ poorArray[i] }}
           </td>
-          <td>
+          <td id="last-quality-audit-table-statuses{{batch.batchId}}-average">
             {{ averageArray[i] }}
           </td>
-          <td>
+          <td id="last-quality-audit-table-statuses{{batch.batchId}}-good">
             {{ goodArray[i] }}
           </td>
-          <td>
+          <td id="last-quality-audit-table-statuses{{batch.batchId}}-start">
             {{ starArray[i] }}
           </td>
-          <td [ngStyle]="{'color': getColorForStatus(getOverallBatchStatus(poorArray[1], averageArray[i], goodArray[i], starArray[i]))}">
+          <td [ngStyle]="{'color': getColorForStatus(getOverallBatchStatus(poorArray[1], averageArray[i], goodArray[i], starArray[i]))}" id="last-quality-audit-table-statuses{{batch.batchId}}-colors">
             {{ getOverallBatchStatus(poorArray[1], averageArray[i], goodArray[i], starArray[i]) }}
           </td>
         </tr>
