@@ -13,8 +13,8 @@
       (selectedBatch)="setSelectedBatch($event)"
     ></app-batch-select-toolbar>
     <div class="toolbar-row-buttons">
-      <app-create-assessment-button [week]="selectedWeek" [batchId]="selectedBatch?.batchId"></app-create-assessment-button>
-      <app-import-grades-button [week]="selectedWeek" [batchId]="selectedBatch?.batchId"></app-import-grades-button>
+      <app-create-assessment-button id="assess-batch-container-create-assessment-button" [week]="selectedWeek" [batchId]="selectedBatch?.batchId"></app-create-assessment-button>
+      <app-import-grades-button id="assess-batch-container-import-grades-button" [week]="selectedWeek" [batchId]="selectedBatch?.batchId"></app-import-grades-button>
     </div>
   </div>
   <div *ngIf="!selectedBatch">

@@ -1,5 +1,5 @@
 <a class="assessment-column" (click)="showUpdateAssessmentDialog()" @fadeInOut id="assess-batch-v2-detailscolumn">
-  <div>{{ this.column?.category }}</div>
-  <div>{{ this.column?.assessment?.assessmentType }}</div>
-  <div>{{ this.column?.assessment?.rawScore / this.totalPoints | percent }}</div>
+  <div id="assessment-details-category-text">{{ this.column?.category }}</div>
+  <div id="assessment-details-assessment-type-text">{{ this.column?.assessment?.assessmentType }}</div>
+  <div id="assessment-details-score-text">{{ this.column?.assessment?.rawScore / this.totalPoints | percent }}</div>
 </a>

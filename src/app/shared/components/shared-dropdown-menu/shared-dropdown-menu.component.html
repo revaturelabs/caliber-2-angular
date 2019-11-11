@@ -4,7 +4,7 @@
     <a id="shared-dropdown-menu-current-value" *ngIf="data?.length" class="dropdown-toggle" data-toggle="dropdown">{{ currentDropdownValue }} <span class="caret"></span></a>
     <ul class="dropdown-menu" id="shared-dropdown-menu-dropdown-container">
       <li *ngFor="let entry of formattedData; let i = index">
-        <a role="button" (click)="setDropdownValue(entry, i)" >{{ entry }}</a>
+        <a role="button" (click)="setDropdownValue(entry, i)" id = "{{'shared-dropdown-menu-' + entry}}">{{ entry }}</a>
       </li>
     </ul>
   </li>
