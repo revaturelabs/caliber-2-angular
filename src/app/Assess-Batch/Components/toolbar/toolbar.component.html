@@ -4,9 +4,9 @@
 			<div class="col-md-12 col-lg-12 top10">
 				<!-- top ui dropdown for available years -->
 				<ul class="nav nav-tabs">
-					<li role="button" class="dropdown"><a 
-id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
-							(click)="displayYears()" id="assess-batch-toolbar-displayyears"> {{selectedYear}} <span class="caret"></span></a>
+					<li role="button" class="dropdown">
+						<a id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
+							(click)="displayYears()" > {{selectedYear}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let year of years">
 								<a role="button" id="{{'assess-batch-toolbar-selectyear-'+year}}" (click)="selectYear(year)">{{year}}</a>
