@@ -1,14 +1,14 @@
 <div id="caliber-container" *ngIf="missingGrades && missingGrades?.length > 0 else noMissingGrades">
-  <div class="top10 data-container">
+  <div class="top10 data-container" id="missing-grades-list-data-container">
 
     <div class="panel panel-default" *ngIf='flag'>
-      <div class="panel-heading"> Missing Grades Report</div>
+      <div class="panel-heading" id="missing-grades-list-report"> Missing Grades Report</div>
       <div class="panel-body">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pill-button-container">
           <app-pill-box id="pill-box" [lastWeek]='highestGradeWeek' style='display: inline-block' (weekFilterChange)="updateWeekFilter($event)"></app-pill-box>
         </div>
         <div *ngIf="flag">
-          <table class="table table-responsive">
+          <table class="table table-responsive" id="missing-grades-list-table">
             <thead>
             <tr>
               <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">Trainer</th>
@@ -18,11 +18,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let missingGrade of missingGrades">
-              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">{{missingGrade.trainer}}</td>
-              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">{{missingGrade.skillType}}</td>
-              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"><span *ngFor="let week of missingGrade.missingWeeks">{{week}} </span></td>
-              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">{{missingGrade.location}}</td>
+            <tr *ngFor="let missingGrade of missingGrades" id="missing-grades-list-missing-grades">
+              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" id="missing-grades-list[missingGrade.id]-trainer">{{missingGrade.trainer}}</td>
+              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" id="missing-grades-list[missingGrade.id]-skill-type">{{missingGrade.skillType}}</td>
+              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" id="missing-grades-list[missingGrade.id]-weeks"><span *ngFor="let week of missingGrade.missingWeeks">{{week}} </span></td>
+              <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" id="missing-grades-list[missingGrade.id]-location">{{missingGrade.location}}</td>
             </tr>
             </tbody>
           </table>
