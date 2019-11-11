@@ -1,6 +1,7 @@
 <div class="toolbar-row" @fadeInOut>
   <div class="toolbar-row-item">
     <app-shared-dropdown-menu
+      id="batch-select-toolbar-years-dropdown"
       *ngIf="years"
       [data]="years"
       [dropdownFor]="'Year'"
@@ -8,6 +9,7 @@
       (onValueSelect)="selectYear($event)"
     ></app-shared-dropdown-menu>
     <app-shared-dropdown-menu
+      id="batch-select-toolbar-quaters-dropdown"
       *ngIf="quarters"
       [data]="quarters"
       [format]="formatQuarters"
@@ -16,6 +18,7 @@
       (onValueSelect)="selectQuarter($event)"
     ></app-shared-dropdown-menu>
     <app-batch-select-dropdown
+      id="batch-select-toolbar-batches-dropdown"
       *ngIf="batches"
       [batches]="batches"
       (onBatchSelect)="selectBatch($event)"

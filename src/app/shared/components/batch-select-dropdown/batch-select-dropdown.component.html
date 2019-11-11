@@ -1,14 +1,14 @@
 <div class="nav nav-tabs">
-  <li class="dropdown" *ngIf="batches">
+  <li id="batch-select-dropdown-open-button" class="dropdown" *ngIf="batches">
     <a *ngIf="batches.length !== 0" class="dropdown-toggle" data-toggle="dropdown">{{ selectedBatch ? formatBatch(selectedBatch) : 'Select Batch' }} <span class="caret"></span></a>
     <a *ngIf="batches.length === 0">No Batches Found</a>
     <ul class="dropdown-menu">
         <a role="button">
           <form [formGroup]="searchForm" class="batch-search form-group">
-            <input type="text" class="form-control" placeholder="Search by First Name, Last Name, or Curriculum" formControlName="query" >
+            <input type="text" id="batch-select-search-bar" class="form-control" placeholder="Search by First Name, Last Name, or Curriculum" formControlName="query" >
           </form>
         </a>
-      <li *ngIf="results.length > 0">
+      <li id="batch-select-dropdown-list" *ngIf="results.length > 0">
         <a role="button" *ngFor="let result of results" (click)="selectBatch(result.batchId)">{{ result.output }}</a>
       </li>
     </ul>

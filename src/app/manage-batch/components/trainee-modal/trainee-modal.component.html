@@ -2,7 +2,7 @@
   <div class="edit-trainee-modal-header">
     <h4 *ngIf="!shouldCreate">Edit Trainee</h4>
     <h4 *ngIf="shouldCreate">Add Trainee to {{ batch?.trainingName }}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <button type="button" id="trainee-modal-close-button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -108,8 +108,8 @@
 </div>
 <div class="modal-footer">
   <div class="pull-right">
-    <button type="button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
-    <button *ngIf="!shouldCreate" type="button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeUpdate()">Update</button>
-    <button *ngIf="shouldCreate" type="button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeCreate()">Create</button>
+    <button type="button" id="trainee-modal-cancel-button" class="btn" (click)="bsModalRef.hide()">Cancel</button>
+    <button *ngIf="!shouldCreate" type="button" id="trainee-modal-update-button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeUpdate()">Update</button>
+    <button *ngIf="shouldCreate" type="button" id="trainee-modal-create-button" class="btn btn-primary" [disabled]="traineeForm.pristine || traineeForm.invalid" (click)="handleTraineeCreate()">Create</button>
   </div>
 </div>

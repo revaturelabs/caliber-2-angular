@@ -1,7 +1,7 @@
 <div class="modal-header">
   <div class="switch-batch-modal-header">
-    <h4>Switch {{ trainee?.name }}'s Batch</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 id="switch-batch-modal-header-text">Switch {{ trainee?.name }}'s Batch</h4>
+    <button type="button" id="switch-batch-modal-close-button"class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -13,16 +13,16 @@
       <select id="switchedBatch" class="form-control" formControlName="selectedBatchToSwitch">
         <option *ngFor="let batch of batches | switchBatch: trainee" [value]="batch?.batchId" [selected]="selectedBatchToSwitch?.batchId === batch?.batchId" >{{ batch?.trainingName }} - {{ batch?.trainer }}</option>
       </select>
-      <small *ngIf="!hideConfirmation" class="text-danger"><strong><em>Confirming switch of {{ trainee?.name }} from {{ getBatchFromId(trainee?.batchId).trainingName }} to {{ selectedBatchToSwitch?.trainingName }}</em></strong></small>
-      <small *ngIf="hideConfirmation">{{ (batches | switchBatch: trainee).length }} option{{ (batches | switchBatch: trainee).length === 1 ? "" : "s" }} available</small>
+      <small *ngIf="!hideConfirmation" id="switch-batch-modal-confirmation-text"class="text-danger"><strong><em>Confirming switch of {{ trainee?.name }} from {{ getBatchFromId(trainee?.batchId).trainingName }} to {{ selectedBatchToSwitch?.trainingName }}</em></strong></small>
+      <small id="switch-batch-modal-batch-count-text" *ngIf="hideConfirmation">{{ (batches | switchBatch: trainee).length }} option{{ (batches | switchBatch: trainee).length === 1 ? "" : "s" }} available</small>
     </div>
   </form>
 </div>
 <div class="modal-footer">
   <div class="pull-right switch-batch-actions">
-    <button *ngIf="!hideConfirmation" type="button" class="btn btn-danger" (click)="handleBatchSwitch()">Confirm</button>
-    <button *ngIf="!hideConfirmation" type="button" class="btn" (click)="cancel()">Cancel</button>
-    <button *ngIf="hideConfirmation" type="button" class="btn" (click)="modalRef.hide()">Cancel</button>
-    <button *ngIf="hideConfirmation" type="button" class="btn btn-primary" (click)="beginSwitch()">Switch</button>
+    <button *ngIf="!hideConfirmation" type="button" id="switch-batch-modal-confirm-button" class="btn btn-danger" (click)="handleBatchSwitch()">Confirm</button>
+    <button *ngIf="!hideConfirmation" type="button" id="switch-batch-modal-cancel-button" class="btn" (click)="cancel()">Cancel</button>
+    <button *ngIf="hideConfirmation" type="button" id="switch-batch-modal-cancel-button" class="btn" (click)="modalRef.hide()">Cancel</button>
+    <button *ngIf="hideConfirmation" type="button" id="switch-batch-modal-switch-button" class="btn btn-primary" (click)="beginSwitch()">Switch</button>
   </div>
 </div>
