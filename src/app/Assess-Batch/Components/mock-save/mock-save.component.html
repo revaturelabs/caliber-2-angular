@@ -1,12 +1,12 @@
 <!-- Previous version can be found in the `audit-module` directory -->
 <div class="save-button-wrapper col-md-2">
-  <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
+  <a (click)="doBurrito()" *ngIf="showFloppy" class="save-button fade-in" id="assess-batch-mock-save-doburritobutton"> <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span>Save</a>
   <!-- Events after clicking save button -->
-  <div class="spinner fa-style " *ngIf="showSaving">
+  <div class="spinner fa-style " *ngIf="showSaving" id="assess-batch-mock-save-spinner">
     <i style="color: #F26925;" role="button" class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
   </div>
 
-  <div id="checkMark" class="spinner fa-style fa-2x" *ngIf="showCheck">
+  <div id="checkMark" class="spinner fa-style fa-2x" *ngIf="showCheck" id="assess-batch-mock-save-checkmark">
     <span class="fas fa-check" aria-hidden="true"></span>
   </div>
 </div>

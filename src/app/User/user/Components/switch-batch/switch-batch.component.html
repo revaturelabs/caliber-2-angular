@@ -1,11 +1,11 @@
-<form (submit)="switchBatchForTrainee(switchBatch)" name="switchBatchForm">
+<form (submit)="switchBatchForTrainee(switchBatch)" name="switchBatchForm" id = "user-switch-batch-switchbatchfortrainee">
 	<div class="modal fade" id="switchBatchModal" tabindex="0"
 		role="dialog" aria-labelledby="traineeModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						aria-label="Close" id="user-switch-batch-closemodal">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="traineeModalLabel">Switch Batch</h4>
@@ -15,13 +15,13 @@
 						<div class="form-group col-lg-12 col-md-12 col-sm-12">
 							<label for="switchBatch">Batch:</label> <select id="switchBatch"
 								class="form-control" [(ngModel)]="switchBatch" name="switchBatch">
-								<option *ngFor="let batch of batches" value="{{batch.batchId}}">{{batch.trainingName}} - {{batch.trainer}} - {{batch.batchId}}</option>
+								<option *ngFor="let batch of batches" value="{{batch.batchId}}" id="{{'user-switch-batch-batchoption-'+batch.batchId}}">{{batch.trainingName}} - {{batch.trainer}} - {{batch.batchId}}</option>
 							</select>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="submit" value="Switch" class="btn btn-lg btn-primary">
+					<input type="submit" value="Switch" class="btn btn-lg btn-primary" id="user-switch-batch-submitswitch">
 					<button id="closeButton3" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>

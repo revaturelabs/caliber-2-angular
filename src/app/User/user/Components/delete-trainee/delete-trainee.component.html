@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="user-delete-trainee-closemodal">
                   <span aria-hidden="true">×</span>
               </button>
               <h4 class="modal-title" id="traineeModalLabel" id="deleteTraineeHeader">Delete Trainee</h4>
@@ -14,8 +14,8 @@
               <br>
           </div>
           <div class="modal-footer">
-              <input value="Delete" class="btn btn-lg btn-danger" data-dismiss="modal" type="submit" (click)="deleteTrainee(trainee)">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <input value="Delete" class="btn btn-lg btn-danger" data-dismiss="modal" type="submit" (click)="deleteTrainee(trainee)" id="user-delete-trainee-deletetrainee">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="user-delete-trainee-cancel">Cancel</button>
           </div>
       </div>
   </div>

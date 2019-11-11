@@ -6,10 +6,10 @@
 				<ul class="nav nav-tabs">
 					<li role="button" class="dropdown"><a 
 id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
-							(click)="displayYears()"> {{selectedYear}} <span class="caret"></span></a>
+							(click)="displayYears()" id="assess-batch-toolbar-displayyears"> {{selectedYear}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let year of years">
-								<a role="button" (click)="selectYear(year)">{{year}}</a>
+								<a role="button" id="{{'assess-batch-toolbar-selectyear-'+year}}" (click)="selectYear(year)">{{year}}</a>
 							</li>
 						</ul>
 
@@ -19,7 +19,7 @@ id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
 								class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li *ngFor="let quarter of quarters">
-								<a role="button" (click)="selectQuarter(quarter)">{{quarter}}</a>
+								<a role="button" id="{{'assess-batch-toolbar-selectquarter-'+quarter}}" (click)="selectQuarter(quarter)">{{quarter}}</a>
 							</li>
 						</ul>
 						<!-- {{selectedBatch.trainer }} - {{ selectedBatch.startDate | date:'shortDate' }} -->
@@ -38,13 +38,13 @@ id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
 							</li>
 						</ul>
 
-					<li role="button" class="pull-right" data-toggle="modal" data-target="#importGradesModal"><a>Import
+					<li role="button" class="pull-right" data-toggle="modal" data-target="#importGradesModal" id="assess-batch-toolbar-importgrades"><a>Import
 							Grades <span class="glyphicon glyphicon-download" aria-hidden="true"> </span>
 						</a></li>
 
 					<!-- Button Trigger for Create Assessment Modal -->
 					<!--   -->
-					<li role="button" class="pull-right" data-toggle="modal" data-target="#createAssessmentModal">
+					<li role="button" class="pull-right" data-toggle="modal" data-target="#createAssessmentModal" id="assess-batch-toolbar-createassessment">
 						<a>Create
 							Assessment<span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
 						</a></li>
@@ -58,7 +58,7 @@ id = "assessYearSelect" class="dropdown-toggle" data-toggle="dropdown"
 						<p *ngIf="checkLastWeek(week, weeks)"></p>
 						<a>Week {{week}}</a>
 					</li>
-					<li role="button" data-toggle="modal" data-target="#confirmingweeks">
+					<li role="button" data-toggle="modal" data-target="#confirmingweeks" id="assess-batch-toolbar-confirmingweeks">
 						<a>
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 						</a>

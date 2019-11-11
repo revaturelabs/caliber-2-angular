@@ -46,13 +46,13 @@
                     
                     <em (click)="onAddFlagClicked(train, j); isaddFlagClicked= true"
                       class="fas fa-pen options" style="margin: 10px 5px; color:#00000080; cursor: pointer;"
-                      data-toggle="modal" attr.data-target="#{{j}}"></em>
+                      data-toggle="modal" attr.data-target="#{{j}}" id="{{'assess-batch-associate-pen-'+train.traineeId}}"></em>
 
                         <!-- dropup to display flagNotes -->
                       <div *ngIf="((train.flagNotes != '') && (train.flagStatus === 'RED' || train.flagStatus === 'GREEN'))"
                             class="dropup-content">
                             <ul>
-                                <li *ngIf="train != null ">{{train.flagNotes}}</li>
+                                <li *ngIf="train != null " id="{{'assess-batch-associate-flagnotes'+train.traineeId}}">{{train.flagNotes}}</li>
                             </ul>
                         </div>
 
@@ -99,12 +99,12 @@
                           <div class="modal-footer">
                             <button style="float: left;" class="btn btn-primary" data-dismiss="modal"
                               *ngIf="train.flagStatus != null && train.flagStatus != 'NONE'"
-                              (click)="onFlagDelete(train)">Delete</button>
+                              (click)="onFlagDelete(train)" id="{{'assess-batch-associate-deletebutton-'+train.traineeId}}">Delete</button>
                             <button class="btn btn-primary" data-dismiss="modal"
                               *ngIf="train.flagStatus != null && train.flagStatus != 'NONE'"
-                              (click)="onFlagSubmit(train)">Submit</button>
+                              (click)="onFlagSubmit(train)" id="{{'assess-batch-associate-submitbutton-'+train.traineeId}}">Submit</button>
                             <button class="btn btn-primary" data-dismiss="modal"
-                              (click)="onFlagCancel2(train);">Cancel</button>
+                              (click)="onFlagCancel2(train);"id="{{'assess-batch-associate-cancelbutton-'+train.traineeId}}">Cancel</button>
                           </div>
                         </div>
                       </div>
@@ -119,9 +119,9 @@
                     <div *ngIf="flagNoteSwitch.indexOf(train.traineeId) != -1" class="flag-notes-popup">
                       <input class="form-control" type="text" placeholder={{train.flagNotes}} #comment />
                       <button (click)="commentOnTrainee(train,comment.value)"
-                        class="btn btn-secondary flage-notes-save-btn">Save</button>
+                        class="btn btn-secondary flage-notes-save-btn" id="{{'assess-batch-associate-savebutton-switch-'+train.traineeId}}">Save</button>
                       <em (click)="deleteFromSwitch(train.traineeId)" type="button"
-                        class="flage-notes-close-btn icon-button" aria-label="Close">
+                        class="flage-notes-close-btn icon-button" aria-label="Close" id="{{'assess-batch-associate-closebutton-switch-'+train.traineeId}}">
                         <span class="glyphicon glyphicon-remove-sign closing-button"></span>
                       </em>
                     </div>
@@ -143,7 +143,7 @@
                       <textarea (blur)="noteOnBlur(j, false)" (keypress)="clearAllSavingIcon(j); isTyping = true"
                         (keydown.backspace)="clearAllSavingIcon(j); isTyping = true" id="note-textarea-{{j}}"
                         class="form-control" maxlength="4000" rows="3" cols="75" placeholder="Note on {{train.name}}"
-                        [(ngModel)]="noteArr[j].noteContent">{{noteArr[j]?.noteContent}}</textarea>
+                        [(ngModel)]="noteArr[j].noteContent" id="{{'assess-batch-associate-notearea-'+train.traineeId}}">{{noteArr[j]?.noteContent}}</textarea>
                     </td>
                   <!-- Status icons -->
                   <div class="savingIconDiv" [attr.id]="'spinner' + j" style="display: none;">
@@ -165,10 +165,10 @@
                   </td>
                   <td></td>
                   <td></td>
-                  <td class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let average of avgArr">
+                  <td class="col-sm-1 col-md-1 col-lg-1 text-center" *ngFor="let average of avgArr; let k=index" id="{{'assess-batch-associate-average-'+k}}">
                     {{average | number:'1.1-2' }}%
                   </td>
-                  <td><strong> Weekly Batch Avg: </strong>{{ result | number:'1.1-2' }}%</td>
+                  <td id="assess-batch-associate-weekly-batch-average"><strong> Weekly Batch Avg: </strong>{{ result | number:'1.1-2' }}%</td>
                 </tr>
               </tfoot>
             </table>

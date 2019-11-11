@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id = "user-edit-trainer-closemodal">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="trainerModalLabel">Edit Trainer</h4>
@@ -34,12 +34,12 @@
                       <label for="trainerTier">Trainer Tier</label> <select class="form-control" id="trainerTier"
                         required [(ngModel)]="trainer.tier" name="trainerTier">
                         <option value="" disabled="">Select Tier</option>
-                        <option value="ROLE_VP">ROLE_VP</option>
-                        <option value="ROLE_PANEL">ROLE_PANEL</option>
-                        <option value="ROLE_QC">ROLE_QC</option>
-                        <option value="ROLE_TRAINER">ROLE_TRAINER</option>
-                        <option value="ROLE_STAGING">ROLE_STAGING</option>
-                        <option value="ROLE_INACTIVE">ROLE_INACTIVE</option>
+                        <option value="ROLE_VP" id="user-edit-trainer-role-vp">ROLE_VP</option>
+                        <option value="ROLE_PANEL" id="user-edit-trainer-role-panel">ROLE_PANEL</option>
+                        <option value="ROLE_QC" id="user-edit-trainer-role-qc">ROLE_QC</option>
+                        <option value="ROLE_TRAINER" id="user-edit-trainer-role-trainer">ROLE_TRAINER</option>
+                        <option value="ROLE_STAGING" id="user-edit-trainer-role-staging">ROLE_STAGING</option>
+                        <option value="ROLE_INACTIVE" id="user-edit-trainer-role-inactive">ROLE_INACTIVE</option>
                       </select>
                     </div>
               </div>
