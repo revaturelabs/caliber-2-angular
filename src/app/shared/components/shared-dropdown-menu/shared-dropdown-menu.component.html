@@ -1,8 +1,8 @@
 <ul class="nav nav-tabs">
-  <li class="dropdown">
-    <a *ngIf="!data?.length" class="dropdown-toggle">No {{ for }}{{ for === 'Batch' ? 'e' : '' }}s Found</a>
-    <a *ngIf="data?.length" class="dropdown-toggle" data-toggle="dropdown">{{ currentDropdownValue }} <span class="caret"></span></a>
-    <ul class="dropdown-menu">
+  <li class="dropdown" id="shared-dropdown-menu-button">
+    <a id="shared-dropdown-menu-current-value" *ngIf="!data?.length" class="dropdown-toggle">No {{ for }}{{ for === 'Batch' ? 'e' : '' }}s Found</a>
+    <a id="shared-dropdown-menu-current-value" *ngIf="data?.length" class="dropdown-toggle" data-toggle="dropdown">{{ currentDropdownValue }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" id="shared-dropdown-menu-dropdown-container">
       <li *ngFor="let entry of formattedData; let i = index">
         <a role="button" (click)="setDropdownValue(entry, i)" >{{ entry }}</a>
       </li>
