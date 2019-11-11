@@ -1,11 +1,11 @@
 <div style="display: flex; justify-content:flex-start">
   <div ngbDropdown class="btn">
     <button class='btn btn-primary' id='WeekSorter' ngbDropdownToggle>{{ weeksList?.length > 0 ? 'Include Weeks' : 'All Weeks Displayed'}}</button>
-    <div ngbDropdownMenu aria-labelledby="WeekSorter" *ngIf="weeksList?.length > 0">
+    <div id="pill-box-dropdown-container" ngbDropdownMenu aria-labelledby="WeekSorter" *ngIf="weeksList?.length > 0">
       <app-dropdown-button *ngFor='let number of weeksList' [weekNumber]='number' (addWeek)="addPill($event)"></app-dropdown-button>
     </div>
   </div>
-  <div >
+  <div id="pill-box-container">
     <app-pill *ngFor='let number of displayedWeeks' [weekNumber]='number' (removeWeek)="removePill($event)"></app-pill>
   </div>
 </div>
