@@ -17,7 +17,7 @@
         </tr>
       </thead>
     </table>
-    <div class="batch-table">
+    <div class="batch-table" id="manage-batch-batch-list-data">
       <div class="row" *ngFor="let batch of batches" @fadeInOut>
         <div class="batch-row">
           <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">{{ batch?.trainingName || '' }}</span>
