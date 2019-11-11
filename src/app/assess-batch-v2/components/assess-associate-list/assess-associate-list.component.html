@@ -1,7 +1,7 @@
 <div *ngIf="trainees?.length > 0" @fadeInOut>
   <div class="table-responsive mt-1" *ngIf="getSelectedBatch() | async as selectedBatch">
     <app-week-selector [batch]="selectedBatch" (selectedWeek)="setSelectedWeek($event)" (updatedBatch)="setUpdatedBatch($event)" ></app-week-selector>
-    <table class="table" *ngIf="notesLoaded && assessments$ | async as assessments" @fadeInOut>
+    <table class="table" id="assess-associate-list-table" *ngIf="notesLoaded && assessments$ | async as assessments" @fadeInOut>
       <thead>
         <tr>
           <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Trainee</th>
