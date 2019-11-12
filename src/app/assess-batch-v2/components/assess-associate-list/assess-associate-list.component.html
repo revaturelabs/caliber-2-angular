@@ -47,7 +47,7 @@
       <tfoot>
         <tr>
           <td><strong>Average:</strong></td>
-          <td *ngFor="let assessment of assessments" @fadeInOut>{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
+          <td *ngFor="let assessment of assessments" @fadeInOut id="assess-associate-list-assessment{{assessment.assessmentId}}">{{ getAverageGradeForAssessment(assessment?.assessmentId) | percent: "1.2-2" }}</td>
           <td @fadeInOut><strong>Weekly Batch Average: </strong>{{ getBatchAverage(assessments) | percent: "1.2-2" }}</td>
         </tr>
       </tfoot>
