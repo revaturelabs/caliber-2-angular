@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <div class="panel-heading">{{ batch?.skillType }} - Technical Status</div>
+  <div class="panel-heading" >{{ batch?.skillType }} - Technical Status</div>
   <div class="panel-body" *ngIf="!trainee && allBatchGrades$ | async as allBatchGrades">
     <canvas
       id="technical-status-radar-chart"
