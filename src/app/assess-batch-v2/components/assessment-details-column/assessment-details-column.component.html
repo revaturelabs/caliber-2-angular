@@ -1,5 +1,14 @@
-<a class="assessment-column" (click)="showUpdateAssessmentDialog()" @fadeInOut id="assess-batch-v2-detailscolumn">
+<a class="assessment-column" @fadeInOut id="assess-batch-v2-detailscolumn">
   <div id="assessment-details-category-text">{{ this.column?.category }}</div>
-  <div id="assessment-details-assessment-type-text">{{ this.column?.assessment?.assessmentType }}</div>
+  <div id="assessment-details-assessment-type-text">
+    {{ this.column?.assessment?.assessmentType }}
+    <em 
+    id="assessment-details-edit-pen"
+    class="fas fa-pen flag-pen" 
+    [style.display]="show ? 'inherit' : 'none'" 
+    (click)="showUpdateAssessmentDialog()"
+    >
+  </em>
+  </div>
   <div id="assessment-details-score-text">{{ this.column?.assessment?.rawScore / this.totalPoints | percent }}</div>
 </a>
