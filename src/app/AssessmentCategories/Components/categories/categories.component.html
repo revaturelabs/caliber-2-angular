@@ -33,7 +33,7 @@
       <hr>
       
 
-      <div *ngFor="let category of categoriesList2" id="{{category-category.skillCategory}}">
+      <div *ngFor="let category of categoriesList2" id="{{'category-' + category.skillCategory}}">
         <span (click)="enableCategory(category)" id="stale-category"   class="stale"> {{category.skillCategory}}  </span>
       </div>
     </div>
