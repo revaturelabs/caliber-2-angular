@@ -25,7 +25,7 @@
       <p style="top:0%; bottom:0%"><small>Click to toggle Active/Stale Categories.</small></p>
       <hr>
       
-      <div *ngFor="let category of categoriesList1" id="{{category-category.skillCategory}}">
+      <div *ngFor="let category of categoriesList1" id="{{'category-'+category.skillCategory}}">
         <span (click)="disableCategory(category)" id="active-category" class="good"> {{category.skillCategory}}  </span>
       </div>
 
