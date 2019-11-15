@@ -1,4 +1,4 @@
-<a class="assessment-column" @fadeInOut id="assess-batch-v2-detailscolumn">
+<a class="assessment-column" (click)="showUpdateAssessmentDialog()" @fadeInOut id="assess-batch-v2-detailscolumn">
   <div id="assessment-details-category-text">{{ this.column?.category }}</div>
   <div id="assessment-details-assessment-type-text">
     {{ this.column?.assessment?.assessmentType }}
