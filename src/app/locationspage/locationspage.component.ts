@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { LocationService } from '../home/service/location.service';
+import { LocationService } from '../services/subvertical/location/location.service';
 import { AddlocationmodalComponent } from './addlocationmodal/addlocationmodal.component';
 import { EditlocationmodalComponent } from './editlocationmodal/editlocationmodal.component';
 import { DisableLocationModalComponent } from './disable-location-modal/disable-location-modal.component';
@@ -48,7 +48,7 @@ export class LocationspageComponent implements OnInit {
   }
 
   addToTable(location: Location){
-    this.locationService.addLocation(location).subscribe(location => {
+    this.locationService.createLocation(location).subscribe(location => {
       this.getAlLocations();
     });
   }
