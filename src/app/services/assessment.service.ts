@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import {Assessment} from "../../domain/model/assessment.dto";
+import { environment } from '../../environments/environment';
+import {Assessment} from "../domain/model/assessment.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({

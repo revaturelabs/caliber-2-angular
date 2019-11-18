@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
-import {NoteService} from "../../../Assess-Batch/Services/note.service";
 import {BehaviorSubject, combineLatest} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {QcNote} from "../../../domain/model/qc-note.dto";
 import {Note} from "../../../domain/model/assessment-note.dto";
-import {QaService} from "../../../services/qa.service";
 import {AssessmentNotesService} from "../../../services/subvertical/assessment/assessment-notes.service";
 import {QaNotesService} from "../../../services/subvertical/quality-audit/qa-notes.service";
 
