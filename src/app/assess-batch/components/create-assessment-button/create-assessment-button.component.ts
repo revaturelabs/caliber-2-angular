@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryService} from "../../../Assess-Batch/Services/category.service";
 import {Observable} from "rxjs";
 import {BsModalRef} from "ngx-bootstrap";
 import {AssessmentDialogService} from "../../../shared/services/assessment-dialog.service";
