@@ -17,4 +17,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class ReportsV2RoutingModule {}
+export class ReportsRoutingModule {}

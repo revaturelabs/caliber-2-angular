@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReportsContainerComponent} from './components/reports-container/reports-container.component';
-import {ReportsV2RoutingModule} from "./reports-v2-routing.module";
+import {ReportsRoutingModule} from "./reports-routing.module";
 import {ReportsToolbarComponent} from './components/reports-toolbar/reports-toolbar.component';
 import {SharedModule} from "../shared/shared.module";
 import {CompareAssessmentScoresComponent} from './components/compare-assessment-scores/compare-assessment-scores.component';
@@ -21,9 +21,9 @@ import { TechnicalStatusComponent } from './components/technical-status/technica
   ],
   imports: [
     CommonModule,
-    ReportsV2RoutingModule,
+    ReportsRoutingModule,
     SharedModule,
     ChartsModule
   ]
 })
-export class ReportsV2Module { }
+export class ReportsModule { }

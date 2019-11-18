@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AssessBatchConatinerComponent} from './components/assess-batch-conatiner/assess-batch-conatiner.component';
-import {AssessBatchV2RoutingModule} from './assess-batch-v2-routing.module';
+import {AssessBatchRoutingModule} from './assess-batch-routing.module';
 import {CreateAssessmentButtonComponent} from './components/create-assessment-button/create-assessment-button.component';
 import {ImportGradesButtonComponent} from './components/import-grades-button/import-grades-button.component';
 import {AssessAssociateListComponent} from './components/assess-associate-list/assess-associate-list.component';
@@ -24,7 +24,7 @@ import {BrandedIconModule} from "../branded-icon/branded-icon.module";
   ],
   imports: [
     CommonModule,
-    AssessBatchV2RoutingModule,
+    AssessBatchRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
@@ -32,5 +32,5 @@ import {BrandedIconModule} from "../branded-icon/branded-icon.module";
   ],
   exports: [MockSaveComponent]
 })
-export class AssessBatchV2Module {
+export class AssessBatchModule {
 }
