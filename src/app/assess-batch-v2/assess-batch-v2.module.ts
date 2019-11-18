@@ -8,7 +8,7 @@ import {AssessAssociateListComponent} from './components/assess-associate-list/a
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AssessmentDetailsColumnComponent} from './components/assessment-details-column/assessment-details-column.component';
 import {AssessmentDetailsRowComponent} from './components/assessment-details-row/assessment-details-row.component';
-import {MockSaveComponent} from "../Assess-Batch/Components/mock-save/mock-save.component";
+import {MockSaveComponent} from "./components/mock-save/mock-save.component";
 import {SharedModule} from "../shared/shared.module";
 import {BrandedIconModule} from "../branded-icon/branded-icon.module";
 
