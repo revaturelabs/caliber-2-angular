@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {Assessment} from "../../../domain/model/assessment.dto";
 import {environment} from "../../../../environments/environment";
 import {Trainee} from "../../../domain/model/trainee.dto";
-import {Batch} from "../../../domain/model/batch.dto";
 
 @Injectable()
 export class AssessmentService {

@@ -11,8 +11,6 @@ import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
 import {ErrorComponent} from './error-handling/error/error.component';
 import {AppRoutingModule} from './app-routing.module';
-import {CreateModalComponent} from './Assess-Batch/Modals/create-modal/create-modal.component';
-import {FormModalComponent} from './Assess-Batch/Components/toolbar/form-modal/form-modal.component';
 import {AssessBatchService} from "./services/assess-batch.service";
 import {QaService} from "./services/qa.service";
 import {CategoryService} from "./services/subvertical/category/category.service";
@@ -40,8 +38,6 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
-    CreateModalComponent,
-    FormModalComponent,
     ProgressBarComponent
   ],
   imports: [
@@ -82,9 +78,6 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
   ],
   bootstrap: [
     AppComponent,
-  ],
-  entryComponents: [
-    FormModalComponent
   ]
 })
 export class AppModule { }

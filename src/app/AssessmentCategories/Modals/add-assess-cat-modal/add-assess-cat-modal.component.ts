@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AssessCategoryService } from '../../Services/assess-category.service';
 import { CategoriesComponent } from '../../Components/categories/categories.component';
 import {Category} from "../../../domain/model/category.dto";
 import {CategoryService} from "../../../services/subvertical/category/category.service";

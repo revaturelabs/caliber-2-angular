@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
-import { BatchService } from 'src/app/Batch/batch.service';
+import { BatchService } from '../../../../services/subvertical/batch/batch.service';
 import { TraineesService } from '../../Services/trainees.service';
 import { EventEmitter } from '@angular/core';
 import { ErrorService } from 'src/app/error-handling/services/error.service';
@@ -58,7 +58,7 @@ export class SwitchBatchComponent implements OnInit, OnChanges {
    * grabs all of the batches and puts them in the 'allBatches' field when initialized
    */
   ngOnInit() {
-    this.bs.getBatches().subscribe(data => {
+    this.bs.getAllBatches().subscribe(data => {
       this.allBatches = data;
     },
     issue => {
