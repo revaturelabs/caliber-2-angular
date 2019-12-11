@@ -31,6 +31,8 @@ phases:
       - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$BUILD_ID > imagedefinitions.json
 artifacts:
   files:
-    - '**/*'
+    - imagedefinitions.json
+    - 'Dockerfile'
+    - dist/caliber-ui
   base-directory: dist/caliber-ui/
 
