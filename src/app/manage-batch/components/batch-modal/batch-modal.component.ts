@@ -103,6 +103,9 @@ export class BatchModalComponent implements OnInit {
       startDate: this.parseDate(this.batchForm.get("startDate").value),
       endDate: this.parseDate(this.batchForm.get("endDate").value)
     };
+    if (created.weeks === 0) {
+      created.weeks = 1;
+    }
     this.createdBatchSubject$.next(created);
     this.bsModalRef.hide();
   }

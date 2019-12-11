@@ -87,4 +87,4 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
     FormModalComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}

@@ -9,14 +9,14 @@ phases:
   pre_build:
     commands:
       - echo Building Angular project
-      - npm run build:prod 
+      - npm run build:prod --configuration=perf
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
       - BUILD_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-8)
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...          
+      - echo Building the Docker image...
       - docker build -t $SERVICE_NAME:$BUILD_ID .
       - docker tag $SERVICE_NAME:$BUILD_ID $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$BUILD_ID
   post_build:
@@ -27,7 +27,7 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$BUILD_ID > imagedefinitions.json
 artifacts:
-  files: 
+  files:
     - '**/*'
   base-directory: dist/caliber-ui/
 

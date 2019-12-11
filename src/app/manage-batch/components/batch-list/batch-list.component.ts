@@ -71,7 +71,7 @@ export class BatchListComponent implements OnInit {
         if (data) {
           this.manageBatchService.updateBatch(data).subscribe(
             batch => {
-              // this.batches.unshift(batch);
+              this.batches.unshift(batch);
               this.toastService.success(`${batch.trainingName} created successfully!`, "");
             },
             err => this.toastService.error(`Failed to create ${data.trainingName}`, "")
