@@ -98,7 +98,7 @@ import {d} from "@angular/core/src/render3";
 export class AppModule {
 
   async loadApmConfiguration() {
-    return await this.http.get<ApmConfig>('assets/config/apm-config.json').toPromise();
+    return await this.http.get<ApmConfig>('/assets/config/apm-config.json').toPromise();
   }
 
   constructor(
