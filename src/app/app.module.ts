@@ -5,7 +5,7 @@ import {UserModule} from './User/user/user.module';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
@@ -35,7 +35,6 @@ import {ReportsService} from "./services/reports.service";
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 import {ApmService} from '@elastic/apm-rum-angular'
 import {Router} from "@angular/router";
-import {d} from "@angular/core/src/render3";
 
 @NgModule({
   declarations: [
@@ -97,17 +96,9 @@ import {d} from "@angular/core/src/render3";
 })
 export class AppModule {
 
-  async loadApmConfiguration() {
-    return await this.http.get<ApmConfig>('/assets/config/apm-config.json').toPromise();
-  }
-
   constructor(
     @Inject(ApmService) service: ApmService,
-    private http: HttpClient
   ) {
-    let config: ApmConfig;
-    this.loadApmConfiguration().then(data => config = data);
-    setTimeout(() => {
       const apm = service.init({
         serviceName: "Caliber Frontend",
         serverUrl: config.url,
@@ -115,13 +106,7 @@ export class AppModule {
         environment: "perf",
         breakdownMetrics: true
       });
-
-    }, 1000);
   }
 
 }
-
-interface ApmConfig {
-  url: string;
-  token: string;
-}
+let config;
