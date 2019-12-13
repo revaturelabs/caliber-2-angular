@@ -1,11 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
 
-import {NgModule} from '@angular/core';
+import {Inject, NgModule} from '@angular/core';
 import {UserModule} from './User/user/user.module';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
@@ -33,6 +33,9 @@ import {HomeService} from "./services/home.service";
 import {ToastService} from './services/toast.service';
 import {ReportsService} from "./services/reports.service";
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
+import {ApmService} from '@elastic/apm-rum-angular'
+import {Router} from "@angular/router";
+import {d} from "@angular/core/src/render3";
 
 @NgModule({
   declarations: [
@@ -78,7 +81,12 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
     LocationService,
     HomeService,
     ReportsService,
-    ToastService
+    ToastService,
+    {
+      provide: ApmService,
+      useClass: ApmService,
+      deps: [Router]
+    }
   ],
   bootstrap: [
     AppComponent,
@@ -87,4 +95,33 @@ import {ProgressBarComponent} from './progress-bar/progress-bar.component';
     FormModalComponent
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  async loadApmConfiguration() {
+    return await this.http.get<ApmConfig>('assets/config/apm-config.json').toPromise();
+  }
+
+  constructor(
+    @Inject(ApmService) service: ApmService,
+    private http: HttpClient
+  ) {
+    let config: ApmConfig;
+    this.loadApmConfiguration().then(data => config = data);
+    setTimeout(() => {
+      const apm = service.init({
+        serviceName: "Caliber Frontend",
+        serverUrl: config.url,
+        secretToken: config.token,
+        environment: "perf",
+        breakdownMetrics: true
+      });
+
+    }, 1000);
+  }
+
+}
+
+interface ApmConfig {
+  url: string;
+  token: string;
+}

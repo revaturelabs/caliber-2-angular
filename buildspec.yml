@@ -12,7 +12,6 @@ phases:
   pre_build:
     commands:
       - echo Building Angular project
-      - pwd
       - mkdir -p src/app/assets/config
       - printf '{"url":"%s","token":"%s"}' $APM_SERVER_URL $APM_SECRET_TOKEN > src/app/assets/config/apm-config.json
       - cat src/app/assets/config/apm-config.json
