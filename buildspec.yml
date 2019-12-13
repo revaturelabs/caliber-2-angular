@@ -12,10 +12,7 @@ phases:
   pre_build:
     commands:
       - echo Building Angular project
-      - mkdir -p src/app/assets/config
-      - printf '{"url":"%s","token":"%s"}' $APM_SERVER_URL $APM_SECRET_TOKEN > src/app/assets/config/apm-config.json
-      - cat src/app/assets/config/apm-config.json
-      - ng build --configuration=perf --aot
+      - npm run build --aot --configuration=perf
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
       - BUILD_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-8)
