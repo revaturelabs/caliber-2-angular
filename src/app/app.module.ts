@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 
-import {Inject, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {UserModule} from './User/user/user.module';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -33,8 +33,6 @@ import {HomeService} from "./services/home.service";
 import {ToastService} from './services/toast.service';
 import {ReportsService} from "./services/reports.service";
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
-import {ApmService} from '@elastic/apm-rum-angular'
-import {Router} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -81,11 +79,6 @@ import {Router} from "@angular/router";
     HomeService,
     ReportsService,
     ToastService,
-    {
-      provide: ApmService,
-      useClass: ApmService,
-      deps: [Router]
-    }
   ],
   bootstrap: [
     AppComponent,
@@ -96,17 +89,4 @@ import {Router} from "@angular/router";
 })
 export class AppModule {
 
-  constructor(
-    @Inject(ApmService) service: ApmService,
-  ) {
-      const apm = service.init({
-        serviceName: "Caliber Frontend",
-        serverUrl: config.url,
-        secretToken: config.token,
-        environment: "perf",
-        breakdownMetrics: true
-      });
-  }
-
 }
-let config;
